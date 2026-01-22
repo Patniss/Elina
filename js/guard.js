@@ -1,14 +1,15 @@
 // js/guard.js
 import { supabase } from "./supabase.js";
 
-// Vérifie si une session existe
 const {
   data: { session },
 } = await supabase.auth.getSession();
 
-if (!session) {
-  // Pas connecté → retour login
-  window.location.href = "index.html";
+// Si on est sur la page login, on ne fait pas de guard
+const isLoginPage = window.location.pathname.endsWith("/index.html") || window.location.pathname === "/";
+
+if (!session && !isLoginPage) {
+  window.location.href = "/index.html";
 }
 
 // Déconnexion
@@ -16,6 +17,6 @@ const logoutBtn = document.getElementById("logout");
 if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
     await supabase.auth.signOut();
-    window.location.href = "./index.html";
+    window.location.href = "/index.html";
   });
 }
