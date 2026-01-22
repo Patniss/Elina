@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>VANISA - L'App de Vanina & Elisa</title>
+  <title>VANISA - Connexion</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bulma.min.css">
   <link rel="stylesheet" href="css/app.css">
@@ -12,24 +12,23 @@
 <section class="section">
   <div class="container">
 
-    <h1 class="title">Accueil</h1>
+    <h1 class="title">Connexion</h1>
 
     <!-- Liste -->
     <div class="box">
       <h2 class="subtitle">Mes pages</h2>
 
-      <div class="columns is-multiline">
-        <!-- carte page -->
-        <div class="column is-one-quarter">
-          <div class="card">
-            <a href="movies/index.html">
-                <div class="card-content">
-                    <p class="title is-5">Mes films</p>
-                </div>
-            </a>
-          </div>
-        </div>
-      </div>
+      <form id="login-form">
+
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Mot de passe" required />
+        <button type="submit">Se connecter</button>
+
+      </form>
+
+      <p id="error" style="color: red;"></p>
+
+      <script type="module" src="js/auth.js"></script>
 
     </div>
 
