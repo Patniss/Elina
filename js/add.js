@@ -25,6 +25,6 @@ movieForm.addEventListener("submit", async (e) => {
     return
   }
   alert("Film ajouté avec succès !");
-  form.reset();
+  movieForm.reset();
 
 });
