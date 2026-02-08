@@ -8,16 +8,21 @@
 </head>
 <body>
 
-  <h1 id="welcome">Bienvenue</h1>
+  <section class="section">
+    <div class="container">
+      <h1 id="welcome">Bienvenue</h1>
+
+      <footer>
+        <button id="logout">Se déconnecter</button>
+      </footer>
+      
+    </div>
+  </section>
 
   <script type="module">
     import { loadNav } from "./js/nav.js";
     loadNav();
   </script>
-
-  <footer>
-    <button id="logout">Se déconnecter</button>
-  </footer>
 
   <script type="module" src="js/dashboard.js"></script>
   <script type="module" src="js/guard.js"></script>
