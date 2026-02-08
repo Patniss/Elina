@@ -9,37 +9,45 @@
 </head>
 <body>
 
-<section class="section">
-  
-  <h1 class="title">🎬 Films</h1>
 
-  <script type="module">
-    import { loadNav } from "./js/nav.js";
-    loadNav();
-  </script>
-  
-  <!-- Liste -->
-   
-  <div class="box">
-    <h2 class="subtitle">Mes films vus</h2>
+<main>
 
-    <a href="add.html"><p class="button">Ajouter un film</p></a>
+  <section class="section">
+
+    <div id="nav-container"></div>
     
-    <div class="columns is-multiline">
-      <!-- carte film -->
-       <div class="column is-one-quarter">
-        <div class="card">
-          <div class="card-content">
-            <p class="title is-5">Inception</p>
-            <p class="subtitle is-6">Christopher Nolan</p>
-            <span class="tag is-success">Vu</span>
+    <h1 class="title">🎬 Films</h1>
+    
+    <div class="box">
+      
+      <h2 class="subtitle">Mes films vus</h2>
+      
+      <a href="add.html"><p class="button">Ajouter un film</p></a>
+      
+      <div class="columns is-multiline">
+        
+        <!-- carte film -->
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5">Inception</p>
+              <p class="subtitle is-6">Christopher Nolan</p>
+              <span class="tag is-success">Vu</span>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
-  </div>
-  
-</section>
+    
+  </section>
+
+</main>
+
+<script type="module">
+  import { loadNav } from "./js/nav.js";
+  loadNav();
+</script>
 
 <script src="../js/dexie.min.js"></script>
 <script src="../js/nav.js"></script>
