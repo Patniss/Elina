@@ -1,13 +1,37 @@
-<aside class="menu">
-  <p class="menu-label">Général</p>
-  <ul class="menu-list">
-    <li><a href="/Elina/dashboard.html">Accueil</a></li>
-    <li><a href="/Elina/settings.html">Réglages</a></li>
-  </ul>
-  <p class="menu-label">Films</p>
-  <ul class="menu-list">
-    <li><a href="/Elina/movies/index.html">Mes films</a></li>
-    <li><a href="/Elina/movies/add.html">Ajouter un film</a></li>
-    <li><a href="/Elina/movies/toComplete.html">Ajouter un film</a></li>
-  </ul>
-</aside>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/Elina/dashboard.html">Accueil</a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Films</a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="/Elina/movies/index.html">Mes films</a>
+          <hr class="navbar-divider">
+          <a class="navbar-item" href="/Elina/movies/add.html">Ajouter un film</a>
+          <a class="navbar-item" href="/Elina/movies/toComplete.html">Compléter les films</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" id="logout">Se déconnecter</a>
+          <a class="button is-ligght" href="/Elina/settings.html">Réglages</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
