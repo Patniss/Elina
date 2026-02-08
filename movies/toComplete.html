@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>My Personal App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/bulma.min.css">
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+
+
+<main>
+
+  <section class="section">
+
+    <div id="nav-container"></div>
+    
+    <h1 class="title">🎬 Films</h1>
+    
+    <div class="box">
+      
+      <h2 class="subtitle">Les films à compléter</h2>
+      
+      <div class="columns is-multiline" id="list-incomplete-movies"></div>
+      
+    </div>
+    
+  </section>
+
+</main>
+
+<script type="module">
+  import { loadNav } from "./js/nav.js";
+  loadNav();
+</script>
+
+<script type="module">
+  import { loadIncompleteMovies } from "./js/list.js";
+  loadIncompleteMovies();
+</script>
+
+<script src="../js/dexie.min.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/bdd.js"></script>
+<script src="../js/app.js"></script>
+<script type="module" src="../js/guard.js"></script>
+</body>
+</html>

@@ -3,58 +3,28 @@ import { supabase } from "./supabase.js";
 /* =====================
    AJOUT FILM
 ===================== */
+
 const movieForm = document.getElementById("movie-form");
 
 movieForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const title = document.getElementById("movie-title").value;
-  const year = document.getElementById("movie-year").value || null;
+  const titleInput = document.getElementById("movie-title").value;
+  const yearInput = document.getElementById("movie-year").value || null;
+
+  const title = titleInput.value.trim();
+  const year = yearInput.value ? parseInt(yearInput.value, 10) : null;
+  const complete = false;
 
   const { error } = await supabase
     .from("movies")
-    .insert([{ title, year }]);
+    .insert([{ title, year, complete }]);
 
   if (error) {
     alert(error.message);
-  } else {
-    alert("Film ajouté !");
-    movieForm.reset();
+    return
   }
-});
+  alert("Film ajouté avec succès !");
+  form.reset();
 
-/* =====================
-   AJOUT PEOPLE
-===================== */
-const peopleForm = document.getElementById("people-form");
-
-peopleForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const firstname = document.getElementById("firstname").value;
-  const lastname = document.getElementById("lastname").value;
-  const birthdate = document.getElementById("birthdate").value || null;
-
-  const nationalitiesInput = document
-    .getElementById("nationalities")
-    .value
-    .split(",")
-    .map(n => n.trim())
-    .filter(Boolean);
-
-  const { error } = await supabase
-    .from("people")
-    .insert([{
-      firstname,
-      lastname,
-      birthdate,
-      nationalities: nationalitiesInput
-    }]);
-
-  if (error) {
-    alert(error.message);
-  } else {
-    alert("Personne ajoutée !");
-    peopleForm.reset();
-  }
 });
