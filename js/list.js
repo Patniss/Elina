@@ -26,7 +26,7 @@ export async function loadIncompleteMovies() {
     column.classList.add("column");
     column.classList.add("is-one-quarter");
     const card = document.createElement("div");
-    card.classList.add = "card";
+    card.classList.add("card");
     const cardContent = document.createElement("div");
     cardContent.classList.add("card-content");
     const pTitle = document.createElement("p");
@@ -60,3 +60,6 @@ export async function loadIncompleteMovies() {
 
 }
 
+export async function loadSeenMovies() {
+  
+}
