@@ -1,6 +1,6 @@
 import { supabase } from "/Elina/js/supabase.js";
 
-export async function movieContent(uuid) {
+export async function completeMovie(uuid) {
     const movie = await supabase
     .from("movies")
     .select("*")
@@ -13,12 +13,8 @@ export async function movieContent(uuid) {
     }
 
     const movieTitle = document.getElementById("movie-title");
+    const yearMovie = document.getElementById("movie-year");
 
     movieTitle.textContent = movie.title;
-
-    const casting = await supabase
-    .from("movies_casting")
-    .select("*")
-    .eq("movie_id", uuid)
-
+    yearMovie.textContent = movie.year;
 }

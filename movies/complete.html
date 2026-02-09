@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter un film</title>
+
+  <!-- Bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+
+<section class="section">
+  <div class="container">
+
+    <div id="nav-container"></div>
+    
+    <h1 class="title">Compléter <i id="movie-title"></i></h1>
+
+    <!-- FORM FILM -->
+    <div class="box">
+      <h2 class="movie-year"></h2>
+
+      <form id="movie-form">
+        <div class="field">
+          <label class="label">Titre</label>
+          <div class="control">
+            <input class="input" type="text" id="" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Année</label>
+          <div class="control">
+            <input class="input" type="number" id="">
+          </div>
+        </div>
+
+        <div class="control">
+          <button class="button is-primary" type="submit">
+            Compléter le film
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<!-- JS -->
+
+<script type="module">
+    import { completeMovie } from "/Elina/js/complete.js";
+
+    const params = new URLSearchParams(window.location.search);
+    const movieId = params.get("id");
+    
+    completeMovie(movieId);
+</script>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/nav.js";
+  loadNav();
+</script>
+
+<script type="module" src="/Elina/js/add.js"></script>
+<script type="module" src="/Elina/js/guard.js"></script>
+
+</body>
+</html>
