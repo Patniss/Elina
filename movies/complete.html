@@ -18,13 +18,13 @@
 
     <!-- FORM FILM -->
     <div class="box">
-      <h2 class="movie-year"></h2>
+      <h2 id="movie-year" class="subtitle"></h2>
 
       <form id="movie-form">
         <div class="field">
           <label class="label">Genres</label>
           <div class="select is-multiple">
-            <select multiple="multiple" size="8" id="genres-movie" required>
+            <select multiple="multiple" size="8" id="movie-genres" required>
           </div>
         </div>
 
@@ -52,10 +52,10 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script src="/Elina/js/tags.js"></script>
+<script src="../js/tags.js"></script>
 
 <script type="module">
-    import { completeMovie } from "/Elina/js/complete.js";
+    import { completeMovie } from "../js/complete.js";
 
     const params = new URLSearchParams(window.location.search);
     const movieId = params.get("id");
@@ -64,12 +64,12 @@
 </script>
 
 <script type="module">
-  import { loadNav } from "/Elina/js/nav.js";
+  import { loadNav } from "../js/nav.js";
   loadNav();
 </script>
 
-<script type="module" src="/Elina/js/add.js"></script>
-<script type="module" src="/Elina/js/guard.js"></script>
+<script type="module" src="../js/add.js"></script>
+<script type="module" src="../js/guard.js"></script>
 
 </body>
 </html>

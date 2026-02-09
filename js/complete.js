@@ -1,7 +1,8 @@
 import { supabase } from "/Elina/js/supabase.js";
+import { genres } from "../js/tags.js";
 
 export async function completeMovie(uuid) {
-    const movie = await supabase
+    const { data: movie, error } = await supabase
     .from("movies")
     .select("*")
     .eq("id", uuid)
