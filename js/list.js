@@ -1,8 +1,8 @@
-import { supabase } from "./supabase.js";
+import { supabase } from "/Elina/supabase.js";
 
 const container = document.getElementById("list-incomplete-movies");
 
-async function loadIncompleteMovies() {
+export async function loadIncompleteMovies() {
   if (!container) return;
 
   const { data, error } = await supabase
@@ -57,5 +57,3 @@ async function loadIncompleteMovies() {
 
   container.appendChild(ul);
 }
-
-loadIncompleteMovies();
