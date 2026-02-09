@@ -14,7 +14,19 @@ export async function completeMovie(uuid) {
 
     const movieTitle = document.getElementById("movie-title");
     const yearMovie = document.getElementById("movie-year");
+    const genresMovie = document.getElementById("movie-genres");
 
     movieTitle.textContent = movie.title;
     yearMovie.textContent = movie.year;
+
+    genres.forEach(genre => {
+        genresMovie.append(
+            new Option(genre, genre, false, false)
+        );
+    });
+
+    genresMovie.select2({
+        placeholder: "Choisir un genre…",
+        allowClear: true
+    });
 }
