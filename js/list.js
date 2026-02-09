@@ -1,9 +1,9 @@
-import { supabase } from "/Elina/supabase.js";
+import { supabase } from "/Elina/js/supabase.js";
 
-const container = document.getElementById("list-incomplete-movies");
+const incompleteContainer = document.getElementById("list-incomplete-movies");
 
 export async function loadIncompleteMovies() {
-  if (!container) return;
+  if (!incompleteContainer) return;
 
   const { data, error } = await supabase
     .from("movies")
@@ -12,12 +12,12 @@ export async function loadIncompleteMovies() {
 
   if (error) {
     console.error(error);
-    container.textContent = "Erreur lors du chargement des films.";
+    incompleteContainer.textContent = "Erreur lors du chargement des films.";
     return;
   }
 
   if (data.length === 0) {
-    container.textContent = "Aucun film à afficher.";
+    incompleteContainer.textContent = "Aucun film à afficher.";
     return;
   }
 
@@ -47,13 +47,9 @@ export async function loadIncompleteMovies() {
     card.appendChild(cardContent);
     column.appendChild(card);
 
-    container.appendChild(column);
+    incompleteContainer.appendChild(column);
     
-    
-    const li = document.createElement("li");
-    li.textContent = `${movie.title} (${movie.year ?? "année inconnue"})`;
-    ul.appendChild(li);
   });
 
-  container.appendChild(ul);
 }
+
