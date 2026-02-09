@@ -7,7 +7,7 @@ export async function loadIncompleteMovies() {
 
   const { data, error } = await supabase
     .from("movies")
-    .select("uuid, title, year")
+    .select("id, title, year")
     .eq("complete", false);
 
   if (error) {
@@ -46,7 +46,7 @@ export async function loadIncompleteMovies() {
     const completeBtn = document.createElement("a");
     completeBtn.classList.add("tag");
     completeBtn.textContent = "Compléter";
-    completeBtn.href = `/Elina/movie/complete.html?id=${movie.uuid}`;
+    completeBtn.href = `/Elina/movie/complete.html?id=${movie.id}`;
 
     divTags.appendChild(tagSeen);
     divTags.appendChild(completeBtn);
