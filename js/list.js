@@ -39,11 +39,12 @@ export async function loadIncompleteMovies() {
     pSubtitle.textContent = movie.year;
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex-direction-row");
+    divTags.classList.add("is-justify-content-space-around");
     const tagSeen = document.createElement("a");
     tagSeen.classList.add("tag");
     tagSeen.textContent = "Non vu";
     const btn = document.createElement("a");
-    btn.classList.add("button");
+    btn.classList.add("tag");
     btn.textContent = "Compléter";
 
     divTags.appendChild(tagSeen);
