@@ -70,35 +70,35 @@ export async function completeMovie(uuid) {
         placeholder: "Choisir un réalisateur…",
         allowClear: true
     });
-
+    
     addDirector.addEventListener("click", () => {
-        const inputFirstnameDirector = document.createElement("input");
-        inputFirstnameDirector.type = "text";
-        inputFirstnameDirector.placeholder = "Prénom";
-        inputFirstnameDirector.id = "firstNameDirector";
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("director-wrapper");
 
-        const inputLastnameDirector = document.createElement("input");
-        inputLastnameDirector.type = "text";
-        inputLastnameDirector.placeholder = "Nom de famille";
-        inputLastnameDirector.id = "lastNameDirector";
+        const inputFirstname = document.createElement("input");
+        inputFirstname.type = "text";
+        inputFirstname.placeholder = "Prénom";
 
-        const inputBirthDirector = document.createElement("input");
-        inputBirthDirector.type = "date";
-        inputBirthDirector.placeholder = "Date de naissance";
-        inputBirthDirector.id = "birthdateDirector";
+        const inputLastname = document.createElement("input");
+        inputLastname.type = "text";
+        inputLastname.placeholder = "Nom de famille";
 
-        const btnAddDirector = document.createElement("button");
-        btnAddDirector.textContent = "Ajouter";
-        btnAddDirector.id = "btnAddDirector";
+        const inputBirth = document.createElement("input");
+        inputBirth.type = "date";
 
-        const cancelAdding = document.createElement("button");
-        cancelAdding.textContent = "Annuler";
+        const btnAdd = document.createElement("button");
+        btnAdd.textContent = "Ajouter";
+        btnAdd.addEventListener("click", () => {
+            console.log(inputFirstname.value, inputLastname.value, inputBirth.value);
+        });
 
-        addingDirector.appendChild(inputFirstnameDirector);
-        addingDirector.appendChild(inputLastnameDirector);
-        addingDirector.appendChild(btnAddDirector);
-        addingDirector.appendChild(cancelAdding);
-    })
+        const btnCancel = document.createElement("button");
+        btnCancel.textContent = "Annuler";
+        btnCancel.addEventListener("click", () => wrapper.remove());
+
+        wrapper.append(inputFirstname, inputLastname, inputBirth, btnAdd, btnCancel);
+        addingDirector.appendChild(wrapper);
+    });
 
     genres.forEach(genre => {
         genresMovie.append(
