@@ -44,7 +44,6 @@ export async function loadIncompleteMovies() {
     completeBtn.textContent = "Compléter";
     completeBtn.href = `/Elina/movies/complete.html?id=${movie.id}`;
 
-    divTags.appendChild(tagSeen);
     divTags.appendChild(completeBtn);
     cardContent.appendChild(pTitle);
     cardContent.appendChild(pSubtitle);
