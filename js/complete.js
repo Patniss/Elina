@@ -16,21 +16,29 @@ const genres = [
 
 import { supabase } from "/Elina/js/supabase.js";
 
-const directors = [];
+const directors = {};
 
-const directorsBase = supabase
-    .from("people")
-    .select("id, lastname, firstname")
-    .ilike("jobs", "director")
-    .order("lastname", { ascending: true });
+async function loadDirectors() {
+    const { data, error } = await supabase
+        .from("people")
+        .select("id, firstname, lastname")
+        .ilike("jobs", "%director%")
+        .order("lastname", { ascending: true });
 
-directorsBase.forEach(dir => {
-    const completeName = dir.firstname + " " + dir.lastname;
-    directors[dir.id] = completeName;
-});
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    data.forEach(dir => {
+        directors[dir.id] = `${dir.firstname} ${dir.lastname}`;
+    });
+}
 
 
 export async function completeMovie(uuid) {
+    await loadDirectors();
+
     const { data: movie, error } = await supabase
     .from("movies")
     .select("*")
@@ -50,10 +58,10 @@ export async function completeMovie(uuid) {
     movieTitle.textContent = movie.title;
     yearMovie.textContent = movie.year;
 
-    directors.forEach(([uuid, completeName]) => {
+    Object.entries(directors).forEach(([uuid, completeName]) => {
         directorsMovie.append(
             new Option(completeName, uuid, false, false)
-        )
+        );
     });
 
     $(directorsMovie).select2({
