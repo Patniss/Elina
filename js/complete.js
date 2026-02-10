@@ -91,9 +91,13 @@ export async function completeMovie(uuid) {
         btnAddDirector.textContent = "Ajouter";
         btnAddDirector.id = "btnAddDirector";
 
+        const cancelAdding = document.createElement("button");
+        cancelAdding.textContent = "Annuler";
+
         addingDirector.appendChild(inputFirstnameDirector);
         addingDirector.appendChild(inputLastnameDirector);
         addingDirector.appendChild(btnAddDirector);
+        addingDirector.appendChild(cancelAdding);
     })
 
     genres.forEach(genre => {
