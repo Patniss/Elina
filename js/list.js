@@ -81,7 +81,12 @@ export async function loadSeenMovies() {
       return;
     }
 
-    data.forEach((movie) => {
+    data.forEach((user_m) => {
+      const movie = supabase
+        .form("movies")
+        .select("*")
+        .eq("id", user_m.movie_id)
+
       const column = document.createElement("div");
       column.classList.add("column");
       column.classList.add("is-one-quarter");
@@ -99,10 +104,10 @@ export async function loadSeenMovies() {
       pSubtitle.textContent = movie.year;
       const divTags = document.createElement("div");
       divTags.classList.add("is-flex-direction-row");
-      const completeBtn = document.createElement("a");
-      completeBtn.classList.add("tag");
-      completeBtn.textContent = "Compléter";
-      completeBtn.href = `/Elina/movies/complete.html?id=${movie.id}`;
+      const detailsBtn = document.createElement("a");
+      detailsBtn.classList.add("tag");
+      detailsBtn.textContent = "Détails";
+      detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
 
       divTags.appendChild(tagSeen);
       divTags.appendChild(completeBtn);
