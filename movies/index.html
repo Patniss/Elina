@@ -24,17 +24,6 @@
         <h2 class="subtitle">Mes films vus</h2>
         
         <div class="columns is-multiline" id="seen-movies">
-          
-          <!-- carte film -->
-          <div class="column is-one-quarter">
-            <div class="card">
-              <div class="card-content">
-                <p class="title is-5">Inception</p>
-                <p class="subtitle is-6">Christopher Nolan</p>
-                <span class="tag is-success">Vu</span>
-              </div>
-            </div>
-          </div>
 
         </div>
 
@@ -49,6 +38,11 @@
 <script type="module">
   import { loadNav } from "/Elina/js/nav.js";
   loadNav();
+</script>
+
+<script type="module">
+  import { loadSeenMovies } from "/Elina/js/list.js";
+  loadSeenMovies();
 </script>
 
 <script type="module" src="/Elina/js/guard.js"></script>
