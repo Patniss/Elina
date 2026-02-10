@@ -52,7 +52,9 @@ export async function completeMovie(uuid) {
 
     const movieTitle = document.getElementById("movie-title");
     const yearMovie = document.getElementById("movie-year");
-    const directorsMovie = document.getElementById("directors")
+    const directorsMovie = document.getElementById("movie-directors");
+    const addDirector = document.getElementById("add-directors");
+    const addingDirector = document.getElementById("adding-directors");
     const genresMovie = document.getElementById("movie-genres");
 
     movieTitle.textContent = movie.title;
@@ -67,6 +69,31 @@ export async function completeMovie(uuid) {
     $(directorsMovie).select2({
         placeholder: "Choisir un réalisateur…",
         allowClear: true
+    });
+
+    addDirector.addEventListener("click", () => {
+        const inputFirstnameDirector = document.createElement("input");
+        inputFirstnameDirector.type = "text";
+        inputFirstnameDirector.placeholder = "Prénom";
+        inputFirstnameDirector.id = "firstNameDirector";
+
+        const inputLastnameDirector = document.createElement("input");
+        inputLastnameDirector.type = "text";
+        inputLastnameDirector.placeholder = "Nom de famille";
+        inputLastnameDirector.id = "lastNameDirector";
+
+        const inputBirthDirector = document.createElement("input");
+        inputBirthDirector.type = "date";
+        inputBirthDirector.placeholder = "Date de naissance";
+        inputBirthDirector.id = "birthdateDirector";
+
+        const btnAddDirector = document.createElement("button");
+        btnAddDirector.textContent = "Ajouter";
+        btnAddDirector.id = "btnAddDirector";
+
+        addingDirector.appendChild(inputFirstnameDirector);
+        addingDirector.appendChild(inputLastnameDirector);
+        addingDirector.appendChild(btnAddDirector);
     })
 
     genres.forEach(genre => {

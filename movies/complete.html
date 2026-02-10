@@ -21,10 +21,12 @@
 
       <form id="movie-form">
         <div class="field">
-          <label for="directors">Réalisateur(s) :</label>
+          <label for="movie-directors" class="label">Réalisateur(s) :</label>
           <div class="select is-multiple">
-            <select name="directors" id="directors" multiple="multiple" size="200" required></select>
+            <select name="directors" id="movie-directors" multiple="multiple" size="200" required></select>
           </div>
+          <button class="button" id="add-director">Ajouter</button>
+          <div id="adding-directors"></div>
         </div>
 
         <div class="field">
@@ -43,7 +45,7 @@
         </div>
 
         <div class="control">
-          <button class="button is-primary" type="submit">
+          <button class="button is-primary" type="submit" id="submit">
             Compléter le film
           </button>
         </div>
