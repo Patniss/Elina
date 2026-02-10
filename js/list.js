@@ -8,7 +8,9 @@ export async function loadIncompleteMovies() {
   const { data, error } = await supabase
     .from("movies")
     .select("id, title, year")
-    .eq("complete", false);
+    .eq("complete", false)
+    .order("year", { ascending: true })
+    .order("title", { ascending: true });
 
   if (error) {
     console.error(error);
@@ -73,6 +75,7 @@ export async function loadSeenMovies() {
       .from("users_movies")
       .select("*")
       .eq("user_id", userId)
+      .order("date", { ascending: false })
     
     if (error) {
       console.error(error);
