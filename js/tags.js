@@ -1,4 +1,4 @@
-export const genres = [
+const genres = [
     "Action", "Animation", "Arts martiaux", "Aventure",
     "Biopic",
     "Comédie", "Comédie dramatique", "Comédie musicale",

@@ -26,7 +26,7 @@ export async function completeMovie(uuid) {
         );
     });
 
-    genresMovie.select2({
+    $(genresMovie).select2({
         placeholder: "Choisir un genre…",
         allowClear: true
     });
