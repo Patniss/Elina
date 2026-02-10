@@ -1,5 +1,20 @@
+const genres = [
+    "Action", "Animation", "Arts martiaux", "Aventure",
+    "Biopic",
+    "Comédie", "Comédie dramatique", "Comédie musicale",
+    "Drame",
+    "Espionnage",
+    "Famille", "Fantastique",
+    "Guerre",
+    "Historique", "Horreur",
+    "Policier",
+    "Romance",
+    "Science-fiction",
+    "Thriller",
+    "Western"
+]
+
 import { supabase } from "/Elina/js/supabase.js";
-import { genres } from "../js/tags.js";
 
 export async function completeMovie(uuid) {
     const { data: movie, error } = await supabase
