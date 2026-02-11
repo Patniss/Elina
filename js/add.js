@@ -39,10 +39,10 @@ movieForm.addEventListener("submit", async (e) => {
     alert(error.message);
     return
   }
+
   alert("Film ajouté avec succès !");
   movieForm.reset();
   titleInput.focus();
-
 });
 
 genres.forEach(genre => {
@@ -57,5 +57,7 @@ $(showGenres).select2({
 });
 
 showForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
   alert("Bouton ajouté cliqué !");
 })
