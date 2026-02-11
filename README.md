@@ -34,7 +34,7 @@
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
 * movies/index.html - list.js => Correction || ÉTAT = EN COURS D'ÉCRITURE
-    * list.js => nouveau console.log pour test || ÉTAT = *EN COURS DE PUSH*
+    * list.js => correction de la ligne erreur || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => Réalisateur = membre du casting || ÉTAT = EN COURS D'ÉCRITURE
     * movies/complete.html + complete.js + add.js => Correction de l'erreur ligne 48/49 de add.js || ÉTAT = *EN COURS DE PUSH*
 * shows/add.html + add.js => Erreur dans add.js ligne 54 = ajout jQuery || ÉTAT = *EN COURS DE PUSH*
