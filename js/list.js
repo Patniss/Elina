@@ -155,6 +155,12 @@ export async function loadSeenMovies() {
       return;
     }
 
+    if (!data) {
+      console.log("data est null ou undefined");
+    } else {
+      console.log("data.length:", data.length);
+    }
+
     data.forEach((user_m) => {
       console.log(`Ligne complète : ${user_m}`);
       console.log(`ID Movie : ${user_m.id_movie}`);
