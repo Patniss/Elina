@@ -37,8 +37,7 @@
 * movies/index.html - list.js => correction detailsBtn || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => test ajout select director || ÉTAT = *EN COURS DE PUSH*
 * shows/add.html + add.js => ajout de if(!movieForm) || ÉTAT = *EN COURS DE PUSH*
-
 * shows/index.html + list.js => data.forEach() || ÉTAT = *EN COURS DE PUSH*
 
-* dramas => création du dossier || ÉTAT = *EN COURS DE PUSH*
-* books => création du dossier || ÉTAT = *EN COURS DE PUSH*
+* dramas/index.html => Initialisation || ÉTAT = *À FAIRE PLUS TARD*
+* books/index.html => Initialisation || ÉTAT = *À FAIRE PLUS TARD*
