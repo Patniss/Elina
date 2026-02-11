@@ -293,6 +293,7 @@ export async function completeMovie(uuid) {
     const movieGenres = document.getElementById("movie-genres");
     const movieSynopsis = document.getElementById("movie-synopsis");
     const addCasting = document.getElementById("add-casting-member");
+    const addingCasting = document.getElementById("adding-casting");
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
@@ -380,6 +381,9 @@ export async function completeMovie(uuid) {
         btnAdd.textContent = "Ajouter un acteur";
         btnAdd.addEventListener("click", () => {
         });
+
+        wrapper.append(inputCharacter, btnAdd, btnCancel);
+        addingCasting.appendChild(wrapper);
     });
 }
 
