@@ -200,3 +200,7 @@ export async function loadSeenMovies() {
     })
 
 }
+
+export async function loadCurrentShows() {
+  // FUNCTION À COMPLÉTER => CRÉATION DE LA TABLE D'ABORD
+}

@@ -32,8 +32,10 @@
 * Réglages avec personnalisation
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
-* complete.js pour movies/complete.html => ajout d'un addEventListener sur le bouton Ajouter dans l'ajout de cast member || ÉTAT = EN COURS DE PUSH
+* complete.js pour movies/complete.html => ajout d'un addEventListener sur le bouton Ajouter dans l'ajout de cast member || ÉTAT = PUSH FINI - À TESTER
 * movies/index.html => ajout d'un console.log pour vérifier pourquoi j'ai une erreur d'affichage || ÉTAT = EN COURS PUSH
 * movies/complete.html et complete.js => modification de la disparisation de la div quand on ajoute un réalisateur || ÉTAT = EN COURS DE PUSH
 * nav.html => ajout de la rubriques séries tv || ÉTAT = EN COURS DE PUSH
 * people.html / toComplete.html => modification de la place dans l'arborescence (utiliser dans shows également, non logique) || ÉTAT = EN COURS DE PUSH
+* dossier shows => initiation || ÉTAT = EN COURS DE PUSH
+* SUPABASE => Création des tables pour les séries TV
