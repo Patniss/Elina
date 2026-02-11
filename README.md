@@ -14,6 +14,15 @@
     * add.html
     * toComplete.html
     * complete.html
+* shows
+    * index.html
+    * add.html
+* dramas
+    * index.html
+    * add.html
+* books
+    * index.html
+    * add.html
 
 # LISTE DE CHOSES À FAIRE :
 * Finir films :
@@ -33,6 +42,8 @@
 * Voyages
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
+* dashboard.html => ajout des pages en constructions || ÉTAT = *EN COURS DE PUSH*
+
 * settings.html + main.css => select colors || ÉTAT = *EN COURS DE PUSH*
 * movies/index.html - list.js => console.log(movie) pour test || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => ajouter optBase || ÉTAT = *EN COURS DE PUSH*
