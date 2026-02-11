@@ -361,7 +361,7 @@ export async function completeMovie(uuid) {
                     divSelectDirectors.classList.add("select");
                     divSelectDirectors.classList.add("is-multiple");
                     
-                    const selectDirectors = document.createElement("")
+                    const selectDirectors = document.createElement("select")
 
                     directors.forEach(director => {
                         const optSelectDirector = document.createElement("option");
