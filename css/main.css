@@ -15,3 +15,19 @@
 .has-background-primary {
   background-color: var(--user-primary);
 }
+
+.navbar-burger {
+  color: var(--user-primary);
+}
+
+.navbar-burger.is-active {
+  color: var(--user-primary);
+}
+
+.navbar-link::after {
+  border-color: var(--user-primary);
+}
+
+.navbar-item.has-dropdown.is-active > .navbar-link::after {
+  border-color: var(--user-primary);
+}
