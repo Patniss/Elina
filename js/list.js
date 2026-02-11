@@ -229,5 +229,5 @@ export async function loadCurrentShows() {
     return;
   }
 
-  console.log(data);
+  console.log(userId);
 }

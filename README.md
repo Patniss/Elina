@@ -38,5 +38,5 @@
 * movies/complete.html + complete.js => Réalisateur = membre du casting || ÉTAT = EN COURS D'ÉCRITURE
     * movies/complete.html + complete.js => test de correction avec <a> || ÉTAT = *EN COURS DE PUSH*
 * shows/add.html + add.js => Erreur dans add.js ligne 54 = ajout jQuery || ÉTAT = *EN COURS DE PUSH*
-* list.js pour shows/index => initialisation de la fonction loadCurrentShows() || ÉTAT = *EN COURS DE PUSH*
+* list.js pour shows/index => console.log(userId) pour test de fonctionnement || ÉTAT = *EN COURS DE PUSH*
 * settings.html => création du fichier || ÉTAT = *EN COURS DE PUSH*
