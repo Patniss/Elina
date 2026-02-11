@@ -26,7 +26,6 @@ async function loadProfile() {
 
 const session = loadProfile();
 
-const userId = session.user.id;
 const pseudo = session.pseudo;
 const colorTheme = session.theme_color;
 const modeUser = session.mode;

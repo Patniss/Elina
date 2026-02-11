@@ -1,6 +1,6 @@
 import { supabase } from "./supabase.js";
 
-async function loadProfile() {
+export async function loadProfile() {
   const {
     data: { session },
   } = await supabase.auth.getSession();

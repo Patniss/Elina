@@ -90,14 +90,18 @@
 
   </section>
 
-  </main>
+</main>
 
-  <script type="module">
-    import { loadNav } from "/Elina/js/nav.js";
-    loadNav();
-  </script>
+<script type="module">
+  import { loadNav } from "/Elina/js/nav.js";
+  loadNav();
+</script>
 
-  <script type="module" src="/Elina/js/dashboard.js"></script>
-  <script type="module" src="/Elina/js/guard.js"></script>
+<script type="module">
+  import { loadProfile } from "/Elina/js/dashboard.js";
+  loadProfile();
+</script>
+
+<script type="module" src="/Elina/js/guard.js"></script>
 </body>
 </html>
