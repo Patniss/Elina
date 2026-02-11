@@ -35,7 +35,7 @@
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
 * movies/index.html - list.js => retirer ligne tagSeen erreur || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => test de correction scriptwriter value || ÉTAT = *EN COURS DE PUSH*
-* shows/add.html + add.js => ajout de e.preventDefault(); dans add.js || ÉTAT = *EN COURS DE PUSH*
+* shows/add.html + add.js => correction de show-form || ÉTAT = *EN COURS DE PUSH*
 * list.js pour shows/index => console.log(userId) pour test de fonctionnement || ÉTAT = *EN COURS DE PUSH*
 * settings.html => erreur dans les pages actives / correction || ÉTAT = *EN COURS DE PUSH*
 * books => création de la base de données || ÉTAT = *FINI*
