@@ -39,4 +39,5 @@
     * movies/complete.html + complete.js => test de correction avec <a> || ÉTAT = *EN COURS DE PUSH*
 * shows/add.html + add.js => ajout de e.preventDefault(); dans add.js || ÉTAT = *EN COURS DE PUSH*
 * list.js pour shows/index => console.log(userId) pour test de fonctionnement || ÉTAT = *EN COURS DE PUSH*
-* settings.html => création du fichier || ÉTAT = *EN COURS DE PUSH*
+* settings.html => erreur dans les pages actives / correction || ÉTAT = *EN COURS DE PUSH*
+* books => création de la base de données || ÉTAT = *FINI*
