@@ -272,7 +272,7 @@ async function loadDirectors() {
 }
 
 export async function completeMovie(uuid) {
-    await loadDirectors();
+    const directors = await loadDirectors();
 
     const { data: movie, error } = await supabase
     .from("movies")
@@ -343,6 +343,44 @@ export async function completeMovie(uuid) {
         divJob.appendChild(selectJob);
         wrapper.appendChild(divJob);
         addingCasts.appendChild(wrapper);
+
+        selectJob.addEventListener("change", () => {
+            switch (selectJob.value) {
+                case "director":
+                    const wrapperDirector = document.createElement("div");
+                    wrapperDirector.classList.add("casting-director-wrapper");
+                    wrapperDirector.classList.add("field");
+                    
+                    const divDirector = document.createElement("div");
+                    
+                    const labelDirector = document.createElement("label");
+                    labelDirector.classList.add("label");
+                    labelDirector.textContent = "Choisir un réalisateur";
+
+                    const divSelectDirectors = document.createElement("div");
+                    divSelectDirectors.classList.add("select");
+                    divSelectDirectors.classList.add("is-multiple");
+                    
+                    const selectDirectors = document.createElement("")
+
+                    directors.forEach(director => {
+                        const optSelectDirector = document.createElement("option");
+                        optSelectDirector.value = director.value;
+                        optSelectDirector.textContent = director;
+                        
+                        selectDirectors.appendChild(optSelectDirector);
+                    });
+
+                    divSelectDirectors.appendChild(selectDirectors);
+                    divDirector.append(labelDirector, divSelectDirectors);
+                    wrapperDirector.appendChild(divDirector);
+                    break;
+            
+                default:
+                    break;
+            }
+        })
+
     });
 }
 
