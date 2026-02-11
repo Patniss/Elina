@@ -287,6 +287,7 @@ export async function completeMovie(uuid) {
 
     const movieTitle = document.getElementById("movie-title");
     const movieYear = document.getElementById("movie-year");
+    const divMovieDirectors = document.getElementById("div-movie-directors");
     const movieDirectors = document.getElementById("movie-directors");
     const addDirector = document.getElementById("add-director");
     const addingDirector = document.getElementById("adding-directors");
@@ -311,7 +312,7 @@ export async function completeMovie(uuid) {
     
     addDirector.addEventListener("click", () => {
         addDirector.style.display = "none";
-        movieDirectors.style.display = "none";
+        divMovieDirectors.style.display = "none";
         const wrapper = document.createElement("div");
         wrapper.classList.add("director-wrapper");
 
@@ -335,7 +336,7 @@ export async function completeMovie(uuid) {
         btnAdd.textContent = "Ajouter";
         btnAdd.addEventListener("click", () => {
             addDirector.style.display = "block";
-            movieDirectors.style.display = "block";
+            divMovieDirectors.style.display = "block";
             wrapper.remove();
             alert("Réalisateur ajouté avec succès.");
         });
@@ -345,7 +346,7 @@ export async function completeMovie(uuid) {
         btnCancel.classList.add("button");
         btnCancel.addEventListener("click", () => {
             addDirector.style.display = "block";
-            movieDirectors.style.display = "block";
+            divMovieDirectors.style.display = "block";
             wrapper.remove();
         });
 
