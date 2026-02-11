@@ -37,6 +37,8 @@ export async function loadSession() {
     return;
   }
 
+  const userId = session.user.id;
+
   const { data, error } = await supabase
     .from("profiles")
     .select("pseudo")
