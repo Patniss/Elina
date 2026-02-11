@@ -1,9 +1,11 @@
 import { supabase } from "/Elina/js/supabase.js";
 
-const incompleteContainer = document.getElementById("list-incomplete-movies");
+const incompleteMoviesContainer = document.getElementById("list-incomplete-movies");
+const incompletePeopleContainer = document.getElementById("list-incomplete-people");
+const seenContainer = document.getElementById("list-seen-movies");
 
 export async function loadIncompleteMovies() {
-  if (!incompleteContainer) return;
+  if (!incompleteMoviesContainer) return;
 
   const { data, error } = await supabase
     .from("movies")
@@ -14,12 +16,12 @@ export async function loadIncompleteMovies() {
 
   if (error) {
     console.error(error);
-    incompleteContainer.textContent = "Erreur lors du chargement des films.";
+    incompleteMoviesContainer.textContent = "Erreur lors du chargement des films.";
     return;
   }
 
   if (data.length === 0) {
-    incompleteContainer.textContent = "Aucun film à afficher.";
+    incompleteMoviesContainer.textContent = "Aucun film à compléter ! Tout est à jour.";
     return;
   }
 
@@ -53,10 +55,65 @@ export async function loadIncompleteMovies() {
     card.appendChild(cardContent);
     column.appendChild(card);
 
-    incompleteContainer.appendChild(column);
+    incompleteMoviesContainer.appendChild(column);
     
   });
 
+}
+
+export async function loadIncompletePeople() {
+  if (!incompletePeopleContainer) return;
+
+  const { data, error } = await supabase
+    .from("people")
+    .select("*")
+    .eq("complete", false)
+    .order("lastname", { ascending: true })
+
+  if (error) {
+    console.error(error);
+    incompletePeopleContainer.textContent = "Erreur lors du chargement des personnalités.";
+    return;
+  }
+
+  if (data.length === 0) {
+    incompletePeopleContainer.textContent = "Aucune personnalité à compléter ! Tout est à jour.";
+    return;
+  }
+
+  data.forEach((p) => {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.classList.add("is-one-quarter");
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+    const pTitle = document.createElement("p");
+    pTitle.classList.add("title");
+    pTitle.classList.add("is-5");
+    pTitle.textContent = p.lastname;
+    const pSubtitle = document.createElement("p");
+    pSubtitle.classList.add("subtitle");
+    pSubtitle.classList.add("is-6");
+    pSubtitle.textContent = p.birthdate;
+    const divTags = document.createElement("div");
+    divTags.classList.add("is-flex-direction-row");
+    const completeBtn = document.createElement("a");
+    completeBtn.classList.add("tag");
+    completeBtn.textContent = "Compléter";
+    completeBtn.href = `/Elina/movies/people/complete.html?id=${p.id}`;
+
+    divTags.appendChild(completeBtn);
+    cardContent.appendChild(pTitle);
+    cardContent.appendChild(pSubtitle);
+    cardContent.appendChild(divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
+
+    incompletePeopleContainer.appendChild(column);
+    
+  });
 }
 
 export async function loadSeenMovies() {
@@ -118,6 +175,9 @@ export async function loadSeenMovies() {
       cardContent.appendChild(divTags);
       card.appendChild(cardContent);
       column.appendChild(card);
+
+      seenContainer.appendChild(column);
+
     })
 
 }

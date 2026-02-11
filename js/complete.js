@@ -14,6 +14,20 @@ const genres = [
     "Western"
 ]
 
+function calculateAge(startDate, endDate = new Date()) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    let age = end.getFullYear() - start.getFullYear();
+    const m = end.getMonth() - start.getMonth();
+
+    if (m < 0 || (m === 0 && end.getDate() < start.getDate())) {
+        age--;
+    }
+
+    return age;
+}
+
 import { supabase } from "/Elina/js/supabase.js";
 
 const directors = {};
@@ -110,4 +124,26 @@ export async function completeMovie(uuid) {
         placeholder: "Choisir un genre…",
         allowClear: true
     });
+}
+
+export async function completePeople(uuid) {
+    const { data: p, error } = await supabase
+        .from("people")
+        .select("*")
+        .eq("id", uuid)
+        .single();
+    
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    const peopleName = document.getElementById("people-name");
+    const peopleAge = document.getElementById("people-age");
+
+    const completeName = `${p.firstname} ${p.lastname}`;
+    const agePeople = p.deathdate === null ? calculateAge(p.birthdate) : "✝ " + calculateAge(p.birthdate, p.deathdate);
+
+    peopleName.textContent = completeName;
+    peopleAge.textContent = agePeople + " ans";
 }

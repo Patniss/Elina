@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Compléter un film</title>
+
+  <!-- Bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+
+<section class="section">
+  <div class="container">
+
+    <div id="nav-container"></div>
+
+    <!-- FORM FILM -->
+    <div class="box">
+      <h1 class="title">Compléter <b id="people-name"></b></h1>
+      <h2 id="people-age" class="subtitle"></h2>
+
+      <form id="people-name">
+
+        <div class="control">
+          <button class="button is-primary" type="submit" id="submit">
+            Compléter la personnalité
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<!-- JS -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script type="module">
+    import { completePeople } from "../js/complete.js";
+
+    const params = new URLSearchParams(window.location.search);
+    const movieId = params.get("id");
+    
+    completeMovie(movieId);
+</script>
+
+<script type="module">
+  import { loadNav } from "../js/nav.js";
+  loadNav();
+</script>
+
+<script type="module" src="../js/add.js"></script>
+<script type="module" src="../js/guard.js"></script>
+
+</body>
+</html>
