@@ -192,7 +192,7 @@ export async function loadSeenMovies() {
     detailsBtn.textContent = "Détails";
     detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
 
-    divTags.appendChild(completeBtn);
+    divTags.appendChild(detailsBtn);
     cardContent.appendChild(pTitle);
     cardContent.appendChild(pSubtitle);
     cardContent.appendChild(divTags);
