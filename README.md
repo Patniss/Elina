@@ -33,9 +33,12 @@
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
 * complete.js pour movies/complete.html => ajout d'un addEventListener sur le bouton Ajouter dans l'ajout de cast member || ÉTAT = PUSH FINI - À TESTER
-* movies/index.html => ajout d'un console.log pour vérifier pourquoi j'ai une erreur d'affichage || ÉTAT = EN COURS PUSH
-* movies/complete.html et complete.js => modification de la disparisation de la div quand on ajoute un réalisateur || ÉTAT = EN COURS DE PUSH
-* nav.html => ajout de la rubriques séries tv || ÉTAT = EN COURS DE PUSH
-* people.html / toComplete.html => modification de la place dans l'arborescence (utiliser dans shows également, non logique) || ÉTAT = EN COURS DE PUSH
+* movies/index.html => ajout d'un console.log pour vérifier pourquoi j'ai une erreur d'affichage || ÉTAT = PUSH FINI - À TESTER
+* movies/complete.html et complete.js => modification de la disparisation de la div quand on ajoute un réalisateur || ÉTAT = PUSH FINI - À TESTER
+* nav.html => ajout de la rubriques séries tv || ÉTAT = PUSH FINI - À TESTER
+* people.html / toComplete.html => modification de la place dans l'arborescence (utiliser dans shows également, non logique) || ÉTAT = PUSH FINI - À TESTER
 * dossier shows => initiation || ÉTAT = EN COURS DE PUSH
-* SUPABASE => Création des tables pour les séries TV
+* SUPABASE => Création des tables pour les séries TV || ÉTAT = CRÉATION FINI
+* toComplete.html => Correction dans le chemin du CSS || ÉTAT = EN COURS DE PUSH
+* list.js pour shows/index => initialisation de la fonction loadCurrentShows() || ÉTAT = EN COURS D'ÉCRITURE
+* SUPABASE => Crétion des données d'une série test || EN COURS AVEC SHERLOCK
