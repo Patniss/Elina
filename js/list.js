@@ -4,6 +4,20 @@ const incompleteMoviesContainer = document.getElementById("list-incomplete-movie
 const incompletePeopleContainer = document.getElementById("list-incomplete-people");
 const seenContainer = document.getElementById("list-seen-movies");
 
+function calculateAge(startDate, endDate = new Date()) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    let age = end.getFullYear() - start.getFullYear();
+    const m = end.getMonth() - start.getMonth();
+
+    if (m < 0 || (m === 0 && end.getDate() < start.getDate())) {
+        age--;
+    }
+
+    return age;
+}
+
 export async function loadIncompleteMovies() {
   if (!incompleteMoviesContainer) return;
 
@@ -82,6 +96,7 @@ export async function loadIncompletePeople() {
   }
 
   data.forEach((p) => {
+    const agePeople = p.deathdate === null ? calculateAge(p.birthdate) : "✝ " + calculateAge(p.birthdate, p.deathdate);
     const column = document.createElement("div");
     column.classList.add("column");
     column.classList.add("is-one-quarter");
@@ -92,11 +107,11 @@ export async function loadIncompletePeople() {
     const pTitle = document.createElement("p");
     pTitle.classList.add("title");
     pTitle.classList.add("is-5");
-    pTitle.textContent = p.lastname;
+    pTitle.textContent = p.firstname !== null ? `${p.firstname} ${p.lastname}` : p.lastname;
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("subtitle");
     pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = p.birthdate;
+    pSubtitle.textContent = agePeople + " ans";
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex-direction-row");
     const completeBtn = document.createElement("a");
