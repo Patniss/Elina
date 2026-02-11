@@ -34,9 +34,10 @@
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
 * settings.html + main.css => select colors || ÉTAT = *EN COURS DE PUSH*
+* movies/index.html - list.js => console.log(movie) pour test || ÉTAT = *EN COURS DE PUSH*
 
-* movies/index.html - list.js => console.log(movie_id); pour test || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => erreur select director || ÉTAT = *EN COURS DE PUSH*
+
 * shows/add.html + add.js => export async function addShow() || ÉTAT = *EN COURS DE PUSH*
 * shows/index.html + list.js => console.log(show_id) pour test || ÉTAT = *EN COURS DE PUSH*
 

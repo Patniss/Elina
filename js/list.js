@@ -163,13 +163,13 @@ export async function loadSeenMovies() {
   }
 
   data.forEach((user_m) => {
-    console.log(`Ligne complète : ${user_m}`);
-    console.log(`ID Movie : ${user_m.movie_id}`);
     const movie = supabase
       .from("movies")
       .select("*")
       .eq("id", user_m.movie_id)
       .single();
+
+    console.log(movie);
 
     const column = document.createElement("div");
     column.classList.add("column");
