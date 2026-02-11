@@ -22,9 +22,6 @@ async function loadProfile() {
     console.error("Erreur profil :", error.message);
     return;
   }
-
-  const pseudo = data?.pseudo || "Utilisateur";
-  document.getElementById("welcome").textContent = `Bienvenue ${pseudo}`;
 }
 
 const session = loadProfile();
