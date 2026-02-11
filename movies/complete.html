@@ -40,8 +40,19 @@
 
         <div class="field">
           <label class="label">Temps :</label>
-          <input type="number" class="input" id="hours" placeholder="Heure" min="0" max="10" style="width: auto;" required />
-          <input type="number" class="input" id="minutes" placeholder="Minutes" min="0" max="59" style="width: auto;" />
+          <input type="number" class="input" id="hours" placeholder="Heure" min="0" max="10" style="width: 100px;" required />
+          <input type="number" class="input" id="minutes" placeholder="Minutes" min="0" max="59" style="width: 100px;" />
+        </div>
+
+        <div class="field">
+          <label for="movie-synopsis" class="label">Synopsis :</label>
+          <textarea name="movie-synopsis" id="movie-synopsis" class="textarea" placeholder="Synopsis du film…"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="label">Casting du film (acteurs) :</label>
+          <button name="actors" id="add-casting-member">Ajouter un membre de casting</button>
+          <div id="adding-casting"></div>
         </div>
 
         <div class="control">

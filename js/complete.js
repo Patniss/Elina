@@ -67,28 +67,31 @@ export async function completeMovie(uuid) {
     }
 
     const movieTitle = document.getElementById("movie-title");
-    const yearMovie = document.getElementById("movie-year");
-    const directorsMovie = document.getElementById("movie-directors");
+    const movieYear = document.getElementById("movie-year");
+    const movieDirectors = document.getElementById("movie-directors");
     const addDirector = document.getElementById("add-director");
     const addingDirector = document.getElementById("adding-directors");
-    const genresMovie = document.getElementById("movie-genres");
+    const movieGenres = document.getElementById("movie-genres");
+    const movieSynopsis = document.getElementById("movie-synopsis");
+    const addCasting = document.getElementById("add-casting-member");
 
     movieTitle.textContent = movie.title;
-    yearMovie.textContent = movie.year;
+    movieYear.textContent = movie.year;
 
     Object.entries(directors).forEach(([uuid, completeName]) => {
-        directorsMovie.append(
+        movieDirectors.append(
             new Option(completeName, uuid, false, false)
         );
     });
 
-    $(directorsMovie).select2({
+    $(movieDirectors).select2({
         placeholder: "Choisir un réalisateur…",
         allowClear: true
     });
     
     addDirector.addEventListener("click", () => {
         addDirector.style.display = "none";
+        movieDirectors.style.display = "none";
         const wrapper = document.createElement("div");
         wrapper.classList.add("director-wrapper");
 
@@ -112,6 +115,7 @@ export async function completeMovie(uuid) {
         btnAdd.textContent = "Ajouter";
         btnAdd.addEventListener("click", () => {
             addDirector.style.display = "block";
+            movieDirectors.style.display = "block";
             wrapper.remove();
             alert("Réalisateur ajouté avec succès.");
         });
@@ -121,6 +125,7 @@ export async function completeMovie(uuid) {
         btnCancel.classList.add("button");
         btnCancel.addEventListener("click", () => {
             addDirector.style.display = "block";
+            movieDirectors.style.display = "block";
             wrapper.remove();
         });
 
@@ -129,14 +134,33 @@ export async function completeMovie(uuid) {
     });
 
     genres.forEach(genre => {
-        genresMovie.append(
+        movieGenres.append(
             new Option(genre, genre, false, false)
         );
     });
 
-    $(genresMovie).select2({
+    $(movieGenres).select2({
         placeholder: "Choisir un genre…",
         allowClear: true
+    });
+
+    addCasting.addEventListener("click", () => {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("actor-wrapper");
+
+        const inputCharacter = document.createElement("input");
+        inputCharacter.type = "text";
+        inputCharacter.classList.add("input");
+        inputCharacter.placeholder = "Nom du personnage";
+        inputCharacter.required = true;
+
+        // INSÉRER ICI SELECT POUR PEOPLE = ACTOR
+
+        const btnAdd = document.createElement("button");
+        btnAdd.classList.add("button");
+        btnAdd.textContent = "Ajouter un acteur";
+        btnAdd.addEventListener("click", () => {
+        });
     });
 }
 
