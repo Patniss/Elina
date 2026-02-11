@@ -1,12 +1,3 @@
-const {
-data: { session },
-} = await supabase.auth.getSession();
-
-if (!session) {
-window.location.href = "/index.html";
-return;
-}
-
 const userId = session.user.id;
 const pseudo = session.pseudo;
 const colorTheme = session.theme_color;
