@@ -21,29 +21,31 @@ const movieForm = document.getElementById("movie-form");
 const showForm = document.getElementById("show-form");
 const showGenres = document.getElementById("show-genres");
 
-movieForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+if(!movieForm) {
+  movieForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  const titleInput = document.getElementById("movie-title");
-  const yearInput = document.getElementById("movie-year");
+    const titleInput = document.getElementById("movie-title");
+    const yearInput = document.getElementById("movie-year");
 
-  const title = titleInput.value.trim();
-  const year = yearInput.value ? parseInt(yearInput.value, 10) : null;
-  const complete = false;
+    const title = titleInput.value.trim();
+    const year = yearInput.value ? parseInt(yearInput.value, 10) : null;
+    const complete = false;
 
-  const { error } = await supabase
-    .from("movies")
-    .insert([{ title, year, complete }]);
+    const { error } = await supabase
+      .from("movies")
+      .insert([{ title, year, complete }]);
 
-  if (error) {
-    alert(error.message);
-    return
-  }
+    if (error) {
+      alert(error.message);
+      return
+    }
 
-  alert("Film ajouté avec succès !");
-  movieForm.reset();
-  titleInput.focus();
-});
+    alert("Film ajouté avec succès !");
+    movieForm.reset();
+    titleInput.focus();
+  });
+}
 
 genres.forEach(genre => {
     showGenres.append(
