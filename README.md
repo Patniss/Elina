@@ -37,8 +37,7 @@
 * movies/index.html - list.js => console.log(movie) pour test || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => ajouter optBase || ÉTAT = *EN COURS DE PUSH*
 * shows/add.html + add.js => console.log(genresInput); pour test || ÉTAT = *EN COURS DE PUSH*
-
-* shows/index.html + list.js => console.log(show_id) pour test || ÉTAT = *EN COURS DE PUSH*
+* shows/index.html + list.js => console.log(show); pour test || ÉTAT = *EN COURS DE PUSH*
 
 * dramas/index.html => Initialisation || ÉTAT = *À FAIRE PLUS TARD*
 * books/index.html => Initialisation || ÉTAT = *À FAIRE PLUS TARD*
