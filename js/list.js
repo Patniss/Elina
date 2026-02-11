@@ -5,6 +5,21 @@ const incompletePeopleContainer = document.getElementById("list-incomplete-peopl
 const seenContainer = document.getElementById("list-seen-movies");
 const currentContainer = document.getElementById("list-current-shows");
 
+async function loadData(table, filtre, donnee) {
+  const { data, error } = await supabase
+    .from(table).select("*")
+    .select("*")
+    .eq(filtre, donnee)
+    .single();
+    
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data;
+}
+
 function calculateAge(startDate, endDate = new Date()) {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -152,22 +167,12 @@ export async function loadSeenMovies() {
     
   if (error) {
     console.error(error);
-    incompleteContainer.textContent = "Erreur lors du chargement des films.";
+    seenContainer.textContent = "Erreur lors du chargement des films.";
     return;
   }
 
-  if (!data) {
-    console.log("data est null ou undefined");
-  } else {
-    console.log("data.length:", data.length);
-  }
-
   data.forEach((user_m) => {
-    const movie = supabase
-      .from("movies")
-      .select("*")
-      .eq("id", user_m.movie_id)
-      .single();
+    movie = loadData("movies", id, user_m.movie_id);
 
     console.log(movie);
 
