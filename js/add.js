@@ -1,10 +1,25 @@
 import { supabase } from "./supabase.js";
 
-/* =====================
-   AJOUT FILM
-===================== */
+const genres = [
+    "Action", "Animation", "Arts martiaux", "Aventure",
+    "Biopic",
+    "Comédie", "Comédie dramatique", "Comédie musicale", "Crime",
+    "Drame",
+    "Espionnage",
+    "Famille", "Fantastique",
+    "Guerre",
+    "Historique", "Horreur",
+    "Mystère",
+    "Policier",
+    "Romance",
+    "Science-fiction", "Suspense",
+    "Thriller",
+    "Western"
+]
 
 const movieForm = document.getElementById("movie-form");
+const showForm = document.getElementById("show-form");
+const showGenres = document.getElementById("show-genres");
 
 movieForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -29,3 +44,18 @@ movieForm.addEventListener("submit", async (e) => {
   titleInput.focus();
 
 });
+
+genres.forEach(genre => {
+    showGenres.append(
+        new Option(genre, genre, false, false)
+    );
+});
+
+$(showGenres).select2({
+    placeholder: "Choisir un genre…",
+    allowClear: true
+});
+
+showForm.addEventListener("submit", async (e) => {
+  alert("Bouton ajouté cliqué !");
+})

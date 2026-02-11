@@ -33,10 +33,10 @@
 * Voyages
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
-* nav.html => Correction de liens pour shows + création shows/add.html || ÉTAT = PUSH FINI - À CORRIGER (GENRES NON FONCTIONNEL)
 * movies/index.html - list.js => Correction || ÉTAT = EN COURS D'ÉCRITURE
     * list.js => ajout d'un console log pour vérifier d'où vient l'erreur || ÉTAT = EN COURS DE PUSH
 * movies/complete.html + complete.js => Réalisateur = membre du casting || ÉTAT = EN COURS D'ÉCRITURE
     * movies/complete.html + complete.js => Création du select job || ÉTAT = EN COURS DE PUSH
+* shows/add.html + add.js => ajout genres + test click bouton ajouter || ÉTAT = EN COURS DE PUSH
 * SUPABASE => Crétion des données d'une série test || EN COURS DE CRÉATION
 * list.js pour shows/index => initialisation de la fonction loadCurrentShows() || ÉTAT = EN COURS D'ÉCRITURE
