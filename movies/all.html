@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>엘리나 | Elina - Données</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
+</head>
+<body>
+
+
+<main>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div id="nav-container"></div>
+      
+      <h1 class="title">🎬 Filmothèque</h1>
+      
+      <div class="box">
+        
+        <h2 class="subtitle">Tous les films</h2>
+        
+        <div class="columns is-multiline" id="list-all-movies"></div>
+        
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/nav.js";
+  loadNav();
+</script>
+
+<script type="module">
+  import { allMovies } from "/Elina/js/list.js";
+  allMovies();
+</script>
+
+</body>
+</html>

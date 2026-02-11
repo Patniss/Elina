@@ -4,6 +4,7 @@ const incompleteMoviesContainer = document.getElementById("list-incomplete-movie
 const incompletePeopleContainer = document.getElementById("list-incomplete-people");
 const seenContainer = document.getElementById("list-seen-movies");
 const currentContainer = document.getElementById("list-current-shows");
+const allMoviesContainer = document.getElementById("list-all-movies");
 
 async function loadData(table, filtre, donnee) {
   const { data, error } = await supabase
@@ -32,6 +33,62 @@ function calculateAge(startDate, endDate = new Date()) {
     }
 
     return age;
+}
+
+export async function allMovies() {
+  if (!allMoviesContainer) return;
+
+  const { data, error } = await supabase
+    .from("movies")
+    .select("id, title, year")
+    .order("year", { ascending: false })
+    .order("title", { ascending: true });
+
+  if (error) {
+    console.error(error);
+    allMoviesContainer.textContent = "Erreur lors du chargement des films.";
+    return;
+  }
+
+  if (data.length === 0) {
+    allMoviesContainer.textContent = "Aucun film affichage…";
+    return;
+  }
+
+  data.forEach((movie) => {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.classList.add("is-one-quarter");
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+    const pTitle = document.createElement("p");
+    pTitle.classList.add("title");
+    pTitle.classList.add("is-5");
+    pTitle.textContent = movie.title;
+    const pSubtitle = document.createElement("p");
+    pSubtitle.classList.add("subtitle");
+    pSubtitle.classList.add("is-6");
+    pSubtitle.textContent = movie.year;
+    const divTags = document.createElement("div");
+    divTags.classList.add("is-flex-direction-row");
+    const completeBtn = document.createElement("a");
+    completeBtn.classList.add("tag");
+    completeBtn.textContent = "Compléter";
+    completeBtn.href = `/Elina/movies/complete.html?id=${movie.id}`;
+
+    divTags.appendChild(completeBtn);
+    cardContent.appendChild(pTitle);
+    cardContent.appendChild(pSubtitle);
+    cardContent.appendChild(divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
+
+    allMoviesContainer.appendChild(column);
+    
+  });
+
 }
 
 export async function loadIncompleteMovies() {
