@@ -155,15 +155,14 @@ export async function loadSeenMovies() {
       return;
     }
 
+    console.log(data);
+
     data.forEach((user_m) => {
       const movie = supabase
         .form("movies")
         .select("*")
         .eq("id", user_m.movie_id)
         .single();
-      
-      console.log(`Ligne de user movie : ${user_m}`);
-      console.log(`ID du film recherché : ${user_m.movie_id}`);
 
       const column = document.createElement("div");
       column.classList.add("column");
