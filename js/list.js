@@ -204,6 +204,74 @@ export async function loadIncompletePeople() {
   });
 }
 
+export async function loadToseeMovies() {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    window.location.href = "/index.html";
+    return;
+  }
+
+  const userId = session.user.id;
+
+  const { data, error } = await supabase
+    .from("users_movies")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("seen", false)
+    .order("date", { ascending: false })
+    
+  if (error) {
+    console.error(error);
+    seenContainer.textContent = "Erreur lors du chargement des films.";
+    return;
+  }
+
+  data.forEach((user_m) => {
+    loadData("movies", "id", user_m.movie_id)
+      .then(movie => {
+        const titleMovie = movie.title;
+        const yearMovie = movie.year;
+      }).catch(err => console.error(err)
+    );
+
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.classList.add("is-one-quarter");
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+    const pTitle = document.createElement("p");
+    pTitle.classList.add("title");
+    pTitle.classList.add("is-5");
+    pTitle.textContent = titleMovie;
+    const pSubtitle = document.createElement("p");
+    pSubtitle.classList.add("subtitle");
+    pSubtitle.classList.add("is-6");
+    pSubtitle.textContent = yearMovie;
+    const divTags = document.createElement("div");
+    divTags.classList.add("is-flex-direction-row");
+    const detailsBtn = document.createElement("a");
+    detailsBtn.classList.add("tag");
+    detailsBtn.textContent = "Détails";
+    detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
+
+    divTags.appendChild(detailsBtn);
+    cardContent.appendChild(pTitle);
+    cardContent.appendChild(pSubtitle);
+    cardContent.appendChild(divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
+
+    seenContainer.appendChild(column);
+
+  })
+
+}
+
 export async function loadSeenMovies() {
   const {
     data: { session },
@@ -220,6 +288,7 @@ export async function loadSeenMovies() {
     .from("users_movies")
     .select("*")
     .eq("user_id", userId)
+    .eq("seen", true)
     .order("date", { ascending: false })
     
   if (error) {

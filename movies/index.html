@@ -24,10 +24,10 @@
       <div class="box">
         
         <h2 class="subtitle">Mes films vus</h2>
-        
-        <div class="columns is-multiline" id="list-seen-movies">
 
-        </div>
+        <div class="columns is-multiline" id="list-tosee-movies"></div>
+        
+        <div class="columns is-multiline" id="list-seen-movies"></div>
 
       </div>
       
@@ -40,6 +40,11 @@
 <script type="module">
   import { loadNav } from "/Elina/js/nav.js";
   loadNav();
+</script>
+
+<script type="module">
+  import { loadToseeMovies } from "/Elina/js/list.js";
+  loadToseeMovies();
 </script>
 
 <script type="module">
