@@ -172,7 +172,7 @@ export async function loadSeenMovies() {
   }
 
   data.forEach((user_m) => {
-    movie = loadData("movies", id, user_m.movie_id);
+    movie = loadData("movies", "id", user_m.movie_id);
 
     console.log(movie);
 
