@@ -86,29 +86,41 @@ export async function completeMovie(uuid) {
     });
     
     addDirector.addEventListener("click", () => {
+        addDirector.style.display = "none";
         const wrapper = document.createElement("div");
         wrapper.classList.add("director-wrapper");
 
         const inputFirstname = document.createElement("input");
         inputFirstname.type = "text";
+        inputFirstname.classList.add("input");
         inputFirstname.placeholder = "Prénom";
+        inputFirstname.required = true;
 
         const inputLastname = document.createElement("input");
         inputLastname.type = "text";
+        inputLastname.classList.add("input");
         inputLastname.placeholder = "Nom de famille";
 
         const inputBirth = document.createElement("input");
         inputBirth.type = "date";
+        inputBirth.classList.add("input");
 
         const btnAdd = document.createElement("button");
+        btnAdd.classList.add("button");
         btnAdd.textContent = "Ajouter";
         btnAdd.addEventListener("click", () => {
-            console.log(inputFirstname.value, inputLastname.value, inputBirth.value);
+            addDirector.style.display = "block";
+            wrapper.remove();
+            alert("Réalisateur ajouté avec succès.");
         });
 
         const btnCancel = document.createElement("button");
         btnCancel.textContent = "Annuler";
-        btnCancel.addEventListener("click", () => wrapper.remove());
+        btnCancel.classList.add("button");
+        btnCancel.addEventListener("click", () => {
+            addDirector.style.display = "block";
+            wrapper.remove();
+        });
 
         wrapper.append(inputFirstname, inputLastname, inputBirth, btnAdd, btnCancel);
         addingDirector.appendChild(wrapper);
