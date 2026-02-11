@@ -34,7 +34,7 @@
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
 * movies/index.html - list.js => Correction || ÉTAT = EN COURS D'ÉCRITURE
-    * list.js => correction de la ligne erreur || ÉTAT = *EN COURS DE PUSH*
+    * list.js => retirer ligne tagSeen erreur || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => Réalisateur = membre du casting || ÉTAT = EN COURS D'ÉCRITURE
     * movies/complete.html + complete.js => test de correction avec <a> || ÉTAT = *EN COURS DE PUSH*
 * shows/add.html + add.js => ajout de e.preventDefault(); dans add.js || ÉTAT = *EN COURS DE PUSH*
