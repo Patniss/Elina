@@ -6,6 +6,30 @@ const seenContainer = document.getElementById("list-seen-movies");
 const currentContainer = document.getElementById("list-current-shows");
 const allMoviesContainer = document.getElementById("list-all-movies");
 
+async function loadSession() {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    window.location.href = "/index.html";
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("pseudo")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error("Erreur profil :", error.message);
+    return;
+  }
+
+  return session;
+}
+
 async function loadData(table, filtre, donnee) {
   const { data, error } = await supabase
     .from(table).select("*")
@@ -36,6 +60,9 @@ function calculateAge(startDate, endDate = new Date()) {
 }
 
 export async function loadAllMovies() {
+  session = loadSession();
+  console.log(session);
+  
   if (!allMoviesContainer) return;
 
   const { data, error } = await supabase
@@ -54,8 +81,6 @@ export async function loadAllMovies() {
     allMoviesContainer.textContent = "Aucun film affichage…";
     return;
   }
-
-  console.log(userId);
 
   data.forEach((movie) => {
     const column = document.createElement("div");
