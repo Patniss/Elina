@@ -39,3 +39,4 @@
     * movies/complete.html + complete.js + add.js => Correction de l'erreur ligne 48/49 de add.js || ÉTAT = *EN COURS DE PUSH*
 * shows/add.html + add.js => Erreur dans add.js ligne 54 = ajout jQuery || ÉTAT = *EN COURS DE PUSH*
 * list.js pour shows/index => initialisation de la fonction loadCurrentShows() || ÉTAT = *EN COURS DE PUSH*
+* settings.html => création du fichier || ÉTAT = *EN COURS DE PUSH*

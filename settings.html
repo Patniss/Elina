@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Elina - Réglages</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+</head>
+<body>
+
+
+<main>
+
+  <section class="section">
+
+    <div class="container">
+        
+        <div id="nav-container"></div>
+
+        <div class="box">
+            <h1 class="title">⚙️ Réglages ⚙️</h1>
+
+            <form action="" id="settings-form">
+
+                <div class="field">
+                    <h2 class="subtitle">Pages actives</h2>
+                    <div>
+                        <label class="checkbox">
+                            <input type="checkbox" name="setting-movies" id="setting-movies" /> Films
+                            <input type="checkbox" name="setting-shows" id="setting-shows" /> Séries TV
+                            <input type="checkbox" name="setting-dramas" id="setting-dramas" /> Dramas
+                            <input type="checkbox" name="setting-books" id="setting-books" /> Livres
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <button class="button is-primary" type="submit">Enregistrer les réglages</button>
+                </div>
+
+            </form>
+        </div>
+    
+    </div>
+
+  </section>
+
+</main>
+
+<script type="module">
+    import { loadNav } from "/Elina/js/nav.js";
+    loadNav();
+</script>
+
+<script type="module">
+    import { loadIncompleteMovies } from "/Elina/js/list.js";
+    loadIncompleteMovies();
+</script>
+
+<script type="module">
+    import { loadIncompletePeople } from "/Elina/js/list.js";
+    loadIncompletePeople();
+</script>
+
+</body>
+</html>
