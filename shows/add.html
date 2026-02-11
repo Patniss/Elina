@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter un film</title>
+
+  <!-- Bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+
+<section class="section">
+  <div class="container">
+
+    <div id="nav-container"></div>
+    
+    <h1 class="title">Ajouter une série à la base de données</h1>
+
+    <!-- FORM FILM -->
+    <div class="box">
+      <h2 class="subtitle">Ajouter une série</h2>
+
+      <form id="movie-form">
+        <div class="field">
+          <label class="label">Titre</label>
+          <div class="control">
+            <input placeholder="Titre de la série…" class="input" type="text" id="show-title" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <div>
+            <label class="label">Genres</label>
+            <div class="select is-multiple">
+              <select multiple="multiple" size="8" id="show-genres" style="width: auto;" required></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Temps moyen épisode</label>
+          <div class="control">
+            <input placeholder="Temps en minutes…" class="input" type="number" id="show-time" required>
+          </div>
+        </div>
+
+        <div class="control">
+          <button class="button is-primary" type="submit">
+            Ajouter la série
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<!-- JS -->
+
+<script type="module">
+  import { loadNav } from "/Elina/js/nav.js";
+  loadNav();
+</script>
+
+<script type="module" src="/Elina/js/add.js"></script>
+<script type="module" src="/Elina/js/guard.js"></script>
+
+</body>
+</html>
