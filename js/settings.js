@@ -1,5 +1,3 @@
-import { supabase } from "Elina/js/supabase.js";
-
 const {
 data: { session },
 } = await supabase.auth.getSession();
