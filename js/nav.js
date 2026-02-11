@@ -38,3 +38,16 @@ function initNavbarDropdowns() {
     });
   });
 }
+
+const navbarItems = document.querySelectorAll(".navbar-item a");
+
+navbarItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    if (window.innerWidth < 1024) {
+      const menu = document.querySelector(".navbar-menu");
+      menu.classList.remove("is-active");
+      const burger = document.querySelector(".navbar-burger");
+      burger.classList.remove("is-active");
+    }
+  });
+});
