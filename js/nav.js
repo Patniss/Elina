@@ -24,21 +24,22 @@ function initNavbarBurger() {
 }
 
 function initNavbarDropdowns() {
-  const dropdowns = document.querySelectorAll(".navbar-item.has-dropdown");
+  const dropdowns = document.querySelectorAll(".mobile-dropdown");
 
   dropdowns.forEach((dropdown) => {
     const link = dropdown.querySelector(".navbar-link");
 
     link.addEventListener("click", (e) => {
-      // uniquement en mobile
-      if (window.innerWidth < 1024) {
+      // mobile uniquement
+      if (window.innerWidth <= 1023) {
         e.preventDefault();
+        e.stopPropagation();
+
         dropdown.classList.toggle("is-active");
       }
     });
   });
 }
-
 const navbarItems = document.querySelectorAll(".navbar-item a");
 
 navbarItems.forEach((item) => {
