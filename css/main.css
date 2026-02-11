@@ -1,0 +1,17 @@
+:root {
+  --user-primary: #23d160;
+}
+
+/* On surcharge les classes Bulma principales */
+.button.is-primary {
+  background-color: var(--user-primary);
+  border-color: var(--user-primary);
+}
+
+.has-text-primary {
+  color: var(--user-primary);
+}
+
+.has-background-primary {
+  background-color: var(--user-primary);
+}

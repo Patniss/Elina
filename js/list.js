@@ -230,3 +230,11 @@ export async function loadCurrentShows() {
 
   console.log(data);
 }
+
+export async function loadCurrentDramas() {
+  // EN COURS
+}
+
+export async function loadLastBooks() {
+  // EN COURS
+}

@@ -33,9 +33,11 @@
 * Voyages
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
+* settings.html + main.css => création du css et modifications des en-têtes || ÉTAT = *EN COURS DE PUSH*
+
 * movies/index.html - list.js => retirer ligne tagSeen erreur || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => test de correction scriptwriter value || ÉTAT = *EN COURS DE PUSH*
 * shows/add.html + add.js => correction de show-form || ÉTAT = *EN COURS DE PUSH*
 * shows/index + list.js => console.log(data); || ÉTAT = *EN COURS DE PUSH*
-* settings.html => erreur dans les pages actives / correction || ÉTAT = *EN COURS DE PUSH*
-* books => création de la base de données || ÉTAT = *FINI*
+* dramas => création du dossier || ÉTAT = *EN COURS DE PUSH*
+* books => création du dossier || ÉTAT = *EN COURS DE PUSH*

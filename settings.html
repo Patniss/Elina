@@ -5,6 +5,7 @@
   <title>Elina - Réglages</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
 </head>
 <body>
 
@@ -25,18 +26,25 @@
                 <div class="field">
                     <h2 class="subtitle">Pages actives</h2>
                     <div>
-                        <label class="checkbox">
+                        <label for="setting-movies" class="checkbox">
                             <input type="checkbox" name="setting-movies" id="setting-movies" /> Films
                         </label>
-                        <label class="checkbox">
+                        <label for="setting-shows" class="checkbox">
                             <input type="checkbox" name="setting-shows" id="setting-shows" /> Séries TV
                         </label>
-                        <label class="checkbox">
+                        <label for="setting-dramas" class="checkbox">
                             <input type="checkbox" name="setting-dramas" id="setting-dramas" /> Dramas
                         </label>
-                        <label class="checkbox">
+                        <label for="setting-books" class="checkbox">
                             <input type="checkbox" name="setting-books" id="setting-books" /> Livres
                         </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="main-colors">Thème principal</label>
+                    <div class="select">
+                        <option value="base"></option>
                     </div>
                 </div>
 

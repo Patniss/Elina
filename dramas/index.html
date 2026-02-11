@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Elina - Films</title>
+  <title>Elina - Dramas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/Elina/css/bulma.min.css">
   <link rel="stylesheet" href="/Elina/css/main.css">
 </head>
@@ -16,13 +17,13 @@
     <div class="container">
       <div id="nav-container"></div>
       
-      <h1 class="title">🎬 Films</h1>
+      <h1 class="title">🎬 Dramas</h1>
       
       <div class="box">
         
-        <h2 class="subtitle">Mes films vus</h2>
+        <h2 class="subtitle">Mes dramas en cours</h2>
         
-        <div class="columns is-multiline" id="list-seen-movies">
+        <div class="columns is-multiline" id="list-current-dramas">
 
         </div>
 
@@ -40,8 +41,8 @@
 </script>
 
 <script type="module">
-  import { loadSeenMovies } from "/Elina/js/list.js";
-  loadSeenMovies();
+  import { loadCurrentDramas } from "/Elina/js/list.js";
+  loadCurrentDramas();
 </script>
 
 <script type="module" src="/Elina/js/guard.js"></script>
