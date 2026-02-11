@@ -6,9 +6,9 @@
 * nav.html
 * css
 * js
+* people
+    * complete.html
 * movies
-    * people
-        * complete.html
     * index.html
     * movie.html
     * add.html
@@ -36,3 +36,4 @@
 * movies/index.html => ajout d'un console.log pour vérifier pourquoi j'ai une erreur d'affichage || ÉTAT = EN COURS PUSH
 * movies/complete.html et complete.js => modification de la disparisation de la div quand on ajoute un réalisateur || ÉTAT = EN COURS DE PUSH
 * nav.html => ajout de la rubriques séries tv || ÉTAT = EN COURS DE PUSH
+* people.html / toComplete.html => modification de la place dans l'arborescence (utiliser dans shows également, non logique) || ÉTAT = EN COURS DE PUSH
