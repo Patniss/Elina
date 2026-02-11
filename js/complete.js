@@ -49,6 +49,8 @@ async function loadDirectors() {
     });
 }
 
+console.log(directors);
+
 
 export async function completeMovie(uuid) {
     await loadDirectors();
