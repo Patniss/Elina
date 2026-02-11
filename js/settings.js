@@ -1,4 +1,4 @@
-import { supabase } from "./supabase.js";
+import { supabase } from "Elina/js/supabase.js";
 
 const {
 data: { session },
