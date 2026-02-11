@@ -30,13 +30,12 @@
 * Mood board
 * Ménage board
 * Réglages avec personnalisation
+* Voyages
 
 # LISTE DES ACTIONS PUSH POUR MÉMOIRE :
-* complete.js pour movies/complete.html => ajout d'un addEventListener sur le bouton Ajouter dans l'ajout de cast member || ÉTAT = PUSH FINI - À TESTER (need CSS)
-* movies/complete.html et complete.js => modification de la disparisation de la div quand on ajoute un réalisateur || ÉTAT = PUSH FINI - À TESTER (need CSS)
-* toComplete.html => Correction dans le chemin du CSS || ÉTAT = EN COURS DE PUSH
-* nav.html => Correction de liens pour shows + création shows/add.html || ÉTAT = EN COURS DE PUSH
-* list.js pour shows/index => initialisation de la fonction loadCurrentShows() || ÉTAT = EN COURS D'ÉCRITURE
-* SUPABASE => Crétion des données d'une série test || EN COURS
+* nav.html => Correction de liens pour shows + création shows/add.html || ÉTAT = PUSH FINI - À CORRIGER (GENRES NON FONCTIONNEL)
 * movies/index.html - list.js => Nouvelle console log pour comprendre l'erreur || EN COURS DE PUSH
-* 
+* *movies/complete.html + complete.js => Réalisateur = membre du casting || ÉTAT = EN COURS D'ÉCRITURE*
+    * *movies/complete.html + complete.js => Création du select job || ÉTAT = EN COURS DE PUSH*
+* SUPABASE => Crétion des données d'une série test || EN COURS DE CRÉATION
+* list.js pour shows/index => initialisation de la fonction loadCurrentShows() || ÉTAT = EN COURS D'ÉCRITURE

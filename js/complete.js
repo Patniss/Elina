@@ -287,72 +287,13 @@ export async function completeMovie(uuid) {
 
     const movieTitle = document.getElementById("movie-title");
     const movieYear = document.getElementById("movie-year");
-    const divMovieDirectors = document.getElementById("div-movie-directors");
-    const movieDirectors = document.getElementById("movie-directors");
-    const addDirector = document.getElementById("add-director");
-    const addingDirector = document.getElementById("adding-directors");
     const movieGenres = document.getElementById("movie-genres");
     const movieSynopsis = document.getElementById("movie-synopsis");
-    const addCasting = document.getElementById("add-casting-member");
-    const addingCasting = document.getElementById("adding-casting");
+    const addCast = document.getElementById("add-cast");
+    const addingCasts = document.getElementById("adding-casts");
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
-
-    Object.entries(directors).forEach(([uuid, completeName]) => {
-        movieDirectors.append(
-            new Option(completeName, uuid, false, false)
-        );
-    });
-
-    $(movieDirectors).select2({
-        placeholder: "Choisir un réalisateur…",
-        allowClear: true
-    });
-    
-    addDirector.addEventListener("click", () => {
-        addDirector.style.display = "none";
-        divMovieDirectors.style.display = "none";
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("director-wrapper");
-
-        const inputFirstname = document.createElement("input");
-        inputFirstname.type = "text";
-        inputFirstname.classList.add("input");
-        inputFirstname.placeholder = "Prénom";
-        inputFirstname.required = true;
-
-        const inputLastname = document.createElement("input");
-        inputLastname.type = "text";
-        inputLastname.classList.add("input");
-        inputLastname.placeholder = "Nom de famille";
-
-        const inputBirth = document.createElement("input");
-        inputBirth.type = "date";
-        inputBirth.classList.add("input");
-
-        const btnAdd = document.createElement("button");
-        btnAdd.classList.add("button");
-        btnAdd.textContent = "Ajouter";
-        btnAdd.addEventListener("click", () => {
-            addDirector.style.display = "block";
-            divMovieDirectors.style.display = "block";
-            wrapper.remove();
-            alert("Réalisateur ajouté avec succès.");
-        });
-
-        const btnCancel = document.createElement("button");
-        btnCancel.textContent = "Annuler";
-        btnCancel.classList.add("button");
-        btnCancel.addEventListener("click", () => {
-            addDirector.style.display = "block";
-            divMovieDirectors.style.display = "block";
-            wrapper.remove();
-        });
-
-        wrapper.append(inputFirstname, inputLastname, inputBirth, btnAdd, btnCancel);
-        addingDirector.appendChild(wrapper);
-    });
 
     genres.forEach(genre => {
         movieGenres.append(
@@ -365,26 +306,43 @@ export async function completeMovie(uuid) {
         allowClear: true
     });
 
-    addCasting.addEventListener("click", () => {
+    addCast.addEventListener("click", () => {
         const wrapper = document.createElement("div");
-        wrapper.classList.add("actor-wrapper");
+        wrapper.classList.add("casting-wrapper");
 
-        const inputCharacter = document.createElement("input");
-        inputCharacter.type = "text";
-        inputCharacter.classList.add("input");
-        inputCharacter.placeholder = "Nom du personnage";
-        inputCharacter.required = true;
+        const labelJob = document.createElement("label");
+        labelJob.classList.add("label");
+        labelJob.textContent = "Choisir le métier :";
 
-        // INSÉRER ICI SELECT POUR PEOPLE = ACTOR
+        const divJob = document.createElement("div");
+        divJob.classList.add("select");
 
-        const btnAdd = document.createElement("button");
-        btnAdd.classList.add("button");
-        btnAdd.textContent = "Ajouter un acteur";
-        btnAdd.addEventListener("click", () => {
-        });
+        const selectJob = document.createElement("select");
+        
+        const optDirector = document.createElement("option");
+        optDirector.value = "director";
+        optDirector.textContent = "Réalisateur";
 
-        wrapper.append(inputCharacter, btnAdd, btnCancel);
-        addingCasting.appendChild(wrapper);
+        const optActor = document.createElement("option");
+        optActor.value = "actor";
+        optActor.textContent = "Acteur";
+
+        const optScriptwriter = document.createElement("option");
+        optScriptwriter = "scriptwriter";
+        optScriptwriter.textContent = "Scénariste";
+
+        const optProducer = document.createElement("option");
+        optProducer.value = "producer";
+        optProducer.textContent = "Producteur";
+
+        const optSinger = document.createElement("option");
+        optSinger.value = "singer";
+        optSinger.textContent = "Interpète";
+
+        selectJob.append(optDirector, optActor, optScriptwriter, optProducer, optSinger);
+        divJob.appendChild(selectJob);
+        wrapper.appendChild(divJob);
+        addingCasts.appendChild(wrapper);
     });
 }
 
