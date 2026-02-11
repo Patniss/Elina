@@ -63,6 +63,11 @@ export async function addShow() {
   showForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    alert("Bouton ajouté cliqué !");
+    const titleInput = document.getElementById("show-title");
+    const genresInput = document.getElementById("show-genres");
+    const averageTimeInput = document.getElementById("show-time");
+    const complete = false;
+
+    console.log(genresInput);
   });
 }
