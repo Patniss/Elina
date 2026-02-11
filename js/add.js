@@ -17,11 +17,12 @@ const genres = [
     "Western"
 ]
 
-const movieForm = document.getElementById("movie-form");
 const showForm = document.getElementById("show-form");
 const showGenres = document.getElementById("show-genres");
 
-if(!movieForm) {
+export async function addMovie() {
+  const movieForm = document.getElementById("movie-form");
+
   movieForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -47,19 +48,21 @@ if(!movieForm) {
   });
 }
 
-genres.forEach(genre => {
-    showGenres.append(
-        new Option(genre, genre, false, false)
-    );
-});
+export async function addShow() {
+  genres.forEach(genre => {
+      showGenres.append(
+          new Option(genre, genre, false, false)
+      );
+  });
 
-$(showGenres).select2({
-    placeholder: "Choisir un genre…",
-    allowClear: true
-});
+  $(showGenres).select2({
+      placeholder: "Choisir un genre…",
+      allowClear: true
+  });
 
-showForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  showForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  alert("Bouton ajouté cliqué !");
-})
+    alert("Bouton ajouté cliqué !");
+  });
+}

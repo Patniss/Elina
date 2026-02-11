@@ -230,8 +230,8 @@ export async function loadCurrentShows() {
   }
 
   data.forEach((user_s) => {
-    console.log(`Ligne complète : ${user_s}`);
-    console.log(`ID Movie : ${user_s.id_movie}`);
+    console.log(`ID Movie : ` + user_s.show_id);
+
     const show = supabase
       .from("shows")
       .select("*")
