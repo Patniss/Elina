@@ -53,7 +53,7 @@ export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
     const yearMovie = document.getElementById("movie-year");
     const directorsMovie = document.getElementById("movie-directors");
-    const addDirector = document.getElementById("add-directors");
+    const addDirector = document.getElementById("add-director");
     const addingDirector = document.getElementById("adding-directors");
     const genresMovie = document.getElementById("movie-genres");
 
