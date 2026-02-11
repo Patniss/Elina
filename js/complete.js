@@ -328,7 +328,7 @@ export async function completeMovie(uuid) {
         optActor.textContent = "Acteur";
 
         const optScriptwriter = document.createElement("option");
-        optScriptwriter = "scriptwriter";
+        optScriptwriter.value = "scriptwriter";
         optScriptwriter.textContent = "Scénariste";
 
         const optProducer = document.createElement("option");
