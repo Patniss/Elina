@@ -34,10 +34,10 @@ const userShows = session.shows;
 const userDramas = session.dramas;
 const userBooks = session.books;
 
-const settingMovies = getElementById("setting-movies");
-const settingShows = getElementById("setting-shows");
-const settingDramas = getElementById("setting-dramas");
-const settingBooks = getElementById("setting-books");
+const settingMovies = document.getElementById("setting-movies");
+const settingShows = document.getElementById("setting-shows");
+const settingDramas = document.getElementById("setting-dramas");
+const settingBooks = document.getElementById("setting-books");
 
 const currentPseudo = document.getElementById("current-pseudo");
 const mainColors = document.getElementById("main-colors");

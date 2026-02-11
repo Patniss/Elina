@@ -27,8 +27,6 @@ export async function loadProfile() {
   document.getElementById("welcome").textContent = `Bienvenue ${pseudo}`;
 }
 
-loadProfile();
-
 export async function loadSession() {
   const {
     data: { session },
