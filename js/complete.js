@@ -14,6 +14,228 @@ const genres = [
     "Western"
 ]
 
+const jobs = {
+    actor: "Acteur",
+    singer: "Interprète",
+    producer: "Producteur",
+    scriptwriter: "Scénariste",
+    director: "Réalisateur",
+}
+
+const nationalities = {
+  AFG: "Afghanistan",
+  ZAF: "Afrique du Sud",
+  ALB: "Albanie",
+  DZA: "Algérie",
+  DEU: "Allemagne",
+  AND: "Andorre",
+  AGO: "Angola",
+  ATG: "Antigua-et-Barbuda",
+  SAU: "Arabie saoudite",
+  ARG: "Argentine",
+  ARM: "Arménie",
+  AUS: "Australie",
+  AUT: "Autriche",
+  AZE: "Azerbaïdjan",
+
+  BHS: "Bahamas",
+  BHR: "Bahreïn",
+  BGD: "Bangladesh",
+  BRB: "Barbade",
+  BEL: "Belgique",
+  BLZ: "Belize",
+  BEN: "Bénin",
+  BTN: "Bhoutan",
+  BLR: "Biélorussie",
+  BOL: "Bolivie",
+  BIH: "Bosnie-Herzégovine",
+  BWA: "Botswana",
+  BRA: "Brésil",
+  BRN: "Brunei",
+  BGR: "Bulgarie",
+  BFA: "Burkina Faso",
+  BDI: "Burundi",
+
+  KHM: "Cambodge",
+  CMR: "Cameroun",
+  CAN: "Canada",
+  CPV: "Cap-Vert",
+  CAF: "République centrafricaine",
+  CHL: "Chili",
+  CHN: "Chine",
+  CYP: "Chypre",
+  COL: "Colombie",
+  COM: "Comores",
+  COG: "Congo",
+  COD: "Congo (RDC)",
+  CRI: "Costa Rica",
+  CIV: "Côte d’Ivoire",
+  HRV: "Croatie",
+  CUB: "Cuba",
+
+  DNK: "Danemark",
+  DJI: "Djibouti",
+  DMA: "Dominique",
+  DOM: "République dominicaine",
+
+  EGY: "Égypte",
+  ARE: "Émirats arabes unis",
+  ECU: "Équateur",
+  ERI: "Érythrée",
+  ESP: "Espagne",
+  EST: "Estonie",
+  SWZ: "Eswatini",
+  USA: "États-Unis",
+  ETH: "Éthiopie",
+
+  FJI: "Fidji",
+  FIN: "Finlande",
+  FRA: "France",
+
+  GAB: "Gabon",
+  GMB: "Gambie",
+  GEO: "Géorgie",
+  GHA: "Ghana",
+  GRC: "Grèce",
+  GRD: "Grenade",
+  GTM: "Guatemala",
+  GIN: "Guinée",
+  GNB: "Guinée-Bissau",
+  GNQ: "Guinée équatoriale",
+  GUY: "Guyana",
+
+  HTI: "Haïti",
+  HND: "Honduras",
+  HUN: "Hongrie",
+
+  ISL: "Islande",
+  IND: "Inde",
+  IDN: "Indonésie",
+  IRN: "Iran",
+  IRQ: "Irak",
+  IRL: "Irlande",
+  ISR: "Israël",
+  ITA: "Italie",
+
+  JAM: "Jamaïque",
+  JPN: "Japon",
+  JOR: "Jordanie",
+
+  KAZ: "Kazakhstan",
+  KEN: "Kenya",
+  KGZ: "Kirghizistan",
+  KIR: "Kiribati",
+  KWT: "Koweït",
+
+  LAO: "Laos",
+  LSO: "Lesotho",
+  LVA: "Lettonie",
+  LBN: "Liban",
+  LBR: "Libéria",
+  LBY: "Libye",
+  LIE: "Liechtenstein",
+  LTU: "Lituanie",
+  LUX: "Luxembourg",
+
+  MDG: "Madagascar",
+  MWI: "Malawi",
+  MYS: "Malaisie",
+  MDV: "Maldives",
+  MLI: "Mali",
+  MLT: "Malte",
+  MAR: "Maroc",
+  MUS: "Maurice",
+  MRT: "Mauritanie",
+  MEX: "Mexique",
+  FSM: "Micronésie",
+  MDA: "Moldavie",
+  MCO: "Monaco",
+  MNG: "Mongolie",
+  MNE: "Monténégro",
+  MOZ: "Mozambique",
+  MMR: "Myanmar",
+
+  NAM: "Namibie",
+  NRU: "Nauru",
+  NPL: "Népal",
+  NIC: "Nicaragua",
+  NER: "Niger",
+  NGA: "Nigéria",
+  NOR: "Norvège",
+  NZL: "Nouvelle-Zélande",
+
+  OMN: "Oman",
+  UGA: "Ouganda",
+  UZB: "Ouzbékistan",
+
+  PAK: "Pakistan",
+  PAN: "Panama",
+  PNG: "Papouasie-Nouvelle-Guinée",
+  PRY: "Paraguay",
+  NLD: "Pays-Bas",
+  PER: "Pérou",
+  PHL: "Philippines",
+  POL: "Pologne",
+  PRT: "Portugal",
+
+  QAT: "Qatar",
+
+  ROU: "Roumanie",
+  GBR: "Royaume-Uni",
+  RUS: "Russie",
+  RWA: "Rwanda",
+
+  LCA: "Sainte-Lucie",
+  KNA: "Saint-Kitts-et-Nevis",
+  SMR: "Saint-Marin",
+  VCT: "Saint-Vincent-et-les-Grenadines",
+  SLB: "Salomon",
+  SLV: "Salvador",
+  WSM: "Samoa",
+  STP: "Sao Tomé-et-Principe",
+  SEN: "Sénégal",
+  SRB: "Serbie",
+  SYC: "Seychelles",
+  SLE: "Sierra Leone",
+  SGP: "Singapour",
+  SVK: "Slovaquie",
+  SVN: "Slovénie",
+  SOM: "Somalie",
+  SDN: "Soudan",
+  SSD: "Soudan du Sud",
+  LKA: "Sri Lanka",
+  SWE: "Suède",
+  CHE: "Suisse",
+  SUR: "Suriname",
+  SYR: "Syrie",
+
+  TJK: "Tadjikistan",
+  TZA: "Tanzanie",
+  TCD: "Tchad",
+  CZE: "Tchéquie",
+  THA: "Thaïlande",
+  TLS: "Timor oriental",
+  TGO: "Togo",
+  TON: "Tonga",
+  TTO: "Trinité-et-Tobago",
+  TUN: "Tunisie",
+  TKM: "Turkménistan",
+  TUR: "Turquie",
+  TUV: "Tuvalu",
+
+  UKR: "Ukraine",
+  URY: "Uruguay",
+
+  VUT: "Vanuatu",
+  VAT: "Vatican",
+  VEN: "Venezuela",
+  VNM: "Viêt Nam",
+
+  YEM: "Yémen",
+  ZMB: "Zambie",
+  ZWE: "Zimbabwe"
+};
+
 function calculateAge(startDate, endDate = new Date()) {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -48,9 +270,6 @@ async function loadDirectors() {
         directors[dir.id] = `${dir.firstname} ${dir.lastname}`;
     });
 }
-
-console.log(directors);
-
 
 export async function completeMovie(uuid) {
     await loadDirectors();
@@ -178,10 +397,30 @@ export async function completePeople(uuid) {
 
     const peopleName = document.getElementById("people-name");
     const peopleAge = document.getElementById("people-age");
+    const peopleNationalities = document.getElementById("people-nationalities");
+    const peopleJobs = document.getElementById("people-jobs");
 
     const completeName = `${p.firstname} ${p.lastname}`;
     const agePeople = p.deathdate === null ? calculateAge(p.birthdate) : "✝ " + calculateAge(p.birthdate, p.deathdate);
 
     peopleName.textContent = completeName;
     peopleAge.textContent = agePeople + " ans";
+
+    for (const [code, name] of Object.entries(nationalities)) {
+        peopleNationalities.append(new Option(name, code));
+    }
+
+    $(peopleNationalities).select2({
+        placeholder: "Choisir une nationalité…",
+        allowClear: true
+    });
+
+    for (const [code, name] of Object.entries(jobs)) {
+        peopleJobs.append(new Option(name, code));
+    }
+
+    $(peopleJobs).select2({
+        placeholder: "Choisir un métier…",
+        allowClear: true
+    });
 }
