@@ -229,9 +229,12 @@ export async function loadSeenMovies() {
   }
 
   data.forEach((user_m) => {
-    const movie = loadData("movies", "id", user_m.movie_id);
-
-    console.log(movie);
+    loadData("movies", "id", user_m.movie_id)
+      .then(movie => {
+        const titleMovie = movie.title;
+        const yearMovie = movie.year;
+      }).catch(err => console.error(err)
+    );
 
     const column = document.createElement("div");
     column.classList.add("column");
@@ -243,11 +246,11 @@ export async function loadSeenMovies() {
     const pTitle = document.createElement("p");
     pTitle.classList.add("title");
     pTitle.classList.add("is-5");
-    pTitle.textContent = movie.title;
+    pTitle.textContent = titleMovie;
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("subtitle");
     pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = movie.year;
+    pSubtitle.textContent = yearMovie;
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex-direction-row");
     const detailsBtn = document.createElement("a");
