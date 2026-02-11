@@ -35,7 +35,7 @@ function calculateAge(startDate, endDate = new Date()) {
     return age;
 }
 
-export async function allMovies() {
+export async function loadAllMovies() {
   if (!allMoviesContainer) return;
 
   const { data, error } = await supabase
@@ -55,6 +55,8 @@ export async function allMovies() {
     return;
   }
 
+  console.log(userId);
+
   data.forEach((movie) => {
     const column = document.createElement("div");
     column.classList.add("column");
@@ -73,12 +75,10 @@ export async function allMovies() {
     pSubtitle.textContent = movie.year;
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex-direction-row");
-    const completeBtn = document.createElement("a");
-    completeBtn.classList.add("tag");
-    completeBtn.textContent = "Compléter";
-    completeBtn.href = `/Elina/movies/complete.html?id=${movie.id}`;
+    const userTag = document.createElement("a");
+    userTag.classList.add("tag");
 
-    divTags.appendChild(completeBtn);
+    divTags.appendChild(userTag);
     cardContent.appendChild(pTitle);
     cardContent.appendChild(pSubtitle);
     cardContent.appendChild(divTags);
