@@ -318,6 +318,9 @@ export async function completeMovie(uuid) {
         divJob.classList.add("select");
 
         const selectJob = document.createElement("select");
+
+        const optBase = document.createElement("option");
+        optBase.textContent = "Choisir un métier…";
         
         const optDirector = document.createElement("option");
         optDirector.value = "director";
