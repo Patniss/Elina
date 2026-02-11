@@ -36,7 +36,7 @@
 * movies/index.html - list.js => Correction || ÉTAT = EN COURS D'ÉCRITURE
     * list.js => nouveau console.log pour test || ÉTAT = *EN COURS DE PUSH*
 * movies/complete.html + complete.js => Réalisateur = membre du casting || ÉTAT = EN COURS D'ÉCRITURE
-    * movies/complete.html + complete.js + add.js => Correction de l'erreur ligne 48/49 de add.js || ÉTAT = *PUSH FINI - À TESTER*
-* shows/add.html + add.js => ajout genres + test click bouton ajouter || ÉTAT = *PUSH FINI - À TESTER*
+    * movies/complete.html + complete.js + add.js => Correction de l'erreur ligne 48/49 de add.js || ÉTAT = *EN COURS DE PUSH*
+* shows/add.html + add.js => Erreur dans add.js ligne 54 = ajout jQuery || ÉTAT = *EN COURS DE PUSH*
 * SUPABASE => Crétion des données d'une série test || EN COURS DE CRÉATION
 * list.js pour shows/index => initialisation de la fonction loadCurrentShows() || ÉTAT = EN COURS D'ÉCRITURE
