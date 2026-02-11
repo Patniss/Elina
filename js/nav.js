@@ -22,3 +22,19 @@ function initNavbarBurger() {
     });
   });
 }
+
+function initNavbarDropdowns() {
+  const dropdowns = document.querySelectorAll(".navbar-item.has-dropdown");
+
+  dropdowns.forEach((dropdown) => {
+    const link = dropdown.querySelector(".navbar-link");
+
+    link.addEventListener("click", (e) => {
+      // uniquement en mobile
+      if (window.innerWidth < 1024) {
+        e.preventDefault();
+        dropdown.classList.toggle("is-active");
+      }
+    });
+  });
+}
