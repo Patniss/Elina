@@ -27,6 +27,7 @@
                     <h2 class="subtitle">Pseudo : <span id="current-pseudo"></span></h2>
                     <input class="input" type="text" placeholder="Changer de pseudo…" id="setting-pseudo">
                 </div>
+                <hr class="hr" />
 
                 <div class="field">
                     <h2 class="subtitle">Pages actives</h2>
@@ -46,8 +47,18 @@
                     </div>
                 </div>
 
+                <hr class="hr" />
+
                 <div class="field">
-                    <h2 class="subtitle">Thème principal</h2>
+                    <h2 class="subtitle">Modifier le thème</h2>
+
+                    <label for="mode" class="label">Mode principal</label>
+                    <div class="select" id="mode">
+                        <option value="system">Système</option>
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                    </div>
+
                     <label for="main-colors" class="label">Couleur principale</label>
                     <div class="select">
                         <select name="main-colors" id="main-colors">
