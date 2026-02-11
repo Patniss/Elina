@@ -164,7 +164,7 @@ export async function loadSeenMovies() {
 
   data.forEach((user_m) => {
     console.log(`Ligne complète : ${user_m}`);
-    console.log(`ID Movie : ${user_m.id_movie}`);
+    console.log(`ID Movie : ${user_m.movie_id}`);
     const movie = supabase
       .from("movies")
       .select("*")
