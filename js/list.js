@@ -276,12 +276,12 @@ export async function loadToseeMovies() {
 
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex");
-    divTags.classList.add("is-justify-content-space-around");
 
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
     detailsBtn.classList.add("is-hoverable");
-    detailsBtn.textContent = "Compléter";
+    detailsBtn.classList.add("mr-2");
+    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
     detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
 
     const toSeeBtn = document.createElement("button");
@@ -289,6 +289,7 @@ export async function loadToseeMovies() {
     toSeeBtn.classList.add("is-success");
     toSeeBtn.classList.add("is-light");
     toSeeBtn.classList.add("is-hoverable");
+    toSeeBtn.classList.add("mr-2");
     toSeeBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
 
     divTags.append(toSeeBtn, detailsBtn);
@@ -298,18 +299,34 @@ export async function loadToseeMovies() {
 
     toseeContainer.appendChild(column);
 
-    toSeeBtn.addEventListener("click", () => {
+    toSeeBtn.addEventListener("click", async () => {
       toSeeBtn.textContent = "";
       toSeeBtn.classList.add("button");
       toSeeBtn.classList.remove("is-light");
       toSeeBtn.classList.add("is-loading");
 
-      setTimeout(() => {
-        toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-check"></i></span><span>Vu</span>`;
-        toSeeBtn.classList.remove("is-loading");
-        toSeeBtn.classList.remove("button");
-        alert("test");
-      }, 2000);
+      try {
+        const { data, error } = await supabase
+          .from("users_movies")
+          .update({ seen: true })
+          .eq("user_id", userId)
+          .eq("movie_id", movieId)
+          .single();
+
+          if (error) {
+            setTimeout(() => {
+              toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            }, 500);
+            return;
+          }
+
+          setTimeout(() => {
+            toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-check"></i></span><span>Vu</span>`;
+            toSeeBtn.classList.remove("is-loading");
+          }, 500);
+      } catch (err) {
+        console.error("Erreur :", error);
+      };
     });
   });
 }
