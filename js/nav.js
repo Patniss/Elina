@@ -1,3 +1,5 @@
+import { loadProfile } from "/Elina/js/dashboard.js";
+
 export async function loadNav() {
   const navContainer = document.getElementById("nav-container");
   if (!navContainer) return;
