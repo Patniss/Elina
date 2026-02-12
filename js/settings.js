@@ -1,15 +1,7 @@
-import { supabase } from "./supabase.js";
+import { supabase } from "/Elina/supabase.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
 session = await loadProfile();
-
-const pseudo = session.pseudo;
-const colorTheme = session.theme_color;
-const modeUser = session.mode;
-const userMovies = session.movies;
-const userShows = session.shows;
-const userDramas = session.dramas;
-const userBooks = session.books;
 
 const settingMovies = document.getElementById("setting-movies");
 const settingShows = document.getElementById("setting-shows");
@@ -22,14 +14,14 @@ const mainColors = document.getElementById("main-colors");
 const mode = document.getElementById("mode");
 const saveSettings = document.getElementById("save-settings");
 
-settingMovies.value = userMovies;
-settingShows.value = userShows;
-settingDramas.value = userDramas;
-settingBooks.value = userBooks;
+settingMovies.value = session.movies;
+settingShows.value = session.shows;
+settingDramas.value = session.dramas;
+settingBooks.value = session.books;
 
-currentPseudo.textContent = pseudo;
-mainColors.value = colorTheme;
-mode.value = modeUser;
+currentPseudo.textContent = session.pseudo;
+mainColors.value = session.theme_color;
+mode.value = session.mode;
 
 mainColors.addEventListener("change", () => {
     console.log("Couleur changée");
