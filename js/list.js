@@ -2,9 +2,7 @@ import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
-const incompleteMoviesContainer = document.getElementById("list-incomplete-movies");
 const incompletePeopleContainer = document.getElementById("list-incomplete-people");
-const seenContainer = document.getElementById("list-seen-movies");
 const currentContainer = document.getElementById("list-current-shows");
 
 export async function loadAllMovies() {
@@ -78,6 +76,7 @@ export async function loadAllMovies() {
 }
 
 export async function loadIncompleteMovies() {
+  const incompleteMoviesContainer = document.getElementById("list-incomplete-movies");
   if (!incompleteMoviesContainer) return;
 
   const { data, error } = await supabase
@@ -102,20 +101,25 @@ export async function loadIncompleteMovies() {
     const column = document.createElement("div");
     column.classList.add("column");
     column.classList.add("is-one-quarter");
+
     const card = document.createElement("div");
     card.classList.add("card");
     const cardContent = document.createElement("div");
     cardContent.classList.add("card-content");
+
     const pTitle = document.createElement("p");
     pTitle.classList.add("title");
     pTitle.classList.add("is-5");
     pTitle.textContent = movie.title;
+
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("subtitle");
     pSubtitle.classList.add("is-6");
     pSubtitle.textContent = movie.year;
+
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex-direction-row");
+
     const completeBtn = document.createElement("a");
     completeBtn.classList.add("tag");
     completeBtn.textContent = "Compléter";
@@ -191,6 +195,8 @@ export async function loadIncompletePeople() {
 }
 
 export async function loadToseeMovies() {
+  const toseeContainer = document.getElementById("list-tosee-movies");
+
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -211,7 +217,7 @@ export async function loadToseeMovies() {
     
   if (error) {
     console.error(error);
-    seenContainer.textContent = "Erreur lors du chargement des films.";
+    toseeContainer.textContent = "Erreur lors du chargement des films.";
     return;
   }
 
@@ -275,13 +281,15 @@ export async function loadToseeMovies() {
     card.appendChild(cardContent);
     column.appendChild(card);
 
-    seenContainer.appendChild(column);
+    toseeContainer.appendChild(column);
 
   })
 
 }
 
 export async function loadSeenMovies() {
+  const seenContainer = document.getElementById("list-seen-movies");
+
   const {
     data: { session },
   } = await supabase.auth.getSession();
