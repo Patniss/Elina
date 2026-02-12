@@ -1,5 +1,19 @@
 import { loadProfile } from "/Elina/js/dashboard.js";
 
+export async function customNavbar() {
+  const session = await loadProfile();
+
+  const navMovies = document.getElementById("navbar-item-movies");
+  const navShows = document.getElementById("navbar-item-shows");
+  const navDramas = document.getElementById("navbar-item-dramas");
+  const navBooks = document.getElementById("navbar-item-books");
+
+  if(!session.movies) navMovies.style.display = "none";
+  if(!session.shows) navShows.style.display = "none";
+  if(!session.dramas) navDramas.style.display = "none";
+  if(!session.books) navBooks.style.display = "none";
+}
+
 export async function loadNav() {
   const navContainer = document.getElementById("nav-container");
   if (!navContainer) return;
@@ -10,6 +24,7 @@ export async function loadNav() {
 
   initNavbarBurger();
   initNavbarDropdowns();
+  customNavbar();
 }
 
 function initNavbarBurger() {
@@ -55,17 +70,3 @@ navbarItems.forEach((item) => {
     }
   });
 });
-
-export async function customNavbar() {
-  const session = await loadProfile();
-
-  const navMovies = document.getElementById("navbar-item-movies");
-  const navShows = document.getElementById("navbar-item-shows");
-  const navDramas = document.getElementById("navbar-item-dramas");
-  const navBooks = document.getElementById("navbar-item-books");
-
-  if(!session.movies) navMovies.style.display = "none";
-  if(!session.shows) navShows.style.display = "none";
-  if(!session.dramas) navDramas.style.display = "none";
-  if(!session.books) navBooks.style.display = "none";
-}

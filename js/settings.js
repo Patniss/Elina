@@ -1,4 +1,4 @@
-import { supabase } from "/Elina/supabase.js";
+import { supabase } from "/Elina/js/supabase.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
 session = await loadProfile();
