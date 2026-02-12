@@ -303,6 +303,7 @@ export async function completeMovie(uuid) {
     });
 
     addCast.addEventListener("click", () => {
+        console.log("bouton cliqué");
         const wrapperCast = document.createElement("div");
         wrapperCast.classList.add("cast-wrapper");
 
