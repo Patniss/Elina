@@ -1,6 +1,6 @@
 :root {
   --user-primary: #00d1b2;
-  --bulma-arrow-color: var(-user-primary);
+  --bulma-arrow-color: var(--user-primary);
 }
 
 /* On surcharge les classes Bulma principales */
