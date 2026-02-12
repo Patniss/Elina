@@ -252,8 +252,6 @@ function calculateAge(startDate, endDate = new Date()) {
 
 import { supabase } from "/Elina/js/supabase.js";
 
-const directors = {};
-
 async function loadDirectors() {
     const { data, error } = await supabase
         .from("people")
@@ -272,6 +270,41 @@ async function loadDirectors() {
 }
 
 export async function completeMovie(uuid) {
+    const { data: movie, error } = await supabase
+    .from("movies")
+    .select("*")
+    .eq("id", uuid)
+    .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    const movieTitle = document.getElementById("movie-title");
+    const movieYear = document.getElementById("movie-year");
+    const movieGenres = document.getElementById("movie-genres");
+    const movieSynopsis = document.getElementById("movie-synopsis");
+    const addCast = document.getElementById("add-cast");
+    const addingCasts = document.getElementById("adding-casts");
+
+    movieTitle.textContent = movie.title;
+    movieYear.textContent = movie.year;
+
+    genres.forEach(genre => {
+        movieGenres.append(
+            new Option(genre, genre, false, false)
+        );
+    });
+
+    $(movieGenres).select2({
+        placeholder: "Choisir un genre…",
+        allowClear: true
+    });
+
+}
+
+export async function completeMovieBase(uuid) {
     const directors = await loadDirectors();
 
     const { data: movie, error } = await supabase
