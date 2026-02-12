@@ -283,7 +283,6 @@ export async function loadIncompletePeople() {
 }
 
 export async function loadToseeMovies() {
-  supabase();
   console.log(profile, userId)
   const toseeContainer = document.getElementById("list-tosee-movies");
 
