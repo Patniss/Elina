@@ -283,11 +283,11 @@ export async function loadIncompletePeople() {
 }
 
 export async function loadToseeMovies() {
-  console.log(profile, userId)
   const toseeContainer = document.getElementById("list-tosee-movies");
 
   const profile = await loadProfile();
   const userId = profile.id;
+  console.log(profile, userId);
 
   const { data: toseeMovies, error: errorTooseeMovies } = await supabase
     .from("users_movies")
