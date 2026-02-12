@@ -240,7 +240,7 @@ export async function loadSeenMovies() {
   }
 
   seenMovies.forEach(movie => {
-    console.log(movie);
+    console.log(movie.movies);
   });
 }
 
