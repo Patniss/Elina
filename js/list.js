@@ -214,7 +214,7 @@ export async function loadToseeMovies() {
     return;
   }
 
-  toseeMovies.forEach(data => {
+  toseeMovies.forEach(item => {
     const column = document.createElement("div");
     column.classList.add("column");
     column.classList.add("is-one-quarter");
@@ -282,8 +282,6 @@ export async function loadSeenMovies() {
   }
 
   seenMovies.forEach(item => {
-    console.log(item.movies);
-
     const column = document.createElement("div");
     column.classList.add("column");
     column.classList.add("is-one-quarter");
