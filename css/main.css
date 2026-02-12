@@ -1,5 +1,6 @@
 :root {
   --user-primary: #00d1b2;
+  --bulma-arrow-color: var(-user-primary);
 }
 
 /* On surcharge les classes Bulma principales */
@@ -60,4 +61,8 @@
   .navbar-menu.is-active {
     transform: translateX(0);
   }
+}
+
+.navbar-link:not(.is-arrowless)::after, .select:not(.is-multiple):not(.is-loading)::after {
+  border: 0.125em solid var(--bulma-arrow-color);
 }
