@@ -1,65 +1,12 @@
 import { supabase } from "/Elina/js/supabase.js";
+import { calculateAge } from "/Elina/js/functions.js";
+import { loadProfile } from "/Elina/js/dashboard.js";
 
 const incompleteMoviesContainer = document.getElementById("list-incomplete-movies");
 const incompletePeopleContainer = document.getElementById("list-incomplete-people");
 const seenContainer = document.getElementById("list-seen-movies");
 const currentContainer = document.getElementById("list-current-shows");
 const allMoviesContainer = document.getElementById("list-all-movies");
-
-async function loadSession() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session) {
-    window.location.href = "/index.html";
-    return;
-  }
-
-  console.log(session);
-
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("pseudo")
-    .eq("id", userId)
-    .single();
-
-  if (error) {
-    console.error("Erreur profil :", error.message);
-    return;
-  }
-
-  return session;
-}
-
-async function loadData(table, filtre, donnee) {
-  const { data, error } = await supabase
-    .from(table).select("*")
-    .select("*")
-    .eq(filtre, donnee)
-    .single();
-    
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  return data;
-}
-
-function calculateAge(startDate, endDate = new Date()) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    let age = end.getFullYear() - start.getFullYear();
-    const m = end.getMonth() - start.getMonth();
-
-    if (m < 0 || (m === 0 && end.getDate() < start.getDate())) {
-        age--;
-    }
-
-    return age;
-}
 
 export async function loadAllMovies() {
   const session = loadSession();
