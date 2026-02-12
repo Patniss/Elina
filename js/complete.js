@@ -310,6 +310,9 @@ export async function completeMovie(uuid) {
         const wrapper = document.createElement("div");
         wrapper.classList.add("casting-wrapper");
 
+        const cancelJob = document.createElement("button");
+        cancelJob.classList.add("modal-close");
+
         const labelJob = document.createElement("label");
         labelJob.classList.add("label");
         labelJob.textContent = "Choisir le métier :";
@@ -342,10 +345,14 @@ export async function completeMovie(uuid) {
         optSinger.value = "singer";
         optSinger.textContent = "Interpète";
 
-        selectJob.append(optDirector, optActor, optScriptwriter, optProducer, optSinger);
-        divJob.appendChild(selectJob);
+        selectJob.append(optBase, optDirector, optActor, optScriptwriter, optProducer, optSinger);
+        divJob.append(labelJob, selectJob);
         wrapper.appendChild(divJob);
         addingCasts.appendChild(wrapper);
+
+        cancelJob.addEventListener("click", () => {
+            wrapper.remove();
+        })
 
         selectJob.addEventListener("change", () => {
             switch (selectJob.value) {
