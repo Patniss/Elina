@@ -3,33 +3,34 @@ import { loadProfile } from "/Elina/js/dashboard.js";
 
 session = await loadProfile();
 
-console.log(session);
+export async function setSettings() {
+  const settingMovies = document.getElementById("setting-movies");
+  const settingShows = document.getElementById("setting-shows");
+  const settingDramas = document.getElementById("setting-dramas");
+  const settingBooks = document.getElementById("setting-books");
+  const settingPseudo = document.getElementById("setting-pseudo");
 
-const settingMovies = document.getElementById("setting-movies");
-const settingShows = document.getElementById("setting-shows");
-const settingDramas = document.getElementById("setting-dramas");
-const settingBooks = document.getElementById("setting-books");
-const settingPseudo = document.getElementById("setting-pseudo");
+  const currentPseudo = document.getElementById("current-pseudo");
+  const mainColors = document.getElementById("main-colors");
+  const mode = document.getElementById("mode");
+  const saveSettings = document.getElementById("save-settings");
 
-const currentPseudo = document.getElementById("current-pseudo");
-const mainColors = document.getElementById("main-colors");
-const mode = document.getElementById("mode");
-const saveSettings = document.getElementById("save-settings");
+  settingMovies.value = session.movies;
+  settingShows.value = session.shows;
+  settingDramas.value = session.dramas;
+  settingBooks.value = session.books;
 
-settingMovies.value = session.movies;
-settingShows.value = session.shows;
-settingDramas.value = session.dramas;
-settingBooks.value = session.books;
+  currentPseudo.textContent = session.pseudo;
+  mainColors.value = session.theme_color;
+  mode.value = session.mode;
 
-currentPseudo.textContent = session.pseudo;
-mainColors.value = session.theme_color;
-mode.value = session.mode;
+  mainColors.addEventListener("change", () => {
+      console.log("Couleur changée");
+      saveSettings.style.backgroundColor = mainColors.value;
+  });
 
-mainColors.addEventListener("change", () => {
-    console.log("Couleur changée");
-    saveSettings.style.backgroundColor = mainColors.value;
-});
-
-saveSettings.addEventListener("click", () => {
-  alert("bouton cliqué");
-})
+  saveSettings.addEventListener("click", (event) => {
+    event.preventDefault();
+    alert("bouton cliqué");
+  })
+}

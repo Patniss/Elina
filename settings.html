@@ -137,7 +137,10 @@
 </script>
 
 <script type="module" src="/Elina/js/dashboard.js"></script>
-<script type="module" src="/Elina/js/settings.js"></script>
+<script type="module">
+    import { setSettings } from "/Elina/js/settings.js";
+    setSettings();
+</script>
 
 </body>
 </html>
