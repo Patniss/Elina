@@ -1,3 +1,5 @@
+import { supabase } from "/Elina/js/supabase.js";
+
 export function calculateAge(startDate, endDate = new Date()) {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -10,8 +12,4 @@ export function calculateAge(startDate, endDate = new Date()) {
     }
 
     return age;
-}
-
-export function loadMovie(uuid) {
-    
 }

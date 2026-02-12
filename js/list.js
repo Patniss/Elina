@@ -1,7 +1,6 @@
 import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
-import { loadMovie } from "/Elina/js/functions.js";
 
 const incompletePeopleContainer = document.getElementById("list-incomplete-people");
 const currentContainer = document.getElementById("list-current-shows");
@@ -213,10 +212,13 @@ export async function loadToseeMovies() {
     return;
   }
 
+  const movies = [];
+
   toseeMovies.forEach(data => {
-    const movie = loadMovie(data.user_movie);
-    console.log(movie);
+    movies.push(data.movie_id);
   });
+
+  console.log(movies);
 }
 
 export async function loadSeenMovies() {
