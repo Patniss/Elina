@@ -60,7 +60,7 @@ function calculateAge(startDate, endDate = new Date()) {
 }
 
 export async function loadAllMovies() {
-  session = loadSession();
+  const session = loadSession();
   console.log(session);
   
   if (!allMoviesContainer) return;
