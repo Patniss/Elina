@@ -3,6 +3,8 @@ import { loadProfile } from "/Elina/js/dashboard.js";
 
 session = await loadProfile();
 
+console.log(session);
+
 const settingMovies = document.getElementById("setting-movies");
 const settingShows = document.getElementById("setting-shows");
 const settingDramas = document.getElementById("setting-dramas");
@@ -29,18 +31,5 @@ mainColors.addEventListener("change", () => {
 });
 
 saveSettings.addEventListener("click", () => {
-  if (settingPseudo) {
-    async function updatePseudo() {
-      const { data, error } = await supabase
-          .from("profiles")
-          .update({ pseudo: settingPseudo })
-          .eq("user_id", userId)
-        if (error) {
-          console.error('Erreur lors de la mise à jour :', error)
-        } else {
-          console.log('Profil mis à jour :', data)
-        }
-    }
-    updatePseudo();
-  }
+  alert("bouton cliqué");
 })
