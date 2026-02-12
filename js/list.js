@@ -2,77 +2,35 @@ import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
-const incompletePeopleContainer = document.getElementById("list-incomplete-people");
-const currentContainer = document.getElementById("list-current-shows");
-
 export async function loadAllMovies() {
-  const session = loadProfile();
-  console.log(session);
-  
-  const allMoviesContainer = document.getElementById("list-all-movies");
+  const allMovieContainer = document.getElementById("list-all-movies");
 
-  if (!allMoviesContainer) return;
+  const profile = await loadProfile();
+  const userId = profile.id;
 
-  const { data: movies, error: errorMovies } = await supabase
+  const { data, error } = await supabase
     .from("movies")
-    .select("id, title, year")
+    .select(`*, users_movies(seen, user_id)`)
     .order("year", { ascending: false })
     .order("title", { ascending: true });
 
-  if (errorMovies) {
-    console.error(errorMovies);
-    allMoviesContainer.textContent = "Erreur lors du chargement des films.";
-    return;
+  if (error) {
+    console.error(error);
+    allMovieContainer.textContent = "Erreur lors du chargement des films.";
   }
-
-  if (movies.length === 0) {
-    allMoviesContainer.textContent = "Aucun film à afficher…";
-    return;
-  }
-
-  movies.forEach((movie) => {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
-
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
-    pTitle.textContent = movie.title;
-
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("subtitle");
-    pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = movie.year;
-
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex-direction-row");
-
-    const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag");
-    detailsBtn.textContent = "Détails";
-    detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
-
-    const userTag = document.createElement("a");
-    userTag.classList.add("tag");
-
-    divTags.appendChild(detailsBtn);
-    cardContent.appendChild(pTitle);
-    cardContent.appendChild(pSubtitle);
-    cardContent.appendChild(divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-
-    allMoviesContainer.appendChild(column);
+  
+  const moviesWithStatus = data.map(movie => {
+    const userMovie = movie.users_movies.find(
+      um => um.user_id === userId
+    );
     
+    return {
+      ...movie,
+      seen: userMovie ? userMovie.seen : null
+    };
   });
 
+  console.log(moviesWithStatus);
 }
 
 export async function loadIncompleteMovies() {
