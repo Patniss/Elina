@@ -240,7 +240,7 @@ export async function loadToseeMovies() {
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
     detailsBtn.textContent = "Compléter";
-    detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
+    detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie.id}`;
 
     const toSeeBtn = document.createElement("a");
     toSeeBtn.classList.add("tag");
@@ -307,7 +307,7 @@ export async function loadSeenMovies() {
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
     detailsBtn.textContent = "Compléter";
-    detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
+    detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie.id}`;
 
     divTags.appendChild(detailsBtn);
     cardContent.appendChild(pTitle);
