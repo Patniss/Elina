@@ -43,10 +43,7 @@ export async function setSettings() {
     setTimeout(() => {
       saveSettings.classList.remove("is-loading");
       saveSettings.textContent = "Enregistrer les réglages";
-      settingsForm.reset();
-      settingPseudo.focus();
+      alert(settingPseudo);
     }, 2000);
-
-    console.log(settingPseudo);
   })
 }
