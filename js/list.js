@@ -160,6 +160,39 @@ export async function loadAllMovies() {
         return;
       }
     })
+
+    suppMovieBtn.addEventListener("click", async () => {
+      suppMovieBtn.textContent = "";
+      suppMovieBtn.classList.add("is-loading");
+
+      try {
+        const { data, error } = await supabase
+          .from("users_movies")
+          .delete()
+          .eq("user_id", userId)
+          .eq("movie_id", movie.id)
+
+          if (error) {
+            setTimeout(() => {
+              suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            }, 500);
+            return;
+          }
+      } catch (err) {
+        setTimeout(() => {
+              suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            }, 500);
+            return;
+      }
+
+      setTimeout(() => {
+        suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
+        suppMovieBtn.classList.remove("is-loading");
+        divTags.removeChild(suppMovieBtn);
+        divTags.removeChild(viewMovieBtn);
+        divTags.appendChild(addMovieBtn);
+      }, 500);
+    })
   });
 }
 
