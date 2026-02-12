@@ -62,3 +62,8 @@
     transform: translateX(0);
   }
 }
+
+.navbar-link:not(.is-arrowless)::after {
+  border-left-color: var(--user-primary) !important;
+  border-bottom-color: var(--user-primary) !important;
+}
