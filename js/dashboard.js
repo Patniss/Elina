@@ -31,6 +31,17 @@ export async function loadProfile() {
   return data;
 }
 
+export async function customDashboard() {
+  const session = await loadProfile();
+
+  const homeMovies = document.getElementById("homeMovies");
+  const homeShows = document.getElementById("homeShows");
+  const homeDramas = document.getElementById("homeDramas");
+  const homeBooks = document.getElementById("homeBooks");
+
+  console.log(session);
+}
+
 export async function loadSession() {
   const {
     data: { session },
