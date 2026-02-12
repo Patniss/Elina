@@ -193,10 +193,12 @@ export async function loadToseeMovies() {
     pSubtitle.textContent = item.movies.year;
 
     const divTags = document.createElement("div");
-    divTags.classList.add("is-flex-direction-row");
+    divTags.classList.add("is-flex");
+    divTags.classList.add("is-justify-content-space-around");
 
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
+    detailsBtn.classList.add("is-hoverable");
     detailsBtn.textContent = "Compléter";
     detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
 
@@ -205,17 +207,18 @@ export async function loadToseeMovies() {
     toSeeBtn.classList.add("is-success");
     toSeeBtn.classList.add("is-light");
     toSeeBtn.classList.add("is-hoverable");
-    toSeeBtn.innerHTML = `<i class="fa fa-eye"></i> J'ai vu`;
+    toSeeBtn.innerHTML = `<i class="fas fa-eye"></i> J'ai vu`;
 
-    divTags.appendChild(toSeeBtn);
-    divTags.appendChild(detailsBtn);
-    cardContent.appendChild(pTitle);
-    cardContent.appendChild(pSubtitle);
-    cardContent.appendChild(divTags);
+    divTags.append(toSeeBtn, detailsBtn);
+    cardContent.append(pTitle, pSubtitle, divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
 
     toseeContainer.appendChild(column);
+
+    toSeeBtn.addEventListener("click", () => {
+      alert('bouton cliqué');
+    })
   });
 }
 
