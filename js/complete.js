@@ -303,17 +303,17 @@ export async function completeMovie(uuid) {
     });
 
     addCast.addEventListener("click", () => {
-        const wrapperCast = document.getElementById("div");
+        const wrapperCast = document.createElement("div");
         wrapperCast.classList.add("cast-wrapper");
 
-        const aClose = document.getElementById("a");
+        const aClose = document.createElement("a");
         aClose.classList.add("tag");
         aClose.classList.add("is-delete");
 
-        const divSelectJob = document.getElementById("div");
+        const divSelectJob = document.createElement("div");
         divSelectJob.classList.add("select");
 
-        const selectJob = document.getElementById("select");
+        const selectJob = document.createElement("select");
 
         const optBase = document.createElement("option");
         optBase.textContent = "Choisir un métier…";
