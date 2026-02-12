@@ -49,12 +49,63 @@ export async function loadAllMovies() {
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("title");
     pSubtitle.classList.add("is-6");
-    pTitle.textContent = data.year;
+    pSubtitle.textContent = data.year;
+
+    const detailsBtn = document.createElement("a");
+    detailsBtn.classList.add("tag");
+    detailsBtn.classList.add("is-hoverable");
+    detailsBtn.textContent = "Compléter";
+    detailsBtn.href = `/Elina/movies/movie.html?id=${data.id}`;
+
+    const addMovieBtn = document.createElement("button");
+    addMovieBtn.classList.add("tag");
+    addMovieBtn.classList.add("button");
+    addMovieBtn.classList.add("is-hoverable");
+    addMovieBtn.classList.add("is-link");
+    addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+
+    const suppMovieBtn = document.createElement("button");
+    suppMovieBtn.classList.add("tag");
+    suppMovieBtn.classList.add("button");
+    suppMovieBtn.classList.add("is-hoverable");
+    suppMovieBtn.classList.add("is-danger");
+    suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
+
+    const viewMovieBtn = document.createElement("button");
+    viewMovieBtn.classList.add("tag");
+    viewMovieBtn.classList.add("button");
+    viewMovieBtn.classList.add("is-hoverable");
+    viewMovieBtn.classList.add("is-light");
+    viewMovieBtn.classList.add("is-success");
+    viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+
+    const seenMovieBtn = document.createElement("button");
+    seenMovieBtn.classList.add("tag");
+    seenMovieBtn.classList.add("button");
+    seenMovieBtn.classList.add("is-hoverable");
+    seenMovieBtn.classList.add("is-success");
+    seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
 
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex");
     divTags.classList.add("is-justify-content-space-around");
 
+    switch (data.seen) {
+      case null:
+        divTags.appendChild(addMovieBtn);
+        break;
+    
+      case false:
+        divTags.appendChild(viewMovieBtn);
+        divTags.appendChild(suppMovieBtn);
+        break;
+
+      case true:
+        divTags.appendChild(seenMovieBtn);
+        break;
+    }
+
+    divTags.appendChild(detailsBtn);
     cardContent.append(pTitle, pSubtitle, divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
