@@ -163,6 +163,170 @@ export async function loadAllMovies() {
   });
 }
 
+export async function loadToseeMovies() {
+  const toseeContainer = document.getElementById("list-tosee-movies");
+
+  const profile = await loadProfile();
+  const userId = profile.id;
+  console.log(profile, userId);
+
+  const { data: toseeMovies, error: errorTooseeMovies } = await supabase
+    .from("users_movies")
+    .select(`*, movies (*)`)
+    .eq("user_id", userId)
+    .eq("seen", false)
+    .order("date_seen", { ascending: false })
+    .order("title", { foreignTable: "movies", ascending: true })
+    
+  if (errorTooseeMovies) {
+    console.error(errorTooseeMovies);
+    toseeContainer.textContent = "Erreur lors du chargement des films.";
+    return;
+  }
+
+  toseeMovies.forEach(item => {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.classList.add("is-one-quarter");
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+    const pTitle = document.createElement("p");
+    pTitle.classList.add("title");
+    pTitle.classList.add("is-5");
+    pTitle.textContent = item.movies.title;
+
+    const pSubtitle = document.createElement("p");
+    pSubtitle.classList.add("subtitle");
+    pSubtitle.classList.add("is-6");
+    pSubtitle.textContent = item.movies.year;
+
+    const divTags = document.createElement("div");
+    divTags.classList.add("is-flex");
+
+    const detailsBtn = document.createElement("a");
+    detailsBtn.classList.add("tag");
+    detailsBtn.classList.add("is-hoverable");
+    detailsBtn.classList.add("mr-2");
+    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
+    detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
+
+    const toSeeBtn = document.createElement("button");
+    toSeeBtn.classList.add("tag");
+    toSeeBtn.classList.add("is-success");
+    toSeeBtn.classList.add("is-light");
+    toSeeBtn.classList.add("is-hoverable");
+    toSeeBtn.classList.add("mr-2");
+    toSeeBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+
+    divTags.append(toSeeBtn, detailsBtn);
+    cardContent.append(pTitle, pSubtitle, divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
+
+    toseeContainer.appendChild(column);
+
+    toSeeBtn.addEventListener("click", async () => {
+      toSeeBtn.textContent = "";
+      toSeeBtn.classList.add("button");
+      toSeeBtn.classList.remove("is-light");
+      toSeeBtn.classList.add("is-loading");
+
+      try {
+        const { data, error } = await supabase
+          .from("users_movies")
+          .update({ seen: true })
+          .eq("user_id", userId)
+          .eq("movie_id", item.movie_id)
+          .single();
+
+          if (error) {
+            setTimeout(() => {
+              toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            }, 500);
+            return;
+          }
+
+          setTimeout(() => {
+            toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-check"></i></span><span>Vu</span>`;
+            toSeeBtn.classList.remove("is-loading");
+          }, 500);
+
+      } catch (err) {
+        console.error("Erreur :", error);
+        setTimeout(() => {
+          toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        }, 500);
+        return;
+      };
+      await loadToseeMovies();
+      await loadSeenMovies();
+    });
+  });
+}
+
+export async function loadSeenMovies() {
+  const seenContainer = document.getElementById("list-seen-movies");
+
+  const profile = await loadProfile();
+  const userId = profile.id;
+
+  const { data: seenMovies, error: errorSeenMovies } = await supabase
+    .from("users_movies")
+    .select(`*, movies (*)`)
+    .eq("user_id", userId)
+    .eq("seen", true)
+    .order("date_seen", { ascending: false })
+    .order("title", { foreignTable: "movies", ascending: true })
+
+  if (errorSeenMovies) {
+    console.error(errorSeenMovies);
+    seenContainer.textContent = "Erreur lors du chargement des fims.";
+    return;
+  }
+
+  seenMovies.forEach(item => {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.classList.add("is-one-quarter");
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+    const pTitle = document.createElement("p");
+    pTitle.classList.add("title");
+    pTitle.classList.add("is-5");
+    pTitle.textContent = item.movies.title;
+
+    const pSubtitle = document.createElement("p");
+    pSubtitle.classList.add("subtitle");
+    pSubtitle.classList.add("is-6");
+    pSubtitle.textContent = item.movies.year;
+
+    const divTags = document.createElement("div");
+    divTags.classList.add("is-flex-direction-row");
+
+    const detailsBtn = document.createElement("a");
+    detailsBtn.classList.add("tag");
+    detailsBtn.textContent = "Compléter";
+    detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
+
+    divTags.appendChild(detailsBtn);
+    cardContent.appendChild(pTitle);
+    cardContent.appendChild(pSubtitle);
+    cardContent.appendChild(divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
+
+    seenContainer.appendChild(column);
+  });
+}
+
 export async function loadIncompleteMovies() {
   const incompleteMoviesContainer = document.getElementById("list-incomplete-movies");
   if (!incompleteMoviesContainer) return;
@@ -280,167 +444,6 @@ export async function loadIncompletePeople() {
 
     incompletePeopleContainer.appendChild(column);
     
-  });
-}
-
-export async function loadToseeMovies() {
-  const toseeContainer = document.getElementById("list-tosee-movies");
-
-  const profile = await loadProfile();
-  const userId = profile.id;
-  console.log(profile, userId);
-
-  const { data: toseeMovies, error: errorTooseeMovies } = await supabase
-    .from("users_movies")
-    .select(`*, movies (*)`)
-    .eq("user_id", userId)
-    .eq("seen", false)
-    .order("date_seen", { ascending: false })
-    .order("title", { foreignTable: "movies", ascending: true })
-    
-  if (errorTooseeMovies) {
-    console.error(errorTooseeMovies);
-    toseeContainer.textContent = "Erreur lors du chargement des films.";
-    return;
-  }
-
-  toseeMovies.forEach(item => {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
-
-    const card = document.createElement("div");
-    card.classList.add("card");
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
-    pTitle.textContent = item.movies.title;
-
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("subtitle");
-    pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = item.movies.year;
-
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex");
-
-    const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag");
-    detailsBtn.classList.add("is-hoverable");
-    detailsBtn.classList.add("mr-2");
-    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-    detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
-
-    const toSeeBtn = document.createElement("button");
-    toSeeBtn.classList.add("tag");
-    toSeeBtn.classList.add("is-success");
-    toSeeBtn.classList.add("is-light");
-    toSeeBtn.classList.add("is-hoverable");
-    toSeeBtn.classList.add("mr-2");
-    toSeeBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-
-    divTags.append(toSeeBtn, detailsBtn);
-    cardContent.append(pTitle, pSubtitle, divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-
-    toseeContainer.appendChild(column);
-
-    toSeeBtn.addEventListener("click", async () => {
-      toSeeBtn.textContent = "";
-      toSeeBtn.classList.add("button");
-      toSeeBtn.classList.remove("is-light");
-      toSeeBtn.classList.add("is-loading");
-
-      try {
-        const { data, error } = await supabase
-          .from("users_movies")
-          .update({ seen: true })
-          .eq("user_id", userId)
-          .eq("movie_id", item.movie_id)
-          .single();
-
-          if (error) {
-            setTimeout(() => {
-              toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            }, 500);
-            return;
-          }
-
-          setTimeout(() => {
-            toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-check"></i></span><span>Vu</span>`;
-            toSeeBtn.classList.remove("is-loading");
-          }, 500);
-      } catch (err) {
-        console.error("Erreur :", error);
-        setTimeout(() => {
-          toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        }, 500);
-        return;
-      };
-    });
-  });
-}
-
-export async function loadSeenMovies() {
-  const seenContainer = document.getElementById("list-seen-movies");
-
-  const profile = await loadProfile();
-  const userId = profile.id;
-
-  const { data: seenMovies, error: errorSeenMovies } = await supabase
-    .from("users_movies")
-    .select(`*, movies (*)`)
-    .eq("user_id", userId)
-    .eq("seen", true)
-    .order("date_seen", { ascending: false })
-    .order("title", { foreignTable: "movies", ascending: true })
-
-  if (errorSeenMovies) {
-    console.error(errorSeenMovies);
-    seenContainer.textContent = "Erreur lors du chargement des fims.";
-    return;
-  }
-
-  seenMovies.forEach(item => {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
-
-    const card = document.createElement("div");
-    card.classList.add("card");
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
-    pTitle.textContent = item.movies.title;
-
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("subtitle");
-    pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = item.movies.year;
-
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex-direction-row");
-
-    const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag");
-    detailsBtn.textContent = "Compléter";
-    detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
-
-    divTags.appendChild(detailsBtn);
-    cardContent.appendChild(pTitle);
-    cardContent.appendChild(pSubtitle);
-    cardContent.appendChild(divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-
-    seenContainer.appendChild(column);
   });
 }
 
