@@ -1,9 +1,9 @@
 import { supabase } from "/Elina/js/supabase.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
-const session = await loadProfile();
-
 export async function setSettings() {
+  const session = await loadProfile();
+  
   const settingMovies = document.getElementById("setting-movies");
   const settingShows = document.getElementById("setting-shows");
   const settingDramas = document.getElementById("setting-dramas");
