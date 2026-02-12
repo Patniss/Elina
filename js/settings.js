@@ -1,30 +1,7 @@
 import { supabase } from "./supabase.js";
+import { loadProfile } from "/Elina/js/dashboard.js";
 
-async function loadProfile() {
-  const { data: { session } } = await supabase.auth.getSession();
-
-  if (!session) {
-    window.location.href = "/Elina/index.html";
-    return;
-  }
-
-  const userId = session.user.id;
-
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", userId)
-    .single();
-
-  if (error) {
-    console.error("Erreur profil :", error.message);
-    return;
-  }
-
-  return {data, userId};
-}
-
-const session = loadProfile();
+session = await loadProfile();
 
 const pseudo = session.pseudo;
 const colorTheme = session.theme_color;
