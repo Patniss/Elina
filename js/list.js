@@ -245,68 +245,7 @@ export async function loadSeenMovies() {
 }
 
 export async function loadCurrentShows() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session) {
-    window.location.href = "/index.html";
-    return;
-  }
-
-  const userId = session.user.id;
-
-  const { data, error } = await supabase
-    .from("users_shows")
-    .select("*")
-    .eq("user_id", userId)
-
-  if (error) {
-    console.error(error);
-    incompleteContainer.textContent = "Erreur lors du chargement des séries.";
-    return;
-  }
-
-  data.forEach((user_s) => {
-    const show = supabase
-      .from("shows")
-      .select("*")
-      .eq("id", user_s.show_id)
-      .single();
-
-    console.log(show);
-
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
-    const card = document.createElement("div");
-    card.classList.add("card");
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
-    pTitle.textContent = show.title;
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("subtitle");
-    pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = "test";
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex-direction-row");
-    const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag");
-    detailsBtn.textContent = "Détails";
-    detailsBtn.href = `/Elina/shows/show.html?id=${show.id}`;
-
-    divTags.appendChild(detailsBtn);
-    cardContent.appendChild(pTitle);
-    cardContent.appendChild(pSubtitle);
-    cardContent.appendChild(divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-
-    currentContainer.appendChild(column);
-  })
+  // EN COURS
 }
 
 export async function loadCurrentDramas() {
