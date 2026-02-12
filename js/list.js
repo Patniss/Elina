@@ -294,7 +294,7 @@ export async function loadToseeMovies() {
     .select(`*, movies (*)`)
     .eq("user_id", userId)
     .eq("seen", false)
-    .order("date", { ascending: false })
+    .order("date_seen", { ascending: false })
     .order("title", { foreignTable: "movies", ascending: true })
     
   if (errorTooseeMovies) {
@@ -395,7 +395,7 @@ export async function loadSeenMovies() {
     .select(`*, movies (*)`)
     .eq("user_id", userId)
     .eq("seen", true)
-    .order("date", { ascending: false })
+    .order("date_seen", { ascending: false })
     .order("title", { foreignTable: "movies", ascending: true })
 
   if (errorSeenMovies) {
