@@ -3,7 +3,8 @@ import { loadProfile } from "/Elina/js/dashboard.js";
 
 export async function setSettings() {
   const session = await loadProfile();
-  
+
+  const settingsForm = document.getElementById("settings-form");
   const settingMovies = document.getElementById("setting-movies");
   const settingShows = document.getElementById("setting-shows");
   const settingDramas = document.getElementById("setting-dramas");
@@ -24,8 +25,6 @@ export async function setSettings() {
   mainColors.value = session.theme_color;
   mode.value = session.mode;
 
-  console.log({settingMovies, settingShows, settingDramas, settingBooks, settingPseudo, mainColors, mode, saveSettings});
-
   mainColors.addEventListener("change", () => {
       console.log("Couleur changée");
       saveSettings.style.backgroundColor = mainColors.value;
@@ -37,14 +36,16 @@ export async function setSettings() {
       settingPseudo = session.pseudo;
     }
 
-    const { data, error } = await supabase
-      .from("profiles")
-      .update([
-        { pseudo: settingPseudo }
-      ])
-      .eq("id", session.id)
-      .single();
+    saveSettings.classList.add("is-loading");
+    saveSettings.textContent = "";
 
-    alert("Mise à jour effectuée !");
+    setTimeout(() => {
+      saveSettings.classList.remove("is-loading");
+      saveSettings.textContent = "Enregistrer les réglages";
+      settingsForm.reset();
+      settingPseudo.focus();
+    }, 500);
+
+    console.log(settingPseudo);
   })
 }
