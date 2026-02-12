@@ -302,6 +302,50 @@ export async function completeMovie(uuid) {
         allowClear: true
     });
 
+    addCast.addEventListener("click", () => {
+        const wrapperCast = document.getElementById("div");
+        wrapperCast.classList.add("cast-wrapper");
+
+        const aClose = document.getElementById("a");
+        aClose.classList.add("tag");
+        aClose.classList.add("is-delete");
+
+        const divSelectJob = document.getElementById("div");
+        divSelectJob.classList.add("select");
+
+        const selectJob = document.getElementById("select");
+
+        const optBase = document.createElement("option");
+        optBase.textContent = "Choisir un métier…";
+        optBase.disabled = true;
+
+        const optDirector = document.createElement("option");
+        optDirector.textContent = "Réalisateur";
+        optDirector.value = "director";
+
+        const optActor = document.createElement("option");
+        optActor.textContent = "Acteur";
+        optActor.value = "actor";
+
+        const optScriptwriter = document.createElement("option");
+        optScriptwriter.textContent = "Scénariste";
+        optScriptwriter.value = "scriptwriter";
+
+        const optProducer = document.createElement("option");
+        optProducer.textContent = "Producteur";
+        optProducer.value = "producer";
+
+        const optSinger = document.createElement("option");
+        optSinger.textContent = "Interprète";
+        optSinger.value = "singer";
+
+        selectJob.append(optBase, optDirector, optActor, optScriptwriter, optProducer, optSinger);
+        divSelectJob.appendChild(selectJob);
+        wrapperCast.append(aClose, divSelectJob);
+
+        aClose.addEventListener("click", () => { wrapper.remove() });
+        selectJob.addEventListener("change", () => alert("Select changé"));
+    })
 }
 
 export async function completeMovieBase(uuid) {
