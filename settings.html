@@ -139,7 +139,7 @@
 <script type="module" src="/Elina/js/dashboard.js"></script>
 <script type="module">
     import { setSettings } from "/Elina/js/settings.js";
-    setSettings();
+    document.addEventListener("DOMContentLoaded", () => { setSettings();});
 </script>
 
 </body>
