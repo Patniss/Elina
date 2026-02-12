@@ -53,3 +53,7 @@ navbarItems.forEach((item) => {
     }
   });
 });
+
+export async function customNavbar() {
+  console.log(session);
+}
