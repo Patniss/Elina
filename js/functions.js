@@ -11,3 +11,7 @@ export function calculateAge(startDate, endDate = new Date()) {
 
     return age;
 }
+
+export function loadMovie(uuid) {
+    
+}
