@@ -47,5 +47,6 @@
 * settings.html + main.css + settings.js => réglages de personnalisation
 * movies/index.html + list.js => boutton "vu le" sur films à voir
 * movies/complete.html + complete.js => ajout de casting
+
 * shows/add.html + add.js => ?? 
 * shows/index.html + list.js => ??

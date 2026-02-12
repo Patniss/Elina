@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>엘리나 | ELINA - Connexion</title>
+  <title>엘리나 ELINA - Connexion</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
@@ -19,7 +19,7 @@
 
       <div id="nav-container"></div>
 
-      <h1 class="title mt-6">Bonjour <span id="welcome" class="text-success"></span></h1>
+      <h1 class="title mt-6">Bonjour <span id="welcome" class="has-text-primary"></span></h1>
 
       <div class="columns is-multiline">
 
@@ -100,6 +100,7 @@
 <script type="module">
   import { loadProfile } from "/Elina/js/dashboard.js";
   loadProfile();
+  console.log(session.user.id);
 </script>
 
 <script type="module" src="/Elina/js/guard.js"></script>
