@@ -30,7 +30,7 @@ export async function loadAllMovies() {
     };
   });
 
-  moviesWithStatus.forEach(data => {
+  moviesWithStatus.forEach(movie => {
     const column = document.createElement("div");
     column.classList.add("column");
     column.classList.add("is-one-quarter");
@@ -44,19 +44,19 @@ export async function loadAllMovies() {
     const pTitle = document.createElement("p");
     pTitle.classList.add("title");
     pTitle.classList.add("is-5");
-    pTitle.textContent = data.title;
+    pTitle.textContent = movie.title;
 
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("title");
     pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = data.year;
+    pSubtitle.textContent = movie.year;
 
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
     detailsBtn.classList.add("is-hoverable");
     detailsBtn.classList.add("mr-2");
     detailsBtn.textContent = "Compléter";
-    detailsBtn.href = `/Elina/movies/movie.html?id=${data.id}`;
+    detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
 
     const addMovieBtn = document.createElement("button");
     addMovieBtn.classList.add("tag");
@@ -94,7 +94,7 @@ export async function loadAllMovies() {
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex");
 
-    switch (data.seen) {
+    switch (movie.seen) {
       case null:
         divTags.appendChild(addMovieBtn);
         break;
