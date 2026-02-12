@@ -1,7 +1,7 @@
 import { supabase } from "/Elina/js/supabase.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
-session = await loadProfile();
+const session = await loadProfile();
 
 export async function setSettings() {
   const settingMovies = document.getElementById("setting-movies");
@@ -23,6 +23,8 @@ export async function setSettings() {
   currentPseudo.textContent = session.pseudo;
   mainColors.value = session.theme_color;
   mode.value = session.mode;
+
+  console.log({settingMovies, settingShows, settingDramas, settingBooks, settingPseudo, mainColors, mode, saveSettings});
 
   mainColors.addEventListener("change", () => {
       console.log("Couleur changée");
