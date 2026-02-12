@@ -215,7 +215,49 @@ export async function loadToseeMovies() {
   }
 
   toseeMovies.forEach(data => {
-    console.log(data);
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.classList.add("is-one-quarter");
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+    const pTitle = document.createElement("p");
+    pTitle.classList.add("title");
+    pTitle.classList.add("is-5");
+    pTitle.textContent = item.movies.title;
+
+    const pSubtitle = document.createElement("p");
+    pSubtitle.classList.add("subtitle");
+    pSubtitle.classList.add("is-6");
+    pSubtitle.textContent = item.movies.year;
+
+    const divTags = document.createElement("div");
+    divTags.classList.add("is-flex-direction-row");
+
+    const detailsBtn = document.createElement("a");
+    detailsBtn.classList.add("tag");
+    detailsBtn.textContent = "Compléter";
+    detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
+
+    const toSeeBtn = document.createElement("a");
+    toSeeBtn.classList.add("tag");
+    toSeeBtn.classList.add("is-success");
+    toSeeBtn.classList.add("is-light");
+    toSeeBtn.classList.add("is-hoverable");
+    toSeeBtn.innerHTML = `<i class="fa fa-eye"></i> J'ai vu`;
+
+    divTags.appendChild(toSeeBtn);
+    divTags.appendChild(detailsBtn);
+    cardContent.appendChild(pTitle);
+    cardContent.appendChild(pSubtitle);
+    cardContent.appendChild(divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
+
+    toseeContainer.appendChild(column);
   });
 }
 
