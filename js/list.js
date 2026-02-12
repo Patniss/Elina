@@ -6,52 +6,65 @@ const incompleteMoviesContainer = document.getElementById("list-incomplete-movie
 const incompletePeopleContainer = document.getElementById("list-incomplete-people");
 const seenContainer = document.getElementById("list-seen-movies");
 const currentContainer = document.getElementById("list-current-shows");
-const allMoviesContainer = document.getElementById("list-all-movies");
 
 export async function loadAllMovies() {
-  const session = loadSession();
+  const session = loadProfile();
+  console.log(session);
   
+  const allMoviesContainer = document.getElementById("list-all-movies");
+
   if (!allMoviesContainer) return;
 
-  const { data, error } = await supabase
+  const { data: movies, error: errorMovies } = await supabase
     .from("movies")
     .select("id, title, year")
     .order("year", { ascending: false })
     .order("title", { ascending: true });
 
-  if (error) {
-    console.error(error);
+  if (errorMovies) {
+    console.error(errorMovies);
     allMoviesContainer.textContent = "Erreur lors du chargement des films.";
     return;
   }
 
-  if (data.length === 0) {
-    allMoviesContainer.textContent = "Aucun film affichage…";
+  if (movies.length === 0) {
+    allMoviesContainer.textContent = "Aucun film à afficher…";
     return;
   }
 
-  data.forEach((movie) => {
+  movies.forEach((movie) => {
     const column = document.createElement("div");
     column.classList.add("column");
     column.classList.add("is-one-quarter");
+
     const card = document.createElement("div");
     card.classList.add("card");
+
     const cardContent = document.createElement("div");
     cardContent.classList.add("card-content");
+
     const pTitle = document.createElement("p");
     pTitle.classList.add("title");
     pTitle.classList.add("is-5");
     pTitle.textContent = movie.title;
+
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("subtitle");
     pSubtitle.classList.add("is-6");
     pSubtitle.textContent = movie.year;
+
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex-direction-row");
+
+    const detailsBtn = document.createElement("a");
+    detailsBtn.classList.add("tag");
+    detailsBtn.textContent = "Détails";
+    detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
+
     const userTag = document.createElement("a");
     userTag.classList.add("tag");
 
-    divTags.appendChild(userTag);
+    divTags.appendChild(detailsBtn);
     cardContent.appendChild(pTitle);
     cardContent.appendChild(pSubtitle);
     cardContent.appendChild(divTags);
