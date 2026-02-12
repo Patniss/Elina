@@ -24,7 +24,8 @@ export async function loadProfile() {
   }
 
   const pseudo = data?.pseudo || "Utilisateur";
-  document.getElementById("welcome").textContent = `Bienvenue ${pseudo}`;
+  document.getElementById("welcome").textContent = pseudo;
+  console.log(session);
 }
 
 export async function loadSession() {
