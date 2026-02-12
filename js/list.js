@@ -59,7 +59,7 @@ export async function loadAllMovies() {
     card.appendChild(cardContent);
     column.appendChild(card);
 
-    loadAllMovies.appendChild(column);
+    allMovieContainer.appendChild(column);
   });
 }
 
