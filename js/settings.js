@@ -25,7 +25,7 @@ export async function setSettings() {
   currentPseudo.textContent = session.pseudo;
   mainColors.value = session.theme_color;
   mode.value = session.mode;
-  buttonColor.value = session.buton_text;
+  buttonColor.value = session.button_text;
 
   mainColors.addEventListener("change", () => {
       console.log("Couleur changée");
@@ -45,7 +45,7 @@ export async function setSettings() {
       saveSettings.textContent = "Enregistrer les réglages";
       settingsForm.reset();
       settingPseudo.focus();
-    }, 500);
+    }, 2000);
 
     console.log(settingPseudo);
   })
