@@ -222,72 +222,26 @@ export async function loadToseeMovies() {
 export async function loadSeenMovies() {
   const seenContainer = document.getElementById("list-seen-movies");
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const profile = await loadProfile();
+  const userId = profile.id;
 
-  if (!session) {
-    window.location.href = "/index.html";
-    return;
-  }
-
-  const userId = session.user.id;
-
-  const { data, error } = await supabase
+  const { data: seenMovies, error: errorSeenMovies } = await supabase
     .from("users_movies")
-    .select("*")
+    .select(`*, movies (*)`)
     .eq("user_id", userId)
     .eq("seen", true)
     .order("date", { ascending: false })
-    
-  if (error) {
-    console.error(error);
-    seenContainer.textContent = "Erreur lors du chargement des films.";
+    .order("title", { foreignTable: "movies", ascending: true })
+
+  if (errorSeenMovies) {
+    console.error(errorSeenMovies);
+    seenContainer.textContent = "Erreur lors du chargement des fims.";
     return;
   }
 
-  data.forEach((user_m) => {
-    loadData("movies", "id", user_m.movie_id)
-      .then(movie => {
-        const titleMovie = movie.title;
-        const yearMovie = movie.year;
-
-        const column = document.createElement("div");
-        column.classList.add("column");
-        column.classList.add("is-one-quarter");
-        const card = document.createElement("div");
-        card.classList.add("card");
-        const cardContent = document.createElement("div");
-        cardContent.classList.add("card-content");
-        const pTitle = document.createElement("p");
-        pTitle.classList.add("title");
-        pTitle.classList.add("is-5");
-        pTitle.textContent = titleMovie;
-        const pSubtitle = document.createElement("p");
-        pSubtitle.classList.add("subtitle");
-        pSubtitle.classList.add("is-6");
-        pSubtitle.textContent = yearMovie;
-        const divTags = document.createElement("div");
-        divTags.classList.add("is-flex-direction-row");
-        const detailsBtn = document.createElement("a");
-        detailsBtn.classList.add("tag");
-        detailsBtn.textContent = "Détails";
-        detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
-
-        divTags.appendChild(detailsBtn);
-        cardContent.appendChild(pTitle);
-        cardContent.appendChild(pSubtitle);
-        cardContent.appendChild(divTags);
-        card.appendChild(cardContent);
-        column.appendChild(card);
-
-        seenContainer.appendChild(column);
-
-      }).catch(err => console.error(err)
-    );
-
-  })
-
+  seenMovies.forEach(movie => {
+    console.log(movie);
+  });
 }
 
 export async function loadCurrentShows() {
