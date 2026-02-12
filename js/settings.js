@@ -15,6 +15,7 @@ export async function setSettings() {
   const mainColors = document.getElementById("main-colors");
   const mode = document.getElementById("mode");
   const saveSettings = document.getElementById("save-settings");
+  const buttonColor = document.getElementById("button-color");
 
   settingMovies.value = session.movies;
   settingShows.value = session.shows;
@@ -24,6 +25,7 @@ export async function setSettings() {
   currentPseudo.textContent = session.pseudo;
   mainColors.value = session.theme_color;
   mode.value = session.mode;
+  buttonColor.value = session.buton_text;
 
   mainColors.addEventListener("change", () => {
       console.log("Couleur changée");
@@ -31,7 +33,6 @@ export async function setSettings() {
   });
 
   saveSettings.addEventListener("click", async (event) => {
-    event.preventDefault();
     if (settingPseudo.value.trim() === "") {
       settingPseudo = session.pseudo;
     }
