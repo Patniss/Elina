@@ -248,15 +248,17 @@ export async function loadToseeMovies() {
     toseeContainer.appendChild(column);
 
     toSeeBtn.addEventListener("click", () => {
-      toSeeBtn.textContent = "Loading";
+      toSeeBtn.textContent = "";
+      toSeeBtn.classList.add("button");
       toSeeBtn.classList.remove("is-light");
       toSeeBtn.classList.add("is-loading");
 
       setTimeout(() => {
         toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-check"></i></span><span>Vu</span>`;
         toSeeBtn.classList.remove("is-loading");
+        toSeeBtn.classList.remove("button");
         alert("test");
-      }, 3000);
+      }, 2000);
     });
   });
 }
