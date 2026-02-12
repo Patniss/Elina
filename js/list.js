@@ -128,7 +128,7 @@ export async function loadAllMovies() {
           .insert([
             {
               user_id: userId,
-              movie_id: data.id,
+              movie_id: movie.id,
               seen: false,
               date_seen: new Date().toISOString()
             }
@@ -152,7 +152,7 @@ export async function loadAllMovies() {
             divTags.appendChild(suppMovieBtn);
           }, 500);
       } catch (err) {
-        console.error("Erreur :", error);
+        console.error("Erreur :", err);
         setTimeout(() => {
           addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
         }, 500);
