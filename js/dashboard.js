@@ -14,7 +14,7 @@ export async function loadProfile() {
 
   const { data, error } = await supabase
     .from("profiles")
-    .select("pseudo")
+    .select("*")
     .eq("id", userId)
     .single();
 
@@ -23,8 +23,12 @@ export async function loadProfile() {
     return;
   }
 
-  const pseudo = data?.pseudo || "Utilisateur";
-  document.getElementById("welcome").textContent = pseudo;
+  if (document.getElementById("welcome")) {
+    const pseudo = data?.pseudo || "Utilisateur";
+    document.getElementById("welcome").textContent = pseudo;
+  }
+
+  return data;
 }
 
 export async function loadSession() {
