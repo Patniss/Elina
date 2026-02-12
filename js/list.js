@@ -266,25 +266,48 @@ export async function loadToseeMovies() {
     const column = document.createElement("div");
     column.classList.add("column");
     column.classList.add("is-one-quarter");
+
     const card = document.createElement("div");
     card.classList.add("card");
+
     const cardContent = document.createElement("div");
     cardContent.classList.add("card-content");
+
     const pTitle = document.createElement("p");
     pTitle.classList.add("title");
     pTitle.classList.add("is-5");
     pTitle.textContent = titleMovie;
+
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("subtitle");
     pSubtitle.classList.add("is-6");
     pSubtitle.textContent = yearMovie;
+
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex-direction-row");
+
+    const seenBtn = document.getElementById("button");
+    seenBtn.classList("button is-small");
+    
+    const spanSeen = document.getElementById("span");
+    spanSeen.classList.add("icon");
+    
+    iconSeen = document.getElementById("i");
+    iconSeen.classList.add("fas");
+    iconSeen.classList("fa-eye");
+
+    const spanText = document.createElement("span");
+    spanText.textContent = "Film vu";
+
+    spanSeen.appendChild(iconSeen);
+    seenBtn.append(spanSeen, spanText);
+
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
     detailsBtn.textContent = "Détails";
     detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
 
+    divTags.appendChild(seenBtn);
     divTags.appendChild(detailsBtn);
     cardContent.appendChild(pTitle);
     cardContent.appendChild(pSubtitle);

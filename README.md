@@ -41,14 +41,11 @@
 * Réglages avec personnalisation
 * Voyages
 
-# LISTE DES ACTIONS PUSH POUR MÉMOIRE :
-* dashboard.html => ajout des pages en constructions || ÉTAT = *EN COURS DE PUSH*
-* nav.html + nav.js => ajout initNavbarBurger || ÉTAT = *EN COURS DE PUSH*
-* settings.html + main.css => select colors || ÉTAT = *EN COURS DE PUSH*
-* movies/index.html - list.js => console.log(movie) pour test || ÉTAT = *EN COURS DE PUSH*
-* movies/complete.html + complete.js => ajouter optBase || ÉTAT = *EN COURS DE PUSH*
-* shows/add.html + add.js => console.log(genresInput); pour test || ÉTAT = *EN COURS DE PUSH*
-* shows/index.html + list.js => console.log(show); pour test || ÉTAT = *EN COURS DE PUSH*
-
-* dramas/index.html => Initialisation || ÉTAT = *À FAIRE PLUS TARD*
-* books/index.html => Initialisation || ÉTAT = *À FAIRE PLUS TARD*
+# LISTE DES ACTIONS EN COURS :
+* dashboard.html + dashboard.js => personnalisation de l'accueil
+* nav.html + nav.js => personnalisation de la barre de navigation
+* settings.html + main.css + settings.js => réglages de personnalisation
+* movies/index.html + list.js => boutton "vu le" sur films à voir
+* movies/complete.html + complete.js => ajout de casting
+* shows/add.html + add.js => ?? 
+* shows/index.html + list.js => ??
