@@ -283,6 +283,8 @@ export async function loadIncompletePeople() {
 }
 
 export async function loadToseeMovies() {
+  supabase();
+  console.log(profile, userId)
   const toseeContainer = document.getElementById("list-tosee-movies");
 
   const profile = await loadProfile();
@@ -358,7 +360,7 @@ export async function loadToseeMovies() {
           .from("users_movies")
           .update({ seen: true })
           .eq("user_id", userId)
-          .eq("movie_id", movieId)
+          .eq("movie_id", item.movie_id)
           .single();
 
           if (error) {
