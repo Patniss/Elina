@@ -7,6 +7,7 @@ export async function loadNav() {
   navContainer.innerHTML = html;
 
   initNavbarBurger();
+  initNavbarDropdowns();
 }
 
 function initNavbarBurger() {
