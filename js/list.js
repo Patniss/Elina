@@ -54,6 +54,7 @@ export async function loadAllMovies() {
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
     detailsBtn.classList.add("is-hoverable");
+    detailsBtn.classList.add("mr-2");
     detailsBtn.textContent = "Compléter";
     detailsBtn.href = `/Elina/movies/movie.html?id=${data.id}`;
 
@@ -62,6 +63,7 @@ export async function loadAllMovies() {
     addMovieBtn.classList.add("button");
     addMovieBtn.classList.add("is-hoverable");
     addMovieBtn.classList.add("is-link");
+    addMovieBtn.classList.add("mr-2");
     addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
 
     const suppMovieBtn = document.createElement("button");
@@ -69,6 +71,7 @@ export async function loadAllMovies() {
     suppMovieBtn.classList.add("button");
     suppMovieBtn.classList.add("is-hoverable");
     suppMovieBtn.classList.add("is-danger");
+    suppMovieBtn.classList.add("mr-2");
     suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
 
     const viewMovieBtn = document.createElement("button");
@@ -77,6 +80,7 @@ export async function loadAllMovies() {
     viewMovieBtn.classList.add("is-hoverable");
     viewMovieBtn.classList.add("is-light");
     viewMovieBtn.classList.add("is-success");
+    viewMovieBtn.classList.add("mr-2");
     viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
 
     const seenMovieBtn = document.createElement("button");
@@ -84,11 +88,11 @@ export async function loadAllMovies() {
     seenMovieBtn.classList.add("button");
     seenMovieBtn.classList.add("is-hoverable");
     seenMovieBtn.classList.add("is-success");
+    seenMovieBtn.classList.add("mr-2");
     seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
 
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex");
-    divTags.classList.add("is-justify-content-space-around");
 
     switch (data.seen) {
       case null:
@@ -111,6 +115,50 @@ export async function loadAllMovies() {
     column.appendChild(card);
 
     allMovieContainer.appendChild(column);
+
+    addMovieBtn.addEventListener("click", async () => {
+      addMovieBtn.textContent = "";
+      addMovieBtn.classList.remove("is-link");
+      addMovieBtn.classList.add("is-success");
+      addMovieBtn.classList.add("is-loading");
+
+      try {
+        const { data, error } = await supabase
+          .from("movies_users")
+          .insert([
+            {
+              user_id: userId,
+              movie_id: data.id,
+              seen: false,
+              date_seen: new Date().toISOString()
+            }
+          ])
+          .select();
+
+          if (error) {
+            setTimeout(() => {
+              addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            }, 500);
+            return;
+          }
+
+          setTimeout(() => {
+            addMovieBtn.classList.add("is-link");
+            addMovieBtn.classList.remove("is-success");
+            addMovieBtn.classList.remove("is-loading");
+            addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+            divTags.removeChild(addMovieBtn);
+            divTags.appendChild(viewMovieBtn);
+            divTags.appendChild(suppMovieBtn);
+          }, 500);
+      } catch (err) {
+        console.error("Erreur :", error);
+        setTimeout(() => {
+          addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        }, 500);
+        return;
+      }
+    })
   });
 }
 
@@ -326,6 +374,10 @@ export async function loadToseeMovies() {
           }, 500);
       } catch (err) {
         console.error("Erreur :", error);
+        setTimeout(() => {
+          toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        }, 500);
+        return;
       };
     });
   });
