@@ -31,8 +31,20 @@ export async function setSettings() {
       saveSettings.style.backgroundColor = mainColors.value;
   });
 
-  saveSettings.addEventListener("click", (event) => {
+  saveSettings.addEventListener("click", async (event) => {
     event.preventDefault();
-    alert("bouton cliqué");
+    if (settingPseudo.value.trim() === "") {
+      settingPseudo = session.pseudo;
+    }
+
+    const { data, error } = await supabase
+      .from("profiles")
+      .update([
+        { pseudo: settingPseudo }
+      ])
+      .eq("id", session.id)
+      .single();
+
+    alert("Mise à jour effectuée !");
   })
 }
