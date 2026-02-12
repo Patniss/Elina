@@ -2,6 +2,7 @@ import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
+// FONCTIONS SUR LES FILMS
 export async function loadAllMovies() {
   const allMovieContainer = document.getElementById("list-all-movies");
 
@@ -124,7 +125,7 @@ export async function loadAllMovies() {
 
       try {
         const { data, error } = await supabase
-          .from("movies_users")
+          .from("users_movies")
           .insert([
             {
               user_id: userId,
@@ -443,14 +444,15 @@ export async function loadSeenMovies() {
   });
 }
 
+// FONCTIONS SUR LES SÉRIES 
+export async function loadAllShows() {
+  
+}
 export async function loadCurrentShows() {
-  // EN COURS
 }
 
 export async function loadCurrentDramas() {
-  // EN COURS
 }
 
 export async function loadLastBooks() {
-  // EN COURS
 }
