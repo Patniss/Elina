@@ -99,8 +99,8 @@
 
 <script type="module">
   import { loadProfile } from "/Elina/js/dashboard.js";
-  loadProfile();
-  console.log(data?.pseudo)
+  const session = loadProfile();
+  console.log(session);
 </script>
 
 <script type="module" src="/Elina/js/guard.js"></script>
