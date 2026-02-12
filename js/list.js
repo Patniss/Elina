@@ -206,6 +206,7 @@ export async function loadToseeMovies() {
     .eq("user_id", userId)
     .eq("seen", false)
     .order("date", { ascending: false })
+    .order("title", { foreignTable: "movies", ascending: true })
     
   if (errorTooseeMovies) {
     console.error(errorTooseeMovies);
