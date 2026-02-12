@@ -197,11 +197,12 @@ export async function loadIncompletePeople() {
 export async function loadToseeMovies() {
   const toseeContainer = document.getElementById("list-tosee-movies");
 
-  const userId = await loadProfile().id;
+  const profile = await loadProfile();
+  const userId = profile.id;
 
   const { data: toseeMovies, error: errorTooseeMovies } = await supabase
     .from("users_movies")
-    .select("*")
+    .select(`*, movies (*)`)
     .eq("user_id", userId)
     .eq("seen", false)
     .order("date", { ascending: false })
@@ -212,13 +213,9 @@ export async function loadToseeMovies() {
     return;
   }
 
-  const movies = [];
-
   toseeMovies.forEach(data => {
-    movies.push(data.movie_id);
+    console.log(data);
   });
-
-  console.log(movies);
 }
 
 export async function loadSeenMovies() {
