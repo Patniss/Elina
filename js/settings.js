@@ -1,12 +1,10 @@
 import { supabase } from "./supabase.js";
 
 async function loadProfile() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const { data: { session } } = await supabase.auth.getSession();
 
   if (!session) {
-    window.location.href = "/index.html";
+    window.location.href = "/Elina/index.html";
     return;
   }
 
@@ -14,7 +12,7 @@ async function loadProfile() {
 
   const { data, error } = await supabase
     .from("profiles")
-    .select("pseudo")
+    .select("*")
     .eq("id", userId)
     .single();
 
@@ -22,6 +20,8 @@ async function loadProfile() {
     console.error("Erreur profil :", error.message);
     return;
   }
+
+  return {data, userId};
 }
 
 const session = loadProfile();
