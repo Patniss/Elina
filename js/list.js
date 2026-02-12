@@ -30,7 +30,37 @@ export async function loadAllMovies() {
     };
   });
 
-  console.log(moviesWithStatus);
+  moviesWithStatus.forEach(data => {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.classList.add("is-one-quarter");
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+    const pTitle = document.createElement("p");
+    pTitle.classList.add("title");
+    pTitle.classList.add("is-5");
+    pTitle.textContent = data.title;
+
+    const pSubtitle = document.createElement("p");
+    pSubtitle.classList.add("title");
+    pSubtitle.classList.add("is-6");
+    pTitle.textContent = data.year;
+
+    const divTags = document.createElement("div");
+    divTags.classList.add("is-flex");
+    divTags.classList.add("is-justify-content-space-around");
+
+    cardContent.append(pTitle, pSubtitle, divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
+
+    loadAllMovies.appendChild(column);
+  });
 }
 
 export async function loadIncompleteMovies() {
@@ -62,6 +92,7 @@ export async function loadIncompleteMovies() {
 
     const card = document.createElement("div");
     card.classList.add("card");
+
     const cardContent = document.createElement("div");
     cardContent.classList.add("card-content");
 
