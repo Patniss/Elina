@@ -39,8 +39,8 @@ export async function customDashboard() {
   const homeDramas = document.getElementById("homeDramas");
   const homeBooks = document.getElementById("homeBooks");
 
-  if (!session.movies) homeMovies.style.display = "none";
-  if (!session.shows) homeShows.style.display = "none";
-  if (!session.dramas) homeDramas.style.display = "none";
-  if (!session.books) homeBooks.style.display = "none";
+  if (session.movies === false) homeMovies.style.display = "none";
+  if (session.shows === false) homeShows.style.display = "none";
+  if (session.dramas === false) homeDramas.style.display = "none";
+  if (session.books === false) homeBooks.style.display = "none";
 }
