@@ -16,6 +16,8 @@ async function loadSession() {
     return;
   }
 
+  console.log(session);
+
   const { data, error } = await supabase
     .from("profiles")
     .select("pseudo")
@@ -61,7 +63,6 @@ function calculateAge(startDate, endDate = new Date()) {
 
 export async function loadAllMovies() {
   const session = loadSession();
-  console.log(session);
   
   if (!allMoviesContainer) return;
 
