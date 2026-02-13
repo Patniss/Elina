@@ -253,6 +253,7 @@ function calculateAge(startDate, endDate = new Date()) {
 }
 
 async function loadDirectors() {
+    const directors = {};
     const { data, error } = await supabase
         .from("people")
         .select("id, firstname, lastname")
@@ -265,11 +266,15 @@ async function loadDirectors() {
     }
 
     data.forEach(dir => {
-        directors[dir.id] = `${dir.firstname} ${dir.lastname}`;
+        directors[dir.id] = dir.firstname? `${dir.firstname} ${dir.lastname}`: dir.lastname;
     });
+
+    return directors;
 }
 
 export async function completeMovie(uuid) {
+    const directors = await loadDirectors();
+    
     const { data: movie, error } = await supabase
     .from("movies")
     .select("*")
@@ -306,19 +311,23 @@ export async function completeMovie(uuid) {
         console.log("bouton cliqué");
         const wrapperCast = document.createElement("div");
         wrapperCast.classList.add("cast-wrapper");
+        wrapperCast.classList.add("mb-4");
 
         const aClose = document.createElement("a");
         aClose.classList.add("tag");
         aClose.classList.add("is-delete");
+        aClose.classList.add("mr-2");
 
         const divSelectJob = document.createElement("div");
         divSelectJob.classList.add("select");
+        divSelectJob.classList.add("mr-2");
 
         const selectJob = document.createElement("select");
 
         const optBase = document.createElement("option");
         optBase.textContent = "Choisir un métier…";
         optBase.disabled = true;
+        optBase.selected = true;
 
         const optDirector = document.createElement("option");
         optDirector.textContent = "Réalisateur";
@@ -345,8 +354,16 @@ export async function completeMovie(uuid) {
         wrapperCast.append(aClose, divSelectJob);
         addingCasts.appendChild(wrapperCast);
 
-        aClose.addEventListener("click", () => { wrapper.remove() });
-        selectJob.addEventListener("change", () => alert("Select changé"));
+        const divSelectDirector = document.createElement("div");
+        divSelectDirector.classList.add("select");
+        divSelectDirector.classList.add("mr-2");
+        const selectDirector = document.createElement("select");
+        divSelectDirector.appendChild(selectDirector);
+
+        aClose.addEventListener("click", () => { wrapperCast.remove() });
+        selectJob.addEventListener("change", () => {
+
+        });
     })
 }
 
