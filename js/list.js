@@ -456,7 +456,9 @@ export async function loadToseeMovies() {
           }, 500);
           return;
         }
-/// VÉRIFIER ICI
+
+        toseeContainer.removeChild(column);
+
         setTimeout(() => {
           toSuppBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Supprimer</span>`;
           toSuppBtn.classList.remove("is-loading");
