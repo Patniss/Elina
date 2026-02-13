@@ -433,6 +433,45 @@ export async function loadToseeMovies() {
         return;
       };
     });
+
+    toSuppBtn.addEventListener("click", async () => {
+      toSuppBtn.textContent = "";
+      toSuppBtn.classList.add("is-loading");
+      toSuppBtn.classList.remove("is-danger");
+      toSuppBtn.classList.add("is-success");
+
+      try {
+        const { data, error } = await supabase
+          .from("users_movies")
+          .delete()
+          .eq("movie_id", item.movie_id)
+          .eq("user_ud", userId)
+          .single();
+
+        if (error) {
+          setTimeout(() => {
+            toSuppBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            toSuppBtn.classList.add("is-danger");
+            toSuppBtn.classList.remove("is-success");
+          }, 500);
+          return;
+        }
+/// VÉRIFIER ICI
+        setTimeout(() => {
+          toSuppBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Supprimer</span>`;
+          toSuppBtn.classList.remove("is-loading");
+          toSuppBtn.classList.add("is-danger");
+          toSuppBtn.classList.remove("is-success");
+        }, 500);
+      } catch (err) {
+        setTimeout(() => {
+          toSuppBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          toSuppBtn.classList.add("is-danger");
+          toSuppBtn.classList.remove("is-success");
+        }, 500);
+        return;
+      }
+    })
   });
 }
 
