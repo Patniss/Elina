@@ -479,6 +479,7 @@ export async function loadToseeMovies() {
 
 export async function loadSeenMovies() {
   const seenContainer = document.getElementById("list-seen-movies");
+  const toseeContainer = document.getElementById("list-tosee-movies");
 
   const profile = await loadProfile();
   const userId = profile.id;
@@ -522,10 +523,36 @@ export async function loadSeenMovies() {
 
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
-    detailsBtn.textContent = "Compléter";
+    detailsBtn.textContent = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
     detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
 
-    divTags.appendChild(detailsBtn);
+    const seenBtn = document.createElement("button");
+    seenBtn.classList.add("tag");
+    seenBtn.classList.add("button");
+    seenBtn.classList.add("is-hoverable");
+    seenBtn.classList.add("is-success");
+    seenBtn.classList.add("mr-2");
+    seenBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
+
+    const suppMovieBtn = document.createElement("button");
+    suppMovieBtn.classList.add("tag");
+    suppMovieBtn.classList.add("button");
+    suppMovieBtn.classList.add("is-hoverable");
+    suppMovieBtn.classList.add("is-danger");
+    suppMovieBtn.classList.add("is-light");
+    suppMovieBtn.classList.add("mr-2");
+    suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
+
+    const viewMovieBtn = document.createElement("button");
+    viewMovieBtn.classList.add("tag");
+    viewMovieBtn.classList.add("button");
+    viewMovieBtn.classList.add("is-hoverable");
+    viewMovieBtn.classList.add("is-light");
+    viewMovieBtn.classList.add("is-success");
+    viewMovieBtn.classList.add("mr-2");
+    viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+
+    divTags.append(seenBtn, detailsBtn);
     cardContent.appendChild(pTitle);
     cardContent.appendChild(pSubtitle);
     cardContent.appendChild(divTags);
@@ -533,6 +560,48 @@ export async function loadSeenMovies() {
     column.appendChild(card);
 
     seenContainer.appendChild(column);
+
+    seenBtn.addEventListener("click", async () => {
+      seenMovieBtn.textContent = "";
+      seenMovieBtn.classList.add("is-loading");
+      
+      try {
+        const { data, error } = await supabase
+          .from("users_movies")
+          .update("seen", false)
+          .eq("user_id", userId)
+          .eq("movie_id", movie.id)
+          .single();
+
+          if (error) {
+            setTimeout(() => {
+              seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+              viewMovieBtn.classList.add("is-danger");
+              return;
+            }, 500);
+          }
+
+          setTimeout(() => {
+            divTags.removeChild(detailsBtn);
+            divTags.removeChild(seenBtn);
+            divTags.appendChild(viewMovieBtn);
+            divTags.appendChild(supabase);
+            divTags.appendChild(detailsBtn);
+          }, 500);
+
+          setTimeout(() => {
+            seenContainer.removeChild(column);
+            toseeContainer.appendChild(column);
+          }, 500);
+
+      } catch (err) {
+        setTimeout(() => {
+          seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          viewMovieBtn.classList.add("is-danger");
+        }, 500);
+        return;
+      }
+    })
   });
 }
 
