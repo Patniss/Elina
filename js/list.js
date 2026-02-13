@@ -301,7 +301,6 @@ export async function loadToseeMovies() {
 
   const profile = await loadProfile();
   const userId = profile.id;
-  console.log(profile, userId);
 
   const { data: toseeMovies, error: errorTooseeMovies } = await supabase
     .from("users_movies")
@@ -445,7 +444,7 @@ export async function loadToseeMovies() {
           .from("users_movies")
           .delete()
           .eq("movie_id", item.movie_id)
-          .eq("user_ud", userId)
+          .eq("user_id", userId)
           .single();
 
         if (error) {
@@ -473,7 +472,7 @@ export async function loadToseeMovies() {
         }, 500);
         return;
       }
-    })
+    });
   });
 }
 
