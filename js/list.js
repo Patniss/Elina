@@ -93,6 +93,19 @@ export async function loadAllMovies() {
     seenMovieBtn.classList.add("mr-2");
     seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
 
+    if (movie.poster !== null) {
+      const figurePoster = document.createElement("figure");
+      figurePoster.classList.add("image");
+      figurePoster.style.position = "absolute";
+      figurePoster.style.bottom = "2px";
+      figurePoster.style.right = "2px";
+      const imgPoster = document.createElement("img");
+      imgPoster.src = movie.poster;
+      imgPoster.style.width = "40%";
+      imgPoster.style.height = "auto";
+      figurePoster.appendChild(imgPoster);
+    }
+
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex");
 
