@@ -1,3 +1,5 @@
+import { supabase } from "/Elina/js/supabase.js";
+
 const genres = [
     "Action", "Animation", "Arts martiaux", "Aventure",
     "Biopic",
@@ -250,8 +252,6 @@ function calculateAge(startDate, endDate = new Date()) {
     return age;
 }
 
-import { supabase } from "/Elina/js/supabase.js";
-
 async function loadDirectors() {
     const { data, error } = await supabase
         .from("people")
@@ -343,6 +343,7 @@ export async function completeMovie(uuid) {
         selectJob.append(optBase, optDirector, optActor, optScriptwriter, optProducer, optSinger);
         divSelectJob.appendChild(selectJob);
         wrapperCast.append(aClose, divSelectJob);
+        addingCasts.appendChild(wrapperCast);
 
         aClose.addEventListener("click", () => { wrapper.remove() });
         selectJob.addEventListener("change", () => alert("Select changé"));
