@@ -17,10 +17,9 @@ const genres = [
     "Western"
 ]
 
-const showForm = document.getElementById("show-form");
-const showGenres = document.getElementById("show-genres");
-
 export async function addMovie() {
+  const showForm = document.getElementById("show-form");
+  const showGenres = document.getElementById("show-genres");
   const movieForm = document.getElementById("movie-form");
   const titleInput = document.getElementById("movie-title");
   const yearInput = document.getElementById("movie-year");
