@@ -398,6 +398,26 @@ export async function loadToseeMovies() {
     card.appendChild(cardContent);
     column.appendChild(card);
 
+    if (movie.poster !== null) {
+      const cardFigure = document.createElement("div");
+      cardFigure.classList.add("card-content", "column", "is-4");
+      
+      const figurePoster = document.createElement("figure");
+      figurePoster.classList.add("image", "poster-wrapper", "is-2by3", "media-right");
+      
+      const imgPoster = document.createElement("img");
+      imgPoster.src = movie.poster;
+      
+      figurePoster.appendChild(imgPoster);
+      cardFigure.appendChild(figurePoster);
+
+      cardContent.classList.add("column", "is-8");
+      
+      card.classList.add("columns", "is-mobile", "is-align-items-center");
+      
+      card.appendChild(cardFigure);
+    }
+
     toseeContainer.appendChild(column);
 
     toSeeBtn.addEventListener("click", async () => {
@@ -578,6 +598,26 @@ export async function loadSeenMovies() {
     cardContent.appendChild(divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
+
+    if (movie.poster !== null) {
+      const cardFigure = document.createElement("div");
+      cardFigure.classList.add("card-content", "column", "is-4");
+      
+      const figurePoster = document.createElement("figure");
+      figurePoster.classList.add("image", "poster-wrapper", "is-2by3", "media-right");
+      
+      const imgPoster = document.createElement("img");
+      imgPoster.src = movie.poster;
+      
+      figurePoster.appendChild(imgPoster);
+      cardFigure.appendChild(figurePoster);
+
+      cardContent.classList.add("column", "is-8");
+      
+      card.classList.add("columns", "is-mobile", "is-align-items-center");
+      
+      card.appendChild(cardFigure);
+    }
 
     seenContainer.appendChild(column);
 
