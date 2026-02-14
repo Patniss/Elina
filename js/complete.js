@@ -482,7 +482,7 @@ export async function completeMovie(uuid) {
                         }
                     })
 
-                    wrapperAddDirector.append(fnAddDirector, lnAddDirector, btnAddDirector);
+                    wrapperAddDirector.append(fnAddDirector, lnAddDirector, dbAddDirector, btnAddDirector);
 
                     $(selectDirector).on("change", function () {
                         if (this.value === "0") {
