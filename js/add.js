@@ -103,6 +103,9 @@ export async function addShow() {
   const showGenres = document.getElementById("show-genres");
   const titleInput = document.getElementById("show-title");
   const searchResult = document.getElementById("research-results");
+  const showState = document.getElementById("show-state");
+  const showNbSeasons = document.getElementById("show-nb-seasons");
+  const showSubmit = document.getElementById("show-submit");
   
   genres.forEach(genre => {
       showGenres.append(
@@ -161,7 +164,6 @@ export async function addShow() {
       } else {
         searchResult.style.display = "block";
       }
-      
     
     }, 100);
   
@@ -169,12 +171,55 @@ export async function addShow() {
 
   showForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const title = titleInput.value;
 
-    const titleInput = document.getElementById("show-title");
-    const genresInput = document.getElementById("show-genres");
-    const averageTimeInput = document.getElementById("show-time");
-    const complete = false;
+    let genres;
+    showGenres.value.forEach(genre => {
+      genres = genre + " ";
+    });
 
-    console.log(genresInput);
+    const averageTime = averageTimeInput.value;
+    const state = showState.value;
+    const complete = true;
+    const nbSeasons = showNbSeasons.value;
+
+    showSubmit.classList.add("is-loading");
+
+    setTimeout(async () => {
+      try {
+        const { data, error } = await supabase
+          .from("shows")
+          .insert([ title, genres, averageTime, state, complete, nbSeasons ]);
+
+        if (error) {
+          setTimeout(() => {
+            showSubmit.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            showSubmit.classList.remove("is-primary", "is-loading");
+            showSubmit.classList.add("is-danger");
+          }, 500);
+        }
+
+        showSubmit.classList.remove("is-loading");
+        showSubmit.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Ajoutée</span>`;
+
+        setTimeout(() => {
+          setTimeout(() => {
+            showSubmit.textContent = "Ajouter la série";
+            showSubmit.classList.add("is-loading");
+          }, 200);
+          
+          showSubmit.classList.remove("is-loading");
+          showForm.reset();
+          titleInput.focus();
+        }, 200);
+
+      } catch (err) {
+        setTimeout(() => {
+          showSubmit.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          showSubmit.classList.remove("is-primary", "is-loading");
+          showSubmit.classList.add("is-danger");
+        }, 500);
+      }
+    }, 500);
   });
 }

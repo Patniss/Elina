@@ -23,11 +23,19 @@
       <h2 class="subtitle">Ajouter une série</h2>
 
       <form id="show-form">
+
         <div class="field">
           <label class="label">Titre</label>
           <div class="control">
             <input placeholder="Titre de la série…" class="input" type="text" id="show-title" required>
             <div id="research-results" class="box mt-2" style="display: none;"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="show-nb-seasons" class="label">Nombre de saisons :</label>
+          <div class="control">
+            <input placeholder="Nombre de saisons…" type="number" style="width: 200px;" required>
           </div>
         </div>
 
@@ -51,7 +59,7 @@
           <div>
             <label for="show-state">
               <div class="select">
-                <select name="show-state" id="show-state">
+                <select name="show-state" id="show-state" required>
                   <option value="finish">Terminée</option>
                   <option value="current">En cours</option>
                 </select>
@@ -61,7 +69,7 @@
         </div>
 
         <div class="control">
-          <button class="button is-primary" type="submit">
+          <button class="button is-primary" type="submit" id="show-submit">
             Ajouter la série
           </button>
         </div>
