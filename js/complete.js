@@ -384,35 +384,37 @@ export async function completeMovie(uuid) {
             switch (selectJob.value) {
                 case "director":
                     wrapperCast.appendChild(divSelectDirector);
-                    if (selectDirector.value = "0") {
-                        const wrapperAddDirector = document.createElement("div");
-                        wrapperAddDirector.classList.add("add-director-wrapper");
-                        wrapperAddDirector.classList.add("columns");
-                        wrapperAddDirector.classList.add("is-2");
+                    const wrapperAddDirector = document.createElement("div");
+                    wrapperAddDirector.classList.add("add-director-wrapper");
+                    wrapperAddDirector.classList.add("columns");
+                    wrapperAddDirector.classList.add("is-2");
 
-                        const fnAddDirector = document.createElement("input");
-                        fnAddDirector.classList.add("input");
-                        fnAddDirector.classList.add("column");
-                        fnAddDirector.type = "text";
-                        fnAddDirector.placeholder = "Prénom";
+                    const fnAddDirector = document.createElement("input");
+                    fnAddDirector.classList.add("input");
+                    fnAddDirector.classList.add("column");
+                    fnAddDirector.type = "text";
+                    fnAddDirector.placeholder = "Prénom";
 
-                        const lnAddDirector = document.createElement("input");
-                        lnAddDirector.classList.add("input");
-                        lnAddDirector.classList.add("column");
-                        lnAddDirector.type = "text";
-                        lnAddDirector.placeholder = "Nom de famille";
+                    const lnAddDirector = document.createElement("input");
+                    lnAddDirector.classList.add("input");
+                    lnAddDirector.classList.add("column");
+                    lnAddDirector.type = "text";
+                    lnAddDirector.placeholder = "Nom de famille";
 
-                        const btnAddDirector = document.createElement("button");
-                        btnAddDirector.classList.add("button");
-                        btnAddDirector.classList.add("column");
-                        btnAddDirector.textContent = "Ajouter";
+                    const btnAddDirector = document.createElement("button");
+                    btnAddDirector.classList.add("button");
+                    btnAddDirector.classList.add("column");
+                    btnAddDirector.textContent = "Ajouter";
 
-                        wrapperAddDirector.append(fnAddDirector, lnAddDirector, btnAddDirector);
+                    wrapperAddDirector.append(fnAddDirector, lnAddDirector, btnAddDirector);
 
-                        wrapperCast.appendChild(wrapperAddDirector);
-                    } else {
-                        wrapperCast.removeChild(wrapperAddDirector);
-                    }
+                    selectDirector.addEventListener("change", () => {
+                        if (selectDirector.value === "0") {
+                            wrapperCast.appendChild(wrapperAddDirector);
+                        } else {
+                            wrapperCast.removeChild(wrapperAddDirector);
+                        }
+                    })
                     break;
             
                 case "actor":
