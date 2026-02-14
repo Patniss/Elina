@@ -273,7 +273,8 @@ async function loadDirectors() {
 }
 
 export async function completeMovie(uuid) {
-    const directors = await loadDirectors();
+    const directors = loadDirectors();
+    Object.values(directors);
     
     const { data: movie, error } = await supabase
     .from("movies")
@@ -359,7 +360,7 @@ export async function completeMovie(uuid) {
         divSelectDirector.classList.add("mr-2");
         const selectDirector = document.createElement("select");
         divSelectDirector.appendChild(selectDirector);
-        directors.forEach(([idDirector, nameDirector]) => {
+        Object.entries(directors).forEach(([idDirector, nameDirector]) => {
             selectDirector.append(
                 new Option(idDirector, nameDirector)
             );
