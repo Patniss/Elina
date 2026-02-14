@@ -400,6 +400,11 @@ export async function completeMovie(uuid) {
                     lnAddDirector.placeholder = "Nom de famille";
                     lnAddDirector.required = true;
 
+                    const dbAddDirector = document.createElement("input");
+                    dbAddDirector.classList.add("input", "column", "mr-2");
+                    dbAddDirector.type = "date";
+                    dbAddDirector.style.height = "48px";
+
                     const btnAddDirector = document.createElement("button");
                     btnAddDirector.classList.add("button", "column", "is-primary", "is-light");
                     btnAddDirector.textContent = "Ajouter";
