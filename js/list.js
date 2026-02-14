@@ -127,6 +127,8 @@ export async function loadAllMovies() {
       imgPoster.src = movie.poster;
       figurePoster.appendChild(imgPoster);
       cardFigure.appendChild(figurePoster);
+      card.classList.add("fixed-grid");
+      card.classList.add("has-2-cols");
       card.appendChild(cardFigure);
     }
 
