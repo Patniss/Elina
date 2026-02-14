@@ -96,6 +96,7 @@ export async function addMovie() {
   });
 
   let selectedGenres = $(genresInput).val();
+  console.log(selectedGenres);
   let movieGenres = selectedGenres.join(" ; ");
 
   movieForm.addEventListener("submit", async (e) => {
