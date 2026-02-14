@@ -22,12 +22,43 @@ const showGenres = document.getElementById("show-genres");
 
 export async function addMovie() {
   const movieForm = document.getElementById("movie-form");
+  const titleInput = document.getElementById("movie-title");
+  const yearInput = document.getElementById("movie-year");
+  const searchResult = document.getElementById("research-results");
+
+  let searchTimeout;
+
+  $(titleInput).on("input", function () {
+    clearTimeout(searchTimeout);
+
+    const query = $(this).val().trim();
+
+    if (query.length < 2) {
+      $(searchResult).hide().empty();
+      return;
+    };
+
+    searchTimeout = setTimeout(async () => {
+
+        const { data, error } = await supabase
+            .from("movies")
+            .select("id, title, year")
+            .ilike("title", `%${query}%`)
+            .order("title", { ascending: true })
+            .limit(5);
+
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        displayResults(data);
+
+    }, 100);
+  })
 
   movieForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    const titleInput = document.getElementById("movie-title");
-    const yearInput = document.getElementById("movie-year");
 
     const title = titleInput.value.trim();
     const year = yearInput.value ? parseInt(yearInput.value, 10) : null;
