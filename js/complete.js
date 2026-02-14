@@ -407,8 +407,8 @@ export async function completeMovie(uuid) {
 
                     btnAddDirector.addEventListener("click", async () => {
                         btnAddDirector.classList.add("is-loading");
-                        lastNameDirector = lnAddDirector.value;
-                        firstNameDirector = fnAddDirector.value;
+                        const lastNameDirector = lnAddDirector.value;
+                        const firstNameDirector = fnAddDirector.value;
 
                         const { data, error } = await supabase
                             .from("people")
