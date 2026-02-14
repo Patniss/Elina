@@ -100,11 +100,9 @@ export async function addMovie() {
   const movieSynopsis = synopsisInput.value;
   const moviePoster = posterInput.value;
   const movieComplete = false;
-  let movieGenres = "";
-
-  genresInput.value.forEach(genre => {
-    movieGenres = genre + " ; "
-  });
+  
+  let selectedGenres = $(genresInput).val();
+  let movieGenres = selectedGenres.join(" ; ");
 
   movieForm.addEventListener("submit", async (e) => {
     e.preventDefault();
