@@ -119,13 +119,9 @@ export async function loadAllMovies() {
     if (movie.poster !== null) {
       const figurePoster = document.createElement("figure");
       figurePoster.classList.add("image");
-      figurePoster.style.position = "absolute";
-      figurePoster.style.bottom = "2px";
-      figurePoster.style.right = "2px";
+      figurePoster.classList.add("is-2by3");
       const imgPoster = document.createElement("img");
       imgPoster.src = movie.poster;
-      imgPoster.style.width = "auto";
-      imgPoster.style.height = "30%";
       figurePoster.appendChild(imgPoster);
       cardContent.appendChild(figurePoster);
     }
