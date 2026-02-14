@@ -37,6 +37,20 @@ export async function setSettings() {
       settingPseudo.value = session.pseudo;
     }
 
-    console.log(settingPseudo);
+    try {
+      const { data, err } = await supabase
+        .from("profiles")
+        .update("pseudo", settingPseudo)
+        .eq("id", session.id)
+        .single();
+
+        if (err) {
+          alert("Une erreur est survenue.");
+          return;
+        }
+    } catch (error) {
+      alert("Une erreur est survenue.");
+      return;
+    }
   })
 }
