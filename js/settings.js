@@ -32,23 +32,24 @@ export async function setSettings() {
       saveSettings.style.backgroundColor = mainColors.value;
   });
 
-  saveSettings.addEventListener("click", async (event) => {
+  settingsForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
     if (settingPseudo.value.trim() === "") {
       settingPseudo.value = session.pseudo;
     }
 
     try {
-      const { data, err } = await supabase
+      const { data, error } = await supabase
         .from("profiles")
-        .update("pseudo", settingPseudo)
+        .update({ "pseudo": settingPseudo.value })
         .eq("id", session.id)
         .single();
 
-        if (err) {
+        if (error) {
           alert("Une erreur est survenue.");
           return;
         }
-    } catch (error) {
+    } catch (err) {
       alert("Une erreur est survenue.");
       return;
     }
