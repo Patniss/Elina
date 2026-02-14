@@ -358,6 +358,10 @@ export async function completeMovie(uuid) {
         divSelectDirector.classList.add("select");
         divSelectDirector.classList.add("mr-2");
         const selectDirector = document.createElement("select");
+        const optAddDirector = document.createElement("option");
+        optAddDirector.value = "0";
+        optAddDirector.textContent = "Ajouter…";
+        selectDirector.appendChild(optAddDirector);
         divSelectDirector.appendChild(selectDirector);
         Object.entries(directors).forEach(([idDirector, nameDirector]) => {
             selectDirector.append(
@@ -375,7 +379,7 @@ export async function completeMovie(uuid) {
             switch (selectJob.value) {
                 case "director":
                     console.log("change is director")
-                    wrapperCast.appendChild(selectDirector);
+                    wrapperCast.appendChild(divSelectDirector);
                     break;
             
                 case "actor":
