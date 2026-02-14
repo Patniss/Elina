@@ -409,6 +409,7 @@ export async function completeMovie(uuid) {
                     wrapperAddDirector.append(fnAddDirector, lnAddDirector, btnAddDirector);
 
                     selectDirector.addEventListener("change", () => {
+                        console.log("test select director")
                         if (selectDirector.value === "0") {
                             wrapperCast.appendChild(wrapperAddDirector);
                         } else {
