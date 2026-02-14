@@ -45,11 +45,6 @@ function renderPagination(totalItems, page, size) {
 // Recherche
 const searchInput = document.getElementById("search-movie");
 
-searchInput.addEventListener("input", () => {
-  currentPage = 1;
-  renderMovies(filteredMovies(), currentPage, pageSize);
-});
-
 function filteredMovies() {
   const term = searchInput.value.toLowerCase();
   return allMovies.filter(movie => movie.title.toLowerCase().includes(term));
