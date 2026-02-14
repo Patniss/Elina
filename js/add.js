@@ -225,14 +225,15 @@ export async function addShow() {
 
   showForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const title = titleInput.value;
+    const titleShow = titleInput.value;
 
-    console.log(showGenres.value);
+    let selectedGenres = $(showGenres).val();
+    let genresShow = selectedGenres.join(" ; ");
 
-    const averageTime = averageTimeInput.value;
-    const state = showState.value;
-    const complete = true;
-    const nbSeasons = showNbSeasons.value;
+    const averageTimeShow = averageTimeInput.value;
+    const stateShow = showState.value;
+    const completeShow = false;
+    const nbSeasonsShow = showNbSeasons.value;
 
     showSubmit.classList.add("is-loading");
 
@@ -240,7 +241,13 @@ export async function addShow() {
       try {
         const { data, error } = await supabase
           .from("shows")
-          .insert([ title, genres, averageTime, state, complete, nbSeasons ]);
+          .insert([{ 
+            title: titleShow, 
+            genres: genresShow, 
+            average_min: averageTimeShow, 
+            state: stateShow, 
+            complete: completeShow, 
+            nb_seasons: nbSeasonsShow }]);
 
         if (error) {
           setTimeout(() => {
