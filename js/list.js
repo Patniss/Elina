@@ -222,9 +222,8 @@ export async function loadAllMovies() {
             return;
       }
     })
-  });
 
-  viewMovieBtn.addEventListener("click", async () => {
+    viewMovieBtn.addEventListener("click", async () => {
     viewMovieBtn.textContent = "";
     viewMovieBtn.classList.add("is-loading");
     viewMovieBtn.classList.remove("is-light");
@@ -306,7 +305,9 @@ export async function loadAllMovies() {
       return;
     }
 
-  })
+  });
+
+  });
 }
 
 export async function loadToseeMovies() {
