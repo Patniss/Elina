@@ -537,7 +537,7 @@ export async function loadSeenMovies() {
 
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag");
-    detailsBtn.textContent = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
+    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
     detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
 
     const seenBtn = document.createElement("button");
