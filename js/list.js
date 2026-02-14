@@ -2,6 +2,59 @@ import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
+
+let allMovies = [];
+let currentPage = 1;
+const pageSize = 25;
+
+function renderMovies(movies, page, size) {
+  const container = document.getElementById("list-all-movies");
+  container.innerHTML = "";
+
+  const start = (page - 1) * size;
+  const end = start + size;
+  const pageMovies = movies.slice(start, end);
+
+  pageMovies.forEach(movie => {
+    const div = document.createElement("div");
+    div.textContent = movie.title;
+    container.appendChild(div);
+  });
+
+  renderPagination(movies.length, page, size);
+}
+
+function renderPagination(totalItems, page, size) {
+  const paginationContainer = document.getElementById("pagination");
+  paginationContainer.innerHTML = "";
+
+  const totalPages = Math.ceil(totalItems / size);
+
+  for(let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.disabled = i === page;
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      renderMovies(filteredMovies(), currentPage, pageSize);
+    });
+    paginationContainer.appendChild(btn);
+  }
+}
+
+// Recherche
+const searchInput = document.getElementById("search-movie");
+
+searchInput.addEventListener("input", () => {
+  currentPage = 1;
+  renderMovies(filteredMovies(), currentPage, pageSize);
+});
+
+function filteredMovies() {
+  const term = searchInput.value.toLowerCase();
+  return allMovies.filter(movie => movie.title.toLowerCase().includes(term));
+}
+
 // FONCTIONS SUR LES FILMS
 export async function loadAllMovies() {
   const allMovieContainer = document.getElementById("list-all-movies");
@@ -19,6 +72,8 @@ export async function loadAllMovies() {
     console.error(error);
     allMovieContainer.textContent = "Erreur lors du chargement des films.";
   }
+
+  allMovies = data;
   
   const moviesWithStatus = data.map(movie => {
     const userMovie = movie.users_movies.find(
@@ -262,60 +317,60 @@ export async function loadAllMovies() {
           divTags.appendChild(seenMovieBtn);
           divTags.appendChild(detailsBtn);
         }, 500);
-
-    } catch (err) {
-      setTimeout(() => {
-        viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        viewMovieBtn.classList.add("is-danger");
-        viewMovieBtn.classList.remove("is-loading");
-      }, 500);
-      return;
-    }
-
-  });
-
-  seenMovieBtn.addEventListener("click", async () => {
-    seenMovieBtn.textContent = "";
-    seenMovieBtn.classList.add("is-loading");
+      
+      } catch (err) {
+        setTimeout(() => {
+          viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          viewMovieBtn.classList.add("is-danger");
+          viewMovieBtn.classList.remove("is-loading");
+        }, 500);
+        return;
+      }
     
-    try {
-      const { data, error } = await supabase
-        .from("users_movies")
-        .update({seen: false})
-        .eq("user_id", userId)
-        .eq("movie_id", movie.id)
-        .single();
-
-        if (error) {
+    });
+    
+    seenMovieBtn.addEventListener("click", async () => {
+      seenMovieBtn.textContent = "";
+      seenMovieBtn.classList.add("is-loading");
+      
+      try {
+        const { data, error } = await supabase
+          .from("users_movies")
+          .update({seen: false})
+          .eq("user_id", userId)
+          .eq("movie_id", movie.id)
+          .single();
+          
+          if (error) {
+            setTimeout(() => {
+              seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+              viewMovieBtn.classList.add("is-danger");
+              return;
+            }, 500);
+          }
+          
+          setTimeout(() => {
+            seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
+            seenMovieBtn.classList.remove("is-loading");
+            
+            divTags.removeChild(seenMovieBtn);
+            divTags.removeChild(detailsBtn);
+            divTags.appendChild(viewMovieBtn);
+            divTags.appendChild(suppMovieBtn);
+            divTags.appendChild(detailsBtn);
+          }, 500);
+        
+        } catch (err) {
           setTimeout(() => {
             seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
             viewMovieBtn.classList.add("is-danger");
-            return;
           }, 500);
+          return;
         }
-
-        setTimeout(() => {
-          seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-          seenMovieBtn.classList.remove("is-loading");
-
-          divTags.removeChild(seenMovieBtn);
-          divTags.removeChild(detailsBtn);
-          divTags.appendChild(viewMovieBtn);
-          divTags.appendChild(suppMovieBtn);
-          divTags.appendChild(detailsBtn);
-        }, 500);
-
-    } catch (err) {
-      setTimeout(() => {
-        seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        viewMovieBtn.classList.add("is-danger");
-      }, 500);
-      return;
-    }
-
+      });
   });
-
-  });
+  
+  renderMovies(allMovies, currentPage, pageSize);
 }
 
 export async function loadToseeMovies() {
@@ -666,6 +721,9 @@ export async function loadSeenMovies() {
     })
   });
 }
+
+
+// FONCTION INCOMPLETE
 
 export async function loadIncompleteMovies() {
   const incompleteMoviesContainer = document.getElementById("list-incomplete-movies");
