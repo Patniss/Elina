@@ -364,7 +364,6 @@ export async function completeMovie(uuid) {
         optAddDirector.value = "0";
         optAddDirector.textContent = "Ajouter…";
 
-        selectDirector.appendChild(optAddDirector);
         divSelectDirector.appendChild(selectDirector);
 
         Object.entries(directors).forEach(([idDirector, nameDirector]) => {
@@ -372,6 +371,8 @@ export async function completeMovie(uuid) {
                 new Option(nameDirector, idDirector)
             );
         });
+
+        selectDirector.appendChild(optAddDirector);
 
         $(selectDirector).select2({
             placeholder: "Saisir un nom…",
@@ -386,20 +387,31 @@ export async function completeMovie(uuid) {
                     if (selectDirector.value = "0") {
                         const wrapperAddDirector = document.createElement("div");
                         wrapperAddDirector.classList.add("add-director-wrapper");
+                        wrapperAddDirector.classList.add("columns");
+                        wrapperAddDirector.classList.add("is-2");
 
                         const fnAddDirector = document.createElement("input");
                         fnAddDirector.classList.add("input");
+                        fnAddDirector.classList.add("column");
                         fnAddDirector.type = "text";
                         fnAddDirector.placeholder = "Prénom";
 
                         const lnAddDirector = document.createElement("input");
                         lnAddDirector.classList.add("input");
+                        lnAddDirector.classList.add("column");
                         lnAddDirector.type = "text";
                         lnAddDirector.placeholder = "Nom de famille";
 
-                        wrapperAddDirector.append(fnAddDirector, lnAddDirector);
+                        const btnAddDirector = document.createElement("button");
+                        btnAddDirector.classList.add("button");
+                        btnAddDirector.classList.add("column");
+                        btnAddDirector.textContent = "Ajouter";
+
+                        wrapperAddDirector.append(fnAddDirector, lnAddDirector, btnAddDirector);
 
                         wrapperCast.appendChild(wrapperAddDirector);
+                    } else {
+                        wrapperCast.removeChild(wrapperAddDirector);
                     }
                     break;
             
