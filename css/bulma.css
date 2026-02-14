@@ -16522,7 +16522,7 @@ has-background-text.is-hoverable:active {
 }
 
 .has-text-primary {
-  color: hsl(var(--bulma-primary-h), var(--bulma-primary-s), var(--bulma-primary-l)) !important;
+  color: hsl(var(--bulma-primary-h), var(--bulma-primary-s), var(--bulma-primary-l));
 }
 
 .has-background-primary {

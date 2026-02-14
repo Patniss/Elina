@@ -8,10 +8,11 @@
 .button.is-primary {
   background-color: var(--user-primary);
   border-color: var(--user-primary);
+  color: var(--bulma-primary-invert-l);
 }
 
 .has-text-primary {
-  color: var(--user-primary);
+  color: var(--user-primary) !important;
 }
 
 .has-background-primary {
