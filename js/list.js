@@ -813,7 +813,42 @@ export async function loadAllShows() {
     };
   });
 
-  console.log(showsWithStatus);
+  showsWithStatus.forEach(show => {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    column.classList.add("is-one-quarter");
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+    const pTitle = document.createElement("p");
+    pTitle.classList.add("title");
+    pTitle.classList.add("is-5");
+    pTitle.textContent = show.title;
+
+    const pSubtitle = document.createElement("p");
+    pSubtitle.classList.add("title");
+    pSubtitle.classList.add("is-6");
+    pSubtitle.textContent = 'test';
+
+    const detailsBtn = document.createElement("a");
+    detailsBtn.classList.add("tag");
+    detailsBtn.classList.add("is-hoverable");
+    detailsBtn.classList.add("mr-2");
+    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
+    detailsBtn.href = `/Elina/shows/movie.html?id=${show.id}`;
+
+    const divTags = document.createElement("div");
+    divTags.classList.add("is-flex");
+    divTags.appendChild(detailsBtn);
+    cardContent.append(pTitle, pSubtitle, divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
+    
+  });
 }
 
 export async function loadCurrentShows() {
