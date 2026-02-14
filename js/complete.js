@@ -448,7 +448,7 @@ export async function completeMovie(uuid) {
                             try {
                                 const { error } = await supabase
                                     .from("people")
-                                    .insert([ lastNameDirector, firstNameDirector ]);
+                                    .insert([{ lastNameDirector, firstNameDirector }]);
 
                                 if (error) {
                                     btnAddDirector.classList.remove("is-loading", "is-primary", "is-light");
