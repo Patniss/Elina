@@ -61,29 +61,28 @@
 
 <script>
   $("#movie-search").on("input", function () {
+
     let search = $(this).val().toLowerCase();
 
+    // Si champ vide → tout afficher
+    if (search === "") {
+      $(".column.is-one-quarter").fadeIn(150);
+      return;
+    }
+
     $(".column.is-one-quarter").each(function () {
+
       let title = $(this).find(".title.is-5").text().toLowerCase();
 
       if (title.includes(search)) {
-        $(this).show();
+        $(this).fadeIn(150);
       } else {
-        $(this).hide();
+        $(this).fadeOut(150);
       }
+
     });
+
   });
-
-  if (title.includes(search)) {
-    $(this).fadeIn(150);
-  } else {
-    $(this).fadeOut(150);
-  }
-
-  if (search === "") {
-    $(".column.is-one-quarter").show();
-    return;
-  }
 </script>
 
 </body>

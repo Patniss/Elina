@@ -237,7 +237,7 @@ export async function loadAllMovies() {
     try {
       const { data, error } = await supabase
         .from("users_movies")
-        .update("seen", true)
+        .update({seen: true})
         .eq("user_id", userId)
         .eq("movie_id", movie.id)
         .single();
@@ -246,6 +246,7 @@ export async function loadAllMovies() {
           setTimeout(() => {
             viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
             viewMovieBtn.classList.add("is-danger");
+            viewMovieBtn.classList.remove("is-loading");
           }, 500);
           return;
         }
@@ -266,6 +267,7 @@ export async function loadAllMovies() {
       setTimeout(() => {
         viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
         viewMovieBtn.classList.add("is-danger");
+        viewMovieBtn.classList.remove("is-loading");
       }, 500);
       return;
     }
@@ -279,7 +281,7 @@ export async function loadAllMovies() {
     try {
       const { data, error } = await supabase
         .from("users_movies")
-        .update("seen", false)
+        .update({seen: false})
         .eq("user_id", userId)
         .eq("movie_id", movie.id)
         .single();
