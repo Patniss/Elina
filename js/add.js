@@ -9,7 +9,7 @@ const genres = [
     "Famille", "Fantastique",
     "Guerre",
     "Historique", "Horreur",
-    "Mystère",
+    "Musique", "Mystère",
     "Policier",
     "Romance",
     "Science-fiction", "Suspense",

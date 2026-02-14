@@ -2,46 +2,6 @@ import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
-
-let allMovies = [];
-let currentPage = 1;
-const pageSize = 25;
-
-function renderMovies(movies, page, size) {
-  const container = document.getElementById("list-all-movies");
-  container.innerHTML = "";
-
-  const start = (page - 1) * size;
-  const end = start + size;
-  const pageMovies = movies.slice(start, end);
-
-  pageMovies.forEach(movie => {
-    const div = document.createElement("div");
-    div.textContent = movie.title;
-    container.appendChild(div);
-  });
-
-  renderPagination(movies.length, page, size);
-}
-
-function renderPagination(totalItems, page, size) {
-  const paginationContainer = document.getElementById("pagination");
-  paginationContainer.innerHTML = "";
-
-  const totalPages = Math.ceil(totalItems / size);
-
-  for(let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement("button");
-    btn.textContent = i;
-    btn.disabled = i === page;
-    btn.addEventListener("click", () => {
-      currentPage = i;
-      renderMovies(filteredMovies(), currentPage, pageSize);
-    });
-    paginationContainer.appendChild(btn);
-  }
-}
-
 // Recherche
 const searchInput = document.getElementById("search-movie");
 
@@ -67,8 +27,6 @@ export async function loadAllMovies() {
     console.error(error);
     allMovieContainer.textContent = "Erreur lors du chargement des films.";
   }
-
-  allMovies = data;
   
   const moviesWithStatus = data.map(movie => {
     const userMovie = movie.users_movies.find(
@@ -364,8 +322,6 @@ export async function loadAllMovies() {
         }
       });
   });
-  
-  renderMovies(allMovies, currentPage, pageSize);
 }
 
 export async function loadToseeMovies() {
