@@ -357,8 +357,6 @@ export async function completeMovie(uuid) {
             );
         });
 
-        selectDirector.appendChild(optAddDirector);
-
         $(selectDirector).select2({
             placeholder: "Saisir un nom…",
             allowClear: true,
