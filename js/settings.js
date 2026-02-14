@@ -4,19 +4,22 @@ import { loadProfile } from "/Elina/js/dashboard.js";
 export async function setSettings() {
   const session = await loadProfile();
 
+  const currentPseudo = document.getElementById("current-pseudo");
+
   const settingsForm = document.getElementById("settings-form");
+  const settingPseudo = document.getElementById("setting-pseudo");
+
   const settingMovies = document.getElementById("setting-movies");
   const settingShows = document.getElementById("setting-shows");
   const settingDramas = document.getElementById("setting-dramas");
   const settingBooks = document.getElementById("setting-books");
-  const settingPseudo = document.getElementById("setting-pseudo");
-  const settingButton = document.getElementById("save-settings");
-
-  const currentPseudo = document.getElementById("current-pseudo");
-  const mainColors = document.getElementById("main-colors");
-  const mode = document.getElementById("mode");
+  
+  
   const saveSettings = document.getElementById("save-settings");
-  const buttonColor = document.getElementById("button-color");
+  
+  const settingColor = document.getElementById("main-colors");
+  const settingMode = document.getElementById("setting-mode");
+  const settingButtonColor = document.getElementById("button-color");
 
   settingMovies.checked = session.movies;
   settingShows.checked = session.shows;
@@ -24,13 +27,12 @@ export async function setSettings() {
   settingBooks.checked = session.books;
 
   currentPseudo.textContent = session.pseudo;
-  mainColors.value = session.theme_color;
-  mode.value = session.mode;
-  buttonColor.value = session.button_text;
+  settingColor.value = session.theme_color;
+  settingMode.value = session.mode;
+  settingButtonColor.value = session.button_text;
 
-  mainColors.addEventListener("change", () => {
-      console.log("Couleur changée");
-      saveSettings.style.backgroundColor = mainColors.value;
+  settingColor.addEventListener("change", () => {
+      saveSettings.style.backgroundColor = settingColor.value;
   });
 
   settingsForm.addEventListener("submit", async (event) => {
@@ -39,13 +41,21 @@ export async function setSettings() {
       settingPseudo.value = session.pseudo;
     }
 
-    alert(settingMovies.value);
     settingButton.classList.add("is-loading");
 
     try {
       const { data, error } = await supabase
         .from("profiles")
-        .update({ "pseudo": settingPseudo.value })
+        .update(
+          { "pseudo": settingPseudo.value },
+          { "movies": settingMovies.checked },
+          { "shows": settingShows.checked },
+          { "dramas": settingDramas.checked },
+          { "books": settingBooks.checked },
+          { "theme_color": settingColor.value },
+          { "mode": settingMode.value },
+          { "button_text": settingButtonColor.value }
+        )
         .eq("id", session.id)
         .single();
 
