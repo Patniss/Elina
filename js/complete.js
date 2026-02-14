@@ -346,10 +346,8 @@ export async function completeMovie(uuid) {
         divSelectDirector.classList.add("mr-2");
 
         const selectDirector = document.createElement("select");
-
-        const optAddDirector = document.createElement("option");
-        optAddDirector.value = "0";
-        optAddDirector.textContent = "Ajouter…";
+        selectDirector.classList.add("input");
+        selectDirector.style.width = "100%";
 
         divSelectDirector.appendChild(selectDirector);
 
@@ -363,10 +361,31 @@ export async function completeMovie(uuid) {
 
         $(selectDirector).select2({
             placeholder: "Saisir un nom…",
-            allowClear: true
+            allowClear: true,
+            tags: true,
+            tokenSeparators: [',', ';'],
+            createTag: function (params) {
+                return {
+                    id: params.term,
+                    text: params.term,
+                    newOption: true
+                };
+            }
         })
 
+        $(selectDirector).on('select2:select', function(e) {
+            const data = e.params.data;
+
+            if (data.newOption) {
+                wrapperCast.appendChild(wrapperAddDirector);
+                
+                fnAddDirector.value = data.text.split(" ")[0] || "";
+                lnAddDirector.value = data.text.split(" ").slice(1).join(" ") || "";
+            }
+        });
+
         aClose.addEventListener("click", () => { wrapperCast.remove() });
+
         selectJob.addEventListener("change", () => {
             switch (selectJob.value) {
                 case "director":
@@ -430,6 +449,7 @@ export async function completeMovie(uuid) {
                                         wrapperAddDirector.remove();
                                     }, 250);
                                 }, 250);
+
                                } catch (err) {
                                 btnAddDirector.classList.remove("is-loading", "is-primary", "is-light");
                                 btnAddDirector.classList.add("is-danger");
@@ -464,6 +484,7 @@ export async function completeMovie(uuid) {
                                         wrapperAddDirector.remove();
                                     }, 250);
                                 }, 250);
+
                             } catch (err) {
                                 btnAddDirector.classList.remove("is-loading", "is-primary", "is-light");
                                 btnAddDirector.classList.add("is-danger");
@@ -502,129 +523,6 @@ export async function completeMovie(uuid) {
             }
         });
     })
-}
-
-export async function completeMovieBase(uuid) {
-    const directors = await loadDirectors();
-
-    const { data: movie, error } = await supabase
-    .from("movies")
-    .select("*")
-    .eq("id", uuid)
-    .single();
-
-    if (error) {
-        console.error(error);
-        return;
-    }
-
-    const movieTitle = document.getElementById("movie-title");
-    const movieYear = document.getElementById("movie-year");
-    const movieGenres = document.getElementById("movie-genres");
-    const movieSynopsis = document.getElementById("movie-synopsis");
-    const addCast = document.getElementById("add-cast");
-    const addingCasts = document.getElementById("adding-casts");
-
-    movieTitle.textContent = movie.title;
-    movieYear.textContent = movie.year;
-
-    genres.forEach(genre => {
-        movieGenres.append(
-            new Option(genre, genre, false, false)
-        );
-    });
-
-    $(movieGenres).select2({
-        placeholder: "Choisir un genre…",
-        allowClear: true
-    });
-
-    addCast.addEventListener("click", () => {
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("casting-wrapper");
-
-        const cancelJob = document.createElement("button");
-        cancelJob.classList.add("modal-close");
-
-        const labelJob = document.createElement("label");
-        labelJob.classList.add("label");
-        labelJob.textContent = "Choisir le métier :";
-
-        const divJob = document.createElement("div");
-        divJob.classList.add("select");
-
-        const selectJob = document.createElement("select");
-
-        const optBase = document.createElement("option");
-        optBase.textContent = "Choisir un métier…";
-        
-        const optDirector = document.createElement("option");
-        optDirector.value = "director";
-        optDirector.textContent = "Réalisateur";
-
-        const optActor = document.createElement("option");
-        optActor.value = "actor";
-        optActor.textContent = "Acteur";
-
-        const optScriptwriter = document.createElement("option");
-        optScriptwriter.value = "scriptwriter";
-        optScriptwriter.textContent = "Scénariste";
-
-        const optProducer = document.createElement("option");
-        optProducer.value = "producer";
-        optProducer.textContent = "Producteur";
-
-        const optSinger = document.createElement("option");
-        optSinger.value = "singer";
-        optSinger.textContent = "Interpète";
-
-        selectJob.append(optBase, optDirector, optActor, optScriptwriter, optProducer, optSinger);
-        divJob.append(labelJob, selectJob);
-        wrapper.appendChild(divJob);
-        addingCasts.appendChild(wrapper);
-
-        cancelJob.addEventListener("click", () => {
-            wrapper.remove();
-        })
-
-        selectJob.addEventListener("change", () => {
-            switch (selectJob.value) {
-                case "director":
-                    const wrapperDirector = document.createElement("div");
-                    wrapperDirector.classList.add("casting-director-wrapper");
-                    wrapperDirector.classList.add("field");
-                    
-                    const divDirector = document.createElement("div");
-                    
-                    const labelDirector = document.createElement("label");
-                    labelDirector.classList.add("label");
-                    labelDirector.textContent = "Choisir un réalisateur";
-
-                    const divSelectDirectors = document.createElement("div");
-                    divSelectDirectors.classList.add("select");
-                    divSelectDirectors.classList.add("is-multiple");
-                    
-                    const selectDirectors = document.createElement("select")
-
-                    directors.forEach(director => {
-                        const optSelectDirector = document.createElement("option");
-                        optSelectDirector.value = director.value;
-                        optSelectDirector.textContent = director;
-                        
-                        selectDirectors.appendChild(optSelectDirector);
-                    });
-
-                    divSelectDirectors.appendChild(selectDirectors);
-                    divDirector.append(labelDirector, divSelectDirectors);
-                    wrapperDirector.appendChild(divDirector);
-                    break;
-            
-                default:
-                    break;
-            }
-        })
-
-    });
 }
 
 export async function completePeople(uuid) {
