@@ -438,10 +438,13 @@ export async function completeMovie(uuid) {
                                }
                             });
                         } else {
+                            jobAddDirector = "director";
+                            statutAddDirector = false;
+                            deathdateDirector = null;
                             try {
                                 const { error } = await supabase
                                     .from("people")
-                                    .insert([{ lastNameDirector, firstNameDirector,  }]);
+                                    .insert([{ lastNameDirector, firstNameDirector, statutAddDirector, birthdateDirector,  deathdateDirector, jobAddDirector }]);
 
                                 if (error) {
                                     btnAddDirector.classList.remove("is-loading", "is-primary", "is-light");
@@ -470,7 +473,7 @@ export async function completeMovie(uuid) {
                         }
                     })
 
-                    wrapperAddDirector.append(fnAddDirector, lnAddDirector, bdAddDirector, false, btnAddDirector, "director");
+                    wrapperAddDirector.append(fnAddDirector, lnAddDirector, bdAddDirector, btnAddDirector);
 
                     $(selectDirector).on("change", function () {
                         if (this.value === "0") {
