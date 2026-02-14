@@ -1,5 +1,27 @@
 import { loadProfile } from "/Elina/js/dashboard.js";
 
+function applyUserMode(mode) {
+  const root = document.documentElement;
+
+  if (mode === "light") {
+    root.removeAttribute("data-theme");
+  }
+
+  if (mode === "black") {
+    root.setAttribute("data-theme", "dark");
+  }
+
+  if (mode === "system") {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (prefersDark) {
+      root.setAttribute("data-theme", "dark");
+    } else {
+      root.removeAttribute("data-theme");
+    }
+  }
+}
+
 export async function customNavbar() {
   const session = await loadProfile();
 
@@ -12,6 +34,13 @@ export async function customNavbar() {
   if(!session.shows) navShows.style.display = "none";
   if(!session.dramas) navDramas.style.display = "none";
   if(!session.books) navBooks.style.display = "none";
+
+  document.documentElement
+      .style
+      .setProperty('--user-primary', session.theme_color)
+      .setProperty('--bulma-primary-invert-l', session.button_text);
+    
+      applyUserMode(session.mode);
 }
 
 export async function loadNav() {

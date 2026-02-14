@@ -36,7 +36,7 @@ export async function setSettings() {
   });
 
   settingButtonColor.addEventListener("change", () => {
-    settingButtonColor.style.color = settingButtonColor.value;
+    saveSettings.style.color = settingButtonColor.value;
   })
 
   settingsForm.addEventListener("submit", async (event) => {
