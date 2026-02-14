@@ -28,7 +28,6 @@ export async function setSettings() {
 
   currentPseudo.textContent = session.pseudo;
   settingColor.value = session.theme_color;
-  settingMode.value = session.mode;
   settingButtonColor.value = session.button_text;
 
   settingColor.addEventListener("change", () => {
