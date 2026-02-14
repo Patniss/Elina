@@ -39,7 +39,7 @@ export async function setSettings() {
       settingPseudo.value = session.pseudo;
     }
 
-    settingButton.textContent = "";
+    alert(settingMovies);
     settingButton.classList.add("is-loading");
 
     try {
@@ -50,7 +50,7 @@ export async function setSettings() {
         .single();
 
         setTimeout(() => {
-          window.location();
+          window.location.reload();
         }, 500);
 
         if (error) {
