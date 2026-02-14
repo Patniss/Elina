@@ -38,40 +38,45 @@ export async function addMovie() {
     };
 
     searchTimeout = setTimeout(async () => {
+      
+      const { data, error } = await supabase
+        .from("movies")
+        .select("id, title, year")
+        .ilike("title", `%${query}%`)
+        .order("title", { ascending: true })
+        .limit(5);
 
-        const { data, error } = await supabase
-            .from("movies")
-            .select("id, title, year")
-            .ilike("title", `%${query}%`)
-            .order("title", { ascending: true })
-            .limit(5);
-
-        if (error) {
-            console.error(error);
-            return;
-        }
-
-        searchResult.innerHTML = "";
+      if (error) {
+        console.error(error);
+        return;
+      }
+      
+      searchResult.innerHTML = "";
+      
+      data.forEach(movie => {
+        const item = document.createElement("div");
+        item.textContent = `${movie.title} (${movie.year})`;
+        item.classList.add("search-item");
         
-        data.forEach(movie => {
-          const item = document.createElement("div");
-          item.textContent = `${movie.title} (${movie.year})`;
-          item.classList.add("search-item");
-          
-          item.addEventListener("click", () => {
-            titleInput.value = movie.title;
-            yearInput.value = movie.year;
-            searchResult.innerHTML = "";
-          });
-          
-          searchResult.appendChild(item);
-});
-
-searchResult.style.display = "block";
-
-
+        item.addEventListener("click", () => {
+          titleInput.value = movie.title;
+          yearInput.value = movie.year;
+          searchResult.innerHTML = "";
+        });
+        
+        searchResult.appendChild(item);
+      });
+      
+      if (data.length === 0) {
+        searchResult.style.display = "none";
+      } else {
+        searchResult.style.display = "block";
+      }
+      
+    
     }, 100);
-  })
+  
+  });
 
   movieForm.addEventListener("submit", async (e) => {
     e.preventDefault();
