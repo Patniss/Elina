@@ -51,7 +51,24 @@ export async function addMovie() {
             return;
         }
 
-        searchResult.appendChild(data);
+        searchResult.innerHTML = "";
+        
+        data.forEach(movie => {
+          const item = document.createElement("div");
+          item.textContent = `${movie.title} (${movie.year})`;
+          item.classList.add("search-item");
+          
+          item.addEventListener("click", () => {
+            titleInput.value = movie.title;
+            yearInput.value = movie.year;
+            searchResult.innerHTML = "";
+          });
+          
+          searchResult.appendChild(item);
+});
+
+searchResult.style.display = "block";
+
 
     }, 100);
   })
