@@ -101,6 +101,7 @@ export async function addMovie() {
 export async function addShow() {
   const showForm = document.getElementById("show-form");
   const showGenres = document.getElementById("show-genres");
+  const titleInput = document.getElementById("show-title");
   
   genres.forEach(genre => {
       showGenres.append(
@@ -111,6 +112,58 @@ export async function addShow() {
   $(showGenres).select2({
       placeholder: "Choisir un genre…",
       allowClear: true
+  });
+
+  let searchTimeout;
+
+  $(titleInput).on("input", function () {
+    clearTimeout(searchTimeout);
+
+    const query = $(this).val().trim();
+
+    if (query.length < 2) {
+      $(searchResult).hide().empty();
+      return;
+    };
+
+    searchTimeout = setTimeout(async () => {
+      
+      const { data, error } = await supabase
+        .from("shows")
+        .select("id, title")
+        .ilike("title", `%${query}%`)
+        .order("title", { ascending: true })
+        .limit(5);
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+      
+      searchResult.innerHTML = "";
+      
+      data.forEach(show => {
+        const item = document.createElement("div");
+        item.textContent = show.title;
+        item.classList.add("search-item");
+        
+        item.addEventListener("click", () => {
+          titleInput.value = show.title;
+          searchResult.innerHTML = "";
+        });
+        
+        searchResult.appendChild(item);
+      });
+      
+      if (data.length === 0) {
+        searchResult.style.display = "none";
+      } else {
+        searchResult.style.display = "block";
+      }
+      
+    
+    }, 100);
+  
   });
 
   showForm.addEventListener("submit", async (e) => {
