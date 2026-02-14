@@ -95,18 +95,18 @@ export async function addMovie() {
   
   });
 
-  const movieTitle = titleInput.value;
-  const movieYear = yearInput.value;
-  const movieTime = (hoursInput.value) * 60 + (minutesInput? minutesInput : 0);
-  const movieSynopsis = synopsisInput.value;
-  const moviePoster = posterInput.value;
-  const movieComplete = false;
-
   let selectedGenres = $(genresInput).val();
   let movieGenres = selectedGenres.join(" ; ");
 
   movieForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const movieTitle = titleInput.value;
+    const movieYear = yearInput.value;
+    const movieTime = (hoursInput.value) * 60 + (minutesInput? minutesInput : 0);
+    const movieSynopsis = synopsisInput.value;
+    const moviePoster = posterInput.value;
+    const movieComplete = false;
 
     buttonInput.classList.add("is-loading")
 
