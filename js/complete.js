@@ -408,30 +408,30 @@ export async function completeMovie(uuid) {
 
                     wrapperAddDirector.append(fnAddDirector, lnAddDirector, btnAddDirector);
 
-                    selectDirector.addEventListener("change", () => {
-                        console.log("test select director")
-                        if (selectDirector.value === "0") {
+                    $(selectDirector).on("change", function () {
+                        if (this.value === "0") {
                             wrapperCast.appendChild(wrapperAddDirector);
                         } else {
-                            wrapperCast.removeChild(wrapperAddDirector);
+                            wrapperAddDirector.remove();
+
                         }
-                    })
+                    });
                     break;
             
                 case "actor":
-                    console.log("change is actor")
+                    wrapperAddDirector.remove();
                     break;
 
                 case "scriptwriter":
-                    console.log("change is swriptwriter")
+                    wrapperAddDirector.remove();
                     break;
 
                 case "producer":
-                    console.log("change is producer")
+                    wrapperAddDirector.remove();
                     break;
 
                 case "singer":
-                    console.log("change is singer")
+                    wrapperAddDirector.remove();
                     break;
             }
         });
