@@ -102,6 +102,7 @@ export async function addShow() {
   const showForm = document.getElementById("show-form");
   const showGenres = document.getElementById("show-genres");
   const titleInput = document.getElementById("show-title");
+  const searchResult = document.getElementById("research-results");
   
   genres.forEach(genre => {
       showGenres.append(
