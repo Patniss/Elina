@@ -27,6 +27,7 @@ export async function addMovie() {
   const hoursInput = document.getElementById("movie-hours");
   const minutesInput = document.getElementById("movie-minutes");
   const posterInput = document.getElementById("movie-poster");
+  const buttonInput = document.getElementById("movie-button");
 
   genres.forEach(genre => {
         genresInput.append(
@@ -100,25 +101,46 @@ export async function addMovie() {
   const movieSynopsis = synopsisInput.value;
   const moviePoster = posterInput.value;
   const movieComplete = false;
-  
+
   let selectedGenres = $(genresInput).val();
   let movieGenres = selectedGenres.join(" ; ");
 
   movieForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase
-      .from("movies")
-      .insert([{ movieTitle, movieYear, movieComplete, movieGenres, moviePoster, movieTime, movieSynopsis }]);
+    buttonInput.classList.add("is-loading")
 
-    if (error) {
-      alert(error.message);
-      return
+    try {
+      const { data, error } = await supabase
+        .from("movies")
+        .insert([{ movieTitle, movieYear, movieComplete, movieGenres, moviePoster, movieTime, movieSynopsis }]);
+
+      setTimeout(() => {
+        buttonInput.classList.remove("is-loading", "is-primary");
+        buttonInput.classList.add("id-success");
+        buttonInput.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Ajouté</span>`;
+
+        setTimeout(() => {
+          buttonInput.classList.remove("is-success");
+          buttonInput.classList.add("is-primary");
+          buttonInput.innerHTML = `<span class="icon"><i class="fas fa-plus"></i></span><span>Ajouter le film</span>`;
+          movieForm.reset();
+          titleInput.focus();
+        }, 250);
+      }, 250);
+
+      if (error) {
+        buttonInput.classList.remove("is-loading", "is-primary");
+        buttonInput.classList.add("is-danger");
+        buttonInput.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        return;
+      }
+    } catch (err) {
+      buttonInput.classList.remove("is-loading", "is-primary");
+      buttonInput.classList.add("is-danger");
+      buttonInput.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+      return;
     }
-
-    alert("Film ajouté avec succès !");
-    movieForm.reset();
-    titleInput.focus();
   });
 }
 
