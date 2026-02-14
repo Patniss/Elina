@@ -18,7 +18,6 @@ export async function setSettings() {
   const saveSettings = document.getElementById("save-settings");
   
   const settingColor = document.getElementById("main-colors");
-  const settingMode = document.getElementById("setting-mode");
   const settingButtonColor = document.getElementById("button-color");
 
   settingMovies.checked = session.movies;
