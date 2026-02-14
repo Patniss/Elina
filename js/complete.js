@@ -398,14 +398,83 @@ export async function completeMovie(uuid) {
                     lnAddDirector.type = "text";
                     lnAddDirector.style.height = "48px";
                     lnAddDirector.placeholder = "Nom de famille";
+                    lnAddDirector.required = true;
 
                     const btnAddDirector = document.createElement("button");
-                    btnAddDirector.classList.add("button");
-                    btnAddDirector.classList.add("column");
+                    btnAddDirector.classList.add("button", "column", "is-primary", "is-light");
                     btnAddDirector.textContent = "Ajouter";
+                    btnAddDirector.type = "button";
 
                     btnAddDirector.addEventListener("click", async () => {
-                        console.log("bouton ajouter director cliqué");
+                        btnAddDirector.classList.add("is-loading");
+                        lastNameDirector = lnAddDirector.value;
+                        firstNameDirector = fnAddDirector.value;
+
+                        const { data, error } = await supabase
+                            .from("people")
+                            .select("id, jobs")
+                            .eq("lastname", lastNameDirector)
+                            .eq("firstname", firstNameDirector);
+
+                        if (data.length > 0) {
+                            data.forEach(async item => {
+                               jobsItem = item.jobs + " director";
+                               try {
+                                const { data: updatePeople, error } = await supabase
+                                    .from("people")
+                                    .update({"jobs": jobsItem})
+                                    .eq("lastname", lastNameDirector)
+                                    .eq("firstname", firstNameDirector);
+
+                                setTimeout(() => {
+                                    btnAddDirector.classList.remove("is-loading");
+                                    btnAddDirector.classList.add("is-success");
+                                    btnAddDirector.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Ajouté</span>`;
+                                    setTimeout(() => {
+                                        btnAddDirector.textContent = "Ajouter";
+                                        btnAddDirector.classList.remove("is-success");
+                                        btnAddDirector.classList.add("is-primary");
+                                        wrapperAddDirector.remove();
+                                    }, 250);
+                                }, 250);
+                               } catch (err) {
+                                btnAddDirector.classList.remove("is-loading", "is-primary", "is-light");
+                                btnAddDirector.classList.add("is-danger");
+                                btnAddDirector.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+                                return;
+                               }
+                            });
+                        } else {
+                            try {
+                                const { error } = await supabase
+                                    .from("people")
+                                    .insert([ lastNameDirector, firstNameDirector ]);
+
+                                if (error) {
+                                    btnAddDirector.classList.remove("is-loading", "is-primary", "is-light");
+                                    btnAddDirector.classList.add("is-danger");
+                                    btnAddDirector.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+                                    return;
+                                }
+
+                                setTimeout(() => {
+                                    btnAddDirector.classList.remove("is-loading");
+                                    btnAddDirector.classList.add("is-success");
+                                    btnAddDirector.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Ajouté</span>`;
+                                    setTimeout(() => {
+                                        btnAddDirector.textContent = "Ajouter";
+                                        btnAddDirector.classList.remove("is-success");
+                                        btnAddDirector.classList.add("is-primary");
+                                        wrapperAddDirector.remove();
+                                    }, 250);
+                                }, 250);
+                            } catch (err) {
+                                btnAddDirector.classList.remove("is-loading", "is-primary", "is-light");
+                                btnAddDirector.classList.add("is-danger");
+                                btnAddDirector.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+                                return;
+                            }
+                        }
                     })
 
                     wrapperAddDirector.append(fnAddDirector, lnAddDirector, btnAddDirector);
