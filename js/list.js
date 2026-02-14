@@ -406,7 +406,7 @@ export async function loadToseeMovies() {
       figurePoster.classList.add("image", "poster-wrapper", "is-2by3", "media-right");
       
       const imgPoster = document.createElement("img");
-      imgPoster.src = item.poster;
+      imgPoster.src = item.movies.poster;
       
       figurePoster.appendChild(imgPoster);
       cardFigure.appendChild(figurePoster);
@@ -607,7 +607,7 @@ export async function loadSeenMovies() {
       figurePoster.classList.add("image", "poster-wrapper", "is-2by3", "media-right");
       
       const imgPoster = document.createElement("img");
-      imgPoster.src = item.poster;
+      imgPoster.src = item.movies.poster;
       
       figurePoster.appendChild(imgPoster);
       cardFigure.appendChild(figurePoster);
