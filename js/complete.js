@@ -385,26 +385,28 @@ export async function completeMovie(uuid) {
                 case "director":
                     wrapperCast.appendChild(divSelectDirector);
                     const wrapperAddDirector = document.createElement("div");
-                    wrapperAddDirector.classList.add("add-director-wrapper");
-                    wrapperAddDirector.classList.add("columns");
-                    wrapperAddDirector.classList.add("is-2");
+                    wrapperAddDirector.classList.add("add-director-wrapper", "columns", "mt-2");
 
                     const fnAddDirector = document.createElement("input");
-                    fnAddDirector.classList.add("input");
-                    fnAddDirector.classList.add("column");
+                    fnAddDirector.classList.add("input", "column", "mr-2");
                     fnAddDirector.type = "text";
+                    fnAddDirector.style.height = "48px";
                     fnAddDirector.placeholder = "Prénom";
 
                     const lnAddDirector = document.createElement("input");
-                    lnAddDirector.classList.add("input");
-                    lnAddDirector.classList.add("column");
+                    lnAddDirector.classList.add("input", "column", "mr-2");
                     lnAddDirector.type = "text";
+                    lnAddDirector.style.height = "48px";
                     lnAddDirector.placeholder = "Nom de famille";
 
                     const btnAddDirector = document.createElement("button");
                     btnAddDirector.classList.add("button");
                     btnAddDirector.classList.add("column");
                     btnAddDirector.textContent = "Ajouter";
+
+                    btnAddDirector.addEventListener("click", async () => {
+                        console.log("bouton ajouter director cliqué");
+                    })
 
                     wrapperAddDirector.append(fnAddDirector, lnAddDirector, btnAddDirector);
 
@@ -413,7 +415,6 @@ export async function completeMovie(uuid) {
                             wrapperCast.appendChild(wrapperAddDirector);
                         } else {
                             wrapperAddDirector.remove();
-
                         }
                     });
                     break;
