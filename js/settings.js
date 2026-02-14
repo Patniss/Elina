@@ -17,10 +17,10 @@ export async function setSettings() {
   const saveSettings = document.getElementById("save-settings");
   const buttonColor = document.getElementById("button-color");
 
-  settingMovies.value = session.movies;
-  settingShows.value = session.shows;
-  settingDramas.value = session.dramas;
-  settingBooks.value = session.books;
+  settingMovies.checked = session.movies;
+  settingShows.checked = session.shows;
+  settingDramas.checked = session.dramas;
+  settingBooks.checked = session.books;
 
   currentPseudo.textContent = session.pseudo;
   mainColors.value = session.theme_color;
@@ -34,16 +34,9 @@ export async function setSettings() {
 
   saveSettings.addEventListener("click", async (event) => {
     if (settingPseudo.value.trim() === "") {
-      settingPseudo = session.pseudo;
+      settingPseudo.value = session.pseudo;
     }
 
-    saveSettings.classList.add("is-loading");
-    saveSettings.textContent = "";
-
-    setTimeout(() => {
-      saveSettings.classList.remove("is-loading");
-      saveSettings.textContent = "Enregistrer les réglages";
-      alert(settingPseudo);
-    }, 2000);
+    console.log(settingPseudo);
   })
 }
