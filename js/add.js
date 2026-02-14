@@ -173,10 +173,7 @@ export async function addShow() {
     e.preventDefault();
     const title = titleInput.value;
 
-    let genres;
-    showGenres.value.forEach(genre => {
-      genres = genre + " ";
-    });
+    console.log(showGenres);
 
     const averageTime = averageTimeInput.value;
     const state = showState.value;
