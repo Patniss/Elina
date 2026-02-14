@@ -117,13 +117,17 @@ export async function loadAllMovies() {
     column.appendChild(card);
 
     if (movie.poster !== null) {
+      const cardFigure = document.createElement("div");
+      cardFigure.classList.add("card-content");
+      cardFigure.classList.add("media-right");
       const figurePoster = document.createElement("figure");
       figurePoster.classList.add("image");
       figurePoster.classList.add("is-2by3");
       const imgPoster = document.createElement("img");
       imgPoster.src = movie.poster;
       figurePoster.appendChild(imgPoster);
-      cardContent.appendChild(figurePoster);
+      cardFigure.appendChild(figurePoster);
+      card.appendChild(cardFigure);
     }
 
     allMovieContainer.appendChild(column);
