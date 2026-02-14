@@ -45,7 +45,7 @@ export async function setSettings() {
       settingPseudo.value = session.pseudo;
     }
 
-    settingButton.classList.add("is-loading");
+    saveSettings.classList.add("is-loading");
 
     try {
       const { data, error } = await supabase
