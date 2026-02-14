@@ -737,7 +737,7 @@ export async function loadIncompletePeople() {
 
 // FONCTIONS SUR LES SÉRIES 
 export async function loadAllShows() {
-  const allShowsContainer = getElementById("list-all-shows");
+  const allShowsContainer = document.getElementById("list-all-shows");
 
   const profile = await loadProfile();
   const userId = profile.id;
