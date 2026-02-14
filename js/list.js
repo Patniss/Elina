@@ -544,23 +544,23 @@ export async function loadSeenMovies() {
     seenBtn.classList.add("mr-2");
     seenBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
 
-    const suppMovieBtn = document.createElement("button");
-    suppMovieBtn.classList.add("tag");
-    suppMovieBtn.classList.add("button");
-    suppMovieBtn.classList.add("is-hoverable");
-    suppMovieBtn.classList.add("is-danger");
-    suppMovieBtn.classList.add("is-light");
-    suppMovieBtn.classList.add("mr-2");
-    suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
+    const suppBtn = document.createElement("button");
+    suppBtn.classList.add("tag");
+    suppBtn.classList.add("button");
+    suppBtn.classList.add("is-hoverable");
+    suppBtn.classList.add("is-danger");
+    suppBtn.classList.add("is-light");
+    suppBtn.classList.add("mr-2");
+    suppBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
 
-    const viewMovieBtn = document.createElement("button");
-    viewMovieBtn.classList.add("tag");
-    viewMovieBtn.classList.add("button");
-    viewMovieBtn.classList.add("is-hoverable");
-    viewMovieBtn.classList.add("is-light");
-    viewMovieBtn.classList.add("is-success");
-    viewMovieBtn.classList.add("mr-2");
-    viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+    const viewBtn = document.createElement("button");
+    viewBtn.classList.add("tag");
+    viewBtn.classList.add("button");
+    viewBtn.classList.add("is-hoverable");
+    viewBtn.classList.add("is-light");
+    viewBtn.classList.add("is-success");
+    viewBtn.classList.add("mr-2");
+    viewBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
 
     divTags.append(seenBtn, detailsBtn);
     cardContent.appendChild(pTitle);
@@ -595,7 +595,7 @@ export async function loadSeenMovies() {
             divTags.removeChild(detailsBtn);
             divTags.removeChild(seenBtn);
             divTags.appendChild(viewBtn);
-            divTags.appendChild(supabase);
+            divTags.appendChild(suppBtn);
             divTags.appendChild(detailsBtn);
           }, 500);
 
