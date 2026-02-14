@@ -126,6 +126,8 @@ export async function loadAllMovies() {
       figurePoster.classList.add("image");
       figurePoster.classList.add("is-2by3");
       figurePoster.classList.add("media-right");
+      figurePoster.style.maxHeight = "90%";
+      figurePoster.style.borderRadius = "5%";
       
       const imgPoster = document.createElement("img");
       imgPoster.src = movie.poster;
