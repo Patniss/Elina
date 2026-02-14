@@ -56,7 +56,6 @@ export async function setSettings() {
           "dramas": settingDramas.checked,
           "books": settingBooks.checked,
           "theme_color": settingColor.value,
-          "mode": settingMode.value,
           "button_text": settingButtonColor.value }
         )
         .eq("id", session.id)
