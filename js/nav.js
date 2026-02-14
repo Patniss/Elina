@@ -20,24 +20,6 @@ export async function customNavbar() {
     document.documentElement
       .style
       .setProperty('--bulma-primary-invert-l', session.button_text);
-
-    if (session.mode === "light") {
-      root.removeAttribute("data-theme");
-    }
-
-    if (session.mode === "black") {
-      root.setAttribute("data-theme", "dark");
-    }
-
-    if (session.mode === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-      if (prefersDark) {
-        root.setAttribute("data-theme", "dark");
-      } else {
-        root.removeAttribute("data-theme");
-      }
-    }
 }
 
 export async function loadNav() {
