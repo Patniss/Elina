@@ -359,10 +359,27 @@ export async function completeMovie(uuid) {
         divSelectDirector.classList.add("mr-2");
         const selectDirector = document.createElement("select");
         divSelectDirector.appendChild(selectDirector);
+        directors.forEach(([idDirector, nameDirector]) => {
+            selectDirector.append(
+                new Option(idDirector, nameDirector)
+            );
+        });
+
+        $(selectDirector).select2({
+            placeholder: "Saisir un nom…",
+            allowClear: true
+        })
 
         aClose.addEventListener("click", () => { wrapperCast.remove() });
         selectJob.addEventListener("change", () => {
-
+            switch (selectJob.value) {
+                case "director":
+                    wrapperCast.appendChild(selectDirector);
+                    break;
+            
+                default:
+                    break;
+            }
         });
     })
 }
