@@ -103,7 +103,7 @@ export async function loadAllMovies() {
 
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex", "is-flex-wrap-wrap");
-    divTags.style.width = "70%";
+    divTags.style.width = "80%";
 
     switch (movie.seen) {
       case null:
