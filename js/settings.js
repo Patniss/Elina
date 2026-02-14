@@ -10,6 +10,7 @@ export async function setSettings() {
   const settingDramas = document.getElementById("setting-dramas");
   const settingBooks = document.getElementById("setting-books");
   const settingPseudo = document.getElementById("setting-pseudo");
+  const settingButton = document.getElementById("save-settings");
 
   const currentPseudo = document.getElementById("current-pseudo");
   const mainColors = document.getElementById("main-colors");
@@ -38,12 +39,19 @@ export async function setSettings() {
       settingPseudo.value = session.pseudo;
     }
 
+    settingButton.textContent = "";
+    settingButton.classList.add("is-loading");
+
     try {
       const { data, error } = await supabase
         .from("profiles")
         .update({ "pseudo": settingPseudo.value })
         .eq("id", session.id)
         .single();
+
+        setTimeout(() => {
+          window.location();
+        }, 500);
 
         if (error) {
           alert("Une erreur est survenue.");
