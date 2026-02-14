@@ -611,8 +611,8 @@ export async function loadSeenMovies() {
 
       } catch (err) {
         setTimeout(() => {
-          seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          viewMovieBtn.classList.add("is-danger");
+          seenBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          viewBtn.classList.add("is-danger");
         }, 500);
         return;
       }
