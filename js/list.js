@@ -126,7 +126,7 @@ export async function loadAllMovies() {
       figurePoster.appendChild(imgPoster);
       cardContent.appendChild(figurePoster);
     }
-    
+
     cardContent.append(pTitle, pSubtitle, divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
@@ -577,8 +577,8 @@ export async function loadSeenMovies() {
     seenContainer.appendChild(column);
 
     seenBtn.addEventListener("click", async () => {
-      seenMovieBtn.textContent = "";
-      seenMovieBtn.classList.add("is-loading");
+      seenBtn.textContent = "";
+      seenBtn.classList.add("is-loading");
       
       try {
         const { data, error } = await supabase
@@ -590,8 +590,8 @@ export async function loadSeenMovies() {
 
           if (error) {
             setTimeout(() => {
-              seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-              viewMovieBtn.classList.add("is-danger");
+              seenBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+              viewBtn.classList.add("is-danger");
               return;
             }, 500);
           }
@@ -599,7 +599,7 @@ export async function loadSeenMovies() {
           setTimeout(() => {
             divTags.removeChild(detailsBtn);
             divTags.removeChild(seenBtn);
-            divTags.appendChild(viewMovieBtn);
+            divTags.appendChild(viewBtn);
             divTags.appendChild(supabase);
             divTags.appendChild(detailsBtn);
           }, 500);
