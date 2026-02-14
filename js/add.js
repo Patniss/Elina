@@ -19,8 +19,26 @@ const genres = [
 
 export async function addMovie() {
   const movieForm = document.getElementById("movie-form");
+
   const titleInput = document.getElementById("movie-title");
   const yearInput = document.getElementById("movie-year");
+  const genresInput = document.getElementById("movie-genres");
+  const synopsisInput = document.getElementById("movie-synopsis");
+  const hoursInput = document.getElementById("movie-hours");
+  const minutesInput = document.getElementById("movie-minutes");
+  const posterInput = document.getElementById("movie-poster");
+
+  genres.forEach(genre => {
+        genresInput.append(
+            new Option(genre, genre, false, false)
+        );
+    });
+
+    $(genresInput).select2({
+        placeholder: "Choisir un genre…",
+        allowClear: true
+    });
+
   const searchResult = document.getElementById("research-results");
 
   let searchTimeout;
@@ -76,16 +94,24 @@ export async function addMovie() {
   
   });
 
+  const movieTitle = titleInput.value;
+  const movieYear = yearInput.value;
+  const movieTime = (hoursInput.value) * 60 + (minutesInput? minutesInput : 0);
+  const movieSynopsis = synopsisInput.value;
+  const moviePoster = posterInput.value;
+  const movieComplete = false;
+  let movieGenres = "";
+
+  genresInput.value.forEach(genre => {
+    movieGenres = genre + " ; "
+  });
+
   movieForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const title = titleInput.value.trim();
-    const year = yearInput.value ? parseInt(yearInput.value, 10) : null;
-    const complete = false;
-
     const { error } = await supabase
       .from("movies")
-      .insert([{ title, year, complete }]);
+      .insert([{ movieTitle, movieYear, movieComplete, movieGenres, moviePoster, movieTime, movieSynopsis }]);
 
     if (error) {
       alert(error.message);

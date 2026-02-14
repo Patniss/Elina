@@ -34,8 +34,36 @@
         <div class="field">
           <label class="label">Année</label>
           <div class="control">
-            <input class="input" type="number" id="movie-year">
+            <input class="input" type="number" id="movie-year" required>
           </div>
+        </div>
+
+        <div class="field">
+          <label for="movie-poster">Affiche</label>
+          <div class="control">
+            <input class="input" type="url" id="movie-poster" required>
+            <p><i>Merci d'utiliser une image provenant de <a href="https://www.themoviedb.org">themoviedb.org</a></i></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <div>
+            <label class="label">Genres</label>
+            <div class="select is-multiple">
+              <select multiple="multiple" size="8" id="movie-genres" style="width: 100%;" required></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Temps :</label>
+          <input type="number" class="input" id="movie-hours" placeholder="Heure" min="0" max="10" style="width: 100px;" required />
+          <input type="number" class="input" id="movie-minutes" placeholder="Minutes" min="0" max="59" style="width: 100px;" />
+        </div>
+
+        <div class="field">
+          <label for="movie-synopsis" class="label">Synopsis :</label>
+          <textarea name="movie-synopsis" id="movie-synopsis" class="textarea" placeholder="Synopsis du film…"></textarea>
         </div>
 
         <div class="control">
