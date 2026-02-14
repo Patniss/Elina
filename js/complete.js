@@ -309,7 +309,6 @@ export async function completeMovie(uuid) {
     });
 
     addCast.addEventListener("click", () => {
-        console.log("bouton cliqué");
         const wrapperCast = document.createElement("div");
         wrapperCast.classList.add("cast-wrapper");
         wrapperCast.classList.add("mb-4");
@@ -375,10 +374,24 @@ export async function completeMovie(uuid) {
         selectJob.addEventListener("change", () => {
             switch (selectJob.value) {
                 case "director":
+                    console.log("change is director")
                     wrapperCast.appendChild(selectDirector);
                     break;
             
-                default:
+                case "actor":
+                    console.log("change is actor")
+                    break;
+
+                case "scriptwriter":
+                    console.log("change is swriptwriter")
+                    break;
+
+                case "producer":
+                    console.log("change is producer")
+                    break;
+
+                case "singer":
+                    console.log("change is singer")
                     break;
             }
         });
