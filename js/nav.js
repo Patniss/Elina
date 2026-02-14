@@ -37,7 +37,10 @@ export async function customNavbar() {
 
   document.documentElement
       .style
-      .setProperty('--user-primary', session.theme_color)
+      .setProperty('--user-primary', session.theme_color);
+      
+    document.documentElement
+      .style
       .setProperty('--bulma-primary-invert-l', session.button_text);
     
       applyUserMode(session.mode);
