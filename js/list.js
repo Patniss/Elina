@@ -599,6 +599,8 @@ export async function loadSeenMovies() {
     card.appendChild(cardContent);
     column.appendChild(card);
 
+    console.log(item.poster);
+
     if (item.poster !== null) {
       const cardFigure = document.createElement("div");
       cardFigure.classList.add("card-content", "column", "is-4");
