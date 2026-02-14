@@ -67,3 +67,15 @@
   border-left-color: var(--user-primary) !important;
   border-bottom-color: var(--user-primary) !important;
 }
+
+
+.poster-wrapper {
+  width: 200px;       /* taille fixe */
+}
+
+.poster-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* recadre proprement */
+  border-radius: 5%;
+}
