@@ -29,7 +29,7 @@
 
         <div class="field">
           <p class="control has-icons-left">
-            <input type="text" id="movie-search" placeholder="Chercher un film…" />
+            <input type="text" id="movie-search" placeholder="Chercher un film…" class="input mb-4"/>
             <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
           </p>
         </div>
@@ -44,6 +44,11 @@
 
 </main>
 
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script type="module">
   import { loadNav } from "/Elina/js/nav.js";
   loadNav();
@@ -52,6 +57,33 @@
 <script type="module">
   import { loadAllMovies } from "/Elina/js/list.js";
   loadAllMovies();
+</script>
+
+<script>
+  $("#movie-search").on("input", function () {
+    let search = $(this).val().toLowerCase();
+
+    $(".column.is-one-quarter").each(function () {
+      let title = $(this).find(".title.is-5").text().toLowerCase();
+
+      if (title.includes(search)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+
+  if (title.includes(search)) {
+    $(this).fadeIn(150);
+  } else {
+    $(this).fadeOut(150);
+  }
+
+  if (search === "") {
+    $(".column.is-one-quarter").show();
+    return;
+  }
 </script>
 
 </body>
