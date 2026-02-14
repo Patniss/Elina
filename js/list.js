@@ -118,11 +118,10 @@ export async function loadAllMovies() {
 
     if (movie.poster !== null) {
       const cardFigure = document.createElement("div");
-      cardFigure.classList.add("column", "card-content", "is-two-fifth");
+      cardFigure.classList.add("card-content", "column", "is-4");
       
       const figurePoster = document.createElement("figure");
       figurePoster.classList.add("image", "poster-wrapper", "is-2by3", "media-right");
-      figurePoster.style.borderRadius = "10px";
       
       const imgPoster = document.createElement("img");
       imgPoster.src = movie.poster;
@@ -130,9 +129,9 @@ export async function loadAllMovies() {
       figurePoster.appendChild(imgPoster);
       cardFigure.appendChild(figurePoster);
 
-      cardContent.classList.add("column", "is-three-fifth");
+      cardContent.classList.add("column", "is-8");
       
-      card.classList.add("columns", "is-multiline");
+      card.classList.add("columns", "is-mobile", "is-align-items-center");
       
       card.appendChild(cardFigure);
     }
