@@ -103,7 +103,7 @@ export async function addMovie() {
 
     const movieTitle = titleInput.value;
     const movieYear = yearInput.value;
-    const movieTime = (hoursInput.value) * 60 + (minutesInput? minutesInput : 0);
+    const movieTime = (hoursInput.value) * 60 + (minutesInput? minutesInput.value : 0);
     const movieSynopsis = synopsisInput.value;
     const moviePoster = posterInput.value;
     const movieComplete = false;
