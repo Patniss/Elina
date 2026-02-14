@@ -357,12 +357,16 @@ export async function completeMovie(uuid) {
         const divSelectDirector = document.createElement("div");
         divSelectDirector.classList.add("select");
         divSelectDirector.classList.add("mr-2");
+
         const selectDirector = document.createElement("select");
+
         const optAddDirector = document.createElement("option");
         optAddDirector.value = "0";
         optAddDirector.textContent = "Ajouter…";
+
         selectDirector.appendChild(optAddDirector);
         divSelectDirector.appendChild(selectDirector);
+
         Object.entries(directors).forEach(([idDirector, nameDirector]) => {
             selectDirector.append(
                 new Option(nameDirector, idDirector)
@@ -378,8 +382,25 @@ export async function completeMovie(uuid) {
         selectJob.addEventListener("change", () => {
             switch (selectJob.value) {
                 case "director":
-                    console.log("change is director")
                     wrapperCast.appendChild(divSelectDirector);
+                    if (selectDirector.value = "0") {
+                        const wrapperAddDirector = document.createElement("div");
+                        wrapperAddDirector.classList.add("add-director-wrapper");
+
+                        const fnAddDirector = document.createElement("input");
+                        fnAddDirector.classList.add("input");
+                        fnAddDirector.type = "text";
+                        fnAddDirector.placeholder = "Prénom";
+
+                        const lnAddDirector = document.createElement("input");
+                        lnAddDirector.classList.add("input");
+                        lnAddDirector.type = "text";
+                        lnAddDirector.placeholder = "Nom de famille";
+
+                        wrapperAddDirector.append(fnAddDirector, lnAddDirector);
+
+                        wrapperCast.appendChild(wrapperAddDirector);
+                    }
                     break;
             
                 case "actor":
