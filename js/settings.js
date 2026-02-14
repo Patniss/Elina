@@ -39,7 +39,7 @@ export async function setSettings() {
       settingPseudo.value = session.pseudo;
     }
 
-    alert(settingMovies);
+    alert(settingMovies.value);
     settingButton.classList.add("is-loading");
 
     try {
