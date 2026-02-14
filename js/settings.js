@@ -35,6 +35,10 @@ export async function setSettings() {
       saveSettings.style.backgroundColor = settingColor.value;
   });
 
+  settingButtonColor.addEventListener("change", () => {
+    settingButtonColor.style.color = settingButtonColor.value;
+  })
+
   settingsForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (settingPseudo.value.trim() === "") {
