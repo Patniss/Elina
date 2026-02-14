@@ -120,7 +120,7 @@ export async function loadAllMovies() {
       const cardFigure = document.createElement("div");
       cardFigure.classList.add("column");
       cardFigure.classList.add("card-content");
-      cardFigure.classList.add("is-one-fifth");
+      cardFigure.classList.add("is-two-fifth");
       
       const figurePoster = document.createElement("figure");
       figurePoster.classList.add("image");
@@ -132,6 +132,9 @@ export async function loadAllMovies() {
       
       figurePoster.appendChild(imgPoster);
       cardFigure.appendChild(figurePoster);
+
+      cardContent.classList.add("column");
+      cardContent.classList.add("is-three-fifth");
       
       card.classList.add("columns");
       card.classList.add("is-multiline");
