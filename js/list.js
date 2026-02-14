@@ -102,7 +102,7 @@ export async function loadAllMovies() {
     seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
 
     const divTags = document.createElement("div");
-    divTags.classList.add("is-flex");
+    divTags.classList.add("is-flex", "is-flex-wrap-wrap");
 
     switch (movie.seen) {
       case null:
