@@ -112,6 +112,9 @@ export async function loadAllMovies() {
     }
 
     divTags.appendChild(detailsBtn);
+    cardContent.append(pTitle, pSubtitle, divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
 
     if (movie.poster !== null) {
       const figurePoster = document.createElement("figure");
@@ -121,15 +124,11 @@ export async function loadAllMovies() {
       figurePoster.style.right = "2px";
       const imgPoster = document.createElement("img");
       imgPoster.src = movie.poster;
-      imgPoster.style.width = "40%";
-      imgPoster.style.height = "auto";
+      imgPoster.style.width = "auto";
+      imgPoster.style.height = "30%";
       figurePoster.appendChild(imgPoster);
       cardContent.appendChild(figurePoster);
     }
-
-    cardContent.append(pTitle, pSubtitle, divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
 
     allMovieContainer.appendChild(column);
 
