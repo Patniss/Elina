@@ -174,7 +174,7 @@ export async function addShow() {
     e.preventDefault();
     const title = titleInput.value;
 
-    console.log(showGenres);
+    console.log(showGenres.value);
 
     const averageTime = averageTimeInput.value;
     const state = showState.value;
