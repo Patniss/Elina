@@ -113,7 +113,14 @@ export async function addMovie() {
     try {
       const { data, error } = await supabase
         .from("movies")
-        .insert([{ movieTitle, movieYear, movieComplete, movieGenres, moviePoster, movieTime, movieSynopsis }]);
+        .insert([{ 
+          title: movieTitle,
+          year: movieYear, 
+          complete: movieComplete, 
+          genres: movieGenres, 
+          poster: moviePoster, 
+          time: movieTime, 
+          synopsis: movieSynopsis }]);
 
       setTimeout(() => {
         buttonInput.classList.remove("is-loading", "is-primary");
