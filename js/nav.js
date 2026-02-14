@@ -42,8 +42,9 @@ export async function customNavbar() {
     document.documentElement
       .style
       .setProperty('--bulma-primary-invert-l', session.button_text);
-    
-      applyUserMode(session.mode);
+
+    console.log(session.mode);
+    applyUserMode(session.mode);
 }
 
 export async function loadNav() {
