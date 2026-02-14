@@ -52,7 +52,7 @@ export async function addMovie() {
             return;
         }
 
-        displayResults(data);
+        searchResult.appendChild(data);
 
     }, 100);
   })
