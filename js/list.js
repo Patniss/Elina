@@ -112,9 +112,6 @@ export async function loadAllMovies() {
     }
 
     divTags.appendChild(detailsBtn);
-    cardContent.append(pTitle, pSubtitle, divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
 
     if (movie.poster !== null) {
       const figurePoster = document.createElement("figure");
@@ -129,6 +126,10 @@ export async function loadAllMovies() {
       figurePoster.appendChild(imgPoster);
       cardContent.appendChild(figurePoster);
     }
+    
+    cardContent.append(pTitle, pSubtitle, divTags);
+    card.appendChild(cardContent);
+    column.appendChild(card);
 
     allMovieContainer.appendChild(column);
 
