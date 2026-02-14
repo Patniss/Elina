@@ -289,24 +289,11 @@ export async function completeMovie(uuid) {
 
     const movieTitle = document.getElementById("movie-title");
     const movieYear = document.getElementById("movie-year");
-    const movieGenres = document.getElementById("movie-genres");
-    const movieSynopsis = document.getElementById("movie-synopsis");
     const addCast = document.getElementById("add-cast");
     const addingCasts = document.getElementById("adding-casts");
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
-
-    genres.forEach(genre => {
-        movieGenres.append(
-            new Option(genre, genre, false, false)
-        );
-    });
-
-    $(movieGenres).select2({
-        placeholder: "Choisir un genre…",
-        allowClear: true
-    });
 
     addCast.addEventListener("click", () => {
         const wrapperCast = document.createElement("div");
@@ -400,10 +387,10 @@ export async function completeMovie(uuid) {
                     lnAddDirector.placeholder = "Nom de famille";
                     lnAddDirector.required = true;
 
-                    const dbAddDirector = document.createElement("input");
-                    dbAddDirector.classList.add("input", "column", "mr-2");
-                    dbAddDirector.type = "date";
-                    dbAddDirector.style.height = "48px";
+                    const bdAddDirector = document.createElement("input");
+                    bdAddDirector.classList.add("input", "column", "mr-2");
+                    bdAddDirector.type = "date";
+                    bdAddDirector.style.height = "48px";
 
                     const btnAddDirector = document.createElement("button");
                     btnAddDirector.classList.add("button", "column", "is-primary", "is-light");
@@ -414,6 +401,7 @@ export async function completeMovie(uuid) {
                         btnAddDirector.classList.add("is-loading");
                         const lastNameDirector = lnAddDirector.value;
                         const firstNameDirector = fnAddDirector.value;
+                        const birthdateDirector = bdAddDirector;
 
                         const { data, error } = await supabase
                             .from("people")
@@ -453,7 +441,7 @@ export async function completeMovie(uuid) {
                             try {
                                 const { error } = await supabase
                                     .from("people")
-                                    .insert([{ lastNameDirector, firstNameDirector }]);
+                                    .insert([{ lastNameDirector, firstNameDirector,  }]);
 
                                 if (error) {
                                     btnAddDirector.classList.remove("is-loading", "is-primary", "is-light");
@@ -482,7 +470,7 @@ export async function completeMovie(uuid) {
                         }
                     })
 
-                    wrapperAddDirector.append(fnAddDirector, lnAddDirector, dbAddDirector, btnAddDirector);
+                    wrapperAddDirector.append(fnAddDirector, lnAddDirector, bdAddDirector, false, btnAddDirector, "director");
 
                     $(selectDirector).on("change", function () {
                         if (this.value === "0") {
