@@ -106,6 +106,7 @@ export async function addShow() {
   const showState = document.getElementById("show-state");
   const showNbSeasons = document.getElementById("show-nb-seasons");
   const showSubmit = document.getElementById("show-submit");
+  const averageTimeInput = document.getElementById("show-average-time");
   
   genres.forEach(genre => {
       showGenres.append(
