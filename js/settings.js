@@ -51,14 +51,14 @@ export async function setSettings() {
       const { data, error } = await supabase
         .from("profiles")
         .update(
-          { "pseudo": settingPseudo.value },
-          { "movies": settingMovies.checked },
-          { "shows": settingShows.checked },
-          { "dramas": settingDramas.checked },
-          { "books": settingBooks.checked },
-          { "theme_color": settingColor.value },
-          { "mode": settingMode.value },
-          { "button_text": settingButtonColor.value }
+          { "pseudo": settingPseudo.value,
+          "movies": settingMovies.checked,
+          "shows": settingShows.checked,
+          "dramas": settingDramas.checked,
+          "books": settingBooks.checked,
+          "theme_color": settingColor.value,
+          "mode": settingMode.value,
+          "button_text": settingButtonColor.value }
         )
         .eq("id", session.id)
         .single();
