@@ -18,8 +18,6 @@ const genres = [
 ]
 
 export async function addMovie() {
-  const showForm = document.getElementById("show-form");
-  const showGenres = document.getElementById("show-genres");
   const movieForm = document.getElementById("movie-form");
   const titleInput = document.getElementById("movie-title");
   const yearInput = document.getElementById("movie-year");
@@ -101,6 +99,9 @@ export async function addMovie() {
 }
 
 export async function addShow() {
+  const showForm = document.getElementById("show-form");
+  const showGenres = document.getElementById("show-genres");
+  
   genres.forEach(genre => {
       showGenres.append(
           new Option(genre, genre, false, false)
