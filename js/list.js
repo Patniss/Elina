@@ -1,13 +1,271 @@
+// IMPORTARTIONS NÉCESSAIRES
 import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
-// Recherche
-const searchInput = document.getElementById("search-movie");
+// VARIABLES BASIQUES
+let allMovies = [];
+let filteredMovies = [];
+let currentPage = 1;
+const pageSize = 20;
 
-function filteredMovies() {
-  const term = searchInput.value.toLowerCase();
-  return allMovies.filter(movie => movie.title.toLowerCase().includes(term));
+// FONCTIONS LISTES & CARDS
+function createMovieCard(movie) {
+  const column = document.createElement("div");
+  column.classList.add("column", "is-one-quarter");
+
+  const card = document.createElement("div");
+  card.classList.add("card", "movie-card");
+
+  const cardContent = document.createElement("div");
+  cardContent.classList.add("card-content");
+
+  const pTitle = document.createElement("p");
+  pTitle.classList.add("title", "is-5");
+  pTitle.textContent = movie.title;
+
+  const pSubtitle = document.createElement("p");
+  pSubtitle.classList.add("subtitle", "is-6");
+  pSubtitle.textContent = movie.year;
+
+  const divTags = document.createElement("div");
+  divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
+
+  const detailsBtn = document.createElement("a");
+  detailsBtn.classList.add("tag", "is-hoverable", "mr-2");
+  detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
+  detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
+
+  const addMovieBtn = document.createElement("button");
+  addMovieBtn.classList.add("tag", "button", "is-hoverable", "is-link", "mr-2");
+  addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+
+  const suppMovieBtn = document.createElement("button");
+  suppMovieBtn.classList.add("tag", "button", "is-hoverable", "is-danger", "is-light", "mr-2");
+  suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
+
+  const viewMovieBtn = document.createElement("button");
+  viewMovieBtn.classList.add("tag", "button", "is-hoverable", "is-light", "is-success", "mr-2");
+  viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+
+  const seenMovieBtn = document.createElement("button");
+  seenMovieBtn.classList.add("tag", "button", "is-hoverable", "is-success", "mr-2");
+  seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
+
+  switch (movie.seen) {
+    case null:
+      divTags.appendChild(addMovieBtn);
+      break;
+  
+    case false:
+      divTags.appendChild(viewMovieBtn);
+      divTags.appendChild(suppMovieBtn);
+      break;
+
+    case true:
+      divTags.appendChild(seenMovieBtn);
+      break;
+  }
+
+  divTags.appendChild(detailsBtn);
+  cardContent.append(pTitle, pSubtitle, divTags);
+  card.appendChild(cardContent);
+  column.appendChild(card);
+
+  if (movie.poster !== null) {
+    const cardFigure = document.createElement("div");
+    cardFigure.classList.add("card-image");
+    
+    const figurePoster = document.createElement("figure");
+    figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
+    
+    const imgPoster = document.createElement("img");
+    imgPoster.src = movie.poster;
+    imgPoster.alt = movie.title;
+    
+    figurePoster.appendChild(imgPoster);
+    cardFigure.appendChild(figurePoster);
+    
+    card.appendChild(cardFigure);
+  }
+
+  allMovieContainer.appendChild(column);
+
+  addMovieBtn.addEventListener("click", async () => {
+    addMovieBtn.textContent = "";
+    addMovieBtn.classList.remove("is-link");
+    addMovieBtn.classList.add("is-success");
+    addMovieBtn.classList.add("is-loading");
+
+    try {
+      const { data, error } = await supabase
+        .from("users_movies")
+        .insert([
+          {
+            user_id: userId,
+            movie_id: movie.id,
+            seen: false,
+            date_seen: new Date().toISOString()
+          }
+        ])
+        .select();
+
+        if (error) {
+          setTimeout(() => {
+            addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            addMovieBtn.classList.remove("is-link");
+            addMovieBtn.classList.add("is-danger");
+          }, 500);
+          return;
+        }
+
+        setTimeout(() => {
+          addMovieBtn.classList.add("is-link");
+          addMovieBtn.classList.remove("is-success");
+          addMovieBtn.classList.remove("is-loading");
+          addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+          
+          divTags.removeChild(addMovieBtn);
+          divTags.removeChild(detailsBtn);
+          divTags.appendChild(viewMovieBtn);
+          divTags.appendChild(suppMovieBtn);
+          divTags.appendChild(detailsBtn);
+        }, 500);
+
+    } catch (err) {
+      console.error("Erreur :", err);
+      setTimeout(() => {
+        addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        addMovieBtn.classList.remove("is-link");
+        addMovieBtn.classList.add("is-danger");
+      }, 500);
+      return;
+    }
+  })
+
+  suppMovieBtn.addEventListener("click", async () => {
+    suppMovieBtn.textContent = "";
+    suppMovieBtn.classList.add("is-loading");
+    suppMovieBtn.classList.remove("is-light");
+
+    try {
+      const { data, error } = await supabase
+        .from("users_movies")
+        .delete()
+        .eq("user_id", userId)
+        .eq("movie_id", movie.id)
+        .single();
+
+        if (error) {
+          setTimeout(() => {
+            suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          }, 500);
+          return;
+        }
+
+        setTimeout(() => {
+          suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
+          suppMovieBtn.classList.remove("is-loading");
+
+          divTags.removeChild(suppMovieBtn);
+          divTags.removeChild(viewMovieBtn);
+          divTags.removeChild(detailsBtn);
+          divTags.appendChild(addMovieBtn);
+          divTags.appendChild(detailsBtn);
+        }, 500);
+
+    } catch (err) {
+      setTimeout(() => {
+            suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          }, 500);
+          return;
+    }
+  })
+
+  viewMovieBtn.addEventListener("click", async () => {
+  viewMovieBtn.textContent = "";
+  viewMovieBtn.classList.add("is-loading");
+  viewMovieBtn.classList.remove("is-light");
+
+  try {
+    const { data, error } = await supabase
+      .from("users_movies")
+      .update({seen: true})
+      .eq("user_id", userId)
+      .eq("movie_id", movie.id)
+      .single();
+
+      if (error) {
+        setTimeout(() => {
+          viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          viewMovieBtn.classList.add("is-danger");
+          viewMovieBtn.classList.remove("is-loading");
+        }, 500);
+        return;
+      }
+
+      setTimeout(() => {
+        viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+        viewMovieBtn.classList.remove("is-loading");
+        viewMovieBtn.classList.add("is-light");
+
+        divTags.removeChild(viewMovieBtn);
+        divTags.removeChild(suppMovieBtn);
+        divTags.removeChild(detailsBtn);
+        divTags.appendChild(seenMovieBtn);
+        divTags.appendChild(detailsBtn);
+      }, 500);
+    
+    } catch (err) {
+      setTimeout(() => {
+        viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        viewMovieBtn.classList.add("is-danger");
+        viewMovieBtn.classList.remove("is-loading");
+      }, 500);
+      return;
+    }
+  
+  });
+  
+  seenMovieBtn.addEventListener("click", async () => {
+    seenMovieBtn.textContent = "";
+    seenMovieBtn.classList.add("is-loading");
+    
+    try {
+      const { data, error } = await supabase
+        .from("users_movies")
+        .update({seen: false})
+        .eq("user_id", userId)
+        .eq("movie_id", movie.id)
+        .single();
+        
+      if (error) {
+        setTimeout(() => {
+          seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          viewMovieBtn.classList.add("is-danger");
+          return;
+        }, 500);
+      }
+      
+      setTimeout(() => {
+        seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
+        seenMovieBtn.classList.remove("is-loading");
+        
+        divTags.removeChild(seenMovieBtn);
+        divTags.removeChild(detailsBtn);
+        divTags.appendChild(viewMovieBtn);
+        divTags.appendChild(suppMovieBtn);
+        divTags.appendChild(detailsBtn);
+      }, 500);
+    
+    } catch (err) {
+      setTimeout(() => {
+        seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        viewMovieBtn.classList.add("is-danger");
+      }, 500);
+      return;
+    }
+  });
 }
 
 // FONCTIONS SUR LES FILMS
@@ -40,261 +298,7 @@ export async function loadAllMovies() {
   });
 
   moviesWithStatus.forEach(movie => {
-    const column = document.createElement("div");
-    column.classList.add("column", "is-one-quarter");
-
-    const card = document.createElement("div");
-    card.classList.add("card", "movie-card");
-
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title", "is-5");
-    pTitle.textContent = movie.title;
-
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("subtitle", "is-6");
-    pSubtitle.textContent = movie.year;
-
-    const divTags = document.createElement("div");
-    divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
-
-    const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag", "is-hoverable", "mr-2");
-    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-    detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
-
-    const addMovieBtn = document.createElement("button");
-    addMovieBtn.classList.add("tag", "button", "is-hoverable", "is-link", "mr-2");
-    addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
-
-    const suppMovieBtn = document.createElement("button");
-    suppMovieBtn.classList.add("tag", "button", "is-hoverable", "is-danger", "is-light", "mr-2");
-    suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
-
-    const viewMovieBtn = document.createElement("button");
-    viewMovieBtn.classList.add("tag", "button", "is-hoverable", "is-light", "is-success", "mr-2");
-    viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-
-    const seenMovieBtn = document.createElement("button");
-    seenMovieBtn.classList.add("tag", "button", "is-hoverable", "is-success", "mr-2");
-    seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-
-    switch (movie.seen) {
-      case null:
-        divTags.appendChild(addMovieBtn);
-        break;
-    
-      case false:
-        divTags.appendChild(viewMovieBtn);
-        divTags.appendChild(suppMovieBtn);
-        break;
-
-      case true:
-        divTags.appendChild(seenMovieBtn);
-        break;
-    }
-
-    divTags.appendChild(detailsBtn);
-    cardContent.append(pTitle, pSubtitle, divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-
-    if (movie.poster !== null) {
-      const cardFigure = document.createElement("div");
-      cardFigure.classList.add("card-image");
-      
-      const figurePoster = document.createElement("figure");
-      figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
-      
-      const imgPoster = document.createElement("img");
-      imgPoster.src = movie.poster;
-      imgPoster.alt = movie.title;
-      
-      figurePoster.appendChild(imgPoster);
-      cardFigure.appendChild(figurePoster);
-      
-      card.appendChild(cardFigure);
-    }
-
-    allMovieContainer.appendChild(column);
-
-    addMovieBtn.addEventListener("click", async () => {
-      addMovieBtn.textContent = "";
-      addMovieBtn.classList.remove("is-link");
-      addMovieBtn.classList.add("is-success");
-      addMovieBtn.classList.add("is-loading");
-
-      try {
-        const { data, error } = await supabase
-          .from("users_movies")
-          .insert([
-            {
-              user_id: userId,
-              movie_id: movie.id,
-              seen: false,
-              date_seen: new Date().toISOString()
-            }
-          ])
-          .select();
-
-          if (error) {
-            setTimeout(() => {
-              addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-              addMovieBtn.classList.remove("is-link");
-              addMovieBtn.classList.add("is-danger");
-            }, 500);
-            return;
-          }
-
-          setTimeout(() => {
-            addMovieBtn.classList.add("is-link");
-            addMovieBtn.classList.remove("is-success");
-            addMovieBtn.classList.remove("is-loading");
-            addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
-            
-            divTags.removeChild(addMovieBtn);
-            divTags.removeChild(detailsBtn);
-            divTags.appendChild(viewMovieBtn);
-            divTags.appendChild(suppMovieBtn);
-            divTags.appendChild(detailsBtn);
-          }, 500);
-
-      } catch (err) {
-        console.error("Erreur :", err);
-        setTimeout(() => {
-          addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          addMovieBtn.classList.remove("is-link");
-          addMovieBtn.classList.add("is-danger");
-        }, 500);
-        return;
-      }
-    })
-
-    suppMovieBtn.addEventListener("click", async () => {
-      suppMovieBtn.textContent = "";
-      suppMovieBtn.classList.add("is-loading");
-      suppMovieBtn.classList.remove("is-light");
-
-      try {
-        const { data, error } = await supabase
-          .from("users_movies")
-          .delete()
-          .eq("user_id", userId)
-          .eq("movie_id", movie.id)
-          .single();
-
-          if (error) {
-            setTimeout(() => {
-              suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            }, 500);
-            return;
-          }
-
-          setTimeout(() => {
-            suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
-            suppMovieBtn.classList.remove("is-loading");
-
-            divTags.removeChild(suppMovieBtn);
-            divTags.removeChild(viewMovieBtn);
-            divTags.removeChild(detailsBtn);
-            divTags.appendChild(addMovieBtn);
-            divTags.appendChild(detailsBtn);
-          }, 500);
-
-      } catch (err) {
-        setTimeout(() => {
-              suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            }, 500);
-            return;
-      }
-    })
-
-    viewMovieBtn.addEventListener("click", async () => {
-    viewMovieBtn.textContent = "";
-    viewMovieBtn.classList.add("is-loading");
-    viewMovieBtn.classList.remove("is-light");
-
-    try {
-      const { data, error } = await supabase
-        .from("users_movies")
-        .update({seen: true})
-        .eq("user_id", userId)
-        .eq("movie_id", movie.id)
-        .single();
-
-        if (error) {
-          setTimeout(() => {
-            viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            viewMovieBtn.classList.add("is-danger");
-            viewMovieBtn.classList.remove("is-loading");
-          }, 500);
-          return;
-        }
-
-        setTimeout(() => {
-          viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-          viewMovieBtn.classList.remove("is-loading");
-          viewMovieBtn.classList.add("is-light");
-
-          divTags.removeChild(viewMovieBtn);
-          divTags.removeChild(suppMovieBtn);
-          divTags.removeChild(detailsBtn);
-          divTags.appendChild(seenMovieBtn);
-          divTags.appendChild(detailsBtn);
-        }, 500);
-      
-      } catch (err) {
-        setTimeout(() => {
-          viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          viewMovieBtn.classList.add("is-danger");
-          viewMovieBtn.classList.remove("is-loading");
-        }, 500);
-        return;
-      }
-    
-    });
-    
-    seenMovieBtn.addEventListener("click", async () => {
-      seenMovieBtn.textContent = "";
-      seenMovieBtn.classList.add("is-loading");
-      
-      try {
-        const { data, error } = await supabase
-          .from("users_movies")
-          .update({seen: false})
-          .eq("user_id", userId)
-          .eq("movie_id", movie.id)
-          .single();
-          
-          if (error) {
-            setTimeout(() => {
-              seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-              viewMovieBtn.classList.add("is-danger");
-              return;
-            }, 500);
-          }
-          
-          setTimeout(() => {
-            seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-            seenMovieBtn.classList.remove("is-loading");
-            
-            divTags.removeChild(seenMovieBtn);
-            divTags.removeChild(detailsBtn);
-            divTags.appendChild(viewMovieBtn);
-            divTags.appendChild(suppMovieBtn);
-            divTags.appendChild(detailsBtn);
-          }, 500);
-        
-        } catch (err) {
-          setTimeout(() => {
-            seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            viewMovieBtn.classList.add("is-danger");
-          }, 500);
-          return;
-        }
-      });
+    createMovieCard(movie);
   });
 }
 
