@@ -218,10 +218,10 @@ export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
     
     const btnAddDirector = document.getElementById("addDirector");
-    const divDirector2 = document.getElementById("divDirector_2");
-    const divDirector3 = document.getElementById("divDirector_3");
 
     const selectDirector1 = document.getElementById("director_1");
+    const selectDirector2 = document.getElementById("director_2");
+    const selectDirector3 = document.getElementById("director_3");
 
     const addDirector1 = document.getElementById("add_director_1");
 
@@ -275,7 +275,34 @@ export async function completeMovie(uuid) {
     
     $(selectDirector1).on("select2:select", async function (e) {
         const data = e.params.data;
+        const parts = data.text.trim().split(" ");
+        const firstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+        const lastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
+
+        const inputFirstNameDirector1 = document.getElementById("firstNameDirector_1");
+        const inputLastNameDirector1 = document.getElementById("lastNameDirector_1");
+        const birthdateDirector1 = document.getElementById("birthdateDirector_1");
+        const checkDeathDirector1 = document.getElementById("isDeadDirector_1");
+        const deathdateDirector1 = document.getElementById("deathdateDirector_1");
         
+        inputFirstNameDirector1.value = firstname;
+        inputFirstNameDirector1.required = true;
+
+        inputLastNameDirector1.value = lastname;
+        birthdateDirectinputLastNameDirector1or1.required = true;
+
+        birthdateDirector1.required = true;
+
+        checkDeathDirector1.addEventListener("change", () => {
+            if (checkDeathDirector1.value === true) {
+                deathdateDirector1.style.display = "block";
+                deathdateDirector1.required = true;
+            } else {
+                deathdateDirector1.style.display = "none";
+                deathdateDirector1.required = false;
+            }
+        })
+
         if (data.newTag) {
             addDirector1.style.display = "block";
         }
@@ -283,10 +310,28 @@ export async function completeMovie(uuid) {
 
     btnAddDirector.addEventListener("click", () => {
         if (divDirector2.style.display === "none") {
+            const divDirector2 = document.getElementById("divDirector_2");
+            const deleteDirector2 = document.getElementById("delete_director_2");
+
             divDirector2.style.display = "block";
+
+            deleteDirector2.addEventListener("click", () => {
+                divDirector2.style.display = "none";
+            });
         } else {
+            const divDirector3 = document.getElementById("divDirector_3");
+            const deleteDirector3 = document.getElementById("delete_director_3");
+            const deleteDirector2 = document.getElementById("delete_director_2");
+            
             divDirector3.style.display === "block";
             btnAddDirector.style.display = "none";
+            deleteDirector2.style.display = "none";
+
+            deleteDirector3.addEventListener("click", () => {
+                divDirector3.style.display = "none";
+                btnAddDirector.style.display = "block";
+                deleteDirector2.style.display = "block";
+            });
         }
     })
 }
