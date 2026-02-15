@@ -72,13 +72,12 @@ export async function myProfile() {
   let totalTosee = 0;
 
   data.forEach(movie => {
-    console.log(movie.time);
-    if (movie.seen = true) {
+    if (movie.seen === true) {
       totalSeen += 1;
-      totalMinutesSeen += Number(movie.time);
+      totalMinutesSeen += Number(movie.movies.time);
     } else {
       totalTosee += 1;
-      totalMinutesToSee += Number(movie.time);
+      totalMinutesToSee += Number(movie.movies.time);
     }
   });
 
