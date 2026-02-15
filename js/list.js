@@ -344,9 +344,15 @@ export function initResearch() {
 export function filterSort() {
   const btnFilter = document.getElementById("filter");
   const btnSort = document.getElementById("sort");
+  const containerFilter = document.getElementById("dropdown-content-filter");
+  const containerSort = document.getElementById("dropdown-content-sort");
 
-  btnFilter.addEventListener("click", () => { });
-  btnSort.addEventListener("click", () => { })
+  btnFilter.addEventListener("click", () => { 
+    containerFilter.style.display = "block";
+   });
+  btnSort.addEventListener("click", () => {
+    containerSort.style.display = "block";
+  })
 }
 
 // FONCTIONS SUR LES FILMS
