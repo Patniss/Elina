@@ -379,23 +379,6 @@ export async function completeMovie(uuid) {
         $(selectDirector).on('select2:select', function(e) {
             const data = e.params.data;
 
-            if (data.newOption) {
-                wrapperCast.appendChild(wrapperAddDirector);
-
-                const parts = data.text.trim().split(/\s+/);
-                
-                fnAddDirector.value = data.text.split(" ")[0] || "";
-                lnAddDirector.value = data.text.split(" ").slice(1).join(" ") || "";
-            } else {
-                if (wrapperAddDirector.parentNode) {
-                    wrapperAddDirector.remove();
-                }
-            }
-        });
-
-        aClose.addEventListener("click", () => { wrapperCast.remove() });
-
-        selectJob.addEventListener("change", () => {
             switch (selectJob.value) {
                 case "director":
                     wrapperCast.appendChild(divSelectDirector);
@@ -530,7 +513,23 @@ export async function completeMovie(uuid) {
                     wrapperAddDirector.remove();
                     break;
             }
+
+            if (data.newOption) {
+                wrapperCast.appendChild(wrapperAddDirector);
+
+                const parts = data.text.trim().split(/\s+/);
+                
+                fnAddDirector.value = data.text.split(" ")[0] || "";
+                lnAddDirector.value = data.text.split(" ").slice(1).join(" ") || "";
+            } else {
+                if (wrapperAddDirector.parentNode) {
+                    wrapperAddDirector.remove();
+                }
+            }
         });
+
+        aClose.addEventListener("click", () => { wrapperCast.remove() });
+
     })
 }
 
