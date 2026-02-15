@@ -216,6 +216,11 @@ const nationalities = {
 
 export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
+    
+    const btnAddDirector = document.getElementById("addDirector");
+    const divDirector2 = document.getElementById("divDirector_2");
+    const divDirector3 = document.getElementById("divDirector_3");
+
     const selectDirector1 = document.getElementById("director_1");
 
     const { data: movie, error: movieError } = await supabase
@@ -242,14 +247,23 @@ export async function completeMovie(uuid) {
     }
 
     poeple.forEach(p => {
-        const completeName = p.firtsname? p.firtsname + " " + p.lastname : p.lastname;
+        const completeName = p.firtsname === null ? p.firtsname + " " + p.lastname : p.lastname;
         selectDirector1.append(
             new Option(completeName, p.id, false, false)
         );
     });
 
     $(selectDirector1).select2({
-        placeholder: "Choisir un réalisateur…",
+        placeholder: "Réalisateur…",
         allowClear: true
     });
+
+    btnAddDirector.addEventListener("click", () => {
+        if (divDirector2.style.display === "none") {
+            divDirector2.style.display = "block";
+        } else {
+            divDirector3.style.display === "block";
+            btnAddDirector.style.display = "none";
+        }
+    })
 }

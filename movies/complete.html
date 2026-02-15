@@ -28,11 +28,11 @@
             <label class="label">Réalisateur(s)</label>
 
             <div id="divDirector_1">
-              <div class="select is-multiple">
+              <div class="block select is-multiple">
                 <select multiple="multiple" size="8" id="director_1" style="width: 100%;" required></select>
               </div>
               <div id="add_director_1" class="field" style="display: none;">
-                <label class="label">Ajouter un réalisateur :</label>
+                <label class="label">Nouveau réalisateur :</label>
                 <input type="text" name="firstNameDirector_1" id="firstNameDirector_1" class="input" placeholder="Prénom…" />
                 <input type="text" name="lastNameDirector_1" id="lastNameDirector_1" class="input" placeholder="Nom…" />
                 <input type="date" name="birthdateDirector_1" id="birthdateDirector_1" class="input" />
@@ -52,14 +52,14 @@
               </div>
             </div>
 
-            <button id="addDirector" class="button">Ajouter un réalisateur</button>
+            <button id="addDirector" class="button" type="button">Ajouter un réalisateur</button>
 
             <div id="divDirector_2" style="display: none;">
               <div class="select is-multiple">
                 <select multiple="multiple" size="8" id="director_2" style="width: 100%;" required></select>
               </div>
               <div id="add_director_2" class="field" style="display: none;">
-                <label class="label">Ajouter un réalisateur :</label>
+                <label class="label">Nouveau réalisateur :</label>
                 <input type="text" name="firstNameDirector_2" id="firstNameDirector_2" class="input" placeholder="Prénom…" />
                 <input type="text" name="lastNameDirector_2" id="lastNameDirector_2" class="input" placeholder="Nom…" />
                 <input type="date" name="birthdateDirector_2" id="birthdateDirector_2" class="input" />
@@ -84,7 +84,7 @@
                 <select multiple="multiple" size="8" id="director_3" style="width: 100%;" required></select>
               </div>
               <div id="add_director_3" class="field" style="display: none;">
-                <label class="label">Ajouter un réalisateur :</label>
+                <label class="label">Nouveau réalisateur :</label>
                 <input type="text" name="firstNameDirector_3" id="firstNameDirector_3" class="input" placeholder="Prénom…" />
                 <input type="text" name="lastNameDirector_3" id="lastNameDirector_3" class="input" placeholder="Nom…" />
                 <input type="date" name="birthdateDirector_3" id="birthdateDirector_3" class="input" />
@@ -129,7 +129,7 @@
 
     const params = new URLSearchParams(window.location.search);
     const movieId = params.get("id");
-    
+
     completeMovie(movieId);
 </script>
 
