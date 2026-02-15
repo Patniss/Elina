@@ -11,6 +11,8 @@ const pageSize = 20;
 
 // FONCTIONS LISTES & CARDS
 function createMovieCard(movie) {
+  const allMovieContainer = document.getElementById("list-all-movies");
+  
   const column = document.createElement("div");
   column.classList.add("column", "is-one-quarter");
 
