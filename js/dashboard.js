@@ -67,22 +67,35 @@ export async function myProfile() {
   }
 
   let totalSeen = 0;
-  let totalTime = 0;
-  let totalTimeToSee = 0;
+  let totalMinutesSeen = 0;
+  let totalMinutesToSee = 0;
   let totalTosee = 0;
 
   data.forEach(movie => {
+    console.log(movie.time);
     if (movie.seen = true) {
       totalSeen += 1;
-      totalTime += movie.time;
+      totalMinutesSeen += Number(movie.time);
     } else {
       totalTosee += 1;
-      totalTimeToSee += movie.time;
+      totalMinutesToSee += Number(movie.time);
     }
   });
 
+  const yearsSeen = Math.floor(totalMinutesSeen / 525600);
+  const monthsSeen = Math.floor((totalMinutesSeen - 525600*yearsSeen) / 43200);
+  const daysSeen = Math.floor((totalMinutesSeen - 525600*yearsSeen - 43200*monthsSeen) / 1440);
+  const hoursSeen = Math.floor((totalMinutesSeen - 525600*yearsSeen - 43200*monthsSeen - 1440*daysSeen) / 60);
+  const minutesSeen = Math.floor(totalMinutesSeen - 525600*yearsSeen - 43200*monthsSeen - 1440*daysSeen - 60*hoursSeen);
+
+  let timeSeen;
+  if (yearsSeen > 0) timeSeen = yearsSeen + " a " + monthsSeen + " m " + daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+  else if (monthsSeen > 0) timeSeen = monthsSeen + " m " + daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+  else if (daysSeen > 0) timeSeen = daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+  else timeSeen = hoursSeen + " h " + minutesSeen + " min ";
+  
   moviesSeen.textContent = totalSeen;
-  moviesMinutesSeen.textContent = totalTime;
+  moviesMinutesSeen.textContent = timeSeen;
   moviesTosee.textContent = totalTosee;
 
 }
