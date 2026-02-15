@@ -236,7 +236,7 @@ export async function completeMovie(uuid) {
 
     movieTitle.textContent = movie.title;
 
-    const { data: poeple, error: peopleError } = await supabase
+    const { data: people, error: peopleError } = await supabase
         .from("people")
         .select("*")
         .order("lastname", { ascending: true });
@@ -246,8 +246,9 @@ export async function completeMovie(uuid) {
         return;
     }
 
-    poeple.forEach(p => {
-        const completeName = p.firtsname === null ? p.firtsname + " " + p.lastname : p.lastname;
+    people.forEach(p => {
+        const completeName = p.firstname ? p.firstname + " " + p.lastname : p.lastname;
+        
         selectDirector1.append(
             new Option(completeName, p.id, false, false)
         );
