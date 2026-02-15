@@ -11,6 +11,8 @@ const pageSize = 20;
 
 // FONCTIONS LISTES & CARDS
 function createMovieCard(movie) {
+  session = loadProfile();
+  userId = session.id;
   const allMovieContainer = document.getElementById("list-all-movies");
 
   const column = document.createElement("div");
