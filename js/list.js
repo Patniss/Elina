@@ -387,7 +387,7 @@ export function filterSort() {
   const containerSort = document.getElementById("dropdown-content-sort");
 
   btnFilter.addEventListener("click", () => { 
-    if (containerFilter.style.display = "block") {
+    if (containerFilter.style.display === "block") {
       containerFilter.style.display = "none";
     } else {
       containerSort.style.display = "none";
@@ -395,7 +395,7 @@ export function filterSort() {
     }
    });
   btnSort.addEventListener("click", () => {
-    if (containerSort.style.display = "block") {
+    if (containerSort.style.display === "block") {
       containerSort.style.display = "none";
     } else {
       containerFilter.style.display = "none";
