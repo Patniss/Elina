@@ -114,11 +114,12 @@ export async function setSettings() {
 
         if (uploadError) throw uploadError;
 
-        const { data } = supabase.storage
-          .from("avatars")
-          .getPublicUrl(filePath);
+        const { data, error } = await supabase.storage
+        .from("avatars")
+        .createSignedUrl(filePath, 31_536_000);
+        
+        avatarUrl = data.signedUrl;
 
-        avatarUrl = data.publicUrl;
       }
 
       // -------------------------------------------------
