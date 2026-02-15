@@ -269,29 +269,66 @@ function createMovieCard(movie) {
 }
 
 function renderPagination() {
-
-  const pagination = document.getElementById("pagination");
+  const pagination = document.getElementById("pagination_nb");
   pagination.innerHTML = "";
 
   const totalPages = Math.ceil(filteredMovies.length / pageSize);
 
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement("button");
-    btn.classList.add("button", "is-small", "mr-2");
-
-    if (i === currentPage) {
-      btn.classList.add("is-link");
+  // -- Bouton Précédent
+  const prevBtn = document.createElement("a");
+  prevBtn.href = "#";
+  prevBtn.id = "pagination-previous";
+  prevBtn.classList.add("pagination-previous");
+  prevBtn.textContent = "Précédent";
+  if (currentPage === 1) prevBtn.classList.add("is-disabled");
+  prevBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage > 1) {
+      currentPage--;
+      renderMovies();
     }
+  });
+  pagination.appendChild(prevBtn);
 
+  // -- Bouton Suivant
+  const nextBtn = document.createElement("a");
+  nextBtn.href = "#";
+  nextBtn.id = "pagination-next";
+  nextBtn.classList.add("pagination-next");
+  nextBtn.textContent = "Suivant";
+  if (currentPage === totalPages) nextBtn.classList.add("is-disabled");
+  nextBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderMovies();
+    }
+  });
+
+  // -- Numéros de page
+  const pageList = document.createElement("ul");
+  pageList.classList.add("pagination-list");
+
+  for (let i = 1; i <= totalPages; i++) {
+    const li = document.createElement("li");
+    const btn = document.createElement("a");
+    btn.href = "#";
+    btn.classList.add("pagination-link");
+    if (i === currentPage) btn.classList.add("is-current");
     btn.textContent = i;
 
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
       currentPage = i;
       renderMovies();
     });
 
-    pagination.appendChild(btn);
+    li.appendChild(btn);
+    pageList.appendChild(li);
   }
+
+  pagination.appendChild(pageList);
+  pagination.appendChild(nextBtn);
 }
 
 function renderMovies() {
@@ -348,10 +385,20 @@ export function filterSort() {
   const containerSort = document.getElementById("dropdown-content-sort");
 
   btnFilter.addEventListener("click", () => { 
-    containerFilter.style.display = "block";
+    if (containerFilter.style.display = "block") {
+      containerFilter.style.display = "none";
+    } else {
+      containerSort.style.display = "none";
+      containerFilter.style.display = "block";
+    }
    });
   btnSort.addEventListener("click", () => {
-    containerSort.style.display = "block";
+    if (containerSort.style.display = "block") {
+      containerSort.style.display = "none";
+    } else {
+      containerFilter.style.display = "none";
+      containerSort.style.display = "block";
+    }
   })
 }
 
