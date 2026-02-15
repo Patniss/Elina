@@ -44,3 +44,31 @@ export async function customDashboard() {
   if (session.dramas === false) homeDramas.style.display = "none";
   if (session.books === false) homeBooks.style.display = "none";
 }
+
+export async function myProfile() {
+  const session = await loadProfile();
+
+  const userId = profile.id;
+
+  const { data, error } = await supabase
+    .from("users_movies")
+    .select(`*, movies (*)`)
+    .eq("user_id", userId)
+    .eq("seen", true)
+    .order("date_seen", { ascending: false })
+    .order("title", { foreignTable: "movies", ascending: true });
+    
+  if (error) {
+    console.error(errorTooseeMovies);
+    toseeContainer.textContent = "Erreur lors du chargement des films.";
+    return;
+  }
+
+  let totalTime = 0;
+
+  data.forEach(movie => {
+    totalTime += movie.time;
+  });
+
+  console.log(totalTime);
+}
