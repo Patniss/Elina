@@ -223,6 +223,8 @@ export async function completeMovie(uuid) {
 
     const selectDirector1 = document.getElementById("director_1");
 
+    const addDirector1 = document.getElementById("add_director_1");
+
     const { data: movie, error: movieError } = await supabase
         .from("movies")
         .select("*")
@@ -248,15 +250,35 @@ export async function completeMovie(uuid) {
 
     people.forEach(p => {
         const completeName = p.firstname ? p.firstname + " " + p.lastname : p.lastname;
-        
         selectDirector1.append(
             new Option(completeName, p.id, false, false)
         );
     });
-
+    
     $(selectDirector1).select2({
         placeholder: "Réalisateur…",
-        allowClear: true
+        allowClear: true,
+        tags: true,
+        createTag: function (params) {
+            const term = $.trim(params.term);
+            if (term === "") {
+                return null;
+            }
+            
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            };
+        }
+    });
+    
+    $(selectDirector1).on("select2:select", async function (e) {
+        const data = e.params.data;
+        
+        if (data.newTag) {
+            addDirector1.style.display = "block";
+        }
     });
 
     btnAddDirector.addEventListener("click", () => {
