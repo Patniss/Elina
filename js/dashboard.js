@@ -47,14 +47,16 @@ export async function customDashboard() {
 
 export async function myProfile() {
   const session = await loadProfile();
+  const userId = session.id;
 
-  const userId = profile.id;
+  const moviesSeen = document.getElementById("moviesSeen");
+  const moviesMinutesSeen = document.getElementById("moviesMinutesSeen");
+  const moviesTosee = document.getElementById("moviesTosee");
 
   const { data, error } = await supabase
     .from("users_movies")
     .select(`*, movies (*)`)
     .eq("user_id", userId)
-    .eq("seen", true)
     .order("date_seen", { ascending: false })
     .order("title", { foreignTable: "movies", ascending: true });
     
@@ -64,11 +66,23 @@ export async function myProfile() {
     return;
   }
 
+  let totalSeen = 0;
   let totalTime = 0;
+  let totalTimeToSee = 0;
+  let totalTosee = 0;
 
   data.forEach(movie => {
-    totalTime += movie.time;
+    if (movie.seen = true) {
+      totalSeen += 1;
+      totalTime += movie.time;
+    } else {
+      totalTosee += 1;
+      totalTimeToSee += movie.time;
+    }
   });
 
-  console.log(totalTime);
+  moviesSeen.textContent = totalSeen;
+  moviesMinutesSeen.textContent = totalTime;
+  moviesTosee.textContent = totalTosee;
+
 }
