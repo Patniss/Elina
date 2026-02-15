@@ -28,8 +28,6 @@ export async function loadProfile() {
     document.getElementById("welcome").textContent = pseudo;
   }
 
-  console.log(data);
-
   return data;
 }
 

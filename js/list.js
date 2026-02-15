@@ -221,7 +221,7 @@ async function createMovieCard(movie) {
       viewMovieBtn.classList.remove("is-loading");
       viewMovieBtn.classList.add("is-light");
 
-      divTags.remove(viewMovieBtn, suppMovieBtn, detailsBtn);
+      divTags.innerHTML = "";
       divTags.append(seenMovieBtn, detailsBtn);
     }, 500);
   
@@ -272,7 +272,7 @@ async function createMovieCard(movie) {
   return column;
 }
 
-function renderPagination() {divTags.innerHTML = "";
+function renderPagination() {
   const pagination = document.getElementById("pagination_nb");
   pagination.innerHTML = "";
 
