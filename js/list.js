@@ -58,7 +58,7 @@ export async function loadAllMovies() {
     pSubtitle.textContent = movie.year;
 
     const divTags = document.createElement("div");
-    divTags.classList.add("buttons", "is-flex-wrap-wrap mt-3");
+    divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
 
     const detailsBtn = document.createElement("a");
     detailsBtn.classList.add("tag", "is-hoverable", "mr-2");
