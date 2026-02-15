@@ -345,7 +345,7 @@ async function renderMovies() {
 
   const pageMovies = filteredMovies.slice(start, end);
 
-  pageMovies.forEach(movie => {
+  pageMovies.forEach(async movie => {
     container.appendChild(await createMovieCard(movie));
   });
 
