@@ -1,3 +1,5 @@
+import { supabase } from "./supabase";
+
 const nationalities = {
   AFG: "Afghanistan",
   ZAF: "Afrique du Sud",
@@ -213,5 +215,42 @@ const nationalities = {
 };
 
 export async function completeMovie(uuid) {
+    const movieTitle = document.getElementById("movie-title");
+
+    const { data: movie, error: movieError } = await supabase
+        .from("movies")
+        .select("*")
+        .eq("id", uuid)
+        .single();
     
+    if (movieError) {
+        console.log("Erreur sur l'extraction Movie");
+        return;
+    }
+
+    movieTitle.textContent = movie.title;
+
+    const selectDirector1 = document.getElementById("director_1");
+
+    const { data: poeple, error: peopleError } = await supabase
+        .from("people")
+        .select("*")
+        .order("lastname", { ascending: true });
+
+    if (peopleError) {
+        console.log("Erreur sur l'extraction People");
+        return;
+    }
+
+    poeple.forEach(p => {
+        completeName = p.firtsname? p.firtsname + " " + p.lastname : p.lastname;
+        selectDirector1.append(
+            new Option(completeName, p.id, false, false)
+        );
+    });
+
+    $(selectDirector1).select2({
+        placeholder: "Choisir un réalisateur…",
+        allowClear: true
+    });
 }
