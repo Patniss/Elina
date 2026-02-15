@@ -21,25 +21,52 @@
 
       <h1 class="title mt-6">Bonjour <span id="welcome" class="has-text-primary"></span></h1>
 
-      <section id="homeMovies">
+      <section id="homeMovies" class="block">
 
         <h2 class="subtitle">Films</h2>
 
+        <nav class="level">
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Films vus</p>
+                    <p class="title" id="moviesSeen"></p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Temps de films</p>
+                    <p class="title" id="moviesMinutesSeen"></p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Films à voir</p>
+                    <p class="title" id="moviesTosee"></p>
+                </div>
+            </div>
+
+        </nav>
+
+        <div></div>
+
       </section>
 
-      <section id="homeShows">
+      <section id="homeShows" class="block">
 
         <h2 class="subtitle">Séries</h2>
 
       </section>
 
-      <section id="homeDramas">
+      <section id="homeDramas" class="block">
 
         <h2 class="subtitle">Dramas</h2>
 
       </section>
 
-      <section id="homeBooks">
+      <section id="homeBooks" class="block">
 
         <h2 class="subtitle">Livres</h2>
 
@@ -61,6 +88,10 @@
 <script type="module">
   import { loadProfile } from "/Elina/js/dashboard.js";
   loadProfile();
+  import { customDashboard } from "/Elina/js/dashboard.js";
+  customDashboard();
+  import { myProfile } from "/Elina/js/dashboard.js";
+  myProfile();
 </script>
 
 <script type="module" src="/Elina/js/guard.js"></script>
