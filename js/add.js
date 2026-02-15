@@ -30,15 +30,22 @@ export async function addMovie() {
   const buttonInput = document.getElementById("movie-button");
 
   genres.forEach(genre => {
-        genresInput.append(
-            new Option(genre, genre, false, false)
-        );
-    });
+      genresInput.append(
+          new Option(genre, genre, false, false)
+      );
+  });
 
-    $(genresInput).select2({
-        placeholder: "Choisir un genre…",
-        allowClear: true
-    });
+  $(genresInput).select2({
+      placeholder: "Choisir un genre…",
+      allowClear: true
+  });
+
+  $(genresInput).on("input", function () {
+    let selectedGenres = $(genresInput).val();
+    console.log(selectedGenres);
+    let movieGenres = selectedGenres.join(" ; ");
+    console.log(movieGenres);
+  })
 
   const searchResult = document.getElementById("research-results");
 
