@@ -40,15 +40,7 @@ export async function addMovie() {
       allowClear: true
   });
 
-  $(genresInput).on("input", function () {
-    let selectedGenres = $(genresInput).val();
-    console.log(selectedGenres);
-    let movieGenres = selectedGenres.join(" ; ");
-    console.log(movieGenres);
-  })
-
   const searchResult = document.getElementById("research-results");
-
   let searchTimeout;
 
   $(titleInput).on("input", function () {
@@ -102,10 +94,6 @@ export async function addMovie() {
   
   });
 
-  let selectedGenres = $(genresInput).val();
-  console.log(selectedGenres);
-  let movieGenres = selectedGenres.join(" ; ");
-
   movieForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -117,6 +105,10 @@ export async function addMovie() {
     const movieSynopsis = synopsisInput.value;
     const moviePoster = posterInput.value;
     const movieComplete = false;
+
+    let selectedGenres = $(genresInput).val();
+    console.log(selectedGenres);
+    let movieGenres = selectedGenres.join(" ; ");
 
     buttonInput.classList.add("is-loading")
 
