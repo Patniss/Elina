@@ -115,34 +115,33 @@ function createMovieCard(movie) {
         if (error) {
           setTimeout(() => {
             addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            addMovieBtn.classList.remove("is-link");
+            addMovieBtn.classList.remove("is-loading", "is-link");
             addMovieBtn.classList.add("is-danger");
+            console.log(error);
           }, 500);
           return;
         }
-
-        setTimeout(() => {
-          addMovieBtn.classList.add("is-link");
-          addMovieBtn.classList.remove("is-success");
-          addMovieBtn.classList.remove("is-loading");
-          addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
-          
-          divTags.removeChild(addMovieBtn);
-          divTags.removeChild(detailsBtn);
-          divTags.appendChild(viewMovieBtn);
-          divTags.appendChild(suppMovieBtn);
-          divTags.appendChild(detailsBtn);
-        }, 500);
 
     } catch (err) {
       console.error("Erreur :", err);
       setTimeout(() => {
         addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        addMovieBtn.classList.remove("is-link");
+        addMovieBtn.classList.remove("is-link", "is-loading");
         addMovieBtn.classList.add("is-danger");
+        console.log(err);
       }, 500);
       return;
     }
+
+    setTimeout(() => {
+      addMovieBtn.classList.add("is-link");
+      addMovieBtn.classList.remove("is-success", "id-loading");
+      addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+      
+      divTags.remove(addMovieBtn, detailsBtn);
+      divTags.append(viewMovieBtn, supabase, detailsBtn);
+    }, 500);
+    
   })
 
   suppMovieBtn.addEventListener("click", async () => {
@@ -161,27 +160,28 @@ function createMovieCard(movie) {
         if (error) {
           setTimeout(() => {
             suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            suppMovieBtn.removeChild("is-loading");
+            console.log(error)
           }, 500);
           return;
         }
 
-        setTimeout(() => {
-          suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
-          suppMovieBtn.classList.remove("is-loading");
-
-          divTags.removeChild(suppMovieBtn);
-          divTags.removeChild(viewMovieBtn);
-          divTags.removeChild(detailsBtn);
-          divTags.appendChild(addMovieBtn);
-          divTags.appendChild(detailsBtn);
-        }, 500);
-
     } catch (err) {
       setTimeout(() => {
             suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            suppMovieBtn.removeChild("is-loading");
+            console.log(err);
           }, 500);
           return;
     }
+
+    setTimeout(() => {
+      suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
+      suppMovieBtn.classList.remove("is-loading");
+
+      divTags.remove(suppMovieBtn, viewMovieBtn, detailsBtn);
+      divTags.append(addMovieBtn, detailsBtn);
+    }, 500);
   })
 
   viewMovieBtn.addEventListener("click", async () => {
@@ -202,30 +202,29 @@ function createMovieCard(movie) {
           viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
           viewMovieBtn.classList.add("is-danger");
           viewMovieBtn.classList.remove("is-loading");
+          console.log(error);
         }, 500);
         return;
       }
-
-      setTimeout(() => {
-        viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-        viewMovieBtn.classList.remove("is-loading");
-        viewMovieBtn.classList.add("is-light");
-
-        divTags.removeChild(viewMovieBtn);
-        divTags.removeChild(suppMovieBtn);
-        divTags.removeChild(detailsBtn);
-        divTags.appendChild(seenMovieBtn);
-        divTags.appendChild(detailsBtn);
-      }, 500);
     
     } catch (err) {
       setTimeout(() => {
         viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
         viewMovieBtn.classList.add("is-danger");
         viewMovieBtn.classList.remove("is-loading");
+        console.log(err);
       }, 500);
       return;
     }
+
+    setTimeout(() => {
+      viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+      viewMovieBtn.classList.remove("is-loading");
+      viewMovieBtn.classList.add("is-light");
+
+      divTags.remove(viewMovieBtn, suppMovieBtn, detailsBtn);
+      divTags.append(seenMovieBtn, detailsBtn);
+    }, 500);
   
   });
   
@@ -245,29 +244,30 @@ function createMovieCard(movie) {
         setTimeout(() => {
           seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
           viewMovieBtn.classList.add("is-danger");
+          viewMovieBtn.classList.remove("is-loading", "is-success");
+          console.log(error);
           return;
         }, 500);
       }
-      
-      setTimeout(() => {
-        seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-        seenMovieBtn.classList.remove("is-loading");
-        
-        divTags.removeChild(seenMovieBtn);
-        divTags.removeChild(detailsBtn);
-        divTags.appendChild(viewMovieBtn);
-        divTags.appendChild(suppMovieBtn);
-        divTags.appendChild(detailsBtn);
-      }, 500);
     
     } catch (err) {
       setTimeout(() => {
         seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
         viewMovieBtn.classList.add("is-danger");
+        viewMovieBtn.classList.remove("is-loading", "is-success");
+        console.log(err);
       }, 500);
       return;
     }
   });
+
+  setTimeout(() => {
+    seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
+    seenMovieBtn.classList.remove("is-loading");
+    
+    divTags.remove(seenMovieBtn, detailsBtn);
+    divTags.append(viewMovieBtn, supabase, detailsBtn);
+  }, 500);
 
   return column;
 }
