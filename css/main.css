@@ -82,3 +82,19 @@
   object-fit: cover;  /* recadre proprement */
   border-radius: 10px;
 }
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.movie-card .card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.movie-card .buttons {
+  margin-top: auto; /* pousse les boutons en bas */
+}

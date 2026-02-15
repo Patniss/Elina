@@ -41,69 +41,45 @@ export async function loadAllMovies() {
 
   moviesWithStatus.forEach(movie => {
     const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
+    column.classList.add("column", "is-one-quarter");
 
     const card = document.createElement("div");
-    card.classList.add("card");
+    card.classList.add("card", "movie-card");
 
     const cardContent = document.createElement("div");
     cardContent.classList.add("card-content");
 
     const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
+    pTitle.classList.add("title", "is-5");
     pTitle.textContent = movie.title;
 
     const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("title");
-    pSubtitle.classList.add("is-6");
+    pSubtitle.classList.add("subtitle", "is-6");
     pSubtitle.textContent = movie.year;
 
+    const divTags = document.createElement("div");
+    divTags.classList.add("buttons", "is-flex-wrap-wrap mt-3");
+
     const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag");
-    detailsBtn.classList.add("is-hoverable");
-    detailsBtn.classList.add("mr-2");
+    detailsBtn.classList.add("tag", "is-hoverable", "mr-2");
     detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
     detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
 
     const addMovieBtn = document.createElement("button");
-    addMovieBtn.classList.add("tag");
-    addMovieBtn.classList.add("button");
-    addMovieBtn.classList.add("is-hoverable");
-    addMovieBtn.classList.add("is-link");
-    addMovieBtn.classList.add("mr-2");
+    addMovieBtn.classList.add("tag", "button", "is-hoverable", "is-link", "mr-2");
     addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
 
     const suppMovieBtn = document.createElement("button");
-    suppMovieBtn.classList.add("tag");
-    suppMovieBtn.classList.add("button");
-    suppMovieBtn.classList.add("is-hoverable");
-    suppMovieBtn.classList.add("is-danger");
-    suppMovieBtn.classList.add("is-light");
-    suppMovieBtn.classList.add("mr-2");
+    suppMovieBtn.classList.add("tag", "button", "is-hoverable", "is-danger", "is-light", "mr-2");
     suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
 
     const viewMovieBtn = document.createElement("button");
-    viewMovieBtn.classList.add("tag");
-    viewMovieBtn.classList.add("button");
-    viewMovieBtn.classList.add("is-hoverable");
-    viewMovieBtn.classList.add("is-light");
-    viewMovieBtn.classList.add("is-success");
-    viewMovieBtn.classList.add("mr-2");
+    viewMovieBtn.classList.add("tag", "button", "is-hoverable", "is-light", "is-success", "mr-2");
     viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
 
     const seenMovieBtn = document.createElement("button");
-    seenMovieBtn.classList.add("tag");
-    seenMovieBtn.classList.add("button");
-    seenMovieBtn.classList.add("is-hoverable");
-    seenMovieBtn.classList.add("is-success");
-    seenMovieBtn.classList.add("mr-2");
+    seenMovieBtn.classList.add("tag", "button", "is-hoverable", "is-success", "mr-2");
     seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex", "is-flex-wrap-wrap");
-    divTags.style.width = "80%";
 
     switch (movie.seen) {
       case null:
@@ -127,20 +103,17 @@ export async function loadAllMovies() {
 
     if (movie.poster !== null) {
       const cardFigure = document.createElement("div");
-      cardFigure.classList.add("card-content", "column", "is-4");
+      cardFigure.classList.add("card-image");
       
       const figurePoster = document.createElement("figure");
-      figurePoster.classList.add("image", "poster-wrapper", "is-2by3", "media-right");
+      figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
       
       const imgPoster = document.createElement("img");
       imgPoster.src = movie.poster;
+      imgPoster.alt = movie.title;
       
       figurePoster.appendChild(imgPoster);
       cardFigure.appendChild(figurePoster);
-
-      cardContent.classList.add("column", "is-8");
-      
-      card.classList.add("columns", "is-mobile", "is-align-items-center");
       
       card.appendChild(cardFigure);
     }
