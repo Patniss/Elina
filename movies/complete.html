@@ -18,15 +18,93 @@
 
     <!-- FORM FILM -->
     <div class="box">
-      <h1 class="title">Compléter le casting <i id="movie-title"></i></h1>
+      <h1 class="title">Compléter le casting de <i id="movie-title"></i></h1>
       <h2 id="movie-year" class="subtitle"></h2>
 
       <form id="movie-form">
 
         <div class="field">
-          <label class="label">Casting :</label>
-          <a class="button mb-3" id="add-cast">Ajouter</a>
-          <div id="adding-casts"></div>
+          <div>
+            <label class="label">Réalisateur(s)</label>
+
+            <div id="divDirector_1">
+              <div class="select is-multiple">
+                <select multiple="multiple" size="8" id="director_1" style="width: 100%;" required></select>
+              </div>
+              <div id="add_director_1" class="field" style="display: none;">
+                <label class="label">Ajouter un réalisateur :</label>
+                <input type="text" name="firstNameDirector_1" id="firstNameDirector_1" class="input" placeholder="Prénom…" />
+                <input type="text" name="lastNameDirector_1" id="lastNameDirector_1" class="input" placeholder="Nom…" />
+                <input type="date" name="birthdateDirector_1" id="birthdateDirector_1" class="input" />
+                <input type="checkbox" name="isDeadDirector_1" id="isDeadDirector_1"> <label for="isDeadDirector_1">Mort</label>
+                <input type="date" name="deathdateDirector_1" id="deathdateDirector_1" class="input" style="display: none;" />
+                <div>
+                  <label class="label">Casquettes :</label>
+                  <input value="director" type="checkbox" class="checkbox" id="jobDirector_1_Director" checked /> <label for="jobDirector_1_Director">Réalisateur</label>
+                  <input value="producer" type="checkbox" class="checkbox" id="jobDirector_1_Producer" /> <label for="jobDirector_1_Producer">Producteur</label>
+                  <input value="scriptwriter" type="checkbox" class="checkbox" id="jobDirector_1_Scriptwriter" /> <label for="jobDirector_1_Scriptwriter">Scénariste</label>
+                  <input value="actor" type="checkbox" class="checkbox" id="jobDirector_1_Actor" /> <label for="jobDirector_1_Actor">Acteur</label>
+                  <input value="singer" type="checkbox" class="checkbox" id="jobDirector_1_Singer" /> <label for="jobDirector_1_Singer">Interprète</label>
+                </div>
+                <div class="select is-multiple">
+                  <select multiple="multiple" size="8" id="nationalitiesDirector_1" style="width: 100%;" required></select>
+                </div>
+              </div>
+            </div>
+
+            <button id="addDirector" class="button">Ajouter un réalisateur</button>
+
+            <div id="divDirector_2" style="display: none;">
+              <div class="select is-multiple">
+                <select multiple="multiple" size="8" id="director_2" style="width: 100%;" required></select>
+              </div>
+              <div id="add_director_2" class="field" style="display: none;">
+                <label class="label">Ajouter un réalisateur :</label>
+                <input type="text" name="firstNameDirector_2" id="firstNameDirector_2" class="input" placeholder="Prénom…" />
+                <input type="text" name="lastNameDirector_2" id="lastNameDirector_2" class="input" placeholder="Nom…" />
+                <input type="date" name="birthdateDirector_2" id="birthdateDirector_2" class="input" />
+                <input type="checkbox" name="isDeadDirector_2" id="isDeadDirector_2"> <label for="isDeadDirector_2">Mort</label>
+                <input type="date" name="deathdateDirector_2" id="deathdateDirector_2" class="input" style="display: none;" />
+                <div>
+                  <label class="label">Casquettes :</label>
+                  <input value="director" type="checkbox" class="checkbox" id="jobDirector_2_Director" checked /> <label for="jobDirector_2_Director">Réalisateur</label>
+                  <input value="producer" type="checkbox" class="checkbox" id="jobDirector_2_Producer" /> <label for="jobDirector_2_Producer">Producteur</label>
+                  <input value="scriptwriter" type="checkbox" class="checkbox" id="jobDirector_2_Scriptwriter" /> <label for="jobDirector_2_Scriptwriter">Scénariste</label>
+                  <input value="actor" type="checkbox" class="checkbox" id="jobDirector_2_Actor" /> <label for="jobDirector_2_Actor">Acteur</label>
+                  <input value="singer" type="checkbox" class="checkbox" id="jobDirector_2_Singer" /> <label for="jobDirector_2_Singer">Interprète</label>
+                </div>
+                <div class="select is-multiple">
+                  <select multiple="multiple" size="8" id="nationalitiesDirector_2" style="width: 100%;" required></select>
+                </div>
+              </div>
+            </div>
+
+            <div id="divDirector_3" style="display: none;">
+              <div class="select is-multiple">
+                <select multiple="multiple" size="8" id="director_3" style="width: 100%;" required></select>
+              </div>
+              <div id="add_director_3" class="field" style="display: none;">
+                <label class="label">Ajouter un réalisateur :</label>
+                <input type="text" name="firstNameDirector_3" id="firstNameDirector_3" class="input" placeholder="Prénom…" />
+                <input type="text" name="lastNameDirector_3" id="lastNameDirector_3" class="input" placeholder="Nom…" />
+                <input type="date" name="birthdateDirector_3" id="birthdateDirector_3" class="input" />
+                <input type="checkbox" name="isDeadDirector_3" id="isDeadDirector_3"> <label for="isDeadDirector_3">Mort</label>
+                <input type="date" name="deathdateDirector_3" id="deathdateDirector_3" class="input" style="display: none;" />
+                <div>
+                  <label class="label">Casquettes :</label>
+                  <input value="director" type="checkbox" class="checkbox" id="jobDirector_3_Director" checked /> <label for="jobDirector_3_Director">Réalisateur</label>
+                  <input value="producer" type="checkbox" class="checkbox" id="jobDirector_3_Producer" /> <label for="jobDirector_3_Producer">Producteur</label>
+                  <input value="scriptwriter" type="checkbox" class="checkbox" id="jobDirector_3_Scriptwriter" /> <label for="jobDirector_3_Scriptwriter">Scénariste</label>
+                  <input value="actor" type="checkbox" class="checkbox" id="jobDirector_3_Actor" /> <label for="jobDirector_3_Actor">Acteur</label>
+                  <input value="singer" type="checkbox" class="checkbox" id="jobDirector_3_Singer" /> <label for="jobDirector_3_Singer">Interprète</label>
+                </div>
+                <div class="select is-multiple">
+                  <select multiple="multiple" size="8" id="nationalitiesDirector_3" style="width: 100%;" required></select>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
         <div class="control">
@@ -48,10 +126,6 @@
 
 <script type="module">
     import { completeMovie } from "../js/complete.js";
-
-    const params = new URLSearchParams(window.location.search);
-    const movieId = params.get("id");
-    
     completeMovie(movieId);
 </script>
 
