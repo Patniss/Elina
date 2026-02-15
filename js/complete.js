@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+import { supabase } from "Elina/js/supabase.js";
 
 const nationalities = {
   AFG: "Afghanistan",
