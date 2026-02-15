@@ -81,7 +81,7 @@ function createMovieCard(movie) {
   figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
   
   const imgPoster = document.createElement("img");
-  imgPoster.src = movie.ownPoster === null ? movie.poster : movie.ownPoster;
+  imgPoster.src = movie.ownPoster || movie.poster;
   imgPoster.alt = movie.title;
   
   figurePoster.appendChild(imgPoster);
