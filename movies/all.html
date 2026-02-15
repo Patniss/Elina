@@ -34,8 +34,30 @@
             <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
           </p>
           <div class="buttons are-small">
-            <button class="button" id="filter"><span class="icon"><i class="fa-solid fa-filter"></i></span><span>Filtrer</span></button>
-            <button class="button" id="trier"><span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span><span>Trier</span></button>
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-filter" id="filter">
+                  <span class="icon"><i class="fa-solid fa-filter"></i></span><span class="content">Filtrer</span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu-filter" role="menu">
+                <div class="dropdown-content" id="dropdown-content-filter">
+                  <p>Test filtre</p>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-sort" id="sort">
+                  <span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span><span class="content">Trier</span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu-sort" role="menu">
+                <div class="dropdown-content" id="dropdown-content-sort">
+                  <p>Test tri</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -70,6 +92,8 @@
   loadAllMovies();
   import { initResearch } from "/Elina/js/list.js";
   initResearch();
+  import { filterSort } from "/Elina/js/list.js";
+  filterSort();
 </script>
 
 </body>

@@ -341,6 +341,14 @@ export function initResearch() {
   });
 }
 
+export function filterSort() {
+  const btnFilter = document.getElementById("filter");
+  const btnSort = document.getElementById("sort");
+
+  btnFilter.addEventListener("click", () => { });
+  btnSort.addEventListener("click", () => { })
+}
+
 // FONCTIONS SUR LES FILMS
 export async function loadAllMovies() {
   const allMovieContainer = document.getElementById("list-all-movies");
