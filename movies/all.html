@@ -40,13 +40,14 @@
 
     </div>
 
-  </section>
+    <nav class="pagination">
+      
+      <a href="#" class="pagination-previous" id="pagination-previous">Précédent</a>
+      <a href="#" class="pagination-next" id="pagination-next">Suivant</a>
+      <ul class="pagination-list" id="pagination"></ul>
+    </nav>
 
-  <nav class="pagination">
-    <a href="#" class="pagination-previous" id="pagination-previous">Précédent</a>
-    <a href="#" class="pagination-next" id="pagination-next">Suivant</a>
-    <ul class="pagination-list" id="pagination"></ul>
-  </nav>
+  </section>
 
 </main>
 
@@ -63,37 +64,8 @@
 <script type="module">
   import { loadAllMovies } from "/Elina/js/list.js";
   loadAllMovies();
-</script>
-
-<script>
-  $("#movie-search").on("input", function () {
-    
-    let search = $(this).val().toLowerCase();
-    
-    currentPage = 1;
-    if (search === "") {
-      filteredMovies = [...allMovies];
-    } else {
-      filteredMovies = allMovies.filter(movie =>
-        movie.title.toLowerCase().includes(search)
-      );
-    }
-
-    $(".column.is-one-quarter").each(function () {
-
-      let title = $(this).find(".title.is-5").text().toLowerCase();
-
-      if (title.includes(search)) {
-        $(this).fadeIn(150);
-      } else {
-        $(this).fadeOut(150);
-      }
-
-    });
-    
-    renderMovies();
-  });
-  
+  import { initResearch } from "/Elina/js/list.js";
+  initResearch();
 </script>
 
 </body>

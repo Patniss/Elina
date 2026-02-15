@@ -313,6 +313,36 @@ function renderMovies() {
   renderPagination();
 }
 
+export function initResearch() {
+  $("#movie-search").on("input", function () {
+    
+    let search = $(this).val().toLowerCase();
+    
+    currentPage = 1;
+    if (search === "") {
+      filteredMovies = [...allMovies];
+    } else {
+      filteredMovies = allMovies.filter(movie =>
+        movie.title.toLowerCase().includes(search)
+      );
+    }
+
+    $(".column.is-one-quarter").each(function () {
+
+      let title = $(this).find(".title.is-5").text().toLowerCase();
+
+      if (title.includes(search)) {
+        $(this).fadeIn(150);
+      } else {
+        $(this).fadeOut(150);
+      }
+
+    });
+    
+    renderMovies();
+  });
+}
+
 // FONCTIONS SUR LES FILMS
 export async function loadAllMovies() {
   const allMovieContainer = document.getElementById("list-all-movies");
