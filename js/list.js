@@ -10,8 +10,8 @@ let currentPage = 1;
 const pageSize = 20;
 
 // FONCTIONS LISTES & CARDS
-function createMovieCard(movie) {
-  const session = loadProfile();
+async function createMovieCard(movie) {
+  const session = await loadProfile();
   const userId = session.id;
   const allMovieContainer = document.getElementById("list-all-movies");
 
@@ -62,8 +62,7 @@ function createMovieCard(movie) {
       break;
   
     case false:
-      divTags.appendChild(viewMovieBtn);
-      divTags.appendChild(suppMovieBtn);
+      divTags.append(viewMovieBtn, suppMovieBtn);
       break;
 
     case true:
@@ -135,11 +134,11 @@ function createMovieCard(movie) {
 
     setTimeout(() => {
       addMovieBtn.classList.add("is-link");
-      addMovieBtn.classList.remove("is-success", "id-loading");
+      addMovieBtn.classList.remove("is-success", "is-loading");
       addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
       
-      divTags.remove(addMovieBtn, detailsBtn);
-      divTags.append(viewMovieBtn, supabase, detailsBtn);
+      divTags.innerHTML = "";
+      divTags.append(viewMovieBtn, suppMovieBtn, detailsBtn);
     }, 500);
     
   })
@@ -160,7 +159,7 @@ function createMovieCard(movie) {
         if (error) {
           setTimeout(() => {
             suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            suppMovieBtn.removeChild("is-loading");
+            suppMovieBtn.classList.remove("is-loading");
             console.log(error)
           }, 500);
           return;
@@ -169,7 +168,7 @@ function createMovieCard(movie) {
     } catch (err) {
       setTimeout(() => {
             suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            suppMovieBtn.removeChild("is-loading");
+            suppMovieBtn.classList.remove("is-loading");
             console.log(err);
           }, 500);
           return;
@@ -179,7 +178,7 @@ function createMovieCard(movie) {
       suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
       suppMovieBtn.classList.remove("is-loading");
 
-      divTags.remove(suppMovieBtn, viewMovieBtn, detailsBtn);
+      divTags.innerHTML = "";
       divTags.append(addMovieBtn, detailsBtn);
     }, 500);
   })
@@ -259,20 +258,21 @@ function createMovieCard(movie) {
       }, 500);
       return;
     }
-  });
 
-  setTimeout(() => {
-    seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-    seenMovieBtn.classList.remove("is-loading");
-    
-    divTags.remove(seenMovieBtn, detailsBtn);
-    divTags.append(viewMovieBtn, supabase, detailsBtn);
-  }, 500);
+    setTimeout(() => {
+      seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
+      seenMovieBtn.classList.remove("is-loading");
+      
+      divTags.innerHTML = "";
+      divTags.append(viewMovieBtn, suppMovieBtn, detailsBtn);
+    }, 500);
+
+  });
 
   return column;
 }
 
-function renderPagination() {
+function renderPagination() {divTags.innerHTML = "";
   const pagination = document.getElementById("pagination_nb");
   pagination.innerHTML = "";
 
@@ -285,11 +285,11 @@ function renderPagination() {
   prevBtn.classList.add("pagination-previous");
   prevBtn.textContent = "Précédent";
   if (currentPage === 1) prevBtn.classList.add("is-disabled");
-  prevBtn.addEventListener("click", (e) => {
+  prevBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     if (currentPage > 1) {
       currentPage--;
-      renderMovies();
+      await renderMovies();
     }
   });
   pagination.appendChild(prevBtn);
@@ -335,7 +335,7 @@ function renderPagination() {
   pagination.appendChild(nextBtn);
 }
 
-function renderMovies() {
+async function renderMovies() {
 
   const container = document.getElementById("list-all-movies");
   container.innerHTML = "";
@@ -346,7 +346,7 @@ function renderMovies() {
   const pageMovies = filteredMovies.slice(start, end);
 
   pageMovies.forEach(movie => {
-    container.appendChild(createMovieCard(movie));
+    container.appendChild(await createMovieCard(movie));
   });
 
   renderPagination();
@@ -575,11 +575,8 @@ export async function loadToseeMovies() {
             toSeeBtn.classList.add("is-light");
             toSeeBtn.classList.remove("is-loading");
 
-            divTags.removeChild(toSeeBtn);
-            divTags.removeChild(detailsBtn);
-            divTags.removeChild(toSuppBtn);
-            divTags.appendChild(seenBtn);
-            divTags.appendChild(detailsBtn);
+            divTags.innerHTML = "";
+            divTags.append(seenBtn, detailsBtn);
 
             setTimeout(() => {
               toseeContainer.removeChild(column);
@@ -768,11 +765,8 @@ export async function loadSeenMovies() {
           }
 
           setTimeout(() => {
-            divTags.removeChild(detailsBtn);
-            divTags.removeChild(seenBtn);
-            divTags.appendChild(viewBtn);
-            divTags.appendChild(suppBtn);
-            divTags.appendChild(detailsBtn);
+            divTags.innerHTML = "";
+            divTags.append(viewBtn, supabase, detailsBtn);
           }, 500);
 
           setTimeout(() => {
@@ -903,9 +897,7 @@ export async function loadIncompletePeople() {
     completeBtn.href = `/Elina/movies/people/complete.html?id=${p.id}`;
 
     divTags.appendChild(completeBtn);
-    cardContent.appendChild(pTitle);
-    cardContent.appendChild(pSubtitle);
-    cardContent.appendChild(divTags);
+    cardContent.append(pTitle, pSubtitle, divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
 
