@@ -289,7 +289,7 @@ export async function completeMovie(uuid) {
         inputFirstNameDirector1.required = true;
 
         inputLastNameDirector1.value = lastname;
-        birthdateDirectinputLastNameDirector1or1.required = true;
+        inputLastNameDirector1.required = true;
 
         birthdateDirector1.required = true;
 
