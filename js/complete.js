@@ -216,6 +216,7 @@ const nationalities = {
 
 export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
+    const selectDirector1 = document.getElementById("director_1");
 
     const { data: movie, error: movieError } = await supabase
         .from("movies")
@@ -230,8 +231,6 @@ export async function completeMovie(uuid) {
 
     movieTitle.textContent = movie.title;
 
-    const selectDirector1 = document.getElementById("director_1");
-
     const { data: poeple, error: peopleError } = await supabase
         .from("people")
         .select("*")
@@ -243,7 +242,7 @@ export async function completeMovie(uuid) {
     }
 
     poeple.forEach(p => {
-        completeName = p.firtsname? p.firtsname + " " + p.lastname : p.lastname;
+        const completeName = p.firtsname? p.firtsname + " " + p.lastname : p.lastname;
         selectDirector1.append(
             new Option(completeName, p.id, false, false)
         );
