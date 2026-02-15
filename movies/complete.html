@@ -126,6 +126,10 @@
 
 <script type="module">
     import { completeMovie } from "../js/complete.js";
+
+    const params = new URLSearchParams(window.location.search);
+    const movieId = params.get("id");
+    
     completeMovie(movieId);
 </script>
 
