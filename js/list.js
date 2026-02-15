@@ -12,7 +12,7 @@ const pageSize = 20;
 // FONCTIONS LISTES & CARDS
 function createMovieCard(movie) {
   const allMovieContainer = document.getElementById("list-all-movies");
-  
+
   const column = document.createElement("div");
   column.classList.add("column", "is-one-quarter");
 
@@ -90,8 +90,6 @@ function createMovieCard(movie) {
     
     card.appendChild(cardFigure);
   }
-
-  allMovieContainer.appendChild(column);
 
   addMovieBtn.addEventListener("click", async () => {
     addMovieBtn.textContent = "";
@@ -268,6 +266,51 @@ function createMovieCard(movie) {
       return;
     }
   });
+
+  return column;
+}
+
+function renderPagination() {
+
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
+
+  const totalPages = Math.ceil(filteredMovies.length / pageSize);
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.classList.add("button", "is-small", "mr-2");
+
+    if (i === currentPage) {
+      btn.classList.add("is-link");
+    }
+
+    btn.textContent = i;
+
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      renderMovies();
+    });
+
+    pagination.appendChild(btn);
+  }
+}
+
+function renderMovies() {
+
+  const container = document.getElementById("list-all-movies");
+  container.innerHTML = "";
+
+  const start = (currentPage - 1) * pageSize;
+  const end = start + pageSize;
+
+  const pageMovies = filteredMovies.slice(start, end);
+
+  pageMovies.forEach(movie => {
+    container.appendChild(createMovieCard(movie));
+  });
+
+  renderPagination();
 }
 
 // FONCTIONS SUR LES FILMS
@@ -299,9 +342,10 @@ export async function loadAllMovies() {
     };
   });
 
-  moviesWithStatus.forEach(movie => {
-    createMovieCard(movie);
-  });
+  allMovies = moviesWithStatus;
+  filteredMovies = [...allMovies];
+
+  renderMovies()
 }
 
 export async function loadToseeMovies() {
