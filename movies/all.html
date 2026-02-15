@@ -9,6 +9,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
   <link rel="stylesheet" href="/Elina/css/bulma.min.css">
   <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -32,12 +33,16 @@
             <input type="text" id="movie-search" placeholder="Chercher un film…" class="input mb-4"/>
             <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
           </p>
+          <div class="buttons are-small">
+            <button class="button" id="filter"><span class="icon"><i class="fa-solid fa-filter"></i></span><span>Filtrer</span></button>
+            <button class="button" id="trier"><span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span><span>Trier</span></button>
+          </div>
         </div>
         
         <div class="columns is-multiline" id="list-all-movies"></div>
         
       </div>
-      
+
       <nav class="pagination">
         <a href="#" class="pagination-previous" id="pagination-previous">Précédent</a>
         <a href="#" class="pagination-next" id="pagination-next">Suivant</a>
