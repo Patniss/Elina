@@ -52,6 +52,7 @@ export async function myProfile() {
   const moviesSeen = document.getElementById("moviesSeen");
   const moviesMinutesSeen = document.getElementById("moviesMinutesSeen");
   const moviesTosee = document.getElementById("moviesTosee");
+  const profilePicture = document.getElementById("profilePicture");
 
   const { data, error } = await supabase
     .from("users_movies")
@@ -65,6 +66,8 @@ export async function myProfile() {
     toseeContainer.textContent = "Erreur lors du chargement des films.";
     return;
   }
+
+  profilePicture.src = session.avatar_url;
 
   let totalSeen = 0;
   let totalMinutesSeen = 0;
