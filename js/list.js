@@ -74,22 +74,20 @@ function createMovieCard(movie) {
   card.appendChild(cardContent);
   column.appendChild(card);
 
-  if (movie.poster !== null) {
-    const cardFigure = document.createElement("div");
-    cardFigure.classList.add("card-image");
-    
-    const figurePoster = document.createElement("figure");
-    figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
-    
-    const imgPoster = document.createElement("img");
-    imgPoster.src = movie.poster;
-    imgPoster.alt = movie.title;
-    
-    figurePoster.appendChild(imgPoster);
-    cardFigure.appendChild(figurePoster);
-    
-    card.appendChild(cardFigure);
-  }
+  const cardFigure = document.createElement("div");
+  cardFigure.classList.add("card-image");
+  
+  const figurePoster = document.createElement("figure");
+  figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
+  
+  const imgPoster = document.createElement("img");
+  imgPoster.src = movie.ownPoster === null ? movie.poster : movie.ownPoster;
+  imgPoster.alt = movie.title;
+  
+  figurePoster.appendChild(imgPoster);
+  cardFigure.appendChild(figurePoster);
+  
+  card.appendChild(cardFigure);
 
   addMovieBtn.addEventListener("click", async () => {
     addMovieBtn.textContent = "";
@@ -368,7 +366,8 @@ export async function loadAllMovies() {
     
     return {
       ...movie,
-      seen: userMovie ? userMovie.seen : null
+      seen: userMovie ? userMovie.seen : null,
+      ownPoster: userMovie ? userMovie.own_poster : null
     };
   });
 
