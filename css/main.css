@@ -86,17 +86,21 @@
 .movie-card {
   display: flex;
   height: 100%;
+  align-items: center;
 }
 
 .movie-card .card-content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  width: 70%;
+  width: 65%;
+  padding: 5%;
+  padding-right: 2%;
 }
 
 .movie-card .card-image {
-  width: 30%;
+  width: 35%;
+  padding: 3%;
 }
 
 .movie-card .buttons {
