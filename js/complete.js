@@ -363,6 +363,11 @@ export async function completeMovie(uuid) {
             tags: true,
             tokenSeparators: [',', ';'],
             createTag: function (params) {
+                const term = $.trim (params.term);
+                if (term === '') {
+                    return null;
+                }
+
                 return {
                     id: params.term,
                     text: params.term,
@@ -376,9 +381,15 @@ export async function completeMovie(uuid) {
 
             if (data.newOption) {
                 wrapperCast.appendChild(wrapperAddDirector);
+
+                const parts = data.text.trim().split(/\s+/);
                 
                 fnAddDirector.value = data.text.split(" ")[0] || "";
                 lnAddDirector.value = data.text.split(" ").slice(1).join(" ") || "";
+            } else {
+                if (wrapperAddDirector.parentNode) {
+                    wrapperAddDirector.remove();
+                }
             }
         });
 
