@@ -96,6 +96,8 @@ function createMovieCard(movie) {
     addMovieBtn.classList.remove("is-link");
     addMovieBtn.classList.add("is-success");
     addMovieBtn.classList.add("is-loading");
+    console.log("userId : " + userId);
+    console.log("movie.id : " + movie.id);
 
     try {
       const { data, error } = await supabase
