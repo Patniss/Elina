@@ -1,7 +1,7 @@
 import { supabase } from "/Elina/js/supabase.js";
 
 export async function movieContent(uuid) {
-    const movie = await supabase
+    const { data:movie, error } = await supabase
     .from("movies")
     .select("*")
     .eq("id", uuid)
