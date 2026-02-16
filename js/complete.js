@@ -225,6 +225,10 @@ export async function completeMovie(uuid) {
 
     const addDirector1 = document.getElementById("add_director_1");
 
+    const selectNationalities1 = document.getElementById("nationalitiesDirector_1");
+    const selectNationalities2 = document.getElementById("nationalitiesDirector_2");
+    const selectNationalities3 = document.getElementById("nationalitiesDirector_3");
+
     const { data: movie, error: movieError } = await supabase
         .from("movies")
         .select("*")
@@ -253,6 +257,12 @@ export async function completeMovie(uuid) {
         selectDirector1.append(
             new Option(completeName, p.id, false, false)
         );
+        selectDirector2.append(
+            new Option(completeName, p.id, false, false)
+        );
+        selectDirector3.append(
+            new Option(completeName, p.id, false, false)
+        );
     });
     
     $(selectDirector1).select2({
@@ -271,6 +281,18 @@ export async function completeMovie(uuid) {
                 newTag: true
             };
         }
+    });
+
+    Object.entries(nationalities).forEach(([iso, country]) => {
+        selectNationalities1.append(
+            new Option(country, iso, false, false)
+        );
+        selectNationalities2.append(
+            new Option(country, iso, false, false)
+        );
+        selectNationalities3.append(
+            new Option(country, iso, false, false)
+        );
     });
     
     $(selectDirector1).on("select2:select", async function (e) {
@@ -293,7 +315,7 @@ export async function completeMovie(uuid) {
 
         birthdateDirector1.required = true;
 
-        checkDeathDirector1.addEventListener("change", () => {
+        checkDeathDirector1.addEventListener("checked", () => {
             if (checkDeathDirector1.value === true) {
                 deathdateDirector1.style.display = "block";
                 deathdateDirector1.required = true;
@@ -305,6 +327,8 @@ export async function completeMovie(uuid) {
 
         if (data.newTag) {
             addDirector1.style.display = "block";
+        } else {
+            addDirector1.style.display = "none";
         }
     });
 
