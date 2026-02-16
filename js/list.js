@@ -382,6 +382,32 @@ export function initResearch() {
   });
 }
 
+function applySort(type) {
+  switch (type) {
+    case "az":
+      filteredMovies.sort((a, b) =>
+        a.title.localeCompare(b.title, "fr", { sensitivity: "base" })
+      );
+      break;
+
+    case "za":
+      filteredMovies.sort((a, b) =>
+        b.title.localeCompare(a.title, "fr", { sensitivity: "base" })
+      );
+      break;
+
+    case "19": // année croissante
+      filteredMovies.sort((a, b) => a.year - b.year);
+      break;
+
+    case "91": // année décroissante
+      filteredMovies.sort((a, b) => b.year - a.year);
+      break;
+  }
+
+  renderMovies();
+}
+
 export function sortFilter() {
   const btnFilter = document.getElementById("filter");
   const btnSort = document.getElementById("sort");
