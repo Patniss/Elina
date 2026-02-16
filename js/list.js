@@ -463,7 +463,7 @@ export async function loadAllMovies() {
   filteredMovies = [...allMovies];
 
   filteredMovies = [...allMovies];
-  applySort("91");
+  sortFilter("91");
   renderMovies();
 }
 
