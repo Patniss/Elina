@@ -225,6 +225,10 @@ export async function completeMovie(uuid) {
 
     const addDirector1 = document.getElementById("add_director_1");
 
+    const divDirector1 = document.getElementById("divDirector_1");
+    const divDirector2 = document.getElementById("divDirector_2");
+    const divDirector3 = document.getElementById("divDirector_3");
+
     const selectNationalities1 = document.getElementById("nationalitiesDirector_1");
     const selectNationalities2 = document.getElementById("nationalitiesDirector_2");
     const selectNationalities3 = document.getElementById("nationalitiesDirector_3");
@@ -294,6 +298,21 @@ export async function completeMovie(uuid) {
             new Option(country, iso, false, false)
         );
     });
+
+    $(selectNationalities1).select2({
+        placeholder: "Nationalité(s)",
+        allowClear: true
+    })
+
+    $(selectNationalities2).select2({
+        placeholder: "Nationalité(s)",
+        allowClear: true
+    })
+
+    $(selectNationalities3).select2({
+        placeholder: "Nationalité(s)",
+        allowClear: true
+    })
     
     $(selectDirector1).on("select2:select", async function (e) {
         const data = e.params.data;
