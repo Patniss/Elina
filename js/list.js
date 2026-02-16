@@ -277,61 +277,105 @@ function renderPagination() {
   pagination.innerHTML = "";
 
   const totalPages = Math.ceil(filteredMovies.length / pageSize);
+  if (totalPages <= 1) return;
 
-  // -- Bouton Précédent
-  const prevBtn = document.createElement("a");
-  prevBtn.href = "#";
-  prevBtn.id = "pagination-previous";
-  prevBtn.classList.add("pagination-previous");
-  prevBtn.textContent = "Précédent";
-  if (currentPage === 1) prevBtn.classList.add("is-disabled");
-  prevBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    if (currentPage > 1) {
-      currentPage--;
-      await renderMovies();
-    }
-  });
-  pagination.appendChild(prevBtn);
+  const delta = 2; // nombre de pages autour de la page active
 
-  // -- Bouton Suivant
-  const nextBtn = document.createElement("a");
-  nextBtn.href = "#";
-  nextBtn.id = "pagination-next";
-  nextBtn.classList.add("pagination-next");
-  nextBtn.textContent = "Suivant";
-  if (currentPage === totalPages) nextBtn.classList.add("is-disabled");
-  nextBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (currentPage < totalPages) {
-      currentPage++;
-      renderMovies();
-    }
-  });
-
-  // -- Numéros de page
-  const pageList = document.createElement("ul");
-  pageList.classList.add("pagination-list");
-
-  for (let i = 1; i <= totalPages; i++) {
+  // --- Fonction utilitaire pour créer un bouton page
+  function createPageButton(page, text = page, isCurrent = false) {
     const li = document.createElement("li");
     const btn = document.createElement("a");
+
     btn.href = "#";
     btn.classList.add("pagination-link");
-    if (i === currentPage) btn.classList.add("is-current");
-    btn.textContent = i;
+    btn.textContent = text;
+
+    if (isCurrent) btn.classList.add("is-current");
 
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      currentPage = i;
+      currentPage = page;
       renderMovies();
     });
 
     li.appendChild(btn);
-    pageList.appendChild(li);
+    return li;
+  }
+
+  // --- Bouton précédent
+  const prevBtn = document.createElement("a");
+  prevBtn.href = "#";
+  prevBtn.classList.add("pagination-previous");
+  prevBtn.textContent = "Précédent";
+
+  if (currentPage === 1) {
+    prevBtn.classList.add("is-disabled");
+  } else {
+    prevBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      currentPage--;
+      renderMovies();
+    });
+  }
+
+  pagination.appendChild(prevBtn);
+
+  // --- Liste des pages
+  const pageList = document.createElement("ul");
+  pageList.classList.add("pagination-list");
+
+  const start = Math.max(1, currentPage - delta);
+  const end = Math.min(totalPages, currentPage + delta);
+
+  // --- Première page + ...
+  if (start > 1) {
+    pageList.appendChild(createPageButton(1));
+
+    if (start > 2) {
+      const ellipsis = document.createElement("span");
+      ellipsis.classList.add("pagination-ellipsis");
+      ellipsis.textContent = "…";
+      pageList.appendChild(ellipsis);
+    }
+  }
+
+  // --- Pages autour de la page active
+  for (let i = start; i <= end; i++) {
+    pageList.appendChild(
+      createPageButton(i, i, i === currentPage)
+    );
+  }
+
+  // --- ... + dernière page
+  if (end < totalPages) {
+    if (end < totalPages - 1) {
+      const ellipsis = document.createElement("span");
+      ellipsis.classList.add("pagination-ellipsis");
+      ellipsis.textContent = "…";
+      pageList.appendChild(ellipsis);
+    }
+
+    pageList.appendChild(createPageButton(totalPages));
   }
 
   pagination.appendChild(pageList);
+
+  // --- Bouton suivant
+  const nextBtn = document.createElement("a");
+  nextBtn.href = "#";
+  nextBtn.classList.add("pagination-next");
+  nextBtn.textContent = "Suivant";
+
+  if (currentPage === totalPages) {
+    nextBtn.classList.add("is-disabled");
+  } else {
+    nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      currentPage++;
+      renderMovies();
+    });
+  }
+
   pagination.appendChild(nextBtn);
 }
 
