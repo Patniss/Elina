@@ -382,31 +382,54 @@ export function initResearch() {
   });
 }
 
-export function filterSort() {
+export function sortFilter() {
   const btnFilter = document.getElementById("filter");
   const btnSort = document.getElementById("sort");
   const containerFilter = document.getElementById("dropdown-content-filter");
   const containerSort = document.getElementById("dropdown-content-sort");
 
+  const sortAZ = document.getElementById("sort-az");
+  const sortZA = document.getElementById("sort-za");
+  const sort19 = document.getElementById("sort-19");
+  const sort91 = document.getElementById("sort-91");
+
   btnFilter.addEventListener("click", () => { 
-    if (containerFilter.style.display === "block") {
-      containerFilter.style.display = "none";
-    } else {
-      containerSort.style.display = "none";
-      containerFilter.style.display = "block";
-    }
-   });
+    containerFilter.style.display =
+      containerFilter.style.display === "block" ? "none" : "block";
+    containerSort.style.display = "none";
+  });
+
   btnSort.addEventListener("click", () => {
-    if (containerSort.style.display === "block") {
-      containerSort.style.display = "none";
-    } else {
-      containerFilter.style.display = "none";
-      containerSort.style.display = "block";
-    }
-  })
+    containerSort.style.display =
+      containerSort.style.display === "block" ? "none" : "block";
+    containerFilter.style.display = "none";
+  });
+
+  sortAZ.addEventListener("click", () => {
+    applySort("az");
+    sortZA.style.display = "inline";
+    sortAZ.style.display = "none";
+  });
+
+  sortZA.addEventListener("click", () => {
+    applySort("za");
+    sortAZ.style.display = "inline";
+    sortZA.style.display = "none";
+  });
+
+  sort19.addEventListener("click", () => {
+    applySort("19");
+    sort91.style.display = "inline";
+    sort19.style.display = "none";
+  });
+
+  sort91.addEventListener("click", () => {
+    applySort("91");
+    sort19.style.display = "inline";
+    sort91.style.display = "none";
+  });
 }
 
-// FONCTIONS SUR LES FILMS
 export async function loadAllMovies() {
   const allMovieContainer = document.getElementById("list-all-movies");
 
@@ -439,7 +462,9 @@ export async function loadAllMovies() {
   allMovies = moviesWithStatus;
   filteredMovies = [...allMovies];
 
-  renderMovies()
+  filteredMovies = [...allMovies];
+  applySort("91");
+  renderMovies();
 }
 
 export async function loadToseeMovies() {
