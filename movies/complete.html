@@ -54,12 +54,17 @@
               </div>
             </div>
 
-            <button id="addDirector" class="button" type="button">Ajouter un réalisateur</button>
+            <div class="buttons my-4">
+              <button id="addDirector" class="button" type="button">Ajouter un réalisateur</button>
+              <button id="addScreenwriter" class="button" type="button">Ajouter un scénariste</button>
+            </div>
 
             <div id="divDirector_2" style="display: none;">
-              <div class="select is-multiple">
-                <button class="delete is-large" id="delete_director_2"></button> <select multiple="multiple" size="8" id="director_2" style="width: 100%;" ></select>
-              </div>
+              <div class="columns"></div>
+                <button class="column delete is-large" id="delete_director_2"></button> 
+                <div class="column select is-multiple">
+                  <select multiple="multiple" size="8" id="director_2" style="width: 100%;" ></select>
+                </div>
               <div id="add_director_2" class="field" style="display: none;">
                 <label class="label">Nouveau réalisateur :</label>
                 <input type="text" name="firstNameDirector_2" id="firstNameDirector_2" class="input" placeholder="Prénom…" />
