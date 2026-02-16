@@ -334,8 +334,8 @@ export async function completeMovie(uuid) {
 
         birthdateDirector1.required = true;
 
-        checkDeathDirector1.addEventListener("checked", () => {
-            if (checkDeathDirector1.value === true) {
+        checkDeathDirector1.addEventListener("change", () => {
+            if (checkDeathDirector1.checked) {
                 deathdateDirector1.style.display = "block";
                 deathdateDirector1.required = true;
             } else {
