@@ -426,80 +426,6 @@ export function initResearch() {
   });
 }
 
-function applySort(type) {
-  switch (type) {
-    case "az":
-      filteredMovies.sort((a, b) =>
-        a.title.localeCompare(b.title, "fr", { sensitivity: "base" })
-      );
-      break;
-
-    case "za":
-      filteredMovies.sort((a, b) =>
-        b.title.localeCompare(a.title, "fr", { sensitivity: "base" })
-      );
-      break;
-
-    case "19": // année croissante
-      filteredMovies.sort((a, b) => a.year - b.year);
-      break;
-
-    case "91": // année décroissante
-      filteredMovies.sort((a, b) => b.year - a.year);
-      break;
-  }
-
-  renderMovies();
-}
-
-export function sortFilter() {
-  const btnFilter = document.getElementById("filter");
-  const btnSort = document.getElementById("sort");
-  const containerFilter = document.getElementById("dropdown-content-filter");
-  const containerSort = document.getElementById("dropdown-content-sort");
-
-  const sortAZ = document.getElementById("sort-az");
-  const sortZA = document.getElementById("sort-za");
-  const sort19 = document.getElementById("sort-19");
-  const sort91 = document.getElementById("sort-91");
-
-  btnFilter.addEventListener("click", () => { 
-    containerFilter.style.display =
-      containerFilter.style.display === "block" ? "none" : "block";
-    containerSort.style.display = "none";
-  });
-
-  btnSort.addEventListener("click", () => {
-    containerSort.style.display =
-      containerSort.style.display === "block" ? "none" : "block";
-    containerFilter.style.display = "none";
-  });
-
-  sortAZ.addEventListener("click", () => {
-    applySort("az");
-    sortZA.style.display = "inline";
-    sortAZ.style.display = "none";
-  });
-
-  sortZA.addEventListener("click", () => {
-    applySort("za");
-    sortAZ.style.display = "inline";
-    sortZA.style.display = "none";
-  });
-
-  sort19.addEventListener("click", () => {
-    applySort("19");
-    sort91.style.display = "inline";
-    sort19.style.display = "none";
-  });
-
-  sort91.addEventListener("click", () => {
-    applySort("91");
-    sort19.style.display = "inline";
-    sort91.style.display = "none";
-  });
-}
-
 export async function loadAllMovies() {
   const allMovieContainer = document.getElementById("list-all-movies");
 
@@ -532,8 +458,6 @@ export async function loadAllMovies() {
   allMovies = moviesWithStatus;
   filteredMovies = [...allMovies];
 
-  filteredMovies = [...allMovies];
-  sortFilter("91");
   renderMovies();
 }
 
