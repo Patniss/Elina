@@ -216,41 +216,59 @@ const nationalities = {
 
 export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
+
+    const addDirector = document.getElementById("add-director");
     
-    const btnAddDirector = document.getElementById("addDirector");
+    const divDirector1 = document.getElementById("div-director-1");
+    const selectDirector1 = document.getElementById("select-director-1");
+    const addNewDirector1 = document.getElementById("add-new-director-1");
+    const firstNameDirector1 = document.getElementById("first-name-director-1");
+    const lastNameDirector1 = document.getElementById("last-name-director-1");
+    const birthdateDirector1 = document.getElementById("birthdate-director-1");
+    const isDeadDirector1 = document.getElementById("is-dead-director-1");
+    const deathdateDirector1 = document.getElementById("deathdate-director-1");
+    const nationalitiesDirector1 = document.getElementById("nationalities-director-1");
 
-    const selectDirector1 = document.getElementById("director_1");
-    const selectDirector2 = document.getElementById("director_2");
-    const selectDirector3 = document.getElementById("director_3");
+    const divDirector2 = document.getElementById("div-director-2");
+    const deleteDirector2 = document.getElementById("delete-director-2");
+    const addNewDirector2 = document.getElementById("add-new-director-2");
+    const selectDirector2 = document.getElementById("select-director-2");
+    const firstNameDirector2 = document.getElementById("first-name-director-2");
+    const lastNameDirector2 = document.getElementById("last-name-director-2");
+    const birthdateDirector2 = document.getElementById("birthdate-director-2");
+    const isDeadDirector2 = document.getElementById("is-dead-director-2");
+    const deathdateDirector2 = document.getElementById("deathdate-director-2");
+    const nationalitiesDirector2 = document.getElementById("nationalities-director-2");
 
-    const divDirector1 = document.getElementById("divDirector_1");
-    const divDirector2 = document.getElementById("divDirector_2");
-    const divDirector3 = document.getElementById("divDirector_3");
+    const divDirector3 = document.getElementById("div-director-3");
+    const deleteDirector3 = document.getElementById("delete-director-3");
+    const selectDirector3 = document.getElementById("select-director-3");""
+    const addNewDirector3 = document.getElementById("add-new-director-3");
+    const firstNameDirector3 = document.getElementById("first-name-director-3");
+    const lastNameDirector3 = document.getElementById("last-name-director-3");
+    const birthdateDirector3 = document.getElementById("birthdate-director-3");
+    const isDeadDirector3 = document.getElementById("is-dead-director-3");
+    const deathdateDirector3 = document.getElementById("deathdate-director-3");
+    const nationalitiesDirector3 = document.getElementById("nationalities-director-3");
 
-    const selectNationalities1 = document.getElementById("nationalitiesDirector_1");
-    const selectNationalities2 = document.getElementById("nationalitiesDirector_2");
-    const selectNationalities3 = document.getElementById("nationalitiesDirector_3");
-
-    const { data: movie, error: movieError } = await supabase
+    const { data: movie, error: errorMovie } = await supabase
         .from("movies")
         .select("*")
         .eq("id", uuid)
         .single();
-    
-    if (movieError) {
-        console.log("Erreur sur l'extraction Movie");
+
+    if (errorMovie) {
+        console.log("Erreur sur l'extraction du film : " + errorMovie);
         return;
     }
 
-    movieTitle.textContent = movie.title;
-
-    const { data: people, error: peopleError } = await supabase
+    const { data: people, error: errorPeople } = await supabase
         .from("people")
         .select("*")
         .order("lastname", { ascending: true });
-
-    if (peopleError) {
-        console.log("Erreur sur l'extraction People");
+    
+    if (errorPeople) {
+        console.log("Erreur sur l'extraction des people : " + errorPeople);
         return;
     }
 
@@ -266,187 +284,175 @@ export async function completeMovie(uuid) {
             new Option(completeName, p.id, false, false)
         );
     });
-    
+
+    movieTitle.textContent = movie.title;
+
+    addDirector.addEventListener("click", () => {
+        if (divDirector2.style.display === "none") {
+            divDirector2.style.display = "block";
+            deleteDirector2.style.display = "inline";
+
+            deleteDirector2.addEventListener("click", () => {
+                divDirector2.style.display = "none";
+                selectDirector2.value = "";
+                firstNameDirector2.value = "";
+                lastNameDirector2.value = "";
+                birthdateDirector2.value = "";
+                isDeadDirector2.checked = false;
+                deathdateDirector2.value = "";
+                nationalitiesDirector2.value = "";
+            })
+        } else {
+            divDirector3.style.display = "block";
+            addDirector.style.display = "none";
+            deleteDirector2.style.display = "none";
+
+            deleteDirector3.addEventListener("click", () => {
+                deleteDirector2.style.display = "inline";
+                divDirector3.style.display = "none";
+                selectDirector3.value = "";
+                firstNameDirector3.value = "";
+                lastNameDirector3.value = "";
+                birthdateDirector3.value = "";
+                isDeadDirector3.checked = false;
+                deathdateDirector3.value = "";
+                nationalitiesDirector3.value = "";
+            })
+        };
+    });
+
     $(selectDirector1).select2({
         placeholder: "Réalisateur…",
         allowClear: true,
         tags: true,
-        createTag: function (params) {
+        createTag: function(params) {
             const term = $.trim(params.term);
-            if (term === "") {
-                return null;
-            }
-            
+            if (term === "") return null;
             return {
                 id: term,
                 text: term,
                 newTag: true
-            };
-        }
-    });
-
-    Object.entries(nationalities).forEach(([iso, country]) => {
-        selectNationalities1.append(
-            new Option(country, iso, false, false)
-        );
-        selectNationalities2.append(
-            new Option(country, iso, false, false)
-        );
-        selectNationalities3.append(
-            new Option(country, iso, false, false)
-        );
-    });
-
-    $(selectNationalities1).select2({
-        placeholder: "Nationalité(s)",
-        allowClear: true
-    })
-
-    $(selectNationalities2).select2({
-        placeholder: "Nationalité(s)",
-        allowClear: true
-    })
-
-    $(selectNationalities3).select2({
-        placeholder: "Nationalité(s)",
-        allowClear: true
-    })
-    
-    $(selectDirector1).on("select2:select", async function (e) {
-        const data = e.params.data;
-        const parts = data.text.trim().split(" ");
-        const firstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
-        const lastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
-
-        const inputFirstNameDirector1 = document.getElementById("firstNameDirector_1");
-        const inputLastNameDirector1 = document.getElementById("lastNameDirector_1");
-        const birthdateDirector1 = document.getElementById("birthdateDirector_1");
-        const checkDeathDirector1 = document.getElementById("isDeadDirector_1");
-        const deathdateDirector1 = document.getElementById("deathdateDirector_1");
-        
-        inputFirstNameDirector1.value = firstname;
-        inputFirstNameDirector1.required = true;
-
-        inputLastNameDirector1.value = lastname;
-        inputLastNameDirector1.required = true;
-
-        birthdateDirector1.required = true;
-
-        checkDeathDirector1.addEventListener("change", () => {
-            if (checkDeathDirector1.checked) {
-                deathdateDirector1.style.display = "block";
-                deathdateDirector1.required = true;
-            } else {
-                deathdateDirector1.style.display = "none";
-                deathdateDirector1.required = false;
             }
-        })
-
-        if (data.newTag) {
-            btnAddDirector.style.display = "block";
-        } else {
-            btnAddDirector.style.display = "none";
         }
     });
 
-    $(selectDirector2).on("select2:select", async function (e) {
+    $(selectDirector1).on("select2:select", function(e) {
         const data = e.params.data;
-        const parts = data.text.trim().split(" ");
-        const firstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
-        const lastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
-
-        const inputFirstNameDirector2 = document.getElementById("firstNameDirector_2");
-        const inputLastNameDirector2 = document.getElementById("lastNameDirector_2");
-        const birthdateDirector2 = document.getElementById("birthdateDirector_2");
-        const checkDeathDirector2 = document.getElementById("isDeadDirector_2");
-        const deathdateDirector2 = document.getElementById("deathdateDirector_2");
-        
-        inputFirstNameDirector2.value = firstname;
-        inputFirstNameDirector2.required = true;
-
-        inputLastNameDirector2.value = lastname;
-        inputLastNameDirector2.required = true;
-
-        birthdateDirector2.required = true;
-
-        checkDeathDirector2.addEventListener("change", () => {
-            if (checkDeathDirector2.checked) {
-                deathdateDirector2.style.display = "block";
-                deathdateDirector2.required = true;
-            } else {
-                deathdateDirector2.style.display = "none";
-                deathdateDirector2.required = false;
-            }
-        })
-
         if (data.newTag) {
-            btnAddDirector.style.display = "block";
-        } else {
-            btnAddDirector.style.display = "none";
-        }
-    });
+            addNewDirector1.style.display = "block";
 
-    $(selectDirector3).on("select2:select", async function (e) {
-        const data = e.params.data;
-        const parts = data.text.trim().split(" ");
-        const firstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
-        const lastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
+            const parts = data.text.trim().split(" ");
+            const testFirstNameDirector1 = parts.lenght > 1 ? parts.slice(0, -1).join(" ") : null;
+            const testLastNameDirector1 = parts.lenght > 1 ? parts.slice(-1).join("") : parts[0];
 
-        const inputFirstNameDirector3 = document.getElementById("firstNameDirector_3");
-        const inputLastNameDirector3 = document.getElementById("lastNameDirector_3");
-        const birthdateDirector3 = document.getElementById("birthdateDirector_3");
-        const checkDeathDirector3 = document.getElementById("isDeadDirector_3");
-        const deathdateDirector3 = document.getElementById("deathdateDirector_3");
-        
-        inputFirstNameDirector3.value = firstname;
-        inputFirstNameDirector3.required = true;
+            firstNameDirector1.value = testFirstNameDirector1;
+            firstNameDirector1.required = true;
 
-        inputLastNameDirector3.value = lastname;
-        inputLastNameDirector3.required = true;
+            lastNameDirector1.value = testLastNameDirector1;
+            lastNameDirector1.required = true;
 
-        birthdateDirector3.required = true;
-
-        checkDeathDirector3.addEventListener("change", () => {
-            if (checkDeathDirector3.checked) {
-                deathdateDirector3.style.display = "block";
-                deathdateDirector3.required = true;
-            } else {
-                deathdateDirector3.style.display = "none";
-                deathdateDirector3.required = false;
-            }
-        })
-
-        if (data.newTag) {
-            btnAddDirector.style.display = "block";
-        } else {
-            btnAddDirector.style.display = "none";
-        }
-    });
-
-    btnAddDirector.addEventListener("click", () => {
-        if (divDirector2.style.display === "none") {
-            const divDirector2 = document.getElementById("divDirector_2");
-            const deleteDirector2 = document.getElementById("delete_director_2");
-
-            divDirector2.style.display = "block";
-
-            deleteDirector2.addEventListener("click", () => {
-                divDirector2.style.display = "none";
-            });
-        } else {
-            const divDirector3 = document.getElementById("divDirector_3");
-            const deleteDirector3 = document.getElementById("delete_director_3");
-            const deleteDirector2 = document.getElementById("delete_director_2");
-            
-            divDirector3.style.display === "block";
-            btnAddDirector.style.display = "none";
-            deleteDirector2.style.display = "none";
-
-            deleteDirector3.addEventListener("click", () => {
-                divDirector3.style.display = "none";
-                btnAddDirector.style.display = "block";
-                deleteDirector2.style.display = "block";
-            });
+            birthdateDirector1.required = true;
         }
     })
+    .on("select2:clear", function() {
+        addNewDirector1.style.display = "none";
+
+        firstNameDirector1.value = "";
+        firstNameDirector1.required = false;
+
+        lastNameDirector1.value = "";
+        lastNameDirector1.required = false;
+
+        birthdateDirector1.required = false;
+    });
+
+    $(selectDirector2).select2({
+        placeholder: "Réalisateur…",
+        allowClear: true,
+        tags: true,
+        createTag: function(params) {
+            const term = $.trim(params.term);
+            if (term === "") return null;
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            }
+        }
+    });
+
+    $(selectDirector2).on("select2:select", function(e) {
+        const data = e.params.data;
+        if (data.newTag) {
+            addNewDirector2.style.display = "block";
+
+            const parts = data.text.trim().split(" ");
+            const testFirstNameDirector2 = parts.lenght > 1 ? parts.slice(0, -1).join(" ") : null;
+            const testLastNameDirector2 = parts.lenght > 1 ? parts.slice(-1).join("") : parts[0];
+
+            firstNameDirector2.value = testFirstNameDirector2;
+            firstNameDirector2.required = true;
+
+            lastNameDirector2.value = testLastNameDirector2;
+            lastNameDirector2.required = true;
+
+            birthdateDirector2.required = true;
+        }
+    })
+    .on("select2:clear", function() {
+        addNewDirector2.style.display = "none";
+
+        firstNameDirector2.value = "";
+        firstNameDirector2.required = false;
+
+        lastNameDirector2.value = "";
+        lastNameDirector2.required = false;
+
+        birthdateDirector2.required = false;
+    });
+
+    $(selectDirector3).select2({
+        placeholder: "Réalisateur…",
+        allowClear: true,
+        tags: true,
+        createTag: function(params) {
+            const term = $.trim(params.term);
+            if (term === "") return null;
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            }
+        }
+    });
+
+    $(selectDirector3).on("select2:select", function(e) {
+        const data = e.params.data;
+        if (data.newTag) {
+            addNewDirector3.style.display = "block";
+
+            const parts = data.text.trim().split(" ");
+            const testFirstNameDirector3 = parts.lenght > 1 ? parts.slice(0, -1).join(" ") : null;
+            const testLastNameDirector3 = parts.lenght > 1 ? parts.slice(-1).join("") : parts[0];
+
+            firstNameDirector3.value = testFirstNameDirector3;
+            firstNameDirector3.required = true;
+
+            lastNameDirector3.value = testLastNameDirector3;
+            lastNameDirector3.required = true;
+
+            birthdateDirector3.required = true;
+        }
+    })
+    .on("select2:clear", function() {
+        addNewDirector3.style.display = "none";
+
+        firstNameDirector3.value = "";
+        firstNameDirector3.required = false;
+
+        lastNameDirector3.value = "";
+        lastNameDirector3.required = false;
+
+        birthdateDirector3.required = false;
+    });
 }
