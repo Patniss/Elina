@@ -486,7 +486,7 @@ export async function completeMovie(uuid) {
     });
 
     isDeadDirector1.addEventListener("change", () => {
-        if (this.checked) {
+        if (isDeadDirector1.checked === true) {
             deathdateDirector1.style.display = "inline";
         } else {
             deathdateDirector1.style.display = "none";
@@ -494,7 +494,7 @@ export async function completeMovie(uuid) {
     });
 
     isDeadDirector2.addEventListener("change", () => {
-        if (this.checked) {
+        if (isDeadDirector2.checked === true) {
             deathdateDirector2.style.display = "inline";
         } else {
             deathdateDirector2.style.display = "none";
@@ -502,7 +502,7 @@ export async function completeMovie(uuid) {
     });
 
     isDeadDirector3.addEventListener("change", () => {
-        if (this.checked) {
+        if (isDeadDirector3.checked === true) {
             deathdateDirector3.style.display = "inline";
         } else {
             deathdateDirector3.style.display = "none";

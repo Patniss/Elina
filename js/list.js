@@ -436,6 +436,29 @@ function changeOrder(field, direction) {
 export function sortFilterMovies() {
   const btnSort = document.getElementById("button-content-sort");
   const contentSort = document.getElementById("dropdown-content-sort");
+  const btnFilter = document.getElementById("button-content-filter");
+  const contentFilter = document.getElementById("dropdown-content-filter");
+
+  contentSort.classList.add("is-hidden");
+  contentFilter.classList.add("is-hidden");
+
+  btnSort.addEventListener("click", () => {
+    if (contentSort.classList.contains("is-hidden")) {
+      contentSort.classList.remove("is-hidden");
+    } else contentSort.classList.add("is-hidden");
+    if (!contentFilter.classList.contains("is-hidden")) {
+      contentFilter.classList.add("is-hidden");
+    }
+  });
+
+  btnFilter.addEventListener("click", () => {
+    if (contentFilter.classList.contains("is-hidden")) {
+      contentFilter.classList.remove("is-hidden");
+    } else contentFilter.classList.add("is-hidden");
+    if (!contentSort.classList.contains("is-hidden")) {
+      contentSort.classList.add("is-hidden");
+    }
+  })
 
   const sortAZ = document.getElementById("sort-az");
   const sortZA = document.getElementById("sort-za");
