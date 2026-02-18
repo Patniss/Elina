@@ -315,38 +315,39 @@ export async function completeMovie(uuid) {
     })
 
     addDirector.addEventListener("click", () => {
-        if (divDirector2.style.display === "none") {
-            divDirector2.style.display = "block";
-            deleteDirector2.style.display = "inline";
-
-            deleteDirector2.addEventListener("click", () => {
-                divDirector2.style.display = "none";
-                selectDirector2.value = "";
-                firstNameDirector2.value = "";
-                lastNameDirector2.value = "";
-                birthdateDirector2.value = "";
-                isDeadDirector2.checked = false;
-                deathdateDirector2.value = "";
-                nationalitiesDirector2.value = "";
-            })
+        if (divDirector2.classList.contains("is-hidden")) {
+            divDirector2.classList.remove("is-hidden");
+            if (deleteDirector2.classList.contains("is-hidden")) deleteDirector2.classList.remove("is-hidden");
+            selectDirector2.required = true;
+        } else {
+            divDirector3.classList.remove("is-hidden");
+            deleteDirector2.classList.add("is-hidden");
+            selectDirector3.required = true;
         }
-        if (divDirector2.style.display === "block") {
-            divDirector3.style.display = "block";
-            addDirector.style.display = "none";
-            deleteDirector2.style.display = "none";
+    });
 
-            deleteDirector3.addEventListener("click", () => {
-                deleteDirector2.style.display = "inline";
-                divDirector3.style.display = "none";
-                selectDirector3.value = "";
-                firstNameDirector3.value = "";
-                lastNameDirector3.value = "";
-                birthdateDirector3.value = "";
-                isDeadDirector3.checked = false;
-                deathdateDirector3.value = "";
-                nationalitiesDirector3.value = "";
-            })
-        };
+    deleteDirector2.addEventListener("click", () => {
+        divDirector2.classList.add("is-hidden");
+        if (deleteDirector2.classList.contains("is-hidden")) deleteDirector2.classList.remove("is-hidden");
+        selectDirector2.required = false;
+        firstNameDirector2.value = "";
+        lastNameDirector2.value = "";
+        birthdateDirector2.value = "";
+        isDeadDirector2.checked = false;
+        deathdateDirector2.value = "";
+        nationalitiesDirector2.value = "";
+    });
+
+    deleteDirector3.addEventListener("click", () => {
+        divDirector3.classList.add("is-hidden");
+        deleteDirector2.classList.remove("is-hidden");
+        selectDirector3.required = false;
+        firstNameDirector3.value = "";
+        lastNameDirector3.value = "";
+        birthdateDirector3.value = "";
+        isDeadDirector3.checked = false;
+        deathdateDirector3.value = "";
+        nationalitiesDirector3.value = "";
     });
 
     $(selectDirector1).select2({
@@ -369,9 +370,9 @@ export async function completeMovie(uuid) {
         if (data.newTag) {
             addNewDirector1.style.display = "block";
 
-            const parts = data.text.trim().split(" ");
-            const testFirstNameDirector1 = parts.lenght > 1 ? parts.slice(0, -1).join(" ") : null;
-            const testLastNameDirector1 = parts.lenght > 1 ? parts.slice(-1).join("") : parts[0];
+            const parts = data.text.trim().split(/\s+/);
+            const testFirstNameDirector1 = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+            const testLastNameDirector1 = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
 
             firstNameDirector1.value = testFirstNameDirector1;
             firstNameDirector1.required = true;
