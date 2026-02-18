@@ -8,7 +8,10 @@ let allMovies = [];
 let filteredMovies = [];
 let currentPage = 1;
 const pageSize = 20;
-let order = "91";
+let order = {
+  field: "year",
+  direction: "desc"
+}
 
 // FONCTIONS LISTES & CARDS
 async function createMovieCard(movie) {
@@ -380,6 +383,28 @@ function renderPagination() {
   pagination.appendChild(nextBtn);
 }
 
+function sortMovies(movies) {
+  return [...movies].sort((a, b) => {
+    const field = order.field;
+
+    let valueA = a[field];
+    let valueB = b[field];
+
+    if (valueA === null) return 1;
+    if (valueB === null) return -1;
+
+    if (typeof valueA === "string") {
+      return order.direction === "asc"
+        ? valueA.localeCompare(valueB)
+        : valueB.localeCompare(valueA);
+    }
+
+    return order.direction === "asc"
+      ? valueA - valueB
+      : valueB - valueA;
+  });
+}
+
 async function renderMovies() {
 
   const container = document.getElementById("list-all-movies");
@@ -435,8 +460,7 @@ export async function loadAllMovies() {
 
   const { data, error } = await supabase
     .from("movies")
-    .select(`*, users_movies(seen, user_id)`)
-    .order("year", { ascending: false });
+    .select(`*, users_movies(seen, user_id)`);
 
   if (error) {
     console.error(error);
@@ -456,7 +480,7 @@ export async function loadAllMovies() {
   });
 
   allMovies = moviesWithStatus;
-  filteredMovies = [...allMovies];
+  filteredMovies = sortMovies(allMovies);
 
   renderMovies();
 }
