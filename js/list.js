@@ -8,6 +8,7 @@ let allMovies = [];
 let filteredMovies = [];
 let currentPage = 1;
 const pageSize = 20;
+let order = "91";
 
 // FONCTIONS LISTES & CARDS
 async function createMovieCard(movie) {
@@ -435,8 +436,7 @@ export async function loadAllMovies() {
   const { data, error } = await supabase
     .from("movies")
     .select(`*, users_movies(seen, user_id)`)
-    .order("year", { ascending: false })
-    .order("title", { ascending: true });
+    .order("year", { ascending: false });
 
   if (error) {
     console.error(error);

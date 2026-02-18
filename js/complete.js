@@ -262,6 +262,8 @@ export async function completeMovie(uuid) {
         return;
     }
 
+    movieTitle.textContent = movie.title;
+
     const { data: people, error: errorPeople } = await supabase
         .from("people")
         .select("*")
@@ -285,7 +287,32 @@ export async function completeMovie(uuid) {
         );
     });
 
-    movieTitle.textContent = movie.title;
+    Object.entries(nationalities).forEach(([iso, country]) => {
+        nationalitiesDirector1.append(
+            new Option(country, iso, false, false)
+        );
+        nationalitiesDirector2.append(
+            new Option(country, iso, false, false)
+        );
+        nationalitiesDirector3.append(
+            new Option(country, iso, false, false)
+        );
+    });
+
+    $(nationalitiesDirector1).select2({
+        placeholder: "Nationalité(s)",
+        allowClear: true
+    });
+
+    $(nationalitiesDirector2).select2({
+        placeholder: "Nationalité(s)",
+        allowClear: true
+    });
+
+    $(nationalitiesDirector3).select2({
+        placeholder: "Nationalité(s)",
+        allowClear: true
+    })
 
     addDirector.addEventListener("click", () => {
         if (divDirector2.style.display === "none") {
@@ -302,7 +329,8 @@ export async function completeMovie(uuid) {
                 deathdateDirector2.value = "";
                 nationalitiesDirector2.value = "";
             })
-        } else {
+        }
+        if (divDirector2.style.display === "block") {
             divDirector3.style.display = "block";
             addDirector.style.display = "none";
             deleteDirector2.style.display = "none";
@@ -454,5 +482,29 @@ export async function completeMovie(uuid) {
         lastNameDirector3.required = false;
 
         birthdateDirector3.required = false;
+    });
+
+    isDeadDirector1.addEventListener("change", () => {
+        if (this.checked) {
+            deathdateDirector1.style.display = "inline";
+        } else {
+            deathdateDirector1.style.display = "none";
+        }
+    });
+
+    isDeadDirector2.addEventListener("change", () => {
+        if (this.checked) {
+            deathdateDirector2.style.display = "inline";
+        } else {
+            deathdateDirector2.style.display = "none";
+        }
+    });
+
+    isDeadDirector3.addEventListener("change", () => {
+        if (this.checked) {
+            deathdateDirector3.style.display = "inline";
+        } else {
+            deathdateDirector3.style.display = "none";
+        }
     });
 }
