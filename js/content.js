@@ -16,7 +16,7 @@ function formatFrenchTypography(text) {
 export async function movieContent(uuid) {
     const { data:movie, error } = await supabase
     .from("movies")
-    .select("*")
+    .select(`*, users_movies(user_id, seen, own-poster)`)
     .eq("id", uuid)
     .single();
 
@@ -29,16 +29,18 @@ export async function movieContent(uuid) {
 
     const movieTitle = document.getElementById("movie-title");
     const movieYear = document.getElementById("movie-year");
+    const moviePoster = document.getElementById("movie-poster");
     const movieTime = document.getElementById("movie-time");
     const movieSynopsis = document.getElementById("movie-synopsis");
     const movieGenres = document.getElementById("movie-genres");
 
     const hoursTime = Math.floor(movie.time / 60);
-    const minutesTime = movieTime - hoursTime * 60;
-    const displayMinutesTime = minutesTime > 9 ? "0" + minutesTime : minutesTime;
+    const minutesTime = Number(movieTime) - Number(hoursTime) * 60;
+    const displayMinutesTime = minutesTime > 9 ? "0" + String(minutesTime) : String(minutesTime);
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
+    moviePoster.src = movie.poster;
     movieTime.textContent = hoursTime + "h " + displayMinutesTime;
     movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
 
