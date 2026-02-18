@@ -25,6 +25,8 @@ export async function movieContent(uuid) {
         return;
     }
 
+    console.log(movie);
+
     const movieTitle = document.getElementById("movie-title");
     const movieYear = document.getElementById("movie-year");
     const movieTime = document.getElementById("movie-time");
@@ -34,18 +36,6 @@ export async function movieContent(uuid) {
     const hoursTime = Math.floor(movie.time / 60);
     const minutesTime = movieTime - hoursTime * 60;
     const displayMinutesTime = minutesTime > 9 ? "0" + minutesTime : minutesTime;
-
-    const genres = movieGenres
-        .trim()
-        .split(";")
-        .map(g => g.trim())
-        .filter(g => g.length > 0);
-    
-    genres.forEach(genre => {
-        const spanGenre = document.createElement("span");
-        spanGenre.classList.add("tag");
-        movieGenres.appendChild(spanGenre);
-    });
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
