@@ -24,35 +24,35 @@
 
       <form id="movie-form">
 
-        <div class="field">
-          <div>
-            <label class="label">Réalisateur(s)</label>
+        <div class="buttons my-4">
+          <button id="add-director" class="button" type="button">Ajouter un réalisateur</button>
+          <button id="addScreenwriter" class="button" type="button">Ajouter un scénariste</button>
+        </div>
 
-            <div class="buttons my-4">
-              <button id="add-director" class="button" type="button">Ajouter un réalisateur</button>
-              <button id="addScreenwriter" class="button" type="button">Ajouter un scénariste</button>
+        <div class="block">
+          <h3 class="subtitle is-4">Réalisateur(s)</h3>
+          <div id="div-director-1">
+            <div class="field select is-multiple">
+              <select multiple="multiple" size="8" id="select-director-1" style="width: 100%;" required>
+                <option value=""></option>
+              </select>
             </div>
 
-            <div id="div-director-1">
-              <div class="block select is-multiple">
-                <select multiple="multiple" size="8" id="select-director-1" style="width: 100%;" required>
-                  <option value=""></option>
-                </select>
+            <div id="add-new-director-1" class="block" style="display: none;">
+              <h4 class="subtitle is-5">Nouveau réalisateur :</h4>
+              <div class="field"><input type="text" name="first-name-director-1" id="first-name-director-1" class="input" placeholder="Prénom…" /></div>
+              <div class="field"><input type="text" name="last-name-director-1" id="last-name-director-1" class="input" placeholder="Nom…" /></div>
+              <div class="field"><input type="date" name="birthdate-director-1" id="birthdate-director-1" class="input" /></div>
+              <div class="field"><input type="checkbox" name="is-dead-director-1" id="is-dead-director-1"> <label for="is-dead-director-1">Mort</label></div>
+              <div class="field"><input type="date" name="deathdate-director-1" id="deathdate-director-1" class="input" style="display: none;" /></div>
+              <div class="field">
+                <label class="label">Casquettes :</label>
+                <input value="director" type="checkbox" class="checkbox" id="job-director-1-director" checked /> <label for="job-director-1-director">Réalisateur</label>
+                <input value="producer" type="checkbox" class="checkbox" id="job-director-1-producer" /> <label for="job-director-1-producer">Producteur</label>
+                <input value="scriptwriter" type="checkbox" class="checkbox" id="job-director-1-scriptwriter" /> <label for="job-director-1-scriptwriter">Scénariste</label>
+                <input value="actor" type="checkbox" class="checkbox" id="job-director-1-actor" /> <label for="job-director-1-actor">Acteur</label>
               </div>
-              <div id="add-new-director-1" class="field" style="display: none;">
-                <label class="label">Nouveau réalisateur :</label>
-                <input type="text" name="first-name-director-1" id="first-name-director-1" class="input" placeholder="Prénom…" />
-                <input type="text" name="last-name-director-1" id="last-name-director-1" class="input" placeholder="Nom…" />
-                <input type="date" name="birthdate-director-1" id="birthdate-director-1" class="input" />
-                <input type="checkbox" name="is-dead-director-1" id="is-dead-director-1"> <label for="is-dead-director-1">Mort</label>
-                <input type="date" name="deathdate-director-1" id="deathdate-director-1" class="input" style="display: none;" />
-                <div>
-                  <label class="label">Casquettes :</label>
-                  <input value="director" type="checkbox" class="checkbox" id="job-director-1-director" checked /> <label for="job-director-1-director">Réalisateur</label>
-                  <input value="producer" type="checkbox" class="checkbox" id="job-director-1-producer" /> <label for="job-director-1-producer">Producteur</label>
-                  <input value="scriptwriter" type="checkbox" class="checkbox" id="job-director-1-scriptwriter" /> <label for="job-director-1-scriptwriter">Scénariste</label>
-                  <input value="actor" type="checkbox" class="checkbox" id="job-director-1-actor" /> <label for="job-director-1-actor">Acteur</label>
-                </div>
+              <div class="field">
                 <div class="select is-multiple">
                   <label for="nationalities-director-1" class="label"></label>
                   <select multiple="multiple" size="8" id="nationalities-director-1" style="width: 100%;" >
@@ -61,29 +61,40 @@
                 </div>
               </div>
             </div>
+          </div>
 
-            <div id="div-director-2" class="is-hidden">
-              <div class="columns"></div>
-                <button class="column button delete is-large" id="delete-director-2"></button> 
-                <div class="column select is-multiple">
+          <div id="div-director-2" class="is-hidden">
+
+            <div class="columns">
+
+              <div class="column is-1">
+                <button class="button delete is-large" id="delete-director-2"></button>
+              </div>
+              <div class="column is-11">
+                <div class="select is-multiple">
                   <select multiple="multiple" size="8" id="select-director-2" style="width: 100%;" >
                     <option value=""></option>
                   </select>
                 </div>
-              <div id="add-new-director-2" class="field is-hidden">
-                <label class="label">Nouveau réalisateur :</label>
-                <input type="text" name="first-name-director-2" id="first-name-director-2" class="input" placeholder="Prénom…" />
-                <input type="text" name="last-name-director-2" id="last-name-director-2" class="input" placeholder="Nom…" />
-                <input type="date" name="birthdate-director-2" id="birthdate-director-2" class="input" />
-                <input type="checkbox" name="is-dead-director-2" id="is-dead-director-2"> <label for="is-dead-director-2">Mort</label>
-                <input type="date" name="deathdate-director-2" id="deathdate-director-2" class="input" style="display: none;" />
-                <div>
-                  <label class="label">Casquettes :</label>
-                  <input value="director" type="checkbox" class="checkbox" id="job-director-2-director" checked /> <label for="job-director-2-director">Réalisateur</label>
-                  <input value="producer" type="checkbox" class="checkbox" id="job-director-2-producer" /> <label for="job-director-2-producer">Producteur</label>
-                  <input value="scriptwriter" type="checkbox" class="checkbox" id="job-director-2-scriptwriter" /> <label for="job-director-2-scriptwriter">Scénariste</label>
-                  <input value="actor" type="checkbox" class="checkbox" id="job-director-2-actor" /> <label for="job-director-2-actor">Acteur</label>
-                </div>
+              </div>
+
+            </div>
+            
+            <div id="add-new-director-2" class="field is-hidden">
+              <h4 class="subtitle is-5">Nouveau réalisateur :</h4>
+              <div class="field"><input type="text" name="first-name-director-2" id="first-name-director-2" class="input" placeholder="Prénom…" /></div>
+              <div class="field"><input type="text" name="last-name-director-2" id="last-name-director-2" class="input" placeholder="Nom…" /></div>
+              <div class="field"><input type="date" name="birthdate-director-2" id="birthdate-director-2" class="input" /></div>
+              <div class="field"><input type="checkbox" name="is-dead-director-2" id="is-dead-director-2"> <label for="is-dead-director-2">Mort</label></div>
+              <div class="field"><input type="date" name="deathdate-director-2" id="deathdate-director-2" class="input" style="display: none;" /></div>
+              <div class="field">
+                <label class="label">Casquettes :</label>
+                <input value="director" type="checkbox" class="checkbox" id="job-director-2-director" checked /> <label for="job-director-2-director">Réalisateur</label>
+                <input value="producer" type="checkbox" class="checkbox" id="job-director-2-producer" /> <label for="job-director-2-producer">Producteur</label>
+                <input value="scriptwriter" type="checkbox" class="checkbox" id="job-director-2-scriptwriter" /> <label for="job-director-2-scriptwriter">Scénariste</label>
+                <input value="actor" type="checkbox" class="checkbox" id="job-director-2-actor" /> <label for="job-director-2-actor">Acteur</label>
+              </div>
+              <div class="field">
                 <div class="select is-multiple">
                   <label for="nationalities-director-2" class="label"></label>
                   <select multiple="multiple" size="8" id="nationalities-director-2" style="width: 100%;" >
@@ -93,29 +104,40 @@
               </div>
             </div>
 
-            <div id="div-director-3" class="is-hidden">
-              <div class="select is-multiple">
-                <button class="column button delete is-large" id="delete-director-3"></button> 
-                <div class="column select is-multiple">
+          </div>
+
+          <div id="div-director-3" class="is-hidden">
+
+            <div class="columns">
+
+              <div class="column is-1">
+                <button class="button delete is-large" id="delete-director-3"></button>
+              </div>
+              <div class="column is-11">
+                <div class="select is-multiple">
                   <select multiple="multiple" size="8" id="select-director-3" style="width: 100%;" >
                     <option value=""></option>
                   </select>
                 </div>
               </div>
-              <div id="add-new-director-3" class="field is-hidden">
-                <label class="label">Nouveau réalisateur :</label>
-                <input type="text" name="first-name-director-3" id="first-name-director-3" class="input" placeholder="Prénom…" />
-                <input type="text" name="last-name-director-3" id="last-name-director-3" class="input" placeholder="Nom…" />
-                <input type="date" name="birthdate-director-3" id="birthdate-director-3" class="input" />
-                <input type="checkbox" name="is-dead-director-3" id="is-dead-director-3"> <label for="is-dead-director-3">Mort</label>
-                <input type="date" name="deathdate-director-3" id="deathdate-director-3" class="input" style="display: none;" />
-                <div>
-                  <label class="label">Casquettes :</label>
-                  <input value="director" type="checkbox" class="checkbox" id="job-director-3-director" checked /> <label for="job-director-3-director">Réalisateur</label>
-                  <input value="producer" type="checkbox" class="checkbox" id="job-director-3-producer" /> <label for="job-director-3-producer">Producteur</label>
-                  <input value="scriptwriter" type="checkbox" class="checkbox" id="job-director-3-scriptwriter" /> <label for="job-director-3-scriptwriter">Scénariste</label>
-                  <input value="actor" type="checkbox" class="checkbox" id="job-director-3-actor" /> <label for="job-director-3-actor">Acteur</label>
-                </div>
+
+            </div>
+
+            <div id="add-new-director-3" class="field is-hidden">
+              <h4 class="subtitle is-5">Nouveau réalisateur :</h4>
+              <div class="field"><input type="text" name="first-name-director-3" id="first-name-director-3" class="input" placeholder="Prénom…" /></div>
+              <div class="field"><input type="text" name="last-name-director-3" id="last-name-director-3" class="input" placeholder="Nom…" /></div>
+              <div class="field"><input type="date" name="birthdate-director-3" id="birthdate-director-3" class="input" /></div>
+              <div class="field"><input type="checkbox" name="is-dead-director-3" id="is-dead-director-3"> <label for="is-dead-director-3">Mort</label></div>
+              <div class="field"><input type="date" name="deathdate-director-3" id="deathdate-director-3" class="input" style="display: none;" /></div>
+              <div class="field">
+                <label class="label">Casquettes :</label>
+                <input value="director" type="checkbox" class="checkbox" id="job-director-3-director" checked /> <label for="job-director-3-director">Réalisateur</label>
+                <input value="producer" type="checkbox" class="checkbox" id="job-director-3-producer" /> <label for="job-director-3-producer">Producteur</label>
+                <input value="scriptwriter" type="checkbox" class="checkbox" id="job-director-3-scriptwriter" /> <label for="job-director-3-scriptwriter">Scénariste</label>
+                <input value="actor" type="checkbox" class="checkbox" id="job-director-3-actor" /> <label for="job-director-3-actor">Acteur</label>
+              </div>
+              <div class="field">
                 <div class="select is-multiple">
                   <label for="nationalities-director-3" class="label"></label>
                   <select multiple="multiple" size="8" id="nationalities-director-3" style="width: 100%;" >
@@ -124,19 +146,17 @@
                 </div>
               </div>
             </div>
-
+            
+            <div class="control">
+              <button class="button is-primary" type="submit" id="submit">
+                Compléter le film
+              </button>
+            </div>
           </div>
-        </div>
-
-        <div class="control">
-          <button class="button is-primary" type="submit" id="submit">
-            Compléter le film
-          </button>
         </div>
       </form>
     </div>
   </div>
-
 </section>
 
 <!-- JS -->
