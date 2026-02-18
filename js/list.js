@@ -405,6 +405,57 @@ function sortMovies(movies) {
   });
 }
 
+function changeOrder(field, direction) {
+  order.field = field;
+  order.direction = direction;
+
+  filteredMovies = sortMovies(filteredMovies);
+  renderMovies();
+}
+
+export function sortFilterMovies() {
+  const sortAZ = document.getElementById("sort-az");
+  const sortZA = document.getElementById("sort-za");
+  const sort19 = document.getElementById("sort-19");
+  const sort91 = document.getElementById("sort-91");
+
+  sortAZ.addEventListener("click", () =>{
+    sortAZ.style.display = "none";
+    sortZA.style.display = "inline";
+    sort19.style.display = "inline";
+    sort91.style.display = "inline";
+
+    changeOrder("title", "asc");
+  });
+
+  sortZA.addEventListener("click", () => {
+    sortAZ.style.display = "inline";
+    sortZA.style.display = "none";
+    sort19.style.display = "inline";
+    sort91.style.display = "inline";
+
+    changeOrder("title", "desc");
+  });
+
+  sort19.addEventListener("click", () => {
+    sortAZ.style.display = "inline";
+    sortZA.style.display = "inline";
+    sort19.style.display = "none";
+    sort91.style.display = "inline";
+
+    changeOrder("year", "asc");
+  });
+
+  sort91.addEventListener("click", () => {
+    sortAZ.style.display = "inline";
+    sortZA.style.display = "inline";
+    sort19.style.display = "inline";
+    sort91.style.display = "none";
+
+    changeOrder("year", "desc");
+  });
+}
+
 async function renderMovies() {
 
   const container = document.getElementById("list-all-movies");
