@@ -1,4 +1,5 @@
 import { supabase } from "/Elina/js/supabase.js";
+import { loadProfile } from "/Elina/js/supabase.js";
 
 function formatFrenchTypography(text) {
   const nbsp = "\u202F";
@@ -14,18 +15,36 @@ function formatFrenchTypography(text) {
 }
 
 export async function movieContent(uuid) {
-    const { data:movie, error } = await supabase
-    .from("movies")
-    .select(`*, users_movies(user_id, seen, own-poster)`)
-    .eq("id", uuid)
-    .single();
+    const session = loadProfile();
+    let poster;
 
-    if (error) {
-        console.error(error);
+    const { data:movie, error: errorMovie } = await supabase
+        .from("movies")
+        .select("*")
+        .eq("id", uuid)
+        .single();
+
+    if (errorMovie) {
+        console.log(errorMovie);
         return;
     }
 
-    console.log(movie);
+    const { data: movieUser, error: errorUser } = await supabase
+        .from(users_movies)
+        .select("*")
+        .eq("movie_id", uuid)
+        .eq("user_id", session.id)
+    
+    if (errorUser) {
+        console.log(errorUser);
+        return;
+    }
+
+    if (movieUser) {
+        poster = movieUser.own_poster ? movieUser.own_poster : movie.poster;
+    } else poster = movie.poster;
+
+    console.log(movie.genres);
 
     const movieTitle = document.getElementById("movie-title");
     const movieYear = document.getElementById("movie-year");
@@ -40,7 +59,7 @@ export async function movieContent(uuid) {
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
-    moviePoster.src = movie.poster;
+    moviePoster.src = poster;
     movieTime.textContent = hoursTime + "h " + displayMinutesTime;
     movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
 
