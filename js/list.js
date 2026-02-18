@@ -414,6 +414,9 @@ function changeOrder(field, direction) {
 }
 
 export function sortFilterMovies() {
+  const btnSort = document.getElementById("button-content-sort");
+  const contentSort = document.getElementById("dropdown-content-sort");
+
   const sortAZ = document.getElementById("sort-az");
   const sortZA = document.getElementById("sort-za");
   const sort19 = document.getElementById("sort-19");
