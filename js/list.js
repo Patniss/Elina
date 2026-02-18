@@ -13,12 +13,15 @@ let order = {
   direction: "desc"
 }
 
-// FONCTIONS LISTES & CARDS
+// ----------
+// FONCTION POUR CRÉER UNE CARTE FILM (GÉNÉRAL)
+// ----------
 async function createMovieCard(movie) {
+  // ❶ Récupérer la session
   const session = await loadProfile();
   const userId = session.id;
-  const allMovieContainer = document.getElementById("list-all-movies");
 
+  // Création de la carte
   const column = document.createElement("div");
   column.classList.add("column", "is-one-quarter");
 
@@ -60,6 +63,7 @@ async function createMovieCard(movie) {
   seenMovieBtn.classList.add("tag", "button", "is-hoverable", "is-success", "mr-2");
   seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
 
+  // Gestion des tags en fonction du statut perso du film
   switch (movie.seen) {
     case null:
       divTags.appendChild(addMovieBtn);
@@ -94,6 +98,7 @@ async function createMovieCard(movie) {
   
   card.appendChild(cardFigure);
 
+  // Gestion de l'action "Ajouter le film"
   addMovieBtn.addEventListener("click", async () => {
     addMovieBtn.textContent = "";
     addMovieBtn.classList.remove("is-link");
@@ -147,6 +152,7 @@ async function createMovieCard(movie) {
     
   })
 
+  // Gestion de l'action "Supprimer le film"
   suppMovieBtn.addEventListener("click", async () => {
     suppMovieBtn.textContent = "";
     suppMovieBtn.classList.add("is-loading");
@@ -187,6 +193,7 @@ async function createMovieCard(movie) {
     }, 500);
   })
 
+  // Gestion de l'action "J'ai vu"
   viewMovieBtn.addEventListener("click", async () => {
   viewMovieBtn.textContent = "";
   viewMovieBtn.classList.add("is-loading");
@@ -231,6 +238,7 @@ async function createMovieCard(movie) {
   
   });
   
+  // Gestion de l'action "Vu" (retirer le tag Vu pour décocher) ----> Évolution prochaine : vu plusieurs fois ou non vu ?
   seenMovieBtn.addEventListener("click", async () => {
     seenMovieBtn.textContent = "";
     seenMovieBtn.classList.add("is-loading");
@@ -276,6 +284,9 @@ async function createMovieCard(movie) {
   return column;
 }
 
+// ----------
+// FONCTION DE PAGINATION GÉNÉRALE
+// ----------
 function renderPagination() {
   const pagination = document.getElementById("pagination_nb");
   pagination.innerHTML = "";
@@ -383,6 +394,9 @@ function renderPagination() {
   pagination.appendChild(nextBtn);
 }
 
+// ----------
+// FONCTION DE TRI DES FILMS
+// ----------
 function sortMovies(movies) {
   return [...movies].sort((a, b) => {
     const field = order.field;
@@ -405,6 +419,9 @@ function sortMovies(movies) {
   });
 }
 
+// ----------
+// FONCTION CHANGER L'ORDRE DE TRI (GÉNÉRAL)
+// ----------
 function changeOrder(field, direction) {
   order.field = field;
   order.direction = direction;
@@ -413,6 +430,9 @@ function changeOrder(field, direction) {
   renderMovies();
 }
 
+// ----------
+// FONCTION CLIQUE DES BOUTONS DE TRI / FILTRE
+// ----------
 export function sortFilterMovies() {
   const btnSort = document.getElementById("button-content-sort");
   const contentSort = document.getElementById("dropdown-content-sort");
@@ -459,8 +479,10 @@ export function sortFilterMovies() {
   });
 }
 
+// ----------
+// FONCTION D'AFFICHAGE DES FILMS CHARGÉS
+// ----------
 async function renderMovies() {
-
   const container = document.getElementById("list-all-movies");
   container.innerHTML = "";
 
@@ -476,6 +498,9 @@ async function renderMovies() {
   renderPagination();
 }
 
+// ----------
+// FONCTION DE RECHERCHE DANS LA BASE DE DONNÉES DES FILMS (VOIR SI POSSIBILITÉ DE GÉNÉRALISER ?)
+// ----------
 export function initResearch() {
   $("#movie-search").on("input", function () {
     
@@ -506,6 +531,9 @@ export function initResearch() {
   });
 }
 
+// -----------
+// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS
+// ----------
 export async function loadAllMovies() {
   const allMovieContainer = document.getElementById("list-all-movies");
 
@@ -539,6 +567,9 @@ export async function loadAllMovies() {
   renderMovies();
 }
 
+// ----------
+// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS À VOIR -----> FONCTION À RETRAVAILLER ET REGROUPER AVEC LA FONCTION LOADSEENMOVIE
+// ----------
 export async function loadToseeMovies() {
   const toseeContainer = document.getElementById("list-tosee-movies");
   const seenContainer = document.getElementById("list-seen-movies");
@@ -737,6 +768,9 @@ export async function loadToseeMovies() {
   });
 }
 
+// ----------
+// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS VUS -----> FONCTION À RETRAVAILLER ET REGROUPER AVEC LA FONCTION LOADTOSEEMOVIES
+// ----------
 export async function loadSeenMovies() {
   const seenContainer = document.getElementById("list-seen-movies");
   const toseeContainer = document.getElementById("list-tosee-movies");
@@ -882,9 +916,9 @@ export async function loadSeenMovies() {
   });
 }
 
-
-// FONCTION INCOMPLETE
-
+// ----------
+// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS À COMPLÉTER
+// ----------
 export async function loadIncompleteMovies() {
   const incompleteMoviesContainer = document.getElementById("list-incomplete-movies");
   if (!incompleteMoviesContainer) return;
@@ -949,61 +983,7 @@ export async function loadIncompleteMovies() {
 
 }
 
-export async function loadIncompletePeople() {
-  if (!incompletePeopleContainer) return;
-
-  const { data, error } = await supabase
-    .from("people")
-    .select("*")
-    .eq("complete", false)
-    .order("lastname", { ascending: true })
-
-  if (error) {
-    console.error(error);
-    incompletePeopleContainer.textContent = "Erreur lors du chargement des personnalités.";
-    return;
-  }
-
-  if (data.length === 0) {
-    incompletePeopleContainer.textContent = "Aucune personnalité à compléter ! Tout est à jour.";
-    return;
-  }
-
-  data.forEach((p) => {
-    const agePeople = p.deathdate === null ? calculateAge(p.birthdate) : "✝ " + calculateAge(p.birthdate, p.deathdate);
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
-    const card = document.createElement("div");
-    card.classList.add("card");
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
-    pTitle.textContent = p.firstname !== null ? `${p.firstname} ${p.lastname}` : p.lastname;
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("subtitle");
-    pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = agePeople + " ans";
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex-direction-row");
-    const completeBtn = document.createElement("a");
-    completeBtn.classList.add("tag");
-    completeBtn.textContent = "Compléter";
-    completeBtn.href = `/Elina/movies/people/complete.html?id=${p.id}`;
-
-    divTags.appendChild(completeBtn);
-    cardContent.append(pTitle, pSubtitle, divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-
-    incompletePeopleContainer.appendChild(column);
-    
-  });
-}
-
-// FONCTIONS SUR LES SÉRIES 
+// FONCTIONS SUR LES SÉRIES ----> À COMPLÉTER (VIDE)
 export async function loadAllShows() {
   const allShowsContainer = document.getElementById("list-all-shows");
 
