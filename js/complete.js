@@ -218,6 +218,7 @@ export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
 
     const addDirector = document.getElementById("add-director");
+    const addScriptwriter = document.getElementById("add-scriptwriter")
     
     const divDirector1 = document.getElementById("div-director-1");
     const selectDirector1 = document.getElementById("select-director-1");
@@ -250,6 +251,16 @@ export async function completeMovie(uuid) {
     const isDeadDirector3 = document.getElementById("is-dead-director-3");
     const deathdateDirector3 = document.getElementById("deathdate-director-3");
     const nationalitiesDirector3 = document.getElementById("nationalities-director-3");
+
+    const divScriptwriter1 = document.getElementById("div-scriptwriter-1");
+    const selectScriptwriter1 = document.getElementById("select-scriptwriter-1");
+    const addNewScriptwriter1 = document.getElementById("add-new-scriptwriter-1");
+    const firstNameScriptwriter1 = document.getElementById("first-name-scriptwriter-1");
+    const lastNameScriptwriter1 = document.getElementById("last-name-scriptwriter-1");
+    const birthdateScriptwriter1 = document.getElementById("birthdate-scriptwriter-1");
+    const isDeadScriptwriter1 = document.getElementById("is-dead-scriptwriter-1");
+    const deathdateScriptwriter1 = document.getElementById("deathdate-scriptwriter-1");
+    const nationalitiesScriptwriter1 = document.getElementById("nationalities-scriptwriter-1");
 
     const { data: movie, error: errorMovie } = await supabase
         .from("movies")
@@ -285,6 +296,9 @@ export async function completeMovie(uuid) {
         selectDirector3.append(
             new Option(completeName, p.id, false, false)
         );
+        selectScriptwriter1.append(
+            new Option(completeName, p.id, false, false)
+        )
     });
 
     Object.entries(nationalities).forEach(([iso, country]) => {
@@ -297,6 +311,9 @@ export async function completeMovie(uuid) {
         nationalitiesDirector3.append(
             new Option(country, iso, false, false)
         );
+        nationalitiesScriptwriter1.append(
+            new Option(country, iso, false, false)
+        )
     });
 
     $(nationalitiesDirector1).select2({
@@ -312,7 +329,12 @@ export async function completeMovie(uuid) {
     $(nationalitiesDirector3).select2({
         placeholder: "Nationalité(s)",
         allowClear: true
-    })
+    });
+
+    $(nationalitiesScriptwriter1).select2({
+        placeholder: "Nationalité(s)",
+        allowClear: true
+    });
 
     addDirector.addEventListener("click", () => {
         if (divDirector2.classList.contains("is-hidden")) {
@@ -485,6 +507,36 @@ export async function completeMovie(uuid) {
         birthdateDirector3.required = false;
     });
 
+    $(selectScriptwriter1).on("select2:select", function(e) {
+        const data = e.params.data;
+        if (data.newTag) {
+            addNewScriptwriter1.style.display = "block";
+
+            const parts = data.text.trim().split(/\s+/);
+            const testFirstNameScriptwriter1 = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+            const testLastNameScriptwriter1 = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
+
+            firstNameScriptwriter1.value = testFirstNameScriptwriter1;
+            firstNameScriptwriter1.required = true;
+
+            lastNameScriptwriter1.value = testLastNameScriptwriter1;
+            lastNameScriptwriter1.required = true;
+
+            birthdateScriptwriter1.required = true;
+        }
+    })
+    .on("select2:clear", function() {
+        addNewScriptwriter1.style.display = "none";
+
+        firstNameScriptwriter1.value = "";
+        firstNameScriptwriter1.required = false;
+
+        lastNameScriptwriter1.value = "";
+        lastNameScriptwriter1.required = false;
+
+        birthdateScriptwriter1.required = false;
+    });
+
     isDeadDirector1.addEventListener("change", () => {
         if (isDeadDirector1.checked === true) {
             deathdateDirector1.style.display = "inline";
@@ -506,6 +558,14 @@ export async function completeMovie(uuid) {
             deathdateDirector3.style.display = "inline";
         } else {
             deathdateDirector3.style.display = "none";
+        }
+    });
+
+    isDeadScriptwriter1.addEventListener("change", () => {
+        if (isDeadScriptwriter1.checked === true) {
+            deathdateScriptwriter1.style.display = "inline";
+        } else {
+            deathdateScriptwriter1.style.display = "none";
         }
     });
 }
