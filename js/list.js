@@ -6,7 +6,9 @@ import { loadProfile } from "/Elina/js/dashboard.js";
 // VARIABLES BASIQUES
 let allMovies = [];
 let filteredMovies = [];
-let currentPage = 1;
+let currentPageAll = 1;
+let currentPageTosee = 1;
+let currentPageSeen = 1;
 const pageSize = 20;
 let order = {
   field: "year",
@@ -286,10 +288,10 @@ async function createMovieCard(movie) {
 }
 
 // ----------
-// FONCTION DE PAGINATION GÉNÉRALE
+// FONCTIONS DE PAGINATION :
 // ----------
-function renderPagination() {
-  const pagination = document.getElementById("pagination_nb");
+function renderPagination({containerId, currentPage, setCurrentPage, totalItems}) {
+  const pagination = document.getElementById(containerId);
   pagination.innerHTML = "";
 
   const totalPages = Math.ceil(filteredMovies.length / pageSize);
@@ -310,7 +312,7 @@ function renderPagination() {
 
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      currentPage = page;
+      setCurrentPage(page);
       renderMovies();
     });
 
@@ -329,7 +331,7 @@ function renderPagination() {
   } else {
     prevBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      currentPage--;
+      setCurrentPage(currentPage - 1);
       renderMovies();
     });
   }
@@ -387,12 +389,40 @@ function renderPagination() {
   } else {
     nextBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      currentPage++;
+      setCurrentPage(currentPage + 1);
       renderMovies();
     });
   }
 
   pagination.appendChild(nextBtn);
+}
+
+function renderPaginationAll(totalItems) {
+  renderPagination({
+    containerId: "pagination_nb",
+    currentPage: currentPageAll,
+    setCurrentPage: (page) => currentPageAll = page,
+    totalItems
+  });
+}
+
+
+function renderPaginationTosee(totalItems) {
+  renderPagination({
+    containerId: "pagination_nb_tosee",
+    currentPage: currentPageTosee,
+    setCurrentPage: (page) => currentPageTosee = page,
+    totalItems
+  });
+}
+
+function renderPaginationSeen(totalItems) {
+  renderPagination({
+    containerId: "pagination_nb_seen",
+    currentPage: currentPageSeen,
+    setCurrentPage: (page) => currentPageSeen = page,
+    totalItems
+  });
 }
 
 // ----------
@@ -687,19 +717,59 @@ export function sortFilterMovies() {
 // FONCTION D'AFFICHAGE DES FILMS CHARGÉS
 // ----------
 async function renderMovies() {
-  const container = document.getElementById("list-all-movies");
-  container.innerHTML = "";
+  const containerAllMovies = document.getElementById("list-all-movies");
+  const containerToseeMovies = document.getElementById("list-tosee-movies");
+  const containerSeenMovies = document.getElementById("list-seen-movies");
 
-  const start = (currentPage - 1) * pageSize;
-  const end = start + pageSize;
+  if (containerAllMovies) {
+    containerAllMovies.innerHTML = "";
 
-  const pageMovies = filteredMovies.slice(start, end);
+    const start = (currentPageAll - 1) * pageSize;
+    const end = start + pageSize;
 
-  pageMovies.forEach(async movie => {
-    container.appendChild(await createMovieCard(movie));
-  });
+    const pageMovies = filteredMovies.slice(start, end);
 
-  renderPagination();
+    for (const movie of pageMovies) {
+      containerAllMovies.appendChild(await createMovieCard(movie));
+    }
+
+    renderPaginationAll(filteredMovies.length);
+    return;
+  }
+
+  if (containerToseeMovies && containerSeenMovies) {
+    containerToseeMovies.innerHTML = "";
+    containerSeenMovies.innerHTML = "";
+
+    const toSeeMovies = filteredMovies.filter(movie =>
+      movie.users_movies?.some(rel => rel.seen === false)
+    );
+
+    const seenMovies = filteredMovies.filter(movie =>
+      movie.users_movies?.some(rel => rel.seen === true)
+    );
+
+    const startTosee = (currentPageTosee - 1) * pageSize;
+    const endTosee = startTosee + pageSize;
+
+    const pageToSee = toSeeMovies.slice(startTosee, endTosee);
+
+    const startSeen = (currentPageSeen - 1) * pageSize;
+    const endSeen = startSeen + pageSize;
+
+    const pageSeen = seenMovies.slice(startSeen, endSeen);
+
+    for (const movie of pageToSee) {
+      containerToseeMovies.appendChild(await createMovieCard(movie));
+    }
+
+    for (const movie of pageSeen) {
+      containerSeenMovies.appendChild(await createMovieCard(movie));
+    }
+
+    renderPaginationTosee(toSeeMovies.length);
+    renderPaginationSeen(seenMovies.length);
+  }
 }
 
 // ----------
@@ -765,6 +835,7 @@ export async function loadAllMovies() {
   if (error) {
     console.error(error);
     allMovieContainer.textContent = "Erreur lors du chargement des films.";
+    return;
   }
   
   const moviesWithStatus = data.map(movie => {
@@ -786,352 +857,51 @@ export async function loadAllMovies() {
 }
 
 // ----------
-// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS À VOIR -----> FONCTION À RETRAVAILLER ET REGROUPER AVEC LA FONCTION LOADSEENMOVIE
+// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS DE MA LISTE
 // ----------
-export async function loadToseeMovies() {
+export async function loadMyMovies() {
   const toseeContainer = document.getElementById("list-tosee-movies");
   const seenContainer = document.getElementById("list-seen-movies");
 
   const profile = await loadProfile();
   const userId = profile.id;
 
-  const { data: toseeMovies, error: errorTooseeMovies } = await supabase
+  let order = {
+    field: "seen",
+    direction: "desc"
+  };
+
+  let query = supabase
     .from("users_movies")
-    .select(`*, movies (*)`)
-    .eq("user_id", userId)
-    .eq("seen", false)
-    .order("date_seen", { ascending: false })
-    .order("title", { foreignTable: "movies", ascending: true })
-    
-  if (errorTooseeMovies) {
-    console.error(errorTooseeMovies);
+    .select(`*, movies(*)`);
+  
+  if (order.field === "seen") {
+    query = query
+      .order("seen", { ascending: order.direction === "asc" })
+      .order("title", { ascending: true });
+  } else if(order.field === "title") {
+    query = query.order("title", { ascending: order.direction === "asc" })
+  } else if(order.field === "year") {
+    query = query.order("year", { ascending: order.direction === "asc" })
+  }
+
+  if (genreFilter !== "") {
+    query = query.ilike("genres", `%${genreFilter}%`);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error(error);
     toseeContainer.textContent = "Erreur lors du chargement des films.";
+    seenContainer.textContent = "Erreur lors du chargement des films.";
     return;
   }
 
-  toseeMovies.forEach(item => {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
+  allMovies = data;
+  filteredMovies = sortMovies(data);
 
-    const card = document.createElement("div");
-    card.classList.add("card");
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
-    pTitle.textContent = item.movies.title;
-
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("subtitle");
-    pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = item.movies.year;
-
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex");
-
-    const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag");
-    detailsBtn.classList.add("is-hoverable");
-    detailsBtn.classList.add("mr-2");
-    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-    detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
-
-    const toSeeBtn = document.createElement("button");
-    toSeeBtn.classList.add("tag");
-    toSeeBtn.classList.add("button");
-    toSeeBtn.classList.add("is-success");
-    toSeeBtn.classList.add("is-light");
-    toSeeBtn.classList.add("is-hoverable");
-    toSeeBtn.classList.add("mr-2");
-    toSeeBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-
-    const toSuppBtn = document.createElement("button");
-    toSuppBtn.classList.add("tag");
-    toSuppBtn.classList.add("button");
-    toSuppBtn.classList.add("is-hoverable");
-    toSuppBtn.classList.add("is-danger");
-    toSuppBtn.classList.add("is-light");
-    toSuppBtn.classList.add("mr-2");
-    toSuppBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
-
-    const seenBtn = document.createElement("button");
-    seenBtn.classList.add("tag");
-    seenBtn.classList.add("button");
-    seenBtn.classList.add("is-hoverable");
-    seenBtn.classList.add("is-success");
-    seenBtn.classList.add("mr-2");
-    seenBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-
-    divTags.append(toSeeBtn, toSuppBtn, detailsBtn);
-    cardContent.append(pTitle, pSubtitle, divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-
-    if (item.movies.poster !== null) {
-      const cardFigure = document.createElement("div");
-      cardFigure.classList.add("card-content", "column", "is-4");
-      
-      const figurePoster = document.createElement("figure");
-      figurePoster.classList.add("image", "poster-wrapper", "is-2by3", "media-right");
-      
-      const imgPoster = document.createElement("img");
-      imgPoster.src = item.movies.poster;
-      
-      figurePoster.appendChild(imgPoster);
-      cardFigure.appendChild(figurePoster);
-
-      cardContent.classList.add("column", "is-8");
-      
-      card.classList.add("columns", "is-mobile", "is-align-items-center");
-      
-      card.appendChild(cardFigure);
-    }
-
-    toseeContainer.appendChild(column);
-
-    toSeeBtn.addEventListener("click", async () => {
-      toSeeBtn.textContent = "";
-      toSeeBtn.classList.remove("is-light");
-      toSeeBtn.classList.add("is-loading");
-
-      try {
-        const { data, error } = await supabase
-          .from("users_movies")
-          .update({ seen: true })
-          .eq("user_id", userId)
-          .eq("movie_id", item.movie_id)
-          .single();
-
-          if (error) {
-            setTimeout(() => {
-              toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-              toSeeBtn.classList.remove("is-success");
-              toSeeBtn.classList.remove("is-light");
-              toSeeBtn.classList.remove("is-loading");
-              toSeeBtn.classList.add("is-danger");
-            }, 500);
-            return;
-          }
-
-          setTimeout(() => {
-            toSeeBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-            toSeeBtn.classList.add("is-light");
-            toSeeBtn.classList.remove("is-loading");
-
-            divTags.innerHTML = "";
-            divTags.append(seenBtn, detailsBtn);
-
-            setTimeout(() => {
-              toseeContainer.removeChild(column);
-              seenContainer.appendChild(column);
-            }, 500);
-          }, 500);
-
-      } catch (err) {
-        console.error("Erreur :", error);
-        setTimeout(() => {
-          toSeeBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          toSeeBtn.classList.remove("is-success");
-          toSeeBtn.classList.remove("is-light");
-          toSeeBtn.classList.remove("is-loading");
-          toSeeBtn.classList.add("is-danger");
-        }, 500);
-        return;
-      };
-    });
-
-    toSuppBtn.addEventListener("click", async () => {
-      toSuppBtn.textContent = "";
-      toSuppBtn.classList.add("is-loading");
-      toSuppBtn.classList.remove("is-danger");
-      toSuppBtn.classList.add("is-success");
-
-      try {
-        const { data, error } = await supabase
-          .from("users_movies")
-          .delete()
-          .eq("movie_id", item.movie_id)
-          .eq("user_id", userId)
-          .single();
-
-        if (error) {
-          setTimeout(() => {
-            toSuppBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            toSuppBtn.classList.add("is-danger");
-            toSuppBtn.classList.remove("is-success");
-          }, 500);
-          return;
-        }
-
-        toseeContainer.removeChild(column);
-
-        setTimeout(() => {
-          toSuppBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Supprimer</span>`;
-          toSuppBtn.classList.remove("is-loading");
-          toSuppBtn.classList.add("is-danger");
-          toSuppBtn.classList.remove("is-success");
-        }, 500);
-      } catch (err) {
-        setTimeout(() => {
-          toSuppBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          toSuppBtn.classList.add("is-danger");
-          toSuppBtn.classList.remove("is-success");
-        }, 500);
-        return;
-      }
-    });
-  });
-}
-
-// ----------
-// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS VUS -----> FONCTION À RETRAVAILLER ET REGROUPER AVEC LA FONCTION LOADTOSEEMOVIES
-// ----------
-export async function loadSeenMovies() {
-  const seenContainer = document.getElementById("list-seen-movies");
-  const toseeContainer = document.getElementById("list-tosee-movies");
-
-  const profile = await loadProfile();
-  const userId = profile.id;
-
-  const { data: seenMovies, error: errorSeenMovies } = await supabase
-    .from("users_movies")
-    .select(`*, movies (*)`)
-    .eq("user_id", userId)
-    .eq("seen", true)
-    .order("date_seen", { ascending: false })
-    .order("title", { foreignTable: "movies", ascending: true })
-
-  if (errorSeenMovies) {
-    console.error(errorSeenMovies);
-    seenContainer.textContent = "Erreur lors du chargement des fims.";
-    return;
-  }
-
-  seenMovies.forEach(item => {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
-
-    const card = document.createElement("div");
-    card.classList.add("card");
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
-    pTitle.textContent = item.movies.title;
-
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("subtitle");
-    pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = item.movies.year;
-
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex-direction-row");
-
-    const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag");
-    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-    detailsBtn.href = `/Elina/movies/movie.html?id=${item.movie_id}`;
-
-    const seenBtn = document.createElement("button");
-    seenBtn.classList.add("tag");
-    seenBtn.classList.add("button");
-    seenBtn.classList.add("is-hoverable");
-    seenBtn.classList.add("is-success");
-    seenBtn.classList.add("mr-2");
-    seenBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-
-    const suppBtn = document.createElement("button");
-    suppBtn.classList.add("tag");
-    suppBtn.classList.add("button");
-    suppBtn.classList.add("is-hoverable");
-    suppBtn.classList.add("is-danger");
-    suppBtn.classList.add("is-light");
-    suppBtn.classList.add("mr-2");
-    suppBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
-
-    const viewBtn = document.createElement("button");
-    viewBtn.classList.add("tag");
-    viewBtn.classList.add("button");
-    viewBtn.classList.add("is-hoverable");
-    viewBtn.classList.add("is-light");
-    viewBtn.classList.add("is-success");
-    viewBtn.classList.add("mr-2");
-    viewBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-
-    divTags.append(seenBtn, detailsBtn);
-    cardContent.appendChild(pTitle);
-    cardContent.appendChild(pSubtitle);
-    cardContent.appendChild(divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-
-    if (item.movies.poster !== null) {
-      const cardFigure = document.createElement("div");
-      cardFigure.classList.add("card-content", "column", "is-4");
-      
-      const figurePoster = document.createElement("figure");
-      figurePoster.classList.add("image", "poster-wrapper", "is-2by3", "media-right");
-      
-      const imgPoster = document.createElement("img");
-      imgPoster.src = item.movies.poster;
-      
-      figurePoster.appendChild(imgPoster);
-      cardFigure.appendChild(figurePoster);
-
-      cardContent.classList.add("column", "is-8");
-      
-      card.classList.add("columns", "is-mobile", "is-align-items-center");
-      
-      card.appendChild(cardFigure);
-    }
-
-    seenContainer.appendChild(column);
-
-    seenBtn.addEventListener("click", async () => {
-      seenBtn.textContent = "";
-      seenBtn.classList.add("is-loading");
-      
-      try {
-        const { data, error } = await supabase
-          .from("users_movies")
-          .update("seen", false)
-          .eq("user_id", userId)
-          .eq("movie_id", movie.id)
-          .single();
-
-          if (error) {
-            setTimeout(() => {
-              seenBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-              viewBtn.classList.add("is-danger");
-              return;
-            }, 500);
-          }
-
-          setTimeout(() => {
-            divTags.innerHTML = "";
-            divTags.append(viewBtn, supabase, detailsBtn);
-          }, 500);
-
-          setTimeout(() => {
-            seenContainer.removeChild(column);
-            toseeContainer.appendChild(column);
-          }, 500);
-
-      } catch (err) {
-        setTimeout(() => {
-          seenBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          viewBtn.classList.add("is-danger");
-        }, 500);
-        return;
-      }
-    })
-  });
+  renderMovies();
 }
 
 // ----------

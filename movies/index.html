@@ -27,6 +27,10 @@
 
         <h2 class="subtitle">Mes films à voir</h2>
         <div class="columns is-multiline" id="list-tosee-movies"></div>
+
+      <nav class="pagination" role="navigation" aria-label="navigation" id="paginationTosee">
+        <div class="pagination-list" id="pagination_nb_tosee"></div>
+      </nav>
       
       </div>
 
@@ -34,6 +38,10 @@
         
         <h2 class="subtitle">Mes films vus</h2>
         <div class="columns is-multiline" id="list-seen-movies"></div>
+
+      <nav class="pagination" role="navigation" aria-label="navigation" id="paginationSeen">
+        <div class="pagination-list" id="pagination_nb_seen"></div>
+      </nav>
 
       </div>
       
@@ -50,12 +58,7 @@
 
 <script type="module">
   import { loadToseeMovies } from "/Elina/js/list.js";
-  loadToseeMovies();
-</script>
-
-<script type="module">
-  import { loadSeenMovies } from "/Elina/js/list.js";
-  loadSeenMovies();
+  loadMyMovies();
 </script>
 
 <script type="module" src="/Elina/js/guard.js"></script>
