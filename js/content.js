@@ -45,14 +45,15 @@ export async function movieContent(uuid) {
         poster = movieUser.own_poster ?? movie.poster;
     } else poster = movie.poster;
 
-    console.log(movie.genres);
-
     const movieTitle = document.getElementById("movie-title");
     const movieYear = document.getElementById("movie-year");
     const moviePoster = document.getElementById("movie-poster");
     const movieTime = document.getElementById("movie-time");
     const movieSynopsis = document.getElementById("movie-synopsis");
     const movieGenres = document.getElementById("movie-genres");
+
+    genres = movie.genres.trim().split(" ; ");
+    console.log(genres);
 
     const hoursTime = Math.floor(movie.time / 60);
     const minutesTime = movie.time - hoursTime * 60;
@@ -61,7 +62,7 @@ export async function movieContent(uuid) {
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
     moviePoster.src = poster;
-    movieTime.textContent = hoursTime + "h " + displayMinutesTime;
+    movieTime.textContent = hoursTime + "h" + displayMinutesTime;
     movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
 
     const casting = await supabase
