@@ -30,7 +30,7 @@ export async function movieContent(uuid) {
     }
 
     const { data: movieUser, error: errorUser } = await supabase
-        .from(users_movies)
+        .from("users_movies")
         .select("*")
         .eq("movie_id", uuid)
         .eq("user_id", session.id)
