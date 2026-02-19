@@ -106,3 +106,40 @@
 .movie-card .buttons {
   margin-top: auto; /* pousse les boutons en bas */
 }
+
+.tag.action, .tag.artsmartiaux, .tag.horreur {
+  background-color: #A7001E;
+  color: white;
+}
+.tag.animation {
+  background-color: #26474E;
+  color: white;
+}
+.tag.aventure, .tag.fantastique, .tag.western {
+  background-color: #5D7052;
+  color: white;
+}
+.tag.biopic, .tag.guerre, .tag.historique {
+  background-color: #93441A;
+  color: white;
+}
+.tag.comédie, tag.comédie-musicale, .tag.famille, .tag.musique {
+  background-color: #F5DF4D;
+  color: black;
+}
+.tag.crime, .tag.espionnage, .tag.mystère, .tag.policier, .tag.suspense, .tag.thriller {
+  background-color: #F27438;
+  color: white;
+}
+.tag.drame {
+  background-color: #212E53;
+  color: white;
+}
+.tag.romance {
+  background-color: #CA3C66;
+  color: white;
+}
+.tag.science-fiction {
+  background-color: #4AA3A2;
+  color: white;
+}

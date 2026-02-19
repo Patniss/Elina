@@ -55,7 +55,7 @@ export async function movieContent(uuid) {
     const genres = movie.genres.trim().split(" ; ");
     genres.forEach(genre => {
         const spanGenre = document.createElement("span");
-        spanGenre.classList.add("tag");
+        spanGenre.classList.add("tag", "is-medium", genre.trim().toLowerCase());
         spanGenre.textContent = genre;
         movieGenres.appendChild(spanGenre);
     });
