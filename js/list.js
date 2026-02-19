@@ -461,6 +461,7 @@ export function sortFilterMovies() {
     sort91.style.display = "inline";
 
     order = { field: "title", direction: "asc" };
+    loadAllMovies();
   });
 
   sortZA.addEventListener("click", () => {
@@ -470,6 +471,7 @@ export function sortFilterMovies() {
     sort91.style.display = "inline";
 
     order = { field: "title", direction: "desc" };
+    loadAllMovies();
   });
 
   sort19.addEventListener("click", () => {
@@ -479,6 +481,7 @@ export function sortFilterMovies() {
     sort91.style.display = "inline";
 
     order = { field: "year", direction: "asc" };
+    loadAllMovies();
   });
 
   sort91.addEventListener("click", () => {
@@ -488,9 +491,8 @@ export function sortFilterMovies() {
     sort91.style.display = "none";
 
     order = { field: "year", direction: "desc" };
+    loadAllMovies();
   });
-
-  loadAllMovies();
 }
 
 // ----------
@@ -560,10 +562,10 @@ export async function loadAllMovies() {
   
   if (order.field === "year") {
     query = query
-      .order("year", { ascending: order.direction === "asc" ? true : false })
+      .order("year", { ascending: order.direction === "asc" })
       .order("title", { ascending: true });
   } else if(order.field === "title") {
-    query = query.order("title", { ascending: order.direction === "asc" ? true : false })
+    query = query.order("title", { ascending: order.direction === "asc" })
   }
 
   const { data, error } = await query;
@@ -586,7 +588,7 @@ export async function loadAllMovies() {
   });
 
   allMovies = moviesWithStatus;
-  filteredMovies = sortMovies(allMovies);
+  filteredMovies = sortMovies(moviesWithStatus);
 
   renderMovies();
 }
