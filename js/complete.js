@@ -262,6 +262,17 @@ export async function completeMovie(uuid) {
     const deathdateScriptwriter1 = document.getElementById("deathdate-scriptwriter-1");
     const nationalitiesScriptwriter1 = document.getElementById("nationalities-scriptwriter-1");
 
+    const divScriptwriter2 = document.getElementById("div-scriptwriter-2");
+    const deleteScriptwriter2 = document.getElementById("delete-scriptwriter-2");
+    const selectScriptwriter2 = document.getElementById("select-scriptwriter-2");
+    const addNewScriptwriter2 = document.getElementById("add-new-scriptwriter-2");
+    const firstNameScriptwriter2 = document.getElementById("first-name-scriptwriter-2");
+    const lastNameScriptwriter2 = document.getElementById("last-name-scriptwriter-2");
+    const birthdateScriptwriter2 = document.getElementById("birthdate-scriptwriter-2");
+    const isDeadScriptwriter2 = document.getElementById("is-dead-scriptwriter-2");
+    const deathdateScriptwriter2 = document.getElementById("deathdate-scriptwriter-2");
+    const nationalitiesScriptwriter2 = document.getElementById("nationalities-scriptwriter-2");
+
     const { data: movie, error: errorMovie } = await supabase
         .from("movies")
         .select("*")
@@ -298,6 +309,9 @@ export async function completeMovie(uuid) {
         );
         selectScriptwriter1.append(
             new Option(completeName, p.id, false, false)
+        ),
+        selectScriptwriter2.append(
+            new Option(completeName, p.id, false, false)
         )
     });
 
@@ -312,6 +326,9 @@ export async function completeMovie(uuid) {
             new Option(country, iso, false, false)
         );
         nationalitiesScriptwriter1.append(
+            new Option(country, iso, false, false)
+        );
+        nationalitiesScriptwriter2.append(
             new Option(country, iso, false, false)
         )
     });
@@ -336,6 +353,11 @@ export async function completeMovie(uuid) {
         allowClear: true
     });
 
+    $(nationalitiesScriptwriter2).select2({
+        placeholder: "Nationalité(s)",
+        allowClear: true
+    });
+
     addDirector.addEventListener("click", () => {
         if (divDirector2.classList.contains("is-hidden")) {
             divDirector2.classList.remove("is-hidden");
@@ -347,6 +369,11 @@ export async function completeMovie(uuid) {
             selectDirector3.required = true;
         }
     });
+
+    addScriptwriter.addEventListener("click", () => {
+        divScriptwriter1.classList.remove("is-hidden");
+        selectScriptwriter2.required = true;
+    })
 
     deleteDirector2.addEventListener("click", () => {
         divDirector2.classList.add("is-hidden");
@@ -371,6 +398,17 @@ export async function completeMovie(uuid) {
         deathdateDirector3.value = "";
         nationalitiesDirector3.value = "";
     });
+
+    deleteScriptwriter2.addEventListener("click", () => {
+        divScriptwriter2.classList.add("is-hidden");
+        selectScriptwriter2.required = false;
+        firstNameScriptwriter2.value = "";
+        lastNameScriptwriter2.value = "";
+        birthdateScriptwriter2.value = "";
+        isDeadScriptwriter2.checked = false;
+        deathdateScriptwriter2.value = "";
+        nationalitiesScriptwriter2.value = "";
+    })
 
     $(selectDirector1).select2({
         placeholder: "Réalisateur…",
@@ -507,6 +545,21 @@ export async function completeMovie(uuid) {
         birthdateDirector3.required = false;
     });
 
+    $(selectScriptwriter1).select2({
+        placeholder: "Réalisateur…",
+        allowClear: true,
+        tags: true,
+        createTag: function(params) {
+            const term = $.trim(params.term);
+            if (term === "") return null;
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            }
+        }
+    });
+
     $(selectScriptwriter1).on("select2:select", function(e) {
         const data = e.params.data;
         if (data.newTag) {
@@ -535,6 +588,51 @@ export async function completeMovie(uuid) {
         lastNameScriptwriter1.required = false;
 
         birthdateScriptwriter1.required = false;
+    });
+
+    $(selectScriptwriter2).select2({
+        placeholder: "Réalisateur…",
+        allowClear: true,
+        tags: true,
+        createTag: function(params) {
+            const term = $.trim(params.term);
+            if (term === "") return null;
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            }
+        }
+    });
+
+    $(selectScriptwriter2).on("select2:select", function(e) {
+        const data = e.params.data;
+        if (data.newTag) {
+            addNewScriptwriter2.style.display = "block";
+
+            const parts = data.text.trim().split(/\s+/);
+            const testFirstNameScriptwriter2 = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+            const testLastNameScriptwriter2 = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
+
+            firstNameScriptwriter2.value = testFirstNameScriptwriter2;
+            firstNameScriptwriter2.required = true;
+
+            lastNameScriptwriter2.value = testLastNameScriptwriter2;
+            lastNameScriptwriter2.required = true;
+
+            birthdateScriptwriter2.required = true;
+        }
+    })
+    .on("select2:clear", function() {
+        addNewScriptwriter2.style.display = "none";
+
+        firstNameScriptwriter2.value = "";
+        firstNameScriptwriter2.required = false;
+
+        lastNameScriptwriter2.value = "";
+        lastNameScriptwriter2.required = false;
+
+        birthdateScriptwriter2.required = false;
     });
 
     isDeadDirector1.addEventListener("change", () => {
@@ -566,6 +664,14 @@ export async function completeMovie(uuid) {
             deathdateScriptwriter1.style.display = "inline";
         } else {
             deathdateScriptwriter1.style.display = "none";
+        }
+    });
+
+    isDeadScriptwriter2.addEventListener("change", () => {
+        if (isDeadScriptwriter2.checked === true) {
+            deathdateScriptwriter2.style.display = "inline";
+        } else {
+            deathdateScriptwriter2.style.display = "none";
         }
     });
 }
