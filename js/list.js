@@ -522,14 +522,163 @@ export function sortFilterMovies() {
   });
 
   btnFilterAction.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
     genreFilter = "Action";
     displayFilter.textContent = "Films d'action";
     loadAllMovies();
   });
 
   btnFilterAnimation.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
     genreFilter = "Animation";
     displayFilter.textContent = "Films d'animation";
+    loadAllMovies();
+  });
+
+  btnFilterArtMartiaux.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Arts martiaux";
+    displayFilter.textContent = "Films d'arts martiaux";
+    loadAllMovies();
+  });
+
+  btnFilterAventure.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Aventure";
+    displayFilter.textContent = "Films d'aventure";
+    loadAllMovies();
+  });
+
+  btnFilterBiopic.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Biopic";
+    displayFilter.textContent = "Biopics";
+    loadAllMovies();
+  });
+
+  btnFilterComedie.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Comédie";
+    displayFilter.textContent = "Comédies";
+    loadAllMovies();
+  });
+
+  btnFilterComMusical.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Comédie musicale";
+    displayFilter.textContent = "Comédies musicales";
+    loadAllMovies();
+  });
+
+  btnFilterCrime.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Crime";
+    displayFilter.textContent = "Films de crime";
+    loadAllMovies();
+  });
+
+  btnFilterDrame.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Drame";
+    displayFilter.textContent = "Films dramatiques";
+    loadAllMovies();
+  });
+
+  btnFilterEspionnage.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Espionnage";
+    displayFilter.textContent = "Films d'espionnage";
+    loadAllMovies();
+  });
+
+  btnFilterFantastique.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Fantastique";
+    displayFilter.textContent = "Films fantastiques";
+    loadAllMovies();
+  });
+
+  btnFilterFamille.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Famille";
+    displayFilter.textContent = "Films familials";
+    loadAllMovies();
+  });
+
+  btnFilterGuerre.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Guerre";
+    displayFilter.textContent = "Films de guerre";
+    loadAllMovies();
+  });
+
+  btnFilterHistorique.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Historique";
+    displayFilter.textContent = "Films historiques";
+    loadAllMovies();
+  });
+
+  btnFilterHorreur.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Horreur";
+    displayFilter.textContent = "Films d'horreur";
+    loadAllMovies();
+  });
+
+  btnFilterMusique.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Musique";
+    displayFilter.textContent = "Films musicaux";
+    loadAllMovies();
+  });
+
+  btnFilterMystere.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Mystère";
+    displayFilter.textContent = "Films de mystères";
+    loadAllMovies();
+  });
+
+  btnFilterPolicier.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Policier";
+    displayFilter.textContent = "Films policiers";
+    loadAllMovies();
+  });
+
+  btnFilterRomance.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Romance";
+    displayFilter.textContent = "Films romantiques";
+    loadAllMovies();
+  });
+
+  btnFilterSF.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Science-Fiction";
+    displayFilter.textContent = "Films de science-fiction";
+    loadAllMovies();
+  });
+
+  btnFilterSuspense.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Suspense";
+    displayFilter.textContent = "Films à suspense";
+    loadAllMovies();
+  });
+
+  btnFilterThriller.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Thriller";
+    displayFilter.textContent = "Thrillers";
+    loadAllMovies();
+  });
+
+  btnFilterWestern.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "Western";
+    displayFilter.textContent = "Films westerns";
     loadAllMovies();
   });
 }
