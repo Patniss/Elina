@@ -456,6 +456,8 @@ export function sortFilterMovies() {
   const btnFilterThriller = document.getElementById("filter-thriller");
   const btnFilterWestern = document.getElementById("filter-western");
 
+  const displayFilter = document.getElementById("filter-display");
+
   btnSort.addEventListener("click", () => {
     if (contentSort.classList.contains("is-hidden")) {
       contentSort.classList.remove("is-hidden");
@@ -521,8 +523,15 @@ export function sortFilterMovies() {
 
   btnFilterAction.addEventListener("click", () => {
     genreFilter = "Action";
+    displayFilter.textContent = "Films d'action";
     loadAllMovies();
-  })
+  });
+
+  btnFilterAnimation.addEventListener("click", () => {
+    genreFilter = "Animation";
+    displayFilter.textContent = "Films d'animation";
+    loadAllMovies();
+  });
 }
 
 // ----------
