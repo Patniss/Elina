@@ -767,9 +767,10 @@ async function renderMovies() {
 
     const pageSeen = seenMovies.slice(startSeen, endSeen);
 
+    console.log(pageToSee);
+    console.log(pageSeen);
+
     for (const movie of pageToSee) {
-      console.log(movie);
-      console.log(pageToSee);
       containerToseeMovies.appendChild(await createMovieCard(movie));
     }
 
