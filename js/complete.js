@@ -218,7 +218,8 @@ export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
 
     const addDirector = document.getElementById("add-director");
-    const addScriptwriter = document.getElementById("add-scriptwriter")
+    const addScriptwriter = document.getElementById("add-scriptwriter");
+    const addRole = document.getElementById("add-role");
     
     const divDirector1 = document.getElementById("div-director-1");
     const selectDirector1 = document.getElementById("select-director-1");
@@ -272,6 +273,8 @@ export async function completeMovie(uuid) {
     const isDeadScriptwriter2 = document.getElementById("is-dead-scriptwriter-2");
     const deathdateScriptwriter2 = document.getElementById("deathdate-scriptwriter-2");
     const nationalitiesScriptwriter2 = document.getElementById("nationalities-scriptwriter-2");
+
+    const divRoles = document.getElementById("div-roles");
 
     const { data: movie, error: errorMovie } = await supabase
         .from("movies")
@@ -673,5 +676,87 @@ export async function completeMovie(uuid) {
         } else {
             deathdateScriptwriter2.classList.add("is-hidden");
         }
+    });
+
+    addRole.addEventListener("click", () => {
+        const divRole = document.createElement("div");
+        divRole.classList.add("mb-6");
+        const columns = document.createElement("div");
+        columns.classList.add("columns");
+        const divDelete = document.createElement("div");
+        divDelete.classList.add("column is-1");
+        const buttonDelete = document.createElement("button");
+        buttonDelete.classList.add("button delete is-large");
+        divDelete.appendChild(buttonDelete);
+
+        const divColumnSelectActor = document.createElement("div");
+        divColumnSelectActor.add("column", "is-3");
+        const divSelectActor = document.createElement("div");
+        divSelectActor.classList.add("select", "is-multiple");
+        const selectActor = document.createElement("select");
+        selectActor.multiple = "multiple";
+        selectActor.style.width = "100%";
+        const optionBaseActor = document.createElement("option");
+        optionBaseActor.value = "";
+        selectActor.appendChild(optionBaseActor);
+        divSelectActor.appendChild(selectActor);
+        divColumnSelectActor.appendChild(divSelectActor);
+
+        const divAddNewActor = document.createElement("div");
+        divAddNewActor.classList.add("block", "column", "is-8", "is-hidden");
+        const h4NewActor = document.createElement("h4");
+        h4NewActor.classList.add("subtitle", "is-5");
+
+        const divFirstName = document.createElement("div");
+        divFirstName.classList.add("field");
+        const inputFirstName = document.createElement("input");
+        inputFirstName.type = "text";
+        inputFirstName.classList.add("input");
+        inputFirstName.placeholder = "Prénom…";
+        divFirstName.appendChild(inputFirstName);
+
+        const divLastName = document.createElement("div");
+        divLastName.classList.add("field");
+        const inputLastName = document.createElement("input");
+        inputLastName.type = "text";
+        inputLastName.classList.add("input");
+        inputLastName.placeholder = "Nom…";
+        divLastName.appendChild(inputLastName);
+
+        const divBirthdate = document.createElement("div");
+        divBirthdate.classList.add("field");
+        const inputBirthdate = document.createElement("input");
+        inputBirthdate.type = "date";
+        inputBirthdate.classList.add("input");
+        divBirthdate.appendChild(inputBirthdate);
+
+        const divIsDead = document.createElement("div");
+        divIsDead.classList.add("div");
+        const inputIsDead = document.createElement("input");
+        inputIsDead.type = "checkbox";
+        const labelIsDead = document.createElement("label");
+        labelIsDead.for = inputIsDead;
+        labelIsDead.classList.add("label");
+        labelIsDead.textContent = "Mort";
+        divIsDead.append(inputIsDead, labelIsDead);
+
+        const divDeathdate = document.createElement("div");
+        divDeathdate.classList.add("field");
+        const inputDeathdate = document.createElement("input");
+        inputDeathdate.type = "date";
+        inputDeathdate.classList.add("input", "is-hidden");
+        divDeathdate.appendChild(inputDeathdate);
+
+        divAddNewActor.append(divFirstName, divLastName, divBirthdate, divIsDead, divDeathdate);
+
+        inputIsDead.addEventListener("change", () => {
+            if (inputIsDead.checked === true) {
+                divDeathdate.classList.remove("is-hidden");
+            } else divDeathdate.classList.add("is-hidden");
+        });
+
+        columns.append(divDelete, divColumnSelectActor, divAddNewActor);
+
+        divRole.appendChild(columns);
     });
 }
