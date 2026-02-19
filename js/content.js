@@ -52,7 +52,7 @@ export async function movieContent(uuid) {
     const movieSynopsis = document.getElementById("movie-synopsis");
     const movieGenres = document.getElementById("movie-genres");
 
-    genres = movie.genres.trim().split(" ; ");
+    const genres = movie.genres.trim().split(" ; ");
     console.log(genres);
 
     const hoursTime = Math.floor(movie.time / 60);
