@@ -465,7 +465,7 @@ export function sortFilterMovies() {
   const btnFilterReint = document.getElementById("filter-reint");
   const btnFilterAction = document.getElementById("filter-action");
   const btnFilterAnimation = document.getElementById("filter-animation");
-  const btnFilterArtMartiaux = document.getElementById("filter-arts-martiaux");
+  const btnFilterArtMartiaux = document.getElementById("filter-artsmartiaux");
   const btnFilterAventure = document.getElementById("filter-aventure");
   const btnFilterBiopic = document.getElementById("filter-biopic");
   const btnFilterComedie = document.getElementById("filter-comedie");
@@ -886,11 +886,11 @@ export async function loadMyMovies() {
   if (order.field === "seen") {
     query = query
       .order("seen", { ascending: order.direction === "asc" })
-      .order("title", { ascending: true });
+      .order("title", { foreignTable: "movies", ascending: true });
   } else if(order.field === "title") {
-    query = query.order("title", { ascending: order.direction === "asc" })
+    query = query.order("title", { foreignTable: "movies", ascending: order.direction === "asc" })
   } else if(order.field === "year") {
-    query = query.order("year", { ascending: order.direction === "asc" })
+    query = query.order("year", { foreignTable: "movies", ascending: order.direction === "asc" })
   }
 
   if (genreFilter !== "") {
