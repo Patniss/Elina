@@ -53,7 +53,12 @@ export async function movieContent(uuid) {
     const movieGenres = document.getElementById("movie-genres");
 
     const genres = movie.genres.trim().split(" ; ");
-    console.log(genres);
+    genres.forEach(genre => {
+        const spanGenre = document.getElementById("span");
+        spanGenre.classList.add("tag");
+        spanGenre.textContent = genre;
+        movieGenres.appendChild(spanGenre);
+    });
 
     const hoursTime = Math.floor(movie.time / 60);
     const minutesTime = movie.time - hoursTime * 60;
