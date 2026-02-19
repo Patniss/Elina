@@ -31,11 +31,17 @@
 
         <div class="block">
           <h3 class="subtitle is-4">Réalisateur(s)</h3>
-          <div id="div-director-1">
-            <div class="field select is-multiple">
-              <select multiple="multiple" size="8" id="select-director-1" style="width: 100%;" required>
-                <option value=""></option>
-              </select>
+          
+          <div id="div-director-1" class="mb-6">
+            <div class="columns">
+              <div class="column is-1"></div>
+              <div class="column is-11">
+                <div class="field select is-multiple">
+                  <select multiple="multiple" size="8" id="select-director-1" style="width: 100%;" required>
+                    <option value=""></option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             <div id="add-new-director-1" class="block" style="display: none;">
@@ -43,8 +49,10 @@
               <div class="field"><input type="text" name="first-name-director-1" id="first-name-director-1" class="input" placeholder="Prénom…" /></div>
               <div class="field"><input type="text" name="last-name-director-1" id="last-name-director-1" class="input" placeholder="Nom…" /></div>
               <div class="field"><input type="date" name="birthdate-director-1" id="birthdate-director-1" class="input" /></div>
-              <div class="field"><input type="checkbox" name="is-dead-director-1" id="is-dead-director-1"> <label for="is-dead-director-1">Mort</label></div>
-              <div class="field"><input type="date" name="deathdate-director-1" id="deathdate-director-1" class="input" style="display: none;" /></div>
+              <div class="field"><input type="checkbox" name="is-dead-director-1" id="is-dead-director-1">
+                <label for="is-dead-director-1">Mort</label>
+                <input type="date" name="deathdate-director-1" id="deathdate-director-1" class="input" style="display: none;" />
+              </div>
               <div class="field">
                 <label class="label">Casquettes :</label>
                 <input value="director" type="checkbox" class="checkbox" id="job-director-1-director" checked /> <label for="job-director-1-director">Réalisateur</label>
@@ -63,7 +71,7 @@
             </div>
           </div>
 
-          <div id="div-director-2" class="is-hidden">
+          <div id="div-director-2" class="is-hidden mb-6">
 
             <div class="columns">
 
@@ -106,7 +114,7 @@
 
           </div>
 
-          <div id="div-director-3" class="is-hidden">
+          <div id="div-director-3" class="is-hidden mb-6">
 
             <div class="columns">
 
@@ -147,7 +155,53 @@
               </div>
             </div>
           </div>
-            
+
+        </div>
+
+        <div class="block">
+          <h3 class="subtitle is-4">Scénariste(s)</h3>
+          
+          <div id="div-scriptwriter-1" class="mb-6">
+            <div class="columns">
+              <div class="column is-1"></div>
+              <div class="column is-11">
+                <div class="field select is-multiple">
+                  <select multiple="multiple" size="8" id="select-scriptwriter-1" style="width: 100%;" required>
+                    <option value=""></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div id="add-new-scriptwriter-1" class="block" style="display: none;">
+              <h4 class="subtitle is-5">Nouveau scénariste :</h4>
+              <div class="field"><input type="text" name="first-name-scriptwriter-1" id="first-name-scriptwriter-1" class="input" placeholder="Prénom…" /></div>
+              <div class="field"><input type="text" name="last-name-scriptwriter-1" id="last-name-scriptwriter-1" class="input" placeholder="Nom…" /></div>
+              <div class="field"><input type="date" name="birthdate-scriptwriter-1" id="birthdate-scriptwriter-1" class="input" /></div>
+              <div class="field"><input type="checkbox" name="is-dead-scriptwriter-1" id="is-dead-scriptwriter-1">
+                <label for="is-dead-scriptwriter-1">Mort</label>
+                <input type="date" name="deathdate-scriptwriter-1" id="deathdate-scriptwriter-1" class="input" style="display: none;" />
+              </div>
+              <div class="field">
+                <label class="label">Casquettes :</label>
+                <input value="director" type="checkbox" class="checkbox" id="job-scriptwriter-1-director" /> <label for="job-scriptwriter-1-director">Réalisateur</label>
+                <input value="producer" type="checkbox" class="checkbox" id="job-scriptwriter-1-producer" /> <label for="job-scriptwriter-1-producer">Producteur</label>
+                <input value="scriptwriter" type="checkbox" class="checkbox" id="job-scriptwriter-1-scriptwriter" checked /> <label for="job-scriptwriter-1-scriptwriter">Scénariste</label>
+                <input value="actor" type="checkbox" class="checkbox" id="job-scriptwriter-1-actor" /> <label for="job-scriptwriter-1-actor">Acteur</label>
+              </div>
+              <div class="field">
+                <div class="select is-multiple">
+                  <label for="nationalities-scriptwriter-1" class="label"></label>
+                  <select multiple="multiple" size="8" id="nationalities-scriptwriter-1" style="width: 100%;" >
+                    <option value=""></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
           <div class="field">
             <div class="control">
               <button class="button is-primary" type="submit" id="submit">
@@ -155,8 +209,8 @@
               </button>
             </div>
           </div>
-          
         </div>
+
       </form>
     </div>
   </div>
