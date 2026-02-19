@@ -420,17 +420,6 @@ function sortMovies(movies) {
 }
 
 // ----------
-// FONCTION CHANGER L'ORDRE DE TRI (GÉNÉRAL)
-// ----------
-function changeOrder(field, direction) {
-  order.field = field;
-  order.direction = direction;
-
-  filteredMovies = sortMovies(filteredMovies);
-  renderMovies();
-}
-
-// ----------
 // FONCTION CLIQUE DES BOUTONS DE TRI / FILTRE
 // ----------
 export function sortFilterMovies() {
@@ -471,7 +460,7 @@ export function sortFilterMovies() {
     sort19.style.display = "inline";
     sort91.style.display = "inline";
 
-    changeOrder("title", "asc");
+    order = { field: "title", direction: "asc" };
   });
 
   sortZA.addEventListener("click", () => {
@@ -480,7 +469,7 @@ export function sortFilterMovies() {
     sort19.style.display = "inline";
     sort91.style.display = "inline";
 
-    changeOrder("title", "desc");
+    order = { field: "title", direction: "desc" };
   });
 
   sort19.addEventListener("click", () => {
@@ -489,7 +478,7 @@ export function sortFilterMovies() {
     sort19.style.display = "none";
     sort91.style.display = "inline";
 
-    changeOrder("year", "asc");
+    order = { field: "year", direction: "asc" };
   });
 
   sort91.addEventListener("click", () => {
@@ -498,7 +487,7 @@ export function sortFilterMovies() {
     sort19.style.display = "inline";
     sort91.style.display = "none";
 
-    changeOrder("year", "desc");
+    order = { field: "year", direction: "desc" };
   });
 }
 
@@ -563,9 +552,19 @@ export async function loadAllMovies() {
   const profile = await loadProfile();
   const userId = profile.id;
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("movies")
     .select(`*, users_movies(seen, user_id)`);
+  
+  if (order.field === "year") {
+    query = query
+      .order("year", { ascending: order.direction === "asc" ? true : false })
+      .order("title", { ascending: true });
+  } else if(order.field === "title") {
+    query = query.order("title", { ascending: order.direction === "asc" ? true : false })
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
