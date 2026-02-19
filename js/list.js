@@ -750,11 +750,11 @@ async function renderMovies() {
     containerSeenMovies.innerHTML = "";
 
     const toSeeMovies = filteredMovies.filter(movie =>
-      movie.users_movies?.some(rel => rel.seen === false)
+      movie.seen === false
     );
 
     const seenMovies = filteredMovies.filter(movie =>
-      movie.users_movies?.some(rel => rel.seen === true)
+      movie.seen === true
     );
 
     const startTosee = (currentPageTosee - 1) * pageSize;
@@ -766,8 +766,6 @@ async function renderMovies() {
     const endSeen = startSeen + pageSize;
 
     const pageSeen = seenMovies.slice(startSeen, endSeen);
-
-    console.log("filteredMovies:", filteredMovies);
 
     for (const movie of pageToSee) {
       containerToseeMovies.appendChild(await createMovieCard(movie));
@@ -883,7 +881,8 @@ export async function loadMyMovies() {
 
   let query = supabase
     .from("users_movies")
-    .select(`*, movies(*)`);
+    .select(`*, movies(*)`)
+    .eq("user_id", userId);
   
   if (order.field === "seen") {
     query = query
