@@ -3,7 +3,7 @@ import { supabase } from "./supabase.js";
 const genres = [
     "Action", "Animation", "Arts martiaux", "Aventure",
     "Biopic",
-    "Comédie", "Comédie dramatique", "Comédie musicale", "Crime",
+    "Comédie", "Comédie musicale", "Crime",
     "Drame",
     "Espionnage",
     "Famille", "Fantastique",

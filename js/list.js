@@ -11,7 +11,8 @@ const pageSize = 20;
 let order = {
   field: "year",
   direction: "desc"
-}
+};
+let genreFilter = "";
 
 // ----------
 // FONCTION POUR CRÉER UNE CARTE FILM (GÉNÉRAL)
@@ -431,6 +432,30 @@ export function sortFilterMovies() {
   contentSort.classList.add("is-hidden");
   contentFilter.classList.add("is-hidden");
 
+  const btnFilterAction = document.getElementById("filter-action");
+  const btnFilterAnimation = document.getElementById("filter-animation");
+  const btnFilterArtMartiaux = document.getElementById("filter-artsmartiaux");
+  const btnFilterAventure = document.getElementById("filter-aventure");
+  const btnFilterBiopic = document.getElementById("filter-biopic");
+  const btnFilterComedie = document.getElementById("filter-comedie");
+  const btnFilterComMusical = document.getElementById("filter-commusicale");
+  const btnFilterCrime = document.getElementById("filter-crime");
+  const btnFilterDrame = document.getElementById("filter-drame");
+  const btnFilterEspionnage = document.getElementById("filter-espionnage");
+  const btnFilterFamille = document.getElementById("filter-famille");
+  const btnFilterFantastique = document.getElementById("filter-fantastique");
+  const btnFilterGuerre = document.getElementById("filter-guerre");
+  const btnFilterHistorique = document.getElementById("filter-historique");
+  const btnFilterHorreur = document.getElementById("filter-horreur");
+  const btnFilterMusique = document.getElementById("filter-musique");
+  const btnFilterMystere = document.getElementById("filter-mystere");
+  const btnFilterPolicier = document.getElementById("filter-policier");
+  const btnFilterRomance = document.getElementById("filter-romance");
+  const btnFilterSF = document.getElementById("filter-sf");
+  const btnFilterSuspense = document.getElementById("filter-suspense");
+  const btnFilterThriller = document.getElementById("filter-thriller");
+  const btnFilterWestern = document.getElementById("filter-western");
+
   btnSort.addEventListener("click", () => {
     if (contentSort.classList.contains("is-hidden")) {
       contentSort.classList.remove("is-hidden");
@@ -493,6 +518,11 @@ export function sortFilterMovies() {
     order = { field: "year", direction: "desc" };
     loadAllMovies();
   });
+
+  btnFilterAction.addEventListener("click", () => {
+    genreFilter = "Action";
+    loadAllMovies();
+  })
 }
 
 // ----------
@@ -566,6 +596,10 @@ export async function loadAllMovies() {
       .order("title", { ascending: true });
   } else if(order.field === "title") {
     query = query.order("title", { ascending: order.direction === "asc" })
+  }
+
+  if (genreFilter !== "") {
+    query = query.ilike("genres", `%${genreFilter}%`);
   }
 
   const { data, error } = await query;
