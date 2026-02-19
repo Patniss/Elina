@@ -489,6 +489,8 @@ export function sortFilterMovies() {
 
     order = { field: "year", direction: "desc" };
   });
+
+  loadAllMovies();
 }
 
 // ----------
