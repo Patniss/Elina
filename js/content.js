@@ -15,7 +15,7 @@ function formatFrenchTypography(text) {
 }
 
 export async function movieContent(uuid) {
-    const session = loadProfile();
+    const session = await loadProfile();
     let poster;
 
     const { data:movie, error: errorMovie } = await supabase
@@ -34,6 +34,7 @@ export async function movieContent(uuid) {
         .select("*")
         .eq("movie_id", uuid)
         .eq("user_id", session.id)
+        .maybeSingle();
     
     if (errorUser) {
         console.log(errorUser);
@@ -41,7 +42,7 @@ export async function movieContent(uuid) {
     }
 
     if (movieUser) {
-        poster = movieUser.own_poster ? movieUser.own_poster : movie.poster;
+        poster = movieUser.own_poster ?? movie.poster;
     } else poster = movie.poster;
 
     console.log(movie.genres);
@@ -54,8 +55,8 @@ export async function movieContent(uuid) {
     const movieGenres = document.getElementById("movie-genres");
 
     const hoursTime = Math.floor(movie.time / 60);
-    const minutesTime = Number(movieTime) - Number(hoursTime) * 60;
-    const displayMinutesTime = minutesTime > 9 ? "0" + String(minutesTime) : String(minutesTime);
+    const minutesTime = movie.time - hoursTime * 60;
+    const displayMinutesTime = minutesTime < 10 ? "0" + minutesTime : minutesTime;
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
