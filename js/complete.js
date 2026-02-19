@@ -428,7 +428,7 @@ export async function completeMovie(uuid) {
     $(selectDirector1).on("select2:select", function(e) {
         const data = e.params.data;
         if (data.newTag) {
-            addNewDirector1.style.display = "block";
+            addNewDirector1.classList.remove = "is-hidden";
 
             const parts = data.text.trim().split(/\s+/);
             const testFirstNameDirector1 = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
@@ -444,7 +444,7 @@ export async function completeMovie(uuid) {
         }
     })
     .on("select2:clear", function() {
-        addNewDirector1.style.display = "none";
+        addNewDirector1.classList.add = "is-hidden";
 
         firstNameDirector1.value = "";
         firstNameDirector1.required = false;
@@ -473,7 +473,7 @@ export async function completeMovie(uuid) {
     $(selectDirector2).on("select2:select", function(e) {
         const data = e.params.data;
         if (data.newTag) {
-            addNewDirector2.style.display = "block";
+            addNewDirector2.classList.remove = "is-hidden";
 
             const parts = data.text.trim().split(" ");
             const testFirstNameDirector2 = parts.lenght > 1 ? parts.slice(0, -1).join(" ") : null;
@@ -489,7 +489,7 @@ export async function completeMovie(uuid) {
         }
     })
     .on("select2:clear", function() {
-        addNewDirector2.style.display = "none";
+        addNewDirector2.classList.add = "is-hidden";
 
         firstNameDirector2.value = "";
         firstNameDirector2.required = false;
@@ -518,7 +518,7 @@ export async function completeMovie(uuid) {
     $(selectDirector3).on("select2:select", function(e) {
         const data = e.params.data;
         if (data.newTag) {
-            addNewDirector3.style.display = "block";
+            addNewDirector3.classList.remove = "is-hidden";
 
             const parts = data.text.trim().split(" ");
             const testFirstNameDirector3 = parts.lenght > 1 ? parts.slice(0, -1).join(" ") : null;
@@ -534,7 +534,7 @@ export async function completeMovie(uuid) {
         }
     })
     .on("select2:clear", function() {
-        addNewDirector3.style.display = "none";
+        addNewDirector3.classList.add = "is-hidden";
 
         firstNameDirector3.value = "";
         firstNameDirector3.required = false;
@@ -563,7 +563,7 @@ export async function completeMovie(uuid) {
     $(selectScriptwriter1).on("select2:select", function(e) {
         const data = e.params.data;
         if (data.newTag) {
-            addNewScriptwriter1.style.display = "block";
+            addNewScriptwriter1.classList.remove = "is-hidden";
 
             const parts = data.text.trim().split(/\s+/);
             const testFirstNameScriptwriter1 = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
@@ -579,7 +579,7 @@ export async function completeMovie(uuid) {
         }
     })
     .on("select2:clear", function() {
-        addNewScriptwriter1.style.display = "none";
+        addNewScriptwriter1.classList.add = "is-hidden";
 
         firstNameScriptwriter1.value = "";
         firstNameScriptwriter1.required = false;
@@ -608,7 +608,7 @@ export async function completeMovie(uuid) {
     $(selectScriptwriter2).on("select2:select", function(e) {
         const data = e.params.data;
         if (data.newTag) {
-            addNewScriptwriter2.style.display = "block";
+            addNewScriptwriter2.classList.remove = "is-hidden";
 
             const parts = data.text.trim().split(/\s+/);
             const testFirstNameScriptwriter2 = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
@@ -624,7 +624,7 @@ export async function completeMovie(uuid) {
         }
     })
     .on("select2:clear", function() {
-        addNewScriptwriter2.style.display = "none";
+        addNewScriptwriter2.classList.add = "is-hidden";
 
         firstNameScriptwriter2.value = "";
         firstNameScriptwriter2.required = false;
@@ -637,41 +637,41 @@ export async function completeMovie(uuid) {
 
     isDeadDirector1.addEventListener("change", () => {
         if (isDeadDirector1.checked === true) {
-            deathdateDirector1.style.display = "inline";
+            deathdateDirector1.classList.remove = "is-hidden";
         } else {
-            deathdateDirector1.style.display = "none";
+            deathdateDirector1.classList.add = "is-hidden";
         }
     });
 
     isDeadDirector2.addEventListener("change", () => {
         if (isDeadDirector2.checked === true) {
-            deathdateDirector2.style.display = "inline";
+            deathdateDirector2.classList.remove = "is-hidden";
         } else {
-            deathdateDirector2.style.display = "none";
+            deathdateDirector2.classList.add = "is-hidden";
         }
     });
 
     isDeadDirector3.addEventListener("change", () => {
         if (isDeadDirector3.checked === true) {
-            deathdateDirector3.style.display = "inline";
+            deathdateDirector3.classList.remove = "is-hidden";
         } else {
-            deathdateDirector3.style.display = "none";
+            deathdateDirector3.classList.add = "is-hidden";
         }
     });
 
     isDeadScriptwriter1.addEventListener("change", () => {
         if (isDeadScriptwriter1.checked === true) {
-            deathdateScriptwriter1.style.display = "inline";
+            deathdateScriptwriter1.classList.remove = "is-hidden";
         } else {
-            deathdateScriptwriter1.style.display = "none";
+            deathdateScriptwriter1.classList.add = "is-hidden";
         }
     });
 
     isDeadScriptwriter2.addEventListener("change", () => {
         if (isDeadScriptwriter2.checked === true) {
-            deathdateScriptwriter2.style.display = "inline";
+            deathdateScriptwriter2.classList.remove = "is-hidden";
         } else {
-            deathdateScriptwriter2.style.display = "none";
+            deathdateScriptwriter2.classList.add = "is-hidden";
         }
     });
 }
