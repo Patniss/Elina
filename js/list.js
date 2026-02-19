@@ -23,6 +23,12 @@ async function createMovieCard(movie) {
   // ❶ Récupérer la session
   const session = await loadProfile();
   const userId = session.id;
+  
+  const movieTitle = movie.title ?? movie.movies.title;
+  const movieYear = movie.year ?? movie.movies.year;
+  const movieId = movie.title ? movie.id : movie.movies.id;
+  const movieSeen = movie.seen ?? movie.users_movies.seen;
+  const moviePoster = movie.own_poster ?? movie.poster ?? movie.movies.poster;
 
   // Création de la carte
   const column = document.createElement("div");
@@ -36,11 +42,11 @@ async function createMovieCard(movie) {
 
   const pTitle = document.createElement("p");
   pTitle.classList.add("title", "is-5");
-  pTitle.textContent = movie.title;
+  pTitle.textContent = movieTitle;
 
   const pSubtitle = document.createElement("p");
   pSubtitle.classList.add("subtitle", "is-6");
-  pSubtitle.textContent = movie.year;
+  pSubtitle.textContent = movieYear;
 
   const divTags = document.createElement("div");
   divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
@@ -48,7 +54,7 @@ async function createMovieCard(movie) {
   const detailsBtn = document.createElement("a");
   detailsBtn.classList.add("tag", "is-hoverable", "mr-2");
   detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-  detailsBtn.href = `/Elina/movies/movie.html?id=${movie.id}`;
+  detailsBtn.href = `/Elina/movies/movie.html?id=${movieId}`;
 
   const addMovieBtn = document.createElement("button");
   addMovieBtn.classList.add("tag", "button", "is-hoverable", "is-link", "mr-2");
@@ -67,7 +73,7 @@ async function createMovieCard(movie) {
   seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
 
   // Gestion des tags en fonction du statut perso du film
-  switch (movie.seen) {
+  switch (movieSeen) {
     case null:
       divTags.appendChild(addMovieBtn);
       break;
@@ -93,7 +99,7 @@ async function createMovieCard(movie) {
   figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
   
   const imgPoster = document.createElement("img");
-  imgPoster.src = movie.ownPoster || movie.poster;
+  imgPoster.src = moviePoster;
   imgPoster.alt = movie.title;
   
   figurePoster.appendChild(imgPoster);
