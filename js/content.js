@@ -1,5 +1,5 @@
 import { supabase } from "/Elina/js/supabase.js";
-import { loadProfile } from "/Elina/js/supabase.js";
+import { loadProfile } from "/Elina/js/dashboard.js";
 
 function formatFrenchTypography(text) {
   const nbsp = "\u202F";
