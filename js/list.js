@@ -462,9 +462,10 @@ export function sortFilterMovies() {
   contentSort.classList.add("is-hidden");
   contentFilter.classList.add("is-hidden");
 
+  const btnFilterReint = document.getElementById("filter-reint");
   const btnFilterAction = document.getElementById("filter-action");
   const btnFilterAnimation = document.getElementById("filter-animation");
-  const btnFilterArtMartiaux = document.getElementById("filter-artsmartiaux");
+  const btnFilterArtMartiaux = document.getElementById("filter-arts-martiaux");
   const btnFilterAventure = document.getElementById("filter-aventure");
   const btnFilterBiopic = document.getElementById("filter-biopic");
   const btnFilterComedie = document.getElementById("filter-comedie");
@@ -548,6 +549,13 @@ export function sortFilterMovies() {
     sort91.style.display = "none";
 
     order = { field: "year", direction: "desc" };
+    loadAllMovies();
+  });
+
+  btnFilterReint.addEventListener("click", () => {
+    contentFilter.classList.add("is-hidden");
+    genreFilter = "";
+    displayFilter.textContent = "";
     loadAllMovies();
   });
 
