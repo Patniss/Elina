@@ -678,19 +678,30 @@ export async function completeMovie(uuid) {
         }
     });
 
+    let i = 0;
+
     addRole.addEventListener("click", () => {
+        i+=1;
+
         const divRole = document.createElement("div");
         divRole.classList.add("mb-6");
         const columns = document.createElement("div");
         columns.classList.add("columns");
         const divDelete = document.createElement("div");
-        divDelete.classList.add("column is-1");
+        divDelete.classList.add("column", "is-1");
+        const nbRole = document.createElement("p");
+        nbRole.textContent = i;
+        nbRole.classList.add("subtitle", "is-5");
         const buttonDelete = document.createElement("button");
         buttonDelete.classList.add("button delete is-large");
         divDelete.appendChild(buttonDelete);
 
         const divColumnSelectActor = document.createElement("div");
         divColumnSelectActor.add("column", "is-3");
+        const inputRole = document.createElement("input");
+        inputRole.type = "text";
+        inputRole.placeholder = "Personnage…";
+        inputRole.classList.add("input");
         const divSelectActor = document.createElement("div");
         divSelectActor.classList.add("select", "is-multiple");
         const selectActor = document.createElement("select");
@@ -700,7 +711,7 @@ export async function completeMovie(uuid) {
         optionBaseActor.value = "";
         selectActor.appendChild(optionBaseActor);
         divSelectActor.appendChild(selectActor);
-        divColumnSelectActor.appendChild(divSelectActor);
+        divColumnSelectActor.apend(divSelectActor, inputRole);
 
         const divAddNewActor = document.createElement("div");
         divAddNewActor.classList.add("block", "column", "is-8", "is-hidden");
