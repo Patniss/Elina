@@ -76,6 +76,12 @@
   src: url("fonts/magiera.ttf") format("truetype");
 }
 
+/* Titre */
+@font-face {
+  font-family: "Magnolia";
+  src: url("fonts/Magnolia\ Script.otf") format("opentype");
+}
+
 
 :root {
   --user-primary: #00d1b2;
@@ -85,7 +91,7 @@
 }
 
 .title {
-  font-family: Magiera, "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Magnolia, Magiera, "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 /* On surcharge les classes Bulma principales */
