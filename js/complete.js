@@ -682,9 +682,20 @@ export async function completeMovie(uuid) {
 
     addRole.addEventListener("click", () => {
         i+=1;
-        console.log("bouton cliqué");
 
-        divRoles.textContent = "Test d'affichage";
-        console.log(i);
+        const columns = document.createElement("div");
+        columns.classList.add("columns");
+
+        const divDelete = document.createElement("div");
+        divDelete.classList.add("column", "is-1");
+        const nbRole = document.createElement("h3");
+        nbRole.classList.add("subtitle", "is-3");
+        const btnDelete = document.createElement("button");
+        btnDelete.classList.add("button", "delete", "is-large");
+        divDelete.append(nbRole, btnDelete);
+
+        columns.appendChild(divDelete);
+
+        divRoles.appendChild(columns);
     });
 }
