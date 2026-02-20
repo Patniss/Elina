@@ -98,10 +98,19 @@ body {
   background-attachment: fixed;
 }
 
+.nav {
+  background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
+  backdrop-filter: blur(6px); /* optionnel, effet glass */
+  border-radius: 5px;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   body {
     background-size: 100% auto;
+  }
+  .nav {
+    background-color: transparent;
   }
 }
 
