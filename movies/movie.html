@@ -27,7 +27,19 @@
                 <h3 class="subtitle is-3 mb-6" id="movie-year"></h3>
 
                 <div class="columns is-four-fifths">
-                    <div class="column is-one-quarter"><img src="poster.png" class="image" id="movie-poster" /></div>
+                    <div class="column is-one-quarter">
+                        <img src="poster.png" class="image" id="movie-poster" />
+                        <div class="modal">
+                            <div class="modal-background"></div>
+                            <div class="modal-content">
+                                <p class="image is-2by3">
+                                    <img src="/Elina/movies/poster.png" alt="Affiche" id="modal-poster">
+                                    <p><a href="#">Personnaliser ma couverture</a></p>
+                                </p>
+                            </div>
+                            <button class="modal-close is-large" aria-label="close"></button>
+                        </div>
+                    </div>
                     <div class="column is-three-quarters">
                         <p id="movie-genres"><span class="subtitle is-4 mb-6 mr-3" id="movie-time"></span><span class="mr-3">&#x2022;</span></p>
                         <h3 class="subtitle is-4 mt-6 mb-2">Réalisateur(s)</h3>

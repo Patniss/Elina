@@ -51,6 +51,7 @@ export async function movieContent(uuid) {
     const movieTime = document.getElementById("movie-time");
     const movieSynopsis = document.getElementById("movie-synopsis");
     const movieGenres = document.getElementById("movie-genres");
+    const modalPoster = document.getElementById("modal-poster");
 
     const genres = movie.genres.trim().split(" ; ");
     genres.forEach(genre => {
@@ -67,6 +68,7 @@ export async function movieContent(uuid) {
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
     moviePoster.src = poster;
+    modalPoster.src = poster;
     movieTime.textContent = hoursTime + "h" + displayMinutesTime;
     movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
 
