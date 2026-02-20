@@ -25,8 +25,13 @@
       
       <div class="box">
 
-        <h2 class="subtitle">Mes films à voir</h2>
-        <div class="columns is-multiline" id="list-tosee-movies"></div>
+        <h2 class="subtitle is-clickable" id="toggle-tosee">
+          <span class="icon mr-2">
+            <i class="fa-solid fa-chevron-right" id="arrow-tosee"></i>
+          </span>
+          <span>Mes films à voir</span>
+        </h2>
+        <div class="columns is-multiline is-hidden" id="list-tosee-movies"></div>
 
       <nav class="pagination" role="navigation" aria-label="navigation" id="paginationTosee">
         <div class="pagination-list" id="pagination_nb_tosee"></div>
@@ -36,8 +41,13 @@
 
       <div class="box">
         
-        <h2 class="subtitle">Mes films vus</h2>
-        <div class="columns is-multiline" id="list-seen-movies"></div>
+        <h2 class="subtitle is-clickable" id="toggle-seen">
+          <span class="icon mr-2">
+            <i class="fa-solid fa-chevron-right" id="arrow-seen"></i>
+          </span>
+          <span>Mes films vus</span>
+        </h2>
+        <div class="columns is-multiline is-hidden" id="list-seen-movies"></div>
 
       <nav class="pagination" role="navigation" aria-label="navigation" id="paginationSeen">
         <div class="pagination-list" id="pagination_nb_seen"></div>
@@ -59,6 +69,24 @@
 <script type="module">
   import { loadMyMovies } from "/Elina/js/list.js";
   loadMyMovies();
+</script>
+
+<script>
+  function setupToggle(titleId, listId, arrowId) {
+    const title = document.getElementById(titleId);
+    const list = document.getElementById(listId);
+    const arrow = document.getElementById(arrowId);
+
+    title.addEventListener("click", () => {
+      list.classList.toggle("is-hidden");
+
+      // rotation de la flèche
+      arrow.classList.toggle("is-rotated");
+    });
+  }
+
+  setupToggle("toggle-tosee", "list-tosee-movies", "arrow-tosee");
+  setupToggle("toggle-seen", "list-seen-movies", "arrow-seen");
 </script>
 
 <script type="module" src="/Elina/js/guard.js"></script>

@@ -412,7 +412,6 @@ function renderPaginationAll(totalItems) {
   });
 }
 
-
 function renderPaginationTosee(totalItems) {
   renderPagination({
     containerId: "pagination_nb_tosee",
