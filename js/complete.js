@@ -693,7 +693,7 @@ export async function completeMovie(uuid) {
         nbRole.textContent = i;
         nbRole.classList.add("subtitle", "is-5");
         const buttonDelete = document.createElement("button");
-        buttonDelete.classList.add("button", "delete is-large");
+        buttonDelete.classList.add("button", "delete", "is-large");
         divDelete.appendChild(buttonDelete);
 
         const divColumnSelectActor = document.createElement("div");
