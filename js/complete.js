@@ -690,11 +690,23 @@ export async function completeMovie(uuid) {
         divDelete.classList.add("column", "is-1");
         const nbRole = document.createElement("h3");
         nbRole.classList.add("subtitle", "is-3");
+        nbRole.textContent = i;
         const btnDelete = document.createElement("button");
         btnDelete.classList.add("button", "delete", "is-large");
         divDelete.append(nbRole, btnDelete);
 
-        columns.appendChild(divDelete);
+        const divSelectRole = document.createElement("div");
+        divSelectRole.classList.add("column", "is-3");
+        const labelRole = document.createElement("label");
+        labelRole.classList.add("label");
+        labelRole.textContent = "Rôle n° " + i;
+        const inputRole = document.createElement("input");
+        inputRole.type = "text";
+        inputRole.placeholder = "Nom du personnage…";
+        inputRole.classList.add("input");
+        divSelectRole.append(labelRole, inputRole);
+
+        columns.append(divDelete, divSelectRole);
 
         divRoles.appendChild(columns);
     });
