@@ -5,7 +5,7 @@
 }
 
 /* On surcharge les classes Bulma principales */
-.button.is-primary {
+.button.is-primary, .tag.is-primary {
   background-color: var(--user-primary);
   border-color: var(--user-primary);
   color: var(--bulma-primary-invert-l);
