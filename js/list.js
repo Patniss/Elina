@@ -52,7 +52,7 @@ async function createMovieCard(movie) {
   divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
 
   const detailsBtn = document.createElement("a");
-  detailsBtn.classList.add("tag", "is-hoverable", "mr-2");
+  detailsBtn.classList.add("tag", "button", "is-hoverable", "mr-2");
   detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
   detailsBtn.href = `/Elina/movies/movie.html?id=${movieId}`;
 
@@ -84,6 +84,10 @@ async function createMovieCard(movie) {
 
     case true:
       divTags.appendChild(seenMovieBtn);
+      break;
+
+    default:
+      divTags.appendChild(addMovieBtn);
       break;
   }
 
