@@ -28,8 +28,8 @@
 
                 <div class="columns is-four-fifths">
                     <div class="column is-one-quarter">
-                        <img src="poster.png" class="image" id="movie-poster" />
-                        <div class="modal">
+                        <img src="poster.png" class="image is-clickable js-modal-trigger" id="movie-poster" data-target="div-modal-poster" />
+                        <div class="modal" id="div-modal-poster">
                             <div class="modal-background"></div>
                             <div class="modal-content">
                                 <p class="image is-2by3">
@@ -57,6 +57,8 @@
     </section>
 
 </main>
+
+<script src="/Elina/js/modal.js"></script>
 
 <script type="module">
     import { movieContent } from "/Elina/js/content.js";
