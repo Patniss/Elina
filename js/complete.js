@@ -682,92 +682,9 @@ export async function completeMovie(uuid) {
 
     addRole.addEventListener("click", () => {
         i+=1;
+        console.log("bouton cliqué");
 
-        const divRole = document.createElement("div");
-        divRole.classList.add("mb-6");
-        const columns = document.createElement("div");
-        columns.classList.add("columns");
-        const divDelete = document.createElement("div");
-        divDelete.classList.add("column", "is-1");
-        const nbRole = document.createElement("p");
-        nbRole.textContent = i;
-        nbRole.classList.add("subtitle", "is-5");
-        const buttonDelete = document.createElement("button");
-        buttonDelete.classList.add("button", "delete", "is-large");
-        divDelete.appendChild(buttonDelete);
-
-        const divColumnSelectActor = document.createElement("div");
-        divColumnSelectActor.add("column", "is-3");
-        const inputRole = document.createElement("input");
-        inputRole.type = "text";
-        inputRole.placeholder = "Personnage…";
-        inputRole.classList.add("input");
-        const divSelectActor = document.createElement("div");
-        divSelectActor.classList.add("select", "is-multiple");
-        const selectActor = document.createElement("select");
-        selectActor.multiple = "multiple";
-        selectActor.style.width = "100%";
-        const optionBaseActor = document.createElement("option");
-        optionBaseActor.value = "";
-        selectActor.appendChild(optionBaseActor);
-        divSelectActor.appendChild(selectActor);
-        divColumnSelectActor.apend(divSelectActor, inputRole);
-
-        const divAddNewActor = document.createElement("div");
-        divAddNewActor.classList.add("block", "column", "is-8", "is-hidden");
-        const h4NewActor = document.createElement("h4");
-        h4NewActor.classList.add("subtitle", "is-5");
-
-        const divFirstName = document.createElement("div");
-        divFirstName.classList.add("field");
-        const inputFirstName = document.createElement("input");
-        inputFirstName.type = "text";
-        inputFirstName.classList.add("input");
-        inputFirstName.placeholder = "Prénom…";
-        divFirstName.appendChild(inputFirstName);
-
-        const divLastName = document.createElement("div");
-        divLastName.classList.add("field");
-        const inputLastName = document.createElement("input");
-        inputLastName.type = "text";
-        inputLastName.classList.add("input");
-        inputLastName.placeholder = "Nom…";
-        divLastName.appendChild(inputLastName);
-
-        const divBirthdate = document.createElement("div");
-        divBirthdate.classList.add("field");
-        const inputBirthdate = document.createElement("input");
-        inputBirthdate.type = "date";
-        inputBirthdate.classList.add("input");
-        divBirthdate.appendChild(inputBirthdate);
-
-        const divIsDead = document.createElement("div");
-        divIsDead.classList.add("div");
-        const inputIsDead = document.createElement("input");
-        inputIsDead.type = "checkbox";
-        const labelIsDead = document.createElement("label");
-        labelIsDead.for = inputIsDead;
-        labelIsDead.classList.add("label");
-        labelIsDead.textContent = "Mort";
-        divIsDead.append(inputIsDead, labelIsDead);
-
-        const divDeathdate = document.createElement("div");
-        divDeathdate.classList.add("field");
-        const inputDeathdate = document.createElement("input");
-        inputDeathdate.type = "date";
-        inputDeathdate.classList.add("input", "is-hidden");
-        divDeathdate.appendChild(inputDeathdate);
-
-        divAddNewActor.append(divFirstName, divLastName, divBirthdate, divIsDead, divDeathdate);
-
-        inputIsDead.addEventListener("change", () => {
-            if (inputIsDead.checked === true) {
-                divDeathdate.classList.remove("is-hidden");
-            } else divDeathdate.classList.add("is-hidden");
-        });
-
-        columns.append(divDelete, divColumnSelectActor, divAddNewActor);
-
-        divRole.appendChild(columns);
+        divRoles.textContent = "Test d'affichage";
+        console.log(i);
     });
 }
