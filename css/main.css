@@ -95,6 +95,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;      /* Ordinateur */
   background-position: center;
+  background-attachment: fixed;
 }
 
 /* Mobile */
