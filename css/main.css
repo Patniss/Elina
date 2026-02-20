@@ -93,10 +93,16 @@
 body {
   background-image: url("/Elina/css/backgrounds/cappuccino.jpeg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover;      /* Ordinateur */
   background-position: center;
 }
 
+/* Mobile */
+@media (max-width: 768px) {
+  body {
+    background-size: contain;
+  }
+}
 .title {
   font-family: Magnolia, Magiera, "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
