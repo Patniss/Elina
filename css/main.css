@@ -90,6 +90,13 @@
   --bulma-family-primary: "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
+body {
+  background-image: url("/Elina/css/backgrounds/cappuccino.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .title {
   font-family: Magnolia, Magiera, "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
