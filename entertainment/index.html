@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>엘리나 Elina - Accueil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+  <main>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div id="nav-container"></div>
+
+      <h1 class="title mt-6">Bonjour <span id="welcome" class="has-text-primary"></span></h1>
+
+      <div class="columns is-multiline">
+
+        <div class="column is-one-quarter" id="homeMovies">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5">Mes films</p>
+              <p class="subtitle is-6"><i>En construction</i></p>
+              <a href="/Elina/entertainment/movies/index.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter" id="homeShows">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5">Mes séries</p>
+              <p class="subtitle is-6"><i>En construction</i></p>
+              <a href="/Elina/entertainment/shows/index.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter" id="homeDramas">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5">Mes dramas</p>
+              <p class="subtitle is-6"><i>En construction</i></p>
+              <a href="/Elina/entertainment/dramas/index.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter" id="homeAnimes">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5">Mes animés</p>
+              <p class="subtitle is-6"><i>En construction</i></p>
+              <a href="/Elina/entertainment/animes/index.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter" id="homeBooks">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5">Mes livres</p>
+              <p class="subtitle is-6"><i>En construction</i></p>
+              <a href="/Elina/entertainment/books/index.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/nav.js";
+  loadNav();
+</script>
+
+<script type="module">
+  import { loadProfile } from "/Elina/js/dashboard.js";
+  loadProfile();
+  import { customDashboard } from "/Elina/js/dashboard.js";
+  customDashboard();
+</script>
+
+<script type="module" src="/Elina/js/guard.js"></script>
+</body>
+</html>
