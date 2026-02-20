@@ -31,11 +31,12 @@
           </span>
           <span>Mes films à voir</span>
         </h2>
-        <div class="columns is-multiline is-hidden" id="list-tosee-movies"></div>
-
-      <nav class="pagination" role="navigation" aria-label="navigation" id="paginationTosee">
-        <div class="pagination-list" id="pagination_nb_tosee"></div>
-      </nav>
+        <div class="columns is-multiline is-hidden" id="div-tosee-movies">
+          <div id="list-tosee-movies"></div>
+          <nav class="pagination" role="navigation" aria-label="navigation" id="paginationTosee">
+            <div class="pagination-list" id="pagination_nb_tosee"></div>
+          </nav>
+        </div>
       
       </div>
 
@@ -47,11 +48,12 @@
           </span>
           <span>Mes films vus</span>
         </h2>
-        <div class="columns is-multiline is-hidden" id="list-seen-movies"></div>
-
-      <nav class="pagination" role="navigation" aria-label="navigation" id="paginationSeen">
-        <div class="pagination-list" id="pagination_nb_seen"></div>
-      </nav>
+        <div class="columns is-multiline is-hidden" id="div-seen-movies">
+          <div id="list-seen-movies"></div>
+          <nav class="pagination" role="navigation" aria-label="navigation" id="paginationSeen">
+            <div class="pagination-list" id="pagination_nb_seen"></div>
+          </nav>
+        </div>
 
       </div>
       
@@ -72,21 +74,32 @@
 </script>
 
 <script>
-  function setupToggle(titleId, listId, arrowId) {
-    const title = document.getElementById(titleId);
-    const list = document.getElementById(listId);
-    const arrow = document.getElementById(arrowId);
+  const toseeMoviesToggle = document.getElementById("toggle-tosee");
+  const seenMoviesToggle = document.getElementById("toggle-seen");
+  const listToseeMovies = document.getElementById("div-tosee-movies");
+  const listSeenMovies = document.getElementById("div-seen-movies");
+  const arrowToseeMovies = document.getElementById("arrow-tosee");
+  const arrowSeenMovies = document.getElementById("arrow-seen");
 
-    title.addEventListener("click", () => {
-      list.classList.toggle("is-hidden");
+  toseeMoviesToggle.addEventListener("click", () => {
+    if (listToseeMovies.classList.contains("is-hidden")) {
+      listToseeMovies.classList.remove("is-hidden");
+      arrowToseeMovies.classList.replace("fa-chevron-right", "fa-chevron-down");
+    } else {
+      listToseeMovies.classList.add("is-hidden");
+      arrowToseeMovies.classList.replace("fa-chevron-down", "fa-chevron-right");
+    };
+  });
 
-      // rotation de la flèche
-      arrow.classList.toggle("is-rotated");
-    });
-  }
-
-  setupToggle("toggle-tosee", "list-tosee-movies", "arrow-tosee");
-  setupToggle("toggle-seen", "list-seen-movies", "arrow-seen");
+  seenMoviesToggle.addEventListener("click", () => {
+    if (listSeenMovies.classList.contains("is-hidden")) {
+      listSeenMovies.classList.remove("is-hidden");
+      arrowSeenMovies.classList.replace("fa-chevron-right", "fa-chevron-down");
+    } else {
+      listSeenMovies.classList.add("is-hidden");
+      arrowSeenMovies.classList.replace("fa-chevron-down", "fa-chevron-right");
+    };
+  });
 </script>
 
 <script type="module" src="/Elina/js/guard.js"></script>
