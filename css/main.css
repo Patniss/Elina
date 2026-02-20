@@ -103,6 +103,12 @@ body {
     background-size: contain;
   }
 }
+
+.card {
+  background-color: color-mix(in srgb, var(--bulma-scheme-main) 85%, transparent);
+  backdrop-filter: blur(6px); /* optionnel, effet glass */
+}
+
 .title {
   font-family: Magnolia, Magiera, "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
