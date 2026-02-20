@@ -1,7 +1,45 @@
+/* Normal */
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("fonts/apple_garamond/AppleGaramond.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Italique */
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("fonts/apple_garamond/AppleGaramond-Italic.ttf") format("ttf");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Gras */
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("fonts/apple_garamond/AppleGaramond-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Gras Italique */
+@font-face {
+  font-family: "Apple Garamond";
+  src: url("fonts/apple_garamond/AppleGaramond-BoldItalic.ttf") format("ttf");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+
 :root {
   --user-primary: #00d1b2;
   --bulma-arrow-color: var(--user-primary);
   --bulma-primary-invert-l: black;
+  --bulma-family-primary: "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 /* On surcharge les classes Bulma principales */
