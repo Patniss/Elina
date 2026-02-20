@@ -685,15 +685,17 @@ export async function completeMovie(uuid) {
 
         const columns = document.createElement("div");
         columns.classList.add("columns");
+        columns.style.border = "1px solid grey";
+        columns.style.borderRadius = "5px";
 
         const divDelete = document.createElement("div");
-        divDelete.classList.add("column", "is-1");
+        divDelete.classList.add("column", "is-1", "columns");
         const nbRole = document.createElement("h3");
-        nbRole.classList.add("subtitle", "is-3");
+        nbRole.classList.add("subtitle", "is-3", "column", "is-half");
         nbRole.textContent = i;
         const btnDelete = document.createElement("button");
-        btnDelete.classList.add("button", "delete", "is-large");
-        divDelete.append(nbRole, btnDelete);
+        btnDelete.classList.add("button", "delete", "is-large", "column", "is-half");
+        divDelete.append(btnDelete, nbRole);
 
         const divSelectRole = document.createElement("div");
         divSelectRole.classList.add("column", "is-3");
@@ -704,7 +706,36 @@ export async function completeMovie(uuid) {
         inputRole.type = "text";
         inputRole.placeholder = "Nom du personnage…";
         inputRole.classList.add("input");
-        divSelectRole.append(labelRole, inputRole);
+        
+        const divTypeRole = document.createElement("div");
+        divTypeRole.classList.add("radios");
+        const labelMainRole = document.createElement("label");
+        labelMainRole.classList.add("radio");
+        const radioMainRole = document.createElement("input");
+        radioMainRole.type = "radio";
+        radioMainRole.name = "typeRole";
+        radioMainRole.value = "main";
+        const radioTextMainRole = "Principal";
+        labelMainRole.append(radioMainRole, radioTextMainRole);
+        const labelSecondRole = document.createElement("label");
+        labelSecondRole.classList.add("radio");
+        const radioSecondRole = document.createElement("input");
+        radioSecondRole.type = "radio";
+        radioSecondRole.name = "typeRole";
+        radioSecondRole.value = "main";
+        const radioTextSecondRole = "Secondaire";
+        labelSecondRole.append(radioSecondRole, radioTextSecondRole);
+        const labelExtraRole = document.createElement("label");
+        labelExtraRole.classList.add("radio");
+        const radioExtraRole = document.createElement("input");
+        radioExtraRole.type = "radio";
+        radioExtraRole.name = "typeRole";
+        radioExtraRole.value = "main";
+        const radioTextExtraRole = "Princiapl";
+        labelExtraRole.append(radioExtraRole, radioTextExtraRole);
+        divTypeRole.append(labelMainRole, labelSecondRole, labelExtraRole);
+        
+        divSelectRole.append(labelRole, inputRole, divTypeRole);
 
         columns.append(divDelete, divSelectRole);
 
