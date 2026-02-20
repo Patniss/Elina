@@ -54,7 +54,7 @@ async function createMovieCard(movie) {
   const detailsBtn = document.createElement("a");
   detailsBtn.classList.add("tag", "button", "is-hoverable", "mr-2");
   detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-  detailsBtn.href = `/Elina/movies/movie.html?id=${movieId}`;
+  detailsBtn.href = `/Elina/entertainment/movies/movie.html?id=${movieId}`;
 
   const addMovieBtn = document.createElement("button");
   addMovieBtn.classList.add("tag", "button", "is-hoverable", "is-link", "mr-2");
@@ -974,7 +974,7 @@ export async function loadIncompleteMovies() {
     const completeBtn = document.createElement("a");
     completeBtn.classList.add("tag");
     completeBtn.textContent = "Compléter";
-    completeBtn.href = `/Elina/movies/complete.html?id=${movie.id}`;
+    completeBtn.href = `/Elina/entertainment/movies/complete.html?id=${movie.id}`;
 
     divTags.appendChild(completeBtn);
     cardContent.appendChild(pTitle);
@@ -1043,7 +1043,7 @@ export async function loadAllShows() {
     detailsBtn.classList.add("is-hoverable");
     detailsBtn.classList.add("mr-2");
     detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-    detailsBtn.href = `/Elina/shows/movie.html?id=${show.id}`;
+    detailsBtn.href = `/Elina/entertainment/shows/movie.html?id=${show.id}`;
 
     const divTags = document.createElement("div");
     divTags.classList.add("is-flex");

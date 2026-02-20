@@ -9,7 +9,7 @@ const {
 const isLoginPage = window.location.pathname.endsWith("/index.html") || window.location.pathname === "/";
 
 if (!session && !isLoginPage) {
-  window.location.href = "/index.html";
+  window.location.href = "/Elina/index.html";
 }
 
 // Déconnexion
