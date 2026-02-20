@@ -304,7 +304,7 @@ function renderPagination({containerId, currentPage, setCurrentPage, totalItems}
   const pagination = document.getElementById(containerId);
   pagination.innerHTML = "";
 
-  const totalPages = Math.ceil(filteredMovies.length / pageSize);
+  const totalPages = Math.ceil(totalItems / pageSize);
   if (totalPages <= 1) return;
 
   const delta = 2; // nombre de pages autour de la page active
