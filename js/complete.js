@@ -707,7 +707,7 @@ export async function completeMovie(uuid) {
         inputRole.placeholder = "Nom du personnage…";
         inputRole.classList.add("input");
         
-        const divTypeRole = document.createElement("div, my-2");
+        const divTypeRole = document.createElement("div", "my-2");
         divTypeRole.classList.add("radios");
         const labelMainRole = document.createElement("label");
         labelMainRole.classList.add("radio");
