@@ -100,7 +100,7 @@ body {
 }
 
 .navbar, .navbar-menu {
-  background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent) !important;
+  background-color: transparent !important;
 }
 
 .box {
