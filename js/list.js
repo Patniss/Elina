@@ -4,8 +4,6 @@ import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 
 // VARIABLES BASIQUES
-let allMovies = [];
-let filteredMovies = [];
 let currentPageAll = 1;
 let currentPageTosee = 1;
 let currentPageSeen = 1;
@@ -17,7 +15,176 @@ let order = {
 let genreFilter = "";
 
 // ----------
-// FONCTION POUR CRÉER UNE CARTE FILM (GÉNÉRAL)
+// FONCTION PLUS GÉNÉRAL 
+// ----------
+let allMovies = [];
+let filteredMovies = [];
+function renderPagination({containerId, currentPage, setCurrentPage, totalItems}) {
+  const pagination = document.getElementById(containerId);
+  pagination.innerHTML = "";
+
+  const totalPages = Math.ceil(totalItems / pageSize);
+  if (totalPages <= 1) return;
+
+  const delta = 2; // nombre de pages autour de la page active
+
+  // --- Fonction utilitaire pour créer un bouton page
+  function createPageButton(page, text = page, isCurrent = false) {
+    const li = document.createElement("li");
+    const btn = document.createElement("a");
+
+    btn.href = "#";
+    btn.classList.add("pagination-link");
+    btn.textContent = text;
+
+    if (isCurrent) btn.classList.add("is-current");
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      setCurrentPage(page);
+      renderMovies();
+    });
+
+    li.appendChild(btn);
+    return li;
+  }
+
+  // --- Bouton précédent
+  const prevBtn = document.createElement("a");
+  prevBtn.href = "#";
+  prevBtn.classList.add("pagination-previous");
+  prevBtn.textContent = "Précédent";
+
+  if (currentPage === 1) {
+    prevBtn.classList.add("is-disabled");
+  } else {
+    prevBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      setCurrentPage(currentPage - 1);
+      renderMovies();
+    });
+  }
+
+  pagination.appendChild(prevBtn);
+
+  // --- Liste des pages
+  const pageList = document.createElement("ul");
+  pageList.classList.add("pagination-list");
+
+  const start = Math.max(1, currentPage - delta);
+  const end = Math.min(totalPages, currentPage + delta);
+
+  // --- Première page + ...
+  if (start > 1) {
+    pageList.appendChild(createPageButton(1));
+
+    if (start > 2) {
+      const ellipsis = document.createElement("span");
+      ellipsis.classList.add("pagination-ellipsis");
+      ellipsis.textContent = "…";
+      pageList.appendChild(ellipsis);
+    }
+  }
+
+  // --- Pages autour de la page active
+  for (let i = start; i <= end; i++) {
+    pageList.appendChild(
+      createPageButton(i, i, i === currentPage)
+    );
+  }
+
+  // --- ... + dernière page
+  if (end < totalPages) {
+    if (end < totalPages - 1) {
+      const ellipsis = document.createElement("span");
+      ellipsis.classList.add("pagination-ellipsis");
+      ellipsis.textContent = "…";
+      pageList.appendChild(ellipsis);
+    }
+
+    pageList.appendChild(createPageButton(totalPages));
+  }
+
+  pagination.appendChild(pageList);
+
+  // --- Bouton suivant
+  const nextBtn = document.createElement("a");
+  nextBtn.href = "#";
+  nextBtn.classList.add("pagination-next");
+  nextBtn.textContent = "Suivant";
+
+  if (currentPage === totalPages) {
+    nextBtn.classList.add("is-disabled");
+  } else {
+    nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      setCurrentPage(currentPage + 1);
+      renderMovies();
+    });
+  }
+
+  pagination.appendChild(nextBtn);
+}
+
+function renderPaginationAll(totalItems) {
+  renderPagination({
+    containerId: "pagination_nb",
+    currentPage: currentPageAll,
+    setCurrentPage: (page) => currentPageAll = page,
+    totalItems
+  });
+}
+
+function renderPaginationTosee(totalItems) {
+  renderPagination({
+    containerId: "pagination_nb_tosee",
+    currentPage: currentPageTosee,
+    setCurrentPage: (page) => currentPageTosee = page,
+    totalItems
+  });
+}
+
+function renderPaginationSeen(totalItems) {
+  renderPagination({
+    containerId: "pagination_nb_seen",
+    currentPage: currentPageSeen,
+    setCurrentPage: (page) => currentPageSeen = page,
+    totalItems
+  });
+}
+
+export function initResearch() {
+  $("#movie-search").on("input", function () {
+    
+    let search = $(this).val().toLowerCase();
+    
+    currentPage = 1;
+    if (search === "") {
+      filteredMovies = [...allMovies];
+    } else {
+      filteredMovies = allMovies.filter(movie =>
+        movie.title.toLowerCase().includes(search)
+      );
+    }
+
+    $(".column.is-one-quarter").each(function () {
+
+      let title = $(this).find(".title.is-5").text().toLowerCase();
+
+      if (title.includes(search)) {
+        $(this).fadeIn(150);
+      } else {
+        $(this).fadeOut(150);
+      }
+
+    });
+    
+    renderMovies();
+  });
+}
+
+// ----------
+// FONCTION SUR LES FILMS
 // ----------
 async function createMovieCard(movie) {
   // ❶ Récupérer la session
@@ -297,171 +464,6 @@ async function createMovieCard(movie) {
   return column;
 }
 
-// ----------
-// FONCTIONS DE PAGINATION :
-// ----------
-function renderPagination({containerId, currentPage, setCurrentPage, totalItems}) {
-  const pagination = document.getElementById(containerId);
-  pagination.innerHTML = "";
-
-  const totalPages = Math.ceil(totalItems / pageSize);
-  if (totalPages <= 1) return;
-
-  const delta = 2; // nombre de pages autour de la page active
-
-  // --- Fonction utilitaire pour créer un bouton page
-  function createPageButton(page, text = page, isCurrent = false) {
-    const li = document.createElement("li");
-    const btn = document.createElement("a");
-
-    btn.href = "#";
-    btn.classList.add("pagination-link");
-    btn.textContent = text;
-
-    if (isCurrent) btn.classList.add("is-current");
-
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      setCurrentPage(page);
-      renderMovies();
-    });
-
-    li.appendChild(btn);
-    return li;
-  }
-
-  // --- Bouton précédent
-  const prevBtn = document.createElement("a");
-  prevBtn.href = "#";
-  prevBtn.classList.add("pagination-previous");
-  prevBtn.textContent = "Précédent";
-
-  if (currentPage === 1) {
-    prevBtn.classList.add("is-disabled");
-  } else {
-    prevBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      setCurrentPage(currentPage - 1);
-      renderMovies();
-    });
-  }
-
-  pagination.appendChild(prevBtn);
-
-  // --- Liste des pages
-  const pageList = document.createElement("ul");
-  pageList.classList.add("pagination-list");
-
-  const start = Math.max(1, currentPage - delta);
-  const end = Math.min(totalPages, currentPage + delta);
-
-  // --- Première page + ...
-  if (start > 1) {
-    pageList.appendChild(createPageButton(1));
-
-    if (start > 2) {
-      const ellipsis = document.createElement("span");
-      ellipsis.classList.add("pagination-ellipsis");
-      ellipsis.textContent = "…";
-      pageList.appendChild(ellipsis);
-    }
-  }
-
-  // --- Pages autour de la page active
-  for (let i = start; i <= end; i++) {
-    pageList.appendChild(
-      createPageButton(i, i, i === currentPage)
-    );
-  }
-
-  // --- ... + dernière page
-  if (end < totalPages) {
-    if (end < totalPages - 1) {
-      const ellipsis = document.createElement("span");
-      ellipsis.classList.add("pagination-ellipsis");
-      ellipsis.textContent = "…";
-      pageList.appendChild(ellipsis);
-    }
-
-    pageList.appendChild(createPageButton(totalPages));
-  }
-
-  pagination.appendChild(pageList);
-
-  // --- Bouton suivant
-  const nextBtn = document.createElement("a");
-  nextBtn.href = "#";
-  nextBtn.classList.add("pagination-next");
-  nextBtn.textContent = "Suivant";
-
-  if (currentPage === totalPages) {
-    nextBtn.classList.add("is-disabled");
-  } else {
-    nextBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      setCurrentPage(currentPage + 1);
-      renderMovies();
-    });
-  }
-
-  pagination.appendChild(nextBtn);
-}
-
-function renderPaginationAll(totalItems) {
-  renderPagination({
-    containerId: "pagination_nb",
-    currentPage: currentPageAll,
-    setCurrentPage: (page) => currentPageAll = page,
-    totalItems
-  });
-}
-
-function renderPaginationTosee(totalItems) {
-  renderPagination({
-    containerId: "pagination_nb_tosee",
-    currentPage: currentPageTosee,
-    setCurrentPage: (page) => currentPageTosee = page,
-    totalItems
-  });
-}
-
-function renderPaginationSeen(totalItems) {
-  renderPagination({
-    containerId: "pagination_nb_seen",
-    currentPage: currentPageSeen,
-    setCurrentPage: (page) => currentPageSeen = page,
-    totalItems
-  });
-}
-
-// ----------
-// FONCTION DE TRI DES FILMS
-// ----------
-function sortMovies(movies) {
-  return [...movies].sort((a, b) => {
-    const field = order.field;
-
-    let valueA = a[field];
-    let valueB = b[field];
-
-    if (valueA === null) return 1;
-    if (valueB === null) return -1;
-
-    if (typeof valueA === "string") {
-      return order.direction === "asc"
-        ? valueA.localeCompare(valueB)
-        : valueB.localeCompare(valueA);
-    }
-
-    return order.direction === "asc"
-      ? valueA - valueB
-      : valueB - valueA;
-  });
-}
-
-// ----------
-// FONCTION CLIQUE DES BOUTONS DE TRI / FILTRE
-// ----------
 export function sortFilterMovies() {
   const btnSort = document.getElementById("button-content-sort");
   const contentSort = document.getElementById("dropdown-content-sort");
@@ -730,9 +732,6 @@ export function sortFilterMovies() {
   });
 }
 
-// ----------
-// FONCTION D'AFFICHAGE DES FILMS CHARGÉS
-// ----------
 async function renderMovies() {
   const containerAllMovies = document.getElementById("list-all-movies");
   const containerToseeMovies = document.getElementById("list-tosee-movies");
@@ -789,42 +788,6 @@ async function renderMovies() {
   }
 }
 
-// ----------
-// FONCTION DE RECHERCHE DANS LA BASE DE DONNÉES DES FILMS (VOIR SI POSSIBILITÉ DE GÉNÉRALISER ?)
-// ----------
-export function initResearch() {
-  $("#movie-search").on("input", function () {
-    
-    let search = $(this).val().toLowerCase();
-    
-    currentPage = 1;
-    if (search === "") {
-      filteredMovies = [...allMovies];
-    } else {
-      filteredMovies = allMovies.filter(movie =>
-        movie.title.toLowerCase().includes(search)
-      );
-    }
-
-    $(".column.is-one-quarter").each(function () {
-
-      let title = $(this).find(".title.is-5").text().toLowerCase();
-
-      if (title.includes(search)) {
-        $(this).fadeIn(150);
-      } else {
-        $(this).fadeOut(150);
-      }
-
-    });
-    
-    renderMovies();
-  });
-}
-
-// -----------
-// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS
-// ----------
 export async function loadAllMovies() {
   const allMovieContainer = document.getElementById("list-all-movies");
 
@@ -868,14 +831,11 @@ export async function loadAllMovies() {
   });
 
   allMovies = moviesWithStatus;
-  filteredMovies = sortMovies(moviesWithStatus);
+  filteredMovies = moviesWithStatus;
 
   renderMovies();
 }
 
-// ----------
-// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS DE MA LISTE
-// ----------
 export async function loadMyMovies() {
   const toseeContainer = document.getElementById("list-tosee-movies");
   const seenContainer = document.getElementById("list-seen-movies");
@@ -922,9 +882,6 @@ export async function loadMyMovies() {
   renderMovies();
 }
 
-// ----------
-// FONCTION POUR CHARGER L'ENSEMBLE DES FILMS À COMPLÉTER
-// ----------
 export async function loadIncompleteMovies() {
   const incompleteMoviesContainer = document.getElementById("list-incomplete-movies");
   if (!incompleteMoviesContainer) return;
@@ -989,23 +946,55 @@ export async function loadIncompleteMovies() {
 
 }
 
-// FONCTIONS SUR LES SÉRIES ----> À COMPLÉTER (VIDE)
+// ------------
+// FONCTIONS SUR LES SÉRIES
+// ------------
+let allShows = [];
+let filteredShows = [];
+
+async function renderShows() {
+  const containerAllShows = document.getElementById("list-all-shows");
+
+  if (containerAllShows) {
+    containerAllShows.innerHTML = "";
+
+    const start = (currentPageAll - 1) * pageSize;
+    const end = start + pageSize;
+
+    const pageShows = filteredShows.slice(start, end);
+
+    for (const show of pageShows) {
+      containerAllShows.appendChild(await createShowCard(show));
+    }
+
+    renderPaginationAll(filteredShows.length);
+    return;
+  }
+}
+
 export async function loadAllShows() {
   const allShowsContainer = document.getElementById("list-all-shows");
 
-  const profile = await loadProfile();
-  const userId = profile.id;
+  const session = await loadProfile();
+  const userId = session.id;
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("shows")
-    .select(`*, users_shows(state, user_id)`)
+    .select(`*, users_shows(user_id, state)`)
     .order("title", { ascending: true });
+
+  if (genreFilter !== "") {
+    query = query.ilike("genres", `%${genreFilter}%`);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
     allShowsContainer.textContent = "Erreur lors du chargement des séries.";
+    return;
   }
-
+  
   const showsWithStatus = data.map(show => {
     const userShow = show.users_shows.find(
       us => us.user_id === userId
@@ -1013,46 +1002,14 @@ export async function loadAllShows() {
     
     return {
       ...show,
-      seen: userShow ? userShow.state : null
+      seen: userShow ? userShow.state : null,
     };
   });
 
-  showsWithStatus.forEach(show => {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.classList.add("is-one-quarter");
+  allShows = showsWithStatus;
+  filteredShows = showsWithStatus;
 
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-    const cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-
-    const pTitle = document.createElement("p");
-    pTitle.classList.add("title");
-    pTitle.classList.add("is-5");
-    pTitle.textContent = show.title;
-
-    const pSubtitle = document.createElement("p");
-    pSubtitle.classList.add("title");
-    pSubtitle.classList.add("is-6");
-    pSubtitle.textContent = 'test';
-
-    const detailsBtn = document.createElement("a");
-    detailsBtn.classList.add("tag");
-    detailsBtn.classList.add("is-hoverable");
-    detailsBtn.classList.add("mr-2");
-    detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-    detailsBtn.href = `/Elina/entertainment/shows/movie.html?id=${show.id}`;
-
-    const divTags = document.createElement("div");
-    divTags.classList.add("is-flex");
-    divTags.appendChild(detailsBtn);
-    cardContent.append(pTitle, pSubtitle, divTags);
-    card.appendChild(cardContent);
-    column.appendChild(card);
-    
-  });
+  renderShows();
 }
 
 export async function loadCurrentShows() {
