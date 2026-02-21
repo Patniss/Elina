@@ -196,8 +196,8 @@ export function initResearchMovie() {
         filteredTosee = [...toseeMovies];
         filteredSeen = [...seenMovies];
       } else {
-        filteredTosee = toseeMovies.filter(movie =>
-          movie.title.toLowerCase().includes(search)
+        filteredTosee = toseeMovies.filter(
+          movie => movie.movies.title.toLowerCase().includes(search)
         );
       }
     });
