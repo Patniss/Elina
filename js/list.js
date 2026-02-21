@@ -973,7 +973,37 @@ let allShows = [];
 let filteredShows = [];
 
 async function createShowCard(show) {
-  console.log(show);
+  // ❶ Récupérer la session
+  const session = await loadProfile();
+  const userId = session.id;
+  
+  const showTitle = show.title ?? show.shows.title;
+  const showId = show.title ? show.id : show.shows.id;
+  const showState = show.state ?? show.users_shows.state;
+
+  // Création de la carte
+  const column = document.createElement("div");
+  column.classList.add("column", "is-one-quarter");
+
+  const card = document.createElement("div");
+  card.classList.add("card", "movie-card");
+
+  const cardContent = document.createElement("div");
+  cardContent.classList.add("card-content");
+
+  const pTitle = document.createElement("p");
+  pTitle.classList.add("title", "is-5");
+  pTitle.textContent = showTitle;
+
+  const pSubtitle = document.createElement("p");
+  pSubtitle.classList.add("subtitle", "is-6");
+  pSubtitle.textContent = "Sous-titre ?";
+
+  cardContent.append(pTitle, pSubtitle);
+  card.appendChild(cardContent);
+  column.appendChild(card);
+
+  return column;
 }
 
 async function renderShows() {
