@@ -694,7 +694,7 @@ export async function completeMovie(uuid) {
         nbRole.classList.add("subtitle", "is-3", "column", "is-half");
         nbRole.textContent = i;
         const btnDelete = document.createElement("button");
-        btnDelete.classList.add("button", "delete", "is-large", "column", "is-half");
+        btnDelete.classList.add("button", "delete", "is-large", "column", "is-half", "my-3", "ml-4", "mr-2");
         divDelete.append(btnDelete, nbRole);
 
         const divSelectRole = document.createElement("div");
@@ -787,13 +787,15 @@ export async function completeMovie(uuid) {
                 inputFirstName.type = "text";
                 inputFirstName.classList.add("input");
                 inputFirstName.placeholder = "Prénom…";
+                divFirstName.appendChild(inputFirstName);
 
                 const divLastName = document.createElement("div");
                 divLastName.classList.add("field");
                 const inputLastName = document.createElement("input");
-                inputFirstName.type = "text";
-                inputFirstName.classList.add("input");
-                inputFirstName.placeholder = "Nom…";
+                inputLastName.type = "text";
+                inputLastName.classList.add("input");
+                inputLastName.placeholder = "Nom…";
+                divLastName.appendChild(inputLastName);
 
                 const divBirthdate = document.createElement("div");
                 divBirthdate.classList.add("field");
@@ -801,6 +803,7 @@ export async function completeMovie(uuid) {
                 inputBirthdate.type = "date";
                 inputBirthdate.classList.add("input");
                 inputBirthdate.placeholder = "Date de naissance…";
+                divBirthdate.appendChild(inputBirthdate);
 
                 const divDeathdate = document.createElement("div");
                 divDeathdate.classList.add("field");
