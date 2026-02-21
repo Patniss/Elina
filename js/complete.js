@@ -841,7 +841,7 @@ export async function completeMovie(uuid) {
                 const spanJobDirector = document.createElement("span");
                 spanJobDirector.classList.add("label", "ml-3");
                 spanJobDirector.textContent = "Réalisateur";
-                labelJobDirector.append(inputJobActor, spanJobDirector);
+                labelJobDirector.append(inputJobDirector, spanJobDirector);
 
                 const labelJobProducer = document.createElement("checkbox");
                 labelJobProducer.classList.add("checkbox");
