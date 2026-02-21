@@ -162,6 +162,7 @@ export async function addShow() {
   const showNbSeasons = document.getElementById("show-nb-seasons");
   const showSubmit = document.getElementById("show-submit");
   const averageTimeInput = document.getElementById("show-time");
+  const showLogo = document.getElementById("show-logo");
   
   genres.forEach(genre => {
       showGenres.append(
@@ -236,6 +237,7 @@ export async function addShow() {
     const stateShow = showState.value;
     const completeShow = false;
     const nbSeasonsShow = showNbSeasons.value;
+    const logoShow = showLogo.value;
 
     showSubmit.classList.add("is-loading");
 
@@ -249,7 +251,9 @@ export async function addShow() {
             average_min: averageTimeShow, 
             state: stateShow, 
             complete: completeShow, 
-            nb_seasons: nbSeasonsShow }]);
+            nb_seasons: nbSeasonsShow,
+            logo: logoShow
+          }]);
 
         if (error) {
           setTimeout(() => {
