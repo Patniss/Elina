@@ -707,7 +707,7 @@ export async function completeMovie(uuid) {
         inputRole.placeholder = "Nom du personnage…";
         inputRole.classList.add("input");
         
-        const divTypeRole = document.createElement("div");
+        const divTypeRole = document.createElement("div, my-2");
         divTypeRole.classList.add("radios");
         const labelMainRole = document.createElement("label");
         labelMainRole.classList.add("radio");
@@ -731,7 +731,7 @@ export async function completeMovie(uuid) {
         radioExtraRole.type = "radio";
         radioExtraRole.name = "typeRole";
         radioExtraRole.value = "main";
-        const radioTextExtraRole = "Princiapl";
+        const radioTextExtraRole = "Figurant";
         labelExtraRole.append(radioExtraRole, radioTextExtraRole);
         divTypeRole.append(labelMainRole, labelSecondRole, labelExtraRole);
 
@@ -775,11 +775,51 @@ export async function completeMovie(uuid) {
         $(selectActor).on("select2:select", function(e) {
             const data = e.params.data;
             if (data.newTag) {
-                console.log("nouvel acteur");
+                const divBlockNewActor = document.createElement("div");
+                divBlockNewActor.classList.add("block", "column", "is-8");
+                const h4NewActor = document.createElement("h4");
+                h4NewActor.classList.add("subtitle", "is-5");
+                h4NewActor.textContent = "Nouvel acteur :";
+
+                const divFirstName = document.createElement("div");
+                divFirstName.classList.add("field");
+                const inputFirstName = document.createElement("input");
+                inputFirstName.type = "text";
+                inputFirstName.classList.add("input");
+                inputFirstName.placeholder = "Prénom…";
+
+                const divLastName = document.createElement("div");
+                divLastName.classList.add("field");
+                const inputLastName = document.createElement("input");
+                inputFirstName.type = "text";
+                inputFirstName.classList.add("input");
+                inputFirstName.placeholder = "Nom…";
+
+                const divBirthdate = document.createElement("div");
+                divBirthdate.classList.add("field");
+                const inputBirthdate = document.createElement("input");
+                inputBirthdate.type = "date";
+                inputBirthdate.classList.add("input");
+                inputBirthdate.placeholder = "Date de naissance…";
+
+                const divDeathdate = document.createElement("div");
+                divDeathdate.classList.add("field");
+                const inputIsDead = document.createElement("input");
+                inputIsDead.type = "checkbox";
+                const labelIsDead = document.createElement("label");
+                labelIsDead.classList.add("label");
+                labelIsDead.textContent = "Mort";
+                const inputDeathdate = document.createElement("input", "is-hidden");
+                inputDeathdate.type = "date";
+                inputDeathdate.classList.add("input");
+                inputDeathdate.placeholder = "Date de mort…";
+                divDeathdate.append(inputIsDead, labelIsDead, inputDeathdate);
+
+                divBlockNewActor.append(divFirstName, divLastName, divBirthdate, divDeathdate);
             }
         })
         .on("select2:clear", function() {
-            console.log("select change");
+            divBlockNewActor.remove();
         });
     });
 }
