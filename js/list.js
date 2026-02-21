@@ -181,6 +181,7 @@ export function initResearchMovie() {
       renderMovies();
     });
   } else if (document.getElementById("div-tosee-movies") && document.getElementById("div-seen-movies")) {
+    console.log(allMovies);
     $("#movie-search").on("input", function () {
       let search = $(this).val().toLowerCase();
 
