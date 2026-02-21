@@ -838,7 +838,10 @@ export async function completeMovie(uuid) {
                 inputJobDirector.value = "director";
                 inputJobDirector.type = "checkbox";
                 inputJobDirector.classList.add("checkbox");
-                labelJobDirector.append(inputJobActor, " Réalisateur");
+                const spanJobDirector = document.createElement("span");
+                spanJobDirector.classList.add("label", "ml-3");
+                spanJobDirector.textContent = "Réalisateur";
+                labelJobDirector.append(inputJobActor, spanJobDirector);
 
                 const labelJobProducer = document.createElement("checkbox");
                 labelJobProducer.classList.add("checkbox");
@@ -846,7 +849,10 @@ export async function completeMovie(uuid) {
                 inputJobProducer.value = "producer";
                 inputJobProducer.type = "checkbox";
                 inputJobProducer.classList.add("checkbox");
-                labelJobProducer.append(inputJobProducer, " Producteur");
+                const spanJobProducer = document.createElement("span");
+                spanJobProducer.classList.add("label", "ml-3");
+                spanJobProducer.textContent = "Producteur";
+                labelJobProducer.append(inputJobProducer, spanJobProducer);
 
                 const labelJobSwcriptwriter = document.createElement("label");
                 labelJobSwcriptwriter.classList.add("checkbox");
@@ -854,7 +860,10 @@ export async function completeMovie(uuid) {
                 inputJobScriptwriter.value = "scriptwriter";
                 inputJobScriptwriter.type = "checkbox";
                 inputJobScriptwriter.classList.add("checkbox");
-                labelJobSwcriptwriter.append(inputJobScriptwriter, " Scénariste");
+                const spanJobScriptwriter = document.createElement("span");
+                spanJobScriptwriter.classList.add("label", "ml-3");
+                spanJobScriptwriter.textContent = "Scénariste";
+                labelJobSwcriptwriter.append(inputJobScriptwriter, spanJobScriptwriter);
                 
                 const labelJobActor = document.createElement("label");
                 labelJobActor.classList.add("checkbox");
@@ -863,7 +872,10 @@ export async function completeMovie(uuid) {
                 inputJobActor.type = "checkbox";
                 inputJobActor.checked = true;
                 inputJobActor.classList.add("checkbox");
-                labelJobActor.append(inputJobActor, " Acteur");
+                const spanJobActor = document.createElement("span");
+                spanJobActor.classList.add("label", "ml-3");
+                spanJobActor.textContent = "Acteur";
+                labelJobActor.append(inputJobActor, spanJobActor);
 
                 divJobs.append(labelJobDirector, labelJobProducer, labelJobSwcriptwriter, labelJobActor);
 
