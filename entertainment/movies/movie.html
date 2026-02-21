@@ -29,20 +29,6 @@
                 <div class="columns is-four-fifths box">
                     <div class="column is-one-quarter">
                         <img src="/Elina/entertainment/movies/poster.png" class="image is-clickable js-modal-trigger" id="movie-poster" data-target="div-modal-poster" style="border-radius: 5px;" />
-                        <div class="modal" id="div-modal-poster">
-                            <div class="modal-background"></div>
-                            <div class="modal-content">
-                                <p class="image is-2by3">
-                                    <img src="/Elina/entertainment/movies/poster.png" alt="Affiche" id="modal-poster">
-                                    <p><button class="button" id="add-own-poster">Personnaliser ma couverture</button></p>
-                                    <div class="field is-hidden" id="div-add-own-poster">
-                                        <input type="text" id="src-add-own-poster" />
-                                        <button type="button" id="btn-add-own-poster">Ajouter</button>
-                                    </div>
-                                </p>
-                            </div>
-                            <button class="modal-close is-large" aria-label="close"></button>
-                        </div>
                     </div>
                     <div class="block column is-three-quarters">
                         <p id="movie-genres"><span class="subtitle is-4 mb-6 mr-3" id="movie-time"></span><span class="mr-3">&#x2022;</span></p>
@@ -56,6 +42,21 @@
                 </div>
             
             </div>
+        </div>
+
+        <div class="modal" id="div-modal-poster" style="min-height: 95%;">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <p class="image is-2by3">
+                    <img src="/Elina/entertainment/movies/poster.png" alt="Affiche" id="modal-poster">
+                    <p><button class="button my-3" id="add-own-poster">Personnaliser ma couverture</button></p>
+                    <div class="field my-3 is-hidden" id="div-add-own-poster">
+                        <input type="text" id="src-add-own-poster" class="input mr-2" style="width:50%" />
+                        <button type="button" id="btn-add-own-poster" class="button is-primary">Ajouter</button>
+                    </div>
+                </p>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
         </div>
 
     </section>
