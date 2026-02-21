@@ -99,7 +99,7 @@ body {
   background-attachment: fixed;
 }
 
-.navbar-container {
+.navbar {
     background-color: --bulma-navbar-background-color;
   }
 
@@ -110,7 +110,7 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .navbar-container {
+  .navbar {
     background-color: transparent !important;
   }
 }
