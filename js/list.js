@@ -154,44 +154,33 @@ function renderPaginationSeen(totalItems) {
 }
 
 export function initResearchMovie() {
-  $("#movie-search").on("input", function () {
-
-    const search = $(this).val().toLowerCase().trim();
-
-    currentPageTosee = 1;
-    currentPageSeen = 1;
-
+  $("#movie-search")
+    .on("input", function () {
+      let search = $(this).val().toLowerCase();
+      currentPage = 1;
+      
     if (search === "") {
-      filteredTosee = [...toseeMovies];
-      filteredSeen = [...seenMovies];
+      filteredMovies = [...allMovies];
     } else {
-      filteredTosee = toseeMovies.filter(movie =>
-        movie.title.toLowerCase().includes(search)
-      );
-
-      filteredSeen = seenMovies.filter(movie =>
-        movie.title.toLowerCase().includes(search)
+      filteredMovies = allMovies.filter(
+        movie => movie.title.toLowerCase().includes(search)
       );
     }
-
-    // 🎬 Ouvrir / fermer automatiquement
-    toggleSection(
-      "#div-tosee-movies",
-      "#arrow-tosee",
-      filteredTosee.length
-    );
-
-    toggleSection(
-      "#div-seen-movies",
-      "#arrow-seen",
-      filteredSeen.length
-    );
-
-    renderToseeMovies();
-    renderSeenMovies();
+    
+    $(".column.is-one-quarter")
+    .each(function () {
+      let title = $(this).find(".title.is-5").text().toLowerCase();
+      
+      if (title.includes(search)) {
+        $(this).fadeIn(150);
+      } else {
+        $(this).fadeOut(150);
+      }
+    });
+    
+    renderMovies();
   });
 }
-
 // ----------
 // FONCTION SUR LES FILMS
 // ----------
@@ -961,7 +950,7 @@ export async function loadIncompleteMovies() {
 let allShows = [];
 let filteredShows = [];
 
-async function createShowCard(show) {
+async function createCard(show) {
   console.log(show);
 }
 
