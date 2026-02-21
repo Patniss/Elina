@@ -807,18 +807,82 @@ export async function completeMovie(uuid) {
 
                 const divDeathdate = document.createElement("div");
                 divDeathdate.classList.add("field");
+                const labelIsDead = document.createElement("label");
+                labelIsDead.classList.add("checkbox");
                 const inputIsDead = document.createElement("input");
                 inputIsDead.type = "checkbox";
-                const labelIsDead = document.createElement("label");
-                labelIsDead.classList.add("label");
-                labelIsDead.textContent = "Mort";
-                const inputDeathdate = document.createElement("input", "is-hidden");
+                labelIsDead.append(inputIsDead, " Mort");
+                const inputDeathdate = document.createElement("input");
                 inputDeathdate.type = "date";
-                inputDeathdate.classList.add("input");
+                inputDeathdate.classList.add("input", "is-hidden");
                 inputDeathdate.placeholder = "Date de mort…";
-                divDeathdate.append(inputIsDead, labelIsDead, inputDeathdate);
+                divDeathdate.append(labelIsDead, inputDeathdate);
 
-                divBlockNewActor.append(divFirstName, divLastName, divBirthdate, divDeathdate);
+                inputIsDead.addEventListener("change", () => {
+                    if (inputIsDead.checked === true) {
+                        inputDeathdate.classList.remove("is-hidden");
+                    } else {
+                        inputDeathdate.add("is-hidden");
+                    }
+                });
+
+                const divJobs = document.createElement("div");
+                divJobs.classList.add("field");
+                const labelJobs = document.createElement("label");
+                labelJobs.classList.add("label");
+                labelJobs.textContent = "Casquettes :";
+
+                const labelJobDirector = document.createElement("checkbox");
+                labelJobDirector.classList.add("checkbox");
+                const inputJobDirector = document.createElement("input");
+                inputJobDirector.value = "director";
+                inputJobDirector.type = "checkbox";
+                inputJobDirector.classList.add("checkbox");
+                labelJobDirector.append(inputJobActor, " Réalisateur");
+
+                const labelJobProducer = document.createElement("checkbox");
+                labelJobProducer.classList.add("checkbox");
+                const inputJobProducer = document.createElement("input");
+                inputJobProducer.value = "producer";
+                inputJobProducer.type = "checkbox";
+                inputJobProducer.classList.add("checkbox");
+                labelJobProducer.append(inputJobProducer, " Producteur");
+
+                const labelJobSwcriptwriter = document.createElement("label");
+                labelJobSwcriptwriter.classList.add("checkbox");
+                const inputJobScriptwriter = document.createElement("input");
+                inputJobScriptwriter.value = "scriptwriter";
+                inputJobScriptwriter.type = "checkbox";
+                inputJobScriptwriter.classList.add("checkbox");
+                labelJobSwcriptwriter.append(inputJobScriptwriter, " Scénariste");
+                
+                const labelJobActor = document.createElement("label");
+                labelJobActor.classList.add("checkbox");
+                const inputJobActor = document.createElement("input");
+                inputJobActor.value = "actor";
+                inputJobActor.type = "checkbox";
+                inputJobActor.checked = true;
+                inputJobActor.classList.add("checkbox");
+                labelJobActor.append(inputJobActor, " Acteur");
+
+                divJobs.append(labelJobDirector, labelJobProducer, labelJobSwcriptwriter, labelJobActor);
+
+                const divNationalities = document.createElement("div");
+                divNationalities.classList.add("field");
+                const divSelectNationalities = document.createElement("div");
+                divSelectNationalities.classList.add("select", "is-multiple");
+                const labelNationalities = document.createElement("label");
+                labelNationalities.classList.add("label");
+                const selectNationalities = document.createElement("select");
+                selectNationalities.multiple = "multiple";
+                selectNationalities.style.width = "100%";
+                const optBaseNationalities = document.createElement("option");
+                selectNationalities.appendChild(optBaseNationalities);
+                divSelectNationalities.append(labelNationalities, selectNationalities);
+                divNationalities.appendChild(divSelectNationalities);
+                
+
+                divBlockNewActor.append(divFirstName, divLastName, divBirthdate, divDeathdate, divJobs, divNationalities);
                 columns.appendChild(divBlockNewActor);
             }
         })
