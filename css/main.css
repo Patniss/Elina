@@ -99,8 +99,8 @@ body {
   background-attachment: fixed;
 }
 
-.navbar {
-  background-color: var(--bulma-navbar-background-color);
+.navbar, .navbar-menu {
+  background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
 }
 
 .box {
