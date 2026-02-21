@@ -698,7 +698,7 @@ export async function completeMovie(uuid) {
         divDelete.append(btnDelete, nbRole);
 
         const divSelectRole = document.createElement("div");
-        divSelectRole.classList.add("column", "is-3");
+        divSelectRole.classList.add("column", "is-3", "mb-2");
         const labelRole = document.createElement("label");
         labelRole.classList.add("label");
         labelRole.textContent = "Rôle n° " + i;
@@ -734,11 +734,52 @@ export async function completeMovie(uuid) {
         const radioTextExtraRole = "Princiapl";
         labelExtraRole.append(radioExtraRole, radioTextExtraRole);
         divTypeRole.append(labelMainRole, labelSecondRole, labelExtraRole);
+
+        const divSelectActor = document.createElement("div");
+        divSelectActor.classList.add("select", "is-multiple");
+        const selectActor = document.createElement("select");
+        selectActor.multiple = "multiple";
+        selectActor.style.width = "100%";
+        const optBaseAction = document.createElement("option");
+        selectActor.appendChild(optBaseAction);
+        divSelectActor.appendChild(selectActor);
         
-        divSelectRole.append(labelRole, inputRole, divTypeRole);
+        divSelectRole.append(labelRole, inputRole, divTypeRole, divSelectActor);
 
         columns.append(divDelete, divSelectRole);
 
         divRoles.appendChild(columns);
+
+        people.forEach(p => {
+            const completeName = p.firstname ? p.firstname + " " + p.lastname : p.lastname;
+            selectActor.append(
+                new Option(completeName, p.id, false, false)
+            );
+        });
+
+        $(selectActor).select2({
+            placeholder: "Acteur…",
+            allowClear: true,
+            tags: true,
+            createTag: function(params) {
+                const term = $.trim(params.term);
+                if (term === "") return null;
+                return {
+                    id: term,
+                    text: term,
+                    newTag: true
+                }
+            }
+        });
+
+        $(selectActor).on("select2:select", function(e) {
+            const data = e.params.data;
+            if (data.newTag) {
+                console.log("nouvel acteur");
+            }
+        })
+        .on("select2:clear", function() {
+            console.log("select change");
+        });
     });
 }
