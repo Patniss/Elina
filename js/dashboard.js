@@ -33,6 +33,7 @@ export async function loadProfile() {
 
 export async function customDashboard() {
   const session = await loadProfile();
+  const userId = session.id;
 
   const homeMovies = document.getElementById("homeMovies");
   const homeShows = document.getElementById("homeShows");
@@ -43,6 +44,47 @@ export async function customDashboard() {
   if (session.shows === false) homeShows.style.display = "none";
   if (session.dramas === false) homeDramas.style.display = "none";
   if (session.books === false) homeBooks.style.display = "none";
+
+  const timeMovies = document.getElementById("time-movies");
+
+  const { data, error } = await supabase
+    .from("users_movies")
+    .select(`*, movies (*)`)
+    .eq("user_id", userId)
+    .order("date_seen", { ascending: false })
+    .order("title", { foreignTable: "movies", ascending: true });
+    
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  let totalSeen = 0;
+  let totalMinutesSeen = 0;
+
+  data.forEach(movie => {
+    if (movie.seen === true) {
+      totalSeen += 1;
+      totalMinutesSeen += Number(movie.movies.time);
+    } else {
+      totalTosee += 1;
+      totalMinutesToSee += Number(movie.movies.time);
+    }
+  });
+
+  const yearsSeen = Math.floor(totalMinutesSeen / 525600);
+  const monthsSeen = Math.floor((totalMinutesSeen - 525600*yearsSeen) / 43200);
+  const daysSeen = Math.floor((totalMinutesSeen - 525600*yearsSeen - 43200*monthsSeen) / 1440);
+  const hoursSeen = Math.floor((totalMinutesSeen - 525600*yearsSeen - 43200*monthsSeen - 1440*daysSeen) / 60);
+  const minutesSeen = Math.floor(totalMinutesSeen - 525600*yearsSeen - 43200*monthsSeen - 1440*daysSeen - 60*hoursSeen);
+
+  let timeSeen;
+  if (yearsSeen > 0) timeSeen = yearsSeen + " a " + monthsSeen + " m " + daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+  else if (monthsSeen > 0) timeSeen = monthsSeen + " m " + daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+  else if (daysSeen > 0) timeSeen = daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+  else timeSeen = hoursSeen + " h " + minutesSeen + " min ";
+  
+  timeMovies.textContent = timeSeen;
 }
 
 export async function myProfile() {
