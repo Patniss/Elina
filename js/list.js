@@ -153,7 +153,7 @@ function renderPaginationSeen(totalItems) {
   });
 }
 
-export function initResearch() {
+export function initResearchMovie() {
   $("#movie-search").on("input", function () {
     
     let search = $(this).val().toLowerCase();
