@@ -893,6 +893,16 @@ export async function completeMovie(uuid) {
                 divSelectNationalities.append(labelNationalities, selectNationalities);
                 divNationalities.appendChild(divSelectNationalities);
                 
+                Object.entries(nationalities).forEach(([iso, country]) => {
+                    selectNationalities.append(
+                        new Option(country, iso, false, false)
+                    );
+                });
+                
+                $(nationalitiesDirector1).select2({
+                    placeholder: "Nationalité(s)",
+                    allowClear: true
+                });
 
                 divBlockNewActor.append(divFirstName, divLastName, divBirthdate, divDeathdate, divJobs, divNationalities);
                 columns.appendChild(divBlockNewActor);
