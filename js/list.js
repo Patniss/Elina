@@ -980,6 +980,8 @@ async function createShowCard(show) {
   const showTitle = show.title ?? show.shows.title;
   const showId = show.title ? show.id : show.shows.id;
   const showState = show.state ?? show.users_shows.state;
+  const showSeasons = show.nb_seasons ?? show.shows.nb_seasons;
+  const showLogo = show.logo ?? show.shows.logo;
 
   // Création de la carte
   const column = document.createElement("div");
@@ -997,7 +999,7 @@ async function createShowCard(show) {
 
   const pSubtitle = document.createElement("p");
   pSubtitle.classList.add("subtitle", "is-6");
-  pSubtitle.textContent = "Sous-titre ?";
+  pSubtitle.textContent = showSeasons + showSeasons === 1 ? " saison" : " saisons" ;
 
   cardContent.append(pTitle, pSubtitle);
   card.appendChild(cardContent);
