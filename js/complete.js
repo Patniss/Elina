@@ -698,7 +698,7 @@ export async function completeMovie(uuid) {
         divDelete.append(btnDelete, nbRole);
 
         const divSelectRole = document.createElement("div");
-        divSelectRole.classList.add("column", "is-3", "mb-2");
+        divSelectRole.classList.add("column", "is-3");
         const labelRole = document.createElement("label");
         labelRole.classList.add("label");
         labelRole.textContent = "Rôle n° " + i;
@@ -707,8 +707,8 @@ export async function completeMovie(uuid) {
         inputRole.placeholder = "Nom du personnage…";
         inputRole.classList.add("input");
         
-        const divTypeRole = document.createElement("div", "my-2");
-        divTypeRole.classList.add("radios");
+        const divTypeRole = document.createElement("div");
+        divTypeRole.classList.add("radios", "my-2");
         const labelMainRole = document.createElement("label");
         labelMainRole.classList.add("radio");
         const radioMainRole = document.createElement("input");
@@ -816,6 +816,7 @@ export async function completeMovie(uuid) {
                 divDeathdate.append(inputIsDead, labelIsDead, inputDeathdate);
 
                 divBlockNewActor.append(divFirstName, divLastName, divBirthdate, divDeathdate);
+                columns.appendChild(divBlockNewActor);
             }
         })
         .on("select2:clear", function() {
