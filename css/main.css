@@ -100,8 +100,8 @@ body {
 }
 
 .navbar {
-    background-color: --bulma-navbar-background-color;
-  }
+  background-color: var(--bulma-navbar-background-color);
+}
 
 .box {
   background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
@@ -110,11 +110,11 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .navbar {
+  .navbar,
+  .navbar-menu {
     background-color: transparent !important;
   }
 }
-
 .card {
   background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
   backdrop-filter: blur(6px); /* optionnel, effet glass */
