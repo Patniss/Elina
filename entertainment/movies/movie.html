@@ -34,14 +34,12 @@
                             <div class="modal-content">
                                 <p class="image is-2by3">
                                     <img src="/Elina/entertainment/movies/poster.png" alt="Affiche" id="modal-poster">
-                                    <p style="width: 100%; text-align: center;"><button class="button" id="add-own-poster" data-target="div-modal-change-poster">Personnaliser ma couverture</button></p>
-                                </p>
-                                <div class="modal" id="div-modal-change-poster">
-                                    <div class="modal-background"></div>
-                                    <div class="modal-content">
-                                        <p>Test d'affichage</p>
+                                    <p><button class="button" id="add-own-poster">Personnaliser ma couverture</button></p>
+                                    <div class="field is-hidden" id="div-add-own-poster">
+                                        <input type="text" id="src-add-own-poster" />
+                                        <button type="button" id="btn-add-own-poster">Ajouter</button>
                                     </div>
-                                </div>
+                                </p>
                             </div>
                             <button class="modal-close is-large" aria-label="close"></button>
                         </div>

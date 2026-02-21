@@ -79,7 +79,10 @@ export async function movieContent(uuid) {
         .eq("movie_id", uuid)
 
     addOwnPoster.addEventListener("click", () => {
-        console.log("bouton cliqué");
+        const divAddOwnPoster = document.getElementById("div-add-own-poster");
+        if (divAddOwnPoster.classList.contains("is-hidden")) {
+            divAddOwnPoster.classList.remove("is-hidden");
+        };
     })
 
 }
