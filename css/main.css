@@ -88,6 +88,7 @@
   --bulma-arrow-color: var(--user-primary);
   --bulma-primary-invert-l: black;
   --bulma-family-primary: "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --bulma-navbar-background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
 }
 
 body {
@@ -98,12 +99,6 @@ body {
   background-attachment: fixed;
 }
 
-.navbar-menu {
-  background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
-  backdrop-filter: blur(6px); /* optionnel, effet glass */
-  border-radius: 5px;
-}
-
 .box {
   background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
   backdrop-filter: blur(6px); /* optionnel, effet glass */
@@ -112,7 +107,7 @@ body {
 /* Mobile */
 @media (max-width: 768px) {
   .navbar-menu {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 }
 
