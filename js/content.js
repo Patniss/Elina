@@ -78,7 +78,6 @@ export async function movieContent(uuid) {
         const divAddOwnPoster = document.getElementById("div-add-own-poster");
         const srcAddOwnPoster = document.getElementById("src-add-own-poster");
         const btnAddOwnPoster = document.getElementById("btn-add-own-poster");
-        const changeOwnPoster = srcAddOwnPoster.value;
 
         if (divAddOwnPoster.classList.contains("is-hidden")) {
             divAddOwnPoster.classList.remove("is-hidden");
@@ -89,7 +88,7 @@ export async function movieContent(uuid) {
         btnAddOwnPoster.addEventListener("click", async () => {
             const { data, error } = await supabase
                 .from("users_movies")
-                .update({"own_poster": changeOwnPoster})
+                .update({"own_poster": srcAddOwnPoster.value})
                 .eq("movie_id", uuid)
                 .eq("user_id", userId)
                 .single();
