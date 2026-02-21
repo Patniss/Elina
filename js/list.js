@@ -877,7 +877,7 @@ export async function loadMyMovies() {
   }
 
   allMovies = data;
-  filteredMovies = sortMovies(data);
+  filteredMovies = data;
 
   renderMovies();
 }
