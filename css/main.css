@@ -100,7 +100,7 @@ body {
 }
 
 .navbar, .navbar-menu {
-  background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
+  background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent) !important;
   backdrop-filter: blur(6px); /* optionnel, effet glass */
   border-radius: 5%;
 }
