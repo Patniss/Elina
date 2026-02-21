@@ -16,6 +16,7 @@ function formatFrenchTypography(text) {
 
 export async function movieContent(uuid) {
     const session = await loadProfile();
+    const userId = session.id;
     let poster;
 
     const { data:movie, error: errorMovie } = await supabase
@@ -73,16 +74,33 @@ export async function movieContent(uuid) {
     movieTime.textContent = hoursTime + "h" + displayMinutesTime;
     movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
 
-    const casting = await supabase
-        .from("movies_casting")
-        .select("*")
-        .eq("movie_id", uuid)
-
     addOwnPoster.addEventListener("click", () => {
         const divAddOwnPoster = document.getElementById("div-add-own-poster");
+        const srcAddOwnPoster = document.getElementById("src-add-own-poster");
+        const btnAddOwnPoster = document.getElementById("btn-add-own-poster");
+
         if (divAddOwnPoster.classList.contains("is-hidden")) {
             divAddOwnPoster.classList.remove("is-hidden");
+        } else {
+            divAddOwnPoster.classList.add("is-hidden");
         };
-    })
 
+        btnAddOwnPoster.addEventListener("click", async () => {
+            const { data, error } = await supabase
+                .from("users_movies")
+                .update("own_poster", srcAddOwnPoster.value)
+                .eq("movie_id", uuid)
+                .eq("user_id", userId)
+                .single();
+            
+            if (error) {
+                alert("Une erreur est survenue. Vérifie que ce film est dans votre liste.");
+                console.log(error);
+                return;
+            };
+
+            moviePoster.src = srcAddOwnPoster.value;
+            modalPoster.src = srcAddOwnPoster.value;
+        })
+    })
 }
