@@ -961,7 +961,7 @@ export async function loadIncompleteMovies() {
 let allShows = [];
 let filteredShows = [];
 
-async function createMovieCard(show) {
+async function createShowCard(show) {
   console.log(show);
 }
 
