@@ -155,8 +155,7 @@ function renderPaginationSeen(totalItems) {
 
 export function initResearchMovie() {
   if (document.getElementById("list-all-movies")) {
-      $("#movie-search")
-      .on("input", function () {
+      $("#movie-search").on("input", function () {
         let search = $(this).val().toLowerCase();
         currentPageAll = 1;
         
@@ -180,6 +179,27 @@ export function initResearchMovie() {
       });
       
       renderMovies();
+    });
+  } else if (document.getElementById("div-tosee-movies") && document.getElementById("div-seen-movies")) {
+    $("#movie-search").on("input", function () {
+      let search = $(this).val().toLowerCase();
+
+      currentPageTosee = 1;
+      currentPageSeen = 1;
+
+      let toseeMovies = allMovies;
+      let seenMovies = allMovies;
+      let filteredTosee = filteredMovies;
+      let filteredSeen = filteredMovies;
+
+      if (search === "") {
+        filteredTosee = [...toseeMovies];
+        filteredSeen = [...seenMovies];
+      } else {
+        filteredTosee = toseeMovies.filter(movie =>
+          movie.title.toLowerCase().includes(search)
+        );
+      }
     });
   }
 }
