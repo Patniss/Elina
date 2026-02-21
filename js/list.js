@@ -155,31 +155,40 @@ function renderPaginationSeen(totalItems) {
 
 export function initResearchMovie() {
   $("#movie-search").on("input", function () {
-    
-    let search = $(this).val().toLowerCase();
-    
-    currentPage = 1;
+
+    const search = $(this).val().toLowerCase().trim();
+
+    currentPageTosee = 1;
+    currentPageSeen = 1;
+
     if (search === "") {
-      filteredMovies = [...allMovies];
+      filteredTosee = [...toseeMovies];
+      filteredSeen = [...seenMovies];
     } else {
-      filteredMovies = allMovies.filter(movie =>
+      filteredTosee = toseeMovies.filter(movie =>
+        movie.title.toLowerCase().includes(search)
+      );
+
+      filteredSeen = seenMovies.filter(movie =>
         movie.title.toLowerCase().includes(search)
       );
     }
 
-    $(".column.is-one-quarter").each(function () {
+    // 🎬 Ouvrir / fermer automatiquement
+    toggleSection(
+      "#div-tosee-movies",
+      "#arrow-tosee",
+      filteredTosee.length
+    );
 
-      let title = $(this).find(".title.is-5").text().toLowerCase();
+    toggleSection(
+      "#div-seen-movies",
+      "#arrow-seen",
+      filteredSeen.length
+    );
 
-      if (title.includes(search)) {
-        $(this).fadeIn(150);
-      } else {
-        $(this).fadeOut(150);
-      }
-
-    });
-    
-    renderMovies();
+    renderToseeMovies();
+    renderSeenMovies();
   });
 }
 
