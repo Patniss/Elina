@@ -99,6 +99,10 @@ body {
   background-attachment: fixed;
 }
 
+.navbar-container {
+    background-color: --bulma-navbar-background-color;
+  }
+
 .box {
   background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
   backdrop-filter: blur(6px); /* optionnel, effet glass */
@@ -106,7 +110,7 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .navbar-menu {
+  .navbar-container {
     background-color: transparent !important;
   }
 }
