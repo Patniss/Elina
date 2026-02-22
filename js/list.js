@@ -2,6 +2,7 @@
 import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
+import { addMovie } from "/Elina/js/functions.js";
 
 // VARIABLES BASIQUES
 let currentPageAll = 1;
@@ -255,9 +256,9 @@ async function createMovieCard(movie) {
   suppMovieBtn.classList.add("tag", "button", "is-hoverable", "is-danger", "is-light", "mr-2");
   suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
 
-  const viewMovieBtn = document.createElement("button");
-  viewMovieBtn.classList.add("tag", "button", "is-hoverable", "is-light", "is-success", "mr-2");
-  viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+  const toseeMovieBtn = document.createElement("button");
+  toseeMovieBtn.classList.add("tag", "button", "is-hoverable", "is-light", "is-success", "mr-2");
+  toseeMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
 
   const seenMovieBtn = document.createElement("button");
   seenMovieBtn.classList.add("tag", "button", "is-hoverable", "is-success", "mr-2");
@@ -270,7 +271,7 @@ async function createMovieCard(movie) {
       break;
   
     case false:
-      divTags.append(viewMovieBtn, suppMovieBtn);
+      divTags.append(toseeMovieBtn, suppMovieBtn);
       break;
 
     case true:
@@ -304,56 +305,7 @@ async function createMovieCard(movie) {
 
   // Gestion de l'action "Ajouter le film"
   addMovieBtn.addEventListener("click", async () => {
-    addMovieBtn.textContent = "";
-    addMovieBtn.classList.remove("is-link");
-    addMovieBtn.classList.add("is-success");
-    addMovieBtn.classList.add("is-loading");
-    console.log("userId : " + userId);
-    console.log("movie.id : " + movie.id);
-
-    try {
-      const { data, error } = await supabase
-        .from("users_movies")
-        .insert([
-          {
-            user_id: userId,
-            movie_id: movie.id,
-            seen: false,
-            date_seen: new Date().toISOString()
-          }
-        ])
-        .select();
-
-        if (error) {
-          setTimeout(() => {
-            addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            addMovieBtn.classList.remove("is-loading", "is-link");
-            addMovieBtn.classList.add("is-danger");
-            console.log(error);
-          }, 500);
-          return;
-        }
-
-    } catch (err) {
-      console.error("Erreur :", err);
-      setTimeout(() => {
-        addMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        addMovieBtn.classList.remove("is-link", "is-loading");
-        addMovieBtn.classList.add("is-danger");
-        console.log(err);
-      }, 500);
-      return;
-    }
-
-    setTimeout(() => {
-      addMovieBtn.classList.add("is-link");
-      addMovieBtn.classList.remove("is-success", "is-loading");
-      addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
-      
-      divTags.innerHTML = "";
-      divTags.append(viewMovieBtn, suppMovieBtn, detailsBtn);
-    }, 500);
-    
+    addMovie(movie.id, addMovieBtn, divTags, toseeMovieBtn, suppMovieBtn, detailsBtn);
   })
 
   // Gestion de l'action "Supprimer le film"
@@ -398,10 +350,10 @@ async function createMovieCard(movie) {
   })
 
   // Gestion de l'action "J'ai vu"
-  viewMovieBtn.addEventListener("click", async () => {
-  viewMovieBtn.textContent = "";
-  viewMovieBtn.classList.add("is-loading");
-  viewMovieBtn.classList.remove("is-light");
+  toseeMovieBtn.addEventListener("click", async () => {
+  toseeMovieBtn.textContent = "";
+  toseeMovieBtn.classList.add("is-loading");
+  toseeMovieBtn.classList.remove("is-light");
 
   try {
     const { data, error } = await supabase
@@ -413,9 +365,9 @@ async function createMovieCard(movie) {
 
       if (error) {
         setTimeout(() => {
-          viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          viewMovieBtn.classList.add("is-danger");
-          viewMovieBtn.classList.remove("is-loading");
+          toseeMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+          toseeMovieBtn.classList.add("is-danger");
+          toseeMovieBtn.classList.remove("is-loading");
           console.log(error);
         }, 500);
         return;
@@ -423,18 +375,18 @@ async function createMovieCard(movie) {
     
     } catch (err) {
       setTimeout(() => {
-        viewMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        viewMovieBtn.classList.add("is-danger");
-        viewMovieBtn.classList.remove("is-loading");
+        toseeMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        toseeMovieBtn.classList.add("is-danger");
+        toseeMovieBtn.classList.remove("is-loading");
         console.log(err);
       }, 500);
       return;
     }
 
     setTimeout(() => {
-      viewMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-      viewMovieBtn.classList.remove("is-loading");
-      viewMovieBtn.classList.add("is-light");
+      toseeMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+      toseeMovieBtn.classList.remove("is-loading");
+      toseeMovieBtn.classList.add("is-light");
 
       divTags.innerHTML = "";
       divTags.append(seenMovieBtn, detailsBtn);
@@ -458,8 +410,8 @@ async function createMovieCard(movie) {
       if (error) {
         setTimeout(() => {
           seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          viewMovieBtn.classList.add("is-danger");
-          viewMovieBtn.classList.remove("is-loading", "is-success");
+          toseeMovieBtn.classList.add("is-danger");
+          toseeMovieBtn.classList.remove("is-loading", "is-success");
           console.log(error);
           return;
         }, 500);
@@ -468,8 +420,8 @@ async function createMovieCard(movie) {
     } catch (err) {
       setTimeout(() => {
         seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        viewMovieBtn.classList.add("is-danger");
-        viewMovieBtn.classList.remove("is-loading", "is-success");
+        toseeMovieBtn.classList.add("is-danger");
+        toseeMovieBtn.classList.remove("is-loading", "is-success");
         console.log(err);
       }, 500);
       return;
@@ -480,7 +432,7 @@ async function createMovieCard(movie) {
       seenMovieBtn.classList.remove("is-loading");
       
       divTags.innerHTML = "";
-      divTags.append(viewMovieBtn, suppMovieBtn, detailsBtn);
+      divTags.append(toseeMovieBtn, suppMovieBtn, detailsBtn);
     }, 500);
 
   });
