@@ -825,12 +825,12 @@ export async function completeMovie(uuid) {
                 inputLastName.placeholder = "Nom…";
                 divLastName.appendChild(inputLastName);
 
-                const parts = data.text.trim().split(/\s+/);
-                const testFirstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
-                const testLastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
+                //const parts = data.text.trim().split(/\s+/);
+                //const testFirstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+                //const testLastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
 
-                inputFirstName.value = testFirstname;
-                inputLastName.value = testLastname;
+                //inputFirstName.value = testFirstname;
+                //inputLastName.value = testLastname;
 
                 const divBirthdate = document.createElement("div");
                 divBirthdate.classList.add("field");
