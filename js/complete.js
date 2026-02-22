@@ -738,7 +738,7 @@ export async function completeMovie(uuid) {
         const divSelectActor = document.createElement("div");
         divSelectActor.classList.add("select", "is-multiple");
         const selectActor = document.createElement("select");
-        selectActor.multiple = "multiple";
+        selectActor.multiple = true;
         selectActor.style.width = "100%";
         const optBaseAction = document.createElement("option");
         selectActor.appendChild(optBaseAction);
@@ -772,10 +772,12 @@ export async function completeMovie(uuid) {
             }
         });
 
+        let divBlockNewActor = null
+
         $(selectActor).on("select2:select", function(e) {
             const data = e.params.data;
             if (data.newTag) {
-                const divBlockNewActor = document.createElement("div");
+                divBlockNewActor = document.createElement("div");
                 divBlockNewActor.classList.add("block", "column", "is-8");
                 const h4NewActor = document.createElement("h4");
                 h4NewActor.classList.add("subtitle", "is-5");
@@ -825,12 +827,12 @@ export async function completeMovie(uuid) {
                 inputLastName.placeholder = "Nom…";
                 divLastName.appendChild(inputLastName);
 
-                //const parts = data.text.trim().split(/\s+/);
-                //const testFirstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
-                //const testLastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
+                const parts = data.text.trim().split(/\s+/);
+                const testFirstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+                const testLastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
 
-                //inputFirstName.value = testFirstname;
-                //inputLastName.value = testLastname;
+                inputFirstName.value = testFirstname;
+                inputLastName.value = testLastname;
 
                 const divBirthdate = document.createElement("div");
                 divBirthdate.classList.add("field");
@@ -857,7 +859,7 @@ export async function completeMovie(uuid) {
                     if (inputIsDead.checked === true) {
                         inputDeathdate.classList.remove("is-hidden");
                     } else {
-                        inputDeathdate.add("is-hidden");
+                        inputDeathdate.classList.add("is-hidden");
                     }
                 });
 
@@ -867,7 +869,7 @@ export async function completeMovie(uuid) {
                 labelJobs.classList.add("label");
                 labelJobs.textContent = "Casquettes :";
 
-                const labelJobDirector = document.createElement("checkbox");
+                const labelJobDirector = document.createElement("label");
                 labelJobDirector.classList.add("checkbox");
                 const inputJobDirector = document.createElement("input");
                 inputJobDirector.value = "director";
@@ -878,7 +880,7 @@ export async function completeMovie(uuid) {
                 spanJobDirector.textContent = "Réalisateur";
                 labelJobDirector.append(inputJobDirector, spanJobDirector);
 
-                const labelJobProducer = document.createElement("checkbox");
+                const labelJobProducer = document.createElement("label");
                 labelJobProducer.classList.add("checkbox");
                 const inputJobProducer = document.createElement("input");
                 inputJobProducer.value = "producer";
@@ -921,7 +923,7 @@ export async function completeMovie(uuid) {
                 const labelNationalities = document.createElement("label");
                 labelNationalities.classList.add("label");
                 const selectNationalities = document.createElement("select");
-                selectNationalities.multiple = "multiple";
+                selectNationalities.multiple = true;
                 selectNationalities.style.width = "100%";
                 const optBaseNationalities = document.createElement("option");
                 selectNationalities.appendChild(optBaseNationalities);
@@ -934,7 +936,7 @@ export async function completeMovie(uuid) {
                     );
                 });
                 
-                $(nationalities).select2({
+                $(selectNationalities).select2({
                     placeholder: "Nationalité(s)",
                     allowClear: true
                 });
@@ -944,7 +946,10 @@ export async function completeMovie(uuid) {
             }
         })
         .on("select2:clear", function() {
-            divBlockNewActor.remove();
+            if (divBlockNewActor) {
+                divBlockNewActor.remove()
+                divBlockNewActor = null;
+            }
         });
     });
 }
