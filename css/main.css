@@ -101,8 +101,9 @@ body {
 
 .navbar, .navbar-menu {
   background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent) !important;
-  backdrop-filter: blur(6px); /* optionnel, effet glass */
-  border-radius: 10%;
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  --bulma-navbar-background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
 }
 
 .box {
