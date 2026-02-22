@@ -42,9 +42,15 @@ export async function movieContent(uuid) {
         return;
     }
 
+    let statut;
+
     if (movieUser) {
         poster = movieUser.own_poster ?? movie.poster;
-    } else poster = movie.poster;
+        statut = null;
+    } else { 
+        poster = movie.poster;
+        statut = movie.seen;
+    }
 
     const movieTitle = document.getElementById("movie-title");
     const movieYear = document.getElementById("movie-year");
@@ -54,6 +60,10 @@ export async function movieContent(uuid) {
     const movieGenres = document.getElementById("movie-genres");
     const modalPoster = document.getElementById("modal-poster");
     const addOwnPoster = document.getElementById("add-own-poster");
+    const btnAddMovie = document.getElementById("button-add-movie");
+    const btnToseeMovie = document.getElementById("button-tosee-movie");
+    const btnSuppMovie = document.getElementById("button-supp-movie");
+    const btnSeenMovie = document.getElementById("button-seen-movie");
 
     const genres = movie.genres.trim().split(" ; ");
     genres.forEach(genre => {
@@ -73,6 +83,21 @@ export async function movieContent(uuid) {
     modalPoster.src = poster;
     movieTime.textContent = hoursTime + "h" + displayMinutesTime;
     movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
+
+    switch (statut) {
+        case null:
+            btnAddMovie.classList.remove("is-hidden");
+            break;
+    
+        case false:
+            btnToseeMovie.classList.remove("is-hidden");
+            btnSuppMovie.classList.remove("is-hidden");
+            break;
+
+        case true:
+            btnSeenMovie.classList.remove("is-hidden");
+            break;
+    }
 
     addOwnPoster.addEventListener("click", () => {
         const divAddOwnPoster = document.getElementById("div-add-own-poster");
