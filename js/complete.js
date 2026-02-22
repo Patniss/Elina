@@ -781,6 +781,34 @@ export async function completeMovie(uuid) {
                 h4NewActor.classList.add("subtitle", "is-5");
                 h4NewActor.textContent = "Nouvel acteur :";
 
+                const divGenre = document.createElement("div");
+                divGenre.classList.add("field");
+                const divRadiosGenre = document.createElement("div");
+                divRadiosGenre.classList.add("radios");
+                const labelGenreF = document.createElement("label");
+                labelGenreF.classList.add("radio");
+                const inputGenreF = document.createElement("input");
+                inputGenreF.classList.add("radio");
+                inputGenreF.name = "genre";
+                inputGenreF.value = "f";
+                labelGenreF.append(inputGenreF, " Féminin");
+                const labelGenreM = document.createElement("label");
+                labelGenreM.classList.add("radio");
+                const inputGenreM = document.createElement("input");
+                inputGenreM.classList.add("radio");
+                inputGenreM.name = "genre";
+                inputGenreM.value = "m";
+                labelGenreM.append(inputGenreM, " Masculin");
+                const labelGenreA = document.createElement("label");
+                labelGenreA.classList.add("radio");
+                const inputGenreA = document.createElement("input");
+                inputGenreA.classList.add("radio");
+                inputGenreA.name = "genre";
+                inputGenreA.value = "a";
+                labelGenreA.append(inputGenreA, " Non binaire / Autre");
+                divRadiosGenre.append(labelGenreF, labelGenreM, labelGenreA);
+                divGenre.appendChild(divRadiosGenre);
+
                 const divFirstName = document.createElement("div");
                 divFirstName.classList.add("field");
                 const inputFirstName = document.createElement("input");
@@ -796,6 +824,13 @@ export async function completeMovie(uuid) {
                 inputLastName.classList.add("input");
                 inputLastName.placeholder = "Nom…";
                 divLastName.appendChild(inputLastName);
+
+                const parts = data.text.trim().split(/\s+/);
+                const testFirstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+                const testLastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
+
+                inputFirstName.value = testFirstname;
+                inputLastName.value = testLastname;
 
                 const divBirthdate = document.createElement("div");
                 divBirthdate.classList.add("field");
@@ -899,12 +934,12 @@ export async function completeMovie(uuid) {
                     );
                 });
                 
-                $(nationalitiesDirector1).select2({
+                $(nationalities).select2({
                     placeholder: "Nationalité(s)",
                     allowClear: true
                 });
 
-                divBlockNewActor.append(divFirstName, divLastName, divBirthdate, divDeathdate, divJobs, divNationalities);
+                divBlockNewActor.append(divGenre, divFirstName, divLastName, divBirthdate, divDeathdate, divJobs, divNationalities);
                 columns.appendChild(divBlockNewActor);
             }
         })
