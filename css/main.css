@@ -111,13 +111,6 @@ body {
   backdrop-filter: blur(6px); /* optionnel, effet glass */
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .navbar,
-  .navbar-menu {
-    background-color: transparent !important;
-  }
-}
 .card {
   background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
   backdrop-filter: blur(6px); /* optionnel, effet glass */
