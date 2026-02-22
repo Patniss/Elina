@@ -791,6 +791,7 @@ export async function completeMovie(uuid) {
                 labelGenreF.classList.add("radio");
                 const inputGenreF = document.createElement("input");
                 inputGenreF.classList.add("radio");
+                inputGenreF.type = "radio";
                 inputGenreF.name = "genre";
                 inputGenreF.value = "f";
                 labelGenreF.append(inputGenreF, " Féminin");
@@ -798,6 +799,7 @@ export async function completeMovie(uuid) {
                 labelGenreM.classList.add("radio");
                 const inputGenreM = document.createElement("input");
                 inputGenreM.classList.add("radio");
+                inputGenreM.type = "radio";
                 inputGenreM.name = "genre";
                 inputGenreM.value = "m";
                 labelGenreM.append(inputGenreM, " Masculin");
@@ -805,6 +807,7 @@ export async function completeMovie(uuid) {
                 labelGenreA.classList.add("radio");
                 const inputGenreA = document.createElement("input");
                 inputGenreA.classList.add("radio");
+                inputGenreA.type = "radio";
                 inputGenreA.name = "genre";
                 inputGenreA.value = "a";
                 labelGenreA.append(inputGenreA, " Non binaire / Autre");
