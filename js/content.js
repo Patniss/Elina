@@ -46,10 +46,10 @@ export async function movieContent(uuid) {
 
     if (movieUser) {
         poster = movieUser.own_poster ?? movie.poster;
-        statut = null;
+        statut = movieUser.seen;
     } else { 
         poster = movie.poster;
-        statut = movie.seen;
+        statut = null;
     }
 
     const movieTitle = document.getElementById("movie-title");
