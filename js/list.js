@@ -19,6 +19,9 @@ let genreFilter = "";
 // ----------
 let allMovies = [];
 let filteredMovies = [];
+let toseeMovies = [];
+let seenMovies = [];
+
 function renderPagination({containerId, currentPage, setCurrentPage, totalItems}) {
   const pagination = document.getElementById(containerId);
   pagination.innerHTML = "";
@@ -181,23 +184,23 @@ export function initResearchMovie() {
       renderMovies();
     });
   } else if (document.getElementById("div-tosee-movies") && document.getElementById("div-seen-movies")) {
-    console.log(allMovies);
     $("#movie-search").on("input", function () {
       let search = $(this).val().toLowerCase();
 
       currentPageTosee = 1;
       currentPageSeen = 1;
 
-      let toseeMovies = allMovies;
-      let seenMovies = allMovies;
-      let filteredTosee = filteredMovies;
-      let filteredSeen = filteredMovies;
+      let filteredTosee;
+      let filteredSeen;
 
       if (search === "") {
         filteredTosee = [...toseeMovies];
         filteredSeen = [...seenMovies];
       } else {
         filteredTosee = toseeMovies.filter(
+          movie => movie.movies.title.toLowerCase().includes(search)
+        );
+        filteredSeen = seenMovies.filter(
           movie => movie.movies.title.toLowerCase().includes(search)
         );
       }
@@ -778,11 +781,11 @@ async function renderMovies() {
     containerToseeMovies.innerHTML = "";
     containerSeenMovies.innerHTML = "";
 
-    const toSeeMovies = filteredMovies.filter(movie =>
+    toSeeMovies = filteredMovies.filter(movie =>
       movie.seen === false
     );
 
-    const seenMovies = filteredMovies.filter(movie =>
+    seenMovies = filteredMovies.filter(movie =>
       movie.seen === true
     );
 
