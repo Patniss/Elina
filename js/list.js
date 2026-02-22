@@ -781,11 +781,13 @@ async function renderMovies() {
     containerToseeMovies.innerHTML = "";
     containerSeenMovies.innerHTML = "";
 
-    toSeeMovies = filteredMovies.filter(movie =>
+    const toSeeMovies = filteredMovies.filter(movie =>
       movie.seen === false
     );
 
-    seenMovies = filteredMovies.filter(movie =>
+    console.log(toseeMovies);
+
+    const seenMovies = filteredMovies.filter(movie =>
       movie.seen === true
     );
 
