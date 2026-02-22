@@ -980,14 +980,14 @@ async function createShowCard(show) {
   // ❶ Récupérer la session
   const session = await loadProfile();
   const userId = session.id;
-
-  console.log(show);
   
   const showTitle = show.title ?? show.shows.title;
   const showId = show.title ? show.id : show.shows.id;
   const showState = show.state ?? show.users_shows.state;
   const showSeasons = show.nb_seasons ?? show.shows.nb_seasons;
   const showLogo = show.logo ?? show.shows.logo;
+
+  console.log(showSeasons);
 
   // Création de la carte
   const column = document.createElement("div");
