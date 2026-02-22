@@ -1007,7 +1007,7 @@ async function createShowCard(show) {
 
   const pSubtitle = document.createElement("p");
   pSubtitle.classList.add("subtitle", "is-6");
-  pSubtitle.textContent = showSeasons;
+  pSubtitle.textContent = `${showSeasons} saisons`;
 
   cardContent.append(pTitle, pSubtitle);
   card.appendChild(cardContent);
