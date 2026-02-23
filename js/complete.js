@@ -892,7 +892,7 @@ export async function completeMovie(uuid) {
                 });
 
                 const divJobs = document.createElement("div");
-                divJobs.classList.add("field");
+                divJobs.classList.add("field", "is-flex");
                 const labelJobs = document.createElement("label");
                 labelJobs.classList.add("label");
                 labelJobs.textContent = "Casquettes :";
@@ -909,7 +909,7 @@ export async function completeMovie(uuid) {
                 labelJobDirector.append(inputJobDirector, spanJobDirector);
 
                 const labelJobProducer = document.createElement("label");
-                labelJobProducer.classList.add("checkbox", "is-flex");
+                labelJobProducer.classList.add("checkbox");
                 const inputJobProducer = document.createElement("input");
                 inputJobProducer.value = "producer";
                 inputJobProducer.type = "checkbox";
