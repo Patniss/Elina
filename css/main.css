@@ -100,6 +100,10 @@ body {
   background-attachment: fixed;
 }
 
+.navbar {
+  border-radius: 10px;
+}
+
 .box {
   background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
   backdrop-filter: blur(6px); /* optionnel, effet glass */
