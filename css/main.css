@@ -98,6 +98,7 @@ body {
   background-size: cover;      /* Ordinateur */
   background-position: center;
   background-attachment: scroll;
+  min-height: 100%;
 }
 
 .navbar {
