@@ -316,7 +316,7 @@ async function createMovieCard(movie) {
 
   // Gestion de l'action "Ajouter le film"
   addMovieBtn.addEventListener("click", async () => {
-    addMovie(movie.id, addMovieBtn, divTags, toseeMovieBtn, suppMovieBtn, detailsBtn);
+    addMovie("adding", movie.id, addMovieBtn, divTags, toseeMovieBtn, suppMovieBtn, detailsBtn);
   })
 
   // Gestion de l'action "Supprimer le film"

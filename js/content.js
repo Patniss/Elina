@@ -1,5 +1,6 @@
 import { supabase } from "/Elina/js/supabase.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
+import { addMovie } from "/Elina/js/functions.js";
 
 function formatFrenchTypography(text) {
   const nbsp = "\u202F";
@@ -98,6 +99,11 @@ export async function movieContent(uuid) {
             btnSeenMovie.classList.remove("is-hidden");
             break;
     }
+
+    btnAddMovie.addEventListener("click", async () => {
+        addMovie("hidden", uuid, btnAddMovie, false, btnToseeMovie, btnSuppMovie)
+    })
+
 
     addOwnPoster.addEventListener("click", () => {
         const divAddOwnPoster = document.getElementById("div-add-own-poster");

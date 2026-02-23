@@ -15,7 +15,7 @@ export function calculateAge(startDate, endDate = new Date()) {
     return age;
 }
 
-export async function addMovie(uuid, btnAdd, div, toseeBtn, suppBtn, detailsBtn) {
+export async function addMovie(mode, uuid, btnAdd, div, toseeBtn, suppBtn, detailsBtn) {
     const session = await loadProfile();
     const userId = session.id;
 
@@ -58,12 +58,23 @@ export async function addMovie(uuid, btnAdd, div, toseeBtn, suppBtn, detailsBtn)
       return;
     }
 
-    setTimeout(() => {
-      btnAdd.classList.add("is-link");
-      btnAdd.classList.remove("is-success", "is-loading");
-      btnAdd.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
-      
-      div.innerHTML = "";
-      div.append(toseeBtn, suppBtn, detailsBtn ?? detailsBtn);
-    }, 500);
+    if (mode === "adding") {
+        setTimeout(() => {
+            btnAdd.classList.add("is-link");
+            btnAdd.classList.remove("is-success", "is-loading");
+            btnAdd.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+            
+            div.innerHTML = "";
+            div.append(toseeBtn, suppBtn, detailsBtn ?? detailsBtn);
+        }, 500);
+    } else if (mode === "hidden") {
+        setTimeout(() => {
+            btnAdd.classList.add("is-link");
+            btnAdd.classList.remove("is-success", "is-loading");
+            btnAdd.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+            
+            toseeBtn.classList.remove("is-hidden");
+            suppBtn.classList.remove("is-hidden");
+        }, 500);
+    }
 }
