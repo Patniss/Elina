@@ -23,7 +23,7 @@ export async function customNavbar() {
 
   document.documentElement
     .style
-    .setProperty(`--user-background-url: url("/Elina/css/backgrounds/${session.background}.jpg)`)
+    .setProperty('--user-background-url', `url("/Elina/css/backgrounds/${session.background}.jpg)`)
 }
 
 export async function loadNav() {
