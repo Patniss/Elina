@@ -316,7 +316,7 @@ async function createMovieCard(movie) {
   cardFigure.appendChild(figurePoster);
   
   card.appendChild(cardFigure);
-  
+
   addMovieBtn.addEventListener("click", async () => {
     addMovie("adding", movie.id, addMovieBtn, divTags, toseeMovieBtn, suppMovieBtn, detailsBtn);
   })
@@ -858,6 +858,21 @@ async function createShowCard(show) {
   cardContent.append(pTitle, pSubtitle);
   card.appendChild(cardContent);
   column.appendChild(card);
+  
+  const cardFigure = document.createElement("div");
+  cardFigure.classList.add("card-image");
+  
+  const figureLogo = document.createElement("figure");
+  figureLogo.classList.add("image", "logo-wrapper");
+  
+  const imgLogo = document.createElement("img");
+  imgLogo.src = moviePoster;
+  imgLogo.alt = movie.title;
+  
+  figurePoster.appendChild(imgLogo);
+  cardFigure.appendChild(figureLogo);
+  
+  card.appendChild(cardFigure);
 
   return column;
 }
