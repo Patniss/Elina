@@ -342,7 +342,7 @@ async function createMovieCard(movie) {
   })
 
   toseeMovieBtn.addEventListener("click", async () => {
-    toseeMovie("adding", movie.id, toseeMovieBtn, divTags, seenMovieBtn, detailsBtn);
+    toseeMovie("adding", movie.id, toseeMovieBtn, divTags, seenMovieBtn, suppMovieBtn, detailsBtn);
   });
   
   seenMovieBtn.addEventListener("click", async () => {

@@ -111,7 +111,7 @@ export async function movieContent(uuid) {
     });
 
     btnToseeMovie.addEventListener("click", async () => {
-        toseeMovie("hidden", uuid, btnToseeMovie, false, btnSeenMovie);
+        toseeMovie("hidden", uuid, btnToseeMovie, false, btnSeenMovie, btnSuppMovie);
     })
 
     addOwnPoster.addEventListener("click", () => {

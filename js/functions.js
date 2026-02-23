@@ -133,7 +133,7 @@ export async function suppMovie(mode, uuid, btnSupp, div, btnAdd, detailsBtn) {
     }
 }
 
-export async function toseeMovie(mode, uuid, btnTosee, div, btnSeen, detailsBtn) {
+export async function toseeMovie(mode, uuid, btnTosee, div, btnSeen, btnSupp, detailsBtn) {
     const session = await loadProfile();
     const userId = session.id;
     
@@ -182,6 +182,7 @@ export async function toseeMovie(mode, uuid, btnTosee, div, btnSeen, detailsBtn)
         setTimeout(() => {
             btnTosee.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
             btnTosee.classList.remove("is-loading");
+            btnSupp.classList.remove("is-loading");
             btnTosee.classList.add("is-light");
 
             btnTosee.classList.add("is-hidden");
@@ -202,7 +203,7 @@ export async function seenMovie(mode, uuid, btnSeen, div, btnTosee, btnSupp, det
         .from("users_movies")
         .update({seen: false})
         .eq("user_id", userId)
-        .eq("movie_id", movie.id)
+        .eq("movie_id", uuid)
         .single();
         
       if (error) {
