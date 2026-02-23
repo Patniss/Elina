@@ -24,7 +24,7 @@ export async function addMovie(uuid, btnAdd, div, toseeBtn, suppBtn, detailsBtn)
     btnAdd.classList.add("is-success");
     btnAdd.classList.add("is-loading");
     console.log("userId : " + userId);
-    console.log("movie.id : " + movie.id);
+    console.log("movie.id : " + session);
 
     try {
       const { data, error } = await supabase
