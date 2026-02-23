@@ -5,6 +5,7 @@ import { loadProfile } from "/Elina/js/dashboard.js";
 import { addMovie } from "/Elina/js/functions.js";
 import { suppMovie } from "/Elina/js/functions.js";
 import { toseeMovie } from "/Elina/js/functions.js";
+import { seenMovie } from "/Elina/js/functions.js";
 
 // VARIABLES BASIQUES
 let currentPageAll = 1;
@@ -315,63 +316,21 @@ async function createMovieCard(movie) {
   cardFigure.appendChild(figurePoster);
   
   card.appendChild(cardFigure);
-
-  // Gestion de l'action "Ajouter le film"
+  
   addMovieBtn.addEventListener("click", async () => {
     addMovie("adding", movie.id, addMovieBtn, divTags, toseeMovieBtn, suppMovieBtn, detailsBtn);
   })
 
-  // Gestion de l'action "Supprimer le film"
   suppMovieBtn.addEventListener("click", async () => {
     suppMovie("adding", movie.id, suppMovieBtn, divTags, addMovieBtn, detailsBtn);
   })
 
-  // Gestion de l'action "J'ai vu"
   toseeMovieBtn.addEventListener("click", async () => {
     toseeMovie("adding", movie.id, toseeMovieBtn, divTags, seenMovieBtn, detailsBtn);
   });
   
-  // Gestion de l'action "Vu" (retirer le tag Vu pour décocher) ----> Évolution prochaine : vu plusieurs fois ou non vu ?
   seenMovieBtn.addEventListener("click", async () => {
-    seenMovieBtn.textContent = "";
-    seenMovieBtn.classList.add("is-loading");
-    
-    try {
-      const { data, error } = await supabase
-        .from("users_movies")
-        .update({seen: false})
-        .eq("user_id", userId)
-        .eq("movie_id", movie.id)
-        .single();
-        
-      if (error) {
-        setTimeout(() => {
-          seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          toseeMovieBtn.classList.add("is-danger");
-          toseeMovieBtn.classList.remove("is-loading", "is-success");
-          console.log(error);
-          return;
-        }, 500);
-      }
-    
-    } catch (err) {
-      setTimeout(() => {
-        seenMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        toseeMovieBtn.classList.add("is-danger");
-        toseeMovieBtn.classList.remove("is-loading", "is-success");
-        console.log(err);
-      }, 500);
-      return;
-    }
-
-    setTimeout(() => {
-      seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-      seenMovieBtn.classList.remove("is-loading");
-      
-      divTags.innerHTML = "";
-      divTags.append(toseeMovieBtn, suppMovieBtn, detailsBtn);
-    }, 500);
-
+    seenMovie("adding", movie.id, seenMovieBtn, divTags, toseeMovieBtn, suppMovieBtn, detailsBtn);
   });
 
   return column;
