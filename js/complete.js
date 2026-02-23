@@ -715,7 +715,7 @@ export async function completeMovie(uuid) {
         radioMainRole.type = "radio";
         radioMainRole.name = "typeRole";
         radioMainRole.value = "main";
-        const radioTextMainRole = "Principal";
+        const radioTextMainRole = " Principal";
         labelMainRole.append(radioMainRole, radioTextMainRole);
         const labelSecondRole = document.createElement("label");
         labelSecondRole.classList.add("radio");
@@ -723,7 +723,7 @@ export async function completeMovie(uuid) {
         radioSecondRole.type = "radio";
         radioSecondRole.name = "typeRole";
         radioSecondRole.value = "main";
-        const radioTextSecondRole = "Secondaire";
+        const radioTextSecondRole = " Secondaire";
         labelSecondRole.append(radioSecondRole, radioTextSecondRole);
         const labelExtraRole = document.createElement("label");
         labelExtraRole.classList.add("radio");
@@ -731,7 +731,7 @@ export async function completeMovie(uuid) {
         radioExtraRole.type = "radio";
         radioExtraRole.name = "typeRole";
         radioExtraRole.value = "main";
-        const radioTextExtraRole = "Figurant";
+        const radioTextExtraRole = " Figurant";
         labelExtraRole.append(radioExtraRole, radioTextExtraRole);
         divTypeRole.append(labelMainRole, labelSecondRole, labelExtraRole);
 
@@ -749,6 +749,10 @@ export async function completeMovie(uuid) {
         columns.append(divDelete, divSelectRole);
 
         divRoles.appendChild(columns);
+
+        btnDelete.addEventListener("click", () => {
+            columns.remove();
+        });
 
         people.forEach(p => {
             const completeName = p.firstname ? p.firstname + " " + p.lastname : p.lastname;
@@ -772,7 +776,7 @@ export async function completeMovie(uuid) {
             }
         });
 
-        let divBlockNewActor = null
+        let divBlockNewActor = null;
 
         $(selectActor).on("select2:select", function(e) {
             const data = e.params.data;
@@ -880,18 +884,18 @@ export async function completeMovie(uuid) {
                 inputJobDirector.classList.add("checkbox");
                 const spanJobDirector = document.createElement("span");
                 spanJobDirector.classList.add("label", "ml-3");
-                spanJobDirector.textContent = "Réalisateur";
+                spanJobDirector.textContent = " Réalisateur";
                 labelJobDirector.append(inputJobDirector, spanJobDirector);
 
                 const labelJobProducer = document.createElement("label");
-                labelJobProducer.classList.add("checkbox");
+                labelJobProducer.classList.add("checkbox", "is-flex");
                 const inputJobProducer = document.createElement("input");
                 inputJobProducer.value = "producer";
                 inputJobProducer.type = "checkbox";
                 inputJobProducer.classList.add("checkbox");
                 const spanJobProducer = document.createElement("span");
                 spanJobProducer.classList.add("label", "ml-3");
-                spanJobProducer.textContent = "Producteur";
+                spanJobProducer.textContent = " Producteur";
                 labelJobProducer.append(inputJobProducer, spanJobProducer);
 
                 const labelJobSwcriptwriter = document.createElement("label");
@@ -902,7 +906,7 @@ export async function completeMovie(uuid) {
                 inputJobScriptwriter.classList.add("checkbox");
                 const spanJobScriptwriter = document.createElement("span");
                 spanJobScriptwriter.classList.add("label", "ml-3");
-                spanJobScriptwriter.textContent = "Scénariste";
+                spanJobScriptwriter.textContent = " Scénariste";
                 labelJobSwcriptwriter.append(inputJobScriptwriter, spanJobScriptwriter);
                 
                 const labelJobActor = document.createElement("label");
@@ -914,7 +918,7 @@ export async function completeMovie(uuid) {
                 inputJobActor.classList.add("checkbox");
                 const spanJobActor = document.createElement("span");
                 spanJobActor.classList.add("label", "ml-3");
-                spanJobActor.textContent = "Acteur";
+                spanJobActor.textContent = " Acteur";
                 labelJobActor.append(inputJobActor, spanJobActor);
 
                 divJobs.append(labelJobDirector, labelJobProducer, labelJobSwcriptwriter, labelJobActor);
