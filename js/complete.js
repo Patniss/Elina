@@ -679,6 +679,7 @@ export async function completeMovie(uuid) {
     });
 
     let i = 0;
+    let newActorId = null;
 
     addRole.addEventListener("click", () => {
         i+=1;
@@ -752,6 +753,7 @@ export async function completeMovie(uuid) {
 
         btnDelete.addEventListener("click", () => {
             columns.remove();
+            i -= 1;
         });
 
         people.forEach(p => {
@@ -778,9 +780,28 @@ export async function completeMovie(uuid) {
 
         let divBlockNewActor = null;
 
-        $(selectActor).on("select2:select", function(e) {
+        $(selectActor).on("select2:select", async function(e) {
             const data = e.params.data;
             if (data.newTag) {
+                const { data: newActor, error: errorNewActor } = await supabase
+                    .from("people")
+                    .update([{ 
+                        firstname: " ", 
+                        lastname: " ",
+                        complete: false
+                    }])
+                    .select("id")
+                    .single();
+                
+                if (errorNewActor) {
+                    console.log(errorNewActor);
+                    return;
+                }
+
+                if (newActor) {
+                    newActorId = data.newActor.id;
+                }
+                
                 divBlockNewActor = document.createElement("div");
                 divBlockNewActor.classList.add("block", "column", "is-8");
                 const h4NewActor = document.createElement("h4");
@@ -950,12 +971,94 @@ export async function completeMovie(uuid) {
 
                 divBlockNewActor.append(divGenre, divFirstName, divLastName, divBirthdate, divDeathdate, divJobs, divNationalities);
                 columns.appendChild(divBlockNewActor);
+
+                let jobsNewActor = [];
+
+                [inputFirstName, inputLastName, inputBirthdate, inputIsDead, inputDeathdate, selectNationalities, inputJobActor, inputJobDirector, inputJobProducer, inputJobScriptwriter].forEach(input => {
+                    input.addEventListener("change", async () => {
+                        let selectedNationalities = $(selectNationalities).val();
+                        let nationalitiesNewActor = selectedNationalities.join(" ");
+                        if (inputJobDirector.checked) {
+                            if (!jobsNewActor.includes("director")) {
+                                jobsNewActor.push("director");
+                            }
+                        } else {
+                            const index = jobsNewActor.indexOf("director");
+                            if (index > -1) { jobsNewActor.splice(index, 1); }
+                        };
+
+                        if (inputJobProducer.checked) {
+                            if (!jobsNewActor.includes("producer")) {
+                                jobsNewActor.push("producer");
+                            }
+                        } else {
+                            const index = jobsNewActor.indexOf("producer");
+                            if (index > -1) { jobsNewActor.splice(index, 1); }
+                        };
+
+                        if (inputJobScriptwriter.checked) {
+                            if (!jobsNewActor.includes("scriptwriter")) {
+                                jobsNewActor.push("scriptwriter");
+                            }
+                        } else {
+                            const index = jobsNewActor.indexOf("scriptwriter");
+                            if (index > -1) { jobsNewActor.splice(index, 1); }
+                        };
+                        
+                        if (inputJobActor.checked) {
+                            if (!jobsNewActor.includes("actor")) {
+                                jobsNewActor.push("actor");
+                            }
+                        } else {
+                            const index = jobsNewActor.indexOf("actor");
+                            if (index > -1) { jobsNewActor.splice(index, 1); }
+                        }
+
+                        let deathdateNewActor;
+
+                        if (inputIsDead.checked === false) {
+                            deathdateNewActor = null;
+                        } else {
+                            deathdateNewActor = inputDeathdate.value;
+                        }
+
+                        const stringJobsNewActor = jobsNewActor.join(" ");
+
+                        const { data: queryActor, error: errorQueryActor} = await supabase
+                            .from("people")
+                            .update([{ 
+                                firstname: inputFirstName.value, 
+                                lastname: inputLastName.value, 
+                                birthdate: inputBirthdate.value, 
+                                nationalities: nationalitiesNewActor, 
+                                jobs: stringJobsNewActor,
+                                complete: false,
+                                deathdate: deathdateNewActor
+                            }])
+                            .eq("id", newActorId);
+
+                        if (errorQueryActor) {
+                            console.log(errorQueryActor);
+                            return;
+                        }
+                    })
+                })
             }
         })
-        .on("select2:clear", function() {
+        .on("select2:clear", async function() {
             if (divBlockNewActor) {
                 divBlockNewActor.remove()
                 divBlockNewActor = null;
+                const { data: deleteNewActor, error: errorDeleteNewActor } = await supabase
+                    .from("people")
+                    .delete()
+                    .eq("id", newActorId)
+                    .single();
+
+                if (errorDeleteNewActor) {
+                    console.log(errorDeleteNewActor);
+                    return;
+                }
             }
         });
     });

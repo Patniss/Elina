@@ -107,7 +107,6 @@ export async function addMovie() {
     const movieComplete = false;
 
     let selectedGenres = $(genresInput).val();
-    console.log(selectedGenres);
     let movieGenres = selectedGenres.join(" ; ");
 
     buttonInput.classList.add("is-loading")
