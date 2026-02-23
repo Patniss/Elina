@@ -890,6 +890,8 @@ async function createShowCard(show) {
     addShow("adding", showId, addShowBtn, divTags, detailsBtn);
   })
 
+  console.log(show);
+
   if (showState === null) {
     divTags.appendChild(addShowBtn);
   }
