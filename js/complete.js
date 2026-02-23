@@ -252,7 +252,7 @@ export async function completeMovie(uuid) {
 
     const divDirector3 = document.getElementById("div-director-3");
     const deleteDirector3 = document.getElementById("delete-director-3");
-    const selectDirector3 = document.getElementById("select-director-3");""
+    const selectDirector3 = document.getElementById("select-director-3");
     const addNewDirector3 = document.getElementById("add-new-director-3");
     const firstNameDirector3 = document.getElementById("first-name-director-3");
     const lastNameDirector3 = document.getElementById("last-name-director-3");
@@ -297,7 +297,6 @@ export async function completeMovie(uuid) {
     const submitComplete = document.getElementById("submit");
 
     const divRoles = document.getElementById("div-roles");
-    let castingActorId = null;
 
     const { data: movie, error: errorMovie } = await supabase
         .from("movies")
@@ -502,8 +501,8 @@ export async function completeMovie(uuid) {
             addNewDirector2.classList.remove("is-hidden");
 
             const parts = data.text.trim().split(" ");
-            const testFirstNameDirector2 = parts.lenght > 1 ? parts.slice(0, -1).join(" ") : null;
-            const testLastNameDirector2 = parts.lenght > 1 ? parts.slice(-1).join("") : parts[0];
+            const testFirstNameDirector2 = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+            const testLastNameDirector2 = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
 
             firstNameDirector2.value = testFirstNameDirector2;
             firstNameDirector2.required = true;
@@ -547,8 +546,8 @@ export async function completeMovie(uuid) {
             addNewDirector3.classList.remove("is-hidden");
 
             const parts = data.text.trim().split(" ");
-            const testFirstNameDirector3 = parts.lenght > 1 ? parts.slice(0, -1).join(" ") : null;
-            const testLastNameDirector3 = parts.lenght > 1 ? parts.slice(-1).join("") : parts[0];
+            const testFirstNameDirector3 = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+            const testLastNameDirector3 = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
 
             firstNameDirector3.value = testFirstNameDirector3;
             firstNameDirector3.required = true;
@@ -702,10 +701,11 @@ export async function completeMovie(uuid) {
     });
 
     let i = 0;
-    let newActorId = null;
 
     addRole.addEventListener("click", async () => {
         i+=1;
+        let castingActorId = null;
+        let newActorId = null;
 
         const columns = document.createElement("div");
         columns.classList.add("columns");
@@ -777,18 +777,6 @@ export async function completeMovie(uuid) {
         btnDelete.addEventListener("click", async () => {
             columns.remove();
             i -= 1;
-            if (castingActorId !== null) {
-                const { data: suppRole, error: errorSuppRole } = await supabase
-                    .from("movies_casting")
-                    .delete()
-                    .eq("id", castingActorId)
-                    .single();
-
-                if (errorSuppRole) {
-                    console.log(errorSuppRole);
-                    return;
-                }
-            }
         });
 
         people.forEach(p => {
@@ -1101,6 +1089,18 @@ export async function completeMovie(uuid) {
             if (newRole) {
                 castingActorId = newRole[0].id;
             }
+
+            if (castingActorId !== null) {
+                const { data: suppRole, error: errorSuppRole } = await supabase
+                    .from("movies_casting")
+                    .delete()
+                    .eq("id", castingActorId);
+
+                if (errorSuppRole) {
+                    console.log(errorSuppRole);
+                    return;
+                }
+            }
         })
         .on("select2:clear", async function() {
             if (divBlockNewActor) {
@@ -1109,8 +1109,7 @@ export async function completeMovie(uuid) {
                 const { data: deleteNewActor, error: errorDeleteNewActor } = await supabase
                     .from("people")
                     .delete()
-                    .eq("id", newActorId)
-                    .single();
+                    .eq("id", newActorId);
 
                 if (errorDeleteNewActor) {
                     console.log(errorDeleteNewActor);
@@ -1143,10 +1142,10 @@ export async function completeMovie(uuid) {
         } else {
             selectedNationalities = Array.from(nationalitiesDirector1.selectedOptions).map(option => option.value);
             const jobsDirector1 = [
-                jobDirectorDirector1 && "director",
-                jobProducerDirector1 && "producer",
-                jobScriptwriterDirector1 && "scriptwriter",
-                jobActorDirector1 && "actor"
+                jobDirectorDirector1.checked && "director",
+                jobProducerDirector1.checked && "producer",
+                jobScriptwriterDirector1.checked && "scriptwriter",
+                jobActorDirector1.checked && "actor"
             ].filter(Boolean).join(" ");
             const { data: addDirector1, error: errorAddDirector1 } = await supabase
                 .from("people")
@@ -1169,7 +1168,7 @@ export async function completeMovie(uuid) {
         }
 
         const { data: castingDirector1, error: errorCastingDirector1 } = await supabase
-            .from(movies_casting)
+            .from("movies_casting")
             .insert([{
                 movie_id: uuid,
                 people_id: idDirector,
@@ -1187,10 +1186,10 @@ export async function completeMovie(uuid) {
             } else {
                 selectedNationalities = Array.from(nationalitiesDirector2.selectedOptions).map(option => option.value);
                 const jobsDirector2 = [
-                    jobDirectorDirector2 && "director",
-                    jobProducerDirector2 && "producer",
-                    jobScriptwriterDirector2 && "scriptwriter",
-                    jobActorDirector2 && "actor"
+                    jobDirectorDirector2.checked && "director",
+                    jobProducerDirector2.checked && "producer",
+                    jobScriptwriterDirector2.checked && "scriptwriter",
+                    jobActorDirector2.checked && "actor"
                 ].filter(Boolean).join(" ");
                 const { data: addDirector2, error: errorAddDirector2 } = await supabase
                     .from("people")
@@ -1232,10 +1231,10 @@ export async function completeMovie(uuid) {
             } else {
                 selectedNationalities = Array.from(nationalitiesDirector3.selectedOptions).map(option => option.value);
                 const jobsDirector3 = [
-                    jobDirectorDirector3 && "director",
-                    jobProducerDirector3 && "producer",
-                    jobScriptwriterDirector3 && "scriptwriter",
-                    jobActorDirector3 && "actor"
+                    jobDirectorDirector3.checked && "director",
+                    jobProducerDirector3.checked && "producer",
+                    jobScriptwriterDirector3.checked && "scriptwriter",
+                    jobActorDirector3.checked && "actor"
                 ].filter(Boolean).join(" ");
                 const { data: addDirector3, error: errorAddDirector3 } = await supabase
                     .from("people")
@@ -1278,10 +1277,10 @@ export async function completeMovie(uuid) {
         } else {
             selectedNationalities = Array.from(nationalitiesScriptwriter1.selectedOptions).map(option => option.value);
             const jobsScriptwriter1 = [
-                jobDirectorScriptwriter1 && "director",
-                jobProducerScriptwriter1 && "producer",
-                jobScriptwriterScriptwriter1 && "scriptwriter",
-                jobActorScriptwriter1 && "actor"
+                jobDirectorScriptwriter1.checked && "director",
+                jobProducerScriptwriter1.checked && "producer",
+                jobScriptwriterScriptwriter1.checked && "scriptwriter",
+                jobActorScriptwriter1.checked && "actor"
             ].filter(Boolean).join(" ");
             const { data: addScriptwriter1, error: errorAddScriptwriter1 } = await supabase
                 .from("people")
@@ -1322,10 +1321,10 @@ export async function completeMovie(uuid) {
             } else {
                 selectedNationalities = Array.from(nationalitiesScriptwriter2.selectedOptions).map(option => option.value);
                 const jobsScriptwriter2 = [
-                    jobDirectorScriptwriter2 && "director",
-                    jobProducerScriptwriter2 && "producer",
-                    jobScriptwriterScriptwriter2 && "scriptwriter",
-                    jobActorScriptwriter2 && "actor"
+                    jobDirectorScriptwriter2.checked && "director",
+                    jobProducerScriptwriter2.checked && "producer",
+                    jobScriptwriterScriptwriter2.checked && "scriptwriter",
+                    jobActorScriptwriter2.checked && "actor"
                 ].filter(Boolean).join(" ");
                 const { data: addScriptwriter2, error: errorAddScriptwriter2 } = await supabase
                     .from("people")
