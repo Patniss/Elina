@@ -159,7 +159,7 @@ export async function setSettings() {
           aromazone: settingAromazone.checked,
           theme_color: settingColor.value,
           button_text: settingButtonColor.value,
-          background: background.value,
+          background: settingBackgroundTheme.value,
           avatar_url: avatarUrl
         })
         .eq("id", session.id);
