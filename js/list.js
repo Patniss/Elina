@@ -20,6 +20,8 @@ let genreFilter = "";
 // ----------
 let allMovies = [];
 let filteredMovies = [];
+let filteredTosee = [];
+let filteredSeen = [];
 let toseeMovies = [];
 let seenMovies = [];
 
@@ -191,9 +193,6 @@ export function initResearchMovie() {
       currentPageTosee = 1;
       currentPageSeen = 1;
 
-      let filteredTosee;
-      let filteredSeen;
-
       if (search === "") {
         filteredTosee = [...toseeMovies];
         filteredSeen = [...seenMovies];
@@ -205,9 +204,21 @@ export function initResearchMovie() {
           movie => movie.movies.title.toLowerCase().includes(search)
         );
       }
+
+      $(".column.is-one-quarter")
+      .each(function () {
+        let title = $(this).find(".title.is-5").text().toLowerCase();
+
+        if (title.includes(search)) {
+          $(this).fadeIn(150);
+        } else {
+          $(this).fadeOut(150);
+        }
+      })
     });
   }
 }
+
 // ----------
 // FONCTION SUR LES FILMS
 // ----------
@@ -736,8 +747,6 @@ async function renderMovies() {
     const toSeeMovies = filteredMovies.filter(movie =>
       movie.seen === false
     );
-
-    console.log(toseeMovies);
 
     const seenMovies = filteredMovies.filter(movie =>
       movie.seen === true
