@@ -799,7 +799,7 @@ export async function completeMovie(uuid) {
                 }
 
                 if (newActor) {
-                    newActorId = data.newActor.id;
+                    newActorId = newActor.id;
                 }
                 
                 divBlockNewActor = document.createElement("div");
