@@ -3,6 +3,8 @@ import { supabase } from "/Elina/js/supabase.js";
 import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/dashboard.js";
 import { addMovie } from "/Elina/js/functions.js";
+import { suppMovie } from "/Elina/js/functions.js";
+import { toseeMovie } from "/Elina/js/functions.js";
 
 // VARIABLES BASIQUES
 let currentPageAll = 1;
@@ -321,88 +323,12 @@ async function createMovieCard(movie) {
 
   // Gestion de l'action "Supprimer le film"
   suppMovieBtn.addEventListener("click", async () => {
-    suppMovieBtn.textContent = "";
-    suppMovieBtn.classList.add("is-loading");
-    suppMovieBtn.classList.remove("is-light");
-
-    try {
-      const { data, error } = await supabase
-        .from("users_movies")
-        .delete()
-        .eq("user_id", userId)
-        .eq("movie_id", movie.id)
-        .single();
-
-        if (error) {
-          setTimeout(() => {
-            suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            suppMovieBtn.classList.remove("is-loading");
-            console.log(error)
-          }, 500);
-          return;
-        }
-
-    } catch (err) {
-      setTimeout(() => {
-            suppMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            suppMovieBtn.classList.remove("is-loading");
-            console.log(err);
-          }, 500);
-          return;
-    }
-
-    setTimeout(() => {
-      suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
-      suppMovieBtn.classList.remove("is-loading");
-
-      divTags.innerHTML = "";
-      divTags.append(addMovieBtn, detailsBtn);
-    }, 500);
+    suppMovie("adding", movie.id, suppMovieBtn, divTags, addMovieBtn, detailsBtn);
   })
 
   // Gestion de l'action "J'ai vu"
   toseeMovieBtn.addEventListener("click", async () => {
-  toseeMovieBtn.textContent = "";
-  toseeMovieBtn.classList.add("is-loading");
-  toseeMovieBtn.classList.remove("is-light");
-
-  try {
-    const { data, error } = await supabase
-      .from("users_movies")
-      .update({seen: true})
-      .eq("user_id", userId)
-      .eq("movie_id", movie.id)
-      .single();
-
-      if (error) {
-        setTimeout(() => {
-          toseeMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-          toseeMovieBtn.classList.add("is-danger");
-          toseeMovieBtn.classList.remove("is-loading");
-          console.log(error);
-        }, 500);
-        return;
-      }
-    
-    } catch (err) {
-      setTimeout(() => {
-        toseeMovieBtn.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        toseeMovieBtn.classList.add("is-danger");
-        toseeMovieBtn.classList.remove("is-loading");
-        console.log(err);
-      }, 500);
-      return;
-    }
-
-    setTimeout(() => {
-      toseeMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-      toseeMovieBtn.classList.remove("is-loading");
-      toseeMovieBtn.classList.add("is-light");
-
-      divTags.innerHTML = "";
-      divTags.append(seenMovieBtn, detailsBtn);
-    }, 500);
-  
+    toseeMovie("adding", movie.id, toseeMovieBtn, divTags, seenMovieBtn, detailsBtn);
   });
   
   // Gestion de l'action "Vu" (retirer le tag Vu pour décocher) ----> Évolution prochaine : vu plusieurs fois ou non vu ?
