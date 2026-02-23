@@ -11,7 +11,18 @@ export async function setSettings() {
   const settingMovies = document.getElementById("setting-movies");
   const settingShows = document.getElementById("setting-shows");
   const settingDramas = document.getElementById("setting-dramas");
+  const settingAnimes = document.getElementById("setting-animes");
   const settingBooks = document.getElementById("setting-books");
+  const settingRecipes = document.getElementById("setting-recipes");
+  const settingCleaning = document.getElementById("setting-cleaning");
+  const settingBudget = document.getElementById("setting-budget");
+  const settingTodo = document.getElementById("setting-todo");
+  const settingMoodboard = document.getElementById("setting-moodboard");
+  const settingPro = document.getElementById("setting-pro");
+  const settingTravel = document.getElementById("setting-travel");
+  const settingCrochet = document.getElementById("setting-crochet");
+  const settingCandles = document.getElementById("setting-candles");
+  const settingAromazone = document.getElementById("setting-aromazone");
 
   const saveSettings = document.getElementById("save-settings");
   const settingColor = document.getElementById("main-colors");
@@ -33,7 +44,20 @@ export async function setSettings() {
   settingMovies.checked = session.movies;
   settingShows.checked = session.shows;
   settingDramas.checked = session.dramas;
+  settingAnimes.checked = session.animes;
   settingBooks.checked = session.books;
+
+  settingRecipes.checked = session.recipes;
+  settingCleaning.checked = session.cleaning;
+  settingBudget.checked = session.budget;
+  settingTodo.checked = session.todo;
+  settingMoodboard.checked = session.moodboard;
+  settingPro.checked = session.pro;
+
+  settingTravel.checked = session.travel;
+  settingCrochet.checked = session.crochet;
+  settingCandles.checked = session.candles;
+  settingAromazone.checked = session.aromazone;
 
   currentPseudo.textContent = session.pseudo;
   settingColor.value = session.theme_color;
@@ -47,11 +71,7 @@ export async function setSettings() {
   settingButtonColor.addEventListener("change", () => {
     saveSettings.style.color = settingButtonColor.value;
   });
-
-  // ----------------------------
-  // Gestion du file input (preview uniquement)
-  // ----------------------------
-
+  
   fileInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -68,14 +88,10 @@ export async function setSettings() {
       return;
     }
 
-    selectedImageFile = file; // ← on garde en mémoire
+    selectedImageFile = file;
     fileNameSpan.textContent = file.name;
     showPreview(file);
   });
-
-  // ----------------------------
-  // Submit
-  // ----------------------------
 
   settingsForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -85,9 +101,6 @@ export async function setSettings() {
     let avatarUrl = session.avatar_url;
 
     try {
-      // -------------------------------------------------
-      // 1️⃣ Si une nouvelle image a été choisie
-      // -------------------------------------------------
       if (selectedImageFile) {
 
         const extension = selectedImageFile.name.split(".").pop();
@@ -99,7 +112,6 @@ export async function setSettings() {
           { type: selectedImageFile.type }
         );
 
-        // Supprimer ancienne image si existante
         if (session.avatar_url) {
           const oldPath = session.avatar_url.split("/avatars/")[1];
           if (oldPath) {
@@ -109,7 +121,6 @@ export async function setSettings() {
           }
         }
 
-        // Upload nouvelle image
         const { error: uploadError } = await supabase.storage
           .from("avatars")
           .upload(filePath, renamedFile, { upsert: true });
@@ -121,12 +132,7 @@ export async function setSettings() {
         .createSignedUrl(filePath, 31_536_000);
         
         avatarUrl = data.signedUrl;
-
       }
-
-      // -------------------------------------------------
-      // 2️⃣ Update profil
-      // -------------------------------------------------
 
       if (settingPseudo.value.trim() === "") {
         settingPseudo.value = session.pseudo;
@@ -139,9 +145,21 @@ export async function setSettings() {
           movies: settingMovies.checked,
           shows: settingShows.checked,
           dramas: settingDramas.checked,
+          animes: settingAnimes.checked,
           books: settingBooks.checked,
+          recipes: settingRecipes.checked,
+          cleaning: settingCleaning.checked,
+          budget: settingBudget.checked,
+          todo: settingTodo.checked,
+          moodboard: settingMoodboard.checked,
+          pro: settingPro.checked,
+          travel: settingTravel.checked,
+          crochet: settingCrochet.checked,
+          candles: settingCandles.checked,
+          aromazone: settingAromazone.checked,
           theme_color: settingColor.value,
           button_text: settingButtonColor.value,
+          background: background.value,
           avatar_url: avatarUrl
         })
         .eq("id", session.id);
