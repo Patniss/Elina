@@ -895,7 +895,7 @@ async function createShowCard(show) {
   imgLogo.src = showLogo;
   imgLogo.alt = show.title;
   
-  figurePoster.appendChild(imgLogo);
+  figureLogo.appendChild(imgLogo);
   cardFigure.appendChild(figureLogo);
   
   card.appendChild(cardFigure);
