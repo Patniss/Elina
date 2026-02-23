@@ -856,7 +856,7 @@ async function createShowCard(show) {
   column.classList.add("column", "is-one-quarter");
 
   const card = document.createElement("div");
-  card.classList.add("card", "movie-card");
+  card.classList.add("card", "show-card");
 
   const cardContent = document.createElement("div");
   cardContent.classList.add("card-content");
@@ -891,7 +891,7 @@ async function createShowCard(show) {
   
   const imgLogo = document.createElement("img");
   imgLogo.src = showLogo;
-  imgLogo.alt = movie.title;
+  imgLogo.alt = show.title;
   
   figurePoster.appendChild(imgLogo);
   cardFigure.appendChild(figureLogo);
