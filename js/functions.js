@@ -16,15 +16,13 @@ export function calculateAge(startDate, endDate = new Date()) {
 }
 
 export async function addMovie(uuid, btnAdd, div, toseeBtn, suppBtn, detailsBtn) {
-    const session = loadProfile();
+    const session = await loadProfile();
     const userId = session.id;
 
     btnAdd.textContent = "";
     btnAdd.classList.remove("is-link");
     btnAdd.classList.add("is-success");
     btnAdd.classList.add("is-loading");
-    console.log("userId : " + userId);
-    console.log("movie.id : " + session);
 
     try {
       const { data, error } = await supabase
@@ -66,6 +64,6 @@ export async function addMovie(uuid, btnAdd, div, toseeBtn, suppBtn, detailsBtn)
       btnAdd.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
       
       div.innerHTML = "";
-      divTags.append(toseeBtn, suppBtn, detailsBtn ?? detailsBtn);
+      div.append(toseeBtn, suppBtn, detailsBtn ?? detailsBtn);
     }, 500);
 }
