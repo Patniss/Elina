@@ -23,15 +23,14 @@
             
             <div>
 
-                <div class="is-flex" style="position: absolute; right: 5%">
-                    <a id="put-fav"><i class="fa-regular fa-heart"></i></a>
-                    <a id="in-fav"><i class="fa-solid fa-heart"></i></a>
-                    <a id="put-unlike"><i class="fa-solid fa-heart-crack"></i></a>
-                </div>
                 <h1 class="title is-1 mt-6 mb-2" id="movie-title"></h1>
                 <h3 class="subtitle is-3 mb-6" id="movie-year" style="color: white;"></h3>
 
                 <div class="columns is-four-fifths box">
+                    <div class="is-flex" style="position: absolute; right: 5%">
+                        <a id="fav" class="tag is-medium" style="background-color: transparent;"><i class="fa-solid fa-heart"></i></a>
+                        <a id="unlike" class="tag is-medium" style="background-color: transparent;"><i class="fa-solid fa-heart-crack"></i></a>
+                    </div>
                     <div class="column is-one-quarter">
                         <img src="/Elina/entertainment/movies/poster.png" class="image is-clickable js-modal-trigger" id="movie-poster" data-target="div-modal-poster" style="border-radius: 5px;" />
                     </div>
