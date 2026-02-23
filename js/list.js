@@ -219,6 +219,22 @@ export function initResearchMovie() {
         }
       })
     });
+
+    if (filteredTosee.length > 0) {
+      $("div-tosee-movies").removeClass("is-hidden");
+      $("arrow-tosee").removeClass("fa-chevron-right").addClass("fa-chevron-down");
+    } else {
+      $("div-tosee-movies").addClass("is-hidden");
+      $("arrow-tosee").removeClass("fa-chevron-down").addClass("fa-chevron-right");
+    }
+
+    if (filteredSeen.length > 0) {
+      $("div-seen-movies").removeClass("is-hidden");
+      $("arrow-seen").removeClass("fa-chevron-right").addClass("fa-chevron-down");
+    } else {
+      $("div-seen-movies").addClass("is-hidden");
+      $("arrow-seen").removeClass("fa-chevron-down").addClass("fa-chevron-right");
+    }
   }
 }
 
