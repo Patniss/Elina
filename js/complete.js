@@ -785,7 +785,7 @@ export async function completeMovie(uuid) {
             if (data.newTag) {
                 const { data: newActor, error: errorNewActor } = await supabase
                     .from("people")
-                    .update([{ 
+                    .insert([{ 
                         firstname: " ", 
                         lastname: " ",
                         complete: false
