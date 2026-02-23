@@ -89,10 +89,11 @@
   --bulma-primary-invert-l: black;
   --bulma-family-primary: "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
   --bulma-navbar-background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
+  --user-background-url: url("/Elina/css/backgrounds/cappuccino.jpg");
 }
 
 body {
-  background-image: url("/Elina/css/backgrounds/cappuccino.jpeg");
+  background-image: var(--user-background-url);
   background-repeat: no-repeat;
   background-size: cover;      /* Ordinateur */
   background-position: center;
