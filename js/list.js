@@ -200,17 +200,12 @@ export function initResearchMovie() {
         filteredTosee = [...toseeMovies];
         filteredSeen = [...seenMovies];
       } else {
-        filteredTosee = toseeMovies.filter(
-          movie => movie.movies.title.toLowerCase().includes(search)
-        );
-        filteredSeen = seenMovies.filter(
-          movie => movie.movies.title.toLowerCase().includes(search)
-        );
-
-        $(".column.is-one-quarter")
-        .each(function () {
+        filteredTosee = toseeMovies.filter(movie => movie.movies.title.toLowerCase().includes(search));
+        filteredSeen = seenMovies.filter(movie => movie.movies.title.toLowerCase().includes(search));
+        
+        $(".column.is-one-quarter").each(function () {
           let title = $(this).find(".title.is-5").text().toLowerCase();
-
+          
           if (title.includes(search)) {
             $(this).fadeIn(150);
           } else {
@@ -219,24 +214,25 @@ export function initResearchMovie() {
         })
       }
 
-      if (filteredTosee.length > 0) {
-        $("div-tosee-movies").removeClass("is-hidden");
-        $("arrow-tosee").removeClass("fa-chevron-right").addClass("fa-chevron-down");
-      } else {
-        $("div-tosee-movies").addClass("is-hidden");
-        $("arrow-tosee").removeClass("fa-chevron-down").addClass("fa-chevron-right");
-      }
-
-      if (filteredSeen.length > 0) {
-        $("div-seen-movies").removeClass("is-hidden");
-        $("arrow-seen").removeClass("fa-chevron-right").addClass("fa-chevron-down");
-      } else {
-        $("div-seen-movies").addClass("is-hidden");
-        $("arrow-seen").removeClass("fa-chevron-down").addClass("fa-chevron-right");
-      }
-
-      renderMovies();
     });
+
+    if (filteredTosee.length > 0) {
+      $("div-tosee-movies").removeClass("is-hidden");
+      $("arrow-tosee").removeClass("fa-chevron-right").addClass("fa-chevron-down");
+    } else {
+      $("div-tosee-movies").addClass("is-hidden");
+      $("arrow-tosee").removeClass("fa-chevron-down").addClass("fa-chevron-right");
+    }
+
+    if (filteredSeen.length > 0) {
+      $("div-seen-movies").removeClass("is-hidden");
+      $("arrow-seen").removeClass("fa-chevron-right").addClass("fa-chevron-down");
+    } else {
+      $("div-seen-movies").addClass("is-hidden");
+      $("arrow-seen").removeClass("fa-chevron-down").addClass("fa-chevron-right");
+    }
+
+    renderMovies();
   }
 }
 
