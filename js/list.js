@@ -6,6 +6,7 @@ import { addMovie } from "/Elina/js/functions.js";
 import { suppMovie } from "/Elina/js/functions.js";
 import { toseeMovie } from "/Elina/js/functions.js";
 import { seenMovie } from "/Elina/js/functions.js";
+import { addShow } from "/Elina/js/functions.js";
 
 // VARIABLES BASIQUES
 let currentPageAll = 1;
@@ -845,7 +846,7 @@ async function createShowCard(show) {
   
   const showTitle = show.title ?? show.shows.title;
   const showId = show.title ? show.id : show.shows.id;
-  const showState = show.state ?? show.users_shows.state;
+  const showState = show.users_shows.state ?? null;
   const showSeasons = show.nb_seasons ?? show.shows.nb_seasons;
   const showLogo = show.logo ?? show.shows.logo;
 
@@ -881,6 +882,18 @@ async function createShowCard(show) {
   detailsBtn.classList.add("tag", "button", "is-hoverable", "mr-2");
   detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
   detailsBtn.href = `/Elina/entertainment/shows/show.html?id=${showId}`;
+
+  const addShowBtn = document.createElement("button");
+  addShowBtn.classList.add("tag", "button", "is-hoverable", "is-link", "mr-2");
+  addShowBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+
+  addShowBtn.addEventListener("click", () => {
+    addShow("adding", showId, addShowBtn, divTags, detailsBtn);
+  })
+
+  if (showState === null) {
+    divTags.appendChild(addShowBtn);
+  }
 
   divTags.appendChild(detailsBtn);
 

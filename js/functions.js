@@ -246,3 +246,57 @@ export async function seenMovie(mode, uuid, btnSeen, div, btnTosee, btnSupp, det
     }
     
 }
+
+export async function addShow(mode, uuid, btnAdd, div, detailsBtn) {
+    const session = await loadProfile();
+    const userId = session.id;
+
+    btnAdd.textContent = "";
+    btnAdd.classList.remove("is-link");
+    btnAdd.classList.add("is-success");
+    btnAdd.classList.add("is-loading");
+
+    try {
+      const { data, error } = await supabase
+        .from("users_shows")
+        .insert([
+          {
+            user_id: userId,
+            show_id: uuid,
+            state: "start"
+          }
+        ])
+        .select();
+
+        if (error) {
+          setTimeout(() => {
+            btnAdd.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+            btnAdd.classList.remove("is-loading", "is-link");
+            btnAdd.classList.add("is-danger");
+            console.log(error);
+          }, 500);
+          return;
+        }
+
+    } catch (err) {
+      console.error("Erreur :", err);
+      setTimeout(() => {
+        btnAdd.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
+        btnAdd.classList.remove("is-link", "is-loading");
+        btnAdd.classList.add("is-danger");
+        console.log(err);
+      }, 500);
+      return;
+    }
+
+    if (mode === "adding") {
+        setTimeout(() => {
+            btnAdd.classList.add("is-link");
+            btnAdd.classList.remove("is-success", "is-loading");
+            btnAdd.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+            
+            div.innerHTML = "";
+            div.append(detailsBtn ?? detailsBtn);
+        }, 500);
+    };
+}
