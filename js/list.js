@@ -859,6 +859,13 @@ async function createShowCard(show) {
   const cardContent = document.createElement("div");
   cardContent.classList.add("card-content");
 
+  const figureLogo = document.createElement("figure");
+  figureLogo.classList.add("image", "logo-wrapper", "py-2", "px-2");
+  const imgLogo = document.createElement("img");
+  imgLogo.src = showLogo;
+  imgLogo.alt = show.title;
+  figureLogo.appendChild(imgLogo);
+
   const pTitle = document.createElement("p");
   pTitle.classList.add("title", "is-5");
   pTitle.textContent = showTitle;
@@ -877,24 +884,9 @@ async function createShowCard(show) {
 
   divTags.appendChild(detailsBtn);
 
-  cardContent.append(pTitle, pSubtitle, divTags);
+  cardContent.append(figureLogo, pSubtitle, divTags);
   card.appendChild(cardContent);
   column.appendChild(card);
-  
-  const cardFigure = document.createElement("div");
-  cardFigure.classList.add("card-image");
-  
-  const figureLogo = document.createElement("figure");
-  figureLogo.classList.add("image", "logo-wrapper");
-  
-  const imgLogo = document.createElement("img");
-  imgLogo.src = showLogo;
-  imgLogo.alt = show.title;
-  
-  figureLogo.appendChild(imgLogo);
-  cardFigure.appendChild(figureLogo);
-  
-  card.appendChild(cardFigure);
 
   return column;
 }
