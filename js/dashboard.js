@@ -51,6 +51,7 @@ export async function customDashboard() {
     .from("users_movies")
     .select(`*, movies (*)`)
     .eq("user_id", userId)
+    .eq("seen", true)
     .order("date_seen", { ascending: false })
     .order("title", { foreignTable: "movies", ascending: true });
     
@@ -59,18 +60,7 @@ export async function customDashboard() {
     return;
   }
 
-  let totalSeen = 0;
-  let totalMinutesSeen = 0;
-
-  data.forEach(movie => {
-    if (movie.seen === true) {
-      totalSeen += 1;
-      totalMinutesSeen += Number(movie.movies.time);
-    } else {
-      totalTosee += 1;
-      totalMinutesToSee += Number(movie.movies.time);
-    }
-  });
+  const totalMinutesSeen = data.reduce((sum, movie) => sum + Number(movie.movies.time), 0 );
 
   const yearsSeen = Math.floor(totalMinutesSeen / 525600);
   const monthsSeen = Math.floor((totalMinutesSeen - 525600*yearsSeen) / 43200);
