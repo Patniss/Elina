@@ -16,6 +16,7 @@ export async function setSettings() {
   const saveSettings = document.getElementById("save-settings");
   const settingColor = document.getElementById("main-colors");
   const settingButtonColor = document.getElementById("button-color");
+  const settingBackgroundTheme = document.getElementById("background-theme");
 
   const fileInput = document.querySelector(".file-input");
   const fileNameSpan = document.getElementById("chosenFile");
@@ -37,6 +38,7 @@ export async function setSettings() {
   currentPseudo.textContent = session.pseudo;
   settingColor.value = session.theme_color;
   settingButtonColor.value = session.button_text;
+  settingBackgroundTheme.value = session.background;
 
   settingColor.addEventListener("change", () => {
     saveSettings.style.backgroundColor = settingColor.value;

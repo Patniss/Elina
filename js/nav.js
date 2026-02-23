@@ -17,9 +17,13 @@ export async function customNavbar() {
       .style
       .setProperty('--user-primary', session.theme_color);
       
-    document.documentElement
-      .style
-      .setProperty('--bulma-primary-invert-l', session.button_text);
+  document.documentElement
+    .style
+    .setProperty('--bulma-primary-invert-l', session.button_text);
+
+  document.documentElement
+    .style
+    .setProperty(`--user-background-url: url("/Elina/css/backgrounds/${session.background}.jpg)`)
 }
 
 export async function loadNav() {
