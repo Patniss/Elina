@@ -835,8 +835,6 @@ async function createShowCard(show) {
   const showSeasons = show.nb_seasons ?? show.shows.nb_seasons;
   const showLogo = show.logo ?? show.shows.logo;
 
-  console.log(showSeasons);
-
   // Création de la carte
   const column = document.createElement("div");
   column.classList.add("column", "is-one-quarter");
@@ -855,7 +853,17 @@ async function createShowCard(show) {
   pSubtitle.classList.add("subtitle", "is-6");
   pSubtitle.textContent = `${showSeasons} saisons`;
 
-  cardContent.append(pTitle, pSubtitle);
+  const divTags = document.createElement("div");
+  divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
+
+  const detailsBtn = document.createElement("a");
+  detailsBtn.classList.add("tag", "button", "is-hoverable", "mr-2");
+  detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
+  detailsBtn.href = `/Elina/entertainment/shows/show.html?id=${showId}`;
+
+  divTags.appendChild(detailsBtn);
+
+  cardContent.append(pTitle, pSubtitle, divTags);
   card.appendChild(cardContent);
   column.appendChild(card);
   
@@ -866,7 +874,7 @@ async function createShowCard(show) {
   figureLogo.classList.add("image", "logo-wrapper");
   
   const imgLogo = document.createElement("img");
-  imgLogo.src = moviePoster;
+  imgLogo.src = showLogo;
   imgLogo.alt = movie.title;
   
   figurePoster.appendChild(imgLogo);
