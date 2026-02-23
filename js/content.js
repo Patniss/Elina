@@ -3,6 +3,7 @@ import { loadProfile } from "/Elina/js/dashboard.js";
 import { addMovie } from "/Elina/js/functions.js";
 import { suppMovie } from "/Elina/js/functions.js";
 import { toseeMovie } from "/Elina/js/functions.js";
+import { seenMovie } from "/Elina/js/functions.js";
 
 function formatFrenchTypography(text) {
   const nbsp = "\u202F";
@@ -68,6 +69,11 @@ export async function movieContent(uuid) {
     const btnSuppMovie = document.getElementById("button-supp-movie");
     const btnSeenMovie = document.getElementById("button-seen-movie");
 
+    const seenMovie = document.getElementById("movie-date-seen");
+    const changeSeenMovie = document.getElementById("change-date-seen");
+    const movieFav = document.getElementById("movie-fav");
+    const movieUnlike = document.getElementById("movie-unlike");
+
     const genres = movie.genres.trim().split(" ; ");
     genres.forEach(genre => {
         const spanGenre = document.createElement("span");
@@ -90,11 +96,19 @@ export async function movieContent(uuid) {
     switch (statut) {
         case null:
             btnAddMovie.classList.remove("is-hidden");
+            seenMovie.classList.add("is-hidden");
+            changeSeenMovie.classList.add("is-hidden");
+            movieFav.classList.add("is-hidden");
+            movieUnlike.classList.add("is-hidden");
             break;
     
         case false:
             btnToseeMovie.classList.remove("is-hidden");
             btnSuppMovie.classList.remove("is-hidden");
+            seenMovie.classList.add("is-hidden");
+            changeSeenMovie.classList.add("is-hidden");
+            movieFav.classList.add("is-hidden");
+            movieUnlike.classList.add("is-hidden");
             break;
 
         case true:
@@ -104,14 +118,34 @@ export async function movieContent(uuid) {
 
     btnAddMovie.addEventListener("click", async () => {
         addMovie("hidden", uuid, btnAddMovie, false, btnToseeMovie, btnSuppMovie);
+        if (seenMovie.classList.contains("is-hidden")) seenMovie.classList.remove("is-hidden");
+        if (changeSeenMovie.classList.contains("is-hidden")) changeSeenMovie.classList.remove("is-hidden");
+        if (movieFav.classList.contains("is-hidden")) movieFav.classList.remove("is-hidden");
+        if (movieUnlike.classList.contains("is-hidden")) movieUnlike.classList.remove("is-hidden");
     });
 
     btnSuppMovie.addEventListener("click", async () => {
         suppMovie("hidden", uuid, btnSuppMovie, false, btnAddMovie);
+        if (seenMovie.classList.contains("is-hidden")) seenMovie.classList.remove("is-hidden");
+        if (changeSeenMovie.classList.contains("is-hidden")) changeSeenMovie.classList.remove("is-hidden");
+        if (movieFav.classList.contains("is-hidden")) movieFav.classList.remove("is-hidden");
+        if (movieUnlike.classList.contains("is-hidden")) movieUnlike.classList.remove("is-hidden");
     });
 
     btnToseeMovie.addEventListener("click", async () => {
         toseeMovie("hidden", uuid, btnToseeMovie, false, btnSeenMovie, btnSuppMovie);
+        if (seenMovie.classList.contains("is-hidden")) seenMovie.classList.remove("is-hidden");
+        if (changeSeenMovie.classList.contains("is-hidden")) changeSeenMovie.classList.remove("is-hidden");
+        if (movieFav.classList.contains("is-hidden")) movieFav.classList.remove("is-hidden");
+        if (movieUnlike.classList.contains("is-hidden")) movieUnlike.classList.remove("is-hidden");
+    })
+
+    btnSeenMovie.addEventListener("click", async () => {
+        seenMovie("hidden", uuid, btnSeenMovie, false, btnToseeMovie, btnSuppMovie)
+        seenMovie.classList.add("is-hidden");
+        changeSeenMovie.classList.add("is-hidden");
+        movieFav.classList.add("is-hidden");
+        movieUnlike.classList.add("is-hidden");
     })
 
     addOwnPoster.addEventListener("click", () => {
