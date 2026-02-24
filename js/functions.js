@@ -1,5 +1,5 @@
 import { supabase } from "/Elina/js/core/supabase.js";
-import { loadProfile } from "/Elina/js/modules/dahsboard/dashboard.js";
+import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
 
 export function calculateAge(startDate, endDate = new Date()) {
     const start = new Date(startDate);
