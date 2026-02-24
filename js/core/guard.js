@@ -1,12 +1,12 @@
 // js/guard.js
-import { supabase } from "./supabase.js";
+import { supabase } from "/Elina/js/core/supabase.js";
 
 const {
   data: { session },
 } = await supabase.auth.getSession();
 
 // Si on est sur la page login, on ne fait pas de guard
-const isLoginPage = window.location.pathname.endsWith("/index.html") || window.location.pathname === "/";
+const isLoginPage = window.location.pathname.endsWith("/Elina/index.html") || window.location.pathname === "/";
 
 if (!session && !isLoginPage) {
   window.location.href = "/Elina/index.html";

@@ -1,4 +1,4 @@
-import { supabase } from "./supabase.js";
+import { supabase } from "/Elina/js/core/supabase.js";
 
 const form = document.getElementById("login-form");
 const errorMessage = document.getElementById("error");
@@ -20,5 +20,5 @@ form.addEventListener("submit", async (e) => {
   }
 
   // Connexion réussie
-  window.location.href = "dashboard.html";
+  window.location.href = "/Elina/dashboard.html";
 });

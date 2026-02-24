@@ -1,4 +1,4 @@
-import { supabase } from "/Elina/js/supabase.js";
+import { supabase } from "/Elina/js/core/supabase.js";
 
 export async function loadProfile() {
   const {

@@ -1,5 +1,5 @@
 // Import de l'instance Supabase configurée dans le fichier supabase.js
-import { supabase } from "./core/supabase.js";
+import { supabase } from "/Elina/js/core/supabase.js";
 
 // Tableau constant contenant tous les genres disponibles
 // Il sera utilisé pour remplir dynamiquement les <select>

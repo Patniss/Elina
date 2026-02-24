@@ -1,4 +1,4 @@
-import { loadProfile } from "/Elina/js/dashboard.js";
+import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
 
 export async function customNavbar() {
   const session = await loadProfile();
