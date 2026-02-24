@@ -88,17 +88,17 @@
 </main>
 
 <script type="module">
-  import { loadNav } from "/Elina/js/nav.js";
+  import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
 </script>
 
 <script type="module">
-  import { loadProfile } from "/Elina/js/dashboard.js";
+  import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
   loadProfile();
-  import { customDashboard } from "/Elina/js/dashboard.js";
+  import { customDashboard } from "/Elina/js/modules/dashboard/dashboard.js";
   customDashboard();
 </script>
 
-<script type="module" src="/Elina/js/guard.js"></script>
+<script type="module" src="/Elina/js/core/guard.js"></script>
 </body>
 </html>
