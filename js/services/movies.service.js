@@ -8,3 +8,7 @@ export async function searchMovies(query) {
         .order("title", { ascending: true })
         .limit(5);
 }
+
+export async function fetchUserMovie(uuid, userId) {
+    
+}

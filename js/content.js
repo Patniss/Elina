@@ -1,22 +1,13 @@
+import { formatMovieDuration } from "/Elina/js/utils/format.js"
+import { formatFrenchTypography } from "/Elina/js/utils/format.js"
+
+
 import { supabase } from "/Elina/js/core/supabase.js";
 import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
 import { addMovie } from "/Elina/js/functions.js";
 import { suppMovie } from "/Elina/js/functions.js";
 import { toseeMovie } from "/Elina/js/functions.js";
 import { seenMovie } from "/Elina/js/functions.js";
-
-function formatFrenchTypography(text) {
-  const nbsp = "\u202F";
-  
-  return text
-    .replace(/\r\n/g, "\n")
-    .replace(/\s*([;:!?»])/g, "$1")
-    .replace(/«\s*/g, "«")
-    .replace(/([;:!?»])/g, nbsp + "$1")
-    .replace(/«/g, "«" + nbsp)
-    .replace(/ {2,}/g, " ")
-    .trim();
-}
 
 export async function movieContent(uuid) {
     const session = await loadProfile();
@@ -82,15 +73,11 @@ export async function movieContent(uuid) {
         movieGenres.appendChild(spanGenre);
     });
 
-    const hoursTime = Math.floor(movie.time / 60);
-    const minutesTime = movie.time - hoursTime * 60;
-    const displayMinutesTime = minutesTime < 10 ? "0" + minutesTime : minutesTime;
-
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
     moviePoster.src = poster;
     modalPoster.src = poster;
-    movieTime.textContent = hoursTime + "h" + displayMinutesTime;
+    movieTime.textContent = formatMovieDuration(movie.time);
     movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
 
     switch (statut) {

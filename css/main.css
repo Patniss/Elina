@@ -95,10 +95,9 @@
 body {
   background-image: var(--user-background-url);
   background-repeat: no-repeat;
-  background-size: cover;      /* Ordinateur */
+  background-size: cover;
   background-position: center;
-  background-attachment: scroll;
-  min-height: 100%;
+  background-attachment: scroll !important;
 }
 
 .navbar {
