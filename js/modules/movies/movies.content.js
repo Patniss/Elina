@@ -1,0 +1,157 @@
+import { formatMovieDuration } from "/Elina/js/utils/format.js"
+import { formatFrenchTypography } from "/Elina/js/utils/format.js"
+import { renderGenres } from "/Elina/js/utils/render.js";
+import { toggleElements } from "/Elina/js/ui/dom.js";
+import { updateMovieUI } from "/Elina/js/modules/movies.ui.js";
+import { searchMovies } from "/Elina/js/services/movies.service.js";
+
+export async function movieContent(uuid) {
+    const session = await loadProfile();
+    const userId = session.id;
+    let poster;
+
+    const { data:movie, error: errorMovie } = await supabase
+        .from("movies")
+        .select("*")
+        .eq("id", uuid)
+        .single();
+
+    if (errorMovie) {
+        console.log(errorMovie);
+        return;
+    }
+
+    const { data: movieUser, error: errorUser } = await supabase
+        .from("users_movies")
+        .select("*")
+        .eq("movie_id", uuid)
+        .eq("user_id", session.id)
+        .maybeSingle();
+    
+    if (errorUser) {
+        console.log(errorUser);
+        return;
+    }
+
+    let statut;
+
+    if (movieUser) {
+        poster = movieUser.own_poster ?? movie.poster;
+        statut = movieUser.seen;
+    } else { 
+        poster = movie.poster;
+        statut = null;
+    }
+
+    const movieTitle = document.getElementById("movie-title");
+    const movieYear = document.getElementById("movie-year");
+    const moviePoster = document.getElementById("movie-poster");
+    const movieTime = document.getElementById("movie-time");
+    const movieSynopsis = document.getElementById("movie-synopsis");
+    const movieGenres = document.getElementById("movie-genres");
+    const modalPoster = document.getElementById("modal-poster");
+    const addOwnPoster = document.getElementById("add-own-poster");
+    const btnAddMovie = document.getElementById("button-add-movie");
+    const btnToseeMovie = document.getElementById("button-tosee-movie");
+    const btnSuppMovie = document.getElementById("button-supp-movie");
+    const btnSeenMovie = document.getElementById("button-seen-movie");
+
+    const seenMovie = document.getElementById("movie-date-seen");
+    const changeSeenMovie = document.getElementById("change-date-seen");
+    const movieFav = document.getElementById("movie-fav");
+    const movieUnlike = document.getElementById("movie-unlike");
+
+    renderGenres(movieGenres, movie.genres);
+
+    movieTitle.textContent = movie.title;
+    movieYear.textContent = movie.year;
+    moviePoster.src = poster;
+    modalPoster.src = poster;
+    movieTime.textContent = formatMovieDuration(movie.time);
+    movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
+
+    switch (statut) {
+        case null:
+            btnAddMovie.classList.remove("is-hidden");
+            seenMovie.classList.add("is-hidden");
+            changeSeenMovie.classList.add("is-hidden");
+            movieFav.classList.add("is-hidden");
+            movieUnlike.classList.add("is-hidden");
+            break;
+    
+        case false:
+            btnToseeMovie.classList.remove("is-hidden");
+            btnSuppMovie.classList.remove("is-hidden");
+            seenMovie.classList.add("is-hidden");
+            changeSeenMovie.classList.add("is-hidden");
+            movieFav.classList.add("is-hidden");
+            movieUnlike.classList.add("is-hidden");
+            break;
+
+        case true:
+            btnSeenMovie.classList.remove("is-hidden");
+            break;
+    }
+
+    btnAddMovie.addEventListener("click", async () => {
+        addMovie("hidden", uuid, btnAddMovie, false, btnToseeMovie, btnSuppMovie);
+        if (seenMovie.classList.contains("is-hidden")) seenMovie.classList.remove("is-hidden");
+        if (changeSeenMovie.classList.contains("is-hidden")) changeSeenMovie.classList.remove("is-hidden");
+        if (movieFav.classList.contains("is-hidden")) movieFav.classList.remove("is-hidden");
+        if (movieUnlike.classList.contains("is-hidden")) movieUnlike.classList.remove("is-hidden");
+    });
+
+    btnSuppMovie.addEventListener("click", async () => {
+        suppMovie("hidden", uuid, btnSuppMovie, false, btnAddMovie);
+        if (seenMovie.classList.contains("is-hidden")) seenMovie.classList.remove("is-hidden");
+        if (changeSeenMovie.classList.contains("is-hidden")) changeSeenMovie.classList.remove("is-hidden");
+        if (movieFav.classList.contains("is-hidden")) movieFav.classList.remove("is-hidden");
+        if (movieUnlike.classList.contains("is-hidden")) movieUnlike.classList.remove("is-hidden");
+    });
+
+    btnToseeMovie.addEventListener("click", async () => {
+        toseeMovie("hidden", uuid, btnToseeMovie, false, btnSeenMovie, btnSuppMovie);
+        if (seenMovie.classList.contains("is-hidden")) seenMovie.classList.remove("is-hidden");
+        if (changeSeenMovie.classList.contains("is-hidden")) changeSeenMovie.classList.remove("is-hidden");
+        if (movieFav.classList.contains("is-hidden")) movieFav.classList.remove("is-hidden");
+        if (movieUnlike.classList.contains("is-hidden")) movieUnlike.classList.remove("is-hidden");
+    })
+
+    btnSeenMovie.addEventListener("click", async () => {
+        seenMovie("hidden", uuid, btnSeenMovie, false, btnToseeMovie, btnSuppMovie)
+        seenMovie.classList.add("is-hidden");
+        changeSeenMovie.classList.add("is-hidden");
+        movieFav.classList.add("is-hidden");
+        movieUnlike.classList.add("is-hidden");
+    })
+
+    addOwnPoster.addEventListener("click", () => {
+        const divAddOwnPoster = document.getElementById("div-add-own-poster");
+        const srcAddOwnPoster = document.getElementById("src-add-own-poster");
+        const btnAddOwnPoster = document.getElementById("btn-add-own-poster");
+
+        if (divAddOwnPoster.classList.contains("is-hidden")) {
+            divAddOwnPoster.classList.remove("is-hidden");
+        } else {
+            divAddOwnPoster.classList.add("is-hidden");
+        };
+
+        btnAddOwnPoster.addEventListener("click", async () => {
+            const { data, error } = await supabase
+                .from("users_movies")
+                .update({"own_poster": srcAddOwnPoster.value})
+                .eq("movie_id", uuid)
+                .eq("user_id", userId)
+                .single();
+            
+            if (error) {
+                alert("Une erreur est survenue. Vérifie que ce film est dans votre liste.");
+                console.log(error);
+                return;
+            };
+
+            moviePoster.src = srcAddOwnPoster.value;
+            modalPoster.src = srcAddOwnPoster.value;
+        })
+    })
+}

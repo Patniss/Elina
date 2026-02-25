@@ -1,19 +1,8 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
-
-export function calculateAge(startDate, endDate = new Date()) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    let age = end.getFullYear() - start.getFullYear();
-    const m = end.getMonth() - start.getMonth();
-
-    if (m < 0 || (m === 0 && end.getDate() < start.getDate())) {
-        age--;
-    }
-
-    return age;
-}
+import { addUserMovie } from "/Elina/js/services/usersMovies.service.js";
+import { handleButtonState } from "/Elina/js/ui/button.js";
+import { debounce } from "/Elina/js/utils/debounce.js";
 
 export async function addMovie(mode, uuid, btnAdd, div, toseeBtn, suppBtn, detailsBtn) {
     const session = await loadProfile();
@@ -25,36 +14,16 @@ export async function addMovie(mode, uuid, btnAdd, div, toseeBtn, suppBtn, detai
     btnAdd.classList.add("is-loading");
 
     try {
-      const { data, error } = await supabase
-        .from("users_movies")
-        .insert([
-          {
-            user_id: userId,
-            movie_id: uuid,
-            seen: false,
-            date_seen: new Date().toISOString()
-          }
-        ])
-        .select();
+      const add = addUserMovie(userId, uuid);
 
-        if (error) {
-          setTimeout(() => {
-            btnAdd.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-            btnAdd.classList.remove("is-loading", "is-link");
-            btnAdd.classList.add("is-danger");
-            console.log(error);
-          }, 500);
+        if (add.error) {
+          debounce(handleButtonState(btnAdd, "error"), 500);
           return;
         }
 
     } catch (err) {
-      console.error("Erreur :", err);
-      setTimeout(() => {
-        btnAdd.innerHTML = `<span class="icon"><i class="fas fa-xmark"></i></span><span>Erreur</span>`;
-        btnAdd.classList.remove("is-link", "is-loading");
-        btnAdd.classList.add("is-danger");
-        console.log(err);
-      }, 500);
+      console.error(err);
+      debounce(handleButtonState(btnAdd, "error", 500));
       return;
     }
 
