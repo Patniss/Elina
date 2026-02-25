@@ -17,6 +17,9 @@ export async function getUserMovie(userId, movieId) {
 }
 
 export async function addUserMovie(userId, movieId) {
+    console.log("supabase instance:", supabase);
+    console.log("supabase url:", supabase?.supabaseUrl);
+    
     const { data, error } = await supabase
         .from("users_movies")
         .insert([{
