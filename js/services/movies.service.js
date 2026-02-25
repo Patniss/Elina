@@ -18,8 +18,8 @@ export async function getMovie(uuid) {
 
     if (error) {
         console.error(error);
-        rerturn;
+        return [];
     }
 
-    return data;
+    return data || [];
 }

@@ -24,6 +24,7 @@ export async function addMovie() {
     // Activation du select2 de genres
     initGenres(genresInput, genres);
 
+    // Recherche de doublons
     searchAllMovies(titleInput, searchResult);
 
     movieForm.addEventListener("submit", async (e) => {
