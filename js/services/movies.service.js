@@ -1,12 +1,20 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 
 export async function searchMovies(query) {
-    return await supabase
+    const { data, error } = await supabase
         .from("movies")
         .select("id, title, year")
-        .ilike("title", '%{query}%')
+        .ilike("title", `%${query}%`)
         .order("title", { ascending: true })
         .limit(5);
+    
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    console.log(data);
+    return data;
 }
 
 export async function getMovie(uuid) {

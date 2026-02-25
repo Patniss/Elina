@@ -48,9 +48,7 @@ export function searchAllMovies(input, resultContainer) {
 
         searchTimeout = setTimeout(async () => {
 
-            const { data, error } = await searchMovies(query);
-            console.log(data);
-            const movies = data;
+            const movies = await searchMovies(query);
             resultContainer.innerHTML = "";
 
             movies.forEach(movie => {
