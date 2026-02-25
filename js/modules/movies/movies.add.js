@@ -1,6 +1,5 @@
 // 1- IMPORTATIONS DES JS NÉCESSAIRES :
 import { supabase } from "/Elina/js/core/supabase.js"; // Connexion à la base de données
-import { debounce } from "/Elina/js/utils/debounce.js"; // Gestion du timeout
 import { handleButtonState } from "/Elina/js/ui/button.js"; // Gestion de l'affichage d'un bouton au clic
 import { initGenres } from "/Elina/js/ui/select.js"; // Ajouter les genres dans un select
 import { initLiveSearch } from "/Elina/js/ui/search.js";

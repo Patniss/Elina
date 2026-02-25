@@ -1,6 +1,5 @@
 // IMPORTARTIONS NÉCESSAIRES
 import { supabase } from "/Elina/js/core/supabase.js";
-import { calculateAge } from "/Elina/js/functions.js";
 import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
 import { addMovie } from "/Elina/js/functions.js";
 import { suppMovie } from "/Elina/js/functions.js";
