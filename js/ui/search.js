@@ -37,6 +37,8 @@ export function searchAllMovies(input, resultContainer) {
     let searchTimeout;
 
     $(input).on("input", function () {
+        clearTimeout(searchTimeout);
+
         const query = $(this).val().trim();
 
         if (query.length < 2) {
@@ -45,7 +47,9 @@ export function searchAllMovies(input, resultContainer) {
         };
 
         searchTimeout = setTimeout(async () => {
+
             const { data, error } = await searchMovies(query);
+            console.log(data);
             const movies = data;
             resultContainer.innerHTML = "";
 
