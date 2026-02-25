@@ -4,7 +4,7 @@ import { debounce } from "/Elina/js/utils/debounce.js";
 import { addUserMovie, removeUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
 
 export async function handleMovieAction(action, uuid, mode, button, typeButton, showButtons = [], hideButtons = [], div, seen) {
-    const userId = getUserId();
+    const userId = await getUserId();
 
     console.log("actions.js handleMovieAction() movie_id: ", uuid);
     console.log("actions.js handleMovieAction() userId", userId);
@@ -35,7 +35,8 @@ export async function handleMovieAction(action, uuid, mode, button, typeButton, 
 }
 
 export async function addMovie(uuid, mode, button, showButtons = [], hideButtons = [], div) {
-    await handleMovieAction(addUserMovie(), uuid, mode, button, "add", showButtons, hideButtons, div);
+    const userId = await getUserId();
+    await handleMovieAction(addUserMovie(userId, uuid), uuid, mode, button, "add", showButtons, hideButtons, div);
 }
 
 export async function deleteMovie(uuid, mode, button, showButtons = [], hideButtons = [], div) {
