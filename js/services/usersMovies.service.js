@@ -17,7 +17,7 @@ export async function getUserMovie(userId, movieId) {
 }
 
 export async function addUserMovie(userId, movieId) {
-    console.log("service.js addUserMovie() movie_id: ", uuid);
+    console.log("service.js addUserMovie() movie_id: ", movieId);
     console.log("service.js addUserMovie() userId", userId);
     
     const { data, error } = await supabase
