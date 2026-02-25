@@ -28,9 +28,9 @@ export async function addMovie() {
     initLiveSearch({
         inputElement: titleInput,
         resultContainer: searchResult,
-        searchFonction: await searchMovies,
+        searchFunction: searchMovies,
         renderItem: (movie) => {
-            const item = document.getElementById("div");
+            const item = document.createElement("div");
             item.textContent = `${movie.title} (${movie.year})`;
             item.classList.add("search-item");
 
