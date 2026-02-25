@@ -1,5 +1,21 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 
+export async function getUserMovie(userId, movieId) {
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("movie_id", movieId)
+        .maybeSingle();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data;
+}
+
 export async function addUserMovie(userId, movieId) {
     const { data, error } = await supabase
         .from("users_movies")

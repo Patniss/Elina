@@ -9,6 +9,17 @@ export async function searchMovies(query) {
         .limit(5);
 }
 
-export async function fetchUserMovie(uuid, userId) {
-    
+export async function getMovie(uuid) {
+    const { data, error } = await supabase
+        .from("movies")
+        .select("*")
+        .eq("id", uuid)
+        .single()
+
+    if (error) {
+        console.error(error);
+        rerturn;
+    }
+
+    return data;
 }

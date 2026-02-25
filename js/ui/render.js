@@ -1,4 +1,5 @@
 export function renderGenres(container, genresString) { // Création des tags pour les genres
+    container.innerHTML = '';
     const genres = genresString.trim().split(" ; ");
     genres.forEach(genre => {
         const spanGenre = document.createElement("span");
