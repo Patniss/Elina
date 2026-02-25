@@ -28,22 +28,22 @@ export async function handleMovieAction(action, mode, button, typeButton, showBu
     }
 }
 
-export async function addMovie(uuid, mode, button, showButtons = [], hideButtons = [], div) {
+export async function addMovieUser(uuid, mode, button, showButtons = [], hideButtons = [], div) {
     const userId = await getUserId();
     await handleMovieAction(() => addUserMovie(userId, uuid), mode, button, "add", showButtons, hideButtons, div);
 }
 
-export async function deleteMovie(uuid, mode, button, showButtons = [], hideButtons = [], div) {
+export async function deleteMovieUser(uuid, mode, button, showButtons = [], hideButtons = [], div) {
     const userId = await getUserId();
     await handleMovieAction(() => removeUserMovie(userId, uuid), mode, button, "delete", showButtons, hideButtons, div);
 }
 
-export async function toseeMovie(uuid, mode, button, showButtons = [], hideButtons = [], div) {
+export async function toseeMovieUser(uuid, mode, button, showButtons = [], hideButtons = [], div) {
     const userId = await getUserId();
     await handleMovieAction(() => updateSeenUserMovie(userId, uuid, false), mode, button, "tosee", showButtons, hideButtons, div)
 }
 
-export async function seenMovie(uuid, mode, button, showButtons = [], hideButtons = [], div) {
+export async function seenMovieUser(uuid, mode, button, showButtons = [], hideButtons = [], div) {
     const userId = await getUserId();
     await handleMovieAction(() => updateSeenUserMovie(userId, uuid, false), mode, button, "seen", showButtons, hideButtons, div)
 }

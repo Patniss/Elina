@@ -4,7 +4,7 @@ import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { renderGenres } from "/Elina/js/ui/render.js";
 import { formatMovieDuration, formatFrenchTypography } from "/Elina/js/utils/format.js";
 import { toggleBtnSeenStatut } from "/Elina/js/ui/dom.js";
-import { addMovie, deleteMovie, toseeMovie, seenMovie } from "/Elina/js/modules/movies/movies.actions.js";
+import { addMovieUser, deleteMovieUser, toseeMovieUser, seenMovieUser } from "/Elina/js/modules/movies/movies.actions.js";
 
 export async function movieContent(uuid) {
     const movieTitle = document.getElementById("movie-title");
@@ -41,15 +41,15 @@ export async function movieContent(uuid) {
     toggleBtnSeenStatut(statut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
 
     btnAddMovie.addEventListener("click", async () => {
-        addMovie(uuid, "hidden", btnAddMovie, [btnToseeMovie, btnDeleteMovie], [btnAddMovie, btnSeenMovie]);
+        addMovieUser(uuid, "hidden", btnAddMovie, [btnToseeMovie, btnDeleteMovie], [btnAddMovie, btnSeenMovie]);
     });
     btnToseeMovie.addEventListener("click", async() => {
-        toseeMovie(uuid, "hidden", btnToseeMovie, [btnSeenMovie], [btnAddMovie, btnToseeMovie, btnDeleteMovie]);
+        toseeMovieUser(uuid, "hidden", btnToseeMovie, [btnSeenMovie], [btnAddMovie, btnToseeMovie, btnDeleteMovie]);
     });
     btnDeleteMovie.addEventListener("click", async () => {
-        deleteMovie(uuid, "hidden", btnDeleteMovie, [btnAddMovie], [btnDeleteMovie, btnToseeMovie, btnSeenMovie]);
+        deleteMovieUser(uuid, "hidden", btnDeleteMovie, [btnAddMovie], [btnDeleteMovie, btnToseeMovie, btnSeenMovie]);
     });
     btnSeenMovie.addEventListener("click", async() => {
-        seenMovie(uuid, "hidden", btnSeenMovie, [btnToseeMovie, btnDeleteMovie], [btnAddMovie, btnSeenMovie]);
+        seenMovieUser(uuid, "hidden", btnSeenMovie, [btnToseeMovie, btnDeleteMovie], [btnAddMovie, btnSeenMovie]);
     })
 }

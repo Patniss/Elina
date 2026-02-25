@@ -1,4 +1,5 @@
 import { supabase } from "/Elina/js/core/supabase.js";
+import { handleButtonState } from "/Elina/js/ui/button.js";
 
 export async function searchMovies(query) {
     const { data, error } = await supabase
@@ -13,7 +14,6 @@ export async function searchMovies(query) {
         return;
     }
 
-    console.log(data);
     return data;
 }
 
@@ -30,4 +30,24 @@ export async function getMovie(uuid) {
     }
 
     return data || [];
+}
+
+export async function addMovie(button) {
+    const { data, error } = await supabase
+        .from("movies")
+        .insert([{
+            title: movieTitle,
+            year: movieYear, 
+            complete: movieComplete, 
+            genres: movieGenres, 
+            poster: moviePoster, 
+            time: movieTime, 
+            synopsis: movieSynopsis 
+        }]);
+    
+    if (error) {
+        console.error(error);
+        handleButtonState(button, "error");
+        return;
+    }
 }

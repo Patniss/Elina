@@ -3,7 +3,7 @@ import { supabase } from "/Elina/js/core/supabase.js"; // Connexion à la base d
 import { handleButtonState } from "/Elina/js/ui/button.js"; // Gestion de l'affichage d'un bouton au clic
 import { initGenres } from "/Elina/js/ui/select.js"; // Ajouter les genres dans un select
 import { searchAllMovies } from "/Elina/js/ui/search.js";
-import { searchMovies } from "/Elina/js/services/movies.service.js";
+import { addMovie } from "/Elina/js/services/movies.service.js";
 import { genres } from "/Elina/js/data/genres.js";
 
 export async function addMovie() {
@@ -47,30 +47,12 @@ export async function addMovie() {
 
         handleButtonState(buttonInput, "loading");
 
-        try {
-            const { data, error } = await supabase
-                .from("movies")
-                .insert([{
-                    title: movieTitle,
-                    year: movieYear, 
-                    complete: movieComplete, 
-                    genres: movieGenres, 
-                    poster: moviePoster, 
-                    time: movieTime, 
-                    synopsis: movieSynopsis 
-                }]);
-            
-            if (error) {
-                console.error(error);
-                handleButtonState(buttonInput, "error");
-                return;
-            }
-
-            handleButtonState(buttonInput, "success");
+        try { await addMovie(buttonInput);
 
             setTimeout(() => {
-                handleButtonState(buttonInput, "default");
+                handleButtonState(buttonInput, "success");
                 movieForm.reset();
+                movieGenres.value = "";
                 titleInput.focus();
             }, 250);
 
