@@ -17,8 +17,6 @@ export async function getUserMovie(userId, movieId) {
 }
 
 export async function addUserMovie(userId, movieId) {
-    console.log("service.js addUserMovie() movie_id: ", movieId);
-    console.log("service.js addUserMovie() userId", userId);
     
     const { data, error } = await supabase
         .from("users_movies")
@@ -29,7 +27,10 @@ export async function addUserMovie(userId, movieId) {
             date_seen: new Date().toISOString()
         }]).select();
 
-    return { data, error };
+    if (error) {
+        console.log(error);
+        return;
+    }
 }
 
 export async function removeUserMovie(userId, movieId) {
@@ -39,8 +40,11 @@ export async function removeUserMovie(userId, movieId) {
         .eq("user_id", userId)
         .eq("movie_id", movieId)
         .single();
-    
-    return { data, error };
+
+    if (error) {
+        console.error(error);
+        return;
+    }
 }
 
 export async function updateSeenUserMovie(userId, movieId, seenState) {
@@ -51,5 +55,8 @@ export async function updateSeenUserMovie(userId, movieId, seenState) {
         .eq("movie_id", movieId)
         .single();
 
-    return { data, error };
+    if (error) {
+        console.log(error);
+        return;
+    }
 }

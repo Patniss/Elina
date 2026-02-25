@@ -1,21 +1,15 @@
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { handleButtonState, changeModeButton } from "/Elina/js/ui/button.js";
-import { debounce } from "/Elina/js/utils/debounce.js";
 import { addUserMovie, removeUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
 
 export async function handleMovieAction(action, mode, button, typeButton, showButtons = [], hideButtons = [], div) {
     handleButtonState(button, "loading");
 
     try {
-        const actionMovie = await action();
+        await action();
 
-        if (actionMovie.error) {
-            setTimeout(() => {
-                handleButtonState(button, "error");
-            }, 500);
-            return;
-        }
     } catch (error) {
+        console.error(error);
         setTimeout(() => {
             handleButtonState(button, "error");
         }, 500);
