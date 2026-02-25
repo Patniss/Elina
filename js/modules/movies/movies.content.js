@@ -41,6 +41,8 @@ export async function movieContent(uuid) {
     toggleBtnSeenStatut(statut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
 
     btnAddMovie.addEventListener("click", async () => {
+        console.log("content.js movie_id: ", uuid);
+        console.log("content.js userId", userId);
         addMovie(uuid, "hidden", btnAddMovie, [btnToseeMovie, btnDeleteMovie], [btnAddMovie, btnSeenMovie]);
     });
     btnToseeMovie.addEventListener("click", async() => {

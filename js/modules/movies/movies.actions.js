@@ -6,6 +6,9 @@ import { addUserMovie, removeUserMovie, updateSeenUserMovie } from "/Elina/js/se
 export async function handleMovieAction(action, uuid, mode, button, typeButton, showButtons = [], hideButtons = [], div, seen) {
     const userId = getUserId();
 
+    console.log("actions.js handleMovieAction() movie_id: ", uuid);
+    console.log("actions.js handleMovieAction() userId", userId);
+
     handleButtonState(button, "loading");
 
     try {
@@ -32,6 +35,8 @@ export async function handleMovieAction(action, uuid, mode, button, typeButton, 
 }
 
 export async function addMovie(uuid, mode, button, showButtons = [], hideButtons = [], div) {
+    console.log("actions.js addMovie() movie_id: ", uuid);
+    console.log("actions.js addMovie() userId", userId);
     await handleMovieAction(addUserMovie, uuid, mode, button, "add", showButtons, hideButtons, div);
 }
 
