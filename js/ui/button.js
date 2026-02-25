@@ -47,3 +47,52 @@ export function changeModeButton(button, mode) {
             break;
     }
 }
+
+export function createButton(type, id) {
+    const button = document.createElement("a");
+    button.classList.add("tag", "button", "is-hoverable", "mr-2");
+    
+    if (type === "details") {
+        button.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
+        button.href = `/Elina/entertainment/movies/movie.html?id=${id}`;
+    } else {
+        changeModeButton(button, type);
+    }
+
+    return button;
+}
+
+export function createButtons(buttons = [], id) {
+    return buttons.map(button => {
+        const element =
+            button === "details"
+                ? createButton(button, id)
+                : createButton(button);
+
+        return { type: button, element };
+    });
+}
+
+export function appendButtons(statut, div, ifNull = [], ifFalse = [], ifTrue = [], preventDefault = []) {
+    let buttonsToAppend;
+
+    switch (statut) {
+        case null:
+            buttonsToAppend = ifNull;
+            break;
+            
+        case false:
+            buttonsToAppend = ifFalse;
+            break;
+            
+        case true:
+            buttonsToAppend = ifTrue;
+            break;
+            
+        default:
+            buttonsToAppend = preventDefault;
+            break;
+    }
+
+    buttonsToAppend.forEach(btn => div.appendChild(btn));
+}

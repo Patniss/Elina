@@ -51,3 +51,29 @@ export async function addMovie(button) {
         return;
     }
 }
+
+export async function getAllMovies() {
+    const { data, error } = await supabase
+        .from("movies")
+        .select("*");
+    
+    if (error) {
+        console.log(error);
+        return;
+    }
+
+    return data;
+}
+
+export async function fethAllMovies() {
+    const { data, error } = await supabase
+        .from("movies")
+        .select(`*, users_movies(*)`);
+    
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data;
+}
