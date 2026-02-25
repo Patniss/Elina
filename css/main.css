@@ -1,5 +1,41 @@
 /* Normal */
 @font-face {
+  font-family: "Linux Biolinum";
+  src: url("fonts/linux_biolinum/LinBiolinum.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Italique */
+@font-face {
+  font-family: "Linux Biolinum";
+  src: url("fonts/linux_biolinum/LinBiolinum_I.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Gras */
+@font-face {
+  font-family: "Linux Biolinum";
+  src: url("fonts/linux_biolinum/LinBiolinum_B.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Gras Italique */
+@font-face {
+  font-family: "Linux Biolinum";
+  src: url("fonts/linux_biolinum/LinBiolinum_BI.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Normal */
+@font-face {
   font-family: "Dream Orphans";
   src: url("fonts/dream_orphans/Dream\ Orphans.otf") format("opentype");
   font-weight: 400;
@@ -34,42 +70,6 @@
   font-display: swap;
 }
 
-/* Normal */
-@font-face {
-  font-family: "Apple Garamond";
-  src: url("fonts/apple_garamond/AppleGaramond.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Italique */
-@font-face {
-  font-family: "Apple Garamond";
-  src: url("fonts/apple_garamond/AppleGaramond-Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* Gras */
-@font-face {
-  font-family: "Apple Garamond";
-  src: url("fonts/apple_garamond/AppleGaramond-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Gras Italique */
-@font-face {
-  font-family: "Apple Garamond";
-  src: url("fonts/apple_garamond/AppleGaramond-BoldItalic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
 /* Titre */
 @font-face {
   font-family: "Magiera";
@@ -87,7 +87,7 @@
   --user-primary: #00d1b2;
   --bulma-arrow-color: var(--user-primary);
   --bulma-primary-invert-l: black;
-  --bulma-family-primary: "Dream Orphans", "Apple Garamond", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --bulma-family-primary: "Linux Biolinum", "Dream Orphans", Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
   --bulma-navbar-background-color: color-mix(in srgb, var(--bulma-scheme-main) 70%, transparent);
   --user-background-url: url("/Elina/css/backgrounds/cappuccino.jpg");
 }
