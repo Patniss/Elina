@@ -1,9 +1,8 @@
 // 1- IMPORTATIONS DES JS NÉCESSAIRES :
 import { supabase } from "/Elina/js/core/supabase.js"; // Connexion à la base de données
-import { debounce } from "/Elina/js/utils/debounce.js"; // Gestion du timeout
 import { handleButtonState } from "/Elina/js/ui/button.js"; // Gestion de l'affichage d'un bouton au clic
 import { initGenres } from "/Elina/js/ui/select.js"; // Ajouter les genres dans un select
-import { initLiveSearch } from "/Elina/js/ui/search.js";
+import { searchAllMovies } from "/Elina/js/ui/search.js";
 import { searchMovies } from "/Elina/js/services/movies.service.js";
 import { genres } from "/Elina/js/data/genres.js";
 
@@ -25,25 +24,7 @@ export async function addMovie() {
     // Activation du select2 de genres
     initGenres(genresInput, genres);
 
-    initLiveSearch({
-        inputElement: titleInput,
-        resultContainer: searchResult,
-        searchFunction: searchMovies,
-        renderItem: (movie) => {
-            const item = document.createElement("div");
-            item.textContent = `${movie.title} (${movie.year})`;
-            item.classList.add("search-item");
-
-            item.addEventListener("click", () => {
-                titleInput.value = movie.title;
-                yearInput.value = movie.year;
-                searchResult.innerHTML = "";
-                searchResult.style.display = "none";
-            });
-
-            return item;
-        }
-    })
+    searchAllMovies(titleInput, searchResult);
 
     movieForm.addEventListener("submit", async (e) => {
         e.preventDefault(); // Empêche le rechargement de la page
