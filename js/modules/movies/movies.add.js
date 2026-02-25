@@ -47,7 +47,7 @@ export async function addMovie() {
 
     $(titleInput).on("input", function () {
         const query = $(this).val().trim();
-        handleSearch(query);
+        initLiveSearch(query);
     })
 
     movieForm.addEventListener("submit", async (e) => {
