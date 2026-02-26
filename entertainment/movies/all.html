@@ -127,10 +127,15 @@
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
   import { initMovies } from "/Elina/js/modules/movies/movies.controller.js";
-  document.addEventListener("DOMContentLoaded", async () => {
-    await initMovies();
-  });
+</script>
 
+<script type="module">
+  import { loadAllMovies } from "/Elina/js/list.js";
+  loadAllMovies();
+  import { initResearchMovie } from "/Elina/js/list.js";
+  initResearchMovie();
+  import { sortFilterMovies } from "/Elina/js/list.js";
+  sortFilterMovies();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
