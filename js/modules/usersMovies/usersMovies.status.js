@@ -1,4 +1,5 @@
 export function mapMoviesWithStatus(data, userId) {
+    if (!data) return [];
     
     const moviesWithStatus = data.map(movie => {
         const userMovie = movie.users_movies.find(

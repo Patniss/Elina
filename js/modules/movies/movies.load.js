@@ -10,7 +10,7 @@ export async function loadAllMovies(field, asc, filter) {
     query = sortMovies(query, field, asc);
     query = filterMovies(query, filter);
 
-    movies = await querySupabase(query);
+    const movies = await querySupabase(query);
     const moviesWithStatus = mapMoviesWithStatus(movies, userId);
 
     return moviesWithStatus;

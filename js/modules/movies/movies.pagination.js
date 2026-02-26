@@ -1,0 +1,48 @@
+import { moviesStore } from "/Elina/js/modules/movies/movies.store.js";
+import { renderPagination } from "/Elina/js/ui/pagination.js";
+import { renderAllMovies, renderToseeMovies, renderSeenMovies } from "/Elina/js/modules/movies/movies.render.js";
+
+export function renderPaginationAll() {
+    const container = document.getElementById("pagination-list");
+
+    renderPagination({
+        container,
+        currentPage: moviesStore.currentPage,
+        totalItems: moviesStore.movies.length,
+        pageSize: moviesStore.pageSize,
+        onPageChange: (page) => {
+            moviesStore.currentPage = page;
+            renderAllMovies();
+        }
+    })
+}
+
+export function renderPaginationTosee() {
+    const container = document.getElementById("pagination-list-tosee");
+
+    renderPagination({
+        container,
+        currentPage: moviesStore.currentPageTosee,
+        totalItems: moviesStore.moviesTosee.length,
+        pageSize: moviesStore.pageSize,
+        onPageChange: (page) => {
+            moviesStore.currentPageTosee = page;
+            renderToseeMovies();
+        }
+    });
+}
+
+export function renderPaginationSeen() {
+    const container = document.getElementById("pagination-list-seen");
+
+    renderPagination({
+        container,
+        currentPage: moviesStore.currentPageSeen,
+        totalItems: moviesStore.moviesSeen.length,
+        pageSize: moviesStore.pageSize,
+        onPageChange: (page) => {
+            moviesStore.currentPageSeen = page;
+            renderSeenMovies();
+        }
+    });
+}

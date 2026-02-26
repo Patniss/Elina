@@ -79,7 +79,7 @@ export async function createMovieCard(movie) {
 
     Object.entries(ACTIONS).forEach(([type, action]) => {
         buttons[type].addEventListener("click", () => {
-            action(movieId, "adding", buttons[type]);
+            action(movieId, "adding", buttons[type], divTags);
         })
     })
 

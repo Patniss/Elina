@@ -109,7 +109,7 @@
       </div>
 
       <nav class="pagination" role="navigation" aria-label="navigation" id="pagination">
-        <div class="pagination-list" id="pagination_nb"></div>
+        <div id="pagination-list"></div>
       </nav>
 
     </div>
@@ -126,15 +126,11 @@
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-</script>
+  import { initMovies } from "/Elina/js/modules/movies/movies.controller.js";
+  document.addEventListener("DOMContentLoaded", async () => {
+    await initMovies();
+  });
 
-<script type="module">
-  import { loadAllMovies } from "/Elina/js/list.js";
-  loadAllMovies();
-  import { initResearchMovie } from "/Elina/js/list.js";
-  initResearchMovie();
-  import { sortFilterMovies } from "/Elina/js/list.js";
-  sortFilterMovies();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
