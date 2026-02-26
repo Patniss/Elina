@@ -1,5 +1,5 @@
 import { getUserId } from "/Elina/js/services/profiles.service.js";
-import { changeModeButton } from "/Elina/js/ui/button.js";
+import { changeModeButton, handleButtonState } from "/Elina/js/ui/button.js";
 import { addUserMovie, removeUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
 
 export async function handleMovieAction(action, mode, button, typeButton, showButtons = [], hideButtons = [], div) {
