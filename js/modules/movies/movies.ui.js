@@ -1,13 +1,25 @@
-import { createButtons, appendButtons } from "/Elina/js/ui/button.js";
+import { createButtons } from "/Elina/js/ui/button.js";
 import { addMovieUser, deleteMovieUser, toseeMovieUser, seenMovieUser } from "/Elina/js/modules/movies/movies.actions.js";
+import { normalizeMovie } from "/Elina/js/modules/movies.movies.model.js";
+
+const BUTTONS_BY_STATUS = {
+    null: ["add", "details"],
+    false: ["tosee", "delete", "details"],
+    true: ["seen", "details"]
+};
+
+export function updateMovieUI(status, buttons, container) { // Met à jour l'affichage des boutons selon le statut du film
+    container.innerHTML = "";
+    const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
+
+    types.forEach(type => {
+        container.appendChild(buttons[type]);
+    });
+}
 
 export async function createMovieCard(movie) {
-    const movieTitle = movie.title ?? movie.movies.title;
-    const movieYear = movie.year ?? movie.movies.year;
-    const movieId = movie.title ? movie.id : movie.movies.id;
-    const movieSeen = movie.seen ?? movie.users_movies.seen;
-    const moviePoster = movie.own_poster ?? movie.poster ?? movie.movies.poster;
-    
+    const { movieId, movieTitle, movieYear, moviePoster, movieSeen } = normalizeMovie(movie);
+
     // Création de la carte
     const column = document.createElement("div");
     column.classList.add("column", "is-one-quarter");
@@ -30,13 +42,14 @@ export async function createMovieCard(movie) {
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
     
     const buttons = createButtons(["details", "add", "delete", "tosee", "seen"], movieId);
-    const detailsButton = buttons.find(btn => btn.type === "details").element;
-    const addButton = buttons.find(btn => btn.type === "add").element;
-    const toseeButton = buttons.find(btn => btn.type === "tosee").element;
-    const deleteButton = buttons.find(btn => btn.type === "delete").element;
-    const seenButton = buttons.find(btn => btn.type === "seen").element;
-    
-    appendButtons(movieSeen, divTags, [addButton, detailsButton], [toseeButton, deleteButton, detailsButton], [seenButton, detailsButton], [addButton, detailsButton]);
+
+    const detailsButton = buttons.details;
+    const addButton = buttons.add;
+    const deleteButton = buttons.delete;
+    const toseeButton = buttons.tosee;
+    const seenButton = buttons.seen;
+
+    updateMovieUI(movieSeen, buttons, divTags);
     
     cardContent.append(pTitle, pSubtitle, divTags);
     card.appendChild(cardContent);
@@ -56,27 +69,19 @@ export async function createMovieCard(movie) {
     cardFigure.appendChild(figurePoster);
     
     card.appendChild(cardFigure);
-    
-    addButton.addEventListener("click", async () => {
-        addMovieUser(movieId, "adding", addButton, [toseeButton, deleteButton, detailsButton]);
-    });
 
-    deleteButton.addEventListener("click", async () => {
-        deleteMovieUser(movieId, "adding", deleteButton, [addButton, detailsButton]);
-    });
+    const ACTIONS = {
+        add: addMovieUser,
+        delete: deleteMovieUser,
+        tosee: toseeMovieUser,
+        seen: seenMovieUser
+    };
 
-    toseeButton.addEventListener("click", async () => {
-        toseeMovieUser(movieId, "adding", toseeButton, [seenButton, deleteButton, detailsButton]);
-    });
-
-    seenButton.addEventListener("click", async () => {
-        seenMovieUser(movieId, "adding", seenButton, [toseeButton, deleteButton, detailsButton]);
-    });
+    Object.entries(ACTIONS).forEach(([type, action]) => {
+        buttons[type].addEventListener("click", () => {
+            action(movieId, "adding", buttons[type]);
+        })
+    })
 
   return column;
-}
-
-
-export function updateMovieUI(status, elements) { // Met à jour l'affichage des boutons selon le statut du film
-
 }

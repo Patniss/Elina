@@ -62,15 +62,13 @@ export function createButton(type, id) {
     return button;
 }
 
-export function createButtons(buttons = [], id) {
-    return buttons.map(button => {
-        const element =
-            button === "details"
-                ? createButton(button, id)
-                : createButton(button);
-
-        return { type: button, element };
+export function createButtons(types = [], id) {
+    const result = [];
+    types.forEach(type => {
+        result[type] = type === "details" ? createButton(type, id) : createButton(type);
     });
+
+    return result;
 }
 
 export function appendButtons(statut, div, ifNull = [], ifFalse = [], ifTrue = [], preventDefault = []) {
