@@ -1,6 +1,6 @@
 import { createButtons } from "/Elina/js/ui/button.js";
 import { addMovieUser, deleteMovieUser, toseeMovieUser, seenMovieUser } from "/Elina/js/modules/movies/movies.actions.js";
-import { normalizeMovie } from "/Elina/js/modules/movies.movies.model.js";
+import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
 
 const BUTTONS_BY_STATUS = {
     null: ["add", "details"],
