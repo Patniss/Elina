@@ -6,6 +6,7 @@ import { suppMovie } from "/Elina/js/functions.js";
 import { toseeMovie } from "/Elina/js/functions.js";
 import { seenMovie } from "/Elina/js/functions.js";
 import { addShow } from "/Elina/js/functions.js";
+import { createMovieCard } from "/Elina/js/modules/movies/movies.ui.js";
 
 // VARIABLES BASIQUES
 let currentPageAll = 1;
@@ -238,116 +239,6 @@ export function initResearchMovie() {
 // ----------
 // FONCTION SUR LES FILMS
 // ----------
-async function createMovieCard(movie) {
-  // ❶ Récupérer la session
-  const session = await loadProfile();
-  const userId = session.id;
-  
-  const movieTitle = movie.title ?? movie.movies.title;
-  const movieYear = movie.year ?? movie.movies.year;
-  const movieId = movie.title ? movie.id : movie.movies.id;
-  const movieSeen = movie.seen ?? movie.users_movies.seen;
-  const moviePoster = movie.own_poster ?? movie.poster ?? movie.movies.poster;
-
-  // Création de la carte
-  const column = document.createElement("div");
-  column.classList.add("column", "is-one-quarter");
-
-  const card = document.createElement("div");
-  card.classList.add("card", "movie-card");
-
-  const cardContent = document.createElement("div");
-  cardContent.classList.add("card-content");
-
-  const pTitle = document.createElement("p");
-  pTitle.classList.add("title", "is-5");
-  pTitle.textContent = movieTitle;
-
-  const pSubtitle = document.createElement("p");
-  pSubtitle.classList.add("subtitle", "is-6");
-  pSubtitle.textContent = movieYear;
-
-  const divTags = document.createElement("div");
-  divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
-
-  const detailsBtn = document.createElement("a");
-  detailsBtn.classList.add("tag", "button", "is-hoverable", "mr-2");
-  detailsBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-  detailsBtn.href = `/Elina/entertainment/movies/movie.html?id=${movieId}`;
-
-  const addMovieBtn = document.createElement("button");
-  addMovieBtn.classList.add("tag", "button", "is-hoverable", "is-link", "mr-2");
-  addMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
-
-  const suppMovieBtn = document.createElement("button");
-  suppMovieBtn.classList.add("tag", "button", "is-hoverable", "is-danger", "is-light", "mr-2");
-  suppMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
-
-  const toseeMovieBtn = document.createElement("button");
-  toseeMovieBtn.classList.add("tag", "button", "is-hoverable", "is-light", "is-success", "mr-2");
-  toseeMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-
-  const seenMovieBtn = document.createElement("button");
-  seenMovieBtn.classList.add("tag", "button", "is-hoverable", "is-success", "mr-2");
-  seenMovieBtn.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
-
-  // Gestion des tags en fonction du statut perso du film
-  switch (movieSeen) {
-    case null:
-      divTags.appendChild(addMovieBtn);
-      break;
-  
-    case false:
-      divTags.append(toseeMovieBtn, suppMovieBtn);
-      break;
-
-    case true:
-      divTags.appendChild(seenMovieBtn);
-      break;
-
-    default:
-      divTags.appendChild(addMovieBtn);
-      break;
-  }
-
-  divTags.appendChild(detailsBtn);
-  cardContent.append(pTitle, pSubtitle, divTags);
-  card.appendChild(cardContent);
-  column.appendChild(card);
-
-  const cardFigure = document.createElement("div");
-  cardFigure.classList.add("card-image");
-  
-  const figurePoster = document.createElement("figure");
-  figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
-  
-  const imgPoster = document.createElement("img");
-  imgPoster.src = moviePoster;
-  imgPoster.alt = movie.title;
-  
-  figurePoster.appendChild(imgPoster);
-  cardFigure.appendChild(figurePoster);
-  
-  card.appendChild(cardFigure);
-
-  addMovieBtn.addEventListener("click", async () => {
-    addMovie("adding", movie.id, addMovieBtn, divTags, toseeMovieBtn, suppMovieBtn, detailsBtn);
-  })
-
-  suppMovieBtn.addEventListener("click", async () => {
-    suppMovie("adding", movie.id, suppMovieBtn, divTags, addMovieBtn, detailsBtn);
-  })
-
-  toseeMovieBtn.addEventListener("click", async () => {
-    toseeMovie("adding", movie.id, toseeMovieBtn, divTags, seenMovieBtn, suppMovieBtn, detailsBtn);
-  });
-  
-  seenMovieBtn.addEventListener("click", async () => {
-    seenMovie("adding", movie.id, seenMovieBtn, divTags, toseeMovieBtn, suppMovieBtn, detailsBtn);
-  });
-
-  return column;
-}
 
 export function sortFilterMovies() {
   const btnSort = document.getElementById("button-content-sort");
