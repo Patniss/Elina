@@ -6,12 +6,14 @@ export function renderPaginationAll() {
     const container = document.getElementById("pagination-list");
 
     renderPagination({
-        container,
+        containerId: container,
         currentPage: moviesStore.currentPage,
         totalItems: moviesStore.movies.length,
         pageSize: moviesStore.pageSize,
-        onPageChange: (page) => {
-            moviesStore.currentPage = page;
+        setCurrentPage: (page) => {
+            moviesStore.setCurrentPage(page);
+        },
+        onPageChange: () => {
             renderAllMovies();
         }
     })

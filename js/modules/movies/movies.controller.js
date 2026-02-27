@@ -6,7 +6,7 @@ import { renderPaginationAll } from "/Elina/js/modules/movies/movies.layout.js";
 export async function initMovies() {
     moviesStore.subscribe(() => {
         renderAllMovies();
-        renderPaginationAll(moviesStore.movies);
+        renderPaginationAll();
     })
 }
 
