@@ -41,7 +41,7 @@
                 </button>
               </div>
 
-              <div class="dropdown-menu" id="dropdown-menu-filter" role="menu">
+              <div class="dropdown-menu is-hidden" id="dropdown-menu-filter" role="menu">
                 <div class="dropdown-content" id="dropdown-content-filter">
                   <a href="#" class="dropdown-item" id="filter-reint">Réinitialiser</a>
                   <a href="#" class="dropdown-item" id="filter-action">Action</a>
@@ -77,7 +77,7 @@
                   <span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span><span class="content">Trier</span>
                 </button>
               </div>
-              <div class="dropdown-menu" id="dropdown-menu-sort" role="menu">
+              <div class="dropdown-menu is-hidden" id="dropdown-menu-sort" role="menu">
                 <div class="dropdown-content" id="dropdown-content-sort">
                   <a href="#" class="dropdown-item" id="sort-az">
                     <span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span>
@@ -126,8 +126,9 @@
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-  import { initMovies } from "/Elina/js/modules/movies/movies.controller.js";
+  import { initMovies, refreshMovies } from "/Elina/js/modules/movies/movies.controller.js";
   initMovies();
+  refreshMovies();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
