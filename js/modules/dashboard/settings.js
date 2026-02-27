@@ -7,6 +7,7 @@ export async function setSettings() {
     if (!session) return;
     
     const settingsForm = document.getElementById("settings-form");
+    const currentPseudo = document.getElementById("current-pseudo");
     
     const settingPseudo = document.getElementById("setting-pseudo");
     const saveSettings = document.getElementById("save-settings");
