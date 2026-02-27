@@ -26,6 +26,10 @@ export async function setSettings() {
     const toggleField = [ "movies", "shows", "dramas", "animes", "books",
         "recipes", "cleaning", "budget", "todo", "moodboard",
         "pro", "travel", "crochet", "candles", "aromazone" ];
+
+    toggleField.forEach(field => {
+        document.getElementById(`setting-${field}`).checked = session[field];
+    });
     
     currentPseudo.textContent = session.pseudo;
 
@@ -94,4 +98,6 @@ export async function setSettings() {
         };
         
     })
+
+    console.log(session);
 }
