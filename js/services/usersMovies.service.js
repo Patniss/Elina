@@ -1,4 +1,4 @@
-import { getUserId } from "/Elina/js/services/profiles.js";
+import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { supabase } from "/Elina/js/core/supabase.js";
 
 export async function getUserMovie(userId, movieId) {
