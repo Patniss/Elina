@@ -32,7 +32,7 @@ export async function setSettings() {
     });
     
     currentPseudo.textContent = session.pseudo;
-    settingColor.textContent = session.theme_color;
+    settingColor.value = session.theme_color;
     settingButtonColor.value = session.button_text;
     settingBackgroundTheme.value = session.background;
 
