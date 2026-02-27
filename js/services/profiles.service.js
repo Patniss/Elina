@@ -23,17 +23,24 @@ export async function loadProfile() {
     return;
   }
 
-  if (document.getElementById("welcome")) {
-    const pseudo = data?.pseudo || "Utilisateur";
-    document.getElementById("welcome").textContent = pseudo;
-  }
-
   return data;
 }
 
 export async function getUserId() {
-    const session = await loadProfile();
-    const userId = session.id;
+  const session = await loadProfile();
+  const userId = session.id;
+  
+  return userId;
+}
 
-    return userId;
+export async function updateProfile(id, data) {
+  const { data, error } = await supabase
+    .from("profiles")
+    .update(data)
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
 }
