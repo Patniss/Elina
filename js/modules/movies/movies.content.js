@@ -1,5 +1,5 @@
 import { getMovie } from "/Elina/js/services/movies.service.js";
-import { getUserMovie } from "/Elina/js/services/usersMovies.service.js";
+import { getUserMovie, updateDateSeenMovie } from "/Elina/js/services/usersMovies.service.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { renderGenres } from "/Elina/js/ui/render.js";
 import { formatMovieDuration, formatFrenchTypography, formatCompleteDate } from "/Elina/js/utils/format.js";
@@ -22,6 +22,7 @@ export async function movieContent(uuid) {
 
     const divSeenMovie = document.getElementById("div-seen");
     const dateSeenMovie = document.getElementById("movie-date-seen");
+    const inputChangeDate = document.getElementById("input-change-date-seen");
     const movieFav = document.getElementById("movie-fav");
     const movieUnlike = document.getElementById("movie-unlike");
 
@@ -57,10 +58,6 @@ export async function movieContent(uuid) {
         divSeenMovie.classList.add("is-hidden");
     });
 
-    dateSeenMovie.addEventListener("click", async() => {
-        console.log("Fonction pour changer la date de visionnage");
-    });
-
     movieFav.addEventListener("click", async () => {
         console.log("Fonction pour mettre / retirer des favoris");
     })
@@ -71,9 +68,7 @@ export async function movieContent(uuid) {
 
     if (statut === true) {
         divSeenMovie.classList.remove("is-hidden");
-        if (dateSeen) {
-            dateSeenMovie.textContent = formatCompleteDate(dateSeen);
-        };
+        dateSeenMovie.textContent = dateSeen? formatCompleteDate(dateSeen) : "Ajouter une date de visionnage";
         if (fav === "fav") {
             movieUnlike.classList.add("is-hidden");
             movieFav.classList.add("has-text-primary");
@@ -82,4 +77,11 @@ export async function movieContent(uuid) {
             movieUnlike.classList.add("has-text-primary");
         }
     }
+
+    inputChangeDate.addEventListener("click", async() => {
+        if (!inputChangeDate.value) return;
+        updateDateSeenMovie(inputChangeDate.value);
+        dateSeenMovie.textContent = formatCompleteDate(inputChangeDate);
+    });
+
 }

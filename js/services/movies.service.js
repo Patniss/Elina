@@ -1,5 +1,6 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { handleButtonState } from "/Elina/js/ui/button.js";
+import { getUserId } from "/Elina/js/services/profiles.service.js";
 
 export async function searchMovies(query) {
     const { data, error } = await supabase

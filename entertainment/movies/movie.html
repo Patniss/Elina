@@ -28,7 +28,7 @@
 
                 <div class="columns is-four-fifths box">
                     <div style="position: absolute; right: 5%" id="div-seen" class="is-hidden">
-                        <a href="#" id="movie-date-seen" class="tag is-medium">3 septembre 2003</a>
+                        <a href="#" id="movie-date-seen" class="js-modal-trigger tag is-medium" data-target="change-date-seen"></a>
                         <a id="movie-fav" class="tag is-large" style="background-color: transparent;"><i class="fa-solid fa-heart"></i></a>
                         <a id="movie-unlike" class="tag is-large" style="background-color: transparent;"><i class="fa-solid fa-heart-crack"></i></a>
                     </div>
@@ -66,6 +66,15 @@
                         <button type="button" id="btn-add-own-poster" class="button is-primary">Ajouter</button>
                     </div>
                 </p>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+
+        <div id="change-date-seen" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <h5 class="title">Changer la date de visionnage</h5>
+                <input class="input" type="text" id="input-change-date-seen" />
             </div>
             <button class="modal-close is-large" aria-label="close"></button>
         </div>
