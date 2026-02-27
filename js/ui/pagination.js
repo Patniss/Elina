@@ -2,6 +2,8 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
     const pagination = document.getElementById(containerId);
     if (!pagination) return;
 
+    const delta = 2;
+
     pagination.innerHTML = "";
 
     const totalPages = Math.ceil(totalItems / pageSize);

@@ -1,3 +1,5 @@
+import { renderPagination } from "/Elina/js/ui/pagination.js";
+
 export function renderGenres(container, genresString) { // Création des tags pour les genres
     container.innerHTML = '';
     const genres = genresString.trim().split(" ; ");
@@ -7,4 +9,21 @@ export function renderGenres(container, genresString) { // Création des tags po
         spanGenre.textContent = genre;
         container.appendChild(spanGenre);
     })
+}
+
+export async function render(containerStore, store, list, element, containerPagination, createFunction) {
+    containerStore.innerHTML = "";
+
+    const start = (store.currentPage[list] - 1) * store.pageSize;
+    const end = start + store.pageSize;
+
+    const page = store[element][list].slice(start, end);
+
+    for (const el of page) {
+        containerStore.appendChild(await createFunction(el));
+    }
+
+    const setPageWrapper = (page) => store.setCurrentPage(list, page);
+
+    renderPagination(containerPagination, store.currentPage[list], store[element][list].length, store.pageSize, setPageWrapper, () => (containerStore, store, list, element, containerPagination, createFunction));
 }

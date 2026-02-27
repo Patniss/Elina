@@ -1,4 +1,4 @@
-import { moviesStore } from "/Elina/js/modules/movies/movies.store.js";
+import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { loadAllMovies } from "/Elina/js/modules/movies/movies.load.js";
 import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { renderPaginationAll } from "/Elina/js/modules/movies/movies.layout.js";
