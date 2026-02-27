@@ -26,5 +26,10 @@ export async function render(containerStore, store, list, element, containerPagi
 
     const setPageWrapper = (page) => store.setCurrentPage(list, page);
 
-    renderPagination(containerPagination, store.currentPage[list], store[element][list].length, store.pageSize, setPageWrapper, () => (containerStore, store, list, element, containerPagination, createFunction));
+    renderPagination(
+        containerPagination,
+        store.currentPage[list],
+        pageArray.length,
+        store.pageSize,
+        setPageWrapper, () => (containerStore, store, list, element, containerPagination, createFunction));
 }
