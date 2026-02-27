@@ -33,10 +33,10 @@ export async function getUserId() {
   return userId;
 }
 
-export async function updateProfile(id, data) {
+export async function updateProfile(id, profileData) {
   const { data, error } = await supabase
     .from("profiles")
-    .update(data)
+    .update(profileData)
     .eq("id", id)
     .select()
     .single();
