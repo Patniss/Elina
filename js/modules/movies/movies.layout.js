@@ -1,5 +1,5 @@
 import { renderPagination } from "/Elina/js/ui/pagination.js";
-import { renderMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { moviesStore } from "/Elina/js/modules/movies/movies.store.js";
 
 export function sortMovies(query, field, asc) {
@@ -41,6 +41,6 @@ export function renderPaginationAll(totalItems) {
     totalItems: totalItems,
     pageSize: moviesStore.pageSize,
     setCurrentPage: (page) => currentPageAll = page,
-    onPageChange: renderMovies
+    onPageChange: renderAllMovies
   });
 }

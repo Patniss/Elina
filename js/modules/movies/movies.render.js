@@ -17,16 +17,3 @@ export async function renderAllMovies() {
 
     renderPaginationAll(moviesStore.movies.length);
 }
-
-// Ton render actuel doit :
-// Recevoir les films
-// Recevoir currentPage
-// Recevoir pageSize
-// Slice
-// Créer les cards
-// Appeler renderPagination()
-// Il ne doit :
-// ❌ pas modifier le store
-// ❌ pas appeler load
-// ❌ pas gérer tri ou filtre
-// Il est purement visuel.
