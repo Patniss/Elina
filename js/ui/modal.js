@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  $trigger.addEventListener('click', (event) => {
-    event.preventDefault(); // <-- empêche le # de faire remonter la page
-    // openModal($target);
-  });
-  
   // Functions to open and close a modal
   function openModal($el) {
     $el.classList.add('is-active');

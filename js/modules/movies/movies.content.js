@@ -80,7 +80,7 @@ export async function movieContent(uuid) {
 
     inputChangeDate.addEventListener("click", async() => {
         if (!inputChangeDate.value) return;
-        updateDateSeenMovie(inputChangeDate.value);
+        updateDateSeenMovie(uuid, inputChangeDate.value);
         dateSeenMovie.textContent = formatCompleteDate(inputChangeDate);
     });
 

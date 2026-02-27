@@ -1,3 +1,4 @@
+import { getUserId } from "/Elina/js/services/profiles.js";
 import { supabase } from "/Elina/js/core/supabase.js";
 
 export async function getUserMovie(userId, movieId) {
@@ -51,6 +52,22 @@ export async function updateSeenUserMovie(userId, movieId, seenState) {
     const { data, error } = await supabase
         .from("users_movies")
         .update({seen: seenState})
+        .eq("user_id", userId)
+        .eq("movie_id", movieId)
+        .single();
+
+    if (error) {
+        console.log(error);
+        return;
+    }
+}
+
+export async function updateDateSeenMovie(movieId, dateSeen) {
+    const userId = await getUserId()
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .update({date_seen: dateSeen})
         .eq("user_id", userId)
         .eq("movie_id", movieId)
         .single();
