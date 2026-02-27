@@ -5,9 +5,9 @@ import { moviesStore } from "/Elina/js/data/movies.store.js";
 export async function renderAllMovies() {
     const container = document.getElementById("list-all-movies");
     const pagination = document.getElementById("pagination-list");
-    console.log("ContainerStore :", container);
-    console.log("Store : ", moviesStore);
-    console.log("Store.movies", moviesStore.movies);
-    console.log("Pagination :", pagination)
     render(container, moviesStore, "all", "movies", pagination, createMovieCard)
+
+    console.log("moviesStore.movies.all:", store.movies.all);
+    console.log("pageArray:", pageArray);
+    console.log("page:", page);
 }
