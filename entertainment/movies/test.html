@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>엘리나 Elina - Films</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+
+<main>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div id="nav-container"></div>
+      
+      <h1 class="title">🎬 Filmothèque</h1>
+      
+      <div class="box">
+        
+        <h2 class="subtitle">Tous les films</h2>
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input type="text" id="movie-search" placeholder="Chercher un film…" class="input mb-4"/>
+            <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+          </p>
+          <div class="buttons are-small">
+
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-filter" id="button-content-filter">
+                  <span class="icon"><i class="fa-solid fa-filter"></i></span><span class="content">Filtrer par genre</span>
+                </button>
+              </div>
+
+              <div class="dropdown-menu" id="dropdown-menu-filter" role="menu">
+                <div class="dropdown-content" id="dropdown-content-filter">
+                  <a href="#" class="dropdown-item" id="filter-reint">Réinitialiser</a>
+                  <a href="#" class="dropdown-item" id="filter-action">Action</a>
+                  <a href="#" class="dropdown-item" id="filter-animation">Animation</a>
+                  <a href="#" class="dropdown-item" id="filter-artsmartiaux">Arts martiaux</a>
+                  <a href="#" class="dropdown-item" id="filter-aventure">Aventure</a>
+                  <a href="#" class="dropdown-item" id="filter-biopic">Biopic</a>
+                  <a href="#" class="dropdown-item" id="filter-comedie">Comédie</a>
+                  <a href="#" class="dropdown-item" id="filter-commusicale">Comédie musicale</a>
+                  <a href="#" class="dropdown-item" id="filter-crime">Crime</a>
+                  <a href="#" class="dropdown-item" id="filter-drame">Drame</a>
+                  <a href="#" class="dropdown-item" id="filter-espionnage">Espionnage</a>
+                  <a href="#" class="dropdown-item" id="filter-fantastique">Fantastique</a>
+                  <a href="#" class="dropdown-item" id="filter-famille">Famille</a>
+                  <a href="#" class="dropdown-item" id="filter-guerre">Guerre</a>
+                  <a href="#" class="dropdown-item" id="filter-historique">Historique</a>
+                  <a href="#" class="dropdown-item" id="filter-horreur">Horreur</a>
+                  <a href="#" class="dropdown-item" id="filter-musique">Musique</a>
+                  <a href="#" class="dropdown-item" id="filter-mystere">Mystère</a>
+                  <a href="#" class="dropdown-item" id="filter-policier">Policier</a>
+                  <a href="#" class="dropdown-item" id="filter-romance">Romance</a>
+                  <a href="#" class="dropdown-item" id="filter-sf">Science-fiction</a>
+                  <a href="#" class="dropdown-item" id="filter-suspense">Suspense</a>
+                  <a href="#" class="dropdown-item" id="filter-thriller">Thriller</a>
+                  <a href="#" class="dropdown-item" id="filter-western">Western</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-sort" id="button-content-sort">
+                  <span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span><span class="content">Trier</span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu-sort" role="menu">
+                <div class="dropdown-content" id="dropdown-content-sort">
+                  <a href="#" class="dropdown-item" id="sort-az">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span>
+                    <span>Trier par titre A-Z</span>
+                  </a>
+                  <a href="#" class="dropdown-item" id="sort-za">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-z-a"></i></span>
+                    <span>Trier par titre Z-A</span>
+                  </a>
+                  <a href="#" class="dropdown-item" id="sort-91">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-9-1"></i>
+                    </span>Trier par sortie (plus récent au moins récent)</span>
+                  </a>
+                  <a href="#" class="dropdown-item" style="display: none;" id="sort-19">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-1-9"></i>
+                    </span>Trier par sortie (moins récent au plus récent)</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <p id="filter-display" class="is-italic"></p>
+
+          </div>
+        </div>
+        
+        <div class="columns is-multiline" id="list-all-movies"></div>
+        
+      </div>
+
+      <nav class="pagination" role="navigation" aria-label="navigation" id="pagination">
+        <div id="pagination-list"></div>
+      </nav>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/core/nav.js";
+  loadNav();
+  import { initMovies } from "/Elina/js/modules/movies/movies.controller.js";
+  initMovies();
+</script>
+
+<script type="module" src="/Elina/js/core/guard.js"></script>
+
+</body>
+</html>
