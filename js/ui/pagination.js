@@ -1,10 +1,13 @@
-export function renderPagination({container, currentPage, totalItems, pageSize, onPageChange, delta = 2}) {
-    container.innerHTML = "";
+export function renderPagination(containerId, currentPage, totalItems, pageSize, setCurrentPage, onPageChange) {
+    const pagination = document.getElementById(containerId);
+    if (!pagination) return;
+
+    pagination.innerHTML = "";
 
     const totalPages = Math.ceil(totalItems / pageSize);
     if (totalPages <= 1) return;
 
-    function createPageButton(page, text, isCurrent = false) {
+    function createPageButton(page, text = page, isCurrent = false) {
         const li = document.createElement("li");
         const btn = document.createElement("a");
 
@@ -16,7 +19,8 @@ export function renderPagination({container, currentPage, totalItems, pageSize, 
 
         btn.addEventListener("click", (e) => {
             e.preventDefault();
-            onPageChange(page);
+            setCurrentPage(page);
+            onPageChange();
         });
 
         li.appendChild(btn);
@@ -34,10 +38,11 @@ export function renderPagination({container, currentPage, totalItems, pageSize, 
     } else {
         prevBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            onPageChange(currentPage - 1);
+            setCurrentPage(currentPage - 1);
+            onPageChange();
         });
     }
-    container.appendChild(prevBtn);
+    pagination.appendChild(prevBtn);
 
     // --- Boutons pages
     const pageList = document.createElement("ul");
@@ -71,7 +76,7 @@ export function renderPagination({container, currentPage, totalItems, pageSize, 
         pageList.appendChild(createPageButton(totalPages));
     }
 
-    container.appendChild(pageList);
+    pagination.appendChild(pageList);
 
     // --- Bouton suivant
     const nextBtn = document.createElement("a");
@@ -84,9 +89,10 @@ export function renderPagination({container, currentPage, totalItems, pageSize, 
     } else {
         nextBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            onPageChange(currentPage + 1);
+            setCurrentPage(currentPage + 1);
+            onPageChange();
         });
     }
 
-    container.appendChild(nextBtn);
+    pagination.appendChild(nextBtn);
 }
