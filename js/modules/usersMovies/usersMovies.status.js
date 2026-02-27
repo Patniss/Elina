@@ -18,29 +18,3 @@ export async function mapMoviesWithStatus(data) {
 
     return moviesWithStatus;
 }
-
-export async function updateDateSeenMovie(uuid, date_seen) {
-    const userId = await getUserId();
-
-    const { data, error } = await supabase
-        .from("users_movies")
-        .update({date_seen: date_seen})
-        .eq("user_id", userId)
-        .eq("movie_id", uuid)
-        .single();
-    
-    if (error) throw error;
-}
-
-export async function updateFavMovie(uuid, fav) {
-    const userId = await getUserId();
-    
-    const { data, error } = await supabase
-        .from("users_movies")
-        .update({fav: fav})
-        .eq("user_id", userId)
-        .eq("movie_id", uuid)
-        .single();
-    
-    if (error) throw error;
-}

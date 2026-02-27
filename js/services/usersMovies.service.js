@@ -62,18 +62,28 @@ export async function updateSeenUserMovie(userId, movieId, seenState) {
     }
 }
 
-export async function updateDateSeenMovie(movieId, dateSeen) {
-    const userId = await getUserId()
+export async function updateDateSeenMovie(uuid, date_seen) {
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_movies")
-        .update({date_seen: dateSeen})
+        .update({date_seen: date_seen})
         .eq("user_id", userId)
-        .eq("movie_id", movieId)
+        .eq("movie_id", uuid)
         .single();
+    
+    if (error) throw error;
+}
 
-    if (error) {
-        console.log(error);
-        return;
-    }
+export async function updateFavMovie(uuid, fav) {
+    const userId = await getUserId();
+    
+    const { data, error } = await supabase
+        .from("users_movies")
+        .update({fav: fav})
+        .eq("user_id", userId)
+        .eq("movie_id", uuid)
+        .single();
+    
+    if (error) throw error;
 }

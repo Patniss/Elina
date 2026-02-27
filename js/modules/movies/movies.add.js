@@ -1,5 +1,4 @@
 // 1- IMPORTATIONS DES JS NÉCESSAIRES :
-import { supabase } from "/Elina/js/core/supabase.js"; // Connexion à la base de données
 import { handleButtonState } from "/Elina/js/ui/button.js"; // Gestion de l'affichage d'un bouton au clic
 import { initGenres } from "/Elina/js/ui/select.js"; // Ajouter les genres dans un select
 import { searchAllMovies } from "/Elina/js/ui/search.js";
