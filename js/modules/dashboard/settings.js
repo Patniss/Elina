@@ -32,6 +32,9 @@ export async function setSettings() {
     });
     
     currentPseudo.textContent = session.pseudo;
+    settingColor.textContent = session.theme_color;
+    settingButtonColor.value = session.button_text;
+    settingBackgroundTheme.value = session.background;
 
     settingColor.addEventListener("change", () => {
         saveSettings.style.backgroundColor = settingColor.value;
@@ -98,6 +101,4 @@ export async function setSettings() {
         };
         
     })
-
-    console.log(session);
 }
