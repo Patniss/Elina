@@ -33,3 +33,15 @@ export function calculateAge(startDate, endDate = new Date()) {
 
     return age;
 }
+
+export function formatCompleteDate(date) {
+    if (!date) return;
+
+    const parsedDate = new Date(date);
+
+    return parsedDate.toLocaleDateString("fr-FR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+    });
+}
