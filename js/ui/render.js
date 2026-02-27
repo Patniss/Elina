@@ -17,7 +17,8 @@ export async function render(containerStore, store, list, element, containerPagi
     const start = (store.currentPage[list] - 1) * store.pageSize;
     const end = start + store.pageSize;
 
-    const page = store[element][list].slice(start, end);
+    const pageArray = store[element]?.[list] || [];
+    const page = pageArray.slice(start, end);
 
     for (const el of page) {
         containerStore.appendChild(await createFunction(el));
