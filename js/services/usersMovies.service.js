@@ -17,8 +17,9 @@ export async function getUserMovie(userId, movieId) {
     return data;
 }
 
-export async function addUserMovie(userId, movieId) {
-    
+export async function addUserMovie(movieId) {
+    const userId = await getUserId();
+
     const { data, error } = await supabase
         .from("users_movies")
         .insert([{
@@ -34,7 +35,9 @@ export async function addUserMovie(userId, movieId) {
     }
 }
 
-export async function removeUserMovie(userId, movieId) {
+export async function removeUserMovie(movieId) {
+    const userId = await getUserId();
+
     const { data, error } = await supabase
         .from("users_movies")
         .delete()
@@ -48,7 +51,9 @@ export async function removeUserMovie(userId, movieId) {
     }
 }
 
-export async function updateSeenUserMovie(userId, movieId, seenState) {
+export async function updateSeenUserMovie(movieId, seenState) {
+    const userId = await getUserId();
+    
     const { data, error } = await supabase
         .from("users_movies")
         .update({seen: seenState})
