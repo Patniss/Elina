@@ -1,5 +1,5 @@
 import { getMovie } from "/Elina/js/services/movies.service.js";
-import { getUserMovie, updateDateSeenMovie } from "/Elina/js/services/usersMovies.service.js";
+import { getUserMovie, updateDateSeenMovie, updateFavMovie } from "/Elina/js/services/usersMovies.service.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { renderGenres } from "/Elina/js/ui/render.js";
 import { formatMovieDuration, formatFrenchTypography, formatCompleteDate } from "/Elina/js/utils/format.js";
@@ -23,6 +23,7 @@ export async function movieContent(uuid) {
     const divSeenMovie = document.getElementById("div-seen");
     const dateSeenMovie = document.getElementById("movie-date-seen");
     const inputChangeDate = document.getElementById("input-change-date-seen");
+    const btnChangeDate = document.getElementById("button-change-date-seen");
     const movieFav = document.getElementById("movie-fav");
     const movieUnlike = document.getElementById("movie-unlike");
 
@@ -59,11 +60,27 @@ export async function movieContent(uuid) {
     });
 
     movieFav.addEventListener("click", async () => {
-        console.log("Fonction pour mettre / retirer des favoris");
+        if (fav === "fav") {
+            updateFavMovie(uuid, "fav");
+            movieUnlike.classList.add("is-hidden");
+            movieFav.classList.add("has-text-primary");
+        } else {
+            updateFavMovie(uuid, null);
+            movieUnlike.classList.remove("is-hidden");
+            movieFav.classList.remove("has-text-primary");
+        }
     })
 
     movieUnlike.addEventListener("click", async () => {
-        console.log("Fonction pour mettre / retier la mention je n'aime pas");
+        if (fav === "unlike") {
+            updateFavMovie(uuid, "unlike");
+            movieFav.classList.add("is-hidden");
+            movieUnlike.classList.add("has-text-primary");
+        } else {
+            updateFavMovie(uuid, null);
+            movieFav.classList.remove("is-hidden");
+            movieUnlike.classList.remove("has-text-primary");
+        }
     })
 
     if (statut === true) {
@@ -78,7 +95,7 @@ export async function movieContent(uuid) {
         }
     }
 
-    inputChangeDate.addEventListener("click", async() => {
+    btnChangeDate.addEventListener("click", async() => {
         if (!inputChangeDate.value) return;
         updateDateSeenMovie(uuid, inputChangeDate.value);
         dateSeenMovie.textContent = formatCompleteDate(inputChangeDate);
