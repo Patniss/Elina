@@ -16,7 +16,6 @@ export async function refreshMovies() {
         movies,
         currentPage: 1
     });
-    console.log(moviesStore.movies);
 }
 
 export async function changePage(page) {
