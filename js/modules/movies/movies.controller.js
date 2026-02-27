@@ -12,10 +12,8 @@ export async function initMovies() {
 
 export async function refreshMovies() {
     const movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-    moviesStore.setState({
-        movies,
-        currentPage: 1
-    });
+    moviesStore.setMovies("all", movies);
+    moviesStore.setCurrentPage("all", 1);
 }
 
 export async function changePage(page) {
