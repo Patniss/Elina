@@ -20,7 +20,7 @@ export async function movieContent(uuid) {
     const btnDeleteMovie = document.getElementById("button-supp-movie");
     const btnSeenMovie = document.getElementById("button-seen-movie");
 
-    const divSeenMovie = getElementById("div-seen");
+    const divSeenMovie = document.getElementById("div-seen");
     const dateSeenMovie = document.getElementById("movie-date-seen");
     const movieFav = document.getElementById("movie-fav");
     const movieUnlike = document.getElementById("movie-unlike");

@@ -36,11 +36,11 @@ export function filterMovies(query, genre) {
 
 export function renderPaginationAll(totalItems) {
   renderPagination({
-    containerId: "pagination_nb",
-    currentPage: moviesStore.currentPageAll,
+    containerId: "pagination-list",
+    currentPage: moviesStore.currentPage[all],
     totalItems: totalItems,
     pageSize: moviesStore.pageSize,
-    setCurrentPage: (page) => currentPageAll = page,
+    setCurrentPage: (page) => currentPage[all] = page,
     onPageChange: renderAllMovies
   });
 }
