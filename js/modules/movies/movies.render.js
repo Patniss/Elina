@@ -6,5 +6,4 @@ export async function renderAllMovies() {
     const container = document.getElementById("list-all-movies");
     const pagination = document.getElementById("pagination-list");
     render(container, moviesStore, "all", "movies", pagination, createMovieCard)
-    console.log("RENDER ALL MOVIES");
 }
