@@ -1,9 +1,12 @@
 import { render } from "/Elina/js/ui/render.js";
 import { createMovieCard } from "/Elina/js/modules/movies/movies.ui.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
+import { renderPaginationAll } from "/Elina/js/modules/movies/movies.pagination.js";
 
 export async function renderAllMovies() {
     const container = document.getElementById("list-all-movies");
     const pagination = document.getElementById("pagination-list");
-    render(container, moviesStore, "all", "movies", pagination, createMovieCard)
+    render(container, moviesStore, "all", "movies", createMovieCard);
+
+    renderPaginationAll();
 }

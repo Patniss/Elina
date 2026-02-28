@@ -92,3 +92,16 @@ export async function updateFavMovie(uuid, fav) {
     
     if (error) throw error;
 }
+
+export async function updateOwnPoster(uuid, link) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .update({own_poster: own_poster})
+        .eq("user_id", userId)
+        .eq("movie_id", uuid)
+        .single();
+    
+    if (error) throw error;
+}

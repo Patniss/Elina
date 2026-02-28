@@ -1,5 +1,5 @@
 import { getMovie } from "/Elina/js/services/movies.service.js";
-import { getUserMovie, updateDateSeenMovie, updateFavMovie } from "/Elina/js/services/usersMovies.service.js";
+import { getUserMovie, updateDateSeenMovie, updateFavMovie, updateOwnPoster} from "/Elina/js/services/usersMovies.service.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { renderGenres } from "/Elina/js/ui/render.js";
 import { formatMovieDuration, formatFrenchTypography, formatCompleteDate } from "/Elina/js/utils/format.js";
@@ -14,11 +14,14 @@ export async function movieContent(uuid) {
     const movieSynopsis = document.getElementById("movie-synopsis");
     const movieGenres = document.getElementById("movie-genres");
     const modalPoster = document.getElementById("modal-poster");
-    const addOwnPoster = document.getElementById("add-own-poster");
     const btnAddMovie = document.getElementById("button-add-movie");
     const btnToseeMovie = document.getElementById("button-tosee-movie");
     const btnDeleteMovie = document.getElementById("button-supp-movie");
     const btnSeenMovie = document.getElementById("button-seen-movie");
+
+    const addOwnPoster = document.getElementById("add-own-poster");
+    const btnChangeOwnPoster = document.getElementById("button-change-own-poster");
+    const btnNullOwnPoster = document.getElementById("button-null-own-poster");
 
     const divSeenMovie = document.getElementById("div-seen");
     const dateSeenMovie = document.getElementById("movie-date-seen");
@@ -113,13 +116,32 @@ export async function movieContent(uuid) {
         dateSeenMovie.textContent = "Ajouter une date";
         const modal = document.querySelector('.modal.is-active');
         if (modal) modal.classList.remove('is-active');
-    })
+    });
 
     addOwnPoster.addEventListener("click", () => {
         const modal = document.querySelector('.modal.is-active');
         if (modal) modal.classList.remove('is-active');
         const changeOwnPoster = document.getElementById("change-own-poster");
         changeOwnPoster.classList.add("is-active");
+    });
+
+    btnChangeOwnPoster.addEventListener("click", () => {
+        const inputChangeOwnPoster = document.getElementById("input-change-own-poster");
+        if (inputChangeOwnPoster) {
+            updateOwnPoster(uuid, inputChangeOwnPoster.value);
+            moviePoster.src = inputChangeOwnPoster.value;
+            modalPoster.src = inputChangeOwnPoster.value;
+            const modal = document.querySelector('.modal.is-active');
+            if (modal) modal.classList.remove('is-active');
+        }
+    });
+
+    btnNullOwnPoster.addEventListener("click", () => {
+        updateOwnPoster(uuid, null);
+        moviePoster.src = movie.poster;
+        modalPoster.src = movie.poster;
+        const modal = document.querySelector('.modal.is-active');
+        if (modal) modal.classList.remove('is-active');
     })
 
 }

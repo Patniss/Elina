@@ -1,5 +1,3 @@
-import { renderPagination } from "/Elina/js/ui/pagination.js";
-
 export function renderGenres(container, genresString) { // Création des tags pour les genres
     container.innerHTML = '';
     const genres = genresString.trim().split(" ; ");
@@ -11,7 +9,7 @@ export function renderGenres(container, genresString) { // Création des tags po
     })
 }
 
-export async function render(containerStore, store, list, element, containerPagination, createFunction) {
+export async function render(containerStore, store, list, element, createFunction) {
     containerStore.innerHTML = "";
 
     const start = (store.currentPage[list] - 1) * store.pageSize;
@@ -23,13 +21,4 @@ export async function render(containerStore, store, list, element, containerPagi
     for (const el of page) {
         containerStore.appendChild(await createFunction(el));
     }
-
-    const setPageWrapper = (page) => store.setCurrentPage(list, page);
-
-    renderPagination(
-        containerPagination,
-        store.currentPage[list],
-        pageArray.length,
-        store.pageSize,
-        setPageWrapper, () => render(containerStore, store, list, element, containerPagination, createFunction));
 }
