@@ -98,7 +98,7 @@ export async function updateOwnPoster(uuid, link) {
 
     const { data, error } = await supabase
         .from("users_movies")
-        .update({own_poster: own_poster})
+        .update({own_poster: link})
         .eq("user_id", userId)
         .eq("movie_id", uuid)
         .single();
