@@ -42,5 +42,11 @@ export let moviesStore = {
     setState(partialState) {
         Object.assign(this, partialState);
         this.notify();
+    },
+
+    setMoviesAndPage(list, movies, page) {
+        this.movies[list] = movies;
+        this.currentPage[list] = page;
+        this.notify();
     }
 };

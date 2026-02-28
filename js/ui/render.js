@@ -32,6 +32,4 @@ export async function render(containerStore, store, list, element, containerPagi
         pageArray.length,
         store.pageSize,
         setPageWrapper, () => render(containerStore, store, list, element, containerPagination, createFunction));
-    
-    console.log("pageArray length:", pageArray.length);
 }
