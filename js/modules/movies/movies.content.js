@@ -60,13 +60,17 @@ export async function movieContent(uuid) {
     });
 
     movieFav.addEventListener("click", async () => {
-        console.log("Bouton cliqué ! State = ", fav);
-        movieFav.classList.add("is-primary");
+        if (fav !== "fav") {
+            movieFav.classList.add("has-text-primary");
+            updateFavMovie(uuid, "fav");
+        }
     })
 
     movieUnlike.addEventListener("click", async () => {
-        console.log("Bouton cliqué ! State = ", fav);
-        movieUnlike.classList.add("is-primary");
+        if (fav !== "unlike") {
+            movieUnlike.classList.add("has-text-primary");
+            updateFavMovie(uuid, "unlike");
+        }
     })
 
     if (statut === true) {
