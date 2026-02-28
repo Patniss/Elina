@@ -63,7 +63,7 @@ export async function clickToseeMovieUser(button, uuid, mode, btnDelete, btnSeen
     }
 }
 
-export async function clickDeleteMovieUser(button, uuid, mode, btnAdd, btnDetails, div) {
+export async function clickDeleteMovieUser(button, uuid, mode, btnAdd, btnTosee, btnDetails, div) {
     button.addEventListener("click", () => {
         handleButtonState(button, "loading");
         try {
@@ -82,7 +82,7 @@ export async function clickDeleteMovieUser(button, uuid, mode, btnAdd, btnDetail
 
     switch (mode) {
         case "hidden":
-            button.classList.add("is-hidden");
+            [button, btnTosee].classList.add("is-hidden");
             btnAdd.classList.remove("is-hidden");
             break;
     
