@@ -33,7 +33,7 @@ export async function movieContent(uuid) {
     const poster = userMovie?.own_poster ?? movie.poster;
     const statut = userMovie ? userMovie.seen : null;
     const dateSeen = userMovie?.date_seen === "1900-01-01" ? null : userMovie?.date_seen ?? null;
-    const fav = userMovie?.fav ?? null;
+    let fav = userMovie?.fav ?? null;
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
@@ -61,15 +61,29 @@ export async function movieContent(uuid) {
 
     movieFav.addEventListener("click", async () => {
         if (fav !== "fav") {
-            movieFav.classList.add("has-text-primary");
             updateFavMovie(uuid, "fav");
+            movieFav.classList.add("has-text-primary");
+            movieUnlike.classList.add("is-hidden");
+            fav = "fav";
+        } else {
+            updateFavMovie(uuid, null);
+            movieFav.classList.remove("has-text-primary");
+            movieUnlike.classList.remove("is-hidden");
+            fav = null;
         }
     })
 
     movieUnlike.addEventListener("click", async () => {
         if (fav !== "unlike") {
-            movieUnlike.classList.add("has-text-primary");
             updateFavMovie(uuid, "unlike");
+            movieUnlike.classList.add("has-text-primary");
+            movieFav.classList.add("is-hidden");
+            fav = "unlike";
+        } else {
+            updateFavMovie(uuid, null);
+            movieUnlike.classList.remove("has-text-primary");
+            movieFav.classList.remove("is-hidden");
+            fav = null;
         }
     })
 

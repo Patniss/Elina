@@ -14,7 +14,7 @@ export async function initMovies() {
         renderPaginationAll();
     });
 
-    await refreshMovies;
+    await refreshMovies();
 }
 
 export async function changePage(page) {
