@@ -79,13 +79,23 @@ export async function movieContent(uuid) {
     movieUnlike.addEventListener("click", async () => {
         console.log("Bouton cliqué ! State = ", fav);
         if (fav === "unlike") {
-            updateFavMovie(uuid, "unlike");
+            try {
+                updateFavMovie(uuid, "unlike");
+            } catch (error) {
+                console.error(error);
+                return
+            }
             movieFav.classList.add("is-hidden");
             movieUnlike.classList.add("has-text-primary");
             fav = null;
             console.log("new fav : ", fav);
         } else {
-            updateFavMovie(uuid, null);
+            try {
+                updateFavMovie(uuid, null);
+            } catch (error) {
+                console.error(error);
+                return;
+            }
             movieFav.classList.remove("is-hidden");
             movieUnlike.classList.remove("has-text-primary");
             fav = "unlike";

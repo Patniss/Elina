@@ -97,4 +97,7 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
     }
 
     pagination.appendChild(nextBtn);
+
+
+    console.log({ currentPage, totalItems, pageSize });
 }
