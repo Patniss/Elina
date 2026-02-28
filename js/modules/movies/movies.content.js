@@ -33,7 +33,7 @@ export async function movieContent(uuid) {
     const poster = userMovie?.own_poster ?? movie.poster;
     const statut = userMovie ? userMovie.seen : null;
     const dateSeen = userMovie?.date_seen === "1900-01-01" ? null : userMovie?.date_seen ?? null;
-    let fav = userMovie?.fav ?? null;
+    const fav = userMovie?.fav ?? null;
 
     movieTitle.textContent = movie.title;
     movieYear.textContent = movie.year;
@@ -61,46 +61,10 @@ export async function movieContent(uuid) {
 
     movieFav.addEventListener("click", async () => {
         console.log("Bouton cliqué ! State = ", fav);
-        if (fav === "fav") {
-            updateFavMovie(uuid, "fav");
-            movieUnlike.classList.add("is-hidden");
-            movieFav.classList.add("has-text-primary");
-            fav = null;
-            console.log("new fav : ", fav);
-        } else {
-            updateFavMovie(uuid, null);
-            movieUnlike.classList.remove("is-hidden");
-            movieFav.classList.remove("has-text-primary");
-            fav = "fav";
-            console.log("new Fav : ", fav);
-        }
     })
 
     movieUnlike.addEventListener("click", async () => {
         console.log("Bouton cliqué ! State = ", fav);
-        if (fav === "unlike") {
-            try {
-                updateFavMovie(uuid, "unlike");
-            } catch (error) {
-                console.error(error);
-                return
-            }
-            movieFav.classList.add("is-hidden");
-            movieUnlike.classList.add("has-text-primary");
-            fav = null;
-            console.log("new fav : ", fav);
-        } else {
-            try {
-                updateFavMovie(uuid, null);
-            } catch (error) {
-                console.error(error);
-                return;
-            }
-            movieFav.classList.remove("is-hidden");
-            movieUnlike.classList.remove("has-text-primary");
-            fav = "unlike";
-            console.log("new fav : ", fav);
-        }
     })
 
     if (statut === true) {
