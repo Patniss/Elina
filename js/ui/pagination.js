@@ -2,6 +2,8 @@ export function renderPagination(container, currentPage, totalItems, pageSize, s
     if (!container) return;
     console.log("renderPagination continue");
 
+    console.log(container);
+
     const delta = 2;
 
     container.innerHTML = "";

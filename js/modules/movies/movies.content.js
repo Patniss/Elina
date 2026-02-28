@@ -4,7 +4,7 @@ import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { renderGenres } from "/Elina/js/ui/render.js";
 import { formatMovieDuration, formatFrenchTypography, formatCompleteDate } from "/Elina/js/utils/format.js";
 import { toggleBtnSeenStatut } from "/Elina/js/ui/dom.js";
-import { addMovieUser, deleteMovieUser, toseeMovieUser, seenMovieUser } from "/Elina/js/modules/movies/movies.actions.js";
+import { clickAddMovieUser, clickDeleteMovieUser, clickToseeMovieUser, clickSeenMovieUser } from "/Elina/js/modules/usersMovies/usersMovies.actions.js";
 
 export async function movieContent(uuid) {
     const movieTitle = document.getElementById("movie-title");
@@ -48,18 +48,14 @@ export async function movieContent(uuid) {
     renderGenres(movieGenres, movie.genres);
     toggleBtnSeenStatut(statut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
 
-    btnAddMovie.addEventListener("click", async () => {
-        addMovieUser(uuid, "hidden", btnAddMovie, [btnToseeMovie, btnDeleteMovie], [btnAddMovie, btnSeenMovie]);
-    });
+    clickAddMovieUser(btnAddMovie, uuid, "hidden", btnToseeMovie, btnDeleteMovie);
+    clickToseeMovieUser(btnToseeMovie, uuid, "hidden", btnDeleteMovie, btnSeenMovie);
     btnToseeMovie.addEventListener("click", async() => {
-        toseeMovieUser(uuid, "hidden", btnToseeMovie, [btnSeenMovie], [btnAddMovie, btnToseeMovie, btnDeleteMovie]);
         divSeenMovie.classList.remove("is-hidden");
     });
-    btnDeleteMovie.addEventListener("click", async () => {
-        deleteMovieUser(uuid, "hidden", btnDeleteMovie, [btnAddMovie], [btnDeleteMovie, btnToseeMovie, btnSeenMovie]);
-    });
+    clickDeleteMovieUser(btnDeleteMovie, uuid, "hidden", btnAddMovie);
+    clickSeenMovieUser(btnSeenMovie, uuid, "hidden", btnToseeMovie, btnDeleteMovie);
     btnSeenMovie.addEventListener("click", async() => {
-        seenMovieUser(uuid, "hidden", btnSeenMovie, [btnToseeMovie, btnDeleteMovie], [btnAddMovie, btnSeenMovie]);
         divSeenMovie.classList.add("is-hidden");
     });
 
