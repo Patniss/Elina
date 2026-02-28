@@ -104,11 +104,15 @@ export async function movieContent(uuid) {
         if (!inputChangeDate.value) return;
         updateDateSeenMovie(uuid, inputChangeDate.value);
         dateSeenMovie.textContent = formatCompleteDate(inputChangeDate);
+        const modal = document.querySelector('.modal.is-active');
+        if (modal) modal.classList.remove('is-active');
     });
 
     btnNullDate.addEventListener("click", () => {
         updateDateSeenMovie(uuid, null);
         dateSeenMovie.textContent = "Ajouter une date";
+        const modal = document.querySelector('.modal.is-active');
+        if (modal) modal.classList.remove('is-active');
     })
 
 }

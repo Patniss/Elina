@@ -1,12 +1,10 @@
-export function renderPagination(containerId, currentPage, totalItems, pageSize, setCurrentPage, onPageChange) {
-    console.log(document.getElementById("pagination-list"));
-    const pagination = document.getElementById(containerId);
-    if (!pagination) return;
+export function renderPagination(container, currentPage, totalItems, pageSize, setCurrentPage, onPageChange) {
+    if (!container) return;
     console.log("renderPagination continue");
 
     const delta = 2;
 
-    pagination.innerHTML = "";
+    container.innerHTML = "";
 
     const totalPages = Math.ceil(totalItems / pageSize);
     if (totalPages <= 1) return;
@@ -46,7 +44,7 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
             onPageChange();
         });
     }
-    pagination.appendChild(prevBtn);
+    container.appendChild(prevBtn);
 
     // --- Boutons pages
     const pageList = document.createElement("ul");
@@ -80,7 +78,7 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
         pageList.appendChild(createPageButton(totalPages));
     }
 
-    pagination.appendChild(pageList);
+    container.appendChild(pageList);
 
     // --- Bouton suivant
     const nextBtn = document.createElement("a");
@@ -98,8 +96,7 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
         });
     }
 
-    pagination.appendChild(nextBtn);
-
-
+    container.appendChild(nextBtn);
+    
     console.log({ currentPage, totalItems, pageSize });
 }

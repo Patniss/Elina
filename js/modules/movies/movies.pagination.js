@@ -3,9 +3,9 @@ import { renderPagination } from "/Elina/js/ui/pagination.js";
 import { renderAllMovies, renderToseeMovies, renderSeenMovies } from "/Elina/js/modules/movies/movies.render.js";
 
 export function renderPaginationAll() {
-    console.log(document.getElementById("pagination-list"));
+    const container = document.getElementById("pagination-list");
     renderPagination({
-        containerId: "pagination-list",
+        container: container,
         currentPage: moviesStore.currentPage.all,
         totalItems: moviesStore.movies.all.length,
         pageSize: moviesStore.pageSize,

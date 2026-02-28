@@ -59,13 +59,26 @@
             <div class="modal-background"></div>
             <div class="modal-content">
                 <p class="image is-2by3">
-                    <img src="/Elina/entertainment/movies/poster.png" alt="Affiche" id="modal-poster">
-                    <p><button class="button my-3" id="add-own-poster">Personnaliser ma couverture</button></p>
+                    <img src="/Elina/entertainment/movies/poster.png" alt="Affiche" id="modal-poster" data-target="change-own-poster">
+                    <p><button class="button my-3 js-modal-trigger" id="add-own-poster">Personnaliser ma couverture</button></p>
                     <div class="field my-3 is-hidden" id="div-add-own-poster">
                         <input type="text" id="src-add-own-poster" class="input mr-2" style="width:50%" />
                         <button type="button" id="btn-add-own-poster" class="button is-primary">Ajouter</button>
                     </div>
                 </p>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+
+        <div id="change-own-poster" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <h5 class="title">Personnaliser votre poster</h5>
+                <div class="is-flex">
+                    <input class="input mr-4" type="text" id="input-change-own-poster" />
+                    <button class="button" id="button-change-own-poster">Modifier</button>
+                </div>
+                <button class="tag mt-2" id="button-null-own-poster">Supprimer la personnalisation</button>
             </div>
             <button class="modal-close is-large" aria-label="close"></button>
         </div>
