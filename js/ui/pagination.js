@@ -43,8 +43,27 @@ export function renderPagination(container, currentPage, totalItems, pageSize, s
             setCurrentPage(currentPage - 1);
             onPageChange();
         });
-    }
+    };
+    
     container.appendChild(prevBtn);
+
+    // --- Bouton suivant
+    const nextBtn = document.createElement("a");
+    nextBtn.href = "#";
+    nextBtn.classList.add("pagination-next");
+    nextBtn.textContent = "Suivant";
+
+    if (currentPage === totalPages) {
+        nextBtn.classList.add("is-disabled");
+    } else {
+        nextBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            setCurrentPage(currentPage + 1);
+            onPageChange();
+        });
+    }
+
+    container.appendChild(nextBtn);
 
     // --- Boutons pages
     const pageList = document.createElement("ul");
@@ -79,24 +98,4 @@ export function renderPagination(container, currentPage, totalItems, pageSize, s
     }
 
     container.appendChild(pageList);
-
-    // --- Bouton suivant
-    const nextBtn = document.createElement("a");
-    nextBtn.href = "#";
-    nextBtn.classList.add("pagination-next");
-    nextBtn.textContent = "Suivant";
-
-    if (currentPage === totalPages) {
-        nextBtn.classList.add("is-disabled");
-    } else {
-        nextBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            setCurrentPage(currentPage + 1);
-            onPageChange();
-        });
-    }
-
-    container.appendChild(nextBtn);
-    
-    console.log({ currentPage, totalItems, pageSize });
 }

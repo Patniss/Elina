@@ -115,4 +115,11 @@ export async function movieContent(uuid) {
         if (modal) modal.classList.remove('is-active');
     })
 
+    addOwnPoster.addEventListener("click", () => {
+        const modal = document.querySelector('.modal.is-active');
+        if (modal) modal.classList.remove('is-active');
+        const changeOwnPoster = document.getElementById("change-own-poster");
+        changeOwnPoster.classList.add("is-active");
+    })
+
 }
