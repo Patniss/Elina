@@ -24,6 +24,7 @@ export async function movieContent(uuid) {
     const dateSeenMovie = document.getElementById("movie-date-seen");
     const inputChangeDate = document.getElementById("input-change-date-seen");
     const btnChangeDate = document.getElementById("button-change-date-seen");
+    const btnNullDate = document.getElementById("button-null-date-seen");
     const movieFav = document.getElementById("movie-fav");
     const movieUnlike = document.getElementById("movie-unlike");
 
@@ -89,7 +90,7 @@ export async function movieContent(uuid) {
 
     if (statut === true) {
         divSeenMovie.classList.remove("is-hidden");
-        dateSeenMovie.textContent = dateSeen? formatCompleteDate(dateSeen) : "Ajouter une date de visionnage";
+        dateSeenMovie.textContent = dateSeen? formatCompleteDate(dateSeen) : "Ajouter une date";
         if (fav === "fav") {
             movieUnlike.classList.add("is-hidden");
             movieFav.classList.add("has-text-primary");
@@ -104,5 +105,10 @@ export async function movieContent(uuid) {
         updateDateSeenMovie(uuid, inputChangeDate.value);
         dateSeenMovie.textContent = formatCompleteDate(inputChangeDate);
     });
+
+    btnNullDate.addEventListener("click", () => {
+        updateDateSeenMovie(uuid, null);
+        dateSeenMovie.textContent = "Ajouter une date";
+    })
 
 }

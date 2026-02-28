@@ -1,6 +1,6 @@
 import { renderPagination } from "/Elina/js/ui/pagination.js";
 import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { moviesStore } from "/Elina/js/modules/movies/movies.store.js";
+import { moviesStore } from "/Elina/js/data/movies.store.js";
 
 export function sortMovies(query, field, asc) {
     switch (field) {
