@@ -12,7 +12,6 @@ export async function initMovies() {
 
 export async function refreshMovies() {
     const movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-    moviesStore.setMovies("all", movies);
     moviesStore.setMoviesAndPage("all", movies, 1);
 }
 

@@ -60,6 +60,7 @@ export async function movieContent(uuid) {
     });
 
     movieFav.addEventListener("click", async () => {
+        console.log("Bouton cliqué ! State = ", fav);
         if (fav === "fav") {
             updateFavMovie(uuid, "fav");
             movieUnlike.classList.add("is-hidden");
@@ -72,6 +73,7 @@ export async function movieContent(uuid) {
     })
 
     movieUnlike.addEventListener("click", async () => {
+        console.log("Bouton cliqué ! State = ", fav);
         if (fav === "unlike") {
             updateFavMovie(uuid, "unlike");
             movieFav.classList.add("is-hidden");
