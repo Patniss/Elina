@@ -61,10 +61,12 @@ export async function movieContent(uuid) {
 
     movieFav.addEventListener("click", async () => {
         console.log("Bouton cliqué ! State = ", fav);
+        movieFav.classList.add("is-primary");
     })
 
     movieUnlike.addEventListener("click", async () => {
         console.log("Bouton cliqué ! State = ", fav);
+        movieUnlike.classList.add("is-primary");
     })
 
     if (statut === true) {

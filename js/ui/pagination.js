@@ -1,5 +1,5 @@
 export function renderPagination(containerId, currentPage, totalItems, pageSize, setCurrentPage, onPageChange) {
-    console.log("renderPagination appelée");
+    console.log(document.getElementById("pagination-list"));
     const pagination = document.getElementById(containerId);
     if (!pagination) return;
     console.log("renderPagination continue");
