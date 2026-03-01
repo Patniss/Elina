@@ -15,7 +15,8 @@ export function updateShowUI(status, buttons, container) {
     const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
 
     types.forEach(type => {
-        container.appendChild(buttons[type]);
+        const btn = buttons[type];
+        container.appendChild(btn);
     });
 }
 
