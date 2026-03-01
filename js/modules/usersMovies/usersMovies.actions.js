@@ -1,4 +1,4 @@
-import { addUserMovie, removeUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
+import { addUserMovie, deleteUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
 import { changeModeButton, handleButtonState } from "/Elina/js/ui/button.js";
 
 export async function clickAddMovieUser(button, uuid) {
@@ -48,7 +48,7 @@ export async function clickDeleteMovieUser(button, uuid) {
         button.addEventListener("click", async () => {
             handleButtonState(button, "loading");
             try {
-                await removeUserMovie(uuid);
+                await deleteUserMovie(uuid);
                 resolve();
             } catch (error) {
                 console.error(error);

@@ -1,5 +1,5 @@
 import { handleButtonTransition } from "/Elina/js/ui/button.js";
-import { addUserMovie, removeUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
+import { addUserMovie, deleteUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
 
 export async function addMovieUser(uuid, mode, button, showButtons = [], hideButtons = [], div) {
     try {
@@ -10,7 +10,7 @@ export async function addMovieUser(uuid, mode, button, showButtons = [], hideBut
 
 export async function deleteMovieUser(uuid, mode, button, showButtons = [], hideButtons = [], div) {
     try {
-        await removeUserMovie(uuid);
+        await deleteUserMovie(uuid);
     } catch (error) { throw error; }
     await handleButtonTransition(mode, button, "delete", showButtons = [], hideButtons = [], div);
 }

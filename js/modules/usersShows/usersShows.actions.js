@@ -1,4 +1,4 @@
-import { addUserShow, seeEpisodeShow, removeUserShow, pauseUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
+import { addUserShow, seeEpisodeShow, deleteUserShow, pauseUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
 import { changeModeButton, handleButtonState } from "/Elina/js/ui/button.js";
 
 export async function clickAddShowUser(button, uuid, mode, btnSeeEp, btnDelete, btnPause, btnCancel, btnDetails, div) {

@@ -18,7 +18,7 @@ export async function addUserShow(uuid) {
     }
 }
 
-export async function removeUserShow(uuid) {
+export async function deleteUserShow(uuid) {
     const userId = getUserId();
 
     const { data, error } = await supabase

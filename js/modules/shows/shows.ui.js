@@ -19,7 +19,6 @@ export function updateShowUI(status, buttons, container) {
     });
 }
 
-
 export async function createShowCard(s) {
     const show = normalizeShow(s);
 
