@@ -1,15 +1,6 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
 import { createButtons } from "/Elina/js/ui/button.js";
 
-export function updateShowUI(status, buttons, container) {
-    container.innerHTML = "";
-    const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
-
-    types.forEach(type => {
-        container.appendChild(buttons[type]);
-    });
-}
-
 export async function createShowCard(s) {
     const show = normalizeShow(s);
 
@@ -48,8 +39,6 @@ export async function createShowCard(s) {
     cardContent.append(figureLogo, pSubtitle, divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
-
-    updateShowUI(show.userState, buttons, divTags);
     
     return column;
 }
