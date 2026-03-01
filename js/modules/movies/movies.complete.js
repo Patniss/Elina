@@ -34,8 +34,7 @@ export async function completeMovie(uuid) {
 
     movieTitle.textContent = movie.title;
 
-    const people = getAllPeople();
-    console.log(people);
+    const people = await getAllPeople();
     selectDirectors.forEach(select => { initPeopleSelect(select, people) });
     selectScriptwriters.forEach(select => { initPeopleSelect(select, people) });
     selectDirectors.forEach(select => { initPeopleSelect2NewTag(select, "Réalisateur…") });
