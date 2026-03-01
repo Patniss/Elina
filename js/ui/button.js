@@ -45,6 +45,31 @@ export function changeModeButton(button, mode) {
             button.classList.add("is-success");
             button.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
             break;
+
+        case "seeEp":
+            button.classList.add("is-success", "is-light");
+            button.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>Épisode ?</span>`;
+            break
+        
+        case "pause":
+            button.classList.add("is-warning", "is-light");
+            button.innerHTML = `<span class="icon"><i class="fa-solid fa-pause"></i></span><span>Mettre en pause</span>`;
+            break;
+
+        case "takeAgain":
+            button.classList.add("is-link", "is-light");
+            button.innerHTML = `<span class="icon"><i class="fa-solid fa-play"></i></span><span>Reprendre</span>`;
+            break
+
+        case "cancel":
+            button.classList.add("is-danger", "is-light");
+            button.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Abandonner</span>`;
+            break;
+
+        case "retry":
+            button.classList.add("is-warning", "is-light");
+            button.innerHTML = `<span class="icon"><i class="fa-solid fa-play"></i></span><span>Réessayer</span>`;
+            break;
     }
 }
 

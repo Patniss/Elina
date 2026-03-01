@@ -39,5 +39,10 @@ export let showsStore = {
         this.shows[list] = shows;
         this.currentPage[list] = page;
         this.notify();
+    },
+
+    setCurrentPage(list, page) {
+        this.currentPage[list] = page;
+        this.notify();
     }
 }

@@ -1,6 +1,25 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
 import { createButtons } from "/Elina/js/ui/button.js";
 
+const BUTTONS_BY_STATUS = {
+    null: ["add", "details"],
+    "added": ["seeEp", "delete", "details"],
+    "started": ["seeEp", "pause", "details"],
+    "paused": ["takeAgain", "cancel", "details"],
+    "canceled": ["retry", "details"],
+    "finished": [ "details"]
+};
+
+export function updateShowUI(status, buttons, container) {
+    container.innerHTML = "";
+    const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
+
+    types.forEach(type => {
+        container.appendChild(buttons[type]);
+    });
+}
+
+
 export async function createShowCard(s) {
     const show = normalizeShow(s);
 
@@ -26,15 +45,22 @@ export async function createShowCard(s) {
     
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("subtitle", "is-6");
-    pSubtitle.textContent = `${show.seaons} saisons`;
+    pSubtitle.textContent = `${show.seasons} saisons`;
     
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
 
-    const buttons = createButtons(["details", "add"], 'entertainment/shows/show', show.id);
+    const buttons = createButtons(["details", "add", "seedEp", "pause", "takeAgain", "cancel", "retry"], 'entertainment/shows/show', show.id);
 
     const detailsButton = buttons.details;
     const addButton = buttons.add;
+    const seeEpButton = buttons.seeEp;
+    const pauseButton = buttons.pause;
+    const takeAgainButton = buttons.takeAgain;
+    const cancelButton = buttons.cancel;
+    const retryButton = buttons.retry;
+
+    updateShowUI(show.user_state, buttons, divTags);
 
     cardContent.append(figureLogo, pSubtitle, divTags);
     card.appendChild(cardContent);

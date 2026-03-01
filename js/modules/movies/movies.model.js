@@ -2,10 +2,10 @@ export function normalizeMovie(movie) {
     const source = movie.movies ?? movie;
 
     return {
-        movieId: source.id,
-        movieTitle: source.title,
-        movieYear: source.year,
-        moviePoster: movie.own_poster ?? source.poster,
-        movieSeen: movie.seen ?? null
+        id: source.id,
+        title: source.title,
+        year: source.year,
+        poster: movie.own_poster ?? source.poster,
+        seen: movie.seen ?? null
     }
 }

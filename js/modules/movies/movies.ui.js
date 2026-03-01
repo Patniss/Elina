@@ -17,8 +17,8 @@ export function updateMovieUI(status, buttons, container) {
     });
 }
 
-export async function createMovieCard(movie) {
-    const { movieId, movieTitle, movieYear, moviePoster, movieSeen } = normalizeMovie(movie);
+export async function createMovieCard(m) {
+    const movie = normalizeMovie(m);
 
     // Création de la carte
     const column = document.createElement("div");
@@ -32,11 +32,11 @@ export async function createMovieCard(movie) {
     
     const pTitle = document.createElement("p");
     pTitle.classList.add("title", "is-5");
-    pTitle.textContent = movieTitle;
+    pTitle.textContent = movie.title;
     
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("subtitle", "is-6");
-    pSubtitle.textContent = movieYear;
+    pSubtitle.textContent = movie.year;
     
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
@@ -49,7 +49,7 @@ export async function createMovieCard(movie) {
     const toseeButton = buttons.tosee;
     const seenButton = buttons.seen;
 
-    updateMovieUI(movieSeen, buttons, divTags);
+    updateMovieUI(movie.seen, buttons, divTags);
     
     cardContent.append(pTitle, pSubtitle, divTags);
     card.appendChild(cardContent);
@@ -62,18 +62,18 @@ export async function createMovieCard(movie) {
     figurePoster.classList.add("image", "poster-wrapper", "is-2by3");
     
     const imgPoster = document.createElement("img");
-    imgPoster.src = moviePoster;
-    imgPoster.alt = movieTitle;
+    imgPoster.src = movie.poster;
+    imgPoster.alt = movie.title;
     
     figurePoster.appendChild(imgPoster);
     cardFigure.appendChild(figurePoster);
     
     card.appendChild(cardFigure);
 
-    clickAddMovieUser(addButton, movieId, "adding", toseeButton, deleteButton, detailsButton, divTags);
-    clickToseeMovieUser(toseeButton, movieId, "adding", deleteButton, seenButton, detailsButton, divTags);
-    clickDeleteMovieUser(deleteButton, movieId, "adding", addButton, toseeButton, detailsButton, divTags);
-    clickSeenMovieUser(seenButton, movieId, "adding", toseeButton, deleteButton, detailsButton, divTags);
+    clickAddMovieUser(addButton, movie.id, "adding", toseeButton, deleteButton, detailsButton, divTags);
+    clickToseeMovieUser(toseeButton, movie.id, "adding", deleteButton, seenButton, detailsButton, divTags);
+    clickDeleteMovieUser(deleteButton, movie.id, "adding", addButton, toseeButton, detailsButton, divTags);
+    clickSeenMovieUser(seenButton, movie.id, "adding", toseeButton, deleteButton, detailsButton, divTags);
 
   return column;
 }
