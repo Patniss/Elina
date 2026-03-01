@@ -119,3 +119,21 @@ export function appendButtons(statut, div, ifNull = [], ifFalse = [], ifTrue = [
 
     buttonsToAppend.forEach(btn => div.appendChild(btn));
 }
+
+export async function handleButtonTransition(mode, button, typeButton, showButtons = [], hideButtons = [], div) {
+    handleButtonState(button, "loading");
+
+    if (mode === "adding") {
+        setTimeout(() => {
+            changeModeButton(button, typeButton);
+            div.innerHTML = "";
+            div.append(showButtons);
+        }, 500);
+    } else if (mode === "hidden") {
+        setTimeout(() => {
+            changeModeButton(button, typeButton);
+            hideButtons.classList.add("is-hidden");
+            showButtons.classList.remove("is-hidden");
+        }, 500);
+    }
+}
