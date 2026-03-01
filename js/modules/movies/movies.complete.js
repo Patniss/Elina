@@ -1,6 +1,6 @@
 import { getMovie } from "/Elina/js/services/movies.service.js";
 import { getAllPeople } from "/Elina/js/services/people.service.js";
-import { initPeopleSelect, initPeopleSelect2NewTag } from "/Elina/js/ui/select.js";
+import { initPeopleSelect, initPeopleSelect2NewTag, bindPeopleSelectEvents } from "/Elina/js/ui/select.js";
 
 export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
@@ -39,4 +39,60 @@ export async function completeMovie(uuid) {
     selectScriptwriters.forEach(select => { initPeopleSelect(select, people) });
     selectDirectors.forEach(select => { initPeopleSelect2NewTag(select, "Réalisateur…") });
     selectScriptwriters.forEach(select => { initPeopleSelect2NewTag(select, "Scénariste…") });
+
+    addDirector.addEventListener("click", () => {
+        if (divDirector2.classList.contains("is-hidden")) {
+            divDirector2.classList.remove("is-hidden");
+            if (deleteDirector2.classList.contains("is-hidden")) deleteDirector2.classList.remove("is-hidden");
+            selectDirector2.required = true;
+        } else {
+            divDirector3.classList.remove("is-hidden");
+            deleteDirector2.classList.add("is-hidden");
+            selectDirector3.required = true;
+        }
+    });
+
+    addScriptwriter.addEventListener("click", () => {
+        divScriptwriter2.classList.remove("is-hidden");
+        selectScriptwriter2.required = true;
+    })
+
+    deleteDirector2.addEventListener("click", () => {
+        divDirector2.classList.add("is-hidden");
+        if (deleteDirector2.classList.contains("is-hidden")) deleteDirector2.classList.remove("is-hidden");
+        selectDirector2.required = false;
+    });
+
+    deleteDirector3.addEventListener("click", () => {
+        divDirector3.classList.add("is-hidden");
+        deleteDirector2.classList.remove("is-hidden");
+        selectDirector3.required = false;
+    });
+
+    deleteScriptwriter2.addEventListener("click", () => {
+        divScriptwriter2.classList.add("is-hidden");
+        selectScriptwriter2.required = false;
+    });
+
+    selectDirectors.forEach(select => {
+        bindPeopleSelectEvents(select, {
+            onCreate: ({ firstName, lastName }) => {
+                console.log("Ajout director :", firstName, lastName);
+            },
+            onClear: () => {
+                console.log("Director supprimé");
+            }
+        });
+    });
+    
+    selectScriptwriters.forEach(select => {
+        bindPeopleSelectEvents(select, {
+            onCreate: ({ firstName, lastName }) => {
+                console.log("Ajout scriptwriter :", firstName, lastName);
+            },
+            onClear: () => {
+                console.log("Scénariste supprimé");
+            }
+        });
+    });
 }

@@ -1,3 +1,5 @@
+import { parseFullName } from "/Elina/js/utils/format.js";
+
 export function initGenres(selectElement, genres) {
     genres.forEach(genre => {
         selectElement.append(
@@ -41,4 +43,26 @@ export function initPeopleSelect2NewTag(selectElement, placeholder) {
             };
         }
     });
+}
+
+export function bindPeopleSelectEvents(selectElement, { onCreate, onClear } = {}) {
+    if (!selectElement) return;
+
+    $(selectElement)
+        .on("select2:select", function (e) {
+            const data = e.params.data;
+
+            if (data.newTag) {
+                const { firstName, lastName } = parseFullName(data.text);
+
+                if (onCreate) {
+                    onCreate({ firstName, lastName, raw: data.text });
+                }
+            }
+        })
+        .on("select2:clear", function () {
+            if (onClear) {
+                onClear();
+            }
+        });
 }

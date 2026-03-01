@@ -45,3 +45,19 @@ export function formatCompleteDate(date) {
         year: "numeric"
     });
 }
+
+export function parseFullName(fullName) {
+    const parts = fullName.trim().split(/\s+/);
+
+    if (parts.length === 1) {
+        return {
+            firstName: null,
+            lastName: parts[0]
+        };
+    }
+
+    return {
+        firstName: parts.slice(0, -1).join(" "),
+        lastName: parts.slice(-1).join("")
+    };
+}
