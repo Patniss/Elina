@@ -1,6 +1,5 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
 import { createButtons } from "/Elina/js/ui/button.js";
-import { addShowUser } from "/Elina/js/modules/shows/shows.actions.js";
 
 export function updateShowUI(status, buttons, container) {
     container.innerHTML = "";
@@ -11,8 +10,8 @@ export function updateShowUI(status, buttons, container) {
     });
 }
 
-export async function createShowCard(show) {
-    const { showId, showTitle, showGenres, showAverageMin, showState, showComplete, showNbSeasons, showLogo, showLogoLarge, showUserState } = normalizeShow(show);
+export async function createShowCard(s) {
+    const show = normalizeShow(s);
 
     const column = document.createElement("div");
     column.classList.add("column", "is-one-quarter");
@@ -26,41 +25,31 @@ export async function createShowCard(show) {
     const figureLogo = document.createElement("figure");
     figureLogo.classList.add("image", "logo-wrapper", "py-2", "px-2");
     const imgLogo = document.createElement("img");
-    imgLogo.src = showLogo;
-    imgLogo.alt = showTitle;
+    imgLogo.src = show.logo;
+    imgLogo.alt = show.title;
     figureLogo.appendChild(imgLogo);
     
     const pTitle = document.createElement("p");
     pTitle.classList.add("title", "is-5");
-    pTitle.textContent = showTitle;
+    pTitle.textContent = show.title;
     
     const pSubtitle = document.createElement("p");
     pSubtitle.classList.add("subtitle", "is-6");
-    pSubtitle.textContent = `${showNbSeasons} saisons`;
+    pSubtitle.textContent = `${show.seaons} saisons`;
     
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
 
-    const buttons = createButtons(["details", "add"], showId);
+    const buttons = createButtons(["details", "add"], 'entertainment/shows/show', show.id);
 
     const detailsButton = buttons.details;
     const addButton = buttons.add;
-
-    updateMovieUI(showUserState, buttons, divTags);
 
     cardContent.append(figureLogo, pSubtitle, divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
 
-    const ACTIONS = {
-        add: addShowUser
-    }
-
-    Object.entries(ACTIONS).forEach(([type, action]) => {
-        buttons[type].addEventListener("click", () => {
-            action(showId, "adding", buttons[type], divTags);
-        })
-    })
+    updateShowUI(show.userState, buttons, divTags);
     
     return column;
 }

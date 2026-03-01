@@ -8,7 +8,7 @@ const BUTTONS_BY_STATUS = {
     true: ["seen", "details"]
 };
 
-export function updateMovieUI(status, buttons, container) { // Met à jour l'affichage des boutons selon le statut du film
+export function updateMovieUI(status, buttons, container) {
     container.innerHTML = "";
     const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
 
@@ -41,7 +41,7 @@ export async function createMovieCard(movie) {
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
     
-    const buttons = createButtons(["details", "add", "delete", "tosee", "seen"], movieId);
+    const buttons = createButtons(["details", "add", "delete", "tosee", "seen"], 'entertainment/movies/movie', movieId);
 
     const detailsButton = buttons.details;
     const addButton = buttons.add;

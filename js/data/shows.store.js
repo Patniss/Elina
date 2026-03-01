@@ -30,22 +30,14 @@ export let showsStore = {
         this.listeners.forEach(cb => cb());
     },
 
-    setShowAll(state, newShows) {
-        if (this.shows[state] !== undefined) {
-            this.shows[state] = newShows;
-            this.notify();
-        }
-    },
-
-    setCurrentPage(state, page) {
-        if (this.currentPage[state] !== undefined) {
-            this.currentPage[state] = page;
-            this.notify();
-        }
-    },
-
     setState(partialState) {
         Object.assign(this, partialState);
+        this.notify();
+    },
+
+    setShowsAndPage(list, shows, page) {
+        this.shows[list] = shows;
+        this.currentPage[list] = page;
         this.notify();
     }
 }

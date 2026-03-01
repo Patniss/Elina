@@ -2,15 +2,15 @@ export function normalizeShow(show) {
     const source = show.shows ?? show;
 
     return {
-        showId: source.id,
-        showTitle: source.title,
-        showGenres: source.genres,
-        showAverageMin: source.average_min,
-        showState: source.state,
-        showComplete: source.complete,
-        showNbSeasons: source.nb_seasons,
-        showLogo: sourceLogo,
-        showLogoLarge: source.logo_large,
-        showUserState: source.user_state
+        id: source.id,
+        title: source.title,
+        genres: source.genres,
+        averageMin: source.average_min,
+        state: source.state,
+        complete: source.complete,
+        seasons: source.nb_seasons,
+        logo: sourceLogo,
+        logoLarge: source.logo_large,
+        userState: source.user_state
     }
 }

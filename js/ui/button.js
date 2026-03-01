@@ -48,13 +48,13 @@ export function changeModeButton(button, mode) {
     }
 }
 
-export function createButton(type, id) {
+export function createButton(type, link, id) {
     const button = document.createElement("a");
     button.classList.add("tag", "button", "is-hoverable", "mr-2");
     
     if (type === "details") {
         button.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
-        button.href = `/Elina/entertainment/movies/movie.html?id=${id}`;
+        button.href = `/Elina/${link}.html?id=${id}`;
     } else {
         changeModeButton(button, type);
     }
@@ -62,10 +62,10 @@ export function createButton(type, id) {
     return button;
 }
 
-export function createButtons(types = [], id) {
+export function createButtons(types = [], link, id) {
     const result = [];
     types.forEach(type => {
-        result[type] = type === "details" ? createButton(type, id) : createButton(type);
+        result[type] = type === "details" ? createButton(type, link, id) : createButton(type);
     });
 
     return result;

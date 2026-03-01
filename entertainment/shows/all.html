@@ -45,11 +45,8 @@
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-</script>
-
-<script type="module">
-  import { loadAllShows } from "/Elina/js/list.js";
-  loadAllShows();
+  import { initShows } from "/Elina/js/modules/shows/shows.controller.js";
+  initShows();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
