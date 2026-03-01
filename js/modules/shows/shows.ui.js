@@ -65,6 +65,8 @@ export async function createShowCard(s) {
     cardContent.append(figureLogo, pSubtitle, divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
+
+    console.log(show.title, " : ", show.user_state);
     
     return column;
 }
