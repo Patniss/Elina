@@ -26,7 +26,7 @@ export async function render(containerStore, store, list, element, createFunctio
     const cards = containerStore.querySelectorAll(".movie-card");
     cards.forEach((card, index) => {
         card.classList.remove("fade-in-up");
-        card.style.animationDelay = `${index * 30}ms`;
+        card.style.animationDelay = `${index * 70}ms`;
         card.classList.add("fade-in-up");
     });
 }

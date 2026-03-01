@@ -75,5 +75,7 @@ export async function createMovieCard(m) {
     clickDeleteMovieUser(deleteButton, movie.id, "adding", addButton, toseeButton, detailsButton, divTags);
     clickSeenMovieUser(seenButton, movie.id, "adding", toseeButton, deleteButton, detailsButton, divTags);
 
+    console.log(movie.title, " : ", movie.seen);
+
   return column;
 }
