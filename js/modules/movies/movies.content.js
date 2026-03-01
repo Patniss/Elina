@@ -53,7 +53,7 @@ export async function movieContent(uuid) {
     btnToseeMovie.addEventListener("click", async() => {
         divSeenMovie.classList.remove("is-hidden");
     });
-    clickDeleteMovieUser(btnDeleteMovie, uuid, "hidden", btnAddMovie);
+    clickDeleteMovieUser(btnDeleteMovie, uuid, "hidden", btnAddMovie, btnToseeMovie);
     clickSeenMovieUser(btnSeenMovie, uuid, "hidden", btnToseeMovie, btnDeleteMovie);
     btnSeenMovie.addEventListener("click", async() => {
         divSeenMovie.classList.add("is-hidden");
