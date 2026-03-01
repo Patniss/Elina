@@ -97,8 +97,10 @@ export async function completeMovie(uuid) {
         });
     });
 
+    let i = 1;
+
     addRole.addEventListener("click", async () => {
-        i+=1;
+        i += 1;
         createRoleBlock(i);
     });
 
