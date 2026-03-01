@@ -1,6 +1,6 @@
 import { getMovie } from "/Elina/js/services/movies.service.js";
 import { getAllPeople } from "/Elina/js/services/people.service.js";
-import { initPeopleSelect, initPeopleSelect2NewTag } from "/Elina/js/ui.select.js";
+import { initPeopleSelect, initPeopleSelect2NewTag } from "/Elina/js/ui/select.js";
 
 export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
