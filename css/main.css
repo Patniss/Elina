@@ -74,6 +74,7 @@
 @font-face {
   font-family: "Colandra";
   src: url("fonts/Colendra.otf") format("opentype");
+  size-adjust: 120%;
 }
 
 /* Titre */
