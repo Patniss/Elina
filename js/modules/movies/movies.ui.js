@@ -41,7 +41,7 @@ export async function createMovieCard(m) {
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
     
-    const buttons = createButtons(["details", "add", "delete", "tosee", "seen"], 'entertainment/movies/movie', movieId);
+    const buttons = createButtons(["details", "add", "delete", "tosee", "seen"], 'entertainment/movies/movie', movie.id);
 
     const detailsButton = buttons.details;
     const addButton = buttons.add;
