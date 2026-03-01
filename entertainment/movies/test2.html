@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>엘리나 Elina - Films</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
   <link rel="stylesheet" href="/Elina/css/bulma.min.css">
@@ -18,15 +19,11 @@
   <section class="section">
 
     <div class="container">
-
       <div id="nav-container"></div>
       
-      <h1 class="title">🎬 Filmothèque</h1>
-      
-      <div class="box">
-        
-        <h2 class="subtitle">Tous les films</h2>
+      <h1 class="title">🎬 Mes Films</h1>
 
+      <div class="box">
         <div class="field">
           <p class="control has-icons-left">
             <input type="text" id="movie-search" placeholder="Chercher un film…" class="input mb-4"/>
@@ -95,6 +92,14 @@
                     <span class="icon"><i class="fa-solid fa-arrow-down-1-9"></i>
                     </span>Trier par sortie (moins récent au plus récent)</span>
                   </a>
+                  <a href="#" class="dropdown-item" id="sort-seen-asc">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-9-1"></i>
+                    </span>Trier par vu / ajouter (plus récent au moins récent)</span>
+                  </a>
+                  <a href="#" class="dropdown-item" id="sort-seen-desc">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-9-1"></i>
+                    </span>Trier par vu / ajouter (moins récent au plus récent)</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -103,13 +108,42 @@
 
           </div>
         </div>
-        
-        <div class="columns is-multiline" id="list-all-movies"></div>
-        
+      </div>
+      
+      <div class="box">
+
+        <h2 class="subtitle is-clickable" id="toggle-tosee">
+          <span class="icon mr-2">
+            <i class="fa-solid fa-chevron-right" id="arrow-tosee"></i>
+          </span>
+          <span>Mes films à voir</span>
+        </h2>
+        <div class="is-hidden" id="div-tosee-movies">
+          <div class="columns is-multiline" id="list-tosee-movies"></div>
+          <nav class="pagination" role="navigation" aria-label="navigation" id="paginationTosee">
+            <div id="pagination-list-tosee"></div>
+          </nav>
+        </div>
+      
       </div>
 
-      <nav class="pagination is-left" role="navigation" aria-label="pagination" id="pagination-list"></nav>
+      <div class="box">
+        
+        <h2 class="subtitle is-clickable" id="toggle-seen">
+          <span class="icon mr-2">
+            <i class="fa-solid fa-chevron-right" id="arrow-seen"></i>
+          </span>
+          <span>Mes films vus</span>
+        </h2>
+        <div class="is-hidden" id="div-seen-movies">
+          <div class="columns is-multiline" id="list-seen-movies"></div>
+          <nav class="pagination" role="navigation" aria-label="navigation" id="paginationSeen">
+            <div id="pagination-list-seen"></div>
+          </nav>
+        </div>
 
+      </div>
+      
     </div>
 
   </section>
@@ -124,11 +158,44 @@
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-  import { initMoviesAll } from "/Elina/js/modules/movies/movies.controller.js";
-  await initMoviesAll();
+</script>
+
+<script type="module">
+  import { loadMyMovies } from "/Elina/js/list.js";
+  loadMyMovies();
+  import { initResearchMovie } from "/Elina/js/list.js";
+  initResearchMovie();
+</script>
+
+<script>
+  const toseeMoviesToggle = document.getElementById("toggle-tosee");
+  const seenMoviesToggle = document.getElementById("toggle-seen");
+  const listToseeMovies = document.getElementById("div-tosee-movies");
+  const listSeenMovies = document.getElementById("div-seen-movies");
+  const arrowToseeMovies = document.getElementById("arrow-tosee");
+  const arrowSeenMovies = document.getElementById("arrow-seen");
+
+  toseeMoviesToggle.addEventListener("click", () => {
+    if (listToseeMovies.classList.contains("is-hidden")) {
+      listToseeMovies.classList.remove("is-hidden");
+      arrowToseeMovies.classList.replace("fa-chevron-right", "fa-chevron-down");
+    } else {
+      listToseeMovies.classList.add("is-hidden");
+      arrowToseeMovies.classList.replace("fa-chevron-down", "fa-chevron-right");
+    };
+  });
+
+  seenMoviesToggle.addEventListener("click", () => {
+    if (listSeenMovies.classList.contains("is-hidden")) {
+      listSeenMovies.classList.remove("is-hidden");
+      arrowSeenMovies.classList.replace("fa-chevron-right", "fa-chevron-down");
+    } else {
+      listSeenMovies.classList.add("is-hidden");
+      arrowSeenMovies.classList.replace("fa-chevron-down", "fa-chevron-right");
+    };
+  });
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
-
 </body>
 </html>

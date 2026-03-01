@@ -19,10 +19,14 @@ export let moviesStore = {
 
     subscribe(callback) {
         this.listeners.push(callback);
+
+        return () => {
+            this.listeners = this.listeners.filter(cb => cb !== callback);
+        };
     },
 
-    notify() {
-        this.listeners.forEach(cb => cb());
+    notify(list) {
+        this.listeners.forEach(cb => cb(list));
     },
 
     setState(partialState) {
@@ -38,6 +42,6 @@ export let moviesStore = {
 
     setCurrentPage(list, page) {
         this.currentPage[list] = page;
-        this.notify();
+        this.notify(list);
     }
 };
