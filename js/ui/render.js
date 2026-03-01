@@ -10,7 +10,6 @@ export function renderGenres(container, genresString) { // Création des tags po
 }
 
 export async function render(containerStore, store, list, element, createFunction) {
-    console.log("render appelé");
     containerStore.innerHTML = "";
 
     const start = (store.currentPage[list] - 1) * store.pageSize;
