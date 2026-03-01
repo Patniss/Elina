@@ -9,7 +9,7 @@ export function normalizeShow(show) {
         state: source.state,
         complete: source.complete,
         seasons: source.nb_seasons,
-        logo: sourceLogo,
+        logo: source.logo,
         logoLarge: source.logo_large,
         userState: source.user_state
     }
