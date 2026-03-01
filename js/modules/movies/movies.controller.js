@@ -1,3 +1,4 @@
+import { initResearchMovie } from "/Elina/js/movies/movies.search";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { loadAllMovies } from "/Elina/js/modules/movies/movies.load.js";
 import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
@@ -6,6 +7,8 @@ export async function initMovies() {
     moviesStore.subscribe(() => {
         renderAllMovies();
     });
+
+    initResearchMovie();
 
     await refreshMovies();
 }

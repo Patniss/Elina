@@ -1,5 +1,4 @@
 import { debounce } from "/Elina/js/utils/debounce.js";
-import { searchMovies } from "/Elina/js/services/movies.service.js";
 
 export function initLiveSearch({
     inputElement, resultContainer, searchFunction, renderItem
@@ -33,36 +32,12 @@ export function initLiveSearch({
     });
 }
 
-export function searchAllMovies(input, resultContainer) {
-    let searchTimeout;
+export function filterByTitle(list, query, getTitle) {
+    if (!query) return [...list];
 
-    $(input).on("input", function () {
-        clearTimeout(searchTimeout);
+    const lowerQuery = query.toLowerCase();
 
-        const query = $(this).val().trim();
-
-        if (query.length < 2) {
-            $(resultContainer).hide().empty();
-            return;
-        };
-
-        searchTimeout = setTimeout(async () => {
-
-            const movies = await searchMovies(query);
-            resultContainer.innerHTML = "";
-
-            movies.forEach(movie => {
-                const item = document.createElement("div");
-                item.textContent = `${movie.title} (${movie.year})`;
-                item.classList.add("search-item");
-                resultContainer.appendChild(item);
-            });
-
-            if (movies.length === 0) {
-                resultContainer.style.display = "none";
-            } else {
-                resultContainer.style.display = "block";
-            }
-        }, 100);
-    })
+    return list.filter(item =>
+        getTitle(item).toLowerCase().includes(lowerQuery)
+    );
 }

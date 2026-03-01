@@ -1,7 +1,7 @@
 // 1- IMPORTATIONS DES JS NÉCESSAIRES :
 import { handleButtonState } from "/Elina/js/ui/button.js"; // Gestion de l'affichage d'un bouton au clic
 import { initGenres } from "/Elina/js/ui/select.js"; // Ajouter les genres dans un select
-import { searchAllMovies } from "/Elina/js/ui/search.js";
+import { searchAllMovies } from "/Elina/js/modules/movies/movies.search.js";
 import { addMovie } from "/Elina/js/services/movies.service.js";
 import { genres } from "/Elina/js/data/genres.js";
 
