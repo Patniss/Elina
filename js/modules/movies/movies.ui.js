@@ -71,22 +71,22 @@ export async function createMovieCard(m) {
     
     card.appendChild(cardFigure);
 
-    clickAddMovieUser(addButton, uuid);
+    clickAddMovieUser(addButton, movie.id);
     addButton.addEventListener("click", async () => {
         updateMovieUI(false, buttons, divTags);
     });
 
-    clickToseeMovieUser(toseeButton, uuid);
+    clickToseeMovieUser(toseeButton, movie.id);
     toseeButton.addEventListener("click", async () => {
         updateMovieUI(true, buttons, divTags);
     });
 
-    clickDeleteMovieUser(deleteButton, uuid);
+    clickDeleteMovieUser(deleteButton, movie.id);
     deleteButton.addEventListener("click", async () => {
         updateMovieUI(null, buttons, divTags);
     })
 
-    clickSeenMovieUser(seenButton, uuid);
+    clickSeenMovieUser(seenButton, movie.id);
     seenButton.addEventListener("click", async () => {
         updateMovieUI(false, buttons, divTags);
     });
