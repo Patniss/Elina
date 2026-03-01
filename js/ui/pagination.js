@@ -20,7 +20,7 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
 
         btn.addEventListener("click", (e) => {
             e.preventDefault();
-            setCurrentPage(page);
+            setCurrentPage(list, page);
             onPageChange();
         });
 

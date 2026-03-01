@@ -34,5 +34,10 @@ export let moviesStore = {
         this.movies[list] = movies;
         this.currentPage[list] = page;
         this.notify();
+    },
+
+    setCurrentPage(list, page) {
+        this.currentPage[list] = page;
+        this.notify();
     }
 };
