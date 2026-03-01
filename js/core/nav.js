@@ -29,7 +29,7 @@ export async function customNavbar() {
     const element = document.getElementById(id);
     if (!element) return;
 
-    if (!session[key]) {
+    if (!session[key] || session[key] === false) {
       element.classList.add("is-hidden");
     }
   });
