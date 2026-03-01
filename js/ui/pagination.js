@@ -1,4 +1,4 @@
-export function renderPagination(containerId, currentPage, totalItems, pageSize, setCurrentPage, onPageChange) {
+export function renderPagination(containerId, currentPage, totalItems, pageSize, setCurrentPage) {
     const container = document.getElementById(containerId);
     const delta = 2;
 
@@ -20,7 +20,6 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
         btn.addEventListener("click", (e) => {
             e.preventDefault();
             setCurrentPage(page);
-            onPageChange();
         });
 
         li.appendChild(btn);
@@ -39,7 +38,6 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
         prevBtn.addEventListener("click", (e) => {
             e.preventDefault();
             setCurrentPage(currentPage - 1);
-            onPageChange();
         });
     };
     
@@ -57,7 +55,6 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
         nextBtn.addEventListener("click", (e) => {
             e.preventDefault();
             setCurrentPage(currentPage + 1);
-            onPageChange();
         });
     }
 
