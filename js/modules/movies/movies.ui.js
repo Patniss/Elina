@@ -1,7 +1,6 @@
-import { createButtons } from "/Elina/js/ui/button.js";
+import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
-import { clickAddMovieUser, clickDeleteMovieUser, clickToseeMovieUser, clickSeenMovieUser } from "/Elina/js/modules/usersMovies/usersMovies.actions.js";
-import { toggleBtnSeenStatut } from "/Elina/js/ui/dom.js";
+import { addUserMovie, deleteUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
 
 const BUTTONS_BY_STATUS = {
     null: ["add", "details"],
@@ -71,24 +70,48 @@ export async function createMovieCard(m) {
     
     card.appendChild(cardFigure);
 
-    clickAddMovieUser(addButton, movie.id);
     addButton.addEventListener("click", async () => {
-        updateMovieUI(false, buttons, divTags);
+        handleButtonState(addButton, "loading");
+        try {
+            await addUserMovie(movie.id);
+        } catch (error) { throw error; }
+        setTimeout(() => {
+            updateMovieUI(false, buttons, divTags);
+            handleButtonState(addButton, "stop-loading");
+        }, 500);
     });
 
-    clickToseeMovieUser(toseeButton, movie.id);
     toseeButton.addEventListener("click", async () => {
-        updateMovieUI(true, buttons, divTags);
+        handleButtonState(toseeButton, "loading");
+        try {
+            await updateSeenUserMovie(movie.id, true);
+        } catch (error) { throw error; }
+        setTimeout(() => {
+            updateMovieUI(true, buttons, divTags);
+            handleButtonState(toseeButton, "stop-loading");
+        }, 500);
     });
 
-    clickDeleteMovieUser(deleteButton, movie.id);
     deleteButton.addEventListener("click", async () => {
-        updateMovieUI(null, buttons, divTags);
-    })
-
-    clickSeenMovieUser(seenButton, movie.id);
+        handleButtonState(deleteButton, "loading");
+        try {
+            await deleteUserMovie(movie.id);
+        } catch (error) { throw error; }
+        setTimeout(() => {
+            updateMovieUI(true, buttons, divTags);
+            handleButtonState(deleteButton, "stop-loading");
+        }, 500);
+    });
+    
     seenButton.addEventListener("click", async () => {
-        updateMovieUI(false, buttons, divTags);
+        handleButtonState(seenButton, "loading");
+        try {
+            await updateSeenUserMovie(movie.id, false);
+        } catch (error) { throw error; }
+        setTimeout(() => {
+            updateMovieUI(true, buttons, divTags);
+            handleButtonState(seenButton, "stop-loading");
+        }, 500);
     });
 
   return column;

@@ -1,4 +1,9 @@
 export function handleButtonState(button, state) {
+    if (state === "stop-loading") {
+        button.classList.remove("is-loading");
+        return;
+    }
+    
     button.classList.remove("is-loading", "is-primary", "is-success", "is-danger");
 
     switch (state) {

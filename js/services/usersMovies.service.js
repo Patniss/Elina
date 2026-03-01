@@ -35,7 +35,7 @@ export async function addUserMovie(movieId) {
     }
 }
 
-export async function removeUserMovie(movieId) {
+export async function deleteUserMovie(movieId) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
