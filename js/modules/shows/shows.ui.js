@@ -59,13 +59,13 @@ export async function createShowCard(s) {
     const cancelButton = buttons.cancel;
     const retryButton = buttons.retry;
 
-    updateShowUI(show.user_state, buttons, divTags);
+    updateShowUI(show.userState, buttons, divTags);
 
     cardContent.append(figureLogo, pSubtitle, divTags);
     card.appendChild(cardContent);
     column.appendChild(card);
 
-    console.log(show.title, " : ", show.user_state);
+    console.log(show.title, " : ", show.userState);
     
     return column;
 }

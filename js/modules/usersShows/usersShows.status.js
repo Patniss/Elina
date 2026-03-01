@@ -11,7 +11,7 @@ export async function mapShowsWithStatus(data) {
         
         return {
         ...show,
-        stateUser: userShow ? userShow.user_state : null
+        userState: userShow ? userShow.user_state : null
         };
     });
 
