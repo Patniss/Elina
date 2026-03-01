@@ -21,7 +21,7 @@ export async function clickAddMovieUser(button, uuid, mode, btnTosee, btnDelete,
     switch (mode) {
         case "hidden":
             button.classList.add("is-hidden");
-            [btnTosee, btnDelete].classList.remove("is-hidden");
+            [btnTosee, btnDelete].forEach(btn => btn.classList.remove("is-hidden"));
             break;
     
         case "adding":
@@ -51,7 +51,7 @@ export async function clickToseeMovieUser(button, uuid, mode, btnDelete, btnSeen
 
     switch (mode) {
         case "hidden":
-            [button, btnDelete].classList.add("is-hidden");
+            [button, btnDelete].forEach(btn => btn.classList.add("is-hidden"));
             btnSeen.classList.remove("is-hidden");
             break;
     
@@ -82,7 +82,7 @@ export async function clickDeleteMovieUser(button, uuid, mode, btnAdd, btnTosee,
 
     switch (mode) {
         case "hidden":
-            [button, btnTosee].classList.add("is-hidden");
+            [button, btnTosee].forEach(btn => btn.classList.add("is-hidden"));
             btnAdd.classList.remove("is-hidden");
             break;
     
@@ -114,7 +114,7 @@ export async function clickSeenMovieUser(button, uuid, mode, btnTosee, btnDelete
     switch (mode) {
         case "hidden":
             button.classList.add("is-hidden");
-            [btnTosee, btnDelete].classList.remove("is-hidden");
+            [btnTosee, btnDelete].forEach(btn => btn.classList.remove("is-hidden"));
             break;
     
         case "adding":

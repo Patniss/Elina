@@ -1,9 +1,5 @@
-export function renderPagination(container, currentPage, totalItems, pageSize, setCurrentPage, onPageChange) {
-    if (!container) return;
-    console.log("renderPagination continue");
-
-    console.log(container);
-
+export function renderPagination(containerId, currentPage, totalItems, pageSize, setCurrentPage, onPageChange) {
+    const container = document.getElementById(containerId);
     const delta = 2;
 
     container.innerHTML = "";
