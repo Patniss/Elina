@@ -1,6 +1,7 @@
 import { createButtons } from "/Elina/js/ui/button.js";
 import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
 import { clickAddMovieUser, clickDeleteMovieUser, clickToseeMovieUser, clickSeenMovieUser } from "/Elina/js/modules/usersMovies/usersMovies.actions.js";
+import { toggleBtnSeenStatut } from "/Elina/js/ui/dom.js";
 
 const BUTTONS_BY_STATUS = {
     null: ["add", "details"],
@@ -70,12 +71,25 @@ export async function createMovieCard(m) {
     
     card.appendChild(cardFigure);
 
-    clickAddMovieUser(addButton, movie.id, "adding", toseeButton, deleteButton, detailsButton, divTags);
-    clickToseeMovieUser(toseeButton, movie.id, "adding", deleteButton, seenButton, detailsButton, divTags);
-    clickDeleteMovieUser(deleteButton, movie.id, "adding", addButton, toseeButton, detailsButton, divTags);
-    clickSeenMovieUser(seenButton, movie.id, "adding", toseeButton, deleteButton, detailsButton, divTags);
+    clickAddMovieUser(addButton, uuid);
+    addButton.addEventListener("click", async () => {
+        updateMovieUI(false, buttons, divTags);
+    });
 
-    console.log(movie.title, " : ", movie.seen);
+    clickToseeMovieUser(toseeButton, uuid);
+    toseeButton.addEventListener("click", async () => {
+        updateMovieUI(true, buttons, divTags);
+    });
+
+    clickDeleteMovieUser(deleteButton, uuid);
+    deleteButton.addEventListener("click", async () => {
+        updateMovieUI(null, buttons, divTags);
+    })
+
+    clickSeenMovieUser(seenButton, uuid);
+    seenButton.addEventListener("click", async () => {
+        updateMovieUI(false, buttons, divTags);
+    });
 
   return column;
 }

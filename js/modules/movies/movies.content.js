@@ -52,31 +52,23 @@ export async function movieContent(uuid) {
 
     clickAddMovieUser(btnAddMovie, uuid);
     btnAddMovie.addEventListener("click", async () => {
-        const userMovie = await getUserMovie(userId, uuid);
-        const newStatut = userMovie ? userMovie.seen : null;
-        toggleBtnSeenStatut(newStatut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
+        toggleBtnSeenStatut(false, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
     });
 
     clickToseeMovieUser(btnToseeMovie, uuid);
     btnToseeMovie.addEventListener("click", async () => {
         divSeenMovie.classList.remove("is-hidden");
-        const userMovie = await getUserMovie(userId, uuid);
-        const newStatut = userMovie ? userMovie.seen : null;
-        toggleBtnSeenStatut(newStatut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
+        toggleBtnSeenStatut(true, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
     });
 
     clickDeleteMovieUser(btnDeleteMovie, uuid);
     btnDeleteMovie.addEventListener("click", async () => {
-        const userMovie = await getUserMovie(userId, uuid);
-        const newStatut = userMovie ? userMovie.seen : null;
-        toggleBtnSeenStatut(newStatut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
+        toggleBtnSeenStatut(null, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
     })
 
     clickSeenMovieUser(btnSeenMovie, uuid);
     btnSeenMovie.addEventListener("click", async () => {
-        const userMovie = await getUserMovie(userId, uuid);
-        const newStatut = userMovie ? userMovie.seen : null;
-        toggleBtnSeenStatut(newStatut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
+        toggleBtnSeenStatut(false, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
         divSeenMovie.classList.add("is-hidden");
     });
 

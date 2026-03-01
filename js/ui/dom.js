@@ -6,7 +6,7 @@ export function toggleElements(elements, show) {
     });
 }
 
-export function toggleBtnSeenStatut(statut, btnAdd, btnTosee, btnDelete, btnSeen) {
+export function toggleBtnSeenStatut(statut, btnAdd, btnTosee, btnDelete, btnSeen, btnDetails) {
     switch (statut) {
         case null:
             toggleElements(btnAdd, true);
