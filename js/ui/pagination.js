@@ -3,7 +3,6 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
     const delta = 2;
 
     container.innerHTML = "";
-    console.log(container);
 
     const totalPages = Math.ceil(totalItems / pageSize);
     if (totalPages <= 1) return;
@@ -20,7 +19,7 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
 
         btn.addEventListener("click", (e) => {
             e.preventDefault();
-            setCurrentPage(list, page);
+            setCurrentPage(page);
             onPageChange();
         });
 
