@@ -24,6 +24,7 @@ const NAV_ITEMS = [
 
 export async function customNavbar() {
   const session = await loadProfile();
+  console.log("Test candles : ", session.candles);
 
   NAV_ITEMS.forEach(( id, key ) => {
     const element = document.getElementById(id);
