@@ -50,14 +50,33 @@ export async function movieContent(uuid) {
     
     toggleBtnSeenStatut(statut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
 
-    clickAddMovieUser(btnAddMovie, uuid, "hidden", btnToseeMovie, btnDeleteMovie);
-    clickToseeMovieUser(btnToseeMovie, uuid, "hidden", btnDeleteMovie, btnSeenMovie);
-    btnToseeMovie.addEventListener("click", async() => {
-        divSeenMovie.classList.remove("is-hidden");
+    clickAddMovieUser(btnAddMovie, uuid);
+    btnAddMovie.addEventListener("click", async () => {
+        const userMovie = await getUserMovie(userId, uuid);
+        const newStatut = userMovie ? userMovie.seen : null;
+        toggleBtnSeenStatut(newStatut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
     });
-    clickDeleteMovieUser(btnDeleteMovie, uuid, "hidden", btnAddMovie, btnToseeMovie);
-    clickSeenMovieUser(btnSeenMovie, uuid, "hidden", btnToseeMovie, btnDeleteMovie);
-    btnSeenMovie.addEventListener("click", async() => {
+
+    clickToseeMovieUser(btnToseeMovie, uuid);
+    btnToseeMovie.addEventListener("click", async () => {
+        divSeenMovie.classList.remove("is-hidden");
+        const userMovie = await getUserMovie(userId, uuid);
+        const newStatut = userMovie ? userMovie.seen : null;
+        toggleBtnSeenStatut(newStatut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
+    });
+
+    clickDeleteMovieUser(btnDeleteMovie, uuid);
+    btnDeleteMovie.addEventListener("click", async () => {
+        const userMovie = await getUserMovie(userId, uuid);
+        const newStatut = userMovie ? userMovie.seen : null;
+        toggleBtnSeenStatut(newStatut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
+    })
+
+    clickSeenMovieUser(btnSeenMovie, uuid);
+    btnSeenMovie.addEventListener("click", async () => {
+        const userMovie = await getUserMovie(userId, uuid);
+        const newStatut = userMovie ? userMovie.seen : null;
+        toggleBtnSeenStatut(newStatut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
         divSeenMovie.classList.add("is-hidden");
     });
 
