@@ -1,4 +1,4 @@
-export function toggleElements(elements, show) { // Affiche ou masque une liste d'éléments via is-hidden
+export function toggleElements(elements, show) {
     if (!Array.isArray(elements)) elements = [elements];
     elements.forEach(el => {
         if (show) el.classList.remove("is-hidden");
