@@ -2,35 +2,34 @@ import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
 import { applyUserTheme } from "/Elina/js/core/custom.js";
 
 const NAV_ITEMS = [
-  { id: "navbar-item-movies", keys: "movies" },
-  { id: "navbar-item-shows", keys: "shows" },
-  { id: "navbar-item-dramas", keys: "dramas" },
-  { id: "navbar-item-animes", keys: "animes" },
-  { id: "navbar-item-books", keys: "books" },
-  { id: "navbar-item-recipes", keys: "recipes" },
-  { id: "navbar-item-movies", keys: "movies" },
-  { id: "navbar-item-cleaning", keys: "cleaning" },
-  { id: "navbar-item-budget", keys: "budget" },
-  { id: "navbar-item-todo", keys: "todo" },
-  { id: "navbar-item-pro", keys: "pro" },
-  { id: "navbar-item-moodboard", keys: "moodboard" },
-  { id: "navbar-item-travel", keys: "travel" },
-  { id: "navbar-item-crochet", keys: "crochet" },
-  { id: "navbar-item-candles", keys: "candles" },
-  { id: "navbar-item-aromazone", keys: "aromazone" },
-  { id: "navbar-item-sport", keys: "sport" },
-  { id: "navbar-item-period", keys: "period" }
+  { id: "navbar-item-movies", key: "movies" },
+  { id: "navbar-item-shows", key: "shows" },
+  { id: "navbar-item-dramas", key: "dramas" },
+  { id: "navbar-item-animes", key: "animes" },
+  { id: "navbar-item-books", key: "books" },
+  { id: "navbar-item-recipes", key: "recipes" },
+  { id: "navbar-item-movies", key: "movies" },
+  { id: "navbar-item-cleaning", key: "cleaning" },
+  { id: "navbar-item-budget", key: "budget" },
+  { id: "navbar-item-todo", key: "todo" },
+  { id: "navbar-item-pro", key: "pro" },
+  { id: "navbar-item-moodboard", key: "moodboard" },
+  { id: "navbar-item-travel", key: "travel" },
+  { id: "navbar-item-crochet", key: "crochet" },
+  { id: "navbar-item-candles", key: "candles" },
+  { id: "navbar-item-aromazone", key: "aromazone" },
+  { id: "navbar-item-sport", key: "sport" },
+  { id: "navbar-item-period", key: "period" }
 ]
 
 export async function customNavbar() {
   const session = await loadProfile();
-  console.log("Test candles : ", session.candles);
 
   NAV_ITEMS.forEach(( id, key ) => {
     const element = document.getElementById(id);
     if (!element) return;
 
-    if (!session[key] || session[key] === false) {
+    if (!session[key]) {
       element.classList.add("is-hidden");
     }
   });
