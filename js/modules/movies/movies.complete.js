@@ -1,6 +1,7 @@
 import { getMovie } from "/Elina/js/services/movies.service.js";
 import { getAllPeople } from "/Elina/js/services/people.service.js";
 import { initPeopleSelect, initPeopleSelect2NewTag, bindPeopleSelectEvents } from "/Elina/js/ui/select.js";
+import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
 
 export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
@@ -92,6 +93,27 @@ export async function completeMovie(uuid) {
             },
             onClear: () => {
                 console.log("Scénariste supprimé");
+            }
+        });
+    });
+
+    addRole.addEventListener("click", async () => {
+        i+=1;
+        createRoleBlock(i);
+    });
+
+    const selectActors = document.querySelectorAll(".select-actor");
+    
+    selectActors.forEach(select => { initPeopleSelect(select, people) });
+    selectActors.forEach(select => { initPeopleSelect2NewTag(select, "Acteur…") });
+    
+    selectActors.forEach(select => {
+        bindPeopleSelectEvents(select, {
+            onCreate: ({ firstName, lastName }) => {
+                console.log("Ajout acteur n° ", firstName, lastName);
+            },
+            onClear: () => {
+                console.log("Acteur supprimé");
             }
         });
     });

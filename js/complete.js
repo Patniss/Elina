@@ -502,7 +502,7 @@ export async function completeMovie(uuid) {
         const divDelete = document.createElement("div");
         divDelete.classList.add("column", "is-1", "columns");
         const nbRole = document.createElement("h3");
-        nbRole.classList.add("subtitle", "is-3", "column", "is-half");
+        nbRole.classList.add("subtitle", "is-11", "column", "is-half");
         nbRole.textContent = i;
         const btnDelete = document.createElement("button");
         btnDelete.classList.add("button", "delete", "is-large", "column", "is-half", "my-3", "ml-4", "mr-2");
@@ -588,8 +588,6 @@ export async function completeMovie(uuid) {
             }
         });
 
-        let divBlockNewActor = null;
-
         $(selectActor).on("select2:select", async function(e) {
             const data = e.params.data;
             let idActor;
@@ -609,252 +607,12 @@ export async function completeMovie(uuid) {
                     return;
                 }
 
-                if (newActor) {
-                    newActorId = newActor.id;
-                    idActor = newActor.id;
-                }
-                
-                divBlockNewActor = document.createElement("div");
-                divBlockNewActor.classList.add("block", "column", "is-8");
-                const h4NewActor = document.createElement("h4");
-                h4NewActor.classList.add("subtitle", "is-5");
-                h4NewActor.textContent = "Nouvel acteur :";
-
-                const divGenre = document.createElement("div");
-                divGenre.classList.add("field");
-                const divRadiosGenre = document.createElement("div");
-                divRadiosGenre.classList.add("radios");
-                const labelGenreF = document.createElement("label");
-                labelGenreF.classList.add("radio");
-                const inputGenreF = document.createElement("input");
-                inputGenreF.classList.add("radio");
-                inputGenreF.type = "radio";
-                inputGenreF.name = "genre";
-                inputGenreF.value = "f";
-                labelGenreF.append(inputGenreF, " Féminin");
-                const labelGenreM = document.createElement("label");
-                labelGenreM.classList.add("radio");
-                const inputGenreM = document.createElement("input");
-                inputGenreM.classList.add("radio");
-                inputGenreM.type = "radio";
-                inputGenreM.name = "genre";
-                inputGenreM.value = "m";
-                labelGenreM.append(inputGenreM, " Masculin");
-                const labelGenreA = document.createElement("label");
-                labelGenreA.classList.add("radio");
-                const inputGenreA = document.createElement("input");
-                inputGenreA.classList.add("radio");
-                inputGenreA.type = "radio";
-                inputGenreA.name = "genre";
-                inputGenreA.value = "a";
-                labelGenreA.append(inputGenreA, " Non binaire / Autre");
-                divRadiosGenre.append(labelGenreF, labelGenreM, labelGenreA);
-                divGenre.appendChild(divRadiosGenre);
-
-                const divFirstName = document.createElement("div");
-                divFirstName.classList.add("field");
-                const inputFirstName = document.createElement("input");
-                inputFirstName.type = "text";
-                inputFirstName.classList.add("input");
-                inputFirstName.placeholder = "Prénom…";
-                divFirstName.appendChild(inputFirstName);
-
-                const divLastName = document.createElement("div");
-                divLastName.classList.add("field");
-                const inputLastName = document.createElement("input");
-                inputLastName.type = "text";
-                inputLastName.classList.add("input");
-                inputLastName.placeholder = "Nom…";
-                divLastName.appendChild(inputLastName);
-
                 const parts = data.text.trim().split(/\s+/);
-                const testFirstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
-                const testLastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
+                const firstname = parts.length > 1 ? parts.slice(0, -1).join(" ") : null;
+                const lastname = parts.length > 1 ? parts.slice(-1).join("") : parts[0];
 
-                inputFirstName.value = testFirstname;
-                inputLastName.value = testLastname;
+                console.log("nouvel acteur : ", firstname, " ", lastname);
 
-                const divBirthdate = document.createElement("div");
-                divBirthdate.classList.add("field");
-                const inputBirthdate = document.createElement("input");
-                inputBirthdate.type = "date";
-                inputBirthdate.classList.add("input");
-                inputBirthdate.placeholder = "Date de naissance…";
-                divBirthdate.appendChild(inputBirthdate);
-
-                const divDeathdate = document.createElement("div");
-                divDeathdate.classList.add("field");
-                const labelIsDead = document.createElement("label");
-                labelIsDead.classList.add("checkbox");
-                const inputIsDead = document.createElement("input");
-                inputIsDead.type = "checkbox";
-                labelIsDead.append(inputIsDead, " Mort");
-                const inputDeathdate = document.createElement("input");
-                inputDeathdate.type = "date";
-                inputDeathdate.classList.add("input", "is-hidden");
-                inputDeathdate.placeholder = "Date de mort…";
-                divDeathdate.append(labelIsDead, inputDeathdate);
-
-                inputIsDead.addEventListener("change", () => {
-                    if (inputIsDead.checked === true) {
-                        inputDeathdate.classList.remove("is-hidden");
-                    } else {
-                        inputDeathdate.classList.add("is-hidden");
-                    }
-                });
-
-                const divJobs = document.createElement("div");
-                divJobs.classList.add("field", "is-flex");
-                const labelJobs = document.createElement("label");
-                labelJobs.classList.add("label");
-                labelJobs.textContent = "Casquettes :";
-
-                const labelJobDirector = document.createElement("label");
-                labelJobDirector.classList.add("checkbox");
-                const inputJobDirector = document.createElement("input");
-                inputJobDirector.value = "director";
-                inputJobDirector.type = "checkbox";
-                inputJobDirector.classList.add("checkbox");
-                const spanJobDirector = document.createElement("span");
-                spanJobDirector.classList.add("label", "ml-3");
-                spanJobDirector.textContent = " Réalisateur";
-                labelJobDirector.append(inputJobDirector, spanJobDirector);
-
-                const labelJobProducer = document.createElement("label");
-                labelJobProducer.classList.add("checkbox");
-                const inputJobProducer = document.createElement("input");
-                inputJobProducer.value = "producer";
-                inputJobProducer.type = "checkbox";
-                inputJobProducer.classList.add("checkbox");
-                const spanJobProducer = document.createElement("span");
-                spanJobProducer.classList.add("label", "ml-3");
-                spanJobProducer.textContent = " Producteur";
-                labelJobProducer.append(inputJobProducer, spanJobProducer);
-
-                const labelJobSwcriptwriter = document.createElement("label");
-                labelJobSwcriptwriter.classList.add("checkbox");
-                const inputJobScriptwriter = document.createElement("input");
-                inputJobScriptwriter.value = "scriptwriter";
-                inputJobScriptwriter.type = "checkbox";
-                inputJobScriptwriter.classList.add("checkbox");
-                const spanJobScriptwriter = document.createElement("span");
-                spanJobScriptwriter.classList.add("label", "ml-3");
-                spanJobScriptwriter.textContent = " Scénariste";
-                labelJobSwcriptwriter.append(inputJobScriptwriter, spanJobScriptwriter);
-                
-                const labelJobActor = document.createElement("label");
-                labelJobActor.classList.add("checkbox");
-                const inputJobActor = document.createElement("input");
-                inputJobActor.value = "actor";
-                inputJobActor.type = "checkbox";
-                inputJobActor.checked = true;
-                inputJobActor.classList.add("checkbox");
-                const spanJobActor = document.createElement("span");
-                spanJobActor.classList.add("label", "ml-3");
-                spanJobActor.textContent = " Acteur";
-                labelJobActor.append(inputJobActor, spanJobActor);
-
-                divJobs.append(labelJobDirector, labelJobProducer, labelJobSwcriptwriter, labelJobActor);
-
-                const divNationalities = document.createElement("div");
-                divNationalities.classList.add("field");
-                const divSelectNationalities = document.createElement("div");
-                divSelectNationalities.classList.add("select", "is-multiple");
-                const labelNationalities = document.createElement("label");
-                labelNationalities.classList.add("label");
-                const selectNationalities = document.createElement("select");
-                selectNationalities.multiple = true;
-                selectNationalities.style.width = "100%";
-                const optBaseNationalities = document.createElement("option");
-                selectNationalities.appendChild(optBaseNationalities);
-                divSelectNationalities.append(labelNationalities, selectNationalities);
-                divNationalities.appendChild(divSelectNationalities);
-                
-                Object.entries(nationalities).forEach(([iso, country]) => {
-                    selectNationalities.append(
-                        new Option(country, iso, false, false)
-                    );
-                });
-                
-                $(selectNationalities).select2({
-                    placeholder: "Nationalité(s)",
-                    allowClear: true
-                });
-
-                divBlockNewActor.append(divGenre, divFirstName, divLastName, divBirthdate, divDeathdate, divJobs, divNationalities);
-                columns.appendChild(divBlockNewActor);
-
-                let jobsNewActor = [];
-
-                [inputFirstName, inputLastName, inputBirthdate, inputIsDead, inputDeathdate, selectNationalities, inputJobActor, inputJobDirector, inputJobProducer, inputJobScriptwriter].forEach(input => {
-                    input.addEventListener("change", async () => {
-                        let selectedNationalities = $(selectNationalities).val() || [];
-                        let nationalitiesNewActor = selectedNationalities.join(" ");
-                        if (inputJobDirector.checked) {
-                            if (!jobsNewActor.includes("director")) {
-                                jobsNewActor.push("director");
-                            }
-                        } else {
-                            const index = jobsNewActor.indexOf("director");
-                            if (index > -1) { jobsNewActor.splice(index, 1); }
-                        };
-
-                        if (inputJobProducer.checked) {
-                            if (!jobsNewActor.includes("producer")) {
-                                jobsNewActor.push("producer");
-                            }
-                        } else {
-                            const index = jobsNewActor.indexOf("producer");
-                            if (index > -1) { jobsNewActor.splice(index, 1); }
-                        };
-
-                        if (inputJobScriptwriter.checked) {
-                            if (!jobsNewActor.includes("scriptwriter")) {
-                                jobsNewActor.push("scriptwriter");
-                            }
-                        } else {
-                            const index = jobsNewActor.indexOf("scriptwriter");
-                            if (index > -1) { jobsNewActor.splice(index, 1); }
-                        };
-                        
-                        if (inputJobActor.checked) {
-                            if (!jobsNewActor.includes("actor")) {
-                                jobsNewActor.push("actor");
-                            }
-                        } else {
-                            const index = jobsNewActor.indexOf("actor");
-                            if (index > -1) { jobsNewActor.splice(index, 1); }
-                        }
-
-                        let deathdateNewActor;
-
-                        if (inputIsDead.checked === false) {
-                            deathdateNewActor = null;
-                        } else {
-                            deathdateNewActor = inputDeathdate.value;
-                        }
-
-                        const stringJobsNewActor = jobsNewActor.join(" ");
-
-                        const { data: queryActor, error: errorQueryActor} = await supabase
-                            .from("people")
-                            .update([{ 
-                                firstname: inputFirstName.value, 
-                                lastname: inputLastName.value, 
-                                birthdate: inputBirthdate.value, 
-                                nationalities: nationalitiesNewActor, 
-                                jobs: stringJobsNewActor,
-                                complete: false,
-                                deathdate: deathdateNewActor
-                            }])
-                            .eq("id", newActorId);
-
-                        if (errorQueryActor) {
-                            console.log(errorQueryActor);
-                            return;
-                        }
-                    })
-                })
             } else idActor = selectActor.value;
 
             const { data: newRole, error: errorNewRole } = await supabase
@@ -890,19 +648,7 @@ export async function completeMovie(uuid) {
             }
         })
         .on("select2:clear", async function() {
-            if (divBlockNewActor) {
-                divBlockNewActor.remove()
-                divBlockNewActor = null;
-                const { data: deleteNewActor, error: errorDeleteNewActor } = await supabase
-                    .from("people")
-                    .delete()
-                    .eq("id", newActorId);
-
-                if (errorDeleteNewActor) {
-                    console.log(errorDeleteNewActor);
-                    return;
-                }
-            }
+            console.log("people effacé");
         });
 
         if (castingActorId !== null) {
