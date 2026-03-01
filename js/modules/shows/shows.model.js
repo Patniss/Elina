@@ -11,6 +11,6 @@ export function normalizeShow(show) {
         seasons: source.nb_seasons,
         logo: source.logo,
         logoLarge: source.logo_large,
-        userState: source.user_state
+        userState: source.userShow.user_state
     }
 }
