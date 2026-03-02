@@ -66,7 +66,6 @@ export function createRoleBlock(i) {
     columns.append(divDelete, divSelectRole);
 
     return {
-        container: columns,
-        inputRole, selectActor, btnDelete
+        columns, inputRole, selectActor, btnDelete
     }
 }
