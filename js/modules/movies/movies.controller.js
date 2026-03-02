@@ -1,9 +1,9 @@
 // movies.controller.js
-import { initResearchMovie } from "/Elina/js/movies/movies.search.js";
+import { initResearchMovie } from "/Elina/js/modules/movies/movies.search.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { loadAllMovies, loadToseeMovies, loadSeenMovies } from "/Elina/js/modules/movies/movies.load.js";
 import { renderAllMovies, renderMyMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { initToggleSection } from "/Elina/js/utils/toggles.js";
+import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
 let unsubscribe;
 
