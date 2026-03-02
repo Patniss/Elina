@@ -1,8 +1,8 @@
-import { initResearchMovie } from "/Elina/js/movies/movies.search";
+import { initResearchMovie } from "/Elina/js/movies/movies.search.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { loadAllMovies } from "/Elina/js/modules/movies/movies.load.js";
 import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { initToggleSection } from "/Elina/js/utils/toggles.js";
+import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
 let unsubscribe;
 
