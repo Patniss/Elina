@@ -1,4 +1,4 @@
-export function createRoleBlock(index) {
+export function createRoleBlock(i) {
     const columns = document.createElement("div");
     columns.classList.add("columns");
     columns.style.border = "1px solid grey";
