@@ -13,3 +13,25 @@ export async function loadAllMovies(field, asc, filter) {
 
     return moviesWithStatus;
 }
+
+export async function loadToseeMovies(field, asc, filter) { // Incorrecte à refaire
+    let query = supabase.from("movies").select("*, users_movies(*)");
+    query = sortMovies(query, field, asc);
+    query = filterMovies(query, filter);
+
+    const movies = await querySupabase(query);
+    const moviesWithStatus = await mapMoviesWithStatus(movies);
+
+    return moviesWithStatus;
+}
+
+export async function loadSeenMovies(field, asc, filter) { // Incorrecte à refaire
+    let query = supabase.from("movies").select("*, users_movies(*)");
+    query = sortMovies(query, field, asc);
+    query = filterMovies(query, filter);
+
+    const movies = await querySupabase(query);
+    const moviesWithStatus = await mapMoviesWithStatus(movies);
+
+    return moviesWithStatus;
+}
