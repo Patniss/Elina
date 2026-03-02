@@ -1,5 +1,5 @@
-import { filterByTitle } from "/Elina/js/ui/search";
-import { debounce } from "/Elina/js/utils/debounce";
+import { filterByTitle } from "/Elina/js/ui/search.js";
+import { debounce } from "/Elina/js/utils/debounce.js";
 import { searchMovies } from "/Elina/js/services/movies.service.js";
 
 export function searchAllMovies(input, resultContainer) {
