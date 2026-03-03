@@ -6,7 +6,9 @@ import { renderPaginationAll } from "/Elina/js/modules/movies/movies.pagination.
 export async function renderAllMovies(filteredMovies) {
     const container = document.getElementById("list-all-movies");
 
-    render(container, { filteredMovies: filteredMovies});
+    const moviesToRender = filteredMovies || moviesStore.movies.all;
+    
+    render(container, moviesStore, "all", "movies", createMovieCard, moviesToRender);
 
     renderPaginationAll();
 }
