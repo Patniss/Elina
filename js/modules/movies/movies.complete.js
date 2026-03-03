@@ -105,7 +105,7 @@ export async function completeMovie(uuid) {
         divRoles.appendChild(roles.columns);
         initPeopleSelect(roles.selectActor, people);
         initPeopleSelect2NewTag(roles.selectActor, "Acteur…");
-        
+
         bindPeopleSelectEvents(roles.selectActor, {
             onCreate: ({ firstName, lastName }) => {
                 console.log("Ajout acteur : ", firstName, " ", lastName);
@@ -117,7 +117,7 @@ export async function completeMovie(uuid) {
 
         roles.btnDelete.addEventListener("click", () => {
             i -= 1;
-            divRoles.remove(roles.columns);
+            roles.columns.remove();
         });
     });
 }
