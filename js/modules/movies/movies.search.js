@@ -42,6 +42,23 @@ export function initResearchMovie() {
     const input = document.getElementById("movie-search");
     if (!input) return;
 
+    const handleSearch = debounce((query) => {
+        const filteredMovies = filterByTitle(
+            moviesStore.movies.all,
+            query,
+            movie => movie.title
+        );
+
+        renderAllMovies(filteredMovies);
+    }, 150);
+
+    input.addEventListener("input", (e) => handleSearch(e.target.value.trim()));
+}
+
+export function initResearchMovieBase() {
+    const input = document.getElementById("movie-search");
+    if (!input) return;
+
     const handleSearch = debounce((search) => {
         const query = search.toLowerCase().trim();
 
