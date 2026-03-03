@@ -77,3 +77,16 @@ export async function fethAllMovies() {
 
     return data;
 }
+
+export async function movieComplete(uuid) {
+    const { data, error } = await supabase
+        .from("movies")
+        .update([{ complete: true }])
+        .eq("id", uuid)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+}

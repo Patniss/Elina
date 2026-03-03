@@ -1,4 +1,4 @@
-import { getMovie } from "/Elina/js/services/movies.service.js";
+import { getMovie, movieComplete } from "/Elina/js/services/movies.service.js";
 import { getAllPeople, addPeople, deletePeople } from "/Elina/js/services/people.service.js";
 import { initPeopleSelect, initPeopleSelect2NewTag, bindPeopleSelectEvents } from "/Elina/js/ui/select.js";
 import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
@@ -253,34 +253,17 @@ export async function completeMovie(uuid) {
 
         // ===== LOADING =====
         submitComplete.classList.add("is-loading");
-        submitComplete.disabled = true;
 
         try {
-            // Ici tu peux éventuellement appeler une validation finale serveur
-
-            // RESET
-            document.querySelector("form").reset();
-
-            // Nettoyage datasets
-            selectDirectors.forEach(select => {
-                delete select.dataset.directorId;
-                delete select.dataset.castingId;
-            });
-
-            selectScriptwriters.forEach(select => {
-                delete select.dataset.scriptwriterId;
-                delete select.dataset.castingId;
-            });
-
-            divRoles.innerHTML = "";
-
-            alert("Film complété avec succès !");
+            await movieComplete(uuid);
+            setTimeout(() => {
+                window.location.href = "/Elina/toComplete.html";
+            }, 500);
         } catch (error) {
             console.error(error);
             alert("Une erreur est survenue.");
         } finally {
             submitComplete.classList.remove("is-loading");
-            submitComplete.disabled = false;
         }
     });
 }
