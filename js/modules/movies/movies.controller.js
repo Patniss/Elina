@@ -2,6 +2,7 @@ import { initResearchMovie } from "/Elina/js/modules/movies/movies.search.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { loadAllMovies } from "/Elina/js/modules/movies/movies.load.js";
 import { renderAllMovies, renderMyMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
 export async function initMovies() {
     moviesStore.subscribe(() => {
@@ -23,6 +24,22 @@ export async function changePage(page) {
 }
 
 export async function initMyMovies() {
+    initToggleSection({
+        toggleId: "toggle-tosee",
+        contentId: "div-tosee-movies",
+        arrowId: "arrow-tosee",
+        hiddenClass: "is-hidden",
+        iconOpen: "fa-chevron-down",
+        iconClosed:"fa-chevron-right"});
+    
+    initToggleSection({
+        toggleId: "toggle-seen",
+        contentId: "div-seen-movies",
+        arrowId: "arrow-seen",
+        hiddenClass: "is-hidden",
+        iconOpen: "fa-chevron-down",
+        iconClosed:"fa-chevron-right"});
+
     moviesStore.subscribe(() => {
         renderMyMovies();
     });
