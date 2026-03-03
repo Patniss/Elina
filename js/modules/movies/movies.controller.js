@@ -13,6 +13,7 @@ export async function initMovies() {
         renderAllMovies();
     });
 
+    sortFilterMovies();
     initResearchMovie();
 
     await refreshMovies();
