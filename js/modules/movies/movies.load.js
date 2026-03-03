@@ -22,7 +22,7 @@ export async function loadMyMovies(field, asc, filter) {
     query = sortMovies(query, field, asc);
     query = filterMovies(query, filter);
 
-    const movies = querySupabase(query);
+    const movies = await querySupabase(query);
 
     return movies;
 }
