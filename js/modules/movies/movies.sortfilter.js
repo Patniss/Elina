@@ -1,6 +1,6 @@
 import { filters } from "/Elina/js/data/genres.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
-import { toggleDropdown } from "/Elina/js/utils/toggles.js";
+import { toggleDropdown } from "/Elina/js/ui/toggles.js";
 import { refreshMovies } from "/Elina/js/modules/movies/movies.controller.js";
 
 const sortButtons = [
