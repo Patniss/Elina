@@ -31,7 +31,7 @@ export async function completeMovie(uuid) {
 
     const submitComplete = document.getElementById("submit");
 
-    const movie = getMovie(uuid);
+    const movie = await getMovie(uuid);
 
     movieTitle.textContent = movie.title;
 
@@ -102,6 +102,7 @@ export async function completeMovie(uuid) {
     addRole.addEventListener("click", async () => {
         i += 1;
         const roles = createRoleBlock(i);
+        console.log(roles);
     });
 
     const selectActors = document.querySelectorAll(".select-actor");
