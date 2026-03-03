@@ -17,14 +17,15 @@ export function sortFilterMovies() {
     const contentFilter = document.getElementById("dropdown-content-filter");
     const displayFilter = document.getElementById("filter-display");
 
+    const dropdownSort = btnSort.closest(".dropdown");
+    const dropdownFilter = btnFilter.closest(".dropdown");
+    
     btnSort.addEventListener("click", () => {
-        contentSort.classList.remove("is-hidden");
-        contentFilter.classList.add("is-hidden");
+        toggleDropdown(dropdownSort, dropdownFilter);
     });
-
+    
     btnFilter.addEventListener("click", () => {
-        contentFilter.classList.remove("is-hidden");
-        contentFilter.classList.add("is-hidden");
+        toggleDropdown(dropdownFilter, dropdownSort);
     });
 
     filters.forEach(({id, genre, label}) => {
