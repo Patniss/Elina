@@ -49,7 +49,7 @@ export function initResearchMovie() {
             moviesStore.currentPage.all = 1;
 
             moviesStore.movies.all = filterByTitle(
-                allMovies,
+                moviesStore.movies.all,
                 query,
                 movie => movie.title
             );
