@@ -11,5 +11,9 @@ export async function renderAllMovies() {
 }
 
 export async function renderMyMovies() {
-    // construire la fonction
+    const containerTosee = document.getElementById("list-tosee-movies");
+    const containerSeen = document.getElementById("list-seen-movies");
+
+    render(containerTosee, moviesStore, "tosee", "movies", createMovieCard);
+    render(containerSeen, moviesStore, "seen", "movies", createMovieCard);
 }
