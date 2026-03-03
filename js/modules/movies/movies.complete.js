@@ -90,7 +90,7 @@ export async function completeMovie(uuid) {
             onClear: async () => {
                 const idDirector = select.dataset.directorId;
                 if (idDirector) {
-                    await deletePeople(id);
+                    await deletePeople(idDirector);
                     delete select.dataset.directorId;
                 }
                 const idCasting = select.dataset.castingId;
@@ -115,7 +115,7 @@ export async function completeMovie(uuid) {
             onClear: async () => {
                 const idScriptwriter = select.dataset.scriptwriterId;
                 if (idScriptwriter) {
-                    await deletePeople(id);
+                    await deletePeople(idScriptwriter);
                     delete select.dataset.scriptwriterId;
                 }
                 const idCasting = select.dataset.castingId;
@@ -170,7 +170,7 @@ export async function completeMovie(uuid) {
             onClear: async () => {
                 const idActor = roles.selectActor.dataset.actorId;
                 if (idActor) {
-                    delete select.dataset.scriptActorId;
+                    delete roles.selectActor.dataset.actorId;
                 }
                 const idCasting = roles.selectActor.dataset.castingId;
                 if (idCasting) {
@@ -195,5 +195,92 @@ export async function completeMovie(uuid) {
                 if (lastBtn) lastBtn.style.display = "inline-block";
             }
         });
+    });
+
+    submitComplete.addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const errors = [];
+
+        // ===== DIRECTORS =====
+        const visibleDirectors = selectDirectors.filter(select => {
+            return !select.closest(".field").classList.contains("is-hidden");
+        });
+
+        visibleDirectors.forEach((select, index) => {
+            if (!select.dataset.directorId) {
+                errors.push(`Le réalisateur ${index + 1} n'est pas sélectionné.`);
+            }
+        });
+
+        // ===== SCRIPTWRITERS =====
+        const visibleScriptwriters = selectScriptwriters.filter(select => {
+            return !select.closest(".field").classList.contains("is-hidden");
+        });
+
+        visibleScriptwriters.forEach((select, index) => {
+            if (!select.dataset.scriptwriterId) {
+                errors.push(`Le scénariste ${index + 1} n'est pas sélectionné.`);
+            }
+        });
+
+        // ===== ACTORS =====
+        const roleBlocks = divRoles.querySelectorAll(".columns");
+
+        roleBlocks.forEach((block, index) => {
+            const selectActor = block.querySelector("select");
+            const inputRole = block.querySelector("input[type='text']");
+            const selectedType = block.querySelector("input[type='radio']:checked");
+
+            if (!selectActor?.dataset.actorId) {
+                errors.push(`L'acteur du rôle ${index + 1} n'est pas sélectionné.`);
+            }
+
+            if (!inputRole?.value.trim()) {
+                errors.push(`Le nom du rôle ${index + 1} est vide.`);
+            }
+
+            if (!selectedType) {
+                errors.push(`Le type du rôle ${index + 1} n'est pas sélectionné.`);
+            }
+        });
+
+        // ===== IF ERRORS =====
+        if (errors.length > 0) {
+            alert(errors.join("\n"));
+            return;
+        }
+
+        // ===== LOADING =====
+        submitComplete.classList.add("is-loading");
+        submitComplete.disabled = true;
+
+        try {
+            // Ici tu peux éventuellement appeler une validation finale serveur
+
+            // RESET
+            document.querySelector("form").reset();
+
+            // Nettoyage datasets
+            selectDirectors.forEach(select => {
+                delete select.dataset.directorId;
+                delete select.dataset.castingId;
+            });
+
+            selectScriptwriters.forEach(select => {
+                delete select.dataset.scriptwriterId;
+                delete select.dataset.castingId;
+            });
+
+            divRoles.innerHTML = "";
+
+            alert("Film complété avec succès !");
+        } catch (error) {
+            console.error(error);
+            alert("Une erreur est survenue.");
+        } finally {
+            submitComplete.classList.remove("is-loading");
+            submitComplete.disabled = false;
+        }
     });
 }
