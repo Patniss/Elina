@@ -102,6 +102,10 @@ export async function completeMovie(uuid) {
     addRole.addEventListener("click", async () => {
         i += 1;
         const roles = createRoleBlock(i);
+
+        const previousDeleteButtons = divRoles.querySelectorAll(".delete");
+        previousDeleteButtons.forEach(btn => btn.style.display = "none");
+
         divRoles.appendChild(roles.columns);
         initPeopleSelect(roles.selectActor, people);
         initPeopleSelect2NewTag(roles.selectActor, "Acteur…");
