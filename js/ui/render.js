@@ -9,13 +9,13 @@ export function renderGenres(container, genresString) { // Création des tags po
     })
 }
 
-export async function render(containerStore, store, list, element, createFunction) {
+export async function render(containerStore, store, list, element, createFunction, filteredMovies) {
     containerStore.innerHTML = "";
 
     const start = (store.currentPage[list] - 1) * store.pageSize;
     const end = start + store.pageSize;
 
-    const pageArray = store[element]?.[list] || [];
+    const pageArray = filteredMovies || store[element]?.[list] || [];
     const page = pageArray.slice(start, end);
 
     for (const el of page) {
