@@ -23,7 +23,7 @@ export async function loadMyMovies(field, asc, filter) {
     query = filterMovies(query, filter);
 
     const movies = querySupabase(query);
-    const mapMoviesWithStatus = mapMoviesWithStatus(movies);
+    const moviesWithStatus = mapMoviesWithStatus(movies);
 
     return moviesWithStatus;
 }
