@@ -25,6 +25,6 @@ export function initToggleSection({
 }
 
 export function toggleDropdown(show, hide) {
-  show.classList.toggle("is-hidden");
+  show.classList.remove("is-hidden");
   hide.classList.add("is-hidden");
 }
