@@ -122,6 +122,13 @@ export async function completeMovie(uuid) {
         roles.btnDelete.addEventListener("click", () => {
             i -= 1;
             roles.columns.remove();
+
+            const allRoles = divRoles.querySelectorAll(".columns");
+            if (allRoles.length > 0) {
+                const lastRole = allRoles[allRoles.length - 1];
+                const lastBtn = lastRole.querySelector(".delete");
+                if (lastBtn) lastBtn.style.display = "inline-block";
+            }
         });
     });
 }
