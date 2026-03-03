@@ -21,10 +21,12 @@ export function sortFilterMovies() {
     const dropdownFilter = btnFilter.closest(".dropdown");
     
     btnSort.addEventListener("click", () => {
+        console.log("bouton tri cliqué");
         toggleDropdown(dropdownSort, dropdownFilter);
     });
     
     btnFilter.addEventListener("click", () => {
+        console.log("bouton filtre cliqué")
         toggleDropdown(dropdownFilter, dropdownSort);
     });
 
