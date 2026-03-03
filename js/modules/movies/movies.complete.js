@@ -89,7 +89,7 @@ export async function completeMovie(uuid) {
     selectScriptwriters.forEach(select => {
         bindPeopleSelectEvents(select, {
             onCreate: ({ firstName, lastName }) => {
-                console.log("Ajout scriptwriter :", firstName, lastName);
+                console.log("Ajout scriptwriter :", firstName, " ", lastName);
             },
             onClear: () => {
                 console.log("Scénariste supprimé");
@@ -97,27 +97,27 @@ export async function completeMovie(uuid) {
         });
     });
 
-    let i = 1;
+    let i = 0;
 
     addRole.addEventListener("click", async () => {
         i += 1;
         const roles = createRoleBlock(i);
         divRoles.appendChild(roles.columns);
-    });
-
-    const selectActors = document.querySelectorAll(".select-actor");
-    
-    selectActors.forEach(select => { initPeopleSelect(select, people) });
-    selectActors.forEach(select => { initPeopleSelect2NewTag(select, "Acteur…") });
-    
-    selectActors.forEach(select => {
-        bindPeopleSelectEvents(select, {
+        initPeopleSelect(roles.selectActor, people);
+        initPeopleSelect2NewTag(roles.selectActor, "Acteur…");
+        
+        bindPeopleSelectEvents(roles.selectActor, {
             onCreate: ({ firstName, lastName }) => {
-                console.log("Ajout acteur n° ", firstName, lastName);
+                console.log("Ajout acteur : ", firstName, " ", lastName);
             },
             onClear: () => {
                 console.log("Acteur supprimé");
             }
+        });
+
+        roles.btnDelete.addEventListener("click", () => {
+            i -= 1;
+            divRoles.remove(roles.columns);
         });
     });
 }
