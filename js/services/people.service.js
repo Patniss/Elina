@@ -13,3 +13,32 @@ export async function getAllPeople() {
 
     return data;
 }
+
+export async function addPeople(firstname, lastname) {
+    const { data, error } = await supabase
+        .from("people")
+        .insert([{
+            firstname: firstname,
+            lastname: lastname
+        }]).select("id").single();
+
+    if (error) {
+        console.log("Erreur sur l'ajout d'un people : " + error);
+        return;
+    }
+
+    return data;
+}
+
+export async function deletePeople(id) {
+    const { data, error } = await supabase
+        .from("people")
+        .delete()
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        console.log("Erreur lors de la suppression du people : " + error);
+        return;
+    }
+}

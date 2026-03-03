@@ -1,5 +1,5 @@
 import { getMovie } from "/Elina/js/services/movies.service.js";
-import { getAllPeople } from "/Elina/js/services/people.service.js";
+import { getAllPeople, addPeople, deletePeople } from "/Elina/js/services/people.service.js";
 import { initPeopleSelect, initPeopleSelect2NewTag, bindPeopleSelectEvents } from "/Elina/js/ui/select.js";
 import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
 
@@ -77,11 +77,16 @@ export async function completeMovie(uuid) {
 
     selectDirectors.forEach(select => {
         bindPeopleSelectEvents(select, {
-            onCreate: ({ firstName, lastName }) => {
-                console.log("Ajout director :", firstName, lastName);
+            onCreate: async ({ firstName, lastName }) => {
+                const person = await addPeople(firstName, lastName);
+                select.dataset.directorId = person.id;
             },
-            onClear: () => {
-                console.log("Director supprimé");
+            onClear: async () => {
+                const id = select.dataset.directorId;
+                if (id) {
+                    await deletePeople(id);
+                    delete select.dataset.directorId;
+                }
             }
         });
     });
