@@ -2,6 +2,7 @@ import { getMovie } from "/Elina/js/services/movies.service.js";
 import { getAllPeople, addPeople, deletePeople } from "/Elina/js/services/people.service.js";
 import { initPeopleSelect, initPeopleSelect2NewTag, bindPeopleSelectEvents } from "/Elina/js/ui/select.js";
 import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
+import { addDirectorMovieCasting, addScriptwriterMovieCasting, addActorMovieCasting, deleteMovieCasting } from "/Elina/js/services/castings.service.js";
 
 export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title");
@@ -80,12 +81,21 @@ export async function completeMovie(uuid) {
             onCreate: async ({ firstName, lastName }) => {
                 const person = await addPeople(firstName, lastName);
                 select.dataset.directorId = person.id;
+                const casting = await addDirectorMovieCasting(uuid, select.dataset.directorId);
+                select.dataset.castingId = casting.id;
+            },
+            onSelect: async (id) => {
+                select.dataset.directorId = id;
             },
             onClear: async () => {
-                const id = select.dataset.directorId;
-                if (id) {
+                const idDirector = select.dataset.directorId;
+                if (idDirector) {
                     await deletePeople(id);
                     delete select.dataset.directorId;
+                }
+                const idCasting = select.dataset.castingId;
+                if (idCasting) {
+                    await deleteMovieCasting(idCasting);
                 }
             }
         });
@@ -93,11 +103,25 @@ export async function completeMovie(uuid) {
     
     selectScriptwriters.forEach(select => {
         bindPeopleSelectEvents(select, {
-            onCreate: ({ firstName, lastName }) => {
-                console.log("Ajout scriptwriter :", firstName, " ", lastName);
+            onCreate: async ({ firstName, lastName }) => {
+                const person = await addPeople(firstName, lastName);
+                select.dataset.scriptwriterId = person.id;
+                const casting = await addScriptwriterMovieCasting(uuid, select.dataset.scriptwriterId);
+                select.dataset.castingId = casting.id;
             },
-            onClear: () => {
-                console.log("Scénariste supprimé");
+            onSelect: async (id) => {
+                select.dataset.scriptwriterId = id;
+            },
+            onClear: async () => {
+                const idScriptwriter = select.dataset.scriptwriterId;
+                if (idScriptwriter) {
+                    await deletePeople(id);
+                    delete select.dataset.scriptwriterId;
+                }
+                const idCasting = select.dataset.castingId;
+                if (idCasting) {
+                    await deleteMovieCasting(idCasting);
+                }
             }
         });
     });
@@ -108,6 +132,24 @@ export async function completeMovie(uuid) {
         i += 1;
         const roles = createRoleBlock(i);
 
+        async function tryCreateCasting() {
+            const idActor = roles.selectActor.dataset.actorId;
+            const roleName = roles.inputRole.value;
+            
+            const selectedTypeRole = roles.divTypeRole
+                .querySelector('input[type="radio"]:checked');
+            
+            const typeRole = selectedTypeRole?.value;
+
+            if (roles.selectActor.dataset.castingId) return;
+            
+            if (idActor && roleName && typeRole) {
+                const casting = await addActorMovieCasting(uuid, idActor, roleName, typeRole);
+                
+                roles.selectActor.dataset.castingId = casting.id;
+            }
+        }
+
         const previousDeleteButtons = divRoles.querySelectorAll(".delete");
         previousDeleteButtons.forEach(btn => btn.style.display = "none");
 
@@ -116,13 +158,31 @@ export async function completeMovie(uuid) {
         initPeopleSelect2NewTag(roles.selectActor, "Acteur…");
 
         bindPeopleSelectEvents(roles.selectActor, {
-            onCreate: ({ firstName, lastName }) => {
-                console.log("Ajout acteur : ", firstName, " ", lastName);
+            onCreate: async ({ firstName, lastName }) => {
+                const person = await addPeople(firstName, lastName);
+                roles.selectActor.dataset.actorId = person.id;
+                await tryCreateCasting();
             },
-            onClear: () => {
-                console.log("Acteur supprimé");
+            onSelect: async (id) => {
+                roles.selectActor.dataset.actorId = id;
+                await tryCreateCasting();
+            },
+            onClear: async () => {
+                const idActor = roles.selectActor.dataset.actorId;
+                if (idActor) {
+                    delete select.dataset.scriptActorId;
+                }
+                const idCasting = roles.selectActor.dataset.castingId;
+                if (idCasting) {
+                    await deleteMovieCasting(idCasting);
+                    delete roles.selectActor.dataset.castingId;
+                }
             }
         });
+
+        roles.inputRole.addEventListener("change", async () => {
+            await tryCreateCasting();
+        })
 
         roles.btnDelete.addEventListener("click", () => {
             i -= 1;
