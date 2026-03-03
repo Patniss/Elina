@@ -102,7 +102,7 @@ export async function completeMovie(uuid) {
     addRole.addEventListener("click", async () => {
         i += 1;
         const roles = createRoleBlock(i);
-        console.log(roles);
+        divRoles.appendChild(roles.columns);
     });
 
     const selectActors = document.querySelectorAll(".select-actor");
