@@ -44,8 +44,8 @@ export function filterByTitle(list, query, getTitle) {
         const titleA = getTitle(a).toLowerCase();
         const titleB = getTitle(b).toLowerCase();
 
-        const aStarts = titleA.starsWith(lowerQuery) ? 1 : 0;
-        const bStarts = titleB.starsWith(lowerQuery) ? 1 : 0;
+        const aStarts = titleA.startsWith(lowerQuery) ? 1 : 0;
+        const bStarts = titleB.startsWith(lowerQuery) ? 1 : 0;
 
         if (aStarts !== bStarts) return bStarts - aStarts;
 
