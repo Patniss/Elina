@@ -1,4 +1,5 @@
 import { debounce } from "/Elina/js/utils/debounce.js";
+import { normalizeString } from "/Elina/js/utils/format.js";
 
 export function initLiveSearch({
     inputElement, resultContainer, searchFunction, renderItem
@@ -35,9 +36,24 @@ export function initLiveSearch({
 export function filterByTitle(list, query, getTitle) {
     if (!query) return [...list];
 
-    const lowerQuery = query.toLowerCase();
+    const lowerQuery = normalizeString(query);
 
-    return list.filter(item =>
-        getTitle(item).toLowerCase().includes(lowerQuery)
-    );
+    const filtered = list.filter(item => normalizeString(getTitle(item)).includes(lowerQuery));
+
+    filtered.sort((a, b) => {
+        const titleA = getTitle(a).toLowerCase();
+        const titleB = getTitle(b).toLowerCase();
+
+        const aStarts = titleA.starsWith(lowerQuery) ? 1 : 0;
+        const bStarts = titleB.starsWith(lowerQuery) ? 1 : 0;
+
+        if (aStarts !== bStarts) return bStarts - aStarts;
+
+        const aIndex = titleA.indexOf(lowerQuery);
+        const bIndex = titleB.indexOf(lowerQuery);
+
+        return aIndex - bIndex;
+    });
+
+    return filtered;
 }
