@@ -1,0 +1,46 @@
+import { filters } from "/Elina/js/data/genres.js";
+import { moviesStore } from "/Elina/js/data/movies.store.js";
+import { toggleDropdown } from "/Elina/js/utils/toggles.js";
+import { refreshMovies } from "/Elina/js/modules/movies/movies.controller.js";
+
+const sortButtons = [
+    { id: "sort-az", field: "title", asc: true },
+    { id: "sort-za", field: "title", asc: false },
+    { id: "sort-19", field: "year", asc: true },
+    { id: "sort-91", field: "year", asc: false },
+  ];
+
+export function sortFilterMovies() {
+    const btnSort = document.getElementById("button-content-sort");
+    const contentSort = document.getElementById("dropdown-content-sort");
+    const btnFilter = document.getElementById("button-content-filter");
+    const contentFilter = document.getElementById("dropdown-content-filter");
+    const displayFilter = document.getElementById("filter-display");
+
+    btnSort.addEventListener("click", () => toggleDropdown(contentSort, contentFilter));
+    btnFilter.addEventListener("click", () => toggleDropdown(contentFilter, contentSort));
+
+    filters.forEach(({id, genre, label}) => {
+        const btn = document.getElementById(id);
+        btn.addEventListener("click", () => {
+            moviesStore.genreFilter = genre;
+            displayFilter.textContent = label;
+            contentFilter.classList.add("is-hidden");
+            refreshMovies();
+        })
+    });
+
+    sortButtons.forEach(({id, field, asc}) => {
+        const btn = document.getElementById(id);
+        btn.addEventListener("click", () => {
+            sortButtons.forEach(({ id: otherId }) => {
+                const el = document.getElementById(otherId);
+                if (otherId !== id) el.classList.add("is-hidden");
+                else el.classList.remove("is-hidden");
+            });
+            moviesStore.sortField = field;
+            moviesStore.sortAsc = asc;
+            refreshMovies();
+        })
+    });
+}

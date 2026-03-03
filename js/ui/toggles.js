@@ -23,3 +23,8 @@ export function initToggleSection({
     );
   });
 }
+
+export function toggleDropdown(show, hide) {
+  show.classList.toggle("is-hidden");
+  hide.classList.add("is-hidden");
+}

@@ -14,3 +14,30 @@ export const genres = [
     "Thriller",
     "Western"
 ]
+
+export const filters = [
+    { id: "filter-reint", genre: "", label: "" },
+    { id: "filter-action", genre: "Action", label: "Films d'action" },
+    { id: "filter-animation", genre: "Animation", label: "Films d'animation" },
+    { id: "filter-artsmartiaux", genre: "Arts martiaux", label: "Films d'arts martiaux" },
+    { id: "filter-aventure", genre: "Aventure", label: "Films d'aventure" },
+    { id: "filter-biopic", genre: "Biopic", label: "Biopics" },
+    { id: "filter-comedie", genre: "Comédie", label: "Comédies" },
+    { id: "filter-commusicale", genre: "Comédie musicale", label: "Comédies musicales" },
+    { id: "filter-crime", genre: "Crime", label: "Films de crime" },
+    { id: "filter-drame", genre: "Drame", label: "Films dramatiques" },
+    { id: "filter-espionnage", genre: "Espionnage", label: "Films d'espionnage" },
+    { id: "filter-fantastique", genre: "Fantastique", label: "Films fantastiques" },
+    { id: "filter-famille", genre: "Famille", label: "Films familials" },
+    { id: "filter-guerre", genre: "Guerre", label: "Films de guerre" },
+    { id: "filter-historique", genre: "Historique", label: "Films historiques" },
+    { id: "filter-horreur", genre: "Horreur", label: "Films d'horreur" },
+    { id: "filter-musique", genre: "Musique", label: "Films musicaux" },
+    { id: "filter-mystere", genre: "Mystère", label: "Films de mystères" },
+    { id: "filter-policier", genre: "Policier", label: "Films policiers" },
+    { id: "filter-romance", genre: "Romance", label: "Films romantiques" },
+    { id: "filter-sf", genre: "Science-Fiction", label: "Films de science-fiction" },
+    { id: "filter-suspense", genre: "Suspense", label: "Films à suspense" },
+    { id: "filter-thriller", genre: "Thriller", label: "Thrillers" },
+    { id: "filter-western", genre: "Western", label: "Films westerns" },
+  ];
