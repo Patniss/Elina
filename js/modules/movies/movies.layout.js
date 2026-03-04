@@ -109,12 +109,13 @@ export function sortFilterMovies() {
         btn.addEventListener("click", () => {
             sortButtons.forEach(({ id: otherId }) => {
                 const el = document.getElementById(otherId);
-                if (otherId !== id) el.classList.add("is-hidden");
-                else el.classList.remove("is-hidden");
+                if (otherId !== id) el.classList.remove("is-hidden");
+                else el.classList.add("is-hidden");
             });
             moviesStore.sortField = field;
             moviesStore.sortAsc = asc;
             refreshMovies();
+            renderPaginationAll();
         })
     });
 }
