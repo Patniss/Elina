@@ -22,12 +22,17 @@ export let showsStore = {
 
     listeners: [],
 
+
     subscribe(callback) {
         this.listeners.push(callback);
+
+        return () => {
+            this.listeners = this.listeners.filter(cb => cb !== callback);
+        };
     },
 
-    notify() {
-        this.listeners.forEach(cb => cb());
+    notify(list) {
+        this.listeners.forEach(cb => cb(list));
     },
 
     setState(partialState) {
