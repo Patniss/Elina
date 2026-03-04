@@ -26,6 +26,30 @@ export function sortMovies(query, field, asc) {
     return query;
 }
 
+export function sortUsersMovies(query, field, asc) {
+    switch (field) {
+        case "year":
+            query = query
+                .order("year", { ascending: asc, foreignTable: "movies" })
+                .order("title", { ascending: true, foreignTable: "movies" });
+            break;
+
+        case "title":
+            query = query.order("title", { ascending: asc, foreignTable: "movies" })
+            break;
+
+        case "date":
+            query = query.order("title", { ascending: asc })
+            break;
+
+        default:
+            query = query.order("title", { ascending: asc, foreignTable: "movies" })
+            break;
+    }
+
+    return query;
+}
+
 export function filterMovies(query, genre) {
     if (genre) {
         query = query.ilike("genres", `%${genre}%`);
