@@ -35,7 +35,8 @@ export async function initMyMovies() {
         arrowId: "arrow-tosee",
         hiddenClass: "is-hidden",
         iconOpen: "fa-chevron-down",
-        iconClosed:"fa-chevron-right"});
+        iconClosed:"fa-chevron-right"
+    });
     
     initToggleSection({
         toggleId: "toggle-seen",
@@ -43,7 +44,8 @@ export async function initMyMovies() {
         arrowId: "arrow-seen",
         hiddenClass: "is-hidden",
         iconOpen: "fa-chevron-down",
-        iconClosed:"fa-chevron-right"});
+        iconClosed:"fa-chevron-right"
+    });
 
     moviesStore.subscribe(() => {
         renderMyMovies();

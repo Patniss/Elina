@@ -1,22 +1,34 @@
 import { render } from "/Elina/js/ui/render.js";
 import { createMovieCard } from "/Elina/js/modules/movies/movies.ui.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
-import { renderPaginationAll } from "/Elina/js/modules/movies/movies.pagination.js";
+import { renderPaginationAll, renderPaginationTosee, renderPaginationSeen } from "/Elina/js/modules/movies/movies.pagination.js";
 
-export async function renderAllMovies(filteredMovies) {
+export async function renderAllMovies(movies) {
     const container = document.getElementById("list-all-movies");
 
-    const moviesToRender = filteredMovies || moviesStore.movies.all;
+    const moviesToRender = movies || moviesStore.movies.all;
     
     render(container, moviesStore, "all", "movies", createMovieCard, moviesToRender);
 
     renderPaginationAll();
 }
 
-export async function renderMyMovies() {
-    const containerTosee = document.getElementById("list-tosee-movies");
-    const containerSeen = document.getElementById("list-seen-movies");
+export async function renderToseeMovies(movies) {
+    const container = document.getElementById("list-tosee-movies");
 
-    render(containerTosee, moviesStore, "tosee", "movies", createMovieCard);
-    render(containerSeen, moviesStore, "seen", "movies", createMovieCard);
+    const moviesToRender = movies || moviesStore.movies.tosee;
+    
+    render(container, moviesStore, "tosee", "movies", createMovieCard, moviesToRender);
+
+    renderPaginationTosee();
+}
+
+export async function renderSeenMovies(movies) {
+    const container = document.getElementById("list-seen-movies");
+
+    const moviesToRender = movies || moviesStore.movies.seen;
+    
+    render(container, moviesStore, "seen", "movies", createMovieCard, moviesToRender);
+
+    renderPaginationSeen();
 }

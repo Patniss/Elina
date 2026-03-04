@@ -16,18 +16,6 @@ export async function loadAllMovies(field, asc, filter) {
     return moviesWithStatus;
 }
 
-export async function loadMyMovies(field, asc, filter) {
-    const userId = await getUserId();
-    let query = supabase.from("users_movies").select("*, movies(*)").eq("user_id", userId);
-    
-    query = sortUsersMovies(query, field, asc);
-    query = filterMovies(query, filter);
-
-    const movies = await querySupabase(query);
-
-    return movies;
-}
-
 export async function loadToseeMovies(field, asc, filter) {
     const userId = await getUserId();
     let query = supabase
