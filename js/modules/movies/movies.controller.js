@@ -9,6 +9,7 @@ export async function initMovies() {
     moviesStore.genreFilter = "";
     moviesStore.sortField = "title";
     moviesStore.sortAsc = true;
+
     moviesStore.subscribe(() => {
         renderAllMovies();
     });
@@ -51,6 +52,9 @@ export async function initMyMovies() {
         renderToseeMovies();
         renderSeenMovies();
     });
+
+    initResearchMovie();
+    sortFilterMovies();
 
     await refreshToseeMovies();
     await refreshSeenMovies();
