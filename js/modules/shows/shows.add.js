@@ -1,4 +1,5 @@
 import { genres } from "/Elina/js/data/genres.js";
+import { searchAllShows } from "/Elina/js/modules/shows/shows.search.js";
 import { initGenres } from "/Elina/js/ui/select.js";
 
 export async function addShow() {
@@ -16,6 +17,7 @@ export async function addShow() {
 
   initGenres(genresInput, genres);
 
+  searchAllShows(titleInput, searchResult);
 }
 
 export async function addShowBase() {
