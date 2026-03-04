@@ -1,9 +1,9 @@
 import { initResearchMovie } from "/Elina/js/modules/movies/movies.search.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { loadAllMovies, loadToseeMovies, loadSeenMovies } from "/Elina/js/modules/movies/movies.load.js";
-import { renderAllMovies, renderMyMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { renderAllMovies, renderSeenMovies, renderToseeMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { initToggleSection } from "/Elina/js/ui/toggles.js";
-import { sortFilterMovies } from "/Elina/js/modules/movies/movies.layout.js";
+import {  } from "./movies.render";
 
 export async function initMovies() {
     moviesStore.genreFilter = "";
@@ -48,7 +48,8 @@ export async function initMyMovies() {
     });
 
     moviesStore.subscribe(() => {
-        renderMyMovies();
+        renderToseeMovies();
+        renderSeenMovies();
     });
 
     await refreshToseeMovies();
