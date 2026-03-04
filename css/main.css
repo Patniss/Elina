@@ -271,3 +271,7 @@ body {
   background-color: #4AA3A2;
   color: white;
 }
+
+.pagination button {
+  background-color: rgba(255, 255, 255, 50);
+}

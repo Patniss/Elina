@@ -2,7 +2,7 @@ import { filterByTitle } from "/Elina/js/ui/search.js";
 import { debounce } from "/Elina/js/utils/debounce.js";
 import { searchMovies } from "/Elina/js/services/movies.service.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
-import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { renderAllMovies, renderToseeMovies, renderSeenMovies } from "/Elina/js/modules/movies/movies.render.js";
 
 export function searchAllMovies(input, resultContainer) {
     let searchTimeout;
@@ -38,7 +38,7 @@ export function searchAllMovies(input, resultContainer) {
     })
 }
 
-export function initResearchMovie() {
+export function initResearchAllMovie() {
     const input = document.getElementById("movie-search");
     if (!input) return;
 
@@ -55,25 +55,30 @@ export function initResearchMovie() {
     input.addEventListener("input", (e) => handleSearch(e.target.value.trim()));
 }
 
-export function initResearchMovieBase() {
-    const input = document.getElementById("movie-search");
-    if (!input) return;
+export function initResearchToseeMovies() {
+    const input = document.getElementById((query) => {
+        const filteredMovies = filterByTitle(
+            moviesStore.movie.tosee,
+            query,
+            movie => movie.title
+        );
 
-    const handleSearch = debounce((search) => {
-        const query = search.toLowerCase().trim();
-
-        if (document.getElementById("list-all-movies")) {
-            moviesStore.currentPage.all = 1;
-
-            moviesStore.movies.all = filterByTitle(
-                moviesStore.movies.all,
-                query,
-                movie => movie.title
-            );
-        }
-
-        renderAllMovies();
+        renderToseeMovies(filteredMovies);
     }, 150);
 
-    input.addEventListener("input", (e) => handleSearch(e.target.value));
+    input.addEventListener("input", (e) => handleSearch(e.target.trim()));
+}
+
+export function initResearchSeenMovies() {
+    const input = document.getElementById((query) => {
+        const filteredMovies = filterByTitle(
+            moviesStore.movie.seen,
+            query,
+            movie => movie.title
+        );
+
+        renderSeenMovies(filteredMovies);
+    }, 150);
+
+    input.addEventListener("input", (e) => handleSearch(e.target.trim()));
 }
