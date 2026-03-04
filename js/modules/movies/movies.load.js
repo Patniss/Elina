@@ -28,7 +28,7 @@ export async function loadMyMovies(field, asc, filter) {
     return movies;
 }
 
-export async function loadTooMovies(field, asc, filter) {
+export async function loadToseeMovies(field, asc, filter) {
     const userId = await getUserId();
     let query = supabase
         .from("users_movies")
