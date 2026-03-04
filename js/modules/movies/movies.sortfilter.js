@@ -16,18 +16,13 @@ export function sortFilterMovies() {
     const btnFilter = document.getElementById("button-content-filter");
     const contentFilter = document.getElementById("dropdown-content-filter");
     const displayFilter = document.getElementById("filter-display");
-
-    const dropdownSort = btnSort.closest(".dropdown");
-    const dropdownFilter = btnFilter.closest(".dropdown");
     
     btnSort.addEventListener("click", () => {
-        console.log("bouton tri cliqué");
-        toggleDropdown(dropdownSort, dropdownFilter);
+        toggleDropdown(contentSort, contentFilter);
     });
     
     btnFilter.addEventListener("click", () => {
-        console.log("bouton filtre cliqué")
-        toggleDropdown(dropdownFilter, dropdownSort);
+        toggleDropdown(contentFilter, contentSort);
     });
 
     filters.forEach(({id, genre, label}) => {
