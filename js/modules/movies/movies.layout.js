@@ -87,15 +87,11 @@ export function sortFilterMovies() {
     const displayFilter = document.getElementById("filter-display");
     
     btnSort.addEventListener("click", () => {
-        console.log("bouton cliqué");
-        contentSort.classList.remove("is-hidden");
-        contentFilter.classList.add("is-hidden");
+        toggleDropdown(contentSort, contentFilter);
     });
     
     btnFilter.addEventListener("click", () => {
-        console.log("bouton cliqué");
-        contentFilter.classList.remove("is-hidden");
-        contentSort.classList.add("is-hidden");
+        toggleDropdown(contentFilter, contentSort);
     });
 
     filters.forEach(({id, genre, label}) => {
