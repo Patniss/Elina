@@ -42,3 +42,18 @@ export async function deletePeople(id) {
         return;
     }
 }
+
+export async function getPeople(uuid) {
+    const { data, error } = await supabase
+        .from("people")
+        .select("firstname, lastname")
+        .eq("id", uuid)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data
+}

@@ -62,6 +62,48 @@ export async function deleteMovieCasting(id) {
         .single();
 
     if (error) {
-        console.log("Erreur sur de la suppression du casting : " + error);
+        console.log("Erreur sur de la suppression du casting : ", error);
     }
+}
+
+export async function getDirectorsMovie(uuid) {
+    const { data, error } = await supabase
+        .from("movies_casting")
+        .select("people_id")
+        .eq("movie_id", uuid)
+        .eq("job", "director");
+
+    if (error) {
+        console.error("Erreur lors de l'extraction des réalisateurs : ", error)
+    }
+
+    return data
+}
+
+export async function getScriptwritersMovie(uuid) {
+    const { data, error } = await supabase
+        .from("movies_casting")
+        .select("people_id")
+        .eq("movie_id", uuid)
+        .eq("job", "scriptwriter");
+
+    if (error) {
+        console.error("Erreur lors de l'extraction des scénaristes : ", error)
+    }
+
+    return data
+}
+
+export async function getActorsMovies(uuid) {
+    const { data, error } = await supabase
+        .from("movies_casting")
+        .select("*")
+        .eq("movie_id", uuid)
+        .eq("job", "actor");
+
+    if (error) {
+        console.error("Erreur lors de l'extraction des réalisateurs : ", error)
+    }
+
+    return data
 }

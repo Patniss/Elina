@@ -1,10 +1,12 @@
+import { clickAddMovieUser, clickDeleteMovieUser, clickToseeMovieUser, clickSeenMovieUser } from "/Elina/js/modules/usersMovies/usersMovies.actions.js";
+import { getDirectorsMovie, getScriptwritersMovie, getActorsMovies } from "/Elina/js/services/castings.service.js";
 import { getMovie } from "/Elina/js/services/movies.service.js";
-import { getUserMovie, updateDateSeenMovie, updateFavMovie, updateOwnPoster} from "/Elina/js/services/usersMovies.service.js";
+import { getPeople } from "/Elina/js/services/people.service.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
+import { getUserMovie, updateDateSeenMovie, updateFavMovie, updateOwnPoster} from "/Elina/js/services/usersMovies.service.js";
+import { toggleBtnSeenStatut } from "/Elina/js/ui/dom.js";
 import { renderGenres } from "/Elina/js/ui/render.js";
 import { formatMovieDuration, formatFrenchTypography, formatCompleteDate } from "/Elina/js/utils/format.js";
-import { toggleBtnSeenStatut } from "/Elina/js/ui/dom.js";
-import { clickAddMovieUser, clickDeleteMovieUser, clickToseeMovieUser, clickSeenMovieUser } from "/Elina/js/modules/usersMovies/usersMovies.actions.js";
 
 export async function movieContent(uuid) {
     const movieTitle = document.getElementById("movie-title");
@@ -30,6 +32,9 @@ export async function movieContent(uuid) {
     const btnNullDate = document.getElementById("button-null-date-seen");
     const movieFav = document.getElementById("movie-fav");
     const movieUnlike = document.getElementById("movie-unlike");
+
+    const movieDirectors = document.getElementById("directors");
+    const movieScriptwriters = document.getElementById("scriptwriters");
 
     const userId = await getUserId();
     const movie = await getMovie(uuid);
@@ -153,4 +158,29 @@ export async function movieContent(uuid) {
         if (modal) modal.classList.remove('is-active');
     })
 
+    if (movie.complete) {
+        const directors = getDirectorsMovie(uuid);
+        const scriptwriters = getScriptwritersMovie(uuid);
+        const actors = getScriptwritersMovie(uuid);
+
+        directors.forEach(d, index => {
+            const isLast = index === directors.length - 1;
+
+            const director = getPeople(d.id);
+            const nameDirector = `${director.firstname} ${director.lastname}`;
+
+            const liDirector = document.createElement("li");
+            liDirector.classList.add("mr-3");
+            const linkDirector = document.createElement("a");
+            linkDirector.href = `/Elina/entertainment/people/people.html?id=${uuid}`;
+            linkDirector.textContent = nameDirector;
+            liDirector.appendChild(linkDirector);
+
+            if (!isLast) {
+                const liSep = document.createElement("li");
+                liSep.classList.add("mr-3");
+                liSep.innerHTML = "&#x2022;";
+            }
+        });
+    }
 }
