@@ -1,6 +1,16 @@
-import { renderPagination } from "/Elina/js/ui/pagination.js";
-import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { filters } from "/Elina/js/data/genres.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
+import { refreshMovies } from "/Elina/js/modules/movies/movies.controller.js";
+import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { renderPagination } from "/Elina/js/ui/pagination.js";
+import { toggleDropdown } from "/Elina/js/ui/toggles.js";
+
+const sortButtons = [
+    { id: "sort-az", field: "title", asc: true },
+    { id: "sort-za", field: "title", asc: false },
+    { id: "sort-19", field: "year", asc: true },
+    { id: "sort-91", field: "year", asc: false },
+];
 
 export function sortMovies(query, field, asc) {
     switch (field) {
@@ -67,4 +77,48 @@ export function renderPaginationAll(totalItems) {
     setCurrentPage: (page) => currentPage["all"] = page,
     onPageChange: renderAllMovies
   });
+}
+
+export function sortFilterMovies() {
+    const btnSort = document.getElementById("button-content-sort");
+    const contentSort = document.getElementById("dropdown-content-sort");
+    const btnFilter = document.getElementById("button-content-filter");
+    const contentFilter = document.getElementById("dropdown-content-filter");
+    const displayFilter = document.getElementById("filter-display");
+    
+    btnSort.addEventListener("click", () => {
+        console.log("bouton cliqué");
+        contentSort.classList.remove("is-hidden");
+        contentFilter.classList.add("is-hidden");
+    });
+    
+    btnFilter.addEventListener("click", () => {
+        console.log("bouton cliqué");
+        contentFilter.classList.remove("is-hidden");
+        contentSort.classList.add("is-hidden");
+    });
+
+    filters.forEach(({id, genre, label}) => {
+        const btn = document.getElementById(id);
+        btn.addEventListener("click", () => {
+            moviesStore.genreFilter = genre;
+            displayFilter.textContent = label;
+            contentFilter.classList.add("is-hidden");
+            refreshMovies();
+        })
+    });
+
+    sortButtons.forEach(({id, field, asc}) => {
+        const btn = document.getElementById(id);
+        btn.addEventListener("click", () => {
+            sortButtons.forEach(({ id: otherId }) => {
+                const el = document.getElementById(otherId);
+                if (otherId !== id) el.classList.add("is-hidden");
+                else el.classList.remove("is-hidden");
+            });
+            moviesStore.sortField = field;
+            moviesStore.sortAsc = asc;
+            refreshMovies();
+        })
+    });
 }
