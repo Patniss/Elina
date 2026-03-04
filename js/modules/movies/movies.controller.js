@@ -53,7 +53,11 @@ export async function initMyMovies() {
 }
 
 export async function refreshMyMovies() {
-    const movies = await loadMyMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-    moviesStore.setMoviesAndPage("tosee", movies, 1);
-    moviesStore.setMoviesAndPage("seen", movies, 1);
+    try {
+        const movies = await loadMyMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+        moviesStore.setMoviesAndPage("tosee", movies, 1);
+        moviesStore.setMoviesAndPage("seen", movies, 1);
+    } catch (error) {
+        console.error("Erreur refreshMyMovies:", error);
+    }
 }

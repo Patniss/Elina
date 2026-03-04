@@ -6,6 +6,7 @@ import { getUserId } from "/Elina/js/services/profiles.service.js";
 
 export async function loadAllMovies(field, asc, filter) {
     let query = supabase.from("movies").select("*, users_movies(*)");
+    
     query = sortMovies(query, field, asc);
     query = filterMovies(query, filter);
 
@@ -17,7 +18,7 @@ export async function loadAllMovies(field, asc, filter) {
 
 export async function loadMyMovies(field, asc, filter) {
     const userId = await getUserId();
-    let query = supabase.from("users_movies").select("*");
+    let query = supabase.from("users_movies").select("*, movies(*)").eq("user_id", userId);
     
     query = sortMovies(query, field, asc);
     query = filterMovies(query, filter);
