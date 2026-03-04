@@ -27,3 +27,35 @@ export async function loadMyMovies(field, asc, filter) {
 
     return movies;
 }
+
+export async function loadTooMovies(field, asc, filter) {
+    const userId = await getUserId();
+    let query = supabase
+        .from("users_movies")
+        .select("*, movies(*)")
+        .eq("user_id", userId)
+        .eq("seen", false);
+    
+    query = sortUsersMovies(query, field, asc);
+    query = filterMovies(query, filter);
+
+    const movies = await querySupabase(query);
+
+    return movies;
+}
+
+export async function loadSeenMovies(field, asc, filter) {
+    const userId = await getUserId();
+    let query = supabase
+        .from("users_movies")
+        .select("*, movies(*)")
+        .eq("user_id", userId)
+        .eq("seen", true);
+    
+    query = sortUsersMovies(query, field, asc);
+    query = filterMovies(query, filter);
+
+    const movies = await querySupabase(query);
+
+    return movies;
+}

@@ -1,6 +1,6 @@
 import { initResearchMovie } from "/Elina/js/modules/movies/movies.search.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
-import { loadAllMovies, loadMyMovies } from "/Elina/js/modules/movies/movies.load.js";
+import { loadAllMovies, loadMyMovies, loadToseeMovies, loadSeenMovies } from "/Elina/js/modules/movies/movies.load.js";
 import { renderAllMovies, renderMyMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { initToggleSection } from "/Elina/js/ui/toggles.js";
 import { sortFilterMovies } from "/Elina/js/modules/movies/movies.layout.js";
@@ -49,15 +49,24 @@ export async function initMyMovies() {
         renderMyMovies();
     });
 
-    await refreshMyMovies();
+    await refreshToseeMovies();
+    await refreshSeenMovies();
 }
 
-export async function refreshMyMovies() {
+export async function refreshToseeMovies() {
     try {
-        const movies = await loadMyMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+        const movies = await loadToseeMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
         moviesStore.setMoviesAndPage("tosee", movies, 1);
+    } catch (error) {
+        console.error("Erreur refreshToseeMovies:", error);
+    }
+}
+
+export async function refreshSeenMovies() {
+    try {
+        const movies = await loadSeenMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
         moviesStore.setMoviesAndPage("seen", movies, 1);
     } catch (error) {
-        console.error("Erreur refreshMyMovies:", error);
+        console.error("Erreur refreshSeenMovies:", error);
     }
 }
