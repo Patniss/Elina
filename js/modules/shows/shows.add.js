@@ -1,4 +1,24 @@
+import { genres } from "/Elina/js/data/genres.js";
+import { initGenres } from "/Elina/js/ui/select.js";
+
 export async function addShow() {
+  const showForm = document.getElementById("show-form");
+  const genresInput = document.getElementById("show-genres");
+  const titleInput = document.getElementById("show-title");
+  const searchResult = document.getElementById("research-results");
+  const showState = document.getElementById("show-state");
+  const showNbSeasons = document.getElementById("show-nb-seasons");
+  const showSubmit = document.getElementById("show-submit");
+  const averageTimeInput = document.getElementById("show-time");
+  const showLogo = document.getElementById("show-logo");
+
+  if (!showForm) return;
+
+  initGenres(genresInput, genres);
+
+}
+
+export async function addShowBase() {
 
   // Récupération des éléments du formulaire
   const showForm = document.getElementById("show-form");
