@@ -144,7 +144,7 @@ export async function completeMovie(uuid) {
             if (roles.selectActor.dataset.castingId) return;
             
             if (idActor && roleName && typeRole) {
-                const casting = await addActorMovieCasting(uuid, idActor, roleName, typeRole);
+                const casting = await addActorMovieCasting(uuid, idActor, roleName, i, typeRole);
                 
                 roles.selectActor.dataset.castingId = casting.id;
             }
