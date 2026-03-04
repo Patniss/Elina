@@ -1,5 +1,6 @@
 import { showsStore } from "/Elina/js/data/shows.store.js";
 import { createShowCard } from "/Elina/js/modules/shows/shows.ui.js";
+import { render } from "/Elina/js/ui/render.js";
 
 export async function renderAllShows(shows) {
     const container = document.getElementById("list-all-shows");
