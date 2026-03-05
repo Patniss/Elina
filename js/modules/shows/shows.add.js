@@ -13,11 +13,21 @@ export async function addShow() {
   const averageTimeInput = document.getElementById("show-time");
   const showLogo = document.getElementById("show-logo");
 
+  const showSeasons = document.getElementById("show-seasons");
+
   if (!showForm) return;
 
   initGenres(genresInput, genres);
 
   searchAllShows(titleInput, searchResult);
+
+  showNbSeasons.addEventListener("change", () => {
+    if (showNbSeasons.value > 1) {
+      for (let index = 2; index < showNbSeasons.value; index++) {
+        console.log("Ajout nb saison n°", index);
+      }
+    }
+  })
 }
 
 export async function addShowBase() {

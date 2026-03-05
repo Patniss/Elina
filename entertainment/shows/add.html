@@ -29,7 +29,7 @@
           <label class="label">Titre</label>
           <div class="control">
             <input placeholder="Titre de la série…" class="input" type="text" id="show-title" required>
-            <div id="research-results" class="box mt-2" style="display: none;"></div>
+            <div id="research-results" class="box mt-2" style="display: none; position: absolute;"></div>
           </div>
         </div>
 
@@ -72,6 +72,8 @@
           </div>
         </div>
 
+        <hr class="hr" />
+
         <div>
             <label class="label">Saisons :</label>
             <div class="content">
@@ -81,7 +83,7 @@
             </div>
         </div>
 
-        <div class="control">
+        <div class="control mt-5">
           <button class="button is-primary" type="submit" id="show-submit">
             Ajouter la série
           </button>
