@@ -2,7 +2,7 @@ import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 
 export async function addUserShow(uuid) {
-    const userId = getUserId();
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_shows")
@@ -19,7 +19,7 @@ export async function addUserShow(uuid) {
 }
 
 export async function deleteUserShow(uuid) {
-    const userId = getUserId();
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_shows")
@@ -35,7 +35,7 @@ export async function deleteUserShow(uuid) {
 }
 
 export async function pauseUserShow(uuid) {
-    const userId = getUserId();
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("uses_shows")
@@ -51,7 +51,7 @@ export async function pauseUserShow(uuid) {
 }
 
 export async function cancelUserShow(uuid) {
-    const userId = getUserId();
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("uses_shows")

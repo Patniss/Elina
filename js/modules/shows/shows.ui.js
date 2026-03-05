@@ -23,7 +23,6 @@ export function updateShowUI(status, buttons, container) {
 
 export async function createShowCard(s) {
     const show = normalizeShow(s);
-    console.log("normalized show:", show);
 
     if (!show) {
         console.error("Invalid normalized show:", s);

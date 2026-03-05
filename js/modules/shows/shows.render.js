@@ -4,7 +4,6 @@ import { render } from "/Elina/js/ui/render.js";
 
 export async function renderAllShows(shows) {
     const container = document.getElementById("list-all-shows");
-    console.log(container);
 
     const showsToRender = shows || showsStore.shows.all;
     
