@@ -1,9 +1,8 @@
+import { filterByTitle } from "/Elina/js/ui/search.js";
+import { debounce } from "/Elina/js/utils/debounce.js";
+import { searchMovies } from "/Elina/js/services/movies.service.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { renderAllMovies, renderToseeMovies, renderSeenMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { searchMovies } from "/Elina/js/services/movies.service.js";
-import { filterByTitle } from "/Elina/js/ui/search.js";
-import { renderPagination } from "/Elina/js/ui/pagination.js";
-import { debounce } from "/Elina/js/utils/debounce.js";
 
 export function searchAllMovies(input, resultContainer) {
     let searchTimeout;
@@ -50,13 +49,7 @@ export function initResearchAllMovie() {
             movie => movie.title
         );
 
-        renderPagination(
-            "pagination-list",
-            filteredMovies,
-            filteredMovies.length,
-            moviesStore.pageSize,
-            (page) => { moviesStore.setCurrentPage("all", page); },
-            () => { renderAllMovies(); })
+        renderAllMovies(filteredMovies);
     }, 150);
 
     input.addEventListener("input", (e) => handleSearch(e.target.value.trim()));
@@ -68,7 +61,7 @@ export function initResearchToseeMovies() {
 
     const handleSearch = debounce((query) => {
         const filteredMovies = filterByTitle(
-            moviesStore.movies.tosee,
+            moviesStore.movie.tosee,
             query,
             movie => movie.title
         );
@@ -85,7 +78,7 @@ export function initResearchSeenMovies() {
 
     const handleSearch = debounce((query) => {
         const filteredMovies = filterByTitle(
-            moviesStore.movies.seen,
+            moviesStore.movie.seen,
             query,
             movie => movie.title
         );
