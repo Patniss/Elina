@@ -55,7 +55,7 @@ export async function addShow() {
     const nbSeasonsShow = showNbSeasons.value;
     const logoShow = showLogo.value;
 
-    const selectedGenres = $(showGenres).val();
+    const selectedGenres = $(genresInput).val();
     const genresShow = selectedGenres.join(" ; ");
 
     try {
@@ -70,7 +70,7 @@ export async function addShow() {
       const nbEpisodes = document.getElementById(`season-${index}`).value;
 
       try {
-        await addSeason(nbSeason, idShow, nbEpisodes)
+        await addSeason(nbSeason, idShow.id, nbEpisodes)
       } catch (error) {
         console.error(error)
         return;
