@@ -56,7 +56,10 @@ export function initResearchAllMovie() {
 }
 
 export function initResearchToseeMovies() {
-    const input = document.getElementById((query) => {
+    const input = document.getElementById("movie-search");
+    if (!input) return;
+
+    const handleSearch = debounce((query) => {
         const filteredMovies = filterByTitle(
             moviesStore.movie.tosee,
             query,
@@ -70,7 +73,10 @@ export function initResearchToseeMovies() {
 }
 
 export function initResearchSeenMovies() {
-    const input = document.getElementById((query) => {
+    const input = document.getElementById("movie-search");
+    if (!input) return;
+
+    const handleSearch = debounce((query) => {
         const filteredMovies = filterByTitle(
             moviesStore.movie.seen,
             query,
