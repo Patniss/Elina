@@ -33,39 +33,34 @@
           </div>
         </div>
 
-        <div class="field">
-          <label for="show-nb-seasons" class="label">Nombre de saisons</label>
+        <div class="field is-flex">
+          <label for="show-nb-seasons" class="label mr-3">Nombre de saisons :</label>
           <div class="control">
             <input placeholder="Nombre de saisons…" class="input" type="number" style="width: 200px;" id="show-nb-seasons" required>
           </div>
         </div>
 
-        <div class="field">
-          <div>
-            <label class="label">Genres</label>
-            <div class="select is-multiple">
-              <select class="input" multiple="multiple" size="8" id="show-genres" style="width: 100%;" required></select>
-            </div>
+        <div class="field is-flex">
+          <label class="label mr-3">Genres :</label>
+          <div class="select is-multiple">
+            <select class="input" multiple="multiple" size="8" id="show-genres" style="width: 100%;" required></select>
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Temps moyen épisode</label>
+        <div class="field is-flex">
+          <label class="label mr-3">Temps moyen épisode :</label>
           <div class="control">
             <input placeholder="Temps en minutes…" class="input" type="number" id="show-time" style="width: 200px;" required>
           </div>
         </div>
 
-        <div class="field">
-          <div>
-            <label for="show-state">
-              <div class="select">
-                <select name="show-state" id="show-state" required>
-                  <option value="finish">Terminée</option>
-                  <option value="current">En cours</option>
-                </select>
-              </div>
-            </label>
+        <div class="field is-flex">
+          <label for="show-state" class="label mr-3">Statut de la série :</label>
+          <div class="select">
+            <select name="show-state" id="show-state" required>
+              <option value="finish">Terminée</option>
+              <option value="current">En cours</option>
+            </select>
           </div>
         </div>
 
@@ -75,6 +70,15 @@
             <input class="input" type="url" id="show-logo" required>
             <p><i>Merci d'utiliser une image provenant de <a href="https://www.themoviedb.org">themoviedb.org</a></i></p>
           </div>
+        </div>
+
+        <div>
+            <label class="label">Saisons :</label>
+            <div class="content">
+              <ol id="show-seasons">
+                  <li class="is-flex"><span class="mr-3">Saison 1 :</span><input placeholder="Nombre d'épisodes…" class="input" type="number" id="season-1" style="width: 200px;" required /></li>
+              </ol>
+            </div>
         </div>
 
         <div class="control">
