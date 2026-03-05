@@ -1,5 +1,6 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
-import { createButtons } from "/Elina/js/ui/button.js";
+import { addUserShow, pauseUserShow } from "/Elina/js/services/usersShows.service.js";
+import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 
 const BUTTONS_BY_STATUS = {
     null: ["add", "details"],
@@ -72,7 +73,29 @@ export async function createShowCard(s) {
     card.appendChild(cardContent);
     column.appendChild(card);
 
-    console.log(show.title, " : ", show.userState);
+    addButton.addEventListener("click", async () => {
+        handleButtonState(addButton, "loading");
+        try {
+            await addUserShow(show.id);
+        } catch (error) {
+            setTimeout(() => {
+                updateShowUI("added", buttons, divTags);
+                handleButtonState(addButton, "stop-loading");
+            }, 500);
+        }
+    });
+
+    pauseButton.addEventListener("click", async () => {
+        handleButtonState(pauseButton, "loading");
+        try {
+            await pauseUserShow(show.id);
+        } catch (error) {
+            setTimeout(() => {
+                updateShowUI("paused", buttons, divTags);
+                handleButtonState(addButton, "stop-loading");
+            }, 500);
+        }
+    });
     
     return column;
 }

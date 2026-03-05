@@ -1,5 +1,5 @@
-import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
+import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 import { addUserMovie, deleteUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
 
 const BUTTONS_BY_STATUS = {
@@ -98,7 +98,7 @@ export async function createMovieCard(m) {
             await deleteUserMovie(movie.id);
         } catch (error) { throw error; }
         setTimeout(() => {
-            updateMovieUI(true, buttons, divTags);
+            updateMovieUI(null, buttons, divTags);
             handleButtonState(deleteButton, "stop-loading");
         }, 500);
     });
