@@ -9,41 +9,7 @@ export function renderGenres(container, genresString) { // Création des tags po
     })
 }
 
-// fonction test show
 export async function render(containerStore, store, list, element, createFunction, filteredMovies) {
-    containerStore.innerHTML = "";
-
-    const start = (store.currentPage[list] - 1) * store.pageSize;
-    const end = start + store.pageSize;
-
-    const pageArray = filteredMovies || store[element]?.[list] || [];
-    const page = pageArray.slice(start, end);
-
-    for (const el of page) {
-        let node;
-
-        try {
-            node = await createFunction(el);
-            if (!(node instanceof Node)) {
-                console.error("createFunction returned:", node, "for element:", el);
-                continue;
-            }
-            containerStore.appendChild(node);
-
-        } catch (error) {
-            console.error("Error creating card for:", el, error);
-        }
-    }
-
-    const cards = containerStore.querySelectorAll(".movie-card");
-    cards.forEach((card, index) => {
-        card.classList.remove("fade-in-up");
-        card.style.animationDelay = `${index * 70}ms`;
-        card.classList.add("fade-in-up");
-    });
-}
-
-export async function BASERENDER(containerStore, store, list, element, createFunction, filteredMovies) {
     containerStore.innerHTML = "";
 
     const start = (store.currentPage[list] - 1) * store.pageSize;

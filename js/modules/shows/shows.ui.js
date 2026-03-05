@@ -22,6 +22,12 @@ export function updateShowUI(status, buttons, container) {
 
 export async function createShowCard(s) {
     const show = normalizeShow(s);
+    console.log("normalized show:", show);
+
+    if (!show) {
+        console.error("Invalid normalized show:", s);
+        return document.createElement("div");
+    }
 
     const column = document.createElement("div");
     column.classList.add("column", "is-one-quarter");
