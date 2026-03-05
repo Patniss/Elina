@@ -28,7 +28,7 @@ export function renderPaginationSeen() {
         moviesStore.currentPage.seen,
         moviesStore.movies.seen.length,
         moviesStore.pageSize,
-        (page) => { moviesStore.setCurrentPage(seen, page); },
+        (page) => { moviesStore.setCurrentPage("seen", page); },
         () => { renderSeenMovies(); })
 }
 
