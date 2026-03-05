@@ -131,5 +131,8 @@ export function onlyNoListDisplay() {
         } else {
             moviesStore.catFilter = "";
         }
+
+        refreshMovies();
+        renderPaginationAll();
     })
 }
