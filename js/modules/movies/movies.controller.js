@@ -27,6 +27,7 @@ export async function refreshMovies() {
     if (moviesStore.catFilter === "nolist") {
         movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter, true);
     } else movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+    
     moviesStore.setMoviesAndPage("all", movies, 1);
 }
 

@@ -1,8 +1,7 @@
 import { filters } from "/Elina/js/data/genres.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { refreshMovies } from "/Elina/js/modules/movies/movies.controller.js";
-import { renderAllMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { renderPagination } from "/Elina/js/ui/pagination.js";
+import { renderPaginationAll } from "/Elina/js/modules/movies/movies.pagination.js";
 import { toggleDropdown } from "/Elina/js/ui/toggles.js";
 
 const sortButtons = [
@@ -68,17 +67,6 @@ export function filterMovies(query, genre) {
     return query;
 }
 
-export function renderPaginationAll(totalItems) {
-  renderPagination({
-    containerId: "pagination-list",
-    currentPage: moviesStore.currentPage["all"],
-    totalItems: totalItems,
-    pageSize: moviesStore.pageSize,
-    setCurrentPage: (page) => currentPage["all"] = page,
-    onPageChange: renderAllMovies
-  });
-}
-
 export function sortFilterMovies() {
     const btnSort = document.getElementById("button-content-sort");
     const contentSort = document.getElementById("dropdown-content-sort");
@@ -133,6 +121,5 @@ export function onlyNoListDisplay() {
         }
 
         refreshMovies();
-        renderPaginationAll();
     })
 }
