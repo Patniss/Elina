@@ -1,4 +1,4 @@
-import { searchShows } from "/Elina/js/services/shows.service.JS";
+import { searchShows } from "/Elina/js/services/shows.service.js";
 
 export function searchAllShows(input, resultContainer) {
     let searchTimeout;
