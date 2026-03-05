@@ -56,10 +56,11 @@ export async function createShowCard(s) {
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
 
-    const buttons = createButtons(["details", "add", "seeEp", "pause", "takeAgain", "cancel", "retry"], 'entertainment/shows/show', show.id);
+    const buttons = createButtons(["details", "add", "delete", "seeEp", "pause", "takeAgain", "cancel", "retry"], 'entertainment/shows/show', show.id);
 
     const detailsButton = buttons.details;
     const addButton = buttons.add;
+    const deleteButton = buttons.delete;
     const seeEpButton = buttons.seeEp;
     const pauseButton = buttons.pause;
     const takeAgainButton = buttons.takeAgain;
