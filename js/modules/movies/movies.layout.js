@@ -119,3 +119,15 @@ export function sortFilterMovies() {
         })
     });
 }
+
+export function onlyNoListDisplay() {
+    const buttonDisplay = document.getElementById("display-only-nolist");
+
+    buttonDisplay.addEventListener("click", () => {
+        if (moviesStore.catFilter !== "nolist") {
+            moviesStore.catFilter = "nolist";
+        } else {
+            moviesStore.catFilter = "";
+        }
+    })
+}

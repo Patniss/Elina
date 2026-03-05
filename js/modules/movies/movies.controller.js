@@ -7,6 +7,7 @@ import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
 export async function initMovies() {
     moviesStore.genreFilter = "";
+    moviesStore.catFilter = "";
     moviesStore.sortField = "title";
     moviesStore.sortAsc = true;
 
@@ -21,7 +22,10 @@ export async function initMovies() {
 }
 
 export async function refreshMovies() {
-    const movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+    let movies;
+    if (moviesStore.catFilter === "nolist") {
+        movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter, true);
+    } else movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
     moviesStore.setMoviesAndPage("all", movies, 1);
 }
 
@@ -30,6 +34,11 @@ export async function changePage(page) {
 }
 
 export async function initMyMovies() {
+    moviesStore.genreFilter = "";
+    moviesStore.catFilter = "";
+    moviesStore.sortField = "title";
+    moviesStore.sortAsc = true;
+
     initToggleSection({
         toggleId: "toggle-tosee",
         contentId: "div-tosee-movies",
