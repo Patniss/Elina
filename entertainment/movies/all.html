@@ -42,7 +42,7 @@
               </div>
 
               <div class="dropdown-menu" id="dropdown-menu-filter" role="menu">
-                <div class="dropdown-content" id="dropdown-content-filter">
+                <div class="dropdown-content is-hidden" id="dropdown-content-filter">
                   <a href="#" class="dropdown-item" id="filter-reint">Réinitialiser</a>
                   <a href="#" class="dropdown-item" id="filter-action">Action</a>
                   <a href="#" class="dropdown-item" id="filter-animation">Animation</a>
@@ -78,7 +78,7 @@
                 </button>
               </div>
               <div class="dropdown-menu" id="dropdown-menu-sort" role="menu">
-                <div class="dropdown-content" id="dropdown-content-sort">
+                <div class="dropdown-content is-hidden" id="dropdown-content-sort">
                   <a href="#" class="dropdown-item" id="sort-az">
                     <span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span>
                     <span>Trier par titre A-Z</span>
@@ -108,9 +108,7 @@
         
       </div>
 
-      <nav class="pagination" role="navigation" aria-label="navigation" id="pagination">
-        <div id="pagination-list"></div>
-      </nav>
+      <nav class="pagination is-left" role="navigation" aria-label="pagination" id="pagination-list"></nav>
 
     </div>
 
@@ -127,15 +125,7 @@
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
   import { initMovies } from "/Elina/js/modules/movies/movies.controller.js";
-</script>
-
-<script type="module">
-  import { loadAllMovies } from "/Elina/js/list.js";
-  loadAllMovies();
-  import { initResearchMovie } from "/Elina/js/list.js";
-  initResearchMovie();
-  import { sortFilterMovies } from "/Elina/js/list.js";
-  sortFilterMovies();
+  await initMovies();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>

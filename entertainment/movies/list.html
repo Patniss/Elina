@@ -158,42 +158,8 @@
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-</script>
-
-<script type="module">
-  import { loadMyMovies } from "/Elina/js/list.js";
-  loadMyMovies();
-  import { initResearchMovie } from "/Elina/js/list.js";
-  initResearchMovie();
-</script>
-
-<script>
-  const toseeMoviesToggle = document.getElementById("toggle-tosee");
-  const seenMoviesToggle = document.getElementById("toggle-seen");
-  const listToseeMovies = document.getElementById("div-tosee-movies");
-  const listSeenMovies = document.getElementById("div-seen-movies");
-  const arrowToseeMovies = document.getElementById("arrow-tosee");
-  const arrowSeenMovies = document.getElementById("arrow-seen");
-
-  toseeMoviesToggle.addEventListener("click", () => {
-    if (listToseeMovies.classList.contains("is-hidden")) {
-      listToseeMovies.classList.remove("is-hidden");
-      arrowToseeMovies.classList.replace("fa-chevron-right", "fa-chevron-down");
-    } else {
-      listToseeMovies.classList.add("is-hidden");
-      arrowToseeMovies.classList.replace("fa-chevron-down", "fa-chevron-right");
-    };
-  });
-
-  seenMoviesToggle.addEventListener("click", () => {
-    if (listSeenMovies.classList.contains("is-hidden")) {
-      listSeenMovies.classList.remove("is-hidden");
-      arrowSeenMovies.classList.replace("fa-chevron-right", "fa-chevron-down");
-    } else {
-      listSeenMovies.classList.add("is-hidden");
-      arrowSeenMovies.classList.replace("fa-chevron-down", "fa-chevron-right");
-    };
-  });
+  import { initMyMovies } from "/Elina/js/modules/movies/movies.controller.js";
+  initMyMovies();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
