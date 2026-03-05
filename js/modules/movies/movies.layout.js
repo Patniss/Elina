@@ -124,6 +124,8 @@ export function onlyNoListDisplay() {
     const buttonDisplay = document.getElementById("display-only-nolist");
 
     buttonDisplay.addEventListener("click", () => {
+        console.log("bouton cliqué");
+        
         if (moviesStore.catFilter !== "nolist") {
             moviesStore.catFilter = "nolist";
         } else {
