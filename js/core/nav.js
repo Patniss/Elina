@@ -1,4 +1,4 @@
-import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
+import { loadProfile } from "/Elina/js/services/profiles.service.js";
 import { applyUserTheme } from "/Elina/js/core/custom.js";
 
 const NAV_ITEMS = [

@@ -1,5 +1,5 @@
 import { supabase } from "/Elina/js/core/supabase.js";
-import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
+import { loadProfile } from "/Elina/js/services/profiles.service.js";
 import { addUserMovie } from "/Elina/js/services/usersMovies.service.js";
 import { handleButtonState } from "/Elina/js/ui/button.js";
 import { debounce } from "/Elina/js/utils/debounce.js";

@@ -3,7 +3,7 @@ import { formatFrenchTypography } from "/Elina/js/utils/format.js"
 
 
 import { supabase } from "/Elina/js/core/supabase.js";
-import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
+import { loadProfile } from "/Elina/js/services/profiles.service.js";
 import { addMovie } from "/Elina/js/functions.js";
 import { suppMovie } from "/Elina/js/functions.js";
 import { toseeMovie } from "/Elina/js/functions.js";
