@@ -71,7 +71,7 @@ export function initResearchToseeMovies() {
         renderToseeMovies(filteredMovies);
     }, 150);
 
-    input.addEventListener("input", (e) => handleSearch(e.target.trim()));
+    input.addEventListener("input", (e) => handleSearch(e.target.value.trim()));
 }
 
 export function initResearchSeenMovies() {
@@ -88,5 +88,5 @@ export function initResearchSeenMovies() {
         renderSeenMovies(filteredMovies);
     }, 150);
 
-    input.addEventListener("input", (e) => handleSearch(e.target.trim()));
+    input.addEventListener("input", (e) => handleSearch(e.target.value.trim()));
 }
