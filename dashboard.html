@@ -28,7 +28,7 @@
           <div class="card">
             <div class="card-content">
               <p class="title is-5">Divertissements</p>
-              <p class="subtitle is-6"><i>En construction</i></p>
+              <p class="subtitle is-6" id="time-entertainment"></p>
               <a href="/Elina/entertainment/index.html" class="button">Accéder</a>
             </div>
           </div>
@@ -130,8 +130,10 @@
 </script>
 
 <script type="module">
-  import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
+  import { loadProfile } from "/Elina/js/services/profiles.service.js";
   loadProfile();
+  import { customDashboard } from "/Elina/js/modules/dahsboard/dashboard.js";
+  customDashboard();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>

@@ -29,7 +29,8 @@
             <div class="card-content">
               <p class="title is-5">Films</p>
               <p class="subtitle is-6" id="time-movies"></p>
-              <a href="/Elina/entertainment/movies/index.html" class="button">Mes films</a>
+              <a href="/Elina/entertainment/movies/index.html" class="button">Accueil</a>
+              <a href="/Elina/entertainment/movies/list.html" class="button">Mes films</a>
               <a href="/Elina/entertainment/movies/all.html" class="button">Tout</a>
             </div>
           </div>
@@ -39,8 +40,9 @@
           <div class="card">
             <div class="card-content">
               <p class="title is-5">Séries</p>
-              <p class="subtitle is-6"><i>En construction</i></p>
-              <a href="/Elina/entertainment/shows/index.html" class="button">Mes séries</a>
+              <p class="subtitle is-6" id="time-shows"><i>En construction</i></p>
+              <a href="/Elina/entertainment/shows/index.html" class="button">Accueil</a>
+              <a href="/Elina/entertainment/shows/list.html" class="button">Mes séries</a>
               <a href="/Elina/entertainment/shows/all.html" class="button">Tout</a>
             </div>
           </div>
@@ -95,8 +97,8 @@
 <script type="module">
   import { loadProfile } from "/Elina/js/modules/dashboard/dashboard.js";
   loadProfile();
-  import { customDashboard } from "/Elina/js/modules/dashboard/dashboard.js";
-  customDashboard();
+  import { customDashboardEntertainement } from "/Elina/js/modules/dashboard/dashboard.js";
+  customDashboardEntertainement();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>

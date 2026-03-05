@@ -105,3 +105,20 @@ export async function updateOwnPoster(uuid, link) {
     
     if (error) throw error;
 }
+
+export async function getSeenTimeMovie() {
+    const userId = getUserId;
+
+    const { data, error } = await supabase
+    .from("users_movies")
+    .select(`*, movies (time)`)
+    .eq("user_id", userId)
+    .eq("seen", true);
+    
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data.reduce((sum, movie) => sum + Number(movie.movies.time), 0 );
+}

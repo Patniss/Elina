@@ -7,6 +7,23 @@ export function formatMovieDuration(totalMinutes) { // Transforme un nombre de m
     return result;
 }
 
+export function formatTotalTime(totalMinutes) {
+    const yearsSeen = Math.floor(totalMinutes / 525600);
+    const monthsSeen = Math.floor((totalMinutes - 525600*yearsSeen) / 43200);
+    const daysSeen = Math.floor((totalMinutes - 525600*yearsSeen - 43200*monthsSeen) / 1440);
+    const hoursSeen = Math.floor((totalMinutes - 525600*yearsSeen - 43200*monthsSeen - 1440*daysSeen) / 60);
+    const minutesSeen = Math.floor(totalMinutes - 525600*yearsSeen - 43200*monthsSeen - 1440*daysSeen - 60*hoursSeen);
+    
+    let timeSeen;
+
+    if (yearsSeen > 0) timeSeen = yearsSeen + " a " + monthsSeen + " m " + daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+    else if (monthsSeen > 0) timeSeen = monthsSeen + " m " + daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+    else if (daysSeen > 0) timeSeen = daysSeen + " j " + hoursSeen + " h " + minutesSeen + " min ";
+    else timeSeen = hoursSeen + " h " + minutesSeen + " min ";
+
+    return timeSeen;
+}
+
 export function formatFrenchTypography(text) { // Ajoute des espaces insécables dans un texte
   const nbsp = "\u202F";
   
