@@ -125,7 +125,7 @@ export async function getTotalSeenMovies() {
 }
 
 export async function getSeenTimeMovie() {
-    const userId = getUserId;
+    const userId = await getUserId;
 
     const { data, error } = await supabase
     .from("users_movies")
