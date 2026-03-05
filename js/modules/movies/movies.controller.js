@@ -1,4 +1,4 @@
-import { initResearchAllMovie, initResearchToseeMovies } from "/Elina/js/modules/movies/movies.search.js";
+import { initResearchAllMovie, initResearchToseeMovies, initResearchSeenMovies } from "/Elina/js/modules/movies/movies.search.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { sortFilterMovies } from "/Elina/js/modules/movies/movies.layout.js";
 import { loadAllMovies, loadToseeMovies, loadSeenMovies } from "/Elina/js/modules/movies/movies.load.js";
@@ -54,6 +54,7 @@ export async function initMyMovies() {
     });
 
     initResearchToseeMovies();
+    initResearchSeenMovies();
     sortFilterMovies();
 
     await refreshToseeMovies();

@@ -3,6 +3,7 @@ import { renderAllMovies, renderToseeMovies, renderSeenMovies } from "/Elina/js/
 import { renderPaginationSearch } from "/Elina/js/modules/movies/movies.pagination.js";
 import { searchMovies } from "/Elina/js/services/movies.service.js";
 import { filterByTitle } from "/Elina/js/ui/search.js";
+import { autoToggleSection } from "/Elina/js/ui/toggles.js";
 import { debounce } from "/Elina/js/utils/debounce.js";
 
 export function searchAllMovies(input, resultContainer) {
@@ -69,6 +70,13 @@ export function initResearchToseeMovies() {
         );
 
         renderToseeMovies(filteredMovies);
+
+        autoToggleSection({
+            contentId: "div-tosee-movies",
+            arrowId: "arrow-tosee",
+            auto: filteredMovies.length > 1
+        });
+
     }, 150);
 
     input.addEventListener("input", (e) => handleSearch(e.target.value.trim()));
@@ -86,6 +94,12 @@ export function initResearchSeenMovies() {
         );
 
         renderSeenMovies(filteredMovies);
+        autoToggleSection({
+            contentId: "div-seen-movies",
+            arrowId: "arrow-seen",
+            auto: filteredMovies.length > 1
+        });
+
     }, 150);
 
     input.addEventListener("input", (e) => handleSearch(e.target.value.trim()));
