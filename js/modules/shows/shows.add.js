@@ -22,9 +22,24 @@ export async function addShow() {
   searchAllShows(titleInput, searchResult);
 
   showNbSeasons.addEventListener("change", () => {
-    if (showNbSeasons.value > 1) {
-      for (let index = 2; index < showNbSeasons.value; index++) {
-        console.log("Ajout nb saison n°", index);
+    if (showNbSeasons.value > 0) {
+      showSeasons.innerHTML = "";
+
+      for (let index = 1; index <= showNbSeasons.value; index++) {
+        const liSeason = document.createElement("li");
+        liSeason.classList.add("is-flex");
+        const spanSeason = document.createElement("span");
+        spanSeason.classList.add("mr-3");
+        spanSeason.textContent = `Saison ${index} :`;
+        const inputSeason = document.createElement("input");
+        inputSeason.placeholder = "Nombre d'épisodes…";
+        inputSeason.classList.add("input");
+        inputSeason.type = "number";
+        inputSeason.id = `season-${index}`;
+        inputSeason.style.width = "200px";
+        inputSeason.required = true;
+        liSeason.append(spanSeason, inputSeason);
+        showSeasons.appendChild(liSeason);
       }
     }
   })
