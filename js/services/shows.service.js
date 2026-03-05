@@ -15,3 +15,25 @@ export async function searchShows(query) {
 
     return data;
 }
+
+export async function addingShow(title, genres, averageMin, state, nbSeasons, logo) {
+    const { data, error } = await supabase
+        .from("shows")
+        .insert([{
+            title: title,
+            genres: genres,
+            average_min: averageMin,
+            state: state,
+            complete: false,
+            nb_seasons: nbSeasons,
+            logo: logo,
+            logo_large: null
+        }]).single().select("id");
+    
+    if (error) {
+        console.error("Erreur lors de l'ajout d'une série :", error);
+        return;
+    }
+
+    return data;
+}
