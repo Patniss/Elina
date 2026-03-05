@@ -107,7 +107,7 @@ export async function updateOwnPoster(uuid, link) {
 }
 
 export async function getTotalSeenMovies() {
-    const userId = getUserId;
+    const userId = getUserId();
 
     const { data, error } = await supabase
     .from("users_movies")
@@ -125,7 +125,7 @@ export async function getTotalSeenMovies() {
 }
 
 export async function getSeenTimeMovie() {
-    const userId = await getUserId;
+    const userId = await getUserId();
 
     const { data, error } = await supabase
     .from("users_movies")
@@ -142,7 +142,7 @@ export async function getSeenTimeMovie() {
 }
 
 export async function getTotalToseeMovies() {
-    const userId = getUserId;
+    const userId = getUserId();
 
     const { data, error } = await supabase
     .from("users_movies")
