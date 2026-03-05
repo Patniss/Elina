@@ -63,7 +63,7 @@ export function initResearchToseeMovies() {
         const filteredMovies = filterByTitle(
             moviesStore.movie.tosee,
             query,
-            movie => movie.title
+            movie => movie.movies.title
         );
 
         renderToseeMovies(filteredMovies);
@@ -80,7 +80,7 @@ export function initResearchSeenMovies() {
         const filteredMovies = filterByTitle(
             moviesStore.movie.seen,
             query,
-            movie => movie.title
+            movie => movie.movies.title
         );
 
         renderSeenMovies(filteredMovies);
