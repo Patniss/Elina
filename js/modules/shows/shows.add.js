@@ -2,6 +2,7 @@ import { genres } from "/Elina/js/data/genres.js";
 import { searchAllShows } from "/Elina/js/modules/shows/shows.search.js";
 import { addSeason } from "/Elina/js/services/seasons.service.js";
 import { addingShow } from "/Elina/js/services/shows.service.js";
+import { handleButtonState } from "/Elina/js/ui/button.js";
 import { initGenres } from "/Elina/js/ui/select.js";
 
 export async function addShow() {
@@ -49,6 +50,8 @@ export async function addShow() {
   showForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    handleButtonState(showSubmit, "loading");
+
     const titleShow = titleInput.value;
     const averageTimeShow = averageTimeInput.value;
     const stateShow = showState.value;
@@ -64,6 +67,9 @@ export async function addShow() {
       idShow = await addingShow(titleShow, genresShow, averageTimeShow, stateShow, nbSeasonsShow, logoShow);
     } catch (error) {
       console.error(error);
+      setTimeout(() => {
+        handleButtonState(showSubmit, "error");
+      }, 250);
       return;
     }
 
@@ -74,13 +80,21 @@ export async function addShow() {
       try {
         await addSeason(nbSeason, idShow.id, nbEpisodes)
       } catch (error) {
+        setTimeout(() => {
+          handleButtonState(showSubmit, "error");
+        }, 250);
         console.error(error)
         return;
       }
     };
 
-    showForm.reset();
-    titleInput.focus();
+    setTimeout(() => {
+      handleButtonState(showSubmit, "stop-loading");
+      showForm.reset();
+      titleInput.focus();
+      showSeasons.innerHTML = "";
+      genresInput.value = "";
+    }, 500);
 
   });
 }
