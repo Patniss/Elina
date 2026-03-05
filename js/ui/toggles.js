@@ -53,6 +53,6 @@ export function toggleDropdown(show, hide) {
     show.classList.remove("is-hidden");
     hide.classList.add("is-hidden");
   } else {
-    hide.classList.add("is-hidden");
+    show.classList.add("is-hidden");
   }
 }
