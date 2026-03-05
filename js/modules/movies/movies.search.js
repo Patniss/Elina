@@ -49,6 +49,8 @@ export function initResearchAllMovie() {
             movie => movie.title
         );
 
+        moviesStore.setMoviesAndPage("all", filteredMovies);
+
         renderAllMovies(filteredMovies);
     }, 150);
 

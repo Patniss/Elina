@@ -272,6 +272,10 @@ body {
   color: white;
 }
 
-.pagination button {
-  background-color: rgba(255, 255, 255, 50);
+.pagination a {
+  background-color: rgba(255, 255, 255, 80);
+}
+
+.pagination a.is-current {
+  background-color: var(--user-primary);
 }
