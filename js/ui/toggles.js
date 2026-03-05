@@ -50,9 +50,9 @@ export function autoToggleSection({
 
 export function toggleDropdown(show, hide) {
   if (show.classList.contains("is-hidden")) {
-    show.classList.add("is-hidden");
+    show.classList.remove("is-hidden");
+    hide.classList.add("is-hidden");
   } else {
-    hide.classList.remove("is-hidden");
-    show.classList.add("is-hidden");
+    hide.classList.add("is-hidden");
   }
 }
