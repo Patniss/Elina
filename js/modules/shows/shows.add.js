@@ -58,8 +58,10 @@ export async function addShow() {
     const selectedGenres = $(genresInput).val();
     const genresShow = selectedGenres.join(" ; ");
 
+    let idShow;
+
     try {
-      const idShow = await addingShow(titleShow, genresShow, averageTimeShow, stateShow, nbSeasonsShow, logoShow);
+      idShow = await addingShow(titleShow, genresShow, averageTimeShow, stateShow, nbSeasonsShow, logoShow);
     } catch (error) {
       console.error(error);
       return;

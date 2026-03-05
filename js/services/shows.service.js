@@ -28,11 +28,11 @@ export async function addingShow(title, genres, averageMin, state, nbSeasons, lo
             nb_seasons: nbSeasons,
             logo: logo,
             logo_large: null
-        }]).single().select("id");
+        }]).select("id").single();
     
     if (error) {
         console.error("Erreur lors de l'ajout d'une série :", error);
-        return;
+        throw error;
     }
 
     return data;
