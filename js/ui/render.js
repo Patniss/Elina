@@ -24,13 +24,14 @@ export async function render(containerStore, store, list, element, createFunctio
 
         try {
             node = await createFunction(el);
-        } catch (error) {
             if (!(node instanceof Node)) {
-                console.error("Not a DOM node:", node);
+                console.error("createFunction returned:", node, "for element:", el);
                 continue;
             }
-
             containerStore.appendChild(node);
+
+        } catch (error) {
+            console.error("Error creating card for:", el, error);
         }
     }
 
