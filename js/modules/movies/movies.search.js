@@ -63,7 +63,7 @@ export function initResearchToseeMovies() {
 
     const handleSearch = debounce((query) => {
         const filteredMovies = filterByTitle(
-            moviesStore.movie.tosee,
+            moviesStore.movies.tosee,
             query,
             movie => movie.movies.title
         );
@@ -80,7 +80,7 @@ export function initResearchSeenMovies() {
 
     const handleSearch = debounce((query) => {
         const filteredMovies = filterByTitle(
-            moviesStore.movie.seen,
+            moviesStore.movies.seen,
             query,
             movie => movie.movies.title
         );
