@@ -50,6 +50,22 @@ export async function pauseUserShow(uuid) {
     }
 }
 
+export async function startUserShow(uuid) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("uses_shows")
+        .update({user_state: "started"})
+        .eq("user_id", userId)
+        .eq("user_show", uuid)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+}
+
 export async function cancelUserShow(uuid) {
     const userId = await getUserId();
 

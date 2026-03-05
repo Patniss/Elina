@@ -51,6 +51,11 @@ export function changeModeButton(button, mode) {
             button.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
             break;
 
+        case "toStart":
+            button.classList.add("is-success", "is-light");
+            button.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>Commencer</span>`;
+            break;
+
         case "seeEp":
             button.classList.add("is-success", "is-light");
             button.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>Épisode ?</span>`;
