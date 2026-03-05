@@ -31,3 +31,13 @@ export function renderPaginationSeen() {
         (page) => { moviesStore.setCurrentPage(seen, page); },
         () => { renderSeenMovies(); })
 }
+
+export function renderPaginationSearch(containerId, list, filteredMovies) {
+    renderPagination(
+        containerId,
+        moviesStore.currentPage[list],
+        filteredMovies.length,
+        moviesStore.pageSize,
+        (page) => { moviesStore.setCurrentPage(list, page); }
+    )
+}
