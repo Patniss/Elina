@@ -1,6 +1,6 @@
 import { render } from "/Elina/js/ui/render.js";
-import { createMovieCard } from "/Elina/js/modules/movies/movies.ui.js";
-import { moviesStore } from "/Elina/js/data/movies.store.js";
+import { createMovieCard, createCarouselCard } from "/Elina/js/modules/movies/movies.ui.js";
+import { moviesStore, indexMoviesStore } from "/Elina/js/data/movies.store.js";
 import { renderPaginationAll, renderPaginationTosee, renderPaginationSeen } from "/Elina/js/modules/movies/movies.pagination.js";
 
 export async function renderAllMovies(movies) {
@@ -31,4 +31,12 @@ export async function renderSeenMovies(movies) {
     render(container, moviesStore, "seen", "movies", createMovieCard, moviesToRender);
 
     renderPaginationSeen();
+}
+
+export async function renderIndexToseeMovies(movies) {
+    const container = document.getElementById("toseeMovies");
+
+    const moviesToRender = movies;
+
+    render(container, indexMoviesStore, "toseeMovies", "movies", createCarouselCard, moviesToRender);
 }

@@ -116,3 +116,12 @@ export async function createMovieCard(m) {
 
   return column;
 }
+
+export async function createCarouselCard(m) {
+    const movie = normalizeMovie(m);
+
+    const testP = document.createElement("p");
+    testP.textContent = "Test";
+
+    return testP;
+}

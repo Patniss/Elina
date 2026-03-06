@@ -45,3 +45,12 @@ export let moviesStore = {
         this.notify(list);
     }
 };
+
+export let indexMoviesStore = {
+    movies: {
+        toseeMovies: [],
+        favMovies: [],
+        lastSeenMovies: []
+    },
+    pageSize: 5
+}

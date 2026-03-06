@@ -1,22 +1,6 @@
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { supabase } from "/Elina/js/core/supabase.js";
 
-export async function getUserMovie(userId, movieId) {
-    const { data, error } = await supabase
-        .from("users_movies")
-        .select("*")
-        .eq("user_id", userId)
-        .eq("movie_id", movieId)
-        .maybeSingle();
-
-    if (error) {
-        console.error(error);
-        return;
-    }
-
-    return data;
-}
-
 export async function addUserMovie(movieId) {
     const userId = await getUserId();
 
@@ -51,20 +35,88 @@ export async function deleteUserMovie(movieId) {
     }
 }
 
-export async function updateSeenUserMovie(movieId, seenState) {
+export async function getSeenTimeMovie() {
     const userId = await getUserId();
+
+    const { data, error } = await supabase
+    .from("users_movies")
+    .select(`*, movies (time)`)
+    .eq("user_id", userId)
+    .eq("seen", true);
     
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data.reduce((sum, movie) => sum + Number(movie.movies.time), 0 );
+}
+
+export async function getToseeMovies() {
+    const userId = await getUserId();
+
     const { data, error } = await supabase
         .from("users_movies")
-        .update({seen: seenState})
+        .select("*, movies(*)")
+        .eq("user_id", userId)
+        .eq("seen", false)
+        .order("title", { ascending: true });
+    
+    if (error) {
+        console.error(error);
+    }
+
+    return data;
+}
+
+export async function getTotalSeenMovies() {
+    const userId = await getUserId();
+
+    const { count, error } = await supabase
+    .from("users_movies")
+    .select(`*`, { count: "exact", head: true })
+    .eq("user_id", userId)
+    .eq("seen", true);
+    
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return count;
+}
+
+export async function getTotalToseeMovies() {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+    .from("users_movies")
+    .select(`*`)
+    .eq("user_id", userId)
+    .eq("seen", false);
+    
+  if (error) {
+    console.error(error);
+    return;
+  }
+  
+  return data.length;
+}
+
+export async function getUserMovie(userId, movieId) {
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*")
         .eq("user_id", userId)
         .eq("movie_id", movieId)
-        .single();
+        .maybeSingle();
 
     if (error) {
-        console.log(error);
+        console.error(error);
         return;
     }
+
+    return data;
 }
 
 export async function updateDateSeenMovie(uuid, date_seen) {
@@ -106,53 +158,18 @@ export async function updateOwnPoster(uuid, link) {
     if (error) throw error;
 }
 
-export async function getTotalSeenMovies() {
+export async function updateSeenUserMovie(movieId, seenState) {
     const userId = await getUserId();
-
-    const { count, error } = await supabase
-    .from("users_movies")
-    .select(`*`, { count: "exact", head: true })
-    .eq("user_id", userId)
-    .eq("seen", true);
     
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  return count;
-}
-
-export async function getSeenTimeMovie() {
-    const userId = await getUserId();
-
     const { data, error } = await supabase
-    .from("users_movies")
-    .select(`*, movies (time)`)
-    .eq("user_id", userId)
-    .eq("seen", true);
-    
-  if (error) {
-    console.error(error);
-    return;
-  }
+        .from("users_movies")
+        .update({seen: seenState})
+        .eq("user_id", userId)
+        .eq("movie_id", movieId)
+        .single();
 
-  return data.reduce((sum, movie) => sum + Number(movie.movies.time), 0 );
-}
-
-export async function getTotalToseeMovies() {
-    const userId = await getUserId();
-
-    const { data, error } = await supabase
-    .from("users_movies")
-    .select(`*`)
-    .eq("user_id", userId)
-    .eq("seen", false);
-    
-  if (error) {
-    console.error(error);
-    return;
-  }
-  
-  return data.length;
+    if (error) {
+        console.log(error);
+        return;
+    }
 }

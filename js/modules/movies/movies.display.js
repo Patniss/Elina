@@ -1,4 +1,5 @@
-import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies } from "/Elina/js/services/usersMovies.service.js";
+import { renderIndexToseeMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
 
 export async function displayIndexMovies() {
@@ -6,9 +7,14 @@ export async function displayIndexMovies() {
     const moviesMinutesSeen = document.getElementById("moviesMinutesSeen");
     const moviesTosee = document.getElementById("moviesTosee");
 
+    const toseeMoviesDiv = document.getElementById("toseeMovies");
+
     const totalTime = await getSeenTimeMovie();
     
     moviesSeen.textContent = await getTotalSeenMovies();
     moviesMinutesSeen.textContent = formatTotalTime(totalTime);
     moviesTosee.textContent = await getTotalToseeMovies();
+
+    const toseeMovies = await getToseeMovies();
+    renderIndexToseeMovies(toseeMovies);
 }
