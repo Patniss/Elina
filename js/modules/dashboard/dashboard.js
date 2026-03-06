@@ -14,8 +14,6 @@ export async function customDashboardEntertainement() {
   if (session.movies === false) homeMovies.style.display = "none"; else {
     const timeMovies = document.getElementById("time-movies");
     const totalMinutesSeen = await getSeenTimeMovie();
-
-    console.log(totalMinutesSeen);
     
     timeMovies.textContent = formatTotalTime(totalMinutesSeen);
   }
@@ -33,7 +31,7 @@ export async function customDashboard() {
   let totalSeen = 0;
 
   if (session.movies) {
-    totalSeen += getSeenTimeMovie();
+    totalSeen += await getSeenTimeMovie();
   }
 
   timeEntertainment.textContent = formatTotalTime(totalSeen);
