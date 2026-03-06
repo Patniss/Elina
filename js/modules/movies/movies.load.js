@@ -4,19 +4,36 @@ import { querySupabase } from "/Elina/js/services/service.js";
 import { mapMoviesWithStatus, mapNolistMovies } from "/Elina/js/modules/usersMovies/usersMovies.status.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 
-export async function loadAllMovies(field, asc, filter, catFilter) {
+export async function loadAllMovies(field, asc, filter) {
     let query = supabase.from("movies").select("*, users_movies(*)");
     
     query = sortMovies(query, field, asc);
     query = filterMovies(query, filter);
 
     const movies = await querySupabase(query);
-    let moviesWithStatus;
-    if (catFilter) {
-        moviesWithStatus = await mapNolistMovies(movies);
-    } else moviesWithStatus = await mapMoviesWithStatus(movies);
+    const moviesWithStatus = await mapMoviesWithStatus(movies);
 
     return moviesWithStatus;
+}
+
+export async function loadNoListMovies(field, asc, filter) {
+    let query = supabase
+        .from("movies")
+        .select("*, users_movies(*)");
+    
+    query = sortMovies(query, field, asc);
+    query = filterMovies(query, filter);
+
+    const movies = await querySupabase(query);
+    const moviesWithStatus = await mapMoviesWithStatus(movies);
+
+    let noListMovies = [];
+
+    movies.forEach(movie => {
+        if (moviesWithStatus.seen === null) { noListMovies.push(moviesWithStatus) }
+    });
+
+    return noListMovies;
 }
 
 export async function loadToseeMovies(field, asc, filter) {

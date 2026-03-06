@@ -18,24 +18,3 @@ export async function mapMoviesWithStatus(data) {
 
     return moviesWithStatus;
 }
-
-export async function mapNolistMovies(data) {
-    const userId = await getUserId();
-    if (!data) return [];
-
-    return data.reduce((acc, movie) => {
-        const userMovie = movie.users_movies.find(
-            um => um.user_id === userId
-        );
-
-        if (!userMovie || userMovie.seen === null) {
-            acc.push({
-                ...movie,
-                seen: userMovie.seen,
-                ownPoster: userMovie.own_poster
-            });
-        }
-
-        return acc;
-    }, []);
-}

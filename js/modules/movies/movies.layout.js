@@ -121,5 +121,6 @@ export function onlyNoListDisplay() {
         }
 
         refreshMovies();
+        renderPaginationAll();
     })
 }
