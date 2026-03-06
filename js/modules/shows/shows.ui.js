@@ -1,4 +1,5 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
+import { addUserSeason } from "/Elina/js/services/usersSeasons.service.js";
 import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
 import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 
@@ -100,6 +101,7 @@ export async function createShowCard(s) {
         handleButtonState(startButton, "loading");
         try {
             await startUserShow(show.id);
+            await addUserSeason(show.id, 1);
         } catch (error) { throw error; }
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
