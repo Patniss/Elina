@@ -70,6 +70,7 @@ export function initResearchToseeMovies() {
         );
 
         renderToseeMovies(filteredMovies);
+        renderPaginationSearch("pagination-list-tosee", "tosee", filteredMovies);
 
         autoToggleSection({
             contentId: "div-tosee-movies",
@@ -94,6 +95,8 @@ export function initResearchSeenMovies() {
         );
 
         renderSeenMovies(filteredMovies);
+        renderPaginationSearch("pagination-list-seen", "seen", filteredMovies);
+
         autoToggleSection({
             contentId: "div-seen-movies",
             arrowId: "arrow-seen",
