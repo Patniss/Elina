@@ -60,7 +60,7 @@ export async function getToseeMovies() {
         .select("*, movies(*)")
         .eq("user_id", userId)
         .eq("seen", false)
-        .order("title", { ascending: true });
+        .order("title", { ascending: true, foreignTable: "movies" });
     
     if (error) {
         console.error(error);
