@@ -107,11 +107,11 @@ export async function updateOwnPoster(uuid, link) {
 }
 
 export async function getTotalSeenMovies() {
-    const userId = getUserId();
+    const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { count, error } = await supabase
     .from("users_movies")
-    .select(`*`)
+    .select(`*`, { count: "exact", head: true })
     .eq("user_id", userId)
     .eq("seen", true);
     
@@ -120,8 +120,7 @@ export async function getTotalSeenMovies() {
     return;
   }
 
-  // return data.reduce((sum, movie) => sum + Number(movie.nb_seen || 0), 0); -> quand j'aurai ajouté nb_seen dans la bdd
-  return data.length;
+  return count;
 }
 
 export async function getSeenTimeMovie() {
@@ -142,7 +141,7 @@ export async function getSeenTimeMovie() {
 }
 
 export async function getTotalToseeMovies() {
-    const userId = getUserId();
+    const userId = await getUserId();
 
     const { data, error } = await supabase
     .from("users_movies")
