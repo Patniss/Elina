@@ -27,7 +27,7 @@
         
         <h2 class="subtitle">Films à compléter</h2>
         
-        <div class="columns is-multiline" id="list-incomplete-movies"></div>
+        <ul id="list-incomplete-movies"></ul>
         
       </div>
 
@@ -48,16 +48,8 @@
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-</script>
-
-<script type="module">
-  import { loadIncompleteMovies } from "/Elina/js/list.js";
-  loadIncompleteMovies();
-</script>
-
-<script type="module">
-  import { loadIncompletePeople } from "/Elina/js/list.js";
-  loadIncompletePeople();
+  import { displayAllIncompleteMovies } from "/Elina/js/modules/movies.complete.js";
+  displayAllIncompleteMovies();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>

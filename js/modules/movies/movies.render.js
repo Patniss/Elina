@@ -36,7 +36,5 @@ export async function renderSeenMovies(movies) {
 export async function renderIndexToseeMovies(movies) {
     const container = document.getElementById("toseeMovies");
 
-    const moviesToRender = movies;
-
-    render(container, indexMoviesStore, "toseeMovies", "movies", createCarouselCard, moviesToRender);
+    render(container, indexMoviesStore, "toseeMovies", "movies", createCarouselCard, movies);
 }

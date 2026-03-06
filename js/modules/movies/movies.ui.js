@@ -17,7 +17,7 @@ export function updateMovieUI(status, buttons, container) {
     });
 }
 
-export async function createMovieCard(m) {
+export async function createMovieCard(m, complete) {
     const movie = normalizeMovie(m);
 
     // Création de la carte
