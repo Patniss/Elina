@@ -75,7 +75,7 @@ export function initResearchToseeMovies() {
         autoToggleSection({
             contentId: "div-tosee-movies",
             arrowId: "arrow-tosee",
-            auto: filteredMovies.length > 1
+            auto: filteredMovies.length >= 1
         });
 
     }, 150);
@@ -100,7 +100,7 @@ export function initResearchSeenMovies() {
         autoToggleSection({
             contentId: "div-seen-movies",
             arrowId: "arrow-seen",
-            auto: filteredMovies.length > 1
+            auto: filteredMovies.length >= 1
         });
 
     }, 150);
