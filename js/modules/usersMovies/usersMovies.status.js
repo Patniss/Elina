@@ -28,7 +28,7 @@ export async function mapNolistMovies(data) {
             um => um.user_id === userId
         );
 
-        if (userMovie && userMovie.seen === null) {
+        if (!userMovie || userMovie.seen === null) {
             acc.push({
                 ...movie,
                 seen: userMovie.seen,
