@@ -38,7 +38,7 @@ export async function pauseUserShow(uuid) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
-        .from("uses_shows")
+        .from("users_shows")
         .update({user_state: "paused"})
         .eq("user_id", userId)
         .eq("user_show", uuid)
@@ -54,7 +54,7 @@ export async function startUserShow(uuid) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
-        .from("uses_shows")
+        .from("users_shows")
         .update({user_state: "started"})
         .eq("user_id", userId)
         .eq("user_show", uuid)
@@ -70,7 +70,7 @@ export async function cancelUserShow(uuid) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
-        .from("uses_shows")
+        .from("users_shows")
         .update({user_state: "canceled"})
         .eq("user_id", userId)
         .eq("user_show", uuid)
