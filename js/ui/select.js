@@ -45,8 +45,10 @@ export function initPeopleSelect2NewTag(selectElement, placeholder) {
     });
 }
 
-export function bindPeopleSelectEvents(selectElement, { onCreate, onClear } = {}) {
+export function bindPeopleModalNewTag(selectElement) {
     if (!selectElement) return;
+
+    const modal = document.getElementById("add-new-people-modal");
 
     $(selectElement)
         .on("select2:select", function (e) {
@@ -55,14 +57,7 @@ export function bindPeopleSelectEvents(selectElement, { onCreate, onClear } = {}
             if (data.newTag) {
                 const { firstName, lastName } = parseFullName(data.text);
 
-                if (onCreate) {
-                    onCreate({ firstName, lastName, raw: data.text });
-                }
-            }
-        })
-        .on("select2:clear", function () {
-            if (onClear) {
-                onClear();
+                modal.classList.add("is-active");
             }
         });
 }
