@@ -49,6 +49,8 @@ export function bindPeopleModalNewTag(selectElement) {
     if (!selectElement) return;
 
     const modal = document.getElementById("add-new-people-modal");
+    const inputFirstname = document.getElementById("firstname");
+    const inputLastname = document.getElementById("lastname");
 
     $(selectElement)
         .on("select2:select", function (e) {
@@ -58,6 +60,8 @@ export function bindPeopleModalNewTag(selectElement) {
                 const { firstName, lastName } = parseFullName(data.text);
 
                 modal.classList.add("is-active");
+                inputFirstname.value = firstName;
+                inputLastname.value = lastName;
             }
         });
 }
