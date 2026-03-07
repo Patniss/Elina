@@ -47,5 +47,5 @@ export async function getCurrentSeason(uuid) {
         return;
     }
 
-    if (data.length === 1) { return data; } else return null;
+    if (data.length === 1) { return data.seasons.id; } else return null;
 }
