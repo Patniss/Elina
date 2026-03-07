@@ -52,5 +52,10 @@ export let indexMoviesStore = {
         favMovies: [],
         lastSeenMovies: []
     },
+    currentPage: {
+        toseeMovies: 1,
+        favMovies: 1,
+        lastSeenMovies: 1
+    },
     pageSize: 5
 }
