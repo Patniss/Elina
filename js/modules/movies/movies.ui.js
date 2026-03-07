@@ -120,12 +120,18 @@ export async function createMovieCard(m, complete) {
 export async function createCarouselCard(m) {
     const movie = normalizeMovie(m);
 
+    const div = document.createElement("div");
+    div.classList.add("cell");
+
     const figure = document.createElement("figure");
-    figure.classList.add("image", "is-2by3", "cell");
+    figure.classList.add("image", "is-2by3");
+
     const img = document.createElement("img");
     img.src = movie.poster;
     img.alt = movie.title;
-    figure.appendChild(img);
 
-    return figure;
+    figure.appendChild(img);
+    div.appendChild(figure);
+
+    return div;
 }
