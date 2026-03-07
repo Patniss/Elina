@@ -20,7 +20,8 @@ export async function completeMovie(uuid) {
     const movie = await getMovie(uuid);
     const people = await getAllPeople();
 
-    document.getElementById("movie-title").textContent = movie.tite;
+    const movieTitle = document.getElementById("movie-title")
+    movieTitle.textContent = movie.tite;
 
     const selectDirectors = [document.getElementById("select-director-1"), document.getElementById("select-director-2"), document.getElementById("select-director-2")];
     selectDirectors.forEach(select => {

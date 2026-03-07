@@ -153,23 +153,56 @@
       <form id="people-form">
 
         <div class="field">
-          <label for="firstname"></label>
+          <label for="firstname">Prénom</label>
           <div class="control">
             <input type="text" class="input" placeholder="Prénom…" id="firstname" name="firstname" />
           </div>
         </div>
 
         <div class="field">
-          <label for="lastname"></label>
+          <label for="lastname">Nom</label>
           <div class="control">
             <input type="text" class="input" placeholder="Nom…" id="lastname" name="lastname" />
           </div>
         </div>
 
         <div class="field">
-          <label for="birthdate"></label>
+          <label for="birthdate">Date de naissance</label>
           <div class="control">
             <input type="date" class="input" placeholder="Date de naissance…" id="birthdate" name="birthdate" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="isDead"><input type="checkbox" class="checkbox mr-2" />Mort</label>
+          <div class="field is-hidden">
+            <label for="deathdate">Date de mort</label>
+            <div class="control">
+              <input type="date" name="deathdate" id="deathdate" placeholder="Date de mort…" class="input" />
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="nationalities">Nationalités</label>
+          <div class="control">
+            <div class="select is-multiple">
+              <select multiple="multiple" id="nationalities" style="width: 100%;"></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="jobs">Métiers</label>
+          <div class="control">
+            <div class="select is-multiple">
+              <select name="jobs" id="jobs" multiple="multiple" style="width: 100%;">
+                <option value="director">Réalisateur</option>
+                <option value="scriptwriter">Scénariste</option>
+                <option value="producer">Producteur</option>
+                <option value="actor">Acteur</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -202,6 +235,7 @@
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
+<script type="module" src="/Elina/js/ui/modal.js"></script>
 
 </body>
 </html>
