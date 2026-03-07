@@ -1,5 +1,5 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
-import { addUserSeason } from "/Elina/js/services/usersSeasons.service.js";
+import { addUserSeason, getCurrentSeason, getNextEpisode } from "/Elina/js/services/usersSeasons.service.js";
 import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
 import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 
@@ -30,6 +30,10 @@ export async function createShowCard(s) {
         return document.createElement("div");
     }
 
+    let nextEpisode = "S00E00";
+    const currentSeason = await getCurrentSeason(show.id);
+    if (currentSeason) nextEpisode = await getNextEpisode(show.id);
+
     const column = document.createElement("div");
     column.classList.add("column", "is-one-quarter");
     
@@ -57,7 +61,7 @@ export async function createShowCard(s) {
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
 
-    const buttons = createButtons(["details", "add", "delete", "toStart", "seeEp", "pause", "takeAgain", "cancel", "retry"], 'entertainment/shows/show', show.id);
+    const buttons = createButtons(["details", "add", "delete", "toStart", "seeEp", "pause", "takeAgain", "cancel", "retry"], 'entertainment/shows/show', show.id, nextEpisode);
 
     const detailsButton = buttons.details;
     const addButton = buttons.add;

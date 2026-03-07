@@ -18,6 +18,22 @@ export async function addUserShow(uuid) {
     }
 }
 
+export async function cancelUserShow(uuid) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_shows")
+        .update({user_state: "canceled"})
+        .eq("user_id", userId)
+        .eq("show_id", uuid)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+}
+
 export async function deleteUserShow(uuid) {
     const userId = await getUserId();
 
@@ -56,22 +72,6 @@ export async function startUserShow(uuid) {
     const { data, error } = await supabase
         .from("users_shows")
         .update({user_state: "started"})
-        .eq("user_id", userId)
-        .eq("show_id", uuid)
-        .single();
-
-    if (error) {
-        console.error(error);
-        return;
-    }
-}
-
-export async function cancelUserShow(uuid) {
-    const userId = await getUserId();
-
-    const { data, error } = await supabase
-        .from("users_shows")
-        .update({user_state: "canceled"})
         .eq("user_id", userId)
         .eq("show_id", uuid)
         .single();
