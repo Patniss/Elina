@@ -56,4 +56,46 @@ export async function completeMovie(uuid) {
         placeholder: "Métiers…",
         allowClear: true
     });
+
+    const addDirector = document.getElementById("add-director");
+    const divDirector2 = document.getElementById("div-director-2");
+    const deleteDirector2 = document.getElementById("delete-director-2");
+    const divDirector3 = document.getElementById("div-director-3");
+    const deleteDirector3 = document.getElementById("delete-director-3");
+
+    const addScriptwriter = document.getElementById("add-scriptwriter");
+    const divScriptwriter2 = document.getElementById("div-scriptwriter-2");
+    const deleteScriptwriter2 = document.getElementById("delete-scriptwriter-2");
+
+    const addActor = document.getElementById("add-actor");
+
+    addDirector.addEventListener("click", () => {
+        if (divDirector2.classList.contains("is-hidden")) {
+            divDirector2.classList.remove("is-hidden")
+        } else {
+            divDirector3.classList.remove("is-hidden");
+            deleteDirector2.classList.add("is-hidden");
+            addDirector.disabled = true;
+        }
+    });
+
+    deleteDirector2.addEventListener("click", () => {
+        divDirector2.classList.add("is-hidden");
+    });
+
+    deleteDirector3.addEventListener("click", () => {
+        divDirector3.classList.remove("is-hidden");
+        deleteDirector2.classList.remove("is-hidden");
+        addDirector.disabled = false;
+    });
+
+    addScriptwriter.addEventListener("click", () => {
+        divScriptwriter2.classList.remove("is-hidden");
+        addScriptwriter.disabled = true;
+    });
+
+    deleteScriptwriter2.addEventListener("click", () => {
+        divScriptwriter2.classList.add("is-hidden");
+        addScriptwriter.disabled = false;
+    })
 }
