@@ -29,8 +29,8 @@ export async function loadNoListMovies(field, asc, filter) {
 
     let noListMovies = [];
 
-    movies.forEach(movie => {
-        if (moviesWithStatus.seen === null) { noListMovies.push(moviesWithStatus) }
+    moviesWithStatus.forEach(movie => {
+        if (movie.seen === null) { movie.push(moviesWithStatus) }
     });
 
     return noListMovies;
