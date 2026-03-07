@@ -1,3 +1,4 @@
+import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { getSeasonId } from "/Elina/js/services/seasons.service.js";
 
