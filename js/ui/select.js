@@ -14,7 +14,7 @@ export function initGenres(selectElement, genres) {
 }
 
 export function initNationalities(selectElement, nationalities) {
-    nationalities.forEach(([key, name]) => {
+    Object.entries(nationalities).forEach(([key, name]) => {
         selectElement.append(
             new Option(name, key, false, false)
         );
