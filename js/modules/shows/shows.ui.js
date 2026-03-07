@@ -32,6 +32,7 @@ export async function createShowCard(s) {
 
     let nextEpisode = "S00E00";
     const currentSeason = await getCurrentSeason(show.id);
+    console.log(show.title, " : ", currentSeason);
     if (currentSeason) nextEpisode = await getNextEpisode(show.id);
 
     const column = document.createElement("div");
