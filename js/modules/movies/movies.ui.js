@@ -121,7 +121,7 @@ export async function createCarouselCard(m) {
     const movie = normalizeMovie(m);
 
     const figure = document.createElement("figure");
-    figure.classList.add("image", "is-2by3");
+    figure.classList.add("image", "is-2by3", "cell");
     const img = document.createElement("img");
     img.src = movie.poster;
     img.alt = movie.title;
