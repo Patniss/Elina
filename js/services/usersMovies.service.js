@@ -35,6 +35,25 @@ export async function deleteUserMovie(movieId) {
     }
 }
 
+export async function getFavMovies() {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*, movies(*)")
+        .eq("user_id", userId)
+        .eq("seen", true)
+        .eq("fav", "fav")
+        .order("title", { ascending: true, foreignTable: "movies" });
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data;
+}
+
 export async function getSeenTimeMovie() {
     const userId = await getUserId();
 

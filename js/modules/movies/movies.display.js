@@ -1,5 +1,5 @@
-import { renderIndexToseeMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies } from "/Elina/js/services/usersMovies.service.js";
+import { renderIndexToseeMovies, renderIndexFavMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
 
 export async function displayIndexMovies() {
@@ -17,4 +17,6 @@ export async function displayIndexMovies() {
 
     const toseeMovies = await getToseeMovies();
     renderIndexToseeMovies(toseeMovies);
+    const favMovies = await getFavMovies();
+    renderIndexFavMovies(favMovies);
 }

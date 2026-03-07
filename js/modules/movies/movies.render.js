@@ -38,3 +38,9 @@ export async function renderIndexToseeMovies(movies) {
 
     render(container, indexMoviesStore, "toseeMovies", "movies", createCarouselCard, movies);
 }
+
+export async function renderIndexFavMovies(movies) {
+    const container = document.getElementById("favMovies");
+
+    render(container, indexMoviesStore, "favMovies", "movies", createCarouselCard, movies);
+}
