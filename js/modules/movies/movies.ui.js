@@ -124,12 +124,12 @@ export async function createCarouselCard(m) {
     div.classList.add("cell");
 
     const figure = document.createElement("figure");
-    figure.classList.add("image", "is-2by3");
+    figure.classList.add("image", "is-2by3", "poster-wrapper");
 
     const img = document.createElement("img");
-    img.classList.add("image");
     img.src = movie.poster;
     img.alt = movie.title;
+    img.style.maxWidth = "100%";
 
     figure.appendChild(img);
     div.appendChild(figure);
