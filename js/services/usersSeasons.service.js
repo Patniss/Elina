@@ -38,7 +38,7 @@ export async function getCurrentSeason(uuid) {
         .from("users_seasons")
         .select("*, seasons(*)")
         .eq("user_id", userId)
-        .eq("show_id", uuid, { foreignTable: "seasons" })
+        .eq("seasons.show_id", uuid)
         .order("season", { foreignTable: "seasons", ascending: false })
         .limit(1);
 
