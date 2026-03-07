@@ -41,7 +41,7 @@ export async function pauseUserShow(uuid) {
         .from("users_shows")
         .update({user_state: "paused"})
         .eq("user_id", userId)
-        .eq("user_show", uuid)
+        .eq("show_id", uuid)
         .single();
 
     if (error) {
@@ -57,7 +57,7 @@ export async function startUserShow(uuid) {
         .from("users_shows")
         .update({user_state: "started"})
         .eq("user_id", userId)
-        .eq("user_show", uuid)
+        .eq("show_id", uuid)
         .single();
 
     if (error) {
@@ -73,7 +73,7 @@ export async function cancelUserShow(uuid) {
         .from("users_shows")
         .update({user_state: "canceled"})
         .eq("user_id", userId)
-        .eq("user_show", uuid)
+        .eq("show_id", uuid)
         .single();
 
     if (error) {
