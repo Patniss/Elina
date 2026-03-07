@@ -57,5 +57,5 @@ export let indexMoviesStore = {
         favMovies: 1,
         lastSeenMovies: 1
     },
-    pageSize: 5
+    pageSize: 7
 }
