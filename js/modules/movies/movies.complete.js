@@ -1,5 +1,4 @@
 import { getAllIncompleteMovies } from "/Elina/js/services/movies.service.js";
-import { createMovieCard } from "/Elina/js/modules/movies/movies.ui.js";
 
 export async function displayAllIncompleteMovies() {
     const container = document.getElementById("list-incomplete-movies");
@@ -13,4 +12,8 @@ export async function displayAllIncompleteMovies() {
         li.appendChild(link);
         container.appendChild(li);
     });
+}
+
+export async function completeMovie(params) {
+    
 }
