@@ -22,7 +22,7 @@ export async function completeMovie(uuid) {
     const people = await getAllPeople();
 
     const movieTitle = document.getElementById("movie-title")
-    movieTitle.textContent = movie.tite;
+    movieTitle.textContent = movie.title;
 
     const selectDirectors = [document.getElementById("select-director-1"), document.getElementById("select-director-2"), document.getElementById("select-director-2")];
     selectDirectors.forEach(select => {
@@ -49,5 +49,11 @@ export async function completeMovie(uuid) {
         } else {
             divDeathdate.classList.add("is-hidden");
         }
-    })
+    });
+
+    const jobs = document.getElementById("jobs");
+    $(jobs).select2({
+        placeholder: "Métiers…",
+        allowClear: true
+    });
 }
