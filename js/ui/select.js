@@ -13,6 +13,19 @@ export function initGenres(selectElement, genres) {
     });
 }
 
+export function initNationalities(selectElement, nationalities) {
+    nationalities.forEach(([key, name]) => {
+        selectElement.append(
+            new Option(name, key, false, false)
+        );
+    });
+
+    $(selectElement).select2({
+        placeholder: "Nationalités…",
+        allowClear: true
+    });
+}
+
 export function initPeopleSelect(selectElement, people) {
     if (!selectElement) return;
 

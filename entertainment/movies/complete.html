@@ -146,7 +146,7 @@
 
   <div id="add-new-people-modal" class="modal">
     <div class="modal-background"></div>
-    <div class="modal-content">
+    <div class="modal-content block">
 
       <h5 class="title">Ajouter un people</h5>
 
@@ -174,8 +174,8 @@
         </div>
 
         <div class="field">
-          <label for="isDead"><input type="checkbox" class="checkbox mr-2" />Mort</label>
-          <div class="field is-hidden">
+          <label for="isDead"><input type="checkbox" class="checkbox mr-2" id="isDead" />Mort</label>
+          <div class="field is-hidden" id="div-deathdate">
             <label for="deathdate">Date de mort</label>
             <div class="control">
               <input type="date" name="deathdate" id="deathdate" placeholder="Date de mort…" class="input" />
