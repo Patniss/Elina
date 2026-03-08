@@ -12,14 +12,14 @@ export function renderPaginationAll() {
         () => { renderAllMovies(); })
 }
 
-export function renderPaginationTosee() {
+export function renderPaginationSearch(containerId, list, filteredMovies) {
     renderPagination(
-        "pagination-list-tosee",
-        moviesStore.currentPage.tosee,
-        moviesStore.movies.tosee.length,
+        containerId,
+        moviesStore.currentPage[list],
+        filteredMovies.length,
         moviesStore.pageSize,
-        (page) => { moviesStore.setCurrentPage("tosee", page); },
-        () => { renderToseeMovies(); })
+        (page) => { moviesStore.setCurrentPage(list, page); }
+    )
 }
 
 export function renderPaginationSeen() {
@@ -32,12 +32,12 @@ export function renderPaginationSeen() {
         () => { renderSeenMovies(); })
 }
 
-export function renderPaginationSearch(containerId, list, filteredMovies) {
+export function renderPaginationTosee() {
     renderPagination(
-        containerId,
-        moviesStore.currentPage[list],
-        filteredMovies.length,
+        "pagination-list-tosee",
+        moviesStore.currentPage.tosee,
+        moviesStore.movies.tosee.length,
         moviesStore.pageSize,
-        (page) => { moviesStore.setCurrentPage(list, page); }
-    )
+        (page) => { moviesStore.setCurrentPage("tosee", page); },
+        () => { renderToseeMovies(); })
 }

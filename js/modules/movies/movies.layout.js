@@ -11,6 +11,70 @@ const sortButtons = [
     { id: "sort-91", field: "year", asc: false },
 ];
 
+export function filterMovies(query, genre) {
+    if (genre) {
+        query = query.ilike("genres", `%${genre}%`);
+    }
+
+    return query;
+}
+
+export function onlyNoListDisplay() {
+    const buttonDisplay = document.getElementById("display-only-nolist");
+
+    buttonDisplay.addEventListener("click", () => {
+        if (moviesStore.catFilter !== "nolist") {
+            moviesStore.catFilter = "nolist";
+        } else {
+            moviesStore.catFilter = "";
+        }
+
+        refreshMovies();
+        renderPaginationAll();
+    })
+}
+
+export function sortFilterMovies() {
+    const btnSort = document.getElementById("button-content-sort");
+    const contentSort = document.getElementById("dropdown-content-sort");
+    const btnFilter = document.getElementById("button-content-filter");
+    const contentFilter = document.getElementById("dropdown-content-filter");
+    const displayFilter = document.getElementById("filter-display");
+    
+    btnSort.addEventListener("click", () => {
+        toggleDropdown(contentSort, contentFilter);
+    });
+    
+    btnFilter.addEventListener("click", () => {
+        toggleDropdown(contentFilter, contentSort);
+    });
+
+    filters.forEach(({id, genre, label}) => {
+        const btn = document.getElementById(id);
+        btn.addEventListener("click", () => {
+            moviesStore.genreFilter = genre;
+            displayFilter.textContent = label;
+            contentFilter.classList.add("is-hidden");
+            refreshMovies();
+        })
+    });
+
+    sortButtons.forEach(({id, field, asc}) => {
+        const btn = document.getElementById(id);
+        btn.addEventListener("click", () => {
+            sortButtons.forEach(({ id: otherId }) => {
+                const el = document.getElementById(otherId);
+                if (otherId !== id) el.classList.remove("is-hidden");
+                else el.classList.add("is-hidden");
+            });
+            moviesStore.sortField = field;
+            moviesStore.sortAsc = asc;
+            refreshMovies();
+            renderPaginationAll();
+        })
+    });
+}
+
 export function sortMovies(query, field, asc) {
     switch (field) {
         case "year":
@@ -57,68 +121,4 @@ export function sortUsersMovies(query, field, asc) {
     }
 
     return query;
-}
-
-export function filterMovies(query, genre) {
-    if (genre) {
-        query = query.ilike("genres", `%${genre}%`);
-    }
-
-    return query;
-}
-
-export function sortFilterMovies() {
-    const btnSort = document.getElementById("button-content-sort");
-    const contentSort = document.getElementById("dropdown-content-sort");
-    const btnFilter = document.getElementById("button-content-filter");
-    const contentFilter = document.getElementById("dropdown-content-filter");
-    const displayFilter = document.getElementById("filter-display");
-    
-    btnSort.addEventListener("click", () => {
-        toggleDropdown(contentSort, contentFilter);
-    });
-    
-    btnFilter.addEventListener("click", () => {
-        toggleDropdown(contentFilter, contentSort);
-    });
-
-    filters.forEach(({id, genre, label}) => {
-        const btn = document.getElementById(id);
-        btn.addEventListener("click", () => {
-            moviesStore.genreFilter = genre;
-            displayFilter.textContent = label;
-            contentFilter.classList.add("is-hidden");
-            refreshMovies();
-        })
-    });
-
-    sortButtons.forEach(({id, field, asc}) => {
-        const btn = document.getElementById(id);
-        btn.addEventListener("click", () => {
-            sortButtons.forEach(({ id: otherId }) => {
-                const el = document.getElementById(otherId);
-                if (otherId !== id) el.classList.remove("is-hidden");
-                else el.classList.add("is-hidden");
-            });
-            moviesStore.sortField = field;
-            moviesStore.sortAsc = asc;
-            refreshMovies();
-            renderPaginationAll();
-        })
-    });
-}
-
-export function onlyNoListDisplay() {
-    const buttonDisplay = document.getElementById("display-only-nolist");
-
-    buttonDisplay.addEventListener("click", () => {
-        if (moviesStore.catFilter !== "nolist") {
-            moviesStore.catFilter = "nolist";
-        } else {
-            moviesStore.catFilter = "";
-        }
-
-        refreshMovies();
-        renderPaginationAll();
-    })
 }

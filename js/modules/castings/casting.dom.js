@@ -4,17 +4,14 @@ export function createRoleBlock(i) {
     columns.style.border = "1px solid grey";
     columns.style.borderRadius = "5px";
 
-    const divDelete = document.createElement("div");
-    divDelete.classList.add("column", "is-1", "columns");
+    const divNbRole = document.createElement("div");
     const nbRole = document.createElement("h3");
     nbRole.classList.add("subtitle", "is-11", "column", "is-half");
     nbRole.textContent = i;
-    const btnDelete = document.createElement("button");
-    btnDelete.classList.add("button", "delete", "is-large", "column", "is-half", "my-3", "ml-4", "mr-2");
-    divDelete.append(btnDelete, nbRole);
+    divNbRole.appendChild(nbRole);
 
     const divSelectRole = document.createElement("div");
-    divSelectRole.classList.add("column", "is-3");
+    divSelectRole.classList.add("column", "is-11");
     const labelRole = document.createElement("label");
     labelRole.classList.add("label");
     labelRole.textContent = "Rôle n° " + i;
@@ -63,9 +60,9 @@ export function createRoleBlock(i) {
     
     divSelectRole.append(labelRole, inputRole, divTypeRole, divSelectActor);
 
-    columns.append(divDelete, divSelectRole);
+    columns.append(divNbRole, divSelectRole);
 
     return {
-        columns, inputRole, selectActor, btnDelete, divTypeRole
+        columns, inputRole, selectActor, divTypeRole
     }
 }

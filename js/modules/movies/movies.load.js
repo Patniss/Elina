@@ -36,13 +36,13 @@ export async function loadNoListMovies(field, asc, filter) {
     return noListMovies;
 }
 
-export async function loadToseeMovies(field, asc, filter) {
+export async function loadSeenMovies(field, asc, filter) {
     const userId = await getUserId();
     let query = supabase
         .from("users_movies")
         .select("*, movies(*)")
         .eq("user_id", userId)
-        .eq("seen", false);
+        .eq("seen", true);
     
     query = sortUsersMovies(query, field, asc);
     query = filterMovies(query, filter);
@@ -52,13 +52,13 @@ export async function loadToseeMovies(field, asc, filter) {
     return movies;
 }
 
-export async function loadSeenMovies(field, asc, filter) {
+export async function loadToseeMovies(field, asc, filter) {
     const userId = await getUserId();
     let query = supabase
         .from("users_movies")
         .select("*, movies(*)")
         .eq("user_id", userId)
-        .eq("seen", true);
+        .eq("seen", false);
     
     query = sortUsersMovies(query, field, asc);
     query = filterMovies(query, filter);

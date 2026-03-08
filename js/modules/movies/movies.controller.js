@@ -5,6 +5,37 @@ import { loadAllMovies, loadToseeMovies, loadSeenMovies, loadNoListMovies } from
 import { renderAllMovies, renderSeenMovies, renderToseeMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
+export async function changePage(page) {
+    moviesStore.setCurrentPage("all", page);
+}
+
+export async function refreshMovies() {
+    let movies;
+    if (moviesStore.catFilter === "nolist") {
+        movies = await loadNoListMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+    } else movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+    
+    moviesStore.setMoviesAndPage("all", movies, 1);
+}
+
+export async function refreshSeenMovies() {
+    try {
+        const movies = await loadSeenMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+        moviesStore.setMoviesAndPage("seen", movies, 1);
+    } catch (error) {
+        console.error("Erreur refreshSeenMovies:", error);
+    }
+}
+
+export async function refreshToseeMovies() {
+    try {
+        const movies = await loadToseeMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+        moviesStore.setMoviesAndPage("tosee", movies, 1);
+    } catch (error) {
+        console.error("Erreur refreshToseeMovies:", error);
+    }
+}
+
 export async function initMovies() {
     moviesStore.genreFilter = "";
     moviesStore.catFilter = "";
@@ -20,19 +51,6 @@ export async function initMovies() {
     onlyNoListDisplay();
 
     await refreshMovies();
-}
-
-export async function refreshMovies() {
-    let movies;
-    if (moviesStore.catFilter === "nolist") {
-        movies = await loadNoListMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-    } else movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-    
-    moviesStore.setMoviesAndPage("all", movies, 1);
-}
-
-export async function changePage(page) {
-    moviesStore.setCurrentPage("all", page);
 }
 
 export async function initMyMovies() {
@@ -70,22 +88,4 @@ export async function initMyMovies() {
 
     await refreshToseeMovies();
     await refreshSeenMovies();
-}
-
-export async function refreshToseeMovies() {
-    try {
-        const movies = await loadToseeMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-        moviesStore.setMoviesAndPage("tosee", movies, 1);
-    } catch (error) {
-        console.error("Erreur refreshToseeMovies:", error);
-    }
-}
-
-export async function refreshSeenMovies() {
-    try {
-        const movies = await loadSeenMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-        moviesStore.setMoviesAndPage("seen", movies, 1);
-    } catch (error) {
-        console.error("Erreur refreshSeenMovies:", error);
-    }
 }

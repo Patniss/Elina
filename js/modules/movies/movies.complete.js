@@ -1,21 +1,8 @@
 import { nationalities } from "/Elina/js/data/nationalities.js";
+import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
 import { getAllIncompleteMovies, getMovie } from "/Elina/js/services/movies.service.js";
 import { getAllPeople } from "/Elina/js/services/people.service.js";
 import { initNationalities, initPeopleSelect, initPeopleSelect2NewTag, bindPeopleModalNewTag } from "/Elina/js/ui/select.js";
-
-export async function displayAllIncompleteMovies() {
-    const container = document.getElementById("list-incomplete-movies");
-    const movies = await getAllIncompleteMovies();
-
-    movies.forEach(async (movie) => {
-        const li = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = `/Elina/entertainment/movies/complete.html?id=${movie.id}`;
-        link.textContent = movie.title;
-        li.appendChild(link);
-        container.appendChild(li);
-    });
-}
 
 export async function completeMovie(uuid) {
     const movie = await getMovie(uuid);
@@ -24,7 +11,7 @@ export async function completeMovie(uuid) {
     const movieTitle = document.getElementById("movie-title")
     movieTitle.textContent = movie.title;
 
-    const selectDirectors = [document.getElementById("select-director-1"), document.getElementById("select-director-2"), document.getElementById("select-director-2")];
+    const selectDirectors = [document.getElementById("select-director-1"), document.getElementById("select-director-2"), document.getElementById("select-director-3")];
     selectDirectors.forEach(select => {
         initPeopleSelect(select, people);
         initPeopleSelect2NewTag(select, "Réalisateur…");
@@ -35,7 +22,7 @@ export async function completeMovie(uuid) {
     selectScriptwriters.forEach(select => {
         initPeopleSelect(select, people);
         initPeopleSelect2NewTag(select, "Scénariste…");
-        bindPeopleModalNewTag(bindPeopleModalNewTag);
+        bindPeopleModalNewTag(select);
     });
 
     const selectNationalities = document.getElementById("nationalities");
@@ -68,6 +55,7 @@ export async function completeMovie(uuid) {
     const deleteScriptwriter2 = document.getElementById("delete-scriptwriter-2");
 
     const addActor = document.getElementById("add-actor");
+    const divRoles = document.getElementById("div-roles");
 
     addDirector.addEventListener("click", () => {
         if (divDirector2.classList.contains("is-hidden")) {
@@ -97,5 +85,27 @@ export async function completeMovie(uuid) {
     deleteScriptwriter2.addEventListener("click", () => {
         divScriptwriter2.classList.add("is-hidden");
         addScriptwriter.disabled = false;
-    })
+    });
+
+    addActor.addEventListener("click", () => {
+        const role = createRoleBlock();
+        divRoles.appendChild(role.columns);
+        initPeopleSelect(role.selectActor, people);
+        initPeopleSelect2NewTag(role.selectActor, "Scénariste…");
+        bindPeopleModalNewTag(role.selectActor);
+    });
+}
+
+export async function displayAllIncompleteMovies() {
+    const container = document.getElementById("list-incomplete-movies");
+    const movies = await getAllIncompleteMovies();
+
+    movies.forEach(async (movie) => {
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `/Elina/entertainment/movies/complete.html?id=${movie.id}`;
+        link.textContent = movie.title;
+        li.appendChild(link);
+        container.appendChild(li);
+    });
 }

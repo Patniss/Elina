@@ -8,13 +8,24 @@ const BUTTONS_BY_STATUS = {
     true: ["seen", "details"]
 };
 
-export function updateMovieUI(status, buttons, container) {
-    container.innerHTML = "";
-    const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
+export async function createCarouselCard(m) {
+    const movie = normalizeMovie(m);
 
-    types.forEach(type => {
-        container.appendChild(buttons[type]);
-    });
+    const div = document.createElement("div");
+    div.classList.add("cell");
+
+    const figure = document.createElement("figure");
+    figure.classList.add("image", "is-2by3", "poster-wrapper");
+
+    const img = document.createElement("img");
+    img.src = movie.poster;
+    img.alt = movie.title;
+    img.style.maxWidth = "100%";
+
+    figure.appendChild(img);
+    div.appendChild(figure);
+
+    return div;
 }
 
 export async function createMovieCard(m, complete) {
@@ -117,22 +128,11 @@ export async function createMovieCard(m, complete) {
   return column;
 }
 
-export async function createCarouselCard(m) {
-    const movie = normalizeMovie(m);
+export function updateMovieUI(status, buttons, container) {
+    container.innerHTML = "";
+    const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
 
-    const div = document.createElement("div");
-    div.classList.add("cell");
-
-    const figure = document.createElement("figure");
-    figure.classList.add("image", "is-2by3", "poster-wrapper");
-
-    const img = document.createElement("img");
-    img.src = movie.poster;
-    img.alt = movie.title;
-    img.style.maxWidth = "100%";
-
-    figure.appendChild(img);
-    div.appendChild(figure);
-
-    return div;
+    types.forEach(type => {
+        container.appendChild(buttons[type]);
+    });
 }

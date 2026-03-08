@@ -13,14 +13,16 @@ export async function renderAllMovies(movies) {
     renderPaginationAll();
 }
 
-export async function renderToseeMovies(movies) {
-    const container = document.getElementById("list-tosee-movies");
+export async function renderIndexFavMovies(movies) {
+    const container = document.getElementById("favMovies");
 
-    const moviesToRender = movies || moviesStore.movies.tosee;
-    
-    render(container, moviesStore, "tosee", "movies", createMovieCard, moviesToRender);
+    render(container, indexMoviesStore, "favMovies", "movies", createCarouselCard, movies);
+}
 
-    renderPaginationTosee();
+export async function renderIndexToseeMovies(movies) {
+    const container = document.getElementById("toseeMovies");
+
+    render(container, indexMoviesStore, "toseeMovies", "movies", createCarouselCard, movies);
 }
 
 export async function renderSeenMovies(movies) {
@@ -33,14 +35,12 @@ export async function renderSeenMovies(movies) {
     renderPaginationSeen();
 }
 
-export async function renderIndexToseeMovies(movies) {
-    const container = document.getElementById("toseeMovies");
+export async function renderToseeMovies(movies) {
+    const container = document.getElementById("list-tosee-movies");
 
-    render(container, indexMoviesStore, "toseeMovies", "movies", createCarouselCard, movies);
-}
+    const moviesToRender = movies || moviesStore.movies.tosee;
+    
+    render(container, moviesStore, "tosee", "movies", createMovieCard, moviesToRender);
 
-export async function renderIndexFavMovies(movies) {
-    const container = document.getElementById("favMovies");
-
-    render(container, indexMoviesStore, "favMovies", "movies", createCarouselCard, movies);
+    renderPaginationTosee();
 }
