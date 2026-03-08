@@ -23,6 +23,68 @@
       
       <h1 class="title">🎬 Films</h1>
 
+      <div class="container box">
+
+        <nav class="level is-primary">
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Films vus</p>
+                    <p class="title" id="moviesSeen"></p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Temps de films</p>
+                    <p class="title" id="moviesMinutesSeen"></p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Films à voir</p>
+                    <p class="title" id="moviesTosee"></p>
+                </div>
+            </div>
+
+        </nav>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="subtitle">Films à voir</h3>
+          <div class="columns">
+            <div class="column is-1 has-text-centered is-flex is-align-items-center">
+              <a href="#" id="tosee-left-btn" class="button"><i class="fa-solid fa-angle-left"></i></a>
+            </div>
+            <div class="column is-10 fixed-grid has-7-cols is-column-gap-2">
+              <div class="grid" id="toseeMovies"></div>
+            </div>
+            <div class="column is-1 has-text-centered is-flex is-align-items-center">
+              <a href="#" id="tosee-next-btn" class="but"><i class="fa-solid fa-angle-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="subtitle">Derniers films vus</h3>
+          <div id="lastSeenMovies"></div>
+        </div>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="subtitle">Mes favoris</h3>
+          <div class="fixed-grid has-7-cols is-column-gap-2">
+            <div class="grid" id="favMovies"></div>
+          </div>
+        </div>
+
+      </div>
+
       <div class="columns is-multiline">
 
         <div class="column is-one-quarter">
@@ -46,72 +108,6 @@
 
       </div>
       
-    </div>
-
-  </section>
-
-  <section class="section">
-
-    <div class="container box">
-
-      <nav class="level is-primary">
-
-          <div class="level-item has-text-centered">
-              <div>
-                  <p class="heading">Films vus</p>
-                  <p class="title" id="moviesSeen"></p>
-              </div>
-          </div>
-
-          <div class="level-item has-text-centered">
-              <div>
-                  <p class="heading">Temps de films</p>
-                  <p class="title" id="moviesMinutesSeen"></p>
-              </div>
-          </div>
-
-          <div class="level-item has-text-centered">
-              <div>
-                  <p class="heading">Films à voir</p>
-                  <p class="title" id="moviesTosee"></p>
-              </div>
-          </div>
-
-      </nav>
-
-      <hr class="hr" />
-
-      <div>
-        <h3 class="subtitle">Films à voir</h3>
-        <div class="columns">
-          <div class="column is-1 has-text-centered is-flex is-align-items-center">
-            <a href="#" id="tosee-left-btn" class="button"><i class="fa-solid fa-angle-left"></i></a>
-          </div>
-          <div class="column is-10 fixed-grid has-7-cols is-column-gap-2">
-            <div class="grid" id="toseeMovies"></div>
-          </div>
-          <div class="column is-1 has-text-centered is-flex is-align-items-center">
-            <a href="#" id="tosee-next-btn" class="button"><i class="fa-solid fa-angle-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <hr class="hr" />
-
-      <div>
-        <h3 class="subtitle">Derniers films vus</h3>
-        <div id="lastSeenMovies"></div>
-      </div>
-
-      <hr class="hr" />
-
-      <div>
-        <h3 class="subtitle">Mes favoris</h3>
-        <div class="fixed-grid has-7-cols is-column-gap-2">
-          <div class="grid" id="favMovies"></div>
-        </div>
-      </div>
-
     </div>
 
   </section>
