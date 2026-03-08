@@ -3,6 +3,7 @@ export function createRoleBlock(i) {
     columns.classList.add("columns");
     columns.style.border = "1px solid grey";
     columns.style.borderRadius = "5px";
+    columns.id = `div-role-${i}`;
 
     const divNbRole = document.createElement("div");
     const nbRole = document.createElement("h3");
@@ -19,6 +20,7 @@ export function createRoleBlock(i) {
     inputRole.type = "text";
     inputRole.placeholder = "Nom du personnage…";
     inputRole.classList.add("input");
+    inputRole.id = `name-role-${i}`;
     
     const divTypeRole = document.createElement("div");
     divTypeRole.classList.add("radios", "my-2");
@@ -54,6 +56,7 @@ export function createRoleBlock(i) {
     selectActor.multiple = true;
     selectActor.style.width = "100%";
     selectActor.classList.add("select-actor");
+    selectActor.id = `actor-${i}`;
     const optBaseAction = document.createElement("option");
     selectActor.appendChild(optBaseAction);
     divSelectActor.appendChild(selectActor);

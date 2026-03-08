@@ -56,6 +56,7 @@ export async function completeMovie(uuid) {
 
     const addRole = document.getElementById("add-role");
     const divRoles = document.getElementById("div-roles");
+    const deleteRole = document.getElementById("delete-role");
 
     addDirector.addEventListener("click", () => {
         if (divDirector2.classList.contains("is-hidden")) {
@@ -87,12 +88,24 @@ export async function completeMovie(uuid) {
         addScriptwriter.disabled = false;
     });
 
+    let index = 0;
+
     addRole.addEventListener("click", () => {
-        const role = createRoleBlock();
+        index += 1;
+        const role = createRoleBlock(index);
+        deleteRole.classList.remove("is-hidden");
         divRoles.appendChild(role.columns);
         initPeopleSelect(role.selectActor, people);
         initPeopleSelect2NewTag(role.selectActor, "Acteur…");
         bindPeopleModalNewTag(role.selectActor);
+    });
+
+    deleteRole.addEventListener("click", () => {
+        document.getElementById(`div-role-${index}`).remove();
+        index -= 1;
+        if (i === 0) {
+            deleteRole.classList.add("is-hidden");
+        }
     });
 }
 
