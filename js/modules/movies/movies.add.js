@@ -51,7 +51,7 @@ export async function initAddMovie() {
             setTimeout(() => {
                 handleButtonState(buttonInput, "success");
                 movieForm.reset();
-                movieGenres.value = "";
+                genresInput.value = "";
                 titleInput.focus();
             }, 250);
 
