@@ -31,6 +31,8 @@ export async function createShowCard(s) {
     }
 
     const nextEpisode = await getNextEpisode(show.id);
+    console.log(show);
+    console.log("show.title:", show.title, "next épisode:", nextEpisode);
 
     const column = document.createElement("div");
     column.classList.add("column", "is-one-quarter");
@@ -59,7 +61,7 @@ export async function createShowCard(s) {
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
 
-    const buttons = createButtons(["details", "add", "delete", "toStart", "seeEp", "pause", "takeAgain", "cancel", "retry"], 'entertainment/shows/show', show.id, nextEpisode);
+    const buttons = createButtons(["details", "add", "delete", "toStart", "seeEp", "pause", "takeAgain", "cancel", "retry"], 'entertainment/shows/show', show.id);
 
     const detailsButton = buttons.details;
     const addButton = buttons.add;
