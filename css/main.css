@@ -101,6 +101,10 @@ body {
   background-attachment: fixed !important;
 }
 
+.dropdown.is-active .dropdown-menu {
+  z-index: 1000;
+}
+
 .navbar {
   border-radius: 10px;
 }
