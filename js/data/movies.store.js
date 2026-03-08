@@ -4,6 +4,18 @@ export function updatePageSize() {
     } else {
         indexMoviesStore.pageSize = 7;
     }
+
+    const elements = document.querySelectorAll('.changeMobileGrid');
+
+    elements.forEach(el => {
+        if (window.innerWidth <= 768) {
+            el.classList.remove('has-7-cols');
+            el.classList.add('has-3-cols');
+        } else {
+            el.classList.remove('has-3-cols');
+            el.classList.add('has-7-cols');
+        }
+    });
 }
 
 export let moviesStore = {
