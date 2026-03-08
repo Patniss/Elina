@@ -120,7 +120,7 @@ export async function movieContent(uuid) {
     btnChangeDate.addEventListener("click", async() => {
         if (!inputChangeDate.value) return;
         updateDateSeenMovie(uuid, inputChangeDate.value);
-        dateSeenMovie.textContent = formatCompleteDate(inputChangeDate);
+        dateSeenMovie.textContent = formatCompleteDate(inputChangeDate.value);
         const modal = document.querySelector('.modal.is-active');
         if (modal) modal.classList.remove('is-active');
     });
