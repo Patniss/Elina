@@ -88,10 +88,12 @@ export async function completeMovie(uuid) {
     });
 
     addActor.addEventListener("click", () => {
+        console.log("bouton cliqué");
         const role = createRoleBlock();
+        console.log("bloc role :", role);
         divRoles.appendChild(role.columns);
         initPeopleSelect(role.selectActor, people);
-        initPeopleSelect2NewTag(role.selectActor, "Scénariste…");
+        initPeopleSelect2NewTag(role.selectActor, "Acteur…");
         bindPeopleModalNewTag(role.selectActor);
     });
 }
