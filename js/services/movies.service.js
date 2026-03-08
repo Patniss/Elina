@@ -12,13 +12,15 @@ export async function addMovie(button, movieTitle, movieYear, movieGenres, movie
             poster: moviePoster, 
             time: movieTime, 
             synopsis: movieSynopsis 
-        }]);
+        }]).select("*");
     
     if (error) {
         console.error(error);
         handleButtonState(button, "error");
         return;
     }
+
+    return data.id;
 }
 
 export async function fethAllMovies() {

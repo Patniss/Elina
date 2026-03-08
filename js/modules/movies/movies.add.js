@@ -46,13 +46,11 @@ export async function initAddMovie() {
 
         handleButtonState(buttonInput, "loading");
 
-        try { await addMovie(buttonInput, movieTitle, movieYear, movieGenres, moviePoster, movieTime, movieSynopsis);
+        try { const movieAdd = await addMovie(buttonInput, movieTitle, movieYear, movieGenres, moviePoster, movieTime, movieSynopsis);
 
             setTimeout(() => {
                 handleButtonState(buttonInput, "success");
-                movieForm.reset();
-                genresInput.value = "";
-                titleInput.focus();
+                window.location = `/Elina/entertainment/movies/movie.html?id=${movieAdd}`;
             }, 250);
 
         } catch (err) {
