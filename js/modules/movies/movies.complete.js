@@ -54,7 +54,7 @@ export async function completeMovie(uuid) {
     const divScriptwriter2 = document.getElementById("div-scriptwriter-2");
     const deleteScriptwriter2 = document.getElementById("delete-scriptwriter-2");
 
-    const addActor = document.getElementById("add-actor");
+    const addRole = document.getElementById("add-role");
     const divRoles = document.getElementById("div-roles");
 
     addDirector.addEventListener("click", () => {
@@ -87,10 +87,8 @@ export async function completeMovie(uuid) {
         addScriptwriter.disabled = false;
     });
 
-    addActor.addEventListener("click", () => {
-        console.log("bouton cliqué");
+    addRole.addEventListener("click", () => {
         const role = createRoleBlock();
-        console.log("bloc role :", role);
         divRoles.appendChild(role.columns);
         initPeopleSelect(role.selectActor, people);
         initPeopleSelect2NewTag(role.selectActor, "Acteur…");
