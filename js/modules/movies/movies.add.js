@@ -46,7 +46,7 @@ export async function initAddMovie() {
 
         handleButtonState(buttonInput, "loading");
 
-        try { await addMovie(buttonInput);
+        try { await addMovie(buttonInput, movieTitle, movieYear, movieGenres, moviePoster, movieTime, movieSynopsis);
 
             setTimeout(() => {
                 handleButtonState(buttonInput, "success");

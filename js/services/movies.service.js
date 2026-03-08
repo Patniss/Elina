@@ -1,13 +1,13 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { handleButtonState } from "/Elina/js/ui/button.js";
 
-export async function addMovie(button) {
+export async function addMovie(button, movieTitle, movieYear, movieGenres, moviePoster, movieTime, movieSynopsis) {
     const { data, error } = await supabase
         .from("movies")
         .insert([{
             title: movieTitle,
             year: movieYear, 
-            complete: movieComplete, 
+            complete: false, 
             genres: movieGenres, 
             poster: moviePoster, 
             time: movieTime, 
