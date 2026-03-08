@@ -14,7 +14,7 @@ export async function addSeason(nbSeason, showId, nbEpisodes) {
         return;
     }
 }
-$
+
 export async function getNbEpisode(uuid) {
     const { data, error } = await supabase
         .from("seasons")
