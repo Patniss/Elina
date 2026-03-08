@@ -27,11 +27,6 @@
                 <h3 class="subtitle is-3 mb-6" id="movie-year" style="color: white;"></h3>
 
                 <div class="columns is-four-fifths box">
-                    <div style="position: absolute; right: 5%" id="div-seen" class="is-hidden">
-                        <button href="#" id="movie-date-seen" class="js-modal-trigger tag is-medium" data-target="change-date-seen"></button>
-                        <button id="movie-fav" class="tag is-large is-hoverable" style="background-color: transparent;"><i class="fa-solid fa-heart"></i></button>
-                        <button id="movie-unlike" class="tag is-large is-hoverable" style="background-color: transparent;"><i class="fa-solid fa-heart-crack"></i></button>
-                    </div>
                     <div class="column is-one-quarter">
                         <img src="/Elina/entertainment/movies/poster.png" class="image is-clickable js-modal-trigger" id="movie-poster" data-target="div-modal-poster" style="border-radius: 5px;" />
                     </div>
@@ -41,6 +36,11 @@
                             <button class="button is-success is-light is-hidden" id="button-tosee-movie"><span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span></button>
                             <button class="button is-danger is-light is-hidden" id="button-supp-movie"><span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span></button>
                             <button class="button is-success is-hidden" id="button-seen-movie"><span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span></button>
+                        </div>
+                        <div id="div-seen" class="is-hidden">
+                            <button href="#" id="movie-date-seen" class="js-modal-trigger tag is-medium" data-target="change-date-seen"></button>
+                            <button id="movie-fav" class="tag is-large is-hoverable" style="background-color: transparent;"><i class="fa-solid fa-heart"></i></button>
+                            <button id="movie-unlike" class="tag is-large is-hoverable" style="background-color: transparent;"><i class="fa-solid fa-heart-crack"></i></button>
                         </div>
                         <p id="movie-genres"><span class="subtitle is-4 mb-6 mr-3" id="movie-time"></span><span class="mr-3">&#x2022;</span></p>
                         <h3 class="subtitle is-4 mt-6 mb-2">Réalisateur(s)</h3>
