@@ -1,3 +1,11 @@
+export function updatePageSize() {
+    if (window.innerWidth <= 768) {
+        indexMoviesStore.pageSize = 3;
+    } else {
+        indexMoviesStore.pageSize = 7;
+    }
+}
+
 export let moviesStore = {
     movies: {
         all: [],

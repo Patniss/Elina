@@ -124,14 +124,7 @@
   loadNav();
   import { displayIndexMovies } from "/Elina/js/modules/movies/movies.display.js";
   displayIndexMovies();
-  
-  function updatePageSize() {
-    if (window.innerWidth <= 768) {
-      indexMoviesStore.pageSize = 3;
-    } else {
-      indexMoviesStore.pageSize = 7;
-    }
-  }
+  import { updatePageSize } from "/Elina/js/data/movies.store.js";
   updatePageSize();
   window.addEventListener("resize", updatePageSize);
 </script>
