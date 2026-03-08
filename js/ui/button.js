@@ -90,9 +90,9 @@ export function createButton(type, link, id, nextEpisode) {
     if (type === "details") {
         button.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
         button.href = `/Elina/${link}.html?id=${id}`;
-    } else if (type === "seeEp") {
-        changeModeButton(button, type, nextEpisode);
-    } else {
+    }
+    // else if (type === "seeEp") { changeModeButton(button, type, nextEpisode); }
+    else {
         changeModeButton(button, type);
     }
 
