@@ -281,3 +281,9 @@ body {
   background-color: var(--user-primary);
   border-color: var(--user-primary);
 }
+
+@media screen and (max-width: 768px) {
+  #tosee-section .fixed-grid.has-7-cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

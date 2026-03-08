@@ -54,7 +54,7 @@
 
         <div>
           <h3 class="subtitle">Films à voir</h3>
-          <div class="columns">
+          <div id="tosee-section" class="columns is-mobile">
             <div class="column is-1 has-text-centered is-flex is-align-items-center is-justify-content-right">
               <a href="#" id="tosee-left-btn" class="button is-primary is-outlined"><i class="fa-solid fa-angle-left"></i></a>
             </div>
@@ -124,6 +124,16 @@
   loadNav();
   import { displayIndexMovies } from "/Elina/js/modules/movies/movies.display.js";
   displayIndexMovies();
+  
+  function updatePageSize() {
+    if (window.innerWidth <= 768) {
+      indexMoviesStore.pageSize = 3;
+    } else {
+      indexMoviesStore.pageSize = 7;
+    }
+  }
+  updatePageSize();
+  window.addEventListener("resize", updatePageSize);
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
