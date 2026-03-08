@@ -83,7 +83,7 @@ export function changeModeButton(button, mode, nextEpisode) {
     }
 }
 
-export function createButton(type, link, id, nextEpisode) {
+export function createButton(type, link, id) {
     const button = document.createElement("a");
     button.classList.add("tag", "button", "is-hoverable", "mr-2");
     
@@ -99,10 +99,10 @@ export function createButton(type, link, id, nextEpisode) {
     return button;
 }
 
-export function createButtons(types = [], link, id, nextEpisode) {
+export function createButtons(types = [], link, id) {
     const result = [];
     types.forEach(type => {
-        result[type] = type === "details" ? createButton(type, link, id, nextEpisode) : createButton(type);
+        result[type] = type === "details" ? createButton(type, link, id) : createButton(type);
     });
 
     return result;
