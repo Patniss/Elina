@@ -1,7 +1,6 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { getSeasonId, getNbEpisode } from "/Elina/js/services/seasons.service.js";
-import { formatShowEpisode } from "/Elina/js/utils/format.js";
 
 export async function addUserSeason(showId, nbSeason) {
     const userId = await getUserId();
@@ -12,22 +11,12 @@ export async function addUserSeason(showId, nbSeason) {
         .insert([{
             user_id: userId,
             season_id: seasonId,
-            episodes_seen: 0
+            episodes_seen: 1
         }]).single();
 
     if (error) {
         console.error(error);
         return;
-    }
-}
-
-export async function getNextEpisode(uuid) {
-    const currentSeason = await getCurrentSeason(uuid);
-    const totalEpisodes = await getNbEpisode(uuid, currentSeason);
-    if (currentSeason.episodes_seen !== totalEpisodes) {
-        return formatShowEpisode(currentSeason, (currentSeason.episodes_seen+1))
-    } else {
-        return formatShowEpisode((currentSeason+1), 1);
     }
 }
 
@@ -47,5 +36,35 @@ export async function getCurrentSeason(uuid) {
         return;
     }
 
-    return data?.[0]?.seasons?.id ?? null;
+    return data?.[0]?.seasons ?? null;
+}
+
+export async function getNextEpisode(uuid) {
+    const currentSeason = await getCurrentSeason(uuid);
+    const nbEpisodes = await getNbEpisode(currentSeason.id);
+
+    const { data, error } = await supabase
+        .from("users_seasons")
+        .select("episodes_seen")
+        .eq("id", currentSeason.id)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    let result;
+
+    if (data.episodes_seen === nbEpisodes) {
+        if ((currentSeason.season + 1) < 10) result = `S0${currentSeason.season + 1}E01`;
+    } else {
+        if ((data.episodes_seen + 1) < 10) {
+            result = `S${currentSeason.season}E0${data.episodes_seen + 1}`;
+        } else {
+            result = `S${currentSeason.season}E${data.episodes_seen + 1}`;
+        }
+    }
+
+    return result;
 }

@@ -1,5 +1,5 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
-import { addUserSeason, getCurrentSeason, getNextEpisode } from "/Elina/js/services/usersSeasons.service.js";
+import { addUserSeason, getNextEpisode } from "/Elina/js/services/usersSeasons.service.js";
 import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
 import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 
@@ -30,10 +30,7 @@ export async function createShowCard(s) {
         return document.createElement("div");
     }
 
-    let nextEpisode = "S00E00";
-    const currentSeason = await getCurrentSeason(show.id);
-    console.log(show.title, " : ", currentSeason);
-    if (currentSeason) nextEpisode = await getNextEpisode(show.id);
+    const nextEpisode = await getNextEpisode(show.id);
 
     const column = document.createElement("div");
     column.classList.add("column", "is-one-quarter");

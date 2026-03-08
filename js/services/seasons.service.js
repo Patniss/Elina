@@ -14,14 +14,12 @@ export async function addSeason(nbSeason, showId, nbEpisodes) {
         return;
     }
 }
-
-export async function getNbEpisode(showId, nbSeason) {
-    const idSeason = await getSeasonId(showId, nbSeason);
-
+$
+export async function getNbEpisode(uuid) {
     const { data, error } = await supabase
         .from("seasons")
         .select("nb_episodes")
-        .eq("id", idSeason)
+        .eq("id", uuid)
         .single();
 
     if (error) {
@@ -33,8 +31,6 @@ export async function getNbEpisode(showId, nbSeason) {
 }
 
 export async function getSeasonId(showId, nbSeason) {
-    console.log(nbSeason, typeof nbSeason);
-    
     const { data, error } = await supabase
         .from("seasons")
         .select("id")
