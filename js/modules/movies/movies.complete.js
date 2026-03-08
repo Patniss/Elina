@@ -1,7 +1,8 @@
 import { nationalities } from "/Elina/js/data/nationalities.js";
 import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
 import { getAllIncompleteMovies, getMovie } from "/Elina/js/services/movies.service.js";
-import { getAllPeople } from "/Elina/js/services/people.service.js";
+import { getAllPeople, addPeople } from "/Elina/js/services/people.service.js";
+import { handleButtonState } from "/Elina/js/ui/button.js";
 import { initNationalities, initPeopleSelect, initPeopleSelect2NewTag, bindPeopleModalNewTag } from "/Elina/js/ui/select.js";
 
 export async function completeMovie(uuid) {
@@ -103,10 +104,42 @@ export async function completeMovie(uuid) {
     deleteRole.addEventListener("click", () => {
         document.getElementById(`div-role-${index}`).remove();
         index -= 1;
-        if (i === 0) {
+        if (index === 0) {
             deleteRole.classList.add("is-hidden");
         }
     });
+
+    const firstnameNewPeopleInput = document.getElementById("firstname");
+    const lastnameNewPeopleInput = document.getElementById("lastname");
+    const birthdateNewPeopleInput = document.getElementById("birthdate");
+    const deathdateNewPeopleInput = document.getElementById("dathdate");
+    const selectedNationalities = Array.from(selectNationalities.selectedOptions).map(option => option.value);
+    const selectJobs = document.getElementById('jobs');
+    const selectedValues = Array.from(selectJobs.selectedOptions).map(option => option.value);
+
+    const firstnameNewPeople = firstnameNewPeopleInput.value;
+    const lastnameNewPeople = lastnameNewPeopleInput.value;
+    const birthdateNewPeople = birthdateNewPeopleInput.value;
+    const deathdateNewPeople = isDead.checked ? deathdateNewPeopleInput.value : null;
+    const nationalitiesNewPeople = selectedNationalities.join(' ');
+    const jobsNewPeople = selectedValues.join(' ');
+
+    const submitNewPeople = document.getElementById("add-people");
+
+    submitNewPeople.addEventListener("click", () => {
+        handleButtonState(submitNewPeople, "loading");
+
+        try {
+            const idNewPeople = addPeople(firstnameNewPeople, lastnameNewPeople, birthdateNewPeople, nationalitiesNewPeople, jobsNewPeople, deathdateNewPeople);
+
+            setTimeout(() => {
+                handleButtonState(submitNewPeople, "stop-loading");
+            }, 500);
+        } catch (error) {
+            console.error(error);
+            handleButtonState(submitNewPeople, "error");
+        }
+    })
 }
 
 export async function displayAllIncompleteMovies() {

@@ -1,5 +1,26 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 
+export async function addPeople(firstname, lastname, birthdate, nationalities, jobs, deathdate) {
+    const { data, error } = await supabase
+        .from("people")
+        .insert([{
+            firstname: firstname,
+            lastname: lastname,
+            birthdate: birthdate,
+            nationalities: nationalities,
+            jobs: jobs,
+            complete: false,
+            deathdate: deathdate
+        }]).select("id").single();
+
+    if (error) {
+        console.log("Erreur sur l'ajout d'un people : " + error);
+        return;
+    }
+
+    return data.id;
+}
+
 export async function getAllPeople() {
     const { data, error } = await supabase
         .from("people")
@@ -12,35 +33,6 @@ export async function getAllPeople() {
     }
 
     return data;
-}
-
-export async function addPeople(firstname, lastname) {
-    const { data, error } = await supabase
-        .from("people")
-        .insert([{
-            firstname: firstname,
-            lastname: lastname
-        }]).select("id").single();
-
-    if (error) {
-        console.log("Erreur sur l'ajout d'un people : " + error);
-        return;
-    }
-
-    return data;
-}
-
-export async function deletePeople(id) {
-    const { data, error } = await supabase
-        .from("people")
-        .delete()
-        .eq("id", id)
-        .single();
-
-    if (error) {
-        console.log("Erreur lors de la suppression du people : " + error);
-        return;
-    }
 }
 
 export async function getPeople(uuid) {
@@ -56,4 +48,17 @@ export async function getPeople(uuid) {
     }
 
     return data
+}
+
+export async function deletePeople(id) {
+    const { data, error } = await supabase
+        .from("people")
+        .delete()
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        console.log("Erreur lors de la suppression du people : " + error);
+        return;
+    }
 }
