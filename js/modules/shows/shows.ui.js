@@ -31,7 +31,6 @@ export async function createShowCard(s) {
     }
 
     const nextEpisode = await getNextEpisode(show.id);
-    console.log(show);
     console.log("show.title:", show.title, "next épisode:", nextEpisode);
 
     const column = document.createElement("div");

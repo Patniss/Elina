@@ -30,6 +30,21 @@ export async function getNbEpisode(uuid) {
     return data.nb_episodes;
 }
 
+export async function getNbSeason(uuid) {
+    const { data, error } = await supabase
+        .from("seasons")
+        .select("season")
+        .eq("id", uuid)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data.season;
+}
+
 export async function getSeasonId(showId, nbSeason) {
     const { data, error } = await supabase
         .from("seasons")
@@ -44,4 +59,34 @@ export async function getSeasonId(showId, nbSeason) {
     }
 
     return data.id;
+}
+
+export async function getSeasonsOfShow(uuid) {
+    const { data, error } = await supabase
+        .from("seasons")
+        .select("*")
+        .eq("show_id", uuid)
+        .order("season", { ascending: true });
+    
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data;
+}
+
+export async function getSeasonsOfShowDesc(uuid) {
+    const { data, error } = await supabase
+        .from("seasons")
+        .select("*")
+        .eq("show_id", uuid)
+        .order("season", { ascending: false });
+    
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data;
 }
