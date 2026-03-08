@@ -12,7 +12,7 @@ export async function addMovie(button, movieTitle, movieYear, movieGenres, movie
             poster: moviePoster, 
             time: movieTime, 
             synopsis: movieSynopsis 
-        }]).select("*");
+        }]).select("id").single();
     
     if (error) {
         console.error(error);
