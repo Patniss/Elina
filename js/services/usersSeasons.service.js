@@ -41,7 +41,9 @@ export async function getCurrentSeason(uuid) {
 
 export async function getNextEpisode(uuid) {
     const currentSeason = await getCurrentSeason(uuid);
+    console.log("currentSeason :", currentSeason);
     const nbEpisodes = await getNbEpisode(currentSeason.id);
+    console.log("nbEpisodes :", console.log(nbEpisodes));
 
     const { data, error } = await supabase
         .from("users_seasons")
@@ -65,6 +67,8 @@ export async function getNextEpisode(uuid) {
             result = `S${currentSeason.season}E${data.episodes_seen + 1}`;
         }
     }
+
+    console.log("result :", result);
 
     return result;
 }
