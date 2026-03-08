@@ -64,6 +64,7 @@ export async function movieContent(uuid) {
     btnToseeMovie.addEventListener("click", async () => {
         divSeenMovie.classList.remove("is-hidden");
         toggleBtnSeenStatut(true, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
+        dateSeenMovie.textContent = "Ajouter une date";
     });
 
     clickDeleteMovieUser(btnDeleteMovie, uuid);

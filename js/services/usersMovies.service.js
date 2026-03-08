@@ -10,7 +10,7 @@ export async function addUserMovie(movieId) {
             user_id: userId,
             movie_id: movieId,
             seen: false,
-            date_seen: new Date().toISOString()
+            date_seen: null
         }]).select();
 
     if (error) {
