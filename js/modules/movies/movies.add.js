@@ -5,7 +5,7 @@ import { searchAllMovies } from "/Elina/js/modules/movies/movies.search.js";
 import { addMovie } from "/Elina/js/services/movies.service.js";
 import { genres } from "/Elina/js/data/genres.js";
 
-export async function addMovie() {
+export async function initAddMovie() {
     // Récupération du formulaire et des champs
     const movieForm = document.getElementById("movie-form");
     const titleInput = document.getElementById("movie-title");
