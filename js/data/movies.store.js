@@ -1,8 +1,12 @@
 export function updatePageSize() {
     if (window.innerWidth <= 768) {
         indexMoviesStore.pageSize = 3;
+        indexMoviesStore.currentIndex.tosee = 1;
+        indexMoviesStore.currentIndex.fav = 1;
     } else {
         indexMoviesStore.pageSize = 7;
+        indexMoviesStore.currentIndex.tosee = 3;
+        indexMoviesStore.currentIndex.fav = 3;
     }
 
     const elements = document.querySelectorAll('.changeMobileGrid');
@@ -68,14 +72,14 @@ export let moviesStore = {
 
 export let indexMoviesStore = {
     movies: {
-        toseeMovies: [],
-        favMovies: [],
-        lastSeenMovies: []
+        tosee: [],
+        fav: [],
+        last: []
     },
-    currentPage: {
-        toseeMovies: 1,
-        favMovies: 1,
-        lastSeenMovies: 1
+    currentIndex: {
+        tosee: 3,
+        fav: 0,
+        last: 0
     },
     pageSize: 7
 }

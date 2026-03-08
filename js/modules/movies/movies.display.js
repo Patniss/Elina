@@ -1,3 +1,4 @@
+import { indexMoviesStore } from "/Elina/js/data/movies.store.js";
 import { renderIndexToseeMovies, renderIndexFavMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
@@ -19,4 +20,23 @@ export async function displayIndexMovies() {
     renderIndexToseeMovies(toseeMovies);
     const favMovies = await getFavMovies();
     renderIndexFavMovies(favMovies);
+
+    const rightBtn = document.getElementById("tosee-right-btn");
+    const leftBtn = document.getElementById("tosee-left-btn");
+
+    rightBtn.addEventListener("click", () => {
+        const max = indexMoviesStore.movies.tosee.length - 1;
+        
+        if (indexMoviesStore.currentIndex.tosee < max) {
+            indexMoviesStore.currentIndex.tosee++;
+            updateCarousel(toseeMoviesDiv, indexMoviesStore, "tosee");
+        }
+    });
+    
+    leftBtn.addEventListener("click", () => {
+        if (indexMoviesStore.currentIndex.tosee > 0) {
+            indexMoviesStore.currentIndex.tosee--;
+            updateCarousel(toseeMoviesDiv, indexMoviesStore, "tosee");
+        }
+    });
 }
