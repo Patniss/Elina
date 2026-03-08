@@ -9,43 +9,25 @@ export function renderGenres(container, genresString) { // Création des tags po
     })
 }
 
-export async function renderCarousel(containerStore, store, list, element, createFunction, filteredMovies) {
+export async function render(containerStore, store, list, element, createFunction, filteredMovies) {
     containerStore.innerHTML = "";
 
+    const start = (store.currentPage[list] - 1) * store.pageSize;
+    const end = start + store.pageSize;
+
     const pageArray = filteredMovies || store[element]?.[list] || [];
-    const center = store.currentIndex[list];
-    const half = Math.floor(store.pageSize / 2);
-
-    let start = center - half;
-    let end = center + half + 1;
-
-    if (start < 0) {
-        start = 0;
-        end = store.pageSize;
-    }
-
-    if (end > pageArray.length) {
-        end = pageArray.length;
-        start = end - store.pageSize;
-    }
-
     const page = pageArray.slice(start, end);
 
-    for (let i = 0; i < page.length; i++) {
-
-        const el = page[i];
-        const card = await createFunction(el);
-
-        const realIndex = start + i;
-
-        if (realIndex === center) {
-            card.classList.add("carousel-center");
-        }
-
-        containerStore.appendChild(card);
+    for (const el of page) {
+        containerStore.appendChild(await createFunction(el));
     }
 
     const cards = containerStore.querySelectorAll(".movie-card");
+    cards.forEach((card, index) => {
+        card.classList.remove("fade-in-up");
+        card.style.animationDelay = `${index * 70}ms`;
+        card.classList.add("fade-in-up");
+    });
 }
 
 export function updateCarousel(container, store, list) {
