@@ -21,8 +21,8 @@ export async function displayIndexMovies() {
     const favMovies = await getFavMovies();
     renderIndexFavMovies(favMovies);
 
-    const rightBtn = document.getElementById("tosee-right-btn");
-    const leftBtn = document.getElementById("tosee-left-btn");
+    const rightBtn = document.getElementById("tosee-next-btn");
+    const leftBtn = document.getElementById("tosee-prev-btn");
 
     rightBtn.addEventListener("click", () => {
         const max = indexMoviesStore.movies.tosee.length - 1;
