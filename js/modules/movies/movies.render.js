@@ -1,4 +1,4 @@
-import { render, updateCarousel } from "/Elina/js/ui/render.js";
+import { render, initCarousel } from "/Elina/js/ui/render.js";
 import { createMovieCard, createCarouselCard } from "/Elina/js/modules/movies/movies.ui.js";
 import { moviesStore, indexMoviesStore } from "/Elina/js/data/movies.store.js";
 import { renderPaginationAll, renderPaginationTosee, renderPaginationSeen } from "/Elina/js/modules/movies/movies.pagination.js";
@@ -20,16 +20,23 @@ export async function renderIndexFavMovies(movies) {
 }
 
 export async function renderIndexToseeMovies(movies) {
-    const container = document.getElementById("toseeMovies");
+    const container = document.getElementById("tosee-movies");
+    const dots = document.getElementById("dots-tosee");
     container.innerHTML = "";
 
     indexMoviesStore.movies.tosee = movies;
 
+    let index = 1;
+
     for (const movie of movies) {
-        container.appendChild(await createCarouselCard(movie));
+        container.appendChild(await createCarouselCard(movie, index));
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        dot.dataset.index = index;
+        index++;
     }
 
-    updateCarousel(container, indexMoviesStore, "tosee");
+    initCarousel();
 }
 
 export async function renderSeenMovies(movies) {

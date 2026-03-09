@@ -54,17 +54,12 @@
 
         <div>
           <h3 class="subtitle">Films à voir</h3>
-          <div class="columns is-mobile">
-            <div class="column is-1 has-text-centered is-flex is-align-items-center is-justify-content-right">
-              <a href="#" id="tosee-prev-btn" class="button is-primary is-outlined"><i class="fa-solid fa-angle-left"></i></a>
-            </div>
-            <div class="column is-10 fixed-grid has-7-cols is-column-gap-2 changeMobileGrid">
-              <div class="grid" id="toseeMovies"></div>
-            </div>
-            <div class="column is-1 has-text-centered is-flex is-align-items-center is-justify-content-left">
-              <a href="#" id="tosee-next-btn" class="button is-primary is-outlined"><i class="fa-solid fa-angle-right"></i></a>
-            </div>
+          <div class="carousel-container">
+            <button class="button is-primary nav-arrow left">‹</button>
+            <div class="carousel-track" id="tosee-movies"></div>
+            <button class="button is-primary nav-arrow right">›</button>
           </div>
+          <div class="dots" id="dots-tosee"></div>
         </div>
 
         <hr class="hr" />
