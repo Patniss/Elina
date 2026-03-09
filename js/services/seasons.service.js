@@ -90,3 +90,17 @@ export async function getSeasonsOfShowDesc(uuid) {
 
     return data;
 }
+
+export async function getTotalSeasons(uuid) {
+    const { count, error } = await supabase
+        .from("seasons")
+        .select("season", { count: "exact", head: true })
+        .eq("show_id", uuid);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return count;
+}
