@@ -3,7 +3,7 @@ import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
 import { getAllIncompleteMovies, getMovie } from "/Elina/js/services/movies.service.js";
 import { getAllPeople, addPeople } from "/Elina/js/services/people.service.js";
 import { handleButtonState } from "/Elina/js/ui/button.js";
-import { initNationalities, initPeopleSelect, initPeopleSelect2NewTag, bindPeopleModalNewTag } from "/Elina/js/ui/select.js";
+import { initNationalities, initPeopleSelect, initPeopleSelect2NewTag, bindPeopleModalNewTag, addPeopleToAllSelects, activePeopleSelect, pendingTagText } from "/Elina/js/ui/select.js";
 
 export async function completeMovie(uuid) {
     const movie = await getMovie(uuid);
@@ -112,34 +112,67 @@ export async function completeMovie(uuid) {
     const firstnameNewPeopleInput = document.getElementById("firstname");
     const lastnameNewPeopleInput = document.getElementById("lastname");
     const birthdateNewPeopleInput = document.getElementById("birthdate");
-    const deathdateNewPeopleInput = document.getElementById("dathdate");
-    const selectedNationalities = Array.from(selectNationalities.selectedOptions).map(option => option.value);
+    const deathdateNewPeopleInput = document.getElementById("deathdate");
     const selectJobs = document.getElementById('jobs');
-    const selectedValues = Array.from(selectJobs.selectedOptions).map(option => option.value);
-
-    const firstnameNewPeople = firstnameNewPeopleInput.value;
-    const lastnameNewPeople = lastnameNewPeopleInput.value;
-    const birthdateNewPeople = birthdateNewPeopleInput.value;
-    const deathdateNewPeople = isDead.checked ? deathdateNewPeopleInput.value : null;
-    const nationalitiesNewPeople = selectedNationalities.join(' ');
-    const jobsNewPeople = selectedValues.join(' ');
 
     const submitNewPeople = document.getElementById("add-people");
 
-    submitNewPeople.addEventListener("click", () => {
+    submitNewPeople.addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const selectedValues = Array.from(selectJobs.selectedOptions).map(option => option.value);
+        const firstnameNewPeople = firstnameNewPeopleInput.value;
+        const lastnameNewPeople = lastnameNewPeopleInput.value;
+        const birthdateNewPeople = birthdateNewPeopleInput.value;
+        const deathdateNewPeople = isDead.checked ? deathdateNewPeopleInput.value : null;
+        const selectedNationalities = Array.from(selectNationalities.selectedOptions).map(option => option.value);
+        const nationalitiesNewPeople = selectedNationalities.join(' ');
+        const jobsNewPeople = selectedValues.join(' ');
+
         handleButtonState(submitNewPeople, "loading");
 
         try {
-            const idNewPeople = addPeople(firstnameNewPeople, lastnameNewPeople, birthdateNewPeople, nationalitiesNewPeople, jobsNewPeople, deathdateNewPeople);
+            const idNewPeople = await addPeople(firstnameNewPeople, lastnameNewPeople, birthdateNewPeople, nationalitiesNewPeople, jobsNewPeople, deathdateNewPeople);
 
             setTimeout(() => {
                 handleButtonState(submitNewPeople, "stop-loading");
             }, 500);
+
+            const allSelects = [
+            document.getElementById("select-director-1"),
+            document.getElementById("select-director-2"),
+            document.getElementById("select-director-3"),
+            document.getElementById("select-scriptwriter-1"),
+            document.getElementById("select-scriptwriter-2")];
+
+            for (let i = 1; i <= index; i++) {
+                allSelects.push(document.getElementById(`select-actor-${i}`))
+            }
+
+            const fullName = `${firstnameNewPeople} ${lastnameNewPeople}`;
+
+            addPeopleToAllSelects(allSelects, idNewPeople, fullName);
+
+            if (activePeopleSelect && pendingTagText) {
+                $(activePeopleSelect)
+                    .find(`option[value="${pendingTagText}"]`)
+                    .remove();
+                
+                const option = new Option(fullName, idNewPeople, true, true);
+                
+                $(activePeopleSelect).append(option).trigger('change');
+                
+                activePeopleSelect = null;
+                pendingTagText = null;
+
+                document.getElementById("people-form").reset();
+                document.getElementById("add-new-people-modal").classList.remove("is-active");
+            }
         } catch (error) {
             console.error(error);
             handleButtonState(submitNewPeople, "error");
         }
-    })
+    });
 }
 
 export async function displayAllIncompleteMovies() {

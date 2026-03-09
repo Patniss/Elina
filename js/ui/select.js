@@ -1,5 +1,17 @@
 import { parseFullName } from "/Elina/js/utils/format.js";
 
+export let activePeopleSelect = null;
+export let pendingTagText = null;
+
+export function addPeopleToAllSelects(selects, id, name) {
+
+    selects.forEach(select => {
+        const option = new Option(name, id, false, false);
+        select.append(option);
+    });
+
+}
+
 export function initGenres(selectElement, genres) {
     genres.forEach(genre => {
         selectElement.append(
@@ -65,16 +77,18 @@ export function bindPeopleModalNewTag(selectElement) {
     const inputFirstname = document.getElementById("firstname");
     const inputLastname = document.getElementById("lastname");
 
-    $(selectElement)
-        .on("select2:select", function (e) {
-            const data = e.params.data;
+    $(selectElement).on("select2:select", function (e) {
+        const data = e.params.data;
+        
+        if (data.newTag) {
+            activePeopleSelect = selectElement;
+            pendingTagText = data.text;
 
-            if (data.newTag) {
-                const { firstName, lastName } = parseFullName(data.text);
-
-                modal.classList.add("is-active");
-                inputFirstname.value = firstName;
-                inputLastname.value = lastName;
-            }
-        });
+            const { firstName, lastName } = parseFullName(data.text);
+            
+            modal.classList.add("is-active");
+            inputFirstname.value = firstName;
+            inputLastname.value = lastName;
+        }
+    });
 }
