@@ -32,7 +32,6 @@ export async function render(containerStore, store, list, element, createFunctio
 
 export function initCarousel() {
     const cards = document.querySelectorAll(".card-carousel");
-    const dots = document.querySelectorAll(".dot");
     const leftArrow = document.querySelector(".nav-arrow.left");
     const rightArrow = document.querySelector(".nav-arrow.right");
     let currentIndex = 0;
@@ -71,10 +70,6 @@ export function initCarousel() {
             }
         });
         
-        dots.forEach((dot, i) => {
-            dot.classList.toggle("active", i === currentIndex);
-        });
-        
         setTimeout(() => {
             isAnimating = false;
         }, 800);
@@ -86,12 +81,6 @@ export function initCarousel() {
     
     rightArrow.addEventListener("click", () => {
         updateCarousel(currentIndex + 1);
-    });
-    
-    dots.forEach((dot, i) => {
-        dot.addEventListener("click", () => {
-            updateCarousel(i);
-        });
     });
     
     cards.forEach((card, i) => {

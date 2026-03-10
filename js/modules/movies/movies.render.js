@@ -21,7 +21,6 @@ export async function renderIndexFavMovies(movies) {
 
 export async function renderIndexToseeMovies(movies) {
     const container = document.getElementById("tosee-movies");
-    const dots = document.getElementById("dots-tosee");
     container.innerHTML = "";
 
     indexMoviesStore.movies.tosee = movies;
@@ -30,9 +29,6 @@ export async function renderIndexToseeMovies(movies) {
 
     for (const movie of movies) {
         container.appendChild(await createCarouselCard(movie, index));
-        const dot = document.createElement("div");
-        dot.classList.add("dot");
-        dot.dataset.index = index;
         index++;
     }
 
