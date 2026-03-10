@@ -64,12 +64,58 @@ export async function getNextEpisode(uuid) {
             return "À jour";
         };
         season = String(seasonNumber + 1).padStart(2,'0');
-        result = `S${season}E01`;
+        result = `S${season}E 01`;
     } else {
         season = String(seasonNumber).padStart(2,'0');
         episode = String(seenEpisode + 1).padStart(2,'0');
-        result = `S${season}E${episode}`;
+        result = `S${season} E${episode}`;
     }
 
     return result;
+}
+
+export async function seeNextEpisode(uuid) {
+    const userId = await getUserId();
+    const currentSeasonData = await getCurrentSeason(uuid);
+    const nbTotalSeasons = await getTotalSeasons(uuid);
+
+    if (!currentSeasonData) return null;
+
+    const currentSeasonId = currentSeasonData.season_id;
+    const nbEpisodes = await getNbEpisode(currentSeasonId);
+    const seasonNumber = await getNbSeason(currentSeasonId);
+
+    const seenEpisode = currentSeasonData.episodes_seen ?? 0;
+
+    if (nbEpisodes === seenEpisode) {
+        if (seasonNumber === nbTotalSeasons) return;
+
+        const nextSeasonId = await getSeasonId(uuid, (seasonNumber + 1));
+        
+        const { data, error } = await supabase
+            .from("users_seasons")
+            .insert({
+                user_id: userId,
+                season_id: nextSeasonId,
+                episodes_seen: 1
+            });
+            
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+    } else {
+        const { data, error } = await supabase
+            .from ("users_seasons")
+            .update({ episodes_seen: (seenEpisode + 1) })
+            .eq("user_id", userId)
+            .eq("season_id", uuid)
+            .single();
+
+        if (error) {
+            console.error(error);
+            return;
+        }
+    }
 }

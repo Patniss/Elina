@@ -1,6 +1,6 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
 import { addUserSeason, getNextEpisode } from "/Elina/js/services/usersSeasons.service.js";
-import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
+import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow, seeNextEpisode } from "/Elina/js/services/usersShows.service.js";
 import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 
 const BUTTONS_BY_STATUS = {
@@ -110,7 +110,19 @@ export async function createShowCard(s) {
             updateShowUI("started", buttons, divTags);
             handleButtonState(startButton, "stop-loading");
         }, 500);
-    })
+    });
+
+    seeEpButton.addEventListener("click", async () => {
+        handleButtonState(seeEpButton, "loading");
+        try {
+            await seeNextEpisode(show.id);
+        } catch (error) { throw error };
+
+        setTimeout(() => {
+            updateShowUI("seeEp", buttons, divTags);
+            handleButtonState(startButton, "stop-loading");
+        }, 500);
+    });
 
     pauseButton.addEventListener("click", async () => {
         handleButtonState(pauseButton, "loading");
