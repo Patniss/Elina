@@ -15,8 +15,21 @@ export async function renderAllMovies(movies) {
 
 export async function renderIndexFavMovies(movies) {
     const container = document.getElementById("favMovies");
+    container.innerHTML = "";
 
-    render(container, indexMoviesStore, "fav", "movies", createCarouselCard, movies);
+    const rightBtnFav = document.getElementById("fav-next-btn");
+    const leftBtnFav = document.getElementById("fav-prev-btn");
+
+    indexMoviesStore.movie.fav = movies;
+
+    let index = 1;
+
+    for (const movie of movies) {
+        container.appendChild(await createCarouselCard(movie, index, "fav"));
+        index++;
+    }
+
+    initCarousel("fav", leftBtnFav, rightBtnFav);
 }
 
 export async function renderIndexToseeMovies(movies) {
