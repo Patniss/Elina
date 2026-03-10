@@ -146,10 +146,13 @@ export async function completeMovie(uuid) {
             document.getElementById("select-director-2"),
             document.getElementById("select-director-3"),
             document.getElementById("select-scriptwriter-1"),
-            document.getElementById("select-scriptwriter-2")];
+            document.getElementById("select-scriptwriter-2")].filter(Boolean);;
 
             for (let i = 1; i <= index; i++) {
-                allSelects.push(document.getElementById(`select-actor-${i}`))
+                const selectActor = document.getElementById(`select-actor-${i}`);
+                if (selectActor) {
+                    allSelects.push(selectActor);
+                }
             }
 
             const fullName = `${firstnameNewPeople} ${lastnameNewPeople}`;
