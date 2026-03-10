@@ -102,11 +102,7 @@ export function createButton(type, link, id, nextEpisode) {
 export function createButtons(types = [], link, id, nextEpisode) {
     const result = [];
     types.forEach(type => {
-        result[type] = type === "details"
-        ? createButton(type, link, id)
-        : type === "seeEp"
-        ? createButton(type, nextEpisode)
-        : createButton(type);
+        result[type] = createButton(type, link, id, nextEpisode);
     });
 
     return result;
