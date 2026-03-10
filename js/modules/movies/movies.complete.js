@@ -1,11 +1,14 @@
 import { nationalities } from "/Elina/js/data/nationalities.js";
 import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
-import { getAllIncompleteMovies, getMovie } from "/Elina/js/services/movies.service.js";
+import { addDirectorMovieCasting, addScriptwriterMovieCasting, addActorMovieCasting } from "/Elina/js/services/castings.service.js";
+import { getAllIncompleteMovies, getMovie, movieComplete } from "/Elina/js/services/movies.service.js";
 import { getAllPeople, addPeople } from "/Elina/js/services/people.service.js";
 import { handleButtonState } from "/Elina/js/ui/button.js";
 import { initNationalities, initPeopleSelect, initPeopleSelect2NewTag, bindPeopleModalNewTag, addPeopleToAllSelects, activePeopleSelect, pendingTagText, clearPeopleSelectState } from "/Elina/js/ui/select.js";
 
 export async function completeMovie(uuid) {
+    const submit = document.getElementById("submit");
+
     const movie = await getMovie(uuid);
     const people = await getAllPeople();
 
@@ -170,6 +173,44 @@ export async function completeMovie(uuid) {
         } catch (error) {
             console.error(error);
             handleButtonState(submitNewPeople, "error");
+        }
+    });
+
+    submit.addEventListener("click", async (e) => {
+        e.preventDefault();
+        handleButtonState(submit, "loading");
+
+        const director1 = document.getElementById("select-director-1");
+        const director2 = document.getElementById("select-director-2");
+        const director3 = document.getElementById("select-director-3");
+        const scriptwriter1 = document.getElementById("select-scriptwriter-1");
+        const scriptwriter2 = document.getElementById("select-scriptwriter-2");
+
+        if (director1.value === "") {
+            alert("Vous devez choisir un réalisateur.")
+            return;
+        }
+
+        try {
+            addDirectorMovieCasting(uuid, director1.value);
+            if (director2.value) addDirectorMovieCasting(uuid, director2.value);
+            if (director3.value) addDirectorMovieCasting(uuid, director3.value);
+            if (scriptwriter1.value) addScriptwriterMovieCasting(uuid, scriptwriter1.value);
+            if (scriptwriter2.value) addScriptwriterMovieCasting(uuid, scriptwriter2.value);
+
+            for (let i = 1; i <= index; i++) {
+                const actor = document.getElementById(`select-actor-${i}`).value;
+                const role = document.getElementById(`name-role-${i}`).value;
+                const typeRole = document.querySelector(`input[name="typeRole-${i}"]:checked`)?.value;
+                addActorMovieCasting(uuid, actor, role, typeRole, i);
+            }
+
+            movieComplete(uuid);
+
+            window.location = `/Elina/entertainment/movies/movie.html?id=${uuid}`;
+
+        } catch (error) {
+            console.error(error);
         }
     });
 }
