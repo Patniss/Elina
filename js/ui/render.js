@@ -30,10 +30,9 @@ export async function render(containerStore, store, list, element, createFunctio
     });
 }
 
-export function initCarousel() {
-    const cards = document.querySelectorAll(".card-carousel");
-    const leftArrow = document.querySelector(".nav-arrow.left");
-    const rightArrow = document.querySelector(".nav-arrow.right");
+export function initCarousel(list, leftArrow, rightArrow) {
+    const cards = document.querySelectorAll(`.card-carousel-${list}`);
+
     let currentIndex = 0;
     let isAnimating = false;
     

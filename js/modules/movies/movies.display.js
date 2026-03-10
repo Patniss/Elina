@@ -9,8 +9,6 @@ export async function displayIndexMovies() {
     const moviesMinutesSeen = document.getElementById("moviesMinutesSeen");
     const moviesTosee = document.getElementById("moviesTosee");
 
-    const toseeMoviesDiv = document.getElementById("toseeMovies");
-
     const totalTime = await getSeenTimeMovie();
     
     moviesSeen.textContent = await getTotalSeenMovies();
@@ -18,26 +16,7 @@ export async function displayIndexMovies() {
     moviesTosee.textContent = await getTotalToseeMovies();
 
     const toseeMovies = await getToseeMovies();
-    renderIndexToseeMovies(toseeMovies);
+    await renderIndexToseeMovies(toseeMovies);
     const favMovies = await getFavMovies();
-    renderIndexFavMovies(favMovies);
-
-    const rightBtn = document.getElementById("tosee-next-btn");
-    const leftBtn = document.getElementById("tosee-prev-btn");
-
-    rightBtn.addEventListener("click", () => {
-        const max = indexMoviesStore.movies.tosee.length - 1;
-        
-        if (indexMoviesStore.currentIndex.tosee < max) {
-            indexMoviesStore.currentIndex.tosee++;
-            initCarousel(toseeMoviesDiv, indexMoviesStore, "tosee");
-        }
-    });
-    
-    leftBtn.addEventListener("click", () => {
-        if (indexMoviesStore.currentIndex.tosee > 0) {
-            indexMoviesStore.currentIndex.tosee--;
-            initCarousel(toseeMoviesDiv, indexMoviesStore, "tosee");
-        }
-    });
+    await renderIndexFavMovies(favMovies);
 }

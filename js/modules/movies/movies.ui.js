@@ -8,11 +8,11 @@ const BUTTONS_BY_STATUS = {
     true: ["seen", "details"]
 };
 
-export async function createCarouselCard(m, index) {
+export async function createCarouselCard(m, index, list) {
     const movie = normalizeMovie(m);
 
     const div = document.createElement("div");
-    div.classList.add("card-carousel");
+    div.classList.add(`card-carousel-${list}`);
     div.dataset.index = index;
 
     const figure = document.createElement("figure");

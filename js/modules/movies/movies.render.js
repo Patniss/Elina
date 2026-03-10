@@ -23,16 +23,19 @@ export async function renderIndexToseeMovies(movies) {
     const container = document.getElementById("tosee-movies");
     container.innerHTML = "";
 
+    const rightBtnTosee = document.getElementById("tosee-next-btn");
+    const leftBtnTosee = document.getElementById("tosee-prev-btn");
+
     indexMoviesStore.movies.tosee = movies;
 
     let index = 1;
 
     for (const movie of movies) {
-        container.appendChild(await createCarouselCard(movie, index));
+        container.appendChild(await createCarouselCard(movie, index, "tosee"));
         index++;
     }
 
-    initCarousel();
+    initCarousel("tosee", leftBtnTosee, rightBtnTosee);
 }
 
 export async function renderSeenMovies(movies) {
