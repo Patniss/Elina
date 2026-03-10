@@ -83,7 +83,7 @@ export function changeModeButton(button, mode, nextEpisode) {
     }
 }
 
-export function createButton(type, link, id) {
+export function createButton(type, link, id, nextEpisode) {
     const button = document.createElement("a");
     button.classList.add("tag", "button", "is-hoverable", "mr-2");
     
@@ -91,7 +91,7 @@ export function createButton(type, link, id) {
         button.innerHTML = `<span class="icon"><i class="fa-solid fa-clapperboard"></i></span><span>Détails</span>`;
         button.href = `/Elina/${link}.html?id=${id}`;
     }
-    // else if (type === "seeEp") { changeModeButton(button, type, nextEpisode); }
+    else if (type === "seeEp") { changeModeButton(button, type, nextEpisode); }
     else {
         changeModeButton(button, type);
     }
@@ -99,10 +99,14 @@ export function createButton(type, link, id) {
     return button;
 }
 
-export function createButtons(types = [], link, id) {
+export function createButtons(types = [], link, id, nextEpisode) {
     const result = [];
     types.forEach(type => {
-        result[type] = type === "details" ? createButton(type, link, id) : createButton(type);
+        result[type] = type === "details"
+        ? createButton(type, link, id)
+        : type === "seeEp"
+        ? createButton(type, nextEpisode)
+        : createButton(type);
     });
 
     return result;
