@@ -3,7 +3,7 @@ import { createRoleBlock } from "/Elina/js/modules/castings/casting.dom.js";
 import { getAllIncompleteMovies, getMovie } from "/Elina/js/services/movies.service.js";
 import { getAllPeople, addPeople } from "/Elina/js/services/people.service.js";
 import { handleButtonState } from "/Elina/js/ui/button.js";
-import { initNationalities, initPeopleSelect, initPeopleSelect2NewTag, bindPeopleModalNewTag, addPeopleToAllSelects, activePeopleSelect, pendingTagText } from "/Elina/js/ui/select.js";
+import { initNationalities, initPeopleSelect, initPeopleSelect2NewTag, bindPeopleModalNewTag, addPeopleToAllSelects, activePeopleSelect, pendingTagText, clearPeopleSelectState } from "/Elina/js/ui/select.js";
 
 export async function completeMovie(uuid) {
     const movie = await getMovie(uuid);
@@ -162,8 +162,7 @@ export async function completeMovie(uuid) {
                 
                 $(activePeopleSelect).append(option).trigger('change');
                 
-                activePeopleSelect = null;
-                pendingTagText = null;
+                clearPeopleSelectState();
 
                 document.getElementById("people-form").reset();
                 document.getElementById("add-new-people-modal").classList.remove("is-active");

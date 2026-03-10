@@ -9,7 +9,11 @@ export function addPeopleToAllSelects(selects, id, name) {
         const option = new Option(name, id, false, false);
         select.append(option);
     });
+}
 
+export function clearPeopleSelectState() {
+    activePeopleSelect = null;
+    pendingTagText = null;
 }
 
 export function initGenres(selectElement, genres) {
