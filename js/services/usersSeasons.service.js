@@ -110,7 +110,7 @@ export async function seeNextEpisode(uuid) {
             .from ("users_seasons")
             .update({ episodes_seen: (seenEpisode + 1) })
             .eq("user_id", userId)
-            .eq("season_id", uuid)
+            .eq("season_id", currentSeasonId)
             .single();
 
         if (error) {
