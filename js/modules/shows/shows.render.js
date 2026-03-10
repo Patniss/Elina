@@ -11,3 +11,13 @@ export async function renderAllShows(shows) {
 
     // renderPaginationAll();
 }
+
+export async function renderCurrentShows(shows) {
+    const container = document.getElementById("list-current-shows");
+
+    const showsToRender = shows || showsStore.shows.current;
+    
+    render(container, showsStore, "current", "shows", createShowCard, showsToRender);
+
+    // renderPaginationCurrent();
+}
