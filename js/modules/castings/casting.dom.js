@@ -56,7 +56,7 @@ export function createRoleBlock(i) {
     selectActor.multiple = true;
     selectActor.style.width = "100%";
     selectActor.classList.add("select-actor");
-    selectActor.id = `actor-${i}`;
+    selectActor.id = `select-actor-${i}`;
     const optBaseAction = document.createElement("option");
     selectActor.appendChild(optBaseAction);
     divSelectActor.appendChild(selectActor);
