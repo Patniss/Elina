@@ -35,3 +35,17 @@ export function renderPaginationAll(totalItems) {
     onPageChange: renderAllShows
   });
 }
+
+export function sortUsersShows(query, field, asc) {
+    switch (field) {
+        case "title":
+            query = query.order("title", { ascending: asc, foreignTable: "shows" })
+            break;
+
+        default:
+            query = query.order("title", { ascending: asc, foreignTable: "movies" })
+            break;
+    }
+
+    return query;
+}
