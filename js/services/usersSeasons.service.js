@@ -87,6 +87,8 @@ export async function seeNextEpisode(uuid) {
 
     const seenEpisode = currentSeasonData.episodes_seen ?? 0;
 
+    console.log(currentSeasonData);
+
     if (nbEpisodes === seenEpisode) {
         if (seasonNumber === nbTotalSeasons) return;
 
