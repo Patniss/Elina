@@ -40,6 +40,7 @@ export async function renderIndexToseeMovies(movies) {
     const leftBtnTosee = document.getElementById("tosee-prev-btn");
 
     indexMoviesStore.movies.tosee = movies;
+    console.log("toseeMovies:", movies);
 
     let index = 1;
 
