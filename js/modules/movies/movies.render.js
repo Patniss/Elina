@@ -20,7 +20,7 @@ export async function renderIndexFavMovies(movies) {
     const rightBtnFav = document.getElementById("fav-next-btn");
     const leftBtnFav = document.getElementById("fav-prev-btn");
 
-    indexMoviesStore.movie.fav = movies;
+    indexMoviesStore.movies.fav = movies;
 
     let index = 1;
 
