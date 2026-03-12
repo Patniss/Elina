@@ -1,6 +1,6 @@
 import { showsStore } from "/Elina/js/data/shows.store.js";
 import { loadAllShows, loadCurrentShows } from "/Elina/js/modules/shows/shows.load.js";
-import { renderAllShows } from "/Elina/js/modules/shows/shows.render.js";
+import { renderAllShows, renderCurrentShows } from "/Elina/js/modules/shows/shows.render.js";
 import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
 export async function changePage(page) {
