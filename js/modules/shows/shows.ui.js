@@ -106,7 +106,6 @@ export async function createShowCard(s) {
             await addUserSeason(show.id, 1);
         } catch (error) { throw error; }
         setTimeout(() => {
-            updateShowUI("started", buttons, divTags);
             handleButtonState(startButton, "stop-loading");
         }, 500);
     });
