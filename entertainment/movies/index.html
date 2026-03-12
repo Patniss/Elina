@@ -65,24 +65,21 @@
 
         <div>
           <h3 class="title is-5 carousel-title">Derniers films vus</h3>
-          <div id="lastSeenMovies"></div>
+          <div class="carousel-container">
+            <button class="button is-primary nav-arrow left" id="last-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
+            <div class="carousel-track" id="last-seen-movies"></div>
+            <button class="button is-primary nav-arrow right" id="last-next-btn"><i class="fa-solid fa-angle-right"></i></button>
+          </div>
         </div>
 
         <hr class="hr" />
 
         <div>
           <h3 class="title is-5 carousel-title">Mes favoris</h3>
-          <div class="fixed-grid has-7-cols is-column-gap-2">
-            <div class="columns is-mobile">
-            <div class="column is-1 has-text-centered is-flex is-align-items-center is-justify-content-right">
-              <a href="#" id="fav-left-btn" class="button is-primary is-outlined"><i class="fa-solid fa-angle-left"></i></a>
-            </div>
-            <div class="column is-10 fixed-grid has-7-cols is-column-gap-2 changeMobileGrid">
-              <div class="grid" id="favMovies"></div>
-            </div>
-            <div class="column is-1 has-text-centered is-flex is-align-items-center is-justify-content-left">
-              <a href="#" id="fav-next-btn" class="button is-primary is-outlined"><i class="fa-solid fa-angle-right"></i></a>
-            </div>
+          <div class="carousel-container">
+            <button class="button is-primary nav-arrow left" id="fav-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
+            <div class="carousel-track" id="fav-movies"></div>
+            <button class="button is-primary nav-arrow right" id="fav-next-btn"><i class="fa-solid fa-angle-right"></i></button>
           </div>
         </div>
 
