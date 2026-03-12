@@ -1,7 +1,7 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
 import { addUserSeason, getNextEpisode, seeNextEpisode } from "/Elina/js/services/usersSeasons.service.js";
 import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
-import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
+import { createButtons, handleButtonState, changeModeButton } from "/Elina/js/ui/button.js";
 
 const BUTTONS_BY_STATUS = {
     null: ["add", "details"],
@@ -116,8 +116,9 @@ export async function createShowCard(s) {
             await seeNextEpisode(show.id);
         } catch (error) { throw error };
 
-        setTimeout(() => {
-            updateShowUI("started", buttons, divTags);
+        setTimeout(async () => {
+            const nextNextEpisode = await getNextEpisode(show.id);
+            changeModeButton(seeEpButton, "seeEp", nextNextEpisode);
             handleButtonState(seeEpButton, "stop-loading");
         }, 500);
     });
