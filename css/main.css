@@ -290,6 +290,15 @@ body {
 
 /* ----- CAROUSEL ----- */
 .carousel-title {
+  text-align: center;
+  color: linear-gradient(
+		to bottom,
+		var(--user-primary),
+		rgb(255 255 255 / 0%) 76%
+	);
+}
+
+.carousel-title2 {
 	font-size: 7.5rem;
 	font-weight: 900;
 	text-transform: uppercase;
