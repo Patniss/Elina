@@ -291,11 +291,16 @@ body {
 /* ----- CAROUSEL ----- */
 .carousel-title {
   text-align: center;
-  color: linear-gradient(
+  background-color: linear-gradient(
 		to bottom,
 		var(--user-primary),
 		rgb(255 255 255 / 0%) 76%
 	);
+  font-size: 7.5rem;
+  margin: 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .carousel-title2 {
