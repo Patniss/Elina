@@ -118,7 +118,7 @@ export async function createShowCard(s) {
 
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
-            handleButtonState(startButton, "stop-loading");
+            handleButtonState(seeEpButton, "stop-loading");
         }, 500);
     });
 
