@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>엘리나 Elina - Dramas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<section class="section">
+  <div class="container">
+
+    <div id="nav-container"></div>
+    
+    <h1 class="title">Ajouter un drama à la base de données</h1>
+
+    <!-- FORM FILM -->
+    <div class="box">
+      <h2 class="subtitle">Ajouter un drama</h2>
+
+      <form id="show-form">
+
+        <div class="field">
+          <label class="label">Titre</label>
+          <div class="control">
+            <input placeholder="Titre du drama…" class="input" type="text" id="drama-title" required>
+            <div id="research-results" class="box mt-2" style="display: none; position: absolute;"></div>
+          </div>
+        </div>
+
+        <div class="field is-flex">
+          <label for="show-nb-seasons" class="label mr-3">Nombre d'épisodes :</label>
+          <div class="control">
+            <input placeholder="Nombre de d'épisodes…" class="input" type="number" style="width: 200px;" id="dramas-nb-episodes" required>
+          </div>
+        </div>
+
+        <div class="field is-flex">
+          <label class="label mr-3">Temps moyen épisode :</label>
+          <label for="drama-exact-time"><input type="checkbox" name="drama-exact-time" id="drama-exact-time" /> Ajouter les temps pour chaque épisode…</label>
+          <div class="control" id="div-drama-time">
+            <input placeholder="Temps moyen en minutes…" class="input" type="number" id="drama-average-time" style="width: 200px;" required>
+          </div>
+        </div>
+
+        <div class="field is-flex">
+          <label class="label mr-3">Genres :</label>
+          <div class="select is-multiple">
+            <select class="input" multiple="multiple" size="8" id="drama-genres" style="width: 100%;" required></select>
+          </div>
+        </div>
+
+        <div class="field is-flex">
+          <label class="label mr-3">Tags :</label>
+          <div class="select is-multiple">
+            <select class="input" multiple="multiple" size="8" id="drama-tags" style="width: 100%;" required></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="show-logo" class="label">Affiche</label>
+          <div class="control">
+            <input class="input" type="url" id="drama-poster" required>
+            <p><i>Merci d'utiliser une image provenant de <a href="https://www.themoviedb.org">themoviedb.org</a></i></p>
+          </div>
+        </div>
+
+        <div class="control mt-5">
+          <button class="button is-primary" type="submit" id="drama-submit">
+            Ajouter le drama
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<!-- JS -->
+ <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/core/nav.js";
+  loadNav();
+  import { addDrama } from "/Elina/js/modules/dramas/dramas.add.js";
+  addDrama();
+</script>
+
+<script type="module" src="/Elina/js/core/guard.js"></script>
+
+</body>
+</html>
