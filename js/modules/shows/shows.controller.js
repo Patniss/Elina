@@ -57,12 +57,12 @@ export async function initMyShows() {
         iconClosed:"fa-chevron-right"
     });
 
-    showsStore.subscribe(() => {
-        renderCurrentShows();
-        renderPausedShows();
-        renderTostartShows();
-        renderFinishedShows();
-        renderCanceledShows();
+    showsStore.subscribe(async () => {
+        await renderCurrentShows();
+        await renderPausedShows();
+        await renderTostartShows();
+        await renderFinishedShows();
+        await renderCanceledShows();
     });
 
     // initResearchCurrentShows();
