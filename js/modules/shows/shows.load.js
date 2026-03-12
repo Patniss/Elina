@@ -31,3 +31,20 @@ export async function loadCurrentShows(field, asc, filter) {
 
     return shows;
 }
+
+export async function loadPausedShows(field, asc, filter) {
+    const userId = await getUserId();
+
+    let query = supabase
+        .from("users_shows")
+        .select("*, shows(*)")
+        .eq("user_id", userId)
+        .eq("user_state", "paused");
+
+    query = sortUsersShows(query, field, asc);
+    query = filter(query, filter);
+
+    const shows = await querySupabase(query);
+
+    return shows;
+}

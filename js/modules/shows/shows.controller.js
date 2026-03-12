@@ -1,6 +1,6 @@
 import { showsStore } from "/Elina/js/data/shows.store.js";
-import { loadAllShows, loadCurrentShows } from "/Elina/js/modules/shows/shows.load.js";
-import { renderAllShows, renderCurrentShows } from "/Elina/js/modules/shows/shows.render.js";
+import { loadAllShows, loadCurrentShows, loadPausedShows } from "/Elina/js/modules/shows/shows.load.js";
+import { renderAllShows, renderCurrentShows, renderPausedShosw } from "/Elina/js/modules/shows/shows.render.js";
 import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
 export async function changePage(page) {
@@ -59,12 +59,14 @@ export async function initMyShows() {
 
     showsStore.subscribe(() => {
         renderCurrentShows();
+        renderPausedShosw();
     });
 
     // initResearchCurrentShows();
     // sortFilterShows();
 
     await refreshCurrentShows();
+    await refreshPausedShows();
 }
 
 export async function initShows() {
@@ -89,6 +91,15 @@ export async function refreshCurrentShows() {
     } catch (error) {
         console.error("Erreur refresh:", error);
         return;
+    }
+}
+
+export async function refreshPausedShows() {
+    try {
+        const shows = await loadPausedShows(showsStore.sortField, showsStore.sortAsc, showsStore.genreFilter);
+        showsStore.setShowsAndPage("pasued", shows, 1);
+    } catch (error) {
+        console.error("Erreur refresh:", error);
     }
 }
 

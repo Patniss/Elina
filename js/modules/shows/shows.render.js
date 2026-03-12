@@ -21,3 +21,11 @@ export async function renderCurrentShows(shows) {
 
     // renderPaginationCurrent();
 }
+
+export async function renderPausedShosw(shows) {
+    const container = document.getElementById("list-paused-shows");
+    
+    const showsToRender = shows || showsStore.shows.paused;
+
+    render(container, showsStore, "paused", "shows", createShowCard, showsToRender);
+}
