@@ -1,6 +1,6 @@
 import { showsStore } from "/Elina/js/data/shows.store.js";
-import { loadAllShows, loadCurrentShows, loadPausedShows } from "/Elina/js/modules/shows/shows.load.js";
-import { renderAllShows, renderCurrentShows, renderPausedShosw } from "/Elina/js/modules/shows/shows.render.js";
+import { loadAllShows, loadCurrentShows, loadPausedShows, loadTostartShows, loadFinishedShows, loadCanceledShows } from "/Elina/js/modules/shows/shows.load.js";
+import { renderAllShows, renderCurrentShows, renderPausedShows, renderTostartShows, renderFinishedShows, renderCanceledShows } from "/Elina/js/modules/shows/shows.render.js";
 import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
 export async function changePage(page) {
@@ -59,7 +59,10 @@ export async function initMyShows() {
 
     showsStore.subscribe(() => {
         renderCurrentShows();
-        renderPausedShosw();
+        renderPausedShows();
+        renderTostartShows();
+        renderFinishedShows();
+        renderCanceledShows();
     });
 
     // initResearchCurrentShows();
@@ -67,6 +70,9 @@ export async function initMyShows() {
 
     await refreshCurrentShows();
     await refreshPausedShows();
+    await refreshTostartShows();
+    await refreshFinishedShows();
+    await refreshCanceledShows();
 }
 
 export async function initShows() {
@@ -84,6 +90,16 @@ export async function initShows() {
     await refreshShows();
 }
 
+export async function refreshCanceledShows() {
+    try {
+        const shows = await loadCanceledShows(showsStore.sortField, showsStore.sortAsc, showsStore.genreFilter);
+        showsStore.setShowsAndPage("canceled", shows, 1);
+    } catch (error) {
+        console.error("Erreur refresh:", error);
+        return;
+    }
+}
+
 export async function refreshCurrentShows() {
     try {
         const shows = await loadCurrentShows(showsStore.sortField, showsStore.sortAsc, showsStore.genreFilter);
@@ -94,16 +110,37 @@ export async function refreshCurrentShows() {
     }
 }
 
+export async function refreshFinishedShows() {
+    try {
+        const shows = await loadFinishedShows(showsStore.sortField, showsStore.sortAsc, showsStore.genreFilter);
+        showsStore.setShowsAndPage("finished", shows, 1);
+    } catch (error) {
+        console.error("Erreur refresh:", error);
+        return;
+    }
+}
+
 export async function refreshPausedShows() {
     try {
         const shows = await loadPausedShows(showsStore.sortField, showsStore.sortAsc, showsStore.genreFilter);
-        showsStore.setShowsAndPage("pasued", shows, 1);
+        showsStore.setShowsAndPage("paused", shows, 1);
     } catch (error) {
         console.error("Erreur refresh:", error);
+        return;
     }
 }
 
 export async function refreshShows() {
     const shows = await loadAllShows(showsStore.sortField, showsStore.sortAsc, showsStore.genreFilter);
     showsStore.setShowsAndPage("all", shows, 1);
+}
+
+export async function refreshTostartShows() {
+    try {
+        const shows = await loadTostartShows(showsStore.sortField, showsStore.sortAsc, showsStore.genreFilter);
+        showsStore.setShowsAndPage("tostart", shows, 1);
+    } catch (error) {
+        console.error("Erreur refresh:", error);
+        return;
+    }
 }

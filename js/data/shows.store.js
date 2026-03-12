@@ -4,7 +4,7 @@ export let showsStore = {
         tostart: [],
         current: [],
         paused: [],
-        givedup: [],
+        canceled: [],
         finished: []
     },
     currentPage: {
@@ -12,7 +12,7 @@ export let showsStore = {
         tostart: 1,
         current: 1,
         paused: 1,
-        givedup: 1,
+        canceled: 1,
         finished: 1
     },
     pageSize: 20,
