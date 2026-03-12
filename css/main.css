@@ -299,11 +299,12 @@ body {
 	white-space: nowrap;
 	background: linear-gradient(
 		to bottom,
-		var(--user-primary)
+		var(--user-primary),
 		rgb(255 255 255 / 0%) 76%
 	);
 	-webkit-background-clip: text;
 	background-clip: text;
+  -webkit-text-fill-color: transparent;
 	color: transparent;
 }
 
