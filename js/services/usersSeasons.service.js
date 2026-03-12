@@ -64,7 +64,7 @@ export async function getNextEpisode(uuid) {
             return "À jour";
         };
         season = String(seasonNumber + 1).padStart(2,'0');
-        result = `S${season}E 01`;
+        result = `S${season} E01`;
     } else {
         season = String(seasonNumber).padStart(2,'0');
         episode = String(seenEpisode + 1).padStart(2,'0');
@@ -91,6 +91,7 @@ export async function seeNextEpisode(uuid) {
         if (seasonNumber === nbTotalSeasons) return;
 
         const nextSeasonId = await getSeasonId(uuid, (seasonNumber + 1));
+        console.log(nextSeasonId);
         
         const { data, error } = await supabase
             .from("users_seasons")
