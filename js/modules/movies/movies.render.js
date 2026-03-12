@@ -14,7 +14,7 @@ export async function renderAllMovies(movies) {
 }
 
 export async function renderIndexFavMovies(movies) {
-    const container = document.getElementById("favMovies");
+    const container = document.getElementById("fav-movies");
     container.innerHTML = "";
 
     const rightBtnFav = document.getElementById("fav-next-btn");
@@ -40,7 +40,6 @@ export async function renderIndexToseeMovies(movies) {
     const leftBtnTosee = document.getElementById("tosee-prev-btn");
 
     indexMoviesStore.movies.tosee = movies;
-    console.log("toseeMovies:", movies);
 
     let index = 1;
 
