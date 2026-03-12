@@ -292,8 +292,8 @@ body {
 .carousel-title {
   text-align: center;
   color: var(--user-primary);
-  font-size: 20rem;
-  margin: 0;
+  font-size: 4.5rem !important;
+  margin: 2rem 0 -5rem 0;
 }
 
 .carousel-title2 {
@@ -417,9 +417,6 @@ body {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	cursor: pointer;
 	z-index: 20;
 	transition: all 0.3s ease;
