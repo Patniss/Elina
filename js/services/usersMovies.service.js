@@ -54,6 +54,25 @@ export async function getFavMovies() {
     return data;
 }
 
+export async function getLastSeenMovies() {
+    const userId = getUserId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("£, movies(*)")
+        .eq("user_id", userId)
+        .eq("seen", true)
+        .order("date_seen", { ascending: false })
+        .limit(5);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data;
+}
+
 export async function getSeenTimeMovie() {
     const userId = await getUserId();
 

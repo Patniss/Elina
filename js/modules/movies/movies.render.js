@@ -32,6 +32,25 @@ export async function renderIndexFavMovies(movies) {
     initCarousel("fav", leftBtnFav, rightBtnFav);
 }
 
+export async function renderIndexLastMovies(movies) {
+    const container = document.getElementById("last-seen-movies");
+    container.innerHTML = "";
+
+    const leftBtnLast = document.getElementById("last-prev-btn");
+    const rightBtnLast = document.getElementById("last-next-btn");
+
+    indexMoviesStore.movies.last = movies;
+
+     let index = 1;
+
+     for (const movie of movies) {
+        container.appendChild(await createCarouselCard(movie, index, "last"));
+        index++;
+     }
+
+     initCarousel("last", leftBtnLast, rightBtnLast);
+}
+
 export async function renderIndexToseeMovies(movies) {
     const container = document.getElementById("tosee-movies");
     container.innerHTML = "";
