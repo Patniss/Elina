@@ -92,18 +92,32 @@ export async function seeNextEpisode(uuid) {
 
         const nextSeasonId = await getSeasonId(uuid, (seasonNumber + 1));
         console.log(nextSeasonId);
-        
-        const { data, error } = await supabase
+
+        const { data: testNewShows, error: errorTest } = await supabase
             .from("users_seasons")
-            .insert({
-                user_id: userId,
-                season_id: nextSeasonId,
-                episodes_seen: 1
-            });
-            
-        if (error) {
-            console.error(error);
+            .select("*")
+            .eq("user_id", userId)
+            .eq("season_id", nextSeasonId)
+            .maybeSingle();
+
+        if (errorTest) {
+            console.error(errorTest);
             return;
+        };
+
+        if (!testNewShows) {
+            const { data, error } = await supabase
+                .from("users_seasons")
+                    .insert({
+                    user_id: userId,
+                    season_id: nextSeasonId,
+                    episodes_seen: 1
+                });
+
+            if (error) {
+                console.error(error);
+                return;
+            }
         }
 
     } else {
