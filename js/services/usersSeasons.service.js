@@ -26,7 +26,7 @@ export async function getCurrentSeason(showId) {
     const { data, error } = await supabase
         .from("users_seasons")
         .select("*, seasons!season_id(*)")
-        .order("seasons.season", { ascending: false })
+        .order("seasons.season.desc")
         .eq("user_id", userId)
         .eq("seasons.show_id", showId);
 
