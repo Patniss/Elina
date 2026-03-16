@@ -42,6 +42,30 @@ export function initNationalities(selectElement, nationalities) {
     });
 }
 
+export function initTags(selectElement, tags) {
+    if (!selectElement) return;
+
+    tags.forEach(tag => {
+        new Option(tag.tag, tag.tag, false, false);
+    });
+
+    $(selectElement).select2({
+        placeholder: "Choisir un tag…",
+        allowClear: true,
+        tags: true,
+        createTag: function(params) {
+            const term = $.trim(params.term);
+            if (term === "") return null;
+
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            }
+        }
+    })
+}
+
 export function initPeopleSelect(selectElement, people) {
     if (!selectElement) return;
 
