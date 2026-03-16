@@ -45,7 +45,7 @@ export function createModalMovie(uuid) {
     modalContent.classList.add("modal-content");
 
     const pUuid = document.createElement("p");
-    p.textContent = uuid;
+    pUuid.textContent = uuid;
 
     modalContent.appendChild(pUuid);
 
