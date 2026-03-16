@@ -296,7 +296,7 @@ body {
 }
 
 .carousel-container {
-	width: 100%;
+	min-width: 100%;
 	max-width: 1200px;
 	height: 450px;
 	position: relative;

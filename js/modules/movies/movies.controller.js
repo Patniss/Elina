@@ -89,3 +89,14 @@ export async function initMyMovies() {
     await refreshToseeMovies();
     await refreshSeenMovies();
 }
+
+export async function initToseeMovies() {
+    moviesStore.subscribe(() => {
+        renderToseeMovies();
+    });
+
+    initResearchToseeMovies();
+    sortFilterMovies();
+
+    await refreshToseeMovies();
+}

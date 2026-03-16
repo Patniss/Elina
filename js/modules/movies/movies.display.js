@@ -17,6 +17,10 @@ export async function displayIndexMovies() {
     await renderIndexToseeMovies(toseeMovies);
     const favMovies = await getFavMovies();
     await renderIndexFavMovies(favMovies);
-    const lastSeenMovies = await getLastSeenMovies();
-    await renderIndexLastMovies(lastSeenMovies);
+    displayToseeMovies();
+}
+
+export async function displayToseeMovies() {
+    const toseeMovies = await getToseeMovies();
+    await renderIndexToseeMovies(toseeMovies);
 }
