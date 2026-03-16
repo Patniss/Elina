@@ -23,10 +23,36 @@ export async function createCarouselCard(m, index, list) {
     img.alt = movie.title;
     img.style.maxWidth = "100%";
 
+    img.addEventListener("click", () => {
+    })
+
     figure.appendChild(img);
     div.appendChild(figure);
 
     return div;
+}
+
+export function createModalMovie(uuid) {
+    const divModal = document.createElement("div");
+    divModal.classList.add("modal");
+    divModal.id = uuid;
+
+    const modalBack = document.createElement("div");
+    modalBack.classList.add("modal-background");
+
+    const modalContent = document.createElement("div");
+    modalContent.class.add("modal-content");
+
+    const pUuid = document.createElement("p");
+    p.textContent = uuid;
+
+    modalContent.appendChild(pUuid);
+
+    const btnClose = document.createElement("button");
+    btnClose.classList.add("modal-close", "is-large");
+    btnClose.ariaLabel = "close";
+
+    divModal.append(modalBack, modalContent, btnClose);
 }
 
 export async function createMovieCard(m, complete) {
