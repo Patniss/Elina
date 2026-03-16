@@ -78,6 +78,9 @@ export async function seeNextEpisode(uuid) {
     const nbEpisodes = await getNbEpisode(currentSeasonId);
 
     const currentEpisode = currentSeasonData.episodes_seen;
+
+    console.log("épisode en cours", currentEpisode);
+    console.log("total episodes", nbEpisodes);
     
     if (currentEpisode === nbEpisodes) {
         console.log("Ajouter une saison");
