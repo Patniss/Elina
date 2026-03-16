@@ -76,7 +76,9 @@ export async function loadPausedShows(field, asc, filter) {
         .eq("user_state", "paused");
 
     query = sortUsersShows(query, field, asc);
-    query = filter(query, filter);
+    if (filter !== "") {
+        query = filter(query, filter);
+    }
 
     const shows = await querySupabase(query);
 
