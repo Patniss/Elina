@@ -24,6 +24,7 @@ export async function createCarouselCard(m, index, list) {
     img.style.maxWidth = "100%";
 
     img.addEventListener("click", () => {
+        createModalMovie(m.id);
     })
 
     figure.appendChild(img);
