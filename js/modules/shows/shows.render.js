@@ -13,7 +13,7 @@ export async function renderAllShows(shows) {
 }
 
 export async function renderCanceledShows(shows) {
-    const container = document.getElementById("list-cancele-shows");
+    const container = document.getElementById("list-canceled-shows");
     const box = document.getElementById("box-canceled-shows");
 
     const showsToRender = shows || showsStore.shows.canceled;

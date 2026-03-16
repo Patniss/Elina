@@ -59,7 +59,7 @@ export async function getLastSeenMovies() {
 
     const { data, error } = await supabase
         .from("users_movies")
-        .select("£, movies(*)")
+        .select("*, movies(*)")
         .eq("user_id", userId)
         .eq("seen", true)
         .order("date_seen", { ascending: false })
