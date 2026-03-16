@@ -70,56 +70,21 @@ export async function getNextEpisode(uuid) {
 }
 
 export async function seeNextEpisode(uuid) {
-    const userId = await getUserId();
     const currentSeasonData = await getCurrentSeason(uuid);
     const nbTotalSeasons = await getTotalSeasons(uuid);
 
     if (!currentSeasonData) return null;
-
     const currentSeasonId = currentSeasonData.season_id;
     const nbEpisodes = await getNbEpisode(currentSeasonId);
-    const seasonNumber = await getNbSeason(currentSeasonId);
 
-    const seenEpisode = currentSeasonData.episodes_seen ?? 0;
-
-    if (nbEpisodes === seenEpisode) {
-        if (seasonNumber === nbTotalSeasons) return;
-
-        const nextSeasonId = await getSeasonId(uuid, (seasonNumber + 1));
-        console.log(nextSeasonId);
-
-        const { data: testNewShows, error: errorTest } = await supabase
-            .from("users_seasons")
-            .select("*")
-            .eq("user_id", userId)
-            .eq("season_id", nextSeasonId)
-            .maybeSingle();
-
-        if (errorTest) {
-            console.error(errorTest);
-            return;
-        };
-
-        if (!testNewShows) {
-            const { data, error } = await supabase
-                .from("users_seasons")
-                    .insert({
-                    user_id: userId,
-                    season_id: nextSeasonId,
-                    episodes_seen: 1
-                });
-
-            if (error) {
-                console.error(error);
-                return;
-            }
-        }
-
+    const currentEpisode = currentSeasonData.episodes_seen;
+    
+    if (currentEpisode === nbEpisodes) {
+        console.log("Ajouter une saison");
     } else {
-        const { data, error } = await supabase
-            .from ("users_seasons")
-            .update({ episodes_seen: (seenEpisode + 1) })
-            .eq("user_id", userId)
+        const { error } = await supabase
+            .from("users_seasons")
+            .update("episode_seen", (currentEpisode + 1))
             .eq("season_id", currentSeasonId)
             .single();
 
