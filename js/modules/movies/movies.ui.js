@@ -42,7 +42,7 @@ export function createModalMovie(uuid) {
     modalBack.classList.add("modal-background");
 
     const modalContent = document.createElement("div");
-    modalContent.class.add("modal-content");
+    modalContent.classList.add("modal-content");
 
     const pUuid = document.createElement("p");
     p.textContent = uuid;

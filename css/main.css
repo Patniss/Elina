@@ -422,6 +422,9 @@ body {
 }
 
 @media (max-width: 768px) {
+  .carousel-title {
+    margin: 0 !important;
+  }
   
 	.carousel-container {
 		width: 90vw;

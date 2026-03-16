@@ -13,11 +13,11 @@ export async function displayIndexMovies() {
     moviesMinutesSeen.textContent = formatTotalTime(totalTime);
     moviesTosee.textContent = await getTotalToseeMovies();
 
-    const toseeMovies = await getToseeMovies();
-    await renderIndexToseeMovies(toseeMovies);
+    displayToseeMovies();
     const favMovies = await getFavMovies();
     await renderIndexFavMovies(favMovies);
-    displayToseeMovies();
+    const lastSeen = await getLastSeenMovies;
+    await renderIndexLastMovies(lastSeen);
 }
 
 export async function displayToseeMovies() {
