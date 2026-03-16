@@ -24,6 +24,7 @@ export async function createCarouselCard(m, index, list) {
     img.style.maxWidth = "100%";
 
     img.addEventListener("click", () => {
+        console.log("modale affichée");
         createModalMovie(m.id);
     })
 
@@ -54,6 +55,7 @@ export function createModalMovie(uuid) {
     btnClose.ariaLabel = "close";
 
     divModal.append(modalBack, modalContent, btnClose);
+    divModal.classList.add("is-active");
 }
 
 export async function createMovieCard(m, complete) {
