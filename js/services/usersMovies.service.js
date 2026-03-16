@@ -62,6 +62,8 @@ export async function getLastSeenMovies() {
         .select("*, movies(*)")
         .eq("user_id", userId)
         .eq("seen", true)
+        .not("date_seen", "is", null)
+        .neq("date_seen", "1900-01-01")
         .order("date_seen", { ascending: false })
         .limit(5);
 
