@@ -28,6 +28,8 @@ export async function getCurrentSeason(showId) {
         .select("*, seasons!season_id(*)")
         .eq("user_id", userId)
         .eq("seasons.show_id", showId)
+        .not("date_seen", "is", null)
+        .neq("date_seen", "1900-01-01")
         .order("seasons.season", { ascending: false });
 
     if (error) {
