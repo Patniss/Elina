@@ -24,11 +24,11 @@
       <div class="container box">
 
         <div>
-          <h3 class="title is-3 carousel-title">🎬 Films à voir</h3>
+          <h3 class="title is-3 carousel-title">❤️ Films favoris</h3>
           <div class="carousel-container">
-            <button class="button is-primary nav-arrow left" id="tosee-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
-            <div class="carousel-track" id="tosee-movies"></div>
-            <button class="button is-primary nav-arrow right" id="tosee-next-btn"><i class="fa-solid fa-angle-right"></i></button>
+            <button class="button is-primary nav-arrow left" id="fav-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
+            <div class="carousel-track" id="fav-movies"></div>
+            <button class="button is-primary nav-arrow right" id="fav-next-btn"><i class="fa-solid fa-angle-right"></i></button>
           </div>
         </div>
 
@@ -36,7 +36,7 @@
         
         <div class="fixed-grid has-4-cols">
           <div class="grid">
-            <div class="cell"><h2 class="subtitle">Films à voir</h2></div>
+            <div class="cell"><h2 class="subtitle">Films vus</h2></div>
             <div class="cell is-col-from-end-2 buttons is-right">
               <a href="/Elina/entertainment/movies/index.html" class="button is-small">Accueil</a>
               <a href="/Elina/entertainment/movies/list.html" class="button is-small">Mes films</a>
@@ -122,9 +122,9 @@
           </div>
         </div>
         
-        <div class="columns is-multiline" id="list-tosee-movies"></div>
+        <div class="columns is-multiline" id="list-seen-movies"></div>
         
-        <nav class="pagination is-left" role="navigation" aria-label="pagination" id="pagination-list-tosee"></nav>
+        <nav class="pagination is-left" role="navigation" aria-label="pagination" id="pagination-list-seen"></nav>
 
       </div>
       
@@ -142,10 +142,10 @@
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-  import { displayToseeMovies } from "/Elina/js/modules/movies/movies.display.js";
-  displayToseeMovies();
-  import { initToseeMovies } from "/Elina/js/modules/movies/movies.controller.js";
-  initToseeMovies();
+  import { displayFavMovies } from "/Elina/js/modules/movies/movies.display.js";
+  displayFavMovies();
+  import { initSeenMovies } from "/Elina/js/modules/movies/movies.controller.js";
+  initSeenMovies();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>

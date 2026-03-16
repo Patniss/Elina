@@ -38,12 +38,14 @@ export function initResearchSeenMovies() {
         renderSeenMovies(filteredMovies);
         renderPaginationSearch("pagination-list-seen", "seen", filteredMovies);
 
-        autoToggleSection({
-            contentId: "div-seen-movies",
-            arrowId: "arrow-seen",
-            auto: filteredMovies.length >= 1
-        });
-
+        if (document.getElementById("div-seen-movies")) {
+            autoToggleSection({
+                contentId: "div-seen-movies",
+                arrowId: "arrow-seen",
+                auto: filteredMovies.length >= 1
+            });
+        }
+        
     }, 150);
 
     input.addEventListener("input", (e) => handleSearch(e.target.value.trim()));
@@ -63,11 +65,13 @@ export function initResearchToseeMovies() {
         renderToseeMovies(filteredMovies);
         renderPaginationSearch("pagination-list-tosee", "tosee", filteredMovies);
 
-        autoToggleSection({
-            contentId: "div-tosee-movies",
-            arrowId: "arrow-tosee",
-            auto: filteredMovies.length >= 1
-        });
+        if (document.getElementById("div-tosee-movies")) {
+            autoToggleSection({
+                contentId: "div-tosee-movies",
+                arrowId: "arrow-tosee",
+                auto: filteredMovies.length >= 1
+            });
+        }
 
     }, 150);
 

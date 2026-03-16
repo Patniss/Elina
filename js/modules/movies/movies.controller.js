@@ -90,7 +90,28 @@ export async function initMyMovies() {
     await refreshSeenMovies();
 }
 
+export async function initSeenMovies() {
+    moviesStore.genreFilter = "";
+    moviesStore.catFilter = "";
+    moviesStore.sortField = "title";
+    moviesStore.sortAsc = true;
+    
+    moviesStore.subscribe(() => {
+        renderSeenMovies();
+    });
+
+    initResearchSeenMovies();
+    sortFilterMovies();
+
+    await refreshSeenMovies();
+}
+
 export async function initToseeMovies() {
+    moviesStore.genreFilter = "";
+    moviesStore.catFilter = "";
+    moviesStore.sortField = "title";
+    moviesStore.sortAsc = true;
+
     moviesStore.subscribe(() => {
         renderToseeMovies();
     });
