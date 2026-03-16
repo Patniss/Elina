@@ -208,13 +208,12 @@ export async function completeMovie(uuid) {
                 addActorMovieCasting(uuid, actor, role, typeRole, i);
             }
 
-            movieComplete(uuid);
-
-            window.location = `/Elina/entertainment/movies/movie.html?id=${uuid}`;
-
         } catch (error) {
             console.error(error);
         }
+
+        movieComplete(uuid);
+        window.location = `/Elina/entertainment/movies/movie.html?id=${uuid}`;
     });
 }
 
