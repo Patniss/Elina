@@ -55,7 +55,7 @@ export async function getFavMovies() {
 }
 
 export async function getLastSeenMovies() {
-    const userId = getUserId();
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_movies")
