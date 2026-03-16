@@ -25,10 +25,10 @@ export async function getCurrentSeason(showId) {
 
     const { data, error } = await supabase
         .from("users_seasons")
-        .select("*, seasons(*)")
+        .select("*, seasons!season_id(*)")
         .eq("user_id", userId)
-        .eq("show_id", showId, { foreignTable: "seasons" })
-        .order("season", { foreignTable: "seasons", ascending: false });
+        .eq("seasons.show_id", showId)
+        .order("seasons.season", { ascending: false });
 
     if (error) {
         console.error(error);
