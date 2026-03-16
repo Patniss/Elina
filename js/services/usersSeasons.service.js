@@ -1,6 +1,6 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
-import { getSeasonId, getNbEpisode, getNbSeason, getSeasonsOfShowDesc, getTotalSeasons } from "/Elina/js/services/seasons.service.js";
+import { getSeasonId, getNbEpisode, getNbSeason, getTotalSeasons } from "/Elina/js/services/seasons.service.js";
 
 export async function addUserSeason(showId, nbSeason) {
     const userId = await getUserId();
@@ -20,21 +20,16 @@ export async function addUserSeason(showId, nbSeason) {
     }
 }
 
-export async function getCurrentSeason(uuid) {
+export async function getCurrentSeason(showId) {
     const userId = await getUserId();
-    const seasonsData = await getSeasonsOfShowDesc(uuid);
-    if (!seasonsData?.length) return null;
-
-    const seasons = seasonsData.map(season => season.id);
 
     const { data, error } = await supabase
         .from("users_seasons")
         .select("*, seasons(*)")
         .eq("user_id", userId)
-        .in("season_id", seasons)
-        .order("season", { foreignTable: "seasons", ascending: false })
-        .limit(1);
-    
+        .eq("show_id", showId, { foreignTable: "seasons" })
+        .order("season", { foreignTable: "seasons", ascending: false });
+
     if (error) {
         console.error(error);
         return;
