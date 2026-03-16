@@ -26,9 +26,9 @@ export async function getCurrentSeason(showId) {
     const { data, error } = await supabase
         .from("users_seasons")
         .select("*, seasons!season_id(*)")
+        .order("seasons.season", { ascending: false })
         .eq("user_id", userId)
-        .eq("seasons.show_id", showId)
-        .order("seasons.season", { ascending: false });
+        .eq("seasons.show_id", showId);
 
     if (error) {
         console.error(error);
