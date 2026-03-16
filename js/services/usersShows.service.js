@@ -57,7 +57,7 @@ export async function getCurrentShows() {
         .from("users_shows")
         .select("*")
         .eq("user_id", userId)
-        .eq("state_user", "started");
+        .eq("user_state", "started");
 
     if (error) {
         console.error(error);
