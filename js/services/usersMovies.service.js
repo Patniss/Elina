@@ -65,6 +65,8 @@ export async function getLastSeenMovies() {
         .order("date_seen", { ascending: false })
         .limit(5);
 
+    console.log(data);
+
     if (error) {
         console.error(error);
         return;
