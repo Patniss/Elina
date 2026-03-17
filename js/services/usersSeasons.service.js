@@ -64,6 +64,7 @@ export async function getNextEpisode(showId) {
 }
 
 export async function seeNextEpisode(showId) {
+    const userId = await getUserId();
     const currentSeasonData = await getCurrentSeason(showId);
     if (!currentSeasonData) return null;
 
