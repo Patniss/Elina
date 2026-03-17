@@ -102,7 +102,7 @@ body {
 }
 
 .dropdown.is-active .dropdown-menu {
-  z-index: 1000;
+  z-index: 3000;
 }
 
 .navbar {
