@@ -73,7 +73,7 @@ export async function getSeasonsOfShow(uuid) {
         return;
     }
 
-    return data;
+    return data?.map(season => season.id) || [];
 }
 
 export async function getSeasonsOfShowDesc(uuid) {

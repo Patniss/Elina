@@ -1,6 +1,6 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
-import { getSeasonId, getNbEpisode, getNbSeason, getTotalSeasons } from "/Elina/js/services/seasons.service.js";
+import { getSeasonId, getNbEpisode, getNbSeason, getTotalSeasons, getSeasonsOfShow } from "/Elina/js/services/seasons.service.js";
 
 export async function addUserSeason(showId, nbSeason) {
     const userId = await getUserId();
@@ -21,19 +21,15 @@ export async function addUserSeason(showId, nbSeason) {
 }
 
 export async function getCurrentSeason(showId) {
-    const userId = await getUserId();
+    const allListSeasons = await getUsersSeasons(showId);
 
-    const { data, error } = await supabase
-        .from("users_seasons")
-        .select(`id, episodes_seen, season_id, seasons(id, season, show_id, nb_episodes)`)
-        .eq("user_id", userId).order("seasons.season", { ascending: false });
-
-    if (error) {
-        console.error(errorUsersSeasons);
-        return null;
+    if (!allListSeasons || allListSeasons.length === 0) {
+        return null
     }
 
-    return data?.[0] || null;
+    const currentSeason = allListSeasons.sort((a, b) => b.seasons.season = a.seasons.seasons)[0];
+
+    return currentSeason;
 }
 
 export async function getNextEpisode(showId) {
@@ -97,4 +93,21 @@ export async function seeNextEpisode(uuid) {
             return;
         }
     }
+}
+
+export async function getUsersSeasons(showId) {
+    const userId = await getUserId();
+    const allSeasonsId = await getSeasonsOfShow(showId);
+
+    const { data, error } = await supabase
+        .from("users_seasons")
+        .select("*, seasons(*)")
+        .eq("user_id", userId)
+        .in("season_id", allSeasonsId);
+
+    if (error) {
+        console.error(error);
+    }
+
+    return data || [];
 }
