@@ -458,4 +458,16 @@ body {
   .carousel-track {
     justify-content: center !important;
   }
+
+  nav-arrow:active {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+@media (hover: hover) {
+  .nav-arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+  }
 }
