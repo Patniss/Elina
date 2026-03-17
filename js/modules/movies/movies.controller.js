@@ -53,43 +53,6 @@ export async function initMovies() {
     await refreshMovies();
 }
 
-export async function initMyMovies() {
-    moviesStore.genreFilter = "";
-    moviesStore.catFilter = "";
-    moviesStore.sortField = "title";
-    moviesStore.sortAsc = true;
-
-    initToggleSection({
-        toggleId: "toggle-tosee",
-        contentId: "div-tosee-movies",
-        arrowId: "arrow-tosee",
-        hiddenClass: "is-hidden",
-        iconOpen: "fa-chevron-down",
-        iconClosed:"fa-chevron-right"
-    });
-    
-    initToggleSection({
-        toggleId: "toggle-seen",
-        contentId: "div-seen-movies",
-        arrowId: "arrow-seen",
-        hiddenClass: "is-hidden",
-        iconOpen: "fa-chevron-down",
-        iconClosed:"fa-chevron-right"
-    });
-
-    moviesStore.subscribe(() => {
-        renderToseeMovies();
-        renderSeenMovies();
-    });
-
-    initResearchToseeMovies();
-    initResearchSeenMovies();
-    sortFilterMovies();
-
-    await refreshToseeMovies();
-    await refreshSeenMovies();
-}
-
 export async function initSeenMovies() {
     moviesStore.genreFilter = "";
     moviesStore.catFilter = "";
