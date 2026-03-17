@@ -48,9 +48,6 @@ export async function getNextEpisode(showId) {
     let episode;
     let result = null;
 
-    console.log("total episodes:", nbEpisodes);
-    console.log("episodes vus:", seenEpisode);
-
     if (parseInt(nbEpisodes) === parseInt(seenEpisode)) {
         if (parseInt(seasonNumber) === parseInt(nbTotalSeasons)) {
             return "À jour";
@@ -66,32 +63,26 @@ export async function getNextEpisode(showId) {
     return result;
 }
 
-export async function seeNextEpisode(uuid) {
-    const currentSeasonData = await getCurrentSeason(uuid);
-    const nbTotalSeasons = await getTotalSeasons(uuid);
-
+export async function seeNextEpisode(showId) {
+    const currentSeasonData = await getCurrentSeason(showId);
     if (!currentSeasonData) return null;
+
+    const nbTotalSeasons = await getTotalSeasons(showId);
+
     const currentSeasonId = currentSeasonData.season_id;
+    const seenEpisode = currentSeasonData.episodes_seen;
+
     const nbEpisodes = await getNbEpisode(currentSeasonId);
+    const seasonNumber = await getNbSeason(currentSeasonId);
 
-    const currentEpisode = currentSeasonData.episodes_seen;
-
-    console.log("épisode en cours", currentEpisode);
-    console.log("total episodes", nbEpisodes);
-    
-    if (currentEpisode === nbEpisodes) {
-        console.log("Ajouter une saison");
-    } else {
-        const { error } = await supabase
-            .from("users_seasons")
-            .update("episode_seen", (currentEpisode + 1))
-            .eq("season_id", currentSeasonId)
-            .single();
-
-        if (error) {
-            console.error(error);
-            return;
+    if (seenEpisode === nbEpisodes) {
+        if (nbTotalSeasons === seasonNumber) {
+            console.log("Pas de maj - à jour");
+        } else {
+            console.log("Nouvelle saison");
         }
+    } else {
+        console.log("prochain épisode");
     }
 }
 
