@@ -78,11 +78,21 @@ export async function seeNextEpisode(showId) {
     if (seenEpisode === nbEpisodes) {
         if (nbTotalSeasons === seasonNumber) {
             console.log("Pas de maj - à jour");
+            return;
         } else {
-            console.log("Nouvelle saison");
+            addUserSeason(showId, (seasonNumber + 1));
         }
     } else {
-        console.log("prochain épisode");
+        const { error } = await supabase
+            .from("users_seasons")
+            .update("episodes_seen", (seenEpisode + 1))
+            .eq("user_id", userId)
+            .eq("season_id", currentSeasonId)
+            .single();
+
+        if (error) {
+            console.error(error);
+        }
     }
 }
 

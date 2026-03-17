@@ -5,9 +5,9 @@ import { formatTotalTime } from "/Elina/js/utils/format.js";
 
 export async function customDashboard() {
   const session = await loadProfile();
+  const welcome = document.getElementById("welcome");
 
-  if (document.getElementById("welcome")) {
-    const welcome = document.getElementById("welcome")
+  if (welcome) {
     welcome.textContent = session.pseudo;
   }
 

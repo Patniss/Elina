@@ -76,21 +76,6 @@ export async function getSeasonsOfShow(uuid) {
     return data?.map(season => season.id) || [];
 }
 
-export async function getSeasonsOfShowDesc(uuid) {
-    const { data, error } = await supabase
-        .from("seasons")
-        .select("*")
-        .eq("show_id", uuid)
-        .order("season", { ascending: false });
-    
-    if (error) {
-        console.error(error);
-        return;
-    }
-
-    return data;
-}
-
 export async function getTotalSeasons(uuid) {
     const { count, error } = await supabase
         .from("seasons")
