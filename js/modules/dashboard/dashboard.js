@@ -7,7 +7,8 @@ export async function customDashboard() {
   const session = await loadProfile();
 
   if (document.getElementById("welcome")) {
-    document.getElementById("welcome") = session.pseudo;
+    const welcome = document.getElementById("welcome")
+    welcome.textContent = session.pseudo;
   }
 
   const timeEntertainment = document.getElementById("time-entertainment");
