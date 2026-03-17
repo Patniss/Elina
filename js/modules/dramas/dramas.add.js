@@ -15,6 +15,7 @@ export async function addDrama() {
     initGenres(genresInput, genres);
 
     const allTags = await getAllTags();
+    console.log(allTags);
     initTags(tagsInput, allTags);
 
     exactTimeInput.addEventListener("change", () => {
@@ -28,8 +29,8 @@ export async function addDrama() {
                 const olEpisodes = document.createElement("ol");
                 divTimeDrama.appendChild(olEpisodes);
                 for (let index = 1; index <= nbEpisodesInput.value; index++) {
-                    const liEpisode = document.getElementById("li");
-                    const inputExactTime = document.getElementById("input");
+                    const liEpisode = document.createElement("li");
+                    const inputExactTime = document.createElement("input");
                     inputExactTime.placeholder = `Temps épisode ${index}`;
                     inputExactTime.classList.add("input");
                     inputExactTime.type = "number";
