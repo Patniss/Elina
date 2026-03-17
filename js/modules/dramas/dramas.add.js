@@ -1,5 +1,5 @@
 import { genres } from "/Elina/js/data/genres.js";
-import { getAllTags } from "/Elina/js/services/tags/service.js";
+import { getAllTags } from "/Elina/js/services/tags.service.js";
 import { initGenres, initTags } from "/Elina/js/ui/select.js";
 
 export async function addDrama() {
