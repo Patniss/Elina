@@ -24,7 +24,7 @@
       <div class="container box">
 
         <div>
-          <h3 class="title is-3 carousel-title">🎬 Films à voir</h3>
+          <h3 class="title is-3 carousel-title"><span class="icon"><i class="fa-solid fa-list-check"></i></span> Films à voir</h3>
           <div class="carousel-container">
             <button class="button is-primary nav-arrow left" id="tosee-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
             <div class="carousel-track" id="tosee-movies"></div>
@@ -33,41 +33,6 @@
           <div class="is-flex is-justify-content-center">
             <button class="button is-large js-modal-trigger" id="random-tosee-movie" data-target="modal-random-movie">Film au hasard 🎲</button>
           </div>
-        </div>
-
-        <div class="modal" id="modal-random-movie">
-          <div class="modal-background"></div>
-          <div class="modal-content">
-            <form>
-
-              <div class="field">
-                <div>
-                  <label class="label">Filter par genres :</label>
-                  <div class="select is-multiple">
-                    <select multiple="multiple" size="8" id="movie-random-genres" style="width: 100%;"></select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="field">
-                <div>
-                  <label class="label">Filter par plateforme :</label>
-                  <div class="select is-multiple">
-                    <select multiple="multiple" size="8" id="movie-random-platforms" style="width: 100%;" disabled></select>
-                    <p><i>Cette fonctionnalité sera bientôt disponible…</i></p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="control">
-                <button class="button is-primary" type="button" id="movie-random-button">
-                  <span class="icon"><i class="fas fa-dice"></i></span><span>Lancer le dé</span>
-                </button>
-              </div>
-
-            </form>
-          </div>
-          <button class="modal-close" aria-label="close"></button>
         </div>
 
         <hr class="hr" />
@@ -166,6 +131,41 @@
 
       </div>
       
+    </div>
+
+    <div class="modal" id="modal-random-movie">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <form>
+
+          <div class="field">
+            <div>
+              <label class="label">Filter par genres :</label>
+              <div class="select is-multiple">
+                <select multiple="multiple" size="8" id="movie-random-genres" style="width: 100%;"></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <div>
+              <label class="label">Filter par plateforme :</label>
+              <div class="select is-multiple">
+                <select multiple="multiple" size="8" id="movie-random-platforms" style="width: 100%;" disabled></select>
+                <p><i>Cette fonctionnalité sera bientôt disponible…</i></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="control">
+            <button class="button is-primary" type="button" id="movie-random-button">
+              <span class="icon"><i class="fas fa-dice"></i></span><span>Lancer le dé</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+      <button class="modal-close" aria-label="close"></button>
     </div>
 
   </section>
