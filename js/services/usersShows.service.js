@@ -51,7 +51,7 @@ export async function deleteUserShow(uuid) {
 }
 
 export async function getCurrentShows() {
-    const userId = getUserId();
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_shows")
