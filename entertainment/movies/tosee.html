@@ -30,6 +30,42 @@
             <div class="carousel-track" id="tosee-movies"></div>
             <button class="button is-primary nav-arrow right" id="tosee-next-btn"><i class="fa-solid fa-angle-right"></i></button>
           </div>
+          <button class="button is-large" id="random-tosee-movie" data-target="modal-random-movie">Film au hasard 🎲</button>
+        </div>
+
+        <div class="modal" id="modal-random-movie">
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <form>
+
+              <div class="field">
+                <div>
+                  <label class="label">Filter par genres :</label>
+                  <div class="select is-multiple">
+                    <select multiple="multiple" size="8" id="movie-random-genres" style="width: 100%;"></select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <div>
+                  <label class="label">Filter par plateforme :</label>
+                  <div class="select is-multiple">
+                    <select multiple="multiple" size="8" id="movie-random-platforms" style="width: 100%;" disabled></select>
+                    <p><i>Cette fonctionnalité sera bientôt disponible…</i></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control">
+                <button class="button is-primary" type="button" id="movie-random-button">
+                  <span class="icon"><i class="fas fa-dice"></i></span><span>Lancer le dé</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+          <button class="modal-close" aria-label="close"></button>
         </div>
 
         <hr class="hr" />
