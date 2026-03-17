@@ -45,7 +45,7 @@ export function initNationalities(selectElement, nationalities) {
 export function initTags(selectElement, tags) {
     if (!selectElement) return;
 
-    tags.forEach(tag => {
+    Object.entries(tags).forEach(tag => {
         new Option(tag.tag, tag.tag, false, false);
     });
 
