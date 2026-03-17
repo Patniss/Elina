@@ -25,24 +25,35 @@ export async function getCurrentSeason(showId) {
 
     const { data, error } = await supabase
         .from("users_seasons")
-        .select("*, seasons(*)")
+        .select("*, seasons!inner(id, season, show_id)")
         .eq("user_id", userId)
         .eq("seasons.show_id", showId)
-        .order("season", { foreignTable: "seasons", ascending: false });
+        .order("seasons.season", { ascending: false })
+        .limit(1);
+
+    console.log("🧪 TEST DATA:", data);
+    console.log("🧪 TEST ERROR:", error);
 
     if (error) {
         console.error(error);
-        return;
+        return null;
+    }
+
+    if (!data?.[0]) {
+        console.log("❌ AUCUNE DONNÉE trouvée pour ce showId");
+        return null;
     }
 
     return data?.[0];
 }
 
-export async function getNextEpisode(uuid) {
-    const currentSeasonData = await getCurrentSeason(uuid);
-    const nbTotalSeasons = await getTotalSeasons(uuid);
+export async function getNextEpisode(showId) {
+    console.log(`🚀 getNextEpisode pour: ${showId}`);
 
+    const currentSeasonData = await getCurrentSeason(showId);
     if (!currentSeasonData) return null;
+    
+    const nbTotalSeasons = await getTotalSeasons(showId);
 
     const currentSeasonId = currentSeasonData.season_id;
     const nbEpisodes = await getNbEpisode(currentSeasonId);
