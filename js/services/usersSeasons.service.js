@@ -54,8 +54,11 @@ export async function getNextEpisode(uuid) {
     let episode;
     let result = null;
 
-    if (nbEpisodes === seenEpisode) {
-        if (seasonNumber === nbTotalSeasons) {
+    console.log("total episodes:", nbEpisodes);
+    console.log("episodes vus:", seenEpisode);
+
+    if (parseInt(nbEpisodes) === parseInt(seenEpisode)) {
+        if (parseInt(seasonNumber) === parseInt(nbTotalSeasons)) {
             return "À jour";
         };
         season = String(seasonNumber + 1).padStart(2,'0');
