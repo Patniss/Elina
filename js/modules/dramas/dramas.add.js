@@ -27,9 +27,11 @@ export async function addDrama() {
             } else {
                 divTimeDrama.innerHTML = "";
                 const olEpisodes = document.createElement("ol");
+                olEpisodes.classList.add("grid");
                 divTimeDrama.appendChild(olEpisodes);
                 for (let index = 1; index <= nbEpisodesInput.value; index++) {
                     const liEpisode = document.createElement("li");
+                    liEpisode.classList.add("cell");
                     const inputExactTime = document.createElement("input");
                     inputExactTime.placeholder = `Temps épisode ${index}`;
                     inputExactTime.classList.add("input");
@@ -45,7 +47,7 @@ export async function addDrama() {
             divTimeDrama.innerHTML = "";
             const inputAverageTime = document.createElement("input");
             inputAverageTime.placeholder = "Temps moyen en minutes…";
-            inputAverageTime.classList.add("input");
+            inputAverageTime.classList.add("input", "cell");
             inputAverageTime.type = "number";
             inputAverageTime.id = "drama-average-time";
             inputAverageTime.style.width = "200px";

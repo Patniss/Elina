@@ -3,6 +3,24 @@ import { loadProfile } from "/Elina/js/services/profiles.service.js";
 import { getSeenTimeMovie } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
 
+export async function customDashboard() {
+  const session = await loadProfile();
+
+  if (document.getElementById("welcome")) {
+    document.getElementById("welcome") = session.pseudo;
+  }
+
+  const timeEntertainment = document.getElementById("time-entertainment");
+  
+  let totalSeen = 0;
+
+  if (session.movies) {
+    totalSeen += await getSeenTimeMovie();
+  }
+
+  timeEntertainment.textContent = formatTotalTime(totalSeen);
+}
+
 export async function customDashboardEntertainement() {
   const session = await loadProfile();
 
@@ -21,20 +39,6 @@ export async function customDashboardEntertainement() {
   if (session.shows === false) homeShows.style.display = "none";
   if (session.dramas === false) homeDramas.style.display = "none";
   if (session.books === false) homeBooks.style.display = "none";
-}
-
-export async function customDashboard() {
-  const session = await loadProfile();
-
-  const timeEntertainment = document.getElementById("time-entertainment");
-  
-  let totalSeen = 0;
-
-  if (session.movies) {
-    totalSeen += await getSeenTimeMovie();
-  }
-
-  timeEntertainment.textContent = formatTotalTime(totalSeen);
 }
 
 export async function myProfile() {
