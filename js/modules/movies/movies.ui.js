@@ -21,6 +21,7 @@ export async function createCarouselCard(m, index, list) {
     const img = document.createElement("img");
     img.src = movie.poster;
     img.alt = movie.title;
+    img.classList.add("js-modal-trigger");
     img.style.maxWidth = "100%";
 
     img.addEventListener("click", () => {
