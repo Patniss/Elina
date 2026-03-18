@@ -20,6 +20,22 @@ export async function addUserSeason(showId, nbSeason) {
     }
 }
 
+export async function countEpisodesSeen() {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_seasons")
+        .select("episodes_seen.sum()")
+        .eq("user_id", userId);
+    
+    if (error) {
+        console.error(error);
+        return;
+    }
+    
+    return data[0]?.[episodes_seen.sum] || 0;
+}
+
 export async function getCurrentSeason(showId) {
     const allListSeasons = await getUsersSeasons(showId);
 
