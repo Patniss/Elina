@@ -11,6 +11,29 @@ export function addPeopleToAllSelects(selects, id, name) {
     });
 }
 
+export function bindPeopleModalNewTag(selectElement) {
+    if (!selectElement) return;
+
+    const modal = document.getElementById("add-new-people-modal");
+    const inputFirstname = document.getElementById("firstname");
+    const inputLastname = document.getElementById("lastname");
+
+    $(selectElement).on("select2:select", function (e) {
+        const data = e.params.data;
+        
+        if (data.newTag) {
+            activePeopleSelect = selectElement;
+            pendingTagText = data.text;
+
+            const { firstName, lastName } = parseFullName(data.text);
+            
+            modal.classList.add("is-active");
+            inputFirstname.value = firstName;
+            inputLastname.value = lastName;
+        }
+    });
+}
+
 export function clearPeopleSelectState() {
     activePeopleSelect = null;
     pendingTagText = null;
@@ -40,30 +63,6 @@ export function initNationalities(selectElement, nationalities) {
         placeholder: "Nationalités…",
         allowClear: true
     });
-}
-
-export function initTags(selectElement, tags) {
-    if (!selectElement) return;
-
-    tags.forEach(([id, tag, color_tag, trad, categorie]) => {
-        new Option(tag, tag, false, false);
-    });
-
-    $(selectElement).select2({
-        placeholder: "Choisir un tag…",
-        allowClear: true,
-        tags: true,
-        createTag: function(params) {
-            const term = $.trim(params.term);
-            if (term === "") return null;
-
-            return {
-                id: term,
-                text: term,
-                newTag: true
-            }
-        }
-    })
 }
 
 export function initPeopleSelect(selectElement, people) {
@@ -98,25 +97,39 @@ export function initPeopleSelect2NewTag(selectElement, placeholder) {
     });
 }
 
-export function bindPeopleModalNewTag(selectElement) {
+export function initPlaforms(selectElement, platforms) {
+    platforms.forEach(platform => {
+        selectElement.append(
+            new Option(platform, platform, false, false)
+        );
+    });
+
+    $(selectElement).select2({
+        placeholder: "Choisir une plateforme…",
+        allowClear: true
+    });
+}
+
+export function initTags(selectElement, tags) {
     if (!selectElement) return;
 
-    const modal = document.getElementById("add-new-people-modal");
-    const inputFirstname = document.getElementById("firstname");
-    const inputLastname = document.getElementById("lastname");
-
-    $(selectElement).on("select2:select", function (e) {
-        const data = e.params.data;
-        
-        if (data.newTag) {
-            activePeopleSelect = selectElement;
-            pendingTagText = data.text;
-
-            const { firstName, lastName } = parseFullName(data.text);
-            
-            modal.classList.add("is-active");
-            inputFirstname.value = firstName;
-            inputLastname.value = lastName;
-        }
+    tags.forEach(([id, tag, color_tag, trad, categorie]) => {
+        new Option(tag, tag, false, false);
     });
+
+    $(selectElement).select2({
+        placeholder: "Choisir un tag…",
+        allowClear: true,
+        tags: true,
+        createTag: function(params) {
+            const term = $.trim(params.term);
+            if (term === "") return null;
+
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            }
+        }
+    })
 }
