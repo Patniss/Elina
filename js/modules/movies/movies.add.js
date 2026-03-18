@@ -6,7 +6,6 @@ import { addMovie } from "/Elina/js/services/movies.service.js";
 import { genres } from "/Elina/js/data/genres.js";
 
 export async function initAddMovie() {
-    // Récupération du formulaire et des champs
     const movieForm = document.getElementById("movie-form");
     const titleInput = document.getElementById("movie-title");
     const yearInput = document.getElementById("movie-year");
@@ -20,16 +19,13 @@ export async function initAddMovie() {
 
     if (!movieForm) return;
 
-    // Activation du select2 de genres
     initGenres(genresInput, genres);
 
-    // Recherche de doublons
     searchAllMovies(titleInput, searchResult);
 
     movieForm.addEventListener("submit", async (e) => {
-        e.preventDefault(); // Empêche le rechargement de la page
+        e.preventDefault();
 
-        // Récupération des valeurs
         const movieTitle = titleInput.value;
         const movieYear = yearInput.value;
         const hours = Number(hoursInput.value) || 0;
