@@ -25,8 +25,9 @@ export async function createCarouselCard(m, index, list) {
     img.style.maxWidth = "100%";
 
     img.addEventListener("click", () => {
-        console.log("modale affichée");
-        createModalMovie(m.id);
+        divModal = createModalMovie(m.id);
+        const section = document.getElementById("section");
+        section.appendChild(divModal);
     })
 
     figure.appendChild(img);
@@ -37,7 +38,7 @@ export async function createCarouselCard(m, index, list) {
 
 export function createModalMovie(uuid) {
     const divModal = document.createElement("div");
-    divModal.classList.add("modal");
+    divModal.classList.add("modal", "is-active");
     divModal.id = uuid;
 
     const modalBack = document.createElement("div");
@@ -56,7 +57,8 @@ export function createModalMovie(uuid) {
     btnClose.ariaLabel = "close";
 
     divModal.append(modalBack, modalContent, btnClose);
-    divModal.classList.add("is-active");
+
+    return divModal;
 }
 
 export async function createMovieCard(m, complete) {
