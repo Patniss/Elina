@@ -100,13 +100,15 @@ export async function seeNextEpisode(showId) {
             addUserSeason(showId, (seasonNumber + 1));
         }
     } else {
-        console.log(currentSeasonId);
         const { error } = await supabase
             .from("users_seasons")
             .update("episodes_seen", (seenEpisode + 1))
             .eq("user_id", userId)
-            .eq("season_id", currentSeasonId)
-            .single();
+            .eq("season_id", currentSeasonId);
+
+        console.log("Lignes trouvées:", data);
+        console.log("userId:", userId, "type:", typeof userId);
+        console.log("currentSeasonId:", currentSeasonId, "type:", typeof currentSeasonId);
 
         if (error) {
             console.error(error);
