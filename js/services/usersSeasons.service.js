@@ -131,32 +131,28 @@ export async function seeNextEpisode(showId) {
             addUserSeason(showId, (seasonNumber + 1));
         }
     } else {
-        const { data, error } = await supabase
-            .from("users_seasons")
-            .select("id")
-            .eq("user_id", userId)
-            .eq("season_id", currentSeasonId)
-            .single();
-
-        if (error) {
-            console.error(error);
-        }
-
         const nextEpisode = seenEpisode + 1;
-
-        if (data) {
-            const dataId = data.id;
-            const { error: errUpdating } = await supabase
-                .from("users_seasons")
-                .update("episodes_seen", nextEpisode)
-                .eq("id", dataId);
-
-            if (errUpdating) {
-                console.error(errUpdating);
-                return;
-            }
-        }
+        const userSeasonId = await getUserSeasonId();
+        await updateSeeEp(userSeasonId, nextEpisode);
     }
+}
+
+export async function getUserSeasonId(seasonId) {
+    const userId = await userId();
+
+    const { data, error } = await supabase
+        .from("users_seasons")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("season_id", seasonId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data.id;
 }
 
 export async function getUsersSeasons(showId) {
@@ -174,4 +170,17 @@ export async function getUsersSeasons(showId) {
     }
 
     return data || [];
+}
+
+export async function updateSeeEp(uuid, episode) {
+    const { error } = await supabase
+        .from("users_seasons")
+        .update("episodes_seen", episode)
+        .eq("id", uuid)
+        .single();
+    
+    if (error) {
+        console.error(error);
+        return;
+    };
 }
