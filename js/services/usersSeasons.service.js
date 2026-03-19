@@ -117,7 +117,7 @@ export async function seeNextEpisode(showId) {
         }
 
         console.log(data);
-        const nextEpisode = seeNextEpisode + 1;
+        const nextEpisode = seenEpisode + 1;
         console.log(nextEpisode);
 
         if (data) {
