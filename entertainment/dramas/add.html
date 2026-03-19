@@ -32,18 +32,14 @@
         </div>
 
         <div class="field is-flex">
-          <label for="show-nb-seasons" class="label mr-3">Nombre d'épisodes :</label>
-          <div class="control">
-            <input placeholder="Nombre de d'épisodes…" class="input" type="number" style="width: 200px;" id="drama-nb-episodes" required>
-          </div>
+          <label class="label mr-3">Temps moyen épisode :</label>
+          <input placeholder="Temps moyen en minutes…" class="input" type="number" id="drama-average-time" style="width: 200px;" required>
         </div>
 
         <div class="field is-flex">
-          <label class="label mr-3">Temps moyen épisode :</label>
+          <label for="show-nb-seasons" class="label mr-3">Nombre d'épisodes :</label>
           <div class="control is-flex is-flex-direction-column">
-            <div id="div-drama-time">
-              <input placeholder="Temps moyen en minutes…" class="input" type="number" id="drama-average-time" style="width: 200px;" required>
-            </div>
+            <input placeholder="Nombre de d'épisodes…" class="input" type="number" style="width: 200px;" id="drama-nb-episodes" required>
             <label for="drama-exact-time"><input type="checkbox" class="checkbox" name="drama-exact-time" id="drama-exact-time" /> Ajouter les temps pour chaque épisode…</label>
           </div>
         </div>
@@ -53,6 +49,11 @@
           <div class="select is-multiple">
             <select class="input" multiple="multiple" size="8" id="drama-genres" style="width: 100%;" required></select>
           </div>
+        </div>
+
+        <div class="field is-hidden" id="drama-time-hidden">
+          <label class="label">Temps par épisode</label>
+          <div id="div-drama-time"></div>
         </div>
 
         <div class="field is-flex">
