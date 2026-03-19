@@ -81,7 +81,10 @@ export async function createShowCard(s) {
         handleButtonState(addButton, "loading");
         try {
             await addUserShow(show.id);
-        } catch (error) { throw error; }
+        } catch (error) {
+            handleButtonState(addButton, "error");
+            throw error
+        };
         setTimeout(() => {
             updateShowUI("added", buttons, divTags);
             handleButtonState(addButton, "stop-loading");
@@ -92,7 +95,10 @@ export async function createShowCard(s) {
         handleButtonState(deleteButton, "loading");
         try {
             await deleteUserShow(show.id);
-        } catch (error) { throw error; }
+        } catch (error) {
+            handleButtonState(deleteButton, "error");
+            throw error
+        };
         setTimeout(() => {
             updateShowUI(null, buttons, divTags);
             handleButtonState(deleteButton, "stop-loading");
@@ -104,7 +110,10 @@ export async function createShowCard(s) {
         try {
             await startUserShow(show.id);
             await addUserSeason(show.id, 1);
-        } catch (error) { throw error; }
+        } catch (error) {
+            handleButtonState(startButton, "error");
+            throw error
+        };
         setTimeout(() => {
             updateShowUI("seeEp", buttons, divTags);
             handleButtonState(startButton, "stop-loading");
@@ -115,7 +124,10 @@ export async function createShowCard(s) {
         handleButtonState(seeEpButton, "loading");
         try {
             await seeNextEpisode(show.id);
-        } catch (error) { throw error };
+        } catch (error) {
+            handleButtonState(seeEpButton, "error");
+            throw error
+        };
 
         setTimeout(async () => {
             const nextNextEpisode = await getNextEpisode(show.id);
@@ -128,7 +140,10 @@ export async function createShowCard(s) {
         handleButtonState(pauseButton, "loading");
         try {
             await pauseUserShow(show.id);
-        } catch (error) { throw error; }
+        } catch (error) {
+            handleButtonState(pauseButton, "error");
+            throw error
+        };
         setTimeout(() => {
             updateShowUI("paused", buttons, divTags);
             handleButtonState(addButton, "stop-loading");
@@ -139,7 +154,10 @@ export async function createShowCard(s) {
         handleButtonState(takeAgainButton, "loading");
         try {
             await startUserShow(show.id);
-        } catch (error) { throw error; }
+        } catch (error) {
+            handleButtonState(takeAgainButton, "error");
+            throw error
+        };
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
             handleButtonState(takeAgainButton, "stop-loading");
@@ -150,7 +168,10 @@ export async function createShowCard(s) {
         handleButtonState(cancelButton, "loading");
         try {
             await cancelUserShow(show.id);
-        } catch (error) { throw error; }
+        } catch (error) {
+            handleButtonState(cancelButton, "error");
+            throw error
+        };
         setTimeout(() => {
             updateShowUI("canceled", buttons, divTags);
             handleButtonState(cancelButton, "stop-loading");
@@ -161,7 +182,10 @@ export async function createShowCard(s) {
         handleButtonState(retryButton, "loading");
         try {
             await startUserShow(show.id)
-        } catch (error) { throw error; }
+        } catch (error) {
+            handleButtonState(retryButton, "error");
+            throw error
+        };
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
             handleButtonState(retryButton, "stop-loading");
