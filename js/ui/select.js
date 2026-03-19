@@ -114,7 +114,8 @@ export function initTags(selectElement, tags) {
     if (!selectElement) return;
 
     tags.forEach(([id, tag, color_tag, trad, categorie]) => {
-        new Option(tag, tag, false, false);
+        const option = new Option(tag, tag, false, false);
+        selectElement.appendChild(option);
     });
 
     $(selectElement).select2({
