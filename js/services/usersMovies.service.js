@@ -106,7 +106,7 @@ export async function getSeenTimeMovieSister() {
         return;
     }
     
-    return data.reduce((sum, movie) > sum + Number(movie.movies.time), 0);
+    return data.reduce((sum, movie) => sum + Number(movie.movies.time), 0);
 }
 
 export async function getToseeMovies() {
@@ -130,10 +130,10 @@ export async function getTotalSeenMovies() {
     const userId = await getUserId();
 
     const { count, error } = await supabase
-    .from("users_movies")
-    .select(`*`, { count: "exact", head: true })
-    .eq("user_id", userId)
-    .eq("seen", true);
+        .from("users_movies")
+        .select(`*`, { count: "exact", head: true })
+        .eq("user_id", userId)
+        .eq("seen", true);
     
   if (error) {
     console.error(error);
@@ -143,14 +143,31 @@ export async function getTotalSeenMovies() {
   return count;
 }
 
+export async function getTotalSeenMoviesSister() {
+    const sisterId = await getSisterId();
+
+    const { count, error } = await supabase
+        .from("users_movies")
+        .select(`*`, { count: "exact", head: true })
+        .eq("user_id", sisterId)
+        .eq("seen", true);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return count;
+}
+
 export async function getTotalToseeMovies() {
     const userId = await getUserId();
 
     const { data, error } = await supabase
-    .from("users_movies")
-    .select(`*`)
-    .eq("user_id", userId)
-    .eq("seen", false);
+        .from("users_movies")
+        .select(`*`)
+        .eq("user_id", userId)
+        .eq("seen", false);
     
   if (error) {
     console.error(error);
@@ -158,6 +175,23 @@ export async function getTotalToseeMovies() {
   }
   
   return data.length;
+}
+
+export async function getTotalToseeMoviesSister() {
+    const sisterId = await getSisterId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*")
+        .eq("user_id", sisterId)
+        .eq("seen", false);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data.length;
 }
 
 export async function getUserMovie(userId, movieId) {

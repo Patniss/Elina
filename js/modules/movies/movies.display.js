@@ -1,6 +1,6 @@
 import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies } from "/Elina/js/services/usersMovies.service.js";
-import { getSeenTimeMovieSister } from "/Elina/js/services/usersMovies.service.js";
+import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
 
 export async function displayIndexMovies() {
@@ -9,7 +9,7 @@ export async function displayIndexMovies() {
     const moviesTosee = document.getElementById("moviesTosee");
 
     const totalTime = await getSeenTimeMovie();
-    
+
     moviesSeen.textContent = await getTotalSeenMovies();
     moviesMinutesSeen.textContent = formatTotalTime(totalTime);
     moviesTosee.textContent = await getTotalToseeMovies();
@@ -26,8 +26,10 @@ export async function displayIndexMoviesSister() {
     const moviesToseeSister = document.getElementById("movies-tosee-sister");
 
     const totalTimeSister = await getSeenTimeMovieSister();
-
-    moviesSeenSister.textContent = totalTimeSister;
+    
+    moviesSeenSister.textContent = await getTotalSeenMoviesSister();
+    moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
+    moviesToseeSister.textContent = getTotalToseeMoviesSister();
 }
 
 export async function displayFavMovies() {
