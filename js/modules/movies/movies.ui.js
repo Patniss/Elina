@@ -66,6 +66,18 @@ export function createModalMovie(uuid) {
 
     divModal.append(modalBack, modalContent, btnClose);
 
+    function closeModal($el) {
+        $el.classList.remove('is-active');
+    }
+    
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+        const $target = $close.closest('.modal');
+        
+        $close.addEventListener('click', () => {
+            closeModal($target);
+        });
+    });
+
     return divModal;
 }
 
