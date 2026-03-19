@@ -22,39 +22,41 @@ export async function addDrama() {
     initTags(tagsInput, dataTags);
 
     function episodesTimesInput() {
-        exactTimeInput.addEventListener("change", () => {
-            if (exactTimeInput.checked === true) {
-                if (nbEpisodesInput.value === "" || nbEpisodesInput.value <= 0) {
-                    alert("Vous devez d'abord ajouter le nombre d'épisodes.");
-                    exactTimeInput.checked = false;
-                    return;
-                } else {
-                    hiddenDramaTime.classList.remove("is-hidden");
-                    divTimeDrama.innerHTML = "";
-                    const olEpisodes = document.createElement("ol");
-                    olEpisodes.classList.add("grid");
-                    divTimeDrama.appendChild(olEpisodes);
-                    for (let index = 1; index <= nbEpisodesInput.value; index++) {
-                        const liEpisode = document.createElement("li");
-                        liEpisode.classList.add("cell");
-                        const inputExactTime = document.createElement("input");
-                        inputExactTime.placeholder = `Temps épisode ${index}`;
-                        inputExactTime.classList.add("input");
-                        inputExactTime.type = "number";
-                        inputExactTime.id = `drama-time-ep-${index}`;
-                        inputExactTime.style.width = "200px";
-                        inputExactTime.required = true;
-                        inputExactTime.value = averageTimeInput.value;
-                        liEpisode.appendChild(inputExactTime);
-                        olEpisodes.appendChild(liEpisode);
-                    }
-                }
+        if (exactTimeInput.checked === true) {
+            if (nbEpisodesInput.value === "" || nbEpisodesInput.value <= 0) {
+                alert("Vous devez d'abord ajouter le nombre d'épisodes.");
+                exactTimeInput.checked = false;
+                return;
             } else {
+                hiddenDramaTime.classList.remove("is-hidden");
                 divTimeDrama.innerHTML = "";
-                hiddenDramaTime.classList.add("is-hidden");
+                const olEpisodes = document.createElement("ol");
+                olEpisodes.classList.add("grid");
+                divTimeDrama.appendChild(olEpisodes);
+                for (let index = 1; index <= nbEpisodesInput.value; index++) {
+                    const liEpisode = document.createElement("li");
+                    liEpisode.classList.add("cell");
+                    const inputExactTime = document.createElement("input");
+                    inputExactTime.placeholder = `Temps épisode ${index}`;
+                    inputExactTime.classList.add("input");
+                    inputExactTime.type = "number";
+                    inputExactTime.id = `drama-time-ep-${index}`;
+                    inputExactTime.style.width = "200px";
+                    inputExactTime.required = true;
+                    inputExactTime.value = averageTimeInput.value;
+                    liEpisode.appendChild(inputExactTime);
+                    olEpisodes.appendChild(liEpisode);
+                }
             }
-        });
+        } else {
+            divTimeDrama.innerHTML = "";
+            hiddenDramaTime.classList.add("is-hidden");
+        }
     };
+
+    exactTimeInput.addEventListener("change", () => {
+        episodesTimesInput();
+    });
 
     nbEpisodesInput.addEventListener("change", () => {
         if (exactTimeInput.checked === true) {
