@@ -1,5 +1,6 @@
 import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
 import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
+import { getMovie } from "/Elina/js/services/movies.service.js";
 import { addUserMovie, deleteUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
 
 const BUTTONS_BY_STATUS = {
@@ -24,8 +25,8 @@ export async function createCarouselCard(m, index, list) {
     img.classList.add("js-modal-trigger");
     img.style.maxWidth = "100%";
 
-    img.addEventListener("click", () => {
-        const divModal = createModalMovie(m.id);
+    img.addEventListener("click", async () => {
+        const divModal = await createModalMovie(m.id);
         const section = document.getElementById("section");
         section.appendChild(divModal);
     })
@@ -36,7 +37,9 @@ export async function createCarouselCard(m, index, list) {
     return div;
 }
 
-export function createModalMovie(uuid) {
+export async function createModalMovie(uuid) {
+    const movie = await getMovie(uuid);
+
     const divModal = document.createElement("div");
     divModal.classList.add("modal", "is-active");
     divModal.id = uuid;
@@ -50,14 +53,10 @@ export function createModalMovie(uuid) {
     const divContent = document.createElement("div");
     divContent.classList.add("box");
 
-    const h1title = document.createElement("h1");
-    h1title.classList.add("title");
-    h1title.textContent = "Test d'affichage";
+    const movieTitle = document.createElement("h1");
+    movieTitle.classList.add("title");
+    movieTitle.textContent = movie.title;
 
-    const pUuid = document.createElement("p");
-    pUuid.textContent = uuid;
-
-    divContent.append(h1title, pUuid);
     modalContent.appendChild(divContent);
 
     const btnClose = document.createElement("button");
