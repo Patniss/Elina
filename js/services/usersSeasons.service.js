@@ -100,7 +100,7 @@ export async function seeNextEpisode(showId) {
             addUserSeason(showId, (seasonNumber + 1));
         }
     } else {
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from("users_seasons")
             .update("episodes_seen", (seenEpisode + 1))
             .eq("user_id", userId)
