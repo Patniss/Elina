@@ -15,8 +15,8 @@ export async function addDrama() {
     initGenres(genresInput, genres);
 
     const allTags = await getAllTags();
-    console.log(allTags);
-    initTags(tagsInput, allTags);
+    const dataTags = allTags.map(obj => [obj.id, obj.tag, obj.color_tag, obj.trad, obj.categorie]);
+    initTags(tagsInput, dataTags);
 
     exactTimeInput.addEventListener("change", () => {
         if (exactTimeInput.checked === true) {
