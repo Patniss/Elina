@@ -116,10 +116,14 @@ export async function seeNextEpisode(showId) {
             console.error(error);
         }
 
+        console.log(data);
+        const nextEpisode = seeNextEpisode + 1;
+        console.log(nextEpisode);
+
         if (data) {
             const { error: errUpdating } = await supabase
                 .from("users_seasons")
-                .update("episodes_seen", (seenEpisode + 1))
+                .update("episodes_seen", nextEpisode)
                 .eq("id", data.id);
 
             if (errUpdating) {
