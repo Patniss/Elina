@@ -55,8 +55,8 @@ export async function renderIndexToseeMovies(movies) {
     const container = document.getElementById("tosee-movies");
     container.innerHTML = "";
 
-    const rightBtn = document.getElementById("tosee-next-btn");
-    const leftBtn = document.getElementById("tosee-prev-btn");
+    const rightBtnTosee = document.getElementById("tosee-next-btn");
+    const leftBtnTosee = document.getElementById("tosee-prev-btn");
 
     indexMoviesStore.movies.tosee = movies;
 
@@ -67,7 +67,7 @@ export async function renderIndexToseeMovies(movies) {
         index++;
     }
 
-    initCarousel("tosee", leftBtn, rightBtn);
+    initCarousel("tosee", leftBtnTosee, rightBtnTosee);
 }
 
 export async function renderIndexToseeSharedMovies(movies) {
