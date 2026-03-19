@@ -26,7 +26,8 @@ export async function createCarouselCard(m, index, list) {
     img.style.maxWidth = "100%";
 
     img.addEventListener("click", async () => {
-        const divModal = await createModalMovie(movie.movies.id);
+        console.log(movie);
+        const divModal = await createModalMovie(movie.id);
         const section = document.getElementById("section");
         section.appendChild(divModal);
     })
