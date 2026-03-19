@@ -47,10 +47,18 @@ export function createModalMovie(uuid) {
     const modalContent = document.createElement("div");
     modalContent.classList.add("modal-content");
 
+    const divContent = document.createElement("div");
+    divContent.classList.add("box");
+
+    const h1title = document.createElement("h1");
+    h1title.classList.add("title");
+    h1title.textContent = "Test d'affichage";
+
     const pUuid = document.createElement("p");
     pUuid.textContent = uuid;
 
-    modalContent.appendChild(pUuid);
+    divContent.append(h1title, pUuid);
+    modalContent.appendChild(divContent);
 
     const btnClose = document.createElement("button");
     btnClose.classList.add("modal-close", "is-large");
