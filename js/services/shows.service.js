@@ -22,6 +22,36 @@ export async function addingShow(title, genres, averageMin, state, nbSeasons, lo
     return data;
 }
 
+export async function getShow(showId) {
+    const { data, error } = await supabase
+        .from("shows")
+        .select("*")
+        .eq("id", showId)
+        .single();
+    
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function getShowId(seasonId) {
+    const { data, error } = await supabase
+        .from("seasons")
+        .select("show_id")
+        .eq("id", seasonId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data.show_id;
+}
+
 export async function searchShows(query) {
     const { data, error } = await supabase
         .from("shows")

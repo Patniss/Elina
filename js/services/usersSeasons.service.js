@@ -1,6 +1,7 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { getSeasonId, getNbEpisode, getNbSeason, getTotalSeasons, getSeasonsOfShow } from "/Elina/js/services/seasons.service.js";
+import { getShow, getShowId } from "/Elina/js/services/shows.service.js";
 
 export async function addUserSeason(showId, nbSeason) {
     const userId = await getUserId();
@@ -23,22 +24,33 @@ export async function addUserSeason(showId, nbSeason) {
 export async function countEpisodesSeen() {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { count, error } = await supabase
         .from("users_seasons")
-        .select("episodes_seen.sum()")
+        .select("episodes_seen", { count: "exact", head: true })
         .eq("user_id", userId);
     
     if (error) {
         console.error(error);
-        return;
+        return 0;
     }
-    
-    const total = data.reduce(
-        (sum, row) => sum + (row.episodes_seen ?? 0),
-        0
-    );
 
-    return total;
+    return count;
+}
+
+export async function getAllUsersSeasons() {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_seasons")
+        .select("*, seasons(*)")
+        .eq("user_id", userId);
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data;
 }
 
 export async function getCurrentSeason(showId) {
@@ -82,6 +94,20 @@ export async function getNextEpisode(showId) {
     }
 
     return result;
+}
+
+export async function getSeenTimeSeenEpisodes() {
+    const allSeasons = await getAllUsersSeasons();
+    let totalTime = 0;
+
+    allSeasons.forEach(season, async () => {
+        const showId = await getShowId(season.season_id);
+        const show = await getShow(showId);
+
+        totalTime += season.episodes_seen * show.average_min;
+    });
+
+    return totalTime;
 }
 
 export async function seeNextEpisode(showId) {
