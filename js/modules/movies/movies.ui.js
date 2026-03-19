@@ -67,7 +67,7 @@ export async function createModalMovie(uuid) {
 
     [modalBack, btnClose].forEach(el => {
         el.addEventListener("click", () => {
-            divModal.classList.remove("is-active");
+            divModal.remove();
         });
     });
 
