@@ -100,6 +100,8 @@ export async function getSeenTimeSeenEpisodes() {
     const allSeasons = await getAllUsersSeasons();
     let totalTime = 0;
 
+    console.log(allSeasons);
+
     allSeasons.forEach(season, async () => {
         const showId = await getShowId(season.season_id);
         const show = await getShow(showId);
