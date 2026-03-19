@@ -109,13 +109,23 @@ export async function seeNextEpisode(showId) {
             .from("users_seasons")
             .select("id")
             .eq("user_id", userId)
-            .eq("season_id", currentSeasonId);
-
-        console.log("data.length:", data?.length);
-        console.log("Lignes trouvées:", data);
+            .eq("season_id", currentSeasonId)
+            .single();
 
         if (error) {
             console.error(error);
+        }
+
+        if (data) {
+            const { error: errUpdating } = await supabase
+                .from("users_seasons")
+                .update("episodes_seen", (seenEpisode + 1))
+                .eq("id", data.id);
+
+            if (errUpdating) {
+                console.error(errUpdating);
+                return;
+            }
         }
     }
 }
