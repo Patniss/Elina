@@ -1,4 +1,4 @@
-import { getUserId } from "/Elina/js/services/profiles.service.js";
+import { getUserId, getSisterId } from "/Elina/js/services/profiles.service.js";
 import { supabase } from "/Elina/js/core/supabase.js";
 
 export async function addUserMovie(movieId) {
@@ -80,7 +80,7 @@ export async function getSeenTimeMovie() {
 
     const { data, error } = await supabase
     .from("users_movies")
-    .select(`*, movies (time)`)
+    .select(`*, movies(time)`)
     .eq("user_id", userId)
     .eq("seen", true);
     
@@ -89,7 +89,24 @@ export async function getSeenTimeMovie() {
     return;
   }
 
-  return data.reduce((sum, movie) => sum + Number(movie.movies.time), 0 );
+  return data.reduce((sum, movie) => sum + Number(movie.movies.time), 0);
+}
+
+export async function getSeenTimeMovieSister() {
+    const sisterId = await getSisterId();
+    
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*, movies(time)")
+        .eq("user_id", sisterId)
+        .eq("seen", true);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+    
+    return data.reduce((sum, movie) > sum + Number(movie.movies.time), 0);
 }
 
 export async function getToseeMovies() {

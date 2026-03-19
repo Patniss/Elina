@@ -26,6 +26,20 @@ export async function loadProfile() {
   return data;
 }
 
+export async function getSisterId() {
+  const userId = await getUserId();
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id")
+    .neq("id", userId)
+    .single();
+
+    const sisterId = data.id;
+
+    return sisterId;
+}
+
 export async function getUserId() {
   const session = await loadProfile();
   const userId = session.id;

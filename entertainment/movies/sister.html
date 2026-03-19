@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>엘리나 Elina - Films</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+
+<main>
+
+  <section class="section" id="section">
+
+    <div class="container">
+      <div id="nav-container"></div>
+
+      <div class="container box">
+
+        <h1 class="title is-1 has-text-centered mt-3 mb-3"><span class="icon"><i class="fa-solid fa-film"></i></span> Sister's movies</h1>
+        <h2 class="subtitle is-3 has-text-centered mt-3 mb-6 sister-pseudo"></h2>
+
+        <nav class="level is-primary">
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Films vus</p>
+                    <p class="title is-2 has-text-primary" id="movies-seen-sister"></p>
+                    <p class="subtitle is-5" id="movies-seen-compare"></p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Temps de films</p>
+                    <p class="title is-2 has-text-primary" id="movies-minutes-seen-sister"></p>
+                    <p class="subtitle is-5" id="movies-minutes-seen-compare"></p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Films à voir</p>
+                    <p class="title is-2 has-text-primary" id="movies-tosee-sister"></p>
+                    <p class="subtitle is-5" id="movies-tosee-compare"></p>
+                </div>
+            </div>
+
+        </nav>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="title is-3 carousel-title">Vous avez toutes les deux envie de voir…</h3>
+          <div class="carousel-container">
+            <button class="button is-primary nav-arrow left" id="tosee-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
+            <div class="carousel-track" id="tosee-movies-shared"></div>
+            <button class="button is-primary nav-arrow right" id="tosee-next-btn"><i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="title is-3 carousel-title">Derniers films vus de <i class="sister-pseudo"></i></h3>
+          <div class="carousel-container">
+            <button class="button is-primary nav-arrow left" id="last-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
+            <div class="carousel-track" id="last-seen-movies-sister"></div>
+            <button class="button is-primary nav-arrow right" id="last-next-btn"><i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="title is-3 carousel-title">Nos favoris communs</h3>
+          <div class="carousel-container">
+            <button class="button is-primary nav-arrow left" id="fav-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
+            <div class="carousel-track" id="fav-movies-shared"></div>
+            <button class="button is-primary nav-arrow right" id="fav-next-btn"><i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="title is-3 carousel-title">Recommandations de ta sister…</h3>
+          <div class="carousel-container">
+            <button class="button is-primary nav-arrow left" id="fav-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
+            <div class="carousel-track" id="fav-sister-movies-not-seen"></div>
+            <button class="button is-primary nav-arrow right" id="fav-next-btn"><i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+
+  </section>
+
+</main>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/core/nav.js";
+  loadNav();
+  import { displayIndexMoviesSister } from "/Elina/js/modules/movies/movies.display.js";
+  displayIndexMoviesSister();
+  import { updatePageSize } from "/Elina/js/data/movies.store.js";
+  updatePageSize();
+  window.addEventListener("resize", updatePageSize);
+</script>
+
+<script type="module" src="/Elina/js/core/guard.js"></script>
+</body>
+</html>
