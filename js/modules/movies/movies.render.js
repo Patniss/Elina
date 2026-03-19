@@ -1,6 +1,6 @@
 import { render, initCarousel } from "/Elina/js/ui/render.js";
 import { createMovieCard, createCarouselCard } from "/Elina/js/modules/movies/movies.ui.js";
-import { moviesStore, indexMoviesStore } from "/Elina/js/data/movies.store.js";
+import { moviesStore, indexMoviesStore, indexSisterMoviesStore } from "/Elina/js/data/movies.store.js";
 import { renderPaginationAll, renderPaginationTosee, renderPaginationSeen } from "/Elina/js/modules/movies/movies.pagination.js";
 
 export async function renderAllMovies(movies) {
@@ -55,8 +55,8 @@ export async function renderIndexToseeMovies(movies) {
     const container = document.getElementById("tosee-movies");
     container.innerHTML = "";
 
-    const rightBtnTosee = document.getElementById("tosee-next-btn");
-    const leftBtnTosee = document.getElementById("tosee-prev-btn");
+    const rightBtn = document.getElementById("tosee-next-btn");
+    const leftBtn = document.getElementById("tosee-prev-btn");
 
     indexMoviesStore.movies.tosee = movies;
 
@@ -67,7 +67,26 @@ export async function renderIndexToseeMovies(movies) {
         index++;
     }
 
-    initCarousel("tosee", leftBtnTosee, rightBtnTosee);
+    initCarousel("tosee", leftBtn, rightBtn);
+}
+
+export async function renderIndexToseeSharedMovies(movies) {
+    const container = document.getElementById("tosee-movies-shared");
+    container.innerHTML = "";
+
+    const leftBtn = document.getElementById("tosee-shared-prev-btn");
+    const rightBtn = document.getElementById("tosee-shared-next-btn");
+
+    indexSisterMoviesStore.movies.toseeShared = movies;
+
+    let index = 1;
+
+    for (const movie of movies) {
+        container.appendChild(await createCarouselCard(movie, index, "toseeShared"));
+        index++;
+    }
+
+    initCarousel("toseeShared", leftBtn, rightBtn);
 }
 
 export async function renderSeenMovies(movies) {

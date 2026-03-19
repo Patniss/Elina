@@ -121,6 +121,36 @@ export async function getToseeMovies() {
     
     if (error) {
         console.error(error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function getToseeSharedMovies() {
+    const userToseeMovies = await getToseeMovies();
+    const sisterToseeMovies = await getToseeSisterMovies();
+
+    const movieIds = new Set(sisterToseeMovies.map(item => item.movie_id));
+    
+    const toseeSharedMovies = userToseeMovies.filter(item => movieIds.has(item.movie_id));
+
+    return toseeSharedMovies;
+}
+
+export async function getToseeSisterMovies() {
+    const sisterId = await getSisterId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*, movies(*)")
+        .eq("user_id", sisterId)
+        .eq("seen", false)
+        .order("title", { ascending: true, foreignTable: "movies" });
+
+    if (error) {
+        console.error(error);
+        return null;
     }
 
     return data;

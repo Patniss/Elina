@@ -83,3 +83,13 @@ export let indexMoviesStore = {
     },
     pageSize: 7
 }
+
+export let indexSisterMoviesStore = {
+    movies: {
+        toseeShared: []
+    },
+    currentIndex: {
+        toseeShared: []
+    },
+    pageSize: 7
+}
