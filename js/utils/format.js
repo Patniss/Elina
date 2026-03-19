@@ -47,6 +47,8 @@ export function formatMovieDuration(totalMinutes) { // Transforme un nombre de m
 }
 
 export function formatTotalTime(totalMinutes) {
+    if (totalMinutes < 0) totalMinutes = totalMinutes * -1;
+
     const yearsSeen = Math.floor(totalMinutes / 525600);
     const monthsSeen = Math.floor((totalMinutes - 525600*yearsSeen) / 43200);
     const daysSeen = Math.floor((totalMinutes - 525600*yearsSeen - 43200*monthsSeen) / 1440);
