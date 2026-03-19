@@ -33,7 +33,12 @@ export async function countEpisodesSeen() {
         return;
     }
     
-    return data[0]?.[episodes_seen.sum] || 0;
+    const total = data.reduce(
+        (sum, row) => sum + (row.episodes_seen ?? 0),
+        0
+    );
+
+    return total;
 }
 
 export async function getCurrentSeason(showId) {
