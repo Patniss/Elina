@@ -58,6 +58,7 @@ export async function createModalMovie(uuid) {
     movieTitle.classList.add("title");
     movieTitle.textContent = movie.title;
 
+    divContent.appendChild(movieTitle);
     modalContent.appendChild(divContent);
 
     const btnClose = document.createElement("button");

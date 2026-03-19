@@ -2,7 +2,7 @@ import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } f
 import { renderIndexToseeSharedMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies } from "/Elina/js/services/usersMovies.service.js";
 import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister, getToseeSharedMovies } from "/Elina/js/services/usersMovies.service.js";
-import { formatTotalTime } from "/Elina/js/utils/format.js";
+import { formatTotalTime, formatPlusDisplay } from "/Elina/js/utils/format.js";
 
 export async function displayIndexMovies() {
     const moviesSeen = document.getElementById("moviesSeen");
@@ -32,18 +32,19 @@ export async function displayIndexMoviesSister() {
     const totalTimeSister = await getSeenTimeMovieSister();
     
     moviesSeenSister.textContent = await getTotalSeenMoviesSister();
-    const comparisonMoviesSeen = await getTotalSeenMoviesSister() - await getTotalSeenMovies();
-    moviesSeenCompare.textContent = comparisonMoviesSeen;
+    const comparisonMoviesSeen = await getTotalSeenMovies() - await getTotalSeenMoviesSister();
+    moviesSeenCompare.textContent = formatPlusDisplay(comparisonMoviesSeen);
     if (comparisonMoviesSeen > 0) moviesSeenCompare.classList.add("has-text-success"); else moviesSeenCompare.classList.add("has-text-danger");
 
     moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
-    const comparisonMoviesMinutesSeen = totalTimeSister - await getSeenTimeMovie();
-    moviesMinutesSeenCompare.textContent = formatTotalTime();
+    const comparisonMoviesMinutesSeen = await getSeenTimeMovie() - totalTimeSister;
+    moviesMinutesSeenCompare.textContent =
+        comparisonMoviesMinutesSeen > 0 ? "+ " : "— ", formatTotalTime(comparisonMoviesMinutesSeen);
     if (comparisonMoviesMinutesSeen > 0) comparisonMoviesMinutesSeen.classList.add("has-text-success"); else comparisonMoviesMinutesSeen.classList.add("has-text-danger");
 
     moviesToseeSister.textContent = await getTotalToseeMoviesSister();
     const comparisonMoviesTosee = await getTotalToseeMoviesSister() - await getTotalToseeMovies();
-    moviesToseeCompare.textContent = comparisonMoviesTosee;
+    moviesToseeCompare.textContent = formatPlusDisplay(comparisonMoviesTosee);
     if (comparisonMoviesTosee > 0) moviesToseeCompare.classList.add("has-text-danger"); else moviesToseeCompare.classList.add("has-text-success");
     
     const toseeSharedMovies = await getToseeSharedMovies();
