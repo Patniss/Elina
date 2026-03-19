@@ -19,70 +19,44 @@
 
     <!-- FORM FILM -->
     <div class="box">
-      <h1 class="title"><span class="icon"><i class="fa-solid fa-pen-to-square"></i></span> Compléter le casting de <i id="movie-title"></i></h1>
-
-      <h2 id="movie-year" class="subtitle"></h2>
+      <h1 class="title"><span class="icon"><i class="fa-solid fa-pen-to-square"></i></span>Ajouter un casting de <i id="movie-title"></i></h1>
 
       <form id="movie-form">
 
         <div class="block">
-          <h3 class="subtitle is-4">Réalisateur(s)</h3>
-          
-          <div id="div-director-1" class="mb-3 py-3">
-            <div class="columns">
+          <h3 class="subtitle is-4">Ajouter un membre de casting :</h3>
 
-              <div class="column is-1"></div>
-              <div class="column is-11">
-                <div class="field select is-multiple">
-                  <select multiple="multiple" id="select-director-1" style="width: 100%;" required>
-                    <option value=""></option>
-                  </select>
-                </div>
-              </div>
-
-            </div>
+          <label for="cast-job">Type de casting :</label>
+          <div class="field select">
+            <select name="cast-job" id="cast-job" required>
+              <option value="director">Réalisateur</option>
+              <option value="producer">Producteur</option>
+              <option value="scriptwriter">Scénariste</option>
+              <option value="actor">Acteur</option>
+            </select>
           </div>
 
-          <div id="div-director-2" class="is-hidden mb-3 py-3">
-
-            <div class="columns">
-
-              <div class="column is-1">
-                <button class="button delete is-large" id="delete-director-2"></button>
-              </div>
-              <div class="column is-11">
-                <div class="select is-multiple">
-                  <select multiple="multiple" id="select-director-2" style="width: 100%;" >
-                    <option value=""></option>
-                  </select>
-                </div>
-              </div>
-
-            </div>
+          <label for="cast-people">Personnalité :</label>
+          <div class="field select">
+            <select name="cast-people" id="cast-people" style="width: 100%;" required>
+              <option value=""></option>
+            </select>
           </div>
 
-          <div id="div-director-3" class="is-hidden mb-3 py-3">
-
-            <div class="columns">
-
-              <div class="column is-1">
-                <button class="button delete is-large" id="delete-director-3"></button>
+          <div id="div-role" class="is-hidden">
+            <div class="field">
+              <label for="cast-role">Rôle et personnage :</label>
+              <input type="text" class="input" placeholder="Nom du rôle…" id="cast-role" name="cast-role" />
+              <div class="select">
+                <select name="cast-type-role" id="cast-type-role">
+                  <option value="" disabled>Choisir un type de rôle</option>
+                  <option value="leading">Rôle principal</option>
+                  <option value="supporting">Rôle secondaire</option>
+                  <option value="extra">Figurant</option>
+                </select>
               </div>
-              <div class="column is-11">
-                <div class="select is-multiple">
-                  <select multiple="multiple" id="select-director-3" style="width: 100%;" >
-                    <option value=""></option>
-                  </select>
-                </div>
-              </div>
-
             </div>
           </div>
-
-        </div>
-
-        <div class="block">
-          <h3 class="subtitle is-4">Scénariste(s)</h3>
           
           <div id="div-scriptwriter-1" class="mb-3 py-3">
             <div class="columns">
@@ -117,28 +91,6 @@
             </div>
           </div>
 
-        </div>
-
-        <div class="block">
-          <h3 class="subtitle is-4">Acteurs et rôles</h3>
-
-          <div id="div-roles" class="mb-6"></div>
-
-        </div>
-
-        <div class="buttons my-4">
-          <button id="add-director" class="button" type="button">Ajouter un réalisateur</button>
-          <button id="add-scriptwriter" class="button" type="button">Ajouter un scénariste</button>
-          <button id="add-role" class="button" type="button">Ajouter un rôle</button>
-          <button id="delete-role" class="button is-hidden" type="button">Supprimer un rôle</button>
-        </div>
-
-        <div class="block">
-          <div class="field">
-            <div class="control">
-              <button class="button is-primary" type="submit" id="submit">Compléter le film</button>
-            </div>
-          </div>
         </div>
 
       </form>
