@@ -1,5 +1,5 @@
-import { renderIndexToseeSharedMovies } from "./movies.render";
 import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { renderIndexToseeSharedMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies } from "/Elina/js/services/usersMovies.service.js";
 import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister, getToseeSharedMovies } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
