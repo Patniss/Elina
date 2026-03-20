@@ -36,9 +36,6 @@ export async function displayIndexMoviesSister() {
     moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
     
     moviesToseeSister.textContent = await getTotalToseeMoviesSister();
-    
-    const toseeSharedMovies = await getToseeSharedMovies();
-    await renderIndexToseeSharedMovies(toseeSharedMovies);
 }
 
 export async function displayFavMovies() {
