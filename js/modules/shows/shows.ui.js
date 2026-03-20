@@ -83,7 +83,7 @@ export async function createShowCard(s) {
             await addUserShow(show.id);
         } catch (error) {
             handleButtonState(addButton, "error");
-            throw error
+            console.error(error);
         };
         setTimeout(() => {
             updateShowUI("added", buttons, divTags);
@@ -97,7 +97,7 @@ export async function createShowCard(s) {
             await deleteUserShow(show.id);
         } catch (error) {
             handleButtonState(deleteButton, "error");
-            throw error
+            console.error(error);
         };
         setTimeout(() => {
             updateShowUI(null, buttons, divTags);
@@ -112,7 +112,7 @@ export async function createShowCard(s) {
             await addUserSeason(show.id, 1);
         } catch (error) {
             handleButtonState(startButton, "error");
-            throw error
+            console.error(error);
         };
         setTimeout(() => {
             updateShowUI("seeEp", buttons, divTags);
@@ -126,7 +126,7 @@ export async function createShowCard(s) {
             await seeNextEpisode(show.id);
         } catch (error) {
             handleButtonState(seeEpButton, "error");
-            throw error
+            console.error(error);
         };
 
         setTimeout(async () => {
@@ -142,7 +142,7 @@ export async function createShowCard(s) {
             await pauseUserShow(show.id);
         } catch (error) {
             handleButtonState(pauseButton, "error");
-            throw error
+            console.error(error);
         };
         setTimeout(() => {
             updateShowUI("paused", buttons, divTags);
@@ -156,7 +156,7 @@ export async function createShowCard(s) {
             await startUserShow(show.id);
         } catch (error) {
             handleButtonState(takeAgainButton, "error");
-            throw error
+            console.error(error);
         };
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
@@ -170,7 +170,7 @@ export async function createShowCard(s) {
             await cancelUserShow(show.id);
         } catch (error) {
             handleButtonState(cancelButton, "error");
-            throw error
+            console.error(error);
         };
         setTimeout(() => {
             updateShowUI("canceled", buttons, divTags);
@@ -184,7 +184,7 @@ export async function createShowCard(s) {
             await startUserShow(show.id)
         } catch (error) {
             handleButtonState(retryButton, "error");
-            throw error
+            console.error(error);
         };
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);

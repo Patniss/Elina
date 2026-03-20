@@ -176,7 +176,7 @@ export async function getUsersSeasons(showId) {
 export async function updateSeeEp(uuid, episode) {
     const { error } = await supabase
         .from("users_seasons")
-        .update("episodes_seen", episode)
+        .update({ "episodes_seen": episode })
         .eq("id", uuid)
         .single();
     
