@@ -39,7 +39,7 @@ export async function displayIndexMoviesSister() {
     moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
     const comparisonMoviesMinutesSeen = await getSeenTimeMovie() - totalTimeSister;
     moviesMinutesSeenCompare.textContent =
-        comparisonMoviesMinutesSeen > 0 ? "+ " : "— ", formatTotalTime(comparisonMoviesMinutesSeen);
+        (comparisonMoviesMinutesSeen > 0 ? "+ " : "— ") + formatTotalTime(comparisonMoviesMinutesSeen);
     if (comparisonMoviesMinutesSeen > 0) comparisonMoviesMinutesSeen.classList.add("has-text-success"); else comparisonMoviesMinutesSeen.classList.add("has-text-danger");
 
     moviesToseeSister.textContent = await getTotalToseeMoviesSister();

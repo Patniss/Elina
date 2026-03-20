@@ -50,11 +50,11 @@ export function formatPlusDisplay(number) {
     let result;
 
     if (number > 0) {
-        result = "+ ", number;
+        result = `+ ${number}`;
     } else if (number === 0) {
         result = number;
     } else {
-        result = "— ", number*-1;
+        result = `— ${number * -1}`;
     }
 
     return result;
