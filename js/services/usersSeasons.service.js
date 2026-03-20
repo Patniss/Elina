@@ -105,8 +105,10 @@ export async function getSeenTimeSeenEpisodes() {
     allSeasons.forEach(async (season) => {
         const showId = await getShowId(season.season_id);
         const show = await getShow(showId);
+        console.log("Série TV:", show);
 
         totalTime += season.episodes_seen * show.average_min;
+        console.log(totalTime);
     });
 
     return totalTime;
