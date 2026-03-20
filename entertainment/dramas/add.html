@@ -53,7 +53,7 @@
 
         <div class="field is-hidden" id="drama-time-hidden">
           <label class="label">Temps par épisode</label>
-          <div id="div-drama-time"></div>
+          <div id="div-drama-time" class="grid"></div>
         </div>
 
         <div class="field is-flex">
@@ -61,6 +61,11 @@
           <div class="select is-multiple">
             <select class="input" multiple="multiple" size="8" id="drama-tags" style="width: 100%;" required></select>
           </div>
+        </div>
+
+        <div class="field">
+          <label for="drama-synopsis" class="label">Synopsis :</label>
+          <textarea name="drama-synopsis" id="drama-synopsis" class="textarea" placeholder="Synopsis du drama…"></textarea>
         </div>
 
         <div class="field">
@@ -90,8 +95,8 @@
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-  import { addDrama } from "/Elina/js/modules/dramas/dramas.add.js";
-  addDrama();
+  import { addingDrama } from "/Elina/js/modules/dramas/dramas.add.js";
+  addingDrama();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>

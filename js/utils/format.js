@@ -47,17 +47,7 @@ export function formatMovieDuration(totalMinutes) { // Transforme un nombre de m
 }
 
 export function formatPlusDisplay(number) {
-    let result;
-
-    if (number > 0) {
-        result = `+ ${number}`;
-    } else if (number === 0) {
-        result = number;
-    } else {
-        result = `— ${number * -1}`;
-    }
-
-    return result;
+    return number > 0 ? `+ ${number}` : number === 0 ? number : `— ${Math.abs(number)}`;
 }
 
 export function formatTotalTime(totalMinutes) {

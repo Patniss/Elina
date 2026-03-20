@@ -1,14 +1,18 @@
 import { genres } from "/Elina/js/data/genres.js";
+import { addDrama } from "/Elina/js/services/dramas.service.js";
+import { addDramaEpisode } from "/Elina/js/services/dramasEpisodes.service.js";
+import { addDramaTag } from "/Elina/js/services/dramasTags.service.js";
 import { getAllTags } from "/Elina/js/services/tags.service.js";
 import { initGenres, initTags } from "/Elina/js/ui/select.js";
 
-export async function addDrama() {
+export async function addingDrama() {
     const titleInput = document.getElementById("drama-title");
     const nbEpisodesInput = document.getElementById("drama-nb-episodes");
     const averageTimeInput = document.getElementById("drama-average-time");
     const exactTimeInput = document.getElementById("drama-exact-time");
     const genresInput = document.getElementById("drama-genres");
     const tagsInput = document.getElementById("drama-tags");
+    const synopsisInput = document.getElementById("drama-synopsis");
     const posterInput = document.getElementById("drama-poster");
     const divTimeDrama = document.getElementById("div-drama-time");
     const hiddenDramaTime = document.getElementById("drama-time-hidden");
@@ -64,12 +68,34 @@ export async function addDrama() {
         } else return;
     });
 
-    submitDrama.addEventListener("click", () => {
+    submitDrama.addEventListener("click", async () => {
        const titleDrama = titleInput.value;
        const nbEpisodesDrama = nbEpisodesInput.value;
        const posterDrama = posterInput.value;
+       const synopsisDrama = synopsisInput.value;
 
        let selectedGenres = $(genresInput).val() || [];
        let dramasGenres = selectedGenres.join(" ; ");
+
+       let selectedTags = $(tagsInput).val() || [];
+
+       const completeDrama = exactTimeInput.checked === true ? true : false;
+
+       try {
+        idDrama = await addDrama(titleDrama, dramasGenres, nbEpisodesDrama, synopsisDrama, posterDrama, completeDrama);
+        selectedTags.forEach(async (tag) => {
+            await addDramaTag(idDrama, tag);
+        });
+        if (exactTimeInput.checked) {
+            for (let ep = 1; ep <= nbEpisodesDrama; ep++) {
+                const timeInput = document.getElementById(`drama-time-ep-${ep}`);
+                const time = timeInput.value;
+                await addDramaEpisode(ep, idDrama, time);
+            }
+        }
+       } catch (error) {
+        console.error(error);
+        return;
+       }
     });
 }
