@@ -139,7 +139,7 @@ export async function seeNextEpisode(showId) {
 }
 
 export async function getUserSeasonId(seasonId) {
-    const userId = await userId();
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_seasons")
