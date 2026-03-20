@@ -135,7 +135,7 @@ export async function seeNextEpisode(showId) {
         }
     } else {
         const nextEpisode = seenEpisode + 1;
-        const userSeasonId = await getUserSeasonId();
+        const userSeasonId = await getUserSeasonId(currentSeasonId);
         await updateSeeEp(userSeasonId, nextEpisode);
     }
 }

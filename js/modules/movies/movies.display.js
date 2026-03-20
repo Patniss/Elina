@@ -32,20 +32,10 @@ export async function displayIndexMoviesSister() {
     const totalTimeSister = await getSeenTimeMovieSister();
     
     moviesSeenSister.textContent = await getTotalSeenMoviesSister();
-    const comparisonMoviesSeen = await getTotalSeenMovies() - await getTotalSeenMoviesSister();
-    moviesSeenCompare.textContent = formatPlusDisplay(comparisonMoviesSeen);
-    if (comparisonMoviesSeen > 0) moviesSeenCompare.classList.add("has-text-success"); else moviesSeenCompare.classList.add("has-text-danger");
-
+    
     moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
-    const comparisonMoviesMinutesSeen = await getSeenTimeMovie() - totalTimeSister;
-    moviesMinutesSeenCompare.textContent =
-        (comparisonMoviesMinutesSeen > 0 ? "+ " : "— ") + formatTotalTime(comparisonMoviesMinutesSeen);
-    if (comparisonMoviesMinutesSeen > 0) comparisonMoviesMinutesSeen.classList.add("has-text-success"); else comparisonMoviesMinutesSeen.classList.add("has-text-danger");
-
+    
     moviesToseeSister.textContent = await getTotalToseeMoviesSister();
-    const comparisonMoviesTosee = await getTotalToseeMoviesSister() - await getTotalToseeMovies();
-    moviesToseeCompare.textContent = formatPlusDisplay(comparisonMoviesTosee);
-    if (comparisonMoviesTosee > 0) moviesToseeCompare.classList.add("has-text-danger"); else moviesToseeCompare.classList.add("has-text-success");
     
     const toseeSharedMovies = await getToseeSharedMovies();
     await renderIndexToseeSharedMovies(toseeSharedMovies);
