@@ -15,11 +15,11 @@ export async function addSeason(nbSeason, showId, nbEpisodes) {
     }
 }
 
-export async function getNbEpisode(uuid) {
+export async function getNbEpisode(seasonId) {
     const { data, error } = await supabase
         .from("seasons")
         .select("nb_episodes")
-        .eq("id", uuid)
+        .eq("id", seasonId)
         .single();
 
     if (error) {
@@ -30,11 +30,11 @@ export async function getNbEpisode(uuid) {
     return data.nb_episodes;
 }
 
-export async function getNbSeason(uuid) {
+export async function getNbSeason(seasonId) {
     const { data, error } = await supabase
         .from("seasons")
         .select("season")
-        .eq("id", uuid)
+        .eq("id", seasonId)
         .single();
 
     if (error) {
