@@ -55,15 +55,21 @@ export async function getAllUsersSeasons() {
 }
 
 export async function getCurrentSeason(showId) {
-    const allListSeasons = await getUsersSeasons(showId);
+    const userId = await getUserId;
 
-    if (!allListSeasons || allListSeasons.length === 0) {
+    const { data, error } = await supabase
+        .from("users_seasons")
+        .select(`id, episodes_seen, season:season_id (id, season, nb_episodes, show: show_id (id))`)
+        .eq("user_id", userId)
+        .order("season->season", { ascending: false });
+
+    if (error || !data) {
         return null
     }
 
-    const currentSeason = allListSeasons.sort((a, b) => b.seasons.season - a.seasons.seasons)[0];
+    const currentSeason = data.find(us => us.season.show.id === showId && us.episodes_seen > 0);
 
-    return currentSeason;
+    return currentSeason || null;
 }
 
 export async function getNextEpisode(showId) {
