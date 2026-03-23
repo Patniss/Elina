@@ -69,6 +69,8 @@ export async function getCurrentSeason(showId) {
 
     const currentSeason = data.find(us => us.season.show.id === showId && us.episodes_seen > 0);
 
+    console.log(currentSeason);
+
     return currentSeason || null;
 }
 
