@@ -61,7 +61,7 @@ export async function getCurrentSeason(showId) {
         return null
     }
 
-    const currentSeason = allListSeasons.sort((a, b) => b.seasons.season = a.seasons.seasons)[0];
+    const currentSeason = allListSeasons.sort((a, b) => b.seasons.season - a.seasons.seasons)[0];
 
     return currentSeason;
 }
@@ -200,7 +200,8 @@ export async function seeNextEpisode(showId) {
             console.log("Pas de maj - à jour");
             return;
         } else {
-            addUserSeason(showId, (seasonNumber + 1));
+            console.log(currentSeasonData);
+            // addUserSeason(showId, (seasonNumber + 1));
         }
     } else {
         const nextEpisode = seenEpisode + 1;
