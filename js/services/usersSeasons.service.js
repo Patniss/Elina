@@ -69,13 +69,12 @@ export async function getCurrentSeason(showId) {
 
     const currentSeason = data.find(us => us.season.show.id === showId && us.episodes_seen > 0);
 
-    console.log(currentSeason);
-
     return currentSeason || null;
 }
 
 export async function getNextEpisode(showId) {
     const currentSeasonData = await getCurrentSeason(showId);
+    console.log(currentSeasonData);
     if (!currentSeasonData) return null;
     
     const nbTotalSeasons = await getTotalSeasons(showId);
