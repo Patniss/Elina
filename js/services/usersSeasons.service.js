@@ -79,9 +79,8 @@ export async function getNextEpisode(showId) {
     if (!currentSeasonData) return null;
     
     const nbTotalSeasons = await getTotalSeasons(showId);
-    console.log("getNextEpisode - nbTotalSeasons:", nbTotalSeasons);
 
-    const currentSeasonId = currentSeasonData.season_id;
+    const currentSeasonId = currentSeasonData.season.id;
     console.log("getNextEpisode - currentSeasonId:", currentSeasonId);
     const nbEpisodes = await getNbEpisode(currentSeasonId);
     console.log("getNextEpisode - nbEpisodes:", nbEpisodes);
