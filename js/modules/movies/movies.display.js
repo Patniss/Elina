@@ -31,16 +31,18 @@ export async function displayIndexMoviesSister() {
 
     moviesSeenSister.textContent = await getTotalSeenMoviesSister();
     const compareTotalSeen = await getTotalSeenMovies() - await getTotalSeenMoviesSister();
-    moviesSeenCompare.textContent = compareTotalSeen;
+    moviesSeenCompare.textContent = formatPlusDisplay(compareTotalSeen);
     
     const totalTimeSister = await getSeenTimeMovieSister();
     moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
-    const compareTotalTime = await getSeenTimeMovie() - getSeenTimeMovieSister();
-    console.log(compareTotalTime);
+    const compareTotalTime = await getSeenTimeMovie() - await getSeenTimeMovieSister();
+    let compareTotalTimeDisplay = compareTotalTime >= 0 ? "+ " : "– ";
+    compareTotalTimeDisplay = `${compareTotalTimeDisplay}${formatTotalTime(compareTotalTime)}`;
+    moviesMinutesSeenCompare.textContent = compareTotalTimeDisplay;
     
     moviesToseeSister.textContent = await getTotalToseeMoviesSister();
     const compareTosee = await getTotalToseeMovies() - await getTotalToseeMoviesSister();
-    moviesToseeCompare.textContent = compareTosee;
+    moviesToseeCompare.textContent = formatPlusDisplay(compareTosee);
 }
 
 export async function displayFavMovies() {
