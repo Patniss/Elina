@@ -23,6 +23,7 @@ export async function addingShow(title, genres, averageMin, state, nbSeasons, lo
 }
 
 export async function getShow(showId) {
+    console.log(showId);
     const { data, error } = await supabase
         .from("shows")
         .select("*")
