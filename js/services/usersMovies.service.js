@@ -88,9 +88,9 @@ export async function getFavSisterMovies() {
     const userFavMovies = await getFavMovies();
     const sisterFavMovies = await getFavAllSisterMovies();
 
-    const movieIds = new Set(sisterFavMovies.map(item => item.movie_id));
+    const movieIds = new Set(userFavMovies.map(item => item.movie_id));
 
-    const onlySisterFavMovies = userFavMovies.filter(item => !movieIds.has(item.movie_id));
+    const onlySisterFavMovies = sisterFavMovies.filter(item => !movieIds.has(item.movie_id));
 
     return onlySisterFavMovies;
 }
@@ -141,9 +141,9 @@ export async function getOnlyToseeSisterMovies() {
     const userToseeMovies = await getToseeMovies();
     const sisterToseeMovies = await getToseeSisterMovies();
 
-    const movieIds = new Set(sisterToseeMovies.map(item => item.movie_id));
+    const movieIds = new Set(userToseeMovies.map(item => item.movie_id));
     
-    const toseeSharedMovies = userToseeMovies.filter(item => !movieIds.has(item.movie_id));
+    const toseeSharedMovies = sisterToseeMovies.filter(item => !movieIds.has(item.movie_id));
 
     return toseeSharedMovies;
 }
