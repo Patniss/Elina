@@ -86,9 +86,11 @@ export let indexMoviesStore = {
 
 export let indexSisterMoviesStore = {
     movies: {
+        favSister: [],
         toseeShared: []
     },
     currentIndex: {
+        favSister: [],
         toseeShared: []
     },
     pageSize: 7

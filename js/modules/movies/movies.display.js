@@ -1,7 +1,7 @@
 import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { renderIndexToseeSharedMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { renderIndexFavSisterMovies, renderIndexToseeSharedMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies } from "/Elina/js/services/usersMovies.service.js";
-import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister, getToseeSharedMovies } from "/Elina/js/services/usersMovies.service.js";
+import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister, getToseeSharedMovies, getFavSisterMovies } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime, formatPlusDisplay } from "/Elina/js/utils/format.js";
 
 export async function displayIndexMovies() {
@@ -41,14 +41,20 @@ export async function displayIndexMoviesSister() {
     let compareTotalTimeDisplay = compareTotalTime >= 0 ? "+ " : "– ";
     compareTotalTimeDisplay = `${compareTotalTimeDisplay}${formatTotalTime(compareTotalTime)}`;
     moviesMinutesSeenCompare.innerHTML = compareTotalTimeDisplay;
-    const classMoviesMinutesSeenCompare = compareTotalTime >= 0 ? "has-text-success" : "has-text-danger";
+    const classMoviesMinutesSeenCompare = compareTotalTime > 0 ? "has-text-success" : "has-text-danger";
     moviesMinutesSeenCompare.classList.add(classMoviesMinutesSeenCompare);
     
     moviesToseeSister.textContent = await getTotalToseeMoviesSister();
     const compareTosee = await getTotalToseeMovies() - await getTotalToseeMoviesSister();
     moviesToseeCompare.textContent = formatPlusDisplay(compareTosee);
-    const classMoviesToseeCompare = compareTosee >= 0 ? "has-text-danger" : "has-text-success";
-    moviesToseeSister.classList.add(classMoviesToseeCompare);
+    const classMoviesToseeCompare = compareTosee > 0 ? "has-text-danger" : "has-text-success";
+    moviesToseeCompare.classList.add(classMoviesToseeCompare);
+
+    const favSisterMovies = await getFavSisterMovies();
+    renderIndexFavSisterMovies(favSisterMovies);
+
+    const toseeSharedMovies = await getToseeSharedMovies();
+    renderIndexToseeSharedMovies(toseeSharedMovies);
 }
 
 export async function displayFavMovies() {

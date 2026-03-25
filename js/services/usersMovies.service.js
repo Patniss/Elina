@@ -48,7 +48,26 @@ export async function getFavMovies() {
 
     if (error) {
         console.error(error);
-        return;
+        return null;
+    }
+
+    return data;
+}
+
+export async function getFavSisterMovies() {
+    const sisterId = await getSisterId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*, movies(*)")
+        .eq("user_id", sisterId)
+        .eq("seen", true)
+        .eq("fav", "fav")
+        .order("title", { ascending: true, foreignTable: "movies" });
+    
+    if (error) {
+        console.error(error);
+        return null;
     }
 
     return data;
