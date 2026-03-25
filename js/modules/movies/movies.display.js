@@ -26,7 +26,7 @@ export async function displayIndexMoviesSister() {
     const moviesMinutesSeenSister = document.getElementById("movies-minutes-seen-sister");
     const moviesToseeSister = document.getElementById("movies-tosee-sister");
     const moviesSeenCompare = document.getElementById("movies-seen-compare");
-    const moviesMinutesSeenCompare = document.getElementById("es-minutes-seen-compare");
+    const moviesMinutesSeenCompare = document.getElementById("movies-minutes-seen-compare");
     const moviesToseeCompare = document.getElementById("movies-tosee-compare");
 
     moviesSeenSister.textContent = await getTotalSeenMoviesSister();
