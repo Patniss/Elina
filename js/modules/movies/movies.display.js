@@ -32,7 +32,7 @@ export async function displayIndexMoviesSister() {
     moviesSeenSister.textContent = await getTotalSeenMoviesSister();
     const compareTotalSeen = await getTotalSeenMovies() - await getTotalSeenMoviesSister();
     moviesSeenCompare.textContent = formatPlusDisplay(compareTotalSeen);
-    const classMoviesSeenCompare = compareTotalSeen >= 0 ? "is-success" : "is-danger";
+    const classMoviesSeenCompare = compareTotalSeen >= 0 ? "has-text-success" : "has-text-danger";
     moviesSeenCompare.classList.add(classMoviesSeenCompare);
     
     const totalTimeSister = await getSeenTimeMovieSister();
@@ -40,13 +40,15 @@ export async function displayIndexMoviesSister() {
     const compareTotalTime = await getSeenTimeMovie() - await getSeenTimeMovieSister();
     let compareTotalTimeDisplay = compareTotalTime >= 0 ? "+ " : "– ";
     compareTotalTimeDisplay = `${compareTotalTimeDisplay}${formatTotalTime(compareTotalTime)}`;
-    console.log(compareTotalTimeDisplay);
+    moviesMinutesSeenCompare.innerHTML = compareTotalTimeDisplay;
+    const classMoviesMinutesSeenCompare = compareTotalTime >= 0 ? "has-text-success" : "has-text-danger";
+    moviesMinutesSeenCompare.classList.add(classMoviesMinutesSeenCompare);
     
     moviesToseeSister.textContent = await getTotalToseeMoviesSister();
     const compareTosee = await getTotalToseeMovies() - await getTotalToseeMoviesSister();
     moviesToseeCompare.textContent = formatPlusDisplay(compareTosee);
-    const classMoviesToseeCompare = compareTosee >= 0 ? "is-danger" : "is-success";
-    compareTosee.classList.add(classMoviesToseeCompare);
+    const classMoviesToseeCompare = compareTosee >= 0 ? "has-text-danger" : "has-text-success";
+    moviesToseeSister.classList.add(classMoviesToseeCompare);
 }
 
 export async function displayFavMovies() {
