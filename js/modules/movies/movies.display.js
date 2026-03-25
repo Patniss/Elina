@@ -1,7 +1,8 @@
 import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { renderIndexFavSisterMovies, renderIndexToseeSharedMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies } from "/Elina/js/services/usersMovies.service.js";
-import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister, getToseeSharedMovies, getFavSisterMovies } from "/Elina/js/services/usersMovies.service.js";
+import { renderIndexFavSisterMovies, renderIndexToseeSharedMovies, renderIndexLastSeenSisterMovies, renderIndexOurFavMovies, renderIndexOnlyToseeSisterMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies, getOnlyToseeSisterMovies } from "/Elina/js/services/usersMovies.service.js";
+import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister } from "/Elina/js/services/usersMovies.service.js";
+import { getToseeSharedMovies, getFavSisterMovies, getLastSeenSisterMovies, getFavSharedSisterMovies } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime, formatPlusDisplay } from "/Elina/js/utils/format.js";
 
 export async function displayIndexMovies() {
@@ -55,6 +56,15 @@ export async function displayIndexMoviesSister() {
 
     const toseeSharedMovies = await getToseeSharedMovies();
     renderIndexToseeSharedMovies(toseeSharedMovies);
+
+    const lastSeenSisterMovies = await getLastSeenSisterMovies();
+    renderIndexLastSeenSisterMovies(lastSeenSisterMovies);
+
+    const ourFavMovies = await getFavSharedSisterMovies();
+    renderIndexOurFavMovies(ourFavMovies);
+
+    const sisterToseeMovies = await getOnlyToseeSisterMovies();
+    renderIndexOnlyToseeSisterMovies(sisterToseeMovies);
 }
 
 export async function displayFavMovies() {

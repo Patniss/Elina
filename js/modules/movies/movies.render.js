@@ -39,16 +39,16 @@ export async function renderIndexFavSisterMovies(movies) {
     const leftBtnFav = document.getElementById("fav-sister-prev-btn");
     const rightBtnFav = document.getElementById("fav-sister-next-btn");
 
-    indexMoviesStore.movies.favSister = movies;
+    indexSisterMoviesStore.movies.favSister = movies;
 
     let index = 1;
 
     for (const movie of movies) {
-        container.appendChild(await createCarouselCard(movie, index, "fav"));
+        container.appendChild(await createCarouselCard(movie, index, "favSister"));
         index++;
     }
 
-    initCarousel("fav", leftBtnFav, rightBtnFav);
+    initCarousel("favSister", leftBtnFav, rightBtnFav);
 }
 
 export async function renderIndexLastMovies(movies) {
@@ -68,6 +68,25 @@ export async function renderIndexLastMovies(movies) {
      }
 
      initCarousel("last", leftBtnLast, rightBtnLast);
+}
+
+export async function renderIndexLastSeenSisterMovies(movies) {
+    const container = document.getElementById("last-seen-movies-sister");
+    container.innerHTML = "";
+
+    const leftBtn = document.getElementById("last-sister-prev-btn");
+    const rightBtn = document.getElementById("last-sister-next-btn");
+
+    indexSisterMoviesStore.movies.lastSeenSister = movies;
+
+    let index = 1;
+
+    for (const movie of movies) {
+        container.appendChild(await createCarouselCard(movie, index, "lastSeenSister"));
+        index++;
+    }
+
+    initCarousel("lastSeenSister", leftBtn, rightBtn);
 }
 
 export async function renderIndexToseeMovies(movies) {
@@ -106,6 +125,44 @@ export async function renderIndexToseeSharedMovies(movies) {
     }
 
     initCarousel("toseeShared", leftBtn, rightBtn);
+}
+
+export async function renderIndexOnlyToseeSisterMovies(movies) {
+    const container = document.getElementById("tosee-movies-sister");
+    container.innerHTML = "";
+
+    const leftBtn = document.getElementById("tosee-sister-prev-btn");
+    const rightBtn = document.getElementById("tosee-sister-next-btn");
+
+    indexSisterMoviesStore.movies.toseeSister = movies;
+
+    let index = 1;
+
+    for (const movie of movies) {
+        container.appendChild(await createCarouselCard(movie, index, "toseeSister"));
+        index++;
+    }
+
+    initCarousel("toseeSister", leftBtn, rightBtn);
+}
+
+export async function renderIndexOurFavMovies(movies) {
+    const container = document.getElementById("fav-movies-shared");
+    container.innerHTML = "";
+
+    const leftBtn = document.getElementById("fav-shared-prev-btn");
+    const rightBtn = document.getElementById("fav-shared-next-btn");
+
+    indexSisterMoviesStore.movies.ourFavMovies = movies;
+
+    let index = 1;
+
+    for (const movie of movies) {
+        container.appendChild(await createCarouselCard(movie, index, "ourFav"));
+        index++;
+    }
+
+    initCarousel("ourFav", leftBtn, rightBtn);
 }
 
 export async function renderSeenMovies(movies) {

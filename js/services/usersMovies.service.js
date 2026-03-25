@@ -35,6 +35,25 @@ export async function deleteUserMovie(movieId) {
     }
 }
 
+export async function getFavAllSisterMovies() {
+    const sisterId = await getSisterId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*, movies(*)")
+        .eq("user_id", sisterId)
+        .eq("seen", true)
+        .eq("fav", "fav")
+        .order("title", { ascending: true, foreignTable: "movies" });
+    
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data;
+}
+
 export async function getFavMovies() {
     const userId = await getUserId();
 
@@ -54,23 +73,26 @@ export async function getFavMovies() {
     return data;
 }
 
+export async function getFavSharedSisterMovies() {
+    const userFavMovies = await getFavMovies();
+    const sisterFavMovies = await getFavAllSisterMovies();
+
+    const movieIds = new Set(sisterFavMovies.map(item => item.movie_id));
+
+    const ourFavMovies = userFavMovies.filter(item => movieIds.has(item.movie_id));
+
+    return ourFavMovies;
+}
+
 export async function getFavSisterMovies() {
-    const sisterId = await getSisterId();
+    const userFavMovies = await getFavMovies();
+    const sisterFavMovies = await getFavAllSisterMovies();
 
-    const { data, error } = await supabase
-        .from("users_movies")
-        .select("*, movies(*)")
-        .eq("user_id", sisterId)
-        .eq("seen", true)
-        .eq("fav", "fav")
-        .order("title", { ascending: true, foreignTable: "movies" });
-    
-    if (error) {
-        console.error(error);
-        return null;
-    }
+    const movieIds = new Set(sisterFavMovies.map(item => item.movie_id));
 
-    return data;
+    const onlySisterFavMovies = userFavMovies.filter(item => !movieIds.has(item.movie_id));
+
+    return onlySisterFavMovies;
 }
 
 export async function getLastSeenMovies() {
@@ -92,6 +114,38 @@ export async function getLastSeenMovies() {
     }
 
     return data;
+}
+
+export async function getLastSeenSisterMovies() {
+    const sisterId = await getSisterId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("*, movies(*)")
+        .eq("user_id", sisterId)
+        .eq("seen", true)
+        .not("date_seen", "is", null)
+        .neq("date_seen", "1900-01-01")
+        .order("date_seen", { ascending: false })
+        .limit(5);
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    return data;
+}
+
+export async function getOnlyToseeSisterMovies() {
+    const userToseeMovies = await getToseeMovies();
+    const sisterToseeMovies = await getToseeSisterMovies();
+
+    const movieIds = new Set(sisterToseeMovies.map(item => item.movie_id));
+    
+    const toseeSharedMovies = userToseeMovies.filter(item => !movieIds.has(item.movie_id));
+
+    return toseeSharedMovies;
 }
 
 export async function getSeenTimeMovie() {
