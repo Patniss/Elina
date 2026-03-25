@@ -132,11 +132,13 @@ export async function getSeenTimeSeenEpisodes() {
     let totalTime = 0;
 
     for (const season of allSeasons) {
-        console.log(season);
         const showId = await getShowId(season.season_id);
         const show = await getShow(showId);
+        console.log("titre:", show.title, "épisodes vus:", season.episodes_seen, "temps moyen:", show.average_min);
+        console.log("temps vus:", ((season.episodes_seen) * (show.average_min)))
 
-        totalTime += season.episodes_seen * show.average_min;
+        totalTime += (season.episodes_seen) * (show.average_min);
+        console.log("temps cumulé:", totalTime);
     }
 
     return totalTime;
