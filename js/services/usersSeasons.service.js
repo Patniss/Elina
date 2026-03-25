@@ -55,7 +55,7 @@ export async function getAllUsersSeasons() {
 }
 
 export async function getCurrentSeason(showId) {
-    const userId = await getUserId;
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_seasons")
@@ -126,13 +126,13 @@ export async function getSeenTimeSeenEpisodes() {
     const allSeasons = await getAllUsersSeasons();
     let totalTime = 0;
 
-    allSeasons.forEach(async (season) => {
+    for (const season of allSeasons) {
         const showId = await getShowId(season.season_id);
         const show = await getShow(showId);
         console.log("Série TV:", show);
 
         totalTime += season.episodes_seen * show.average_min;
-    });
+    }
 
     return totalTime;
 }
@@ -142,15 +142,15 @@ export async function getTotalToseeEpisodes() {
 
     let episodesTosee = 0;
 
-    currentShows.forEach(async (show) => {
+    for (const show of currentShows) {
         const seasonsShow = await getSeasonsOfShow(show.id);
-        
-        seasonsShow.forEach(async (season) => {
+
+        for (const season of seasonsShow) {
             const seenEpisode = await getSeenEpSeason(season);
             const nbEpisodes = await getNbEpisode(season);
             episodesTosee += nbEpisodes - seenEpisode;
-        });
-    });
+        }
+    }
 
     return episodesTosee;
 }
