@@ -74,6 +74,7 @@ export async function getCurrentSeason(showId) {
 }
 
 export async function getNextEpisode(showId) {
+    const show = await getShow(showId);
     const currentSeasonData = await getCurrentSeason(showId);
     if (!currentSeasonData) return null;
     
@@ -91,7 +92,11 @@ export async function getNextEpisode(showId) {
 
     if (parseInt(nbEpisodes) === parseInt(seenEpisode)) {
         if (parseInt(seasonNumber) === parseInt(nbTotalSeasons)) {
-            return "À jour";
+            if (show.state === "finish") {
+                return "Terminée";
+            } else {
+                return "À jour";
+            }
         };
         season = String(seasonNumber + 1).padStart(2,'0');
         result = `S${season} E01`;
