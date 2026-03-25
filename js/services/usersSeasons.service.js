@@ -56,14 +56,13 @@ export async function getAllUsersSeasons() {
 
 export async function getCurrentSeason(showId) {
     console.log("getCurrentSeason - showId:", showId);
-    const userId = await getUserId();
     console.log("getCurrentSeason - userId:", userId);
 
     const { data, error } = await supabase
         .from("users_seasons")
         .select(`id, episodes_seen, season:season_id (id, season, nb_episodes, show: show_id (id))`)
         .eq("user_id", userId)
-        .order("season->season", { ascending: false });
+        .order("season(season)", { ascending: false });
 
     if (error) {
         console.error(error);
