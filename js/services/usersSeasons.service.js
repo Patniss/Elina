@@ -55,8 +55,7 @@ export async function getAllUsersSeasons() {
 }
 
 export async function getCurrentSeason(showId) {
-    console.log("getCurrentSeason - showId:", showId);
-    console.log("getCurrentSeason - userId:", userId);
+    const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_seasons")
