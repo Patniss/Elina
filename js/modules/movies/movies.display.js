@@ -29,13 +29,18 @@ export async function displayIndexMoviesSister() {
     const moviesMinutesSeenCompare = document.getElementById("es-minutes-seen-compare");
     const moviesToseeCompare = document.getElementById("movies-tosee-compare");
 
-    const totalTimeSister = await getSeenTimeMovieSister();
-    
     moviesSeenSister.textContent = await getTotalSeenMoviesSister();
+    const compareTotalSeen = await getTotalSeenMovies() - await getTotalSeenMoviesSister();
+    moviesSeenCompare.textContent = compareTotalSeen;
     
+    const totalTimeSister = await getSeenTimeMovieSister();
     moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
+    const compareTotalTime = await getSeenTimeMovie() - getSeenTimeMovieSister();
+    console.log(compareTotalTime);
     
     moviesToseeSister.textContent = await getTotalToseeMoviesSister();
+    const compareTosee = await getTotalToseeMovies() - await getTotalToseeMoviesSister();
+    moviesToseeCompare.textContent = compareTosee;
 }
 
 export async function displayFavMovies() {
