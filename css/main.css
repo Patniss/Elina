@@ -474,6 +474,10 @@ body {
 }
 
 /*------- CALENDAR --------*/
+#calender a {
+  color: #212E53;
+}
+
 .table-calendar {
   background-color: transparent;
 }
