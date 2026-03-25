@@ -18,8 +18,33 @@ export function displayCalendar(yearCalendar) {
 
     const linkPrev = document.getElementById("link-year-calendar-prev");
     const linkNext = document.getElementById("link-year-calendar-next");
-    linkPrev.href = `/Elina/daily/calendar/index.html?id=${(nowYear - 1)}`;
-    linkNext.href = `/Elina/daily/calendar/index.html?id=${(nowYear + 1)}`;
+    linkPrev.href = `/Elina/daily/calendar/index.html?id=${(parseInt(nowYear) - 1)}`;
+    linkNext.href = `/Elina/daily/calendar/index.html?id=${(parseInt(nowYear) + 1)}`;
+
+    const linkJanuary = document.getElementById("link-january");
+    linkJanuary.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=01`;
+    const linkFebruary = document.getElementById("link-february");
+    linkFebruary.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=02`;
+    const linkMarch = document.getElementById("link-march");
+    linkMarch.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=03`;
+    const linkApril = document.getElementById("link-april");
+    linkApril.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=04`;
+    const linkMay = document.getElementById("link-may");
+    linkMay.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=05`;
+    const linkJune = document.getElementById("link-june");
+    linkJune.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=06`;
+    const linkJuly = document.getElementById("link-july");
+    linkJuly.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=07`;
+    const linkAugust = document.getElementById("link-august");
+    linkAugust.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=08`;
+    const linkSeptember = document.getElementById("link-september");
+    linkSeptember.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=09`;
+    const linkOctober = document.getElementById("link-october");
+    linkOctober.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=10`;
+    const linkNovember = document.getElementById("link-november");
+    linkNovember.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=11`;
+    const linkDecember = document.getElementById("link-december");
+    linkDecember.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=12`;
 
     function createWeek(table, start, max) {
         const tr = document.createElement("tr");

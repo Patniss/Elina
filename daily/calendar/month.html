@@ -45,7 +45,8 @@
 
 <script type="module">
   const params = new URLSearchParams(window.location.search);
-  const monthCalendar = params.get("id") ?? null;
+  const yearCalendar = params.get("year") ?? null;
+  const monthCalendar = params.get("month") ?? null;
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
