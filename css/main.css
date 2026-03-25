@@ -472,3 +472,12 @@ body {
     transform: translateY(-50%) scale(1.1);
   }
 }
+
+/*------- CALENDAR --------*/
+#calendar article {
+  background-color: transparent;
+}
+
+.table-calendar {
+  background-color: transparent;
+}

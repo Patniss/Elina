@@ -1,4 +1,4 @@
-export function displayCalendar() {
+export function displayCalendar(yearCalendar) {
     const yearDisplay = document.getElementById("year");
     const januaryDisplay = document.getElementById("january");
     const februaryDisplay = document.getElementById("february");
@@ -14,7 +14,7 @@ export function displayCalendar() {
     const decemberDisplay = document.getElementById("december");
 
     const nowDate = new Date();
-    const nowYear = new Date().getFullYear();
+    const nowYear = yearCalendar ?? new Date().getFullYear();
 
     function createWeek(table, start, max) {
         const tr = document.createElement("tr");
@@ -28,14 +28,11 @@ export function displayCalendar() {
         table.appendChild(tr);
     }
 
-    let dayOfWeek;
-
     function createMonth(table, nbYear, nbMonth) {
         const firstMonth = new Date(nbYear, nbMonth, 1);
         const lastMonth = new Date(nbYear, (nbMonth + 1), 0);
 
-        dayOfWeek = firstMonth.getDay();
-        dayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+        const dayOfWeek = firstMonth.getDay();
 
         let start = dayOfWeek === 0 ? 1 : (1 - dayOfWeek);
         const lastDayOfMonth = lastMonth.getDate();
