@@ -80,6 +80,11 @@ export function changeModeButton(button, mode, nextEpisode) {
             button.classList.add("is-warning", "is-light");
             button.innerHTML = `<span class="icon"><i class="fa-solid fa-play"></i></span><span>Réessayer</span>`;
             break;
+
+        case "finish":
+            button.classList.add("is-success", "disabled");
+            button.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Terminée</span>`;
+            break;
     }
 }
 

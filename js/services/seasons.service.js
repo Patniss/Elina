@@ -61,11 +61,11 @@ export async function getSeasonId(showId, nbSeason) {
     return data.id;
 }
 
-export async function getSeasonsOfShow(uuid) {
+export async function getSeasonsOfShow(showId) {
     const { data, error } = await supabase
         .from("seasons")
         .select("*")
-        .eq("show_id", uuid)
+        .eq("show_id", showId)
         .order("season", { ascending: true });
     
     if (error) {
@@ -76,11 +76,11 @@ export async function getSeasonsOfShow(uuid) {
     return data?.map(season => season.id) || [];
 }
 
-export async function getTotalSeasons(uuid) {
+export async function getTotalSeasons(showId) {
     const { count, error } = await supabase
         .from("seasons")
         .select("season", { count: "exact", head: true })
-        .eq("show_id", uuid);
+        .eq("show_id", showId);
 
     if (error) {
         console.error(error);

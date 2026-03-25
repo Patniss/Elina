@@ -9,7 +9,7 @@ const BUTTONS_BY_STATUS = {
     "started": ["seeEp", "pause", "details"],
     "paused": ["takeAgain", "cancel", "details"],
     "canceled": ["retry", "details"],
-    "finished": [ "details"]
+    "finished": [ "finish", "details"]
 };
 
 export function updateShowUI(status, buttons, container) {
@@ -59,7 +59,7 @@ export async function createShowCard(s) {
     const divTags = document.createElement("div");
     divTags.classList.add("buttons", "is-flex-wrap-wrap", "mt-3");
 
-    const buttons = createButtons(["details", "add", "delete", "toStart", "seeEp", "pause", "takeAgain", "cancel", "retry"], 'entertainment/shows/show', show.id, nextEpisode);
+    const buttons = createButtons(["details", "add", "delete", "toStart", "seeEp", "pause", "takeAgain", "cancel", "retry", "finish"], 'entertainment/shows/show', show.id, nextEpisode);
 
     const detailsButton = buttons.details;
     const addButton = buttons.add;
@@ -88,7 +88,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("added", buttons, divTags);
             handleButtonState(addButton, "stop-loading");
-        }, 500);
+        }, 250);
     });
 
     deleteButton.addEventListener("click", async () => {
@@ -102,7 +102,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI(null, buttons, divTags);
             handleButtonState(deleteButton, "stop-loading");
-        }, 500);
+        }, 250);
     });
 
     startButton.addEventListener("click", async () => {
@@ -117,7 +117,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("seeEp", buttons, divTags);
             handleButtonState(startButton, "stop-loading");
-        }, 500);
+        }, 250);
     });
 
     seeEpButton.addEventListener("click", async () => {
@@ -131,9 +131,13 @@ export async function createShowCard(s) {
 
         setTimeout(async () => {
             const nextNextEpisode = await getNextEpisode(show.id);
-            changeModeButton(seeEpButton, "seeEp", nextNextEpisode);
+            if (nextNextEpisode === "Terminée") {
+                updateShowUI(null, buttons, divTags);
+            } else {
+                changeModeButton(seeEpButton, "seeEp", nextNextEpisode);
+            }
             handleButtonState(seeEpButton, "stop-loading");
-        }, 500);
+        }, 250);
     });
 
     pauseButton.addEventListener("click", async () => {
@@ -147,7 +151,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("paused", buttons, divTags);
             handleButtonState(addButton, "stop-loading");
-        }, 500);
+        }, 250);
     });
 
     takeAgainButton.addEventListener("click", async () => {
@@ -161,7 +165,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
             handleButtonState(takeAgainButton, "stop-loading");
-        }, 500);
+        }, 250);
     });
 
     cancelButton.addEventListener("click", async () => {
@@ -175,7 +179,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("canceled", buttons, divTags);
             handleButtonState(cancelButton, "stop-loading");
-        }, 500);
+        }, 250);
     });
 
     retryButton.addEventListener("click", async () => {
@@ -189,7 +193,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
             handleButtonState(retryButton, "stop-loading");
-        }, 500);
+        }, 250);
     })
     
     return column;

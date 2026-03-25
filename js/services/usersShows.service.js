@@ -50,6 +50,22 @@ export async function deleteUserShow(uuid) {
     }
 }
 
+export async function finishUserShow(showId) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_shows")
+        .update({user_state: "finished"})
+        .eq("user_id", userId)
+        .eq("show_id", showId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+}
+
 export async function getCurrentShows() {
     const userId = await getUserId();
 
