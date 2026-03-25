@@ -196,7 +196,7 @@ export async function seeNextEpisode(showId) {
 
     const nbTotalSeasons = await getTotalSeasons(showId);
 
-    const currentSeasonId = currentSeasonData.season_id;
+    const currentSeasonId = currentSeasonData.season.id;
     const seenEpisode = currentSeasonData.episodes_seen;
 
     const nbEpisodes = await getNbEpisode(currentSeasonId);
