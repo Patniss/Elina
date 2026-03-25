@@ -41,7 +41,6 @@ export async function movieContent(uuid) {
     const userMovie = await getUserMovie(userId, uuid);
     const poster = userMovie?.own_poster ?? movie.poster;
     const statut = userMovie ? userMovie.seen : null;
-    console.log(statut);
     const dateSeen = userMovie?.date_seen === "1900-01-01" ? null : userMovie?.date_seen ?? null;
     let fav = userMovie?.fav ?? null;
 

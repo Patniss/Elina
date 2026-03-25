@@ -39,7 +39,6 @@ export async function createCarouselCard(m, index, list) {
 
 export async function createModalMovie(uuid) {
     const movie = await getMovie(uuid);
-    console.log(movie);
 
     const divModal = document.createElement("div");
     divModal.classList.add("modal", "is-active");
@@ -62,19 +61,39 @@ export async function createModalMovie(uuid) {
     movieYear.classList.add("subtitle");
     movieYear.textContent = movie.year;
 
-    const divInfos = document.createElement("div");
-    divInfos.classList.add("columns", "is-four-fifths");
+    const divAllInfos = document.createElement("div");
+    divAllInfos.classList.add("columns", "is-four-fifths");
 
     const divPoster = document.createElement("div");
     divPoster.classList.add("column", "is-one-quarter");
     const imgPoster = document.createElement("img");
-    imgPoster.src = "/Elina/entertainment/movies/poster.png";
+    imgPoster.src = movie.poster;
     imgPoster.classList.add("image");
     imgPoster.style.borderRadius = "5px";
     divPoster.appendChild(imgPoster);
 
-    divInfos.appendChild(divPoster);
-    divContent.append(movieTitle, movieYear, divInfos);
+    const divInfos = document.createElement("div");
+    divInfos.classList.add("block", "column", "is-three-quarters");
+
+    const divButtons = document.createElement("div");
+    divButtons.classList.add("buttons", "mb-2");
+    const btnAdd = document.createElement("button");
+    btnAdd.classList.add("button", "is-link");
+    btnAdd.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
+    const btnTosee = document.createElement("button");
+    btnTosee.classList.add("button", "is-success", "is-light");
+    btnTosee.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
+    const btnDelete = document.createElement("button");
+    btnDelete.classList.add("button", "is-danger", "is-light");
+    btnDelete.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
+    const btnSeen = document.createElement("button");
+    btnSeen.classList.add("button", "is-success");
+    btnSeen.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
+
+    divButtons.append(btnAdd, btnTosee, btnDelete, btnSeen);
+    divInfos.append(divButtons);
+    divAllInfos.appendChild(divPoster, divInfos);
+    divContent.append(movieTitle, movieYear, divAllInfos);
     modalContent.appendChild(divContent);
 
     const btnClose = document.createElement("button");
