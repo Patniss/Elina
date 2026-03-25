@@ -97,7 +97,7 @@ export async function loadTostartShows(field, asc, filter) {
     query = sortUsersShows(query, field, asc);
     query = filter(query, filter);
 
-    const shows = querySupabase(query);
+    const shows = await querySupabase(query);
 
     return shows;
 }
