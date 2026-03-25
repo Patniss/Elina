@@ -27,7 +27,7 @@ export async function loadCanceledShows(field, asc, filter) {
     query = sortUsersShows(query, field, asc);
     query = filterShows(query, filter);
 
-    const shows = await querySupabase;
+    const shows = await querySupabase(query);
 
     return shows;
 }
