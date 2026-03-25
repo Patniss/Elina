@@ -90,6 +90,24 @@ export function displayCalendar(yearCalendar) {
 }
 
 export function displayMonthCalendar(year, month) {
+    const titleMonth = document.getElementById("month-subtitle");
+    
+    monthName = 
+        month === "01" ? "JANUARY" 
+        : month === "02" ? "FEBRUARY" 
+        : month === "03" ? "MARCH"
+        : month === "04" ? "APRIL"
+        : month === "05" ? "MAY"
+        : month === '06' ? "JUNE"
+        : month === "07" ? "JULY"
+        : month === "08" ? "AUGUST"
+        : month === "09" ? "SEPTEMBER"
+        : month === "10" ? "OCTOBER"
+        : month === "11" ? "NOVEMBER"
+        : "DECEMBER";
+
+    titleMonth.textContent = `${monthName} ${year}`;
+
     const tableCalendar = document.getElementById("month-calendar");
     const nbMonth = (parseInt(month) - 1);
     createWeek(tableCalendar, year, nbMonth);

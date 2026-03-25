@@ -21,7 +21,7 @@
       <div class="box">
         
         <h1 class="title is-1 has-text-centered">Planner</h1>
-        <h2 class="subtitle is-6 has-text-centered"><a href="#" id="link-month-calendar-prev"><i class="fa-solid fa-angle-left"></i></a> <span id="month-title"></span> <a href="#" id="link-month-calendar-next"><i class="fa-solid fa-angle-right"></i></a></h2>
+        <h2 class="subtitle is-6 has-text-centered" id="month-subtitle"></h2>
         
         <table class="table is-fullwidth table-calendar table-calendar-month">
           <thead>
@@ -55,6 +55,8 @@
   const params = new URLSearchParams(window.location.search);
   const yearCalendar = params.get("year") ?? null;
   const monthCalendar = params.get("month") ?? null;
+  import { displayMonthCalendar } from "/Elina/js/modules/calendar/calendar.js";
+  displayMonthCalendar();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
