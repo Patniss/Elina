@@ -62,7 +62,7 @@ export async function createModalMovie(uuid) {
     movieYear.classList.add("subtitle");
     movieYear.textContent = movie.year;
 
-    divContent.appendChild(movieTitle, movieYear);
+    divContent.append(movieTitle, movieYear);
     modalContent.appendChild(divContent);
 
     const btnClose = document.createElement("button");
