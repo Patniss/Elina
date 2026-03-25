@@ -88,7 +88,7 @@ export async function createModalMovie(uuid) {
     updateMovieUI(movie.seen, buttons, divButtons);
 
     divInfos.append(divButtons);
-    divAllInfos.appendChild(divPoster, divInfos);
+    divAllInfos.append(divPoster, divInfos);
     divContent.append(movieTitle, movieYear, divAllInfos);
     modalContent.appendChild(divContent);
 
