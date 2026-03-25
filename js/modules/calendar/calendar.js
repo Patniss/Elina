@@ -16,6 +16,11 @@ export function displayCalendar(yearCalendar) {
     const nowDate = new Date();
     const nowYear = yearCalendar ?? new Date().getFullYear();
 
+    const linkPrev = document.getElementById("link-year-calendar-prev");
+    const linkNext = document.getElementById("link-year-calendar-next");
+    linkPrev.href = `/Elina/daily/calender/index.html?id=${(nowYear - 1)}`;
+    linkNext.href = `/Elina/daily/calender/index.html?id=${(nowYear + 1)}`;
+
     function createWeek(table, start, max) {
         const tr = document.createElement("tr");
         for (let w = 1; w <= 7; w++) {
