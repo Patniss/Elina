@@ -208,7 +208,7 @@ export async function seeNextEpisode(showId) {
             return;
         } else {
             console.log(currentSeasonData);
-            // addUserSeason(showId, (seasonNumber + 1));
+            addUserSeason(showId, (parseInt(seasonNumber) + 1));
         }
     } else {
         const nextEpisode = seenEpisode + 1;
