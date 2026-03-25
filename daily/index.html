@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>엘리나 Elina - Accueil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+  <main>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div id="nav-container"></div>
+
+      <div class="columns is-multiline">
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5"><span class="icon"><i class="fa-solid fa-calendar"></i></span> Planner</p>
+              <a href="/Elina/daily/calendar/index.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/core/nav.js";
+  loadNav();
+</script>
+
+<script type="module">
+  import { loadProfile } from "/Elina/js/services/profiles.service.js";
+  loadProfile();
+</script>
+
+<script type="module" src="/Elina/js/core/guard.js"></script>
+</body>
+</html>

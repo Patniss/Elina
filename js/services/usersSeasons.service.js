@@ -73,8 +73,8 @@ export async function getCurrentSeason(showId) {
 }
 
 export async function getNextEpisode(showId) {
+    console.log(showId);
     const currentSeasonData = await getCurrentSeason(showId);
-    console.log(currentSeasonData);
     if (!currentSeasonData) return null;
     
     const nbTotalSeasons = await getTotalSeasons(showId);
