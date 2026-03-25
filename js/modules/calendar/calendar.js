@@ -1,3 +1,30 @@
+function createWeek(table, start, max) {
+    const tr = document.createElement("tr");
+    for (let w = 1; w <= 7; w++) {
+        const td = document.createElement("td");
+        td.textContent = start > 0 ? start <= max ? start : " " : " ";
+        start++;
+        tr.appendChild(td);
+    }
+
+    table.appendChild(tr);
+}
+
+function createMonth(table, nbYear, nbMonth) {
+    const firstMonth = new Date(nbYear, nbMonth, 1);
+    const lastMonth = new Date(nbYear, (nbMonth + 1), 0);
+
+    const dayOfWeek = firstMonth.getDay();
+
+    let start = dayOfWeek === 0 ? 1 : (1 - dayOfWeek);
+    const lastDayOfMonth = lastMonth.getDate();
+
+    while (start <= lastDayOfMonth) {
+        createWeek(table, start, lastDayOfMonth);
+        start += 7;
+    }
+}
+
 export function displayCalendar(yearCalendar) {
     const yearDisplay = document.getElementById("year");
     const januaryDisplay = document.getElementById("january");
@@ -46,33 +73,6 @@ export function displayCalendar(yearCalendar) {
     const linkDecember = document.getElementById("link-december");
     linkDecember.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=12`;
 
-    function createWeek(table, start, max) {
-        const tr = document.createElement("tr");
-        for (let w = 1; w <= 7; w++) {
-            const td = document.createElement("td");
-            td.textContent = start > 0 ? start <= max ? start : " " : " ";
-            start++;
-            tr.appendChild(td);
-        }
-
-        table.appendChild(tr);
-    }
-
-    function createMonth(table, nbYear, nbMonth) {
-        const firstMonth = new Date(nbYear, nbMonth, 1);
-        const lastMonth = new Date(nbYear, (nbMonth + 1), 0);
-
-        const dayOfWeek = firstMonth.getDay();
-
-        let start = dayOfWeek === 0 ? 1 : (1 - dayOfWeek);
-        const lastDayOfMonth = lastMonth.getDate();
-
-        while (start <= lastDayOfMonth) {
-            createWeek(table, start, lastDayOfMonth);
-            start += 7;
-        }
-    }
-
     createMonth(januaryDisplay, nowYear, 0);
     createMonth(februaryDisplay, nowYear, 1);
     createMonth(marchDisplay, nowYear, 2);
@@ -87,4 +87,10 @@ export function displayCalendar(yearCalendar) {
     createMonth(decemberDisplay, nowYear, 11);
 
     yearDisplay.textContent = nowYear;
+}
+
+export function displayMonthCalendar(year, month) {
+    const tableCalendar = document.getElementById("month-calendar");
+    const nbMonth = (parseInt(month) - 1);
+    createWeek(tableCalendar, year, nbMonth);
 }
