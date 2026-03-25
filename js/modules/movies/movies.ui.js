@@ -77,20 +77,16 @@ export async function createModalMovie(uuid) {
 
     const divButtons = document.createElement("div");
     divButtons.classList.add("buttons", "mb-2");
-    const btnAdd = document.createElement("button");
-    btnAdd.classList.add("button", "is-link");
-    btnAdd.innerHTML = `<span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span>`;
-    const btnTosee = document.createElement("button");
-    btnTosee.classList.add("button", "is-success", "is-light");
-    btnTosee.innerHTML = `<span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span>`;
-    const btnDelete = document.createElement("button");
-    btnDelete.classList.add("button", "is-danger", "is-light");
-    btnDelete.innerHTML = `<span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span>`;
-    const btnSeen = document.createElement("button");
-    btnSeen.classList.add("button", "is-success");
-    btnSeen.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span>`;
+    const buttons = createButtons(["details", "add", "delete", "tosee", "seen"], 'entertainment/movies/movie', movie.id);
 
-    divButtons.append(btnAdd, btnTosee, btnDelete, btnSeen);
+    const detailsButton = buttons.details;
+    const addButton = buttons.add;
+    const deleteButton = buttons.delete;
+    const toseeButton = buttons.tosee;
+    const seenButton = buttons.seen;
+
+    updateMovieUI(movie.seen, buttons, divButtons);
+
     divInfos.append(divButtons);
     divAllInfos.appendChild(divPoster, divInfos);
     divContent.append(movieTitle, movieYear, divAllInfos);
