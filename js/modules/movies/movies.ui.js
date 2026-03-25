@@ -62,7 +62,19 @@ export async function createModalMovie(uuid) {
     movieYear.classList.add("subtitle");
     movieYear.textContent = movie.year;
 
-    divContent.append(movieTitle, movieYear);
+    const divInfos = document.createElement("div");
+    divInfos.classList.add("columns", "is-four-fifths");
+
+    const divPoster = document.createElement("div");
+    divPoster.classList.add("column", "is-one-quarter");
+    const imgPoster = document.createElement("img");
+    imgPoster.src = "/Elina/entertainment/movies/poster.png";
+    imgPoster.classList.add("image");
+    imgPoster.style.borderRadius = "5px";
+    divPoster.appendChild(imgPoster);
+
+    divInfos.appendChild(divPoster);
+    divContent.append(movieTitle, movieYear, divInfos);
     modalContent.appendChild(divContent);
 
     const btnClose = document.createElement("button");
