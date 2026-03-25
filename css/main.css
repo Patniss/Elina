@@ -474,10 +474,6 @@ body {
 }
 
 /*------- CALENDAR --------*/
-#calendar article {
-  background-color: transparent;
-}
-
 .table-calendar {
   background-color: transparent;
 }
