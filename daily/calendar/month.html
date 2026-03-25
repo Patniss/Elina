@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>엘리나 Elina - Accueil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+    
+<main>
+  
+  <section class="section">
+    
+    <div class="container" id="calendar">
+      
+      <div id="nav-container"></div>
+      
+      <div class="box">
+        
+        <h1 class="title is-1 has-text-centered">Planner</h1>
+        <h2 class="subtitle is-6 has-text-centered"><a href="#" id="link-month-calendar-prev"><i class="fa-solid fa-angle-left"></i></a> <span id="month-title"></span> <a href="#" id="link-month-calendar-next"><i class="fa-solid fa-angle-right"></i></a></h2>
+        
+        <table class="table is-fullwidth table-calendar">
+          <thead>
+            <tr class="has-text-centered"><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr>
+          </thead>
+          <tbody id="month-calendar"></tbody>
+        </table>
+      
+      </div>
+    
+    </div>
+  
+  </section>
+
+</main>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/core/nav.js";
+  loadNav();
+</script>
+
+<script type="module">
+  const params = new URLSearchParams(window.location.search);
+  const monthCalendar = params.get("id") ?? null;
+</script>
+
+<script type="module" src="/Elina/js/core/guard.js"></script>
+</body>
+</html>
