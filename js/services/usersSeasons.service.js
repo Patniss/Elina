@@ -55,7 +55,9 @@ export async function getAllUsersSeasons() {
 }
 
 export async function getCurrentSeason(showId) {
+    console.log("getCurrentSeason - showId:", showId);
     const userId = await getUserId();
+    console.log("getCurrentSeason - userId:", userId);
 
     const { data, error } = await supabase
         .from("users_seasons")
@@ -63,8 +65,9 @@ export async function getCurrentSeason(showId) {
         .eq("user_id", userId)
         .order("season->season", { ascending: false });
 
-    if (error || !data) {
-        return null
+    if (error) {
+        console.error(error);
+        return null;
     }
 
     const currentSeason = data.find(us => us.season.show.id === showId && us.episodes_seen > 0);
@@ -73,7 +76,6 @@ export async function getCurrentSeason(showId) {
 }
 
 export async function getNextEpisode(showId) {
-    console.log("getNextEpisode - showId:", showId);
     const currentSeasonData = await getCurrentSeason(showId);
     console.log("getNextEpisode - currentSeasonData:", currentSeasonData);
     if (!currentSeasonData) return null;
