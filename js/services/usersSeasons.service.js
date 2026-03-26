@@ -147,8 +147,8 @@ export async function getTotalToseeEpisodes() {
     let episodesTosee = 0;
 
     for (const show of currentShows) {
-        const seasonsShow = await getSeasonsOfShow(show.id);
-        console.log(show);
+        const seasonsShow = await getSeasonsOfShow(show.show_id);
+        console.log(seasonsShow);
 
         for (const season of seasonsShow) {
             console.log(season);

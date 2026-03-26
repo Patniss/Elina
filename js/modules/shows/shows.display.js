@@ -15,7 +15,6 @@ export async function displayIndexShows() {
     episodesSeen.textContent = sumEpisodesSeen;
 
     const totalMinutesSeen = await getTotalTimeSeenEpisodes();
-    console.log(totalMinutesSeen);
     totalTimeSeen.textContent = formatTotalTime(totalMinutesSeen);
 
     const totalToseeEpisodes = await getTotalToseeEpisodes();
