@@ -23,3 +23,29 @@ export function toggleBtnSeenStatut(statut, btnAdd, btnTosee, btnDelete, btnSeen
             toggleElements([btnAdd, btnTosee, btnDelete], false);
     }
 }
+
+export function toggleBtnStateStatut(statut, btnAdd, btnNext, btnCancel, btnPause, btnRetake, btnFinish, btnRetry) {
+    switch (statut) {
+        case null:
+            toggleElements(btnAdd, true);
+            toggleElements([btnNext, btnCancel, btnPause, btnRetake, btnFinish, btnRetry], false);
+            break;
+    
+        case "current":
+            toggleElements([btnNext, btnPause], true);
+            toggleElements([btnAdd, btnCancel, btnRetake, btnFinish, btnRetry], false);
+            break;
+        
+        case "paused":
+            toggleElements(btnRetake, btnCancel, true);
+            toggleElements([btnAdd, btnNext, btnPause, btnFinish, btnRetry], false);
+        
+        case "canceled":
+            toggleElements(btnRetry, true);
+            toggleElements([btnAdd, btnNext, btnCancel, btnPause, btnRetake, btnFinish], false);
+        
+        case "finished":
+            toggleElements(btnFinish, true);
+            toggleElements([btnAdd, btnNext, btnCancel, btnPause, btnRetake, btnRetry], false);
+    }
+}

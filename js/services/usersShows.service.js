@@ -1,14 +1,14 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 
-export async function addUserShow(uuid) {
+export async function addUserShow(showId) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_shows")
         .insert([{
             user_id: userId,
-            show_id: uuid,
+            show_id: showId,
             user_state: "added"
         }]).select();
 
@@ -18,14 +18,14 @@ export async function addUserShow(uuid) {
     }
 }
 
-export async function cancelUserShow(uuid) {
+export async function cancelUserShow(showId) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_shows")
         .update({user_state: "canceled"})
         .eq("user_id", userId)
-        .eq("show_id", uuid)
+        .eq("show_id", showId)
         .single();
 
     if (error) {
@@ -34,14 +34,14 @@ export async function cancelUserShow(uuid) {
     }
 }
 
-export async function deleteUserShow(uuid) {
+export async function deleteUserShow(showId) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_shows")
         .delete()
         .eq("user_id", userId)
-        .eq("show_id", uuid)
+        .eq("show_id", showId)
         .single();
 
     if (error) {
@@ -83,14 +83,32 @@ export async function getCurrentShows() {
     return data;
 }
 
-export async function pauseUserShow(uuid) {
+export async function getUserShowStatus(showId) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_shows")
+        .select("user_state")
+        .eq("user_id", userId)
+        .eq("show_id", showId)
+        .maybeSingle();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data?.seen || null;
+}
+
+export async function pauseUserShow(showId) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_shows")
         .update({user_state: "paused"})
         .eq("user_id", userId)
-        .eq("show_id", uuid)
+        .eq("show_id", showId)
         .single();
 
     if (error) {
@@ -99,14 +117,14 @@ export async function pauseUserShow(uuid) {
     }
 }
 
-export async function startUserShow(uuid) {
+export async function startUserShow(showId) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
         .from("users_shows")
         .update({user_state: "started"})
         .eq("user_id", userId)
-        .eq("show_id", uuid)
+        .eq("show_id", showId)
         .single();
 
     if (error) {
