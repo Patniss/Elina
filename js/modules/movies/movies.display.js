@@ -25,7 +25,7 @@ export async function displayIndexMovies() {
 
 export async function displayIndexMoviesSister() {
     const pseudoSister = await getSisterPseudo();
-    const sisterPseudo = document.getElementsByClassName("sister-pseudo");
+    const sisterPseudo = document.querySelectorAll(".sister-pseudo");
     sisterPseudo.forEach(element => {
         element.textContent = pseudoSister;
     });
