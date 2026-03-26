@@ -127,18 +127,15 @@ export async function getSeenEpSeason(seasonId) {
     return data.episodes_seen;
 }
 
-export async function getSeenTimeSeenEpisodes() {
+export async function getTotalTimeSeenEpisodes() {
     const allSeasons = await getAllUsersSeasons();
     let totalTime = 0;
 
     for (const season of allSeasons) {
         const showId = await getShowId(season.season_id);
         const show = await getShow(showId);
-        console.log("titre:", show.title, "épisodes vus:", season.episodes_seen, "temps moyen:", show.average_min);
-        console.log("temps vus:", ((season.episodes_seen) * (show.average_min)))
 
         totalTime += (season.episodes_seen) * (show.average_min);
-        console.log("temps cumulé:", totalTime);
     }
 
     return totalTime;
@@ -151,11 +148,16 @@ export async function getTotalToseeEpisodes() {
 
     for (const show of currentShows) {
         const seasonsShow = await getSeasonsOfShow(show.id);
+        console.log(show);
 
         for (const season of seasonsShow) {
+            console.log(season);
             const seenEpisode = await getSeenEpSeason(season);
+            console.log(seenEpisode);
             const nbEpisodes = await getNbEpisode(season);
+            console.log(nbEpisodes);
             episodesTosee += nbEpisodes - seenEpisode;
+            console.log(episodesTosee);
         }
     }
 
