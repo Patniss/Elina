@@ -1,7 +1,7 @@
 import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
 import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 import { getMovie } from "/Elina/js/services/movies.service.js";
-import { addUserMovie, deleteUserMovie, updateSeenUserMovie } from "/Elina/js/services/usersMovies.service.js";
+import { addUserMovie, deleteUserMovie, updateSeenUserMovie, getStatusMovie } from "/Elina/js/services/usersMovies.service.js";
 
 const BUTTONS_BY_STATUS = {
     null: ["add", "details"],
@@ -49,6 +49,8 @@ export async function createModalMovie(uuid) {
 
     const modalContent = document.createElement("div");
     modalContent.classList.add("modal-content");
+    modalContent.style.width = "80%";
+    modalContent.style.height = "auto";
 
     const divContent = document.createElement("div");
     divContent.classList.add("box");
@@ -85,7 +87,9 @@ export async function createModalMovie(uuid) {
     const toseeButton = buttons.tosee;
     const seenButton = buttons.seen;
 
-    updateMovieUI(movie.seen, buttons, divButtons);
+    const seen = await getStatusMovie(uuid);
+
+    updateMovieUI(seen, buttons, divButtons);
 
     divInfos.append(divButtons);
     divAllInfos.append(divPoster, divInfos);

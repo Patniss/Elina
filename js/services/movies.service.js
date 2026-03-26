@@ -64,11 +64,11 @@ export async function getAllMovies() {
     return data;
 }
 
-export async function getMovie(uuid) {
+export async function getMovie(movieId) {
     const { data, error } = await supabase
         .from("movies")
         .select("*")
-        .eq("id", uuid)
+        .eq("id", movieId)
         .single()
 
     if (error) {
@@ -79,11 +79,11 @@ export async function getMovie(uuid) {
     return data || [];
 }
 
-export async function movieComplete(uuid) {
-    const { data, error } = await supabase
+export async function movieComplete(movieId) {
+    const { error } = await supabase
         .from("movies")
         .update([{ complete: true }])
-        .eq("id", uuid)
+        .eq("id", movieId)
         .single();
 
     if (error) {

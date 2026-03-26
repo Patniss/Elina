@@ -137,6 +137,24 @@ export async function getLastSeenSisterMovies() {
     return data;
 }
 
+export async function getStatusMovie(movieId) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("seen")
+        .eq("user_id", userId)
+        .eq("movie_id", movieId)
+        .maybeSingle();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data.seen;
+}
+
 export async function getOnlyToseeSisterMovies() {
     const userToseeMovies = await getToseeMovies();
     const sisterToseeMovies = await getToseeSisterMovies();
