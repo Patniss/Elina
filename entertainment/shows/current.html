@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>엘리나 Elina - Séries</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
+  <link rel="stylesheet" href="/Elina/css/bulma.min.css">
+  <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+
+<main>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div id="nav-container"></div>
+      
+      <div class="box">
+        
+        <h1 class="title"><span class="icon"><i class="fa-solid fa-couch"></i></span> Séries en cours</h1>
+        
+        <div class="columns is-multiline" id="list-current-shows"></div>
+        
+      </div>
+
+      <nav class="pagination" role="navigation" aria-label="navigation" id="pagination">
+        <div class="pagination-list" id="pagination_nb"></div>
+      </nav>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script type="module">
+  import { loadNav } from "/Elina/js/core/nav.js";
+  loadNav();
+  import { initCurrentShows } from "/Elina/js/modules/shows/shows.controller.js";
+  initCurrentShows();
+</script>
+
+<script type="module" src="/Elina/js/core/guard.js"></script>
+
+</body>
+</html>
