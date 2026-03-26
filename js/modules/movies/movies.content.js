@@ -2,7 +2,6 @@ import { clickAddMovieUser, clickDeleteMovieUser, clickToseeMovieUser, clickSeen
 import { getDirectorsMovie, getScriptwritersMovie, getActorsMovies } from "/Elina/js/services/castings.service.js";
 import { getMovie } from "/Elina/js/services/movies.service.js";
 import { getPeople } from "/Elina/js/services/people.service.js";
-import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { getUserMovie, updateDateSeenMovie, updateFavMovie, updateOwnPoster} from "/Elina/js/services/usersMovies.service.js";
 import { toggleBtnSeenStatut } from "/Elina/js/ui/dom.js";
 import { renderGenres } from "/Elina/js/ui/render.js";
@@ -160,26 +159,62 @@ export async function movieContent(uuid) {
     if (movie.complete) {
         const directors = getDirectorsMovie(uuid);
         const scriptwriters = getScriptwritersMovie(uuid);
-        const actors = getScriptwritersMovie(uuid);
+        const actors = getActorsMovies(uuid);
 
-        directors.forEach(d, index => {
-            const isLast = index === directors.length - 1;
+        if (directors.length === 0) {
+            const btnAddDirector = document.createElement("button");
+            btnAddDirector.classList.add("button", "tag", "is-link");
+            btnAddDirector.textContent = "Ajouter un réalisateur";
+        } else {
+            directors.forEach(d, index => {
+                const isLast = index === directors.length - 1;
 
-            const director = getPeople(d.id);
-            const nameDirector = `${director.firstname} ${director.lastname}`;
+                const director = getPeople(d.id);
+                const nameDirector = `${director.firstname} ${director.lastname}`;
 
-            const liDirector = document.createElement("li");
-            liDirector.classList.add("mr-3");
-            const linkDirector = document.createElement("a");
-            linkDirector.href = `/Elina/entertainment/people/people.html?id=${uuid}`;
-            linkDirector.textContent = nameDirector;
-            liDirector.appendChild(linkDirector);
+                const liDirector = document.createElement("li");
+                liDirector.classList.add("mr-3");
+                const linkDirector = document.createElement("a");
+                linkDirector.href = `/Elina/entertainment/people/people.html?id=${uuid}`;
+                linkDirector.textContent = nameDirector;
+                liDirector.appendChild(linkDirector);
+                movieDirectors.appendChild(liDirector);
 
-            if (!isLast) {
-                const liSep = document.createElement("li");
-                liSep.classList.add("mr-3");
-                liSep.innerHTML = "&#x2022;";
-            }
-        });
+                if (!isLast) {
+                    const liSep = document.createElement("li");
+                    liSep.classList.add("mr-3");
+                    liSep.innerHTML = "&#x2022;";
+                    movieDirectors.appendChild(liSep);
+                }
+            });
+        }
+
+        if (scriptwriters.length === 0) {
+            const btnAddScriptwriter = document.createElement("button");
+            btnAddScriptwriter.classList.add("button", "tag", "is-link");
+            btnAddScriptwriter.textContent = "Ajouter un scénariste";
+        } else {
+            scriptwriters.forEach(s, index => {
+                const isLast = index === directors.length - 1;
+
+                const scriptwriter = getPeople(s.id);
+                const nameScriptwriter = `${scriptwriter.firstname} ${scriptwriter.lastname}`;
+
+                const liScriptwriter = document.createElement("li");
+                liScriptwriter.classList.add("mr-3");
+                const linkScriptwriter = document.createElement("a");
+                linkScriptwriter.href = `/Elina/entertainment/people/people.html?id=${uuid}`;
+                linkScriptwriter.textContent = nameScriptwriter;
+                liScriptwriter.appendChild(linkScriptwriter);
+                movieScriptwriters.appendChild(liScriptwriter);
+
+                if (!isLast) {
+                    const liSep = document.createElement("li");
+                    liSep.classList.add("mr-3");
+                    liSep.innerHTML = "&#x2022;";
+                    movieScriptwriters.appendChild(liSep);
+                }
+            });
+        }
     }
 }
