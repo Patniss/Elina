@@ -35,6 +35,30 @@ export async function deleteUserMovie(movieId) {
     }
 }
 
+export async function getDateSeen(movieId) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("date_seen")
+        .eq("user_id", userId)
+        .eq("movie_id", movieId)
+        .maybeSingle();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    if (data) {
+        if (data.date_seen === "1900-01-01") {
+            return null;
+        }
+    }
+
+    return data?.date_seen || null;
+}
+
 export async function getFavAllSisterMovies() {
     const sisterId = await getSisterId();
 
@@ -93,6 +117,24 @@ export async function getFavSisterMovies() {
     const onlySisterFavMovies = sisterFavMovies.filter(item => !movieIds.has(item.movie_id));
 
     return onlySisterFavMovies;
+}
+
+export async function getFavUnklikeMovie(movieId) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_movies")
+        .select("fav")
+        .eq("user_id", userId)
+        .eq("movie_id", movieId)
+        .maybeSingle();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data?.fav || null;
 }
 
 export async function getLastSeenMovies() {

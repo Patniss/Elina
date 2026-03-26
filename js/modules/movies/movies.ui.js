@@ -1,7 +1,9 @@
 import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
 import { createButtons, handleButtonState } from "/Elina/js/ui/button.js";
 import { getMovie } from "/Elina/js/services/movies.service.js";
-import { addUserMovie, deleteUserMovie, updateSeenUserMovie, getStatusMovie } from "/Elina/js/services/usersMovies.service.js";
+import { addUserMovie, deleteUserMovie, updateSeenUserMovie, getStatusMovie, getDateSeen, getFavUnklikeMovie } from "/Elina/js/services/usersMovies.service.js";
+import { renderGenres } from "/Elina/js/ui/render.js";
+import { formatMovieDuration, formatFrenchTypography, formatCompleteDate } from "/Elina/js/utils/format.js";
 
 const BUTTONS_BY_STATUS = {
     null: ["add", "details"],
@@ -88,10 +90,58 @@ export async function createModalMovie(uuid) {
     const seenButton = buttons.seen;
 
     const seen = await getStatusMovie(uuid);
-
     updateMovieUI(seen, buttons, divButtons);
+    divInfos.appendChild(divButtons);
 
-    divInfos.append(divButtons);
+    if (seen === true) {
+        const divSeen = document.createElement("div");
+        divSeen.classList.add("mb-4, is-flex");
+
+        const dateSeen = await getDateSeen(uuid);
+        if (dateSeen) {
+            const tagDateSeen = document.createElement("span");
+            tagDateSeen.classList.add("tag", "is-medium");
+            tagDateSeen.textContent = formatCompleteDate(dateSeen);
+            divSeen.appendChild(tagDateSeen);
+        }
+
+        const favUnlike = await getFavUnklikeMovie(uuid);
+        if (favUnlike && favUnlike === "fav") {
+            const tagFavMovie = document.createElement("span");
+            tagFavMovie.classList.add("tag", "is-large", "has-primary-text");
+            tagFavMovie.style.backgroundColor = "transparent";
+            tagFavMovie.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+            divSeen.appendChild(tagFavMovie);
+        }
+        if (favUnlike && favUnlike === "unlike") {
+            const tagFavMovie = document.createElement("span");
+            tagFavMovie.classList.add("tag", "is-large", "has-primary-text");
+            tagFavMovie.style.backgroundColor = "transparent";
+            tagFavMovie.innerHTML = `<i class="fa-solid fa-heart-crack"></i>`;
+            divSeen.appendChild(tagFavMovie);
+        }
+        divInfos.appendChild(divSeen);
+    }
+
+    divInfos.appendChild(pGenres);
+    const pGenres = document.createElement("p");
+    const spanTime = document.createElement("span");
+    spanTime.classList.add("subtitle", "is-4", "mb-6", "mr-3");
+    spanTime.textContent = formatMovieDuration(movie.time);
+    const spanSep = document.createElement("span");
+    spanSep.classList.add("mr-3");
+    spanSep.innerHTML = `&#x2022;`;
+    renderGenres(pGenres, movie.genres);
+    pGenres.append(spanTime, spanSep);
+
+    const h3Synopsis = document.createElement("h3");
+    h3Synopsis.classList.add("subtitle", "is-4", "mt-6", "mb-2");
+    h3Synopsis.textContent = "Synopsis";
+    const pSynopsis = document.createElement("p");
+    pSynopsis.classList.add("content");
+    pSynopsis.textContent = formatFrenchTypography(movie.synopsis);
+
+    divInfos.append(h3Synopsis, pSynopsis);
     divAllInfos.append(divPoster, divInfos);
     divContent.append(movieTitle, movieYear, divAllInfos);
     modalContent.appendChild(divContent);
