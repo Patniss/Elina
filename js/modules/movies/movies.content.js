@@ -36,9 +36,8 @@ export async function movieContent(uuid) {
     const movieDirectors = document.getElementById("directors");
     const movieScriptwriters = document.getElementById("scriptwriters");
 
-    const userId = await getUserId();
     const movie = await getMovie(uuid);
-    const userMovie = await getUserMovie(userId, uuid);
+    const userMovie = await getUserMovie(uuid);
     const poster = userMovie?.own_poster ?? movie.poster;
     const statut = userMovie ? userMovie.seen : null;
     const dateSeen = userMovie?.date_seen === "1900-01-01" ? null : userMovie?.date_seen ?? null;

@@ -297,7 +297,8 @@ export async function getTotalToseeMoviesSister() {
     return data.length;
 }
 
-export async function getUserMovie(userId, movieId) {
+export async function getUserMovie(movieId) {
+    const userId = await getUserId();
     const { data, error } = await supabase
         .from("users_movies")
         .select("*")
