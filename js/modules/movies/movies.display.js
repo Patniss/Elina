@@ -12,6 +12,7 @@ export async function displayIndexMovies() {
     const moviesTosee = document.getElementById("moviesTosee");
 
     const totalTime = await getSeenTimeMovie();
+    console.log(totalTime);
 
     moviesSeen.textContent = await getTotalSeenMovies();
     moviesMinutesSeen.textContent = formatTotalTime(totalTime);
@@ -44,6 +45,7 @@ export async function displayIndexMoviesSister() {
     moviesSeenCompare.classList.add(classMoviesSeenCompare);
     
     const totalTimeSister = await getSeenTimeMovieSister();
+    console.log(totalTimeSister);
     moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
     const compareTotalTime = await getSeenTimeMovie() - await getSeenTimeMovieSister();
     let compareTotalTimeDisplay = compareTotalTime >= 0 ? "+ " : "– ";
