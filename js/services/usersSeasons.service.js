@@ -1,6 +1,6 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
-import { getSeasonId, getNbEpisode, getNbSeason, getTotalSeasons, getSeasonsOfShow, getLastSeason } from "/Elina/js/services/seasons.service.js";
+import { getSeasonId, getNbEpisode, getNbSeason, getTotalSeasons, getSeasonsOfShow } from "/Elina/js/services/seasons.service.js";
 import { getShow, getShowId } from "/Elina/js/services/shows.service.js";
 import { getCurrentShows, finishUserShow } from "/Elina/js/services/usersShows.service.js";
 
