@@ -23,12 +23,12 @@
             
             <div class="box">
 
-                <h1 class="title is-1 mt-6 mb-2"><span class="icon"><i class="fa-solid fa-film"></i></span> <span id="movie-title"></span></h1>
-                <h3 class="subtitle is-3 mb-6" id="movie-year"></h3>
-
                 <div class="columns is-four-fifths">
-                    <div class="column is-one-quarter">
-                        <img src="/Elina/entertainment/movies/poster.png" class="image is-clickable js-modal-trigger" id="movie-poster" data-target="div-modal-poster" style="border-radius: 5px;" />
+                    <h3 class="title is-3 carousel-title" id="show-title">Films à voir</h3>
+                    <div class="carousel-container">
+                        <button class="button is-primary nav-arrow left" id="posters-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
+                        <div class="carousel-track" id="posters-show"></div>
+                        <button class="button is-primary nav-arrow right" id="posters-next-btn"><i class="fa-solid fa-angle-right"></i></button>
                     </div>
                     <div class="block column is-three-quarters">
                         <div class="buttons mb-2" id="movie-list-buttons">
@@ -110,12 +110,12 @@
 <script src="/Elina/js/ui/modal.js"></script>
 
 <script type="module">
-    import { movieContent } from "/Elina/js/modules/movies/movies.content.js";
+    import { showContent } from "/Elina/js/modules/shows/shows.content.js";
 
     const params = new URLSearchParams(window.location.search);
-    const movieId = params.get("id");
+    const showId = params.get("id");
     
-    movieContent(movieId);
+    showContent(showId);
 </script>
 
 <script type="module">

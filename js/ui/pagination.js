@@ -34,7 +34,9 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
 
     if (currentPage === 1) {
         prevBtn.classList.add("is-disabled");
+        prevBtn.disabled = true;
     } else {
+        prevBtn.disabled = false;
         prevBtn.addEventListener("click", (e) => {
             e.preventDefault();
             setCurrentPage(currentPage - 1);
@@ -51,7 +53,9 @@ export function renderPagination(containerId, currentPage, totalItems, pageSize,
 
     if (currentPage === totalPages) {
         nextBtn.classList.add("is-disabled");
+        nextBtn.disabled = true;
     } else {
+        nextBtn.disabled = false;
         nextBtn.addEventListener("click", (e) => {
             e.preventDefault();
             setCurrentPage(currentPage + 1);
