@@ -71,7 +71,7 @@ export async function displayIndexMoviesSister() {
     const lastSeenSisterMovies = await getLastSeenSisterMovies();
     renderIndexLastSeenSisterMovies(lastSeenSisterMovies);
     const divLastSeenSisterMovies = document.getElementById("div-last-seen-movies-sister");
-    // if (lastSeenSisterMovies.length === 0) divLastSeenSisterMovies.classList.add("is-hidden");
+    if (lastSeenSisterMovies.length === 0) divLastSeenSisterMovies.classList.add("is-hidden");
 
     const ourFavMovies = await getFavSharedSisterMovies();
     renderIndexOurFavMovies(ourFavMovies);
