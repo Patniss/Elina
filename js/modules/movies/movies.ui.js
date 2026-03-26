@@ -168,7 +168,7 @@ export async function createMovieCard(m, complete) {
         setTimeout(() => {
             updateMovieUI(false, buttons, divTags);
             handleButtonState(addButton, "stop-loading");
-        }, 500);
+        }, 150);
     });
 
     toseeButton.addEventListener("click", async () => {
@@ -179,7 +179,7 @@ export async function createMovieCard(m, complete) {
         setTimeout(() => {
             updateMovieUI(true, buttons, divTags);
             handleButtonState(toseeButton, "stop-loading");
-        }, 500);
+        }, 150);
     });
 
     deleteButton.addEventListener("click", async () => {
@@ -190,7 +190,7 @@ export async function createMovieCard(m, complete) {
         setTimeout(() => {
             updateMovieUI(null, buttons, divTags);
             handleButtonState(deleteButton, "stop-loading");
-        }, 500);
+        }, 150);
     });
     
     seenButton.addEventListener("click", async () => {
@@ -201,7 +201,7 @@ export async function createMovieCard(m, complete) {
         setTimeout(() => {
             updateMovieUI(true, buttons, divTags);
             handleButtonState(seenButton, "stop-loading");
-        }, 500);
+        }, 150);
     });
 
   return column;

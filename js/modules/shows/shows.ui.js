@@ -90,7 +90,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("added", buttons, divTags);
             handleButtonState(addButton, "stop-loading");
-        }, 250);
+        }, 100);
     });
 
     deleteButton.addEventListener("click", async () => {
@@ -104,7 +104,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI(null, buttons, divTags);
             handleButtonState(deleteButton, "stop-loading");
-        }, 250);
+        }, 100);
     });
 
     startButton.addEventListener("click", async () => {
@@ -119,7 +119,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("seeEp", buttons, divTags);
             handleButtonState(startButton, "stop-loading");
-        }, 250);
+        }, 100);
     });
 
     seeEpButton.addEventListener("click", async () => {
@@ -139,7 +139,7 @@ export async function createShowCard(s) {
                 changeModeButton(seeEpButton, "seeEp", nextNextEpisode);
             }
             handleButtonState(seeEpButton, "stop-loading");
-        }, 250);
+        }, 100);
     });
 
     pauseButton.addEventListener("click", async () => {
@@ -152,8 +152,8 @@ export async function createShowCard(s) {
         };
         setTimeout(() => {
             updateShowUI("paused", buttons, divTags);
-            handleButtonState(addButton, "stop-loading");
-        }, 250);
+            handleButtonState(pauseButton, "stop-loading");
+        }, 100);
     });
 
     takeAgainButton.addEventListener("click", async () => {
@@ -167,7 +167,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
             handleButtonState(takeAgainButton, "stop-loading");
-        }, 250);
+        }, 100);
     });
 
     cancelButton.addEventListener("click", async () => {
@@ -181,7 +181,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("canceled", buttons, divTags);
             handleButtonState(cancelButton, "stop-loading");
-        }, 250);
+        }, 100);
     });
 
     retryButton.addEventListener("click", async () => {
@@ -195,7 +195,7 @@ export async function createShowCard(s) {
         setTimeout(() => {
             updateShowUI("started", buttons, divTags);
             handleButtonState(retryButton, "stop-loading");
-        }, 250);
+        }, 100);
     })
     
     return column;

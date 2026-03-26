@@ -23,84 +23,35 @@
             
             <div class="box">
 
+                <h3 class="title" id="show-title"></h3>
+
                 <div class="columns is-four-fifths">
-                    <h3 class="title is-3 carousel-title" id="show-title">Films à voir</h3>
                     <div class="carousel-container">
                         <button class="button is-primary nav-arrow left" id="posters-prev-btn"><i class="fa-solid fa-angle-left"></i></button>
                         <div class="carousel-track" id="posters-show"></div>
                         <button class="button is-primary nav-arrow right" id="posters-next-btn"><i class="fa-solid fa-angle-right"></i></button>
                     </div>
                     <div class="block column is-three-quarters">
-                        <div class="buttons mb-2" id="movie-list-buttons">
-                            <button class="button is-link is-hidden" id="button-add-movie"><span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span></button>
-                            <button class="button is-success is-light is-hidden" id="button-tosee-movie"><span class="icon"><i class="fa-solid fa-eye"></i></span><span>J'ai vu</span></button>
-                            <button class="button is-danger is-light is-hidden" id="button-supp-movie"><span class="icon"><i class="fa-solid fa-minus"></i></span><span>Supprimer</span></button>
-                            <button class="button is-success is-hidden" id="button-seen-movie"><span class="icon"><i class="fa-solid fa-check"></i></span><span>Vu</span></button>
+                        <div class="buttons mb-2" id="show-list-buttons">
+                            <button class="button is-link is-hidden" id="button-add-show"><span class="icon"><i class="fa-solid fa-plus"></i></span><span>Ajouter</span></button>
+                            <button class="button is-success is-light is-hidden" id="button-current-show"><span class="icon"><i class="fa-solid fa-eye"></i></span><span id="next-episode"></span></button>
+                            <button class="button is-danger is-light is-hidden" id="button-paused-show"><span class="icon"><i class="fa-solid fa-pause"></i></span><span>Mettre en pause</span></button>
+                            <button class="button is-link is-light is-hidden" id="button-retake-show"><span class="icon"><i class="fa-solid fa-play"></i></span><span>Reprendre</span></button>
+                            <button class="button is-danger is-light is-hidden" id="button-paused-show"><span class="icon"><i class="fa-solid fa-minus"></i></span><span>Abandonner</span></button>
+                            <button class="button is-success is-hidden" id="button-finished-show"><span class="icon"><i class="fa-solid fa-check"></i></span><span>Terminée</span></button>
                         </div>
                         <div id="div-seen" class="is-hidden mb-4">
-                            <button href="#" id="movie-date-seen" class="js-modal-trigger tag is-medium" data-target="change-date-seen"></button>
-                            <button id="movie-fav" class="tag is-large is-hoverable" style="background-color: transparent;"><i class="fa-solid fa-heart"></i></button>
-                            <button id="movie-unlike" class="tag is-large is-hoverable" style="background-color: transparent;"><i class="fa-solid fa-heart-crack"></i></button>
+                            <button id="show-fav" class="tag is-large is-hoverable" style="background-color: transparent;"><i class="fa-solid fa-heart"></i></button>
+                            <button id="show-unlike" class="tag is-large is-hoverable" style="background-color: transparent;"><i class="fa-solid fa-heart-crack"></i></button>
                         </div>
-                        <p id="movie-genres"><span class="subtitle is-4 mb-6 mr-3" id="movie-time"></span><span class="mr-3">&#x2022;</span></p>
-                        <div class="grid is-mobile">
-                            <div class="cell">
-                                <h3 class="subtitle is-4 mt-6 mb-2">Réalisateur(s)</h3>
-                                <ul id="directors" class="is-flex"><li class="mr-3"><a>Réalisateur 1</a></li><li class="mr-3">&#x2022;</li><li class="mr-3">Réalisateur 2</li></ul>
-                            </div>
-                            <div class="cell">
-                                <h3 class="subtitle is-4 mt-6 mb-2">Scénariste(s)</h3>
-                                <ul id="scriptwriters" class="is-flex"></ul>
-                            </div>
-                        </div>
-                        <ul id="movie-platforms mt-6"></ul>
+                        <p class="subtitle is-4 mb-6"><span class="mr-3" id="show-genres"></span><span class="mr-3">&#x2022;</span><span class="mr-3" id="show-seasons"></span></p>
+                        <ul id="show-platforms mt-6"></ul>
                         <h3 class="subtitle is-4 mt-6 mb-2">Synopsis</h3>
-                        <p class="content" id="movie-synopsis"></p>
+                        <p class="content" id="show-synopsis"></p>
                     </div>
                 </div>
             
             </div>
-        </div>
-
-        <div class="modal" id="div-modal-poster" style="min-height: 95%;">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <p class="image is-2by3">
-                    <img src="/Elina/entertainment/movies/poster.png" alt="Affiche" id="modal-poster" data-target="change-own-poster">
-                    <p><button class="button my-3 js-modal-trigger" id="add-own-poster">Personnaliser ma couverture</button></p>
-                    <div class="field my-3 is-hidden" id="div-add-own-poster">
-                        <input type="text" id="src-add-own-poster" class="input mr-2" style="width:50%" />
-                        <button type="button" id="btn-add-own-poster" class="button is-primary">Ajouter</button>
-                    </div>
-                </p>
-            </div>
-            <button class="modal-close is-large" aria-label="close"></button>
-        </div>
-
-        <div id="change-own-poster" class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <h5 class="title">Personnaliser votre poster</h5>
-                <div class="is-flex">
-                    <input class="input mr-4" type="text" id="input-change-own-poster" />
-                    <button class="button" id="button-change-own-poster">Modifier</button>
-                </div>
-                <button class="tag mt-2" id="button-null-own-poster">Supprimer la personnalisation</button>
-            </div>
-            <button class="modal-close is-large" aria-label="close"></button>
-        </div>
-
-        <div id="change-date-seen" class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <h5 class="title">Changer la date de visionnage</h5>
-                <div class="is-flex">
-                    <input class="input mr-4" type="date" id="input-change-date-seen" />
-                    <button class="button" id="button-change-date-seen">Modifier</button>
-                </div>
-                <button class="tag mt-2" id="button-null-date-seen">Supprimer la date</button>
-            </div>
-            <button class="modal-close is-large" aria-label="close"></button>
         </div>
 
     </section>
