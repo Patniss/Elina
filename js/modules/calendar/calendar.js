@@ -92,7 +92,7 @@ export function displayCalendar(yearCalendar) {
 export function displayMonthCalendar(year, month) {
     const titleMonth = document.getElementById("month-subtitle");
     
-    monthName = 
+    const monthName = 
         month === "01" ? "JANUARY" 
         : month === "02" ? "FEBRUARY" 
         : month === "03" ? "MARCH"
