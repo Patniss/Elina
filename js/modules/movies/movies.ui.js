@@ -85,7 +85,7 @@ export async function createModalMovie(uuid) {
     const toseeButton = buttons.tosee;
     const seenButton = buttons.seen;
 
-    console.log(movie.seen);
+    console.log(movie);
 
     updateMovieUI(movie.seen, buttons, divButtons);
 
