@@ -219,13 +219,15 @@ export async function seeNextEpisode(showId) {
             addUserSeason(showId, (parseInt(seasonNumber) + 1));
         }
     } else {
-        const nextEpisode = seenEpisode + 1;
-        const lastSeasonId = getSeasonId(showId, nbTotalSeasons);
-        const lastEpisode = getNbEpisode(lastSeasonId);
+        const nextEpisode = parseInt(seenEpisode) + 1;
         const userSeasonId = await getUserSeasonId(currentSeasonId);
         await updateSeeEp(userSeasonId, nextEpisode);
+        const lastSeasonId = getSeasonId(showId, nbTotalSeasons);
+        console.log(lastSeasonId);
+        const lastEpisode = getNbEpisode(lastSeasonId);
+        console.log(lastEpisode);
         if ((nbTotalSeasons === seasonNumber) && (nextEpisode === lastEpisode)) {
-            finishUserShow(showId);
+            await finishUserShow(showId);
         }
     }
 }
