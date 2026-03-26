@@ -35,9 +35,31 @@ export async function getSisterId() {
     .neq("id", userId)
     .single();
 
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
     const sisterId = data.id;
 
     return sisterId;
+}
+
+export async function getSisterPseudo() {
+  const sisterId = await getSisterId();
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("pseudo")
+    .eq("id", sisterId)
+    .single();
+  
+  if (error) {
+    console.error(error);
+    return null;
+  }
+
+  return data.pseudo;
 }
 
 export async function getUserId() {

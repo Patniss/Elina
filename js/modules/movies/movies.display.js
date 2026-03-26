@@ -1,5 +1,6 @@
 import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { renderIndexFavSisterMovies, renderIndexToseeSharedMovies, renderIndexLastSeenSisterMovies, renderIndexOurFavMovies, renderIndexOnlyToseeSisterMovies } from "/Elina/js/modules/movies/movies.render.js";
+import { getSisterPseudo } from "/Elina/js/services/profiles.service.js";
 import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies, getOnlyToseeSisterMovies } from "/Elina/js/services/usersMovies.service.js";
 import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister } from "/Elina/js/services/usersMovies.service.js";
 import { getToseeSharedMovies, getFavSisterMovies, getLastSeenSisterMovies, getFavSharedSisterMovies } from "/Elina/js/services/usersMovies.service.js";
@@ -23,6 +24,12 @@ export async function displayIndexMovies() {
 }
 
 export async function displayIndexMoviesSister() {
+    const pseudoSister = await getSisterPseudo();
+    const sisterPseudo = document.getElementsByClassName("sister-pseudo");
+    sisterPseudo.forEach(element => {
+        element.textContent = pseudoSister;
+    });
+    
     const moviesSeenSister = document.getElementById("movies-seen-sister");
     const moviesMinutesSeenSister = document.getElementById("movies-minutes-seen-sister");
     const moviesToseeSister = document.getElementById("movies-tosee-sister");
@@ -53,18 +60,28 @@ export async function displayIndexMoviesSister() {
 
     const favSisterMovies = await getFavSisterMovies();
     renderIndexFavSisterMovies(favSisterMovies);
+    const divFavSisterMovies = document.getElementById("div-fav-sister-movies-not-seen");
+    if (favSisterMovies.length === 0) divFavSisterMovies.classList.add("is-hidden");
 
     const toseeSharedMovies = await getToseeSharedMovies();
     renderIndexToseeSharedMovies(toseeSharedMovies);
+    const divToseeSharedMovies = document.getElementById("div-tosee-movies-shared");
+    if (toseeSharedMovies.length === 0) divToseeSharedMovies.classList.add("is-hidden");
 
     const lastSeenSisterMovies = await getLastSeenSisterMovies();
     renderIndexLastSeenSisterMovies(lastSeenSisterMovies);
+    const divLastSeenSisterMovies = document.getElementById("div-last-seen-movies-sister");
+    // if (lastSeenSisterMovies.length === 0) divLastSeenSisterMovies.classList.add("is-hidden");
 
     const ourFavMovies = await getFavSharedSisterMovies();
     renderIndexOurFavMovies(ourFavMovies);
+    const divOurFavMovies = document.getElementById("div-fav-movies-shared");
+    if (ourFavMovies.length === 0) divOurFavMovies.classList.add("is-hidden");
 
     const sisterToseeMovies = await getOnlyToseeSisterMovies();
     renderIndexOnlyToseeSisterMovies(sisterToseeMovies);
+    const divSisterToseeMovies = document.getElementById("div-tosee-movies-sister");
+    if (sisterToseeMovies.length === 0) divSisterToseeMovies.classList.add("is-hidden");
 }
 
 export async function displayFavMovies() {
