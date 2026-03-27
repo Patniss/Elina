@@ -421,7 +421,7 @@ export async function updateOwnPoster(uuid, link) {
 export async function updateSeenUserMovie(movieId, seenState) {
     const userId = await getUserId();
     
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_movies")
         .update({seen: seenState})
         .eq("user_id", userId)
@@ -436,8 +436,10 @@ export async function updateSeenUserMovie(movieId, seenState) {
     if (seenState === true) {
         await majMoviesSeen(1);
         await majTimeMoviesSeen(movieId);
+        await majMoviesTosee(-1);
     } else {
         await majMoviesSeen(-1)
         await majTimeMoviesSeen(movieId);
+        await majMoviesTosee(1);
     }
 }
