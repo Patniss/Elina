@@ -27,7 +27,7 @@ export async function majMoviesSeen(nb) {
     const newNb = parseInt(moviesSeen) + nb;
 
     const { error } = await supabase
-        .from("profiles_date")
+        .from("profiles_data")
         .update("movies_seen", newNb)
         .eq("user_id", userId)
         .single();
@@ -46,7 +46,7 @@ export async function majMoviesTosee(nb) {
     const newNb = parseInt(moviesTosee) + nb;
 
     const { error } = await supabase
-        .from("profiles_date")
+        .from("profiles_data")
         .update("movies_seen", newNb)
         .eq("user_id", userId)
         .single();

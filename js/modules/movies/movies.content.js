@@ -160,6 +160,10 @@ export async function movieContent(uuid) {
     const scriptwriters = getScriptwritersMovie(uuid);
     const actors = getActorsMovies(uuid);
 
+    console.log(directors);
+    console.log(scriptwriters);
+    console.log(actors);
+
     if (directors.length === 0) {
         const btnAddDirector = document.createElement("button");
         btnAddDirector.classList.add("button", "tag", "is-link");
