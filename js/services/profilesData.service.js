@@ -45,6 +45,8 @@ export async function majMoviesTosee(nb) {
     const moviesTosee = dataProfile.movies_tosee;
     const newNb = parseInt(moviesTosee) + nb;
 
+    console.log(userId);
+
     const { error } = await supabase
         .from("profiles_data")
         .update("movies_seen", newNb)
@@ -69,7 +71,7 @@ export async function majTimeMoviesSeen(movieId) {
     const newTime = parseInt(timeMoviesSeen) + parseInt(movieTime);
 
     const { error } = await supabase
-        .from("profiles_date")
+        .from("profiles_data")
         .update("time_movies_seen", newTime)
         .eq("user_id", userId)
         .single();
