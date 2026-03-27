@@ -28,7 +28,7 @@ export async function majMoviesSeen(nb) {
 
     const { error } = await supabase
         .from("profiles_data")
-        .update("movies_seen", newNb)
+        .update({"movies_seen": newNb})
         .eq("user_id", userId)
         .single();
 
@@ -49,7 +49,7 @@ export async function majMoviesTosee(nb) {
 
     const { error } = await supabase
         .from("profiles_data")
-        .update("movies_seen", newNb)
+        .update({"movies_tosee": newNb})
         .eq("user_id", userId)
         .single();
 
@@ -72,7 +72,7 @@ export async function majTimeMoviesSeen(movieId) {
 
     const { error } = await supabase
         .from("profiles_data")
-        .update("time_movies_seen", newTime)
+        .update({"time_movies_seen": newTime})
         .eq("user_id", userId)
         .single();
 
