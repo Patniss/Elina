@@ -1,4 +1,4 @@
-import { genres } from "/Elina/js/data/genres.hs";
+import { genres } from "/Elina/js/data/genres.js";
 import { getToseeMovies } from "/Elina/js/services/usersMovies.service.js";
 import { initGenres, initPlaforms } from "/Elina/js/ui/select.js";
 
