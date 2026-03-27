@@ -123,7 +123,6 @@ export async function createModalMovie(uuid) {
         divInfos.appendChild(divSeen);
     }
 
-    divInfos.appendChild(pGenres);
     const pGenres = document.createElement("p");
     const spanTime = document.createElement("span");
     spanTime.classList.add("subtitle", "is-4", "mb-6", "mr-3");
@@ -133,6 +132,7 @@ export async function createModalMovie(uuid) {
     spanSep.innerHTML = `&#x2022;`;
     renderGenres(pGenres, movie.genres);
     pGenres.append(spanTime, spanSep);
+    divInfos.appendChild(pGenres);
 
     const h3Synopsis = document.createElement("h3");
     h3Synopsis.classList.add("subtitle", "is-4", "mt-6", "mb-2");
@@ -140,8 +140,8 @@ export async function createModalMovie(uuid) {
     const pSynopsis = document.createElement("p");
     pSynopsis.classList.add("content");
     pSynopsis.textContent = formatFrenchTypography(movie.synopsis);
-
     divInfos.append(h3Synopsis, pSynopsis);
+    
     divAllInfos.append(divPoster, divInfos);
     divContent.append(movieTitle, movieYear, divAllInfos);
     modalContent.appendChild(divContent);

@@ -12,7 +12,6 @@ export async function displayIndexMovies() {
     const moviesTosee = document.getElementById("moviesTosee");
 
     const totalTime = await getSeenTimeMovie();
-    console.log(totalTime);
 
     moviesSeen.textContent = await getTotalSeenMovies();
     moviesMinutesSeen.textContent = formatTotalTime(totalTime);
