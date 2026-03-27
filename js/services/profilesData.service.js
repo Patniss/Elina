@@ -1,8 +1,9 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getMovie } from "/Elina/js/services/movies.service.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
+import { getShow } from "/Elina/js/services/shows.service.js";
 
-export async function getProfilesData() {
+export async function getProfileData() {
     const userId = await getUserId();
 
     const { data, error } = await supabase
@@ -19,10 +20,86 @@ export async function getProfilesData() {
     return data;
 }
 
+export async function majCurrentShows(nb) {
+    if (!nb) nb = 1;
+    const userId = await getUserId();
+    const dataProfile = await getProfileData();
+    const currentShows = dataProfile.current_shows;
+    const newNb = parseInt(currentShows) + nb;
+
+    const { error } = await supabase
+        .from("profiles_data")
+        .update({"current_shows": newNb})
+        .eq("user_id", userId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+}
+
+export async function majEpisodesSeen(nb) {
+    if (!nb) nb = 1;
+    const userId = await getUserId();
+    const dataProfile = await getProfileData();
+    const episodesSeen = dataProfile.episodes_seen;
+    const newNb = parseInt(episodesSeen) + nb;
+
+    const { error } = await supabase
+        .from("profiles_data")
+        .update({"episodes_seen": newNb})
+        .eq("user_id", userId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+}
+
+export async function majEpisodesTosee(nb) {
+    if (!nb) nb = 1;
+    const userId = await getUserId();
+    const dataProfile = await getProfileData();
+    const episodesTosee = dataProfile.episodes_tosee;
+    const nwNb = parseInt(episodesTosee) + nb;
+
+    const { error } = await supabase
+        .from("profiles_data")
+        .update({"episodes_tosee": newNb})
+        .eq("user_id", userId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+}
+
+export async function majFinishedShows(nb) {
+    if (!nb) nb = 1;
+    const userId = await getUserId();
+    const dataProfile = await getProfileData();
+    const finishedShows = dataProfile.finished_shows;
+    const newNb = parseInt(finishedShows) + nb;
+
+    const { error } = await supabase
+        .from("profiles_data")
+        .update({"finished_shows": newNb})
+        .eq("user_id", userId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+}
+
 export async function majMoviesSeen(nb) {
     if (!nb) nb = 1;
     const userId = await getUserId();
-    const dataProfile = await getProfilesData();
+    const dataProfile = await getProfileData();
     const moviesSeen = dataProfile.movies_seen;
     const newNb = parseInt(moviesSeen) + nb;
 
@@ -34,14 +111,14 @@ export async function majMoviesSeen(nb) {
 
     if (error) {
         console.error(error);
-        return
+        return;
     }
 }
 
 export async function majMoviesTosee(nb) {
     if (!nb) nb = 1;
     const userId = await getUserId();
-    const dataProfile = await getProfilesData();
+    const dataProfile = await getProfileData();
     const moviesTosee = dataProfile.movies_tosee;
     const newNb = parseInt(moviesTosee) + nb;
 
@@ -62,7 +139,7 @@ export async function majMoviesTosee(nb) {
 export async function majTimeMoviesSeen(movieId) {
     const userId = await getUserId();
 
-    const dataProfile = await getProfilesData();
+    const dataProfile = await getProfileData();
     const timeMoviesSeen = dataProfile.time_movies_seen;
 
     const dataMovie = await getMovie(movieId);
@@ -80,4 +157,31 @@ export async function majTimeMoviesSeen(movieId) {
         console.error(error);
         return
     }
+}
+
+export async function majTimeShowsSeen(showId, nbEp, add) {
+    if (!nbEp) nbEp = 1;
+    if (!add) add = true;
+    const userId = await getUserId();
+
+    const dataProfile = await getProfileData();
+    const timeShowsSeen = dataProfile.time_shows_seen;
+
+    const dataShow = await getShow(showId);
+    const averageTime = parseInt(dataShow.average_min);
+    const showTime = add === false ? (averageTime * nbEp) * -1 : averageTime * nbEp;
+
+    const newTime = parseInt(timeShowsSeen) + parseInt(showTime);
+
+    const { error } = await supabase
+        .from("profiles_data")
+        .update({"time_shows_seen": newTime})
+        .eq("user_time", userId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
 }

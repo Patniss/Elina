@@ -1,10 +1,11 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
+import { majCurrentShows, majFinishedShows, majCurrentShows } from "/Elina/js/services/profilesData.service.js";
 
 export async function addUserShow(showId) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_shows")
         .insert([{
             user_id: userId,
@@ -21,7 +22,7 @@ export async function addUserShow(showId) {
 export async function cancelUserShow(showId) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_shows")
         .update({user_state: "canceled"})
         .eq("user_id", userId)
@@ -32,12 +33,14 @@ export async function cancelUserShow(showId) {
         console.error(error);
         return;
     }
+
+    await majCurrentShows(-1);
 }
 
 export async function deleteUserShow(showId) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_shows")
         .delete()
         .eq("user_id", userId)
@@ -53,7 +56,7 @@ export async function deleteUserShow(showId) {
 export async function finishUserShow(showId) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_shows")
         .update({user_state: "finished"})
         .eq("user_id", userId)
@@ -64,6 +67,9 @@ export async function finishUserShow(showId) {
         console.error(error);
         return;
     }
+
+    await majCurrentShows(-1);
+    await majFinishedShows();
 }
 
 export async function getCurrentShows() {
@@ -104,7 +110,7 @@ export async function getUserShowStatus(showId) {
 export async function pauseUserShow(showId) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_shows")
         .update({user_state: "paused"})
         .eq("user_id", userId)
@@ -115,12 +121,14 @@ export async function pauseUserShow(showId) {
         console.error(error);
         return;
     }
+    
+    await majCurrentShows(-1);
 }
 
 export async function startUserShow(showId) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_shows")
         .update({user_state: "started"})
         .eq("user_id", userId)
@@ -131,4 +139,6 @@ export async function startUserShow(showId) {
         console.error(error);
         return;
     }
+
+    await majCurrentShows();
 }

@@ -8,7 +8,7 @@ export async function addUserSeason(showId, nbSeason) {
     const userId = await getUserId();
     const seasonId = await getSeasonId(showId, nbSeason);
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_seasons")
         .insert([{
             user_id: userId,
