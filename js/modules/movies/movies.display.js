@@ -1,6 +1,7 @@
 import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { renderIndexFavSisterMovies, renderIndexToseeSharedMovies, renderIndexLastSeenSisterMovies, renderIndexOurFavMovies, renderIndexOnlyToseeSisterMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { getSisterPseudo } from "/Elina/js/services/profiles.service.js";
+import { getProfileData, getSisterData } from "/Elina/js/services/profilesData.service.js";
 import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies, getOnlyToseeSisterMovies } from "/Elina/js/services/usersMovies.service.js";
 import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister } from "/Elina/js/services/usersMovies.service.js";
 import { getToseeSharedMovies, getFavSisterMovies, getLastSeenSisterMovies, getFavSharedSisterMovies } from "/Elina/js/services/usersMovies.service.js";
@@ -10,12 +11,11 @@ export async function displayIndexMovies() {
     const moviesSeen = document.getElementById("moviesSeen");
     const moviesMinutesSeen = document.getElementById("moviesMinutesSeen");
     const moviesTosee = document.getElementById("moviesTosee");
+    const profileData = await getProfileData();
 
-    const totalTime = await getSeenTimeMovie();
-
-    moviesSeen.textContent = await getTotalSeenMovies();
-    moviesMinutesSeen.textContent = formatTotalTime(totalTime);
-    moviesTosee.textContent = await getTotalToseeMovies();
+    moviesSeen.textContent = profileData.movies_seen;
+    moviesMinutesSeen.textContent = formatTotalTime(profileData.time_movies_seen);
+    moviesTosee.textContent = profileData.movies_tosee;
 
     displayToseeMovies();
     const lastSeen = await getLastSeenMovies();
@@ -24,6 +24,8 @@ export async function displayIndexMovies() {
 }
 
 export async function displayIndexMoviesSister() {
+    const sisterData = await getSisterData();
+    const userData = await getProfileData();
     const pseudoSister = await getSisterPseudo();
     const sisterPseudo = document.querySelectorAll(".sister-pseudo");
     sisterPseudo.forEach(element => {
@@ -37,25 +39,24 @@ export async function displayIndexMoviesSister() {
     const moviesMinutesSeenCompare = document.getElementById("movies-minutes-seen-compare");
     const moviesToseeCompare = document.getElementById("movies-tosee-compare");
 
-    moviesSeenSister.textContent = await getTotalSeenMoviesSister();
-    const compareTotalSeen = await getTotalSeenMovies() - await getTotalSeenMoviesSister();
+    moviesSeenSister.textContent = sisterData.movies_seen;
+    const compareTotalSeen = parseInt(profileData.movies_seen) - parseInt(sisterData.movies_seen);
     moviesSeenCompare.textContent = formatPlusDisplay(compareTotalSeen);
     const classMoviesSeenCompare = compareTotalSeen >= 0 ? "has-text-success" : "has-text-danger";
     moviesSeenCompare.classList.add(classMoviesSeenCompare);
     
-    const totalTimeSister = await getSeenTimeMovieSister();
-    console.log(totalTimeSister);
+    const totalTimeSister = sisterData.time_movies_seen;
     moviesMinutesSeenSister.textContent = formatTotalTime(totalTimeSister);
-    const compareTotalTime = await getSeenTimeMovie() - await getSeenTimeMovieSister();
+    const compareTotalTime = parseInt(profileData.time_movies_seen) - parseInt(sisterData.time_movies_seen);
     let compareTotalTimeDisplay = compareTotalTime >= 0 ? "+ " : "– ";
     compareTotalTimeDisplay = `${compareTotalTimeDisplay}${formatTotalTime(compareTotalTime)}`;
     moviesMinutesSeenCompare.innerHTML = compareTotalTimeDisplay;
     const classMoviesMinutesSeenCompare = compareTotalTime > 0 ? "has-text-success" : "has-text-danger";
     moviesMinutesSeenCompare.classList.add(classMoviesMinutesSeenCompare);
     
-    moviesToseeSister.textContent = await getTotalToseeMoviesSister();
-    const compareTosee = await getTotalToseeMovies() - await getTotalToseeMoviesSister();
+    moviesToseeSister.textContent = sisterData.movies_tosee;
     moviesToseeCompare.textContent = formatPlusDisplay(compareTosee);
+    const compareTosee = parseInt(userData.movies_tosee) - parseInt(sisterData.movies_tosee);
     const classMoviesToseeCompare = compareTosee > 0 ? "has-text-danger" : "has-text-success";
     moviesToseeCompare.classList.add(classMoviesToseeCompare);
 

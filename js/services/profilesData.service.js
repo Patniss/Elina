@@ -1,6 +1,6 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getMovie } from "/Elina/js/services/movies.service.js";
-import { getUserId } from "/Elina/js/services/profiles.service.js";
+import { getUserId, getSisterId } from "/Elina/js/services/profiles.service.js";
 import { getShow } from "/Elina/js/services/shows.service.js";
 
 export async function getProfileData() {
@@ -10,6 +10,23 @@ export async function getProfileData() {
         .from("profiles_data")
         .select("*")
         .eq("user_id", userId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function getSisterData() {
+    const sisterId = await getSisterId();
+
+    const { data, error } = await supabase
+        .from("profiles_data")
+        .select("*")
+        .es("user_id", sisterId)
         .single();
 
     if (error) {
