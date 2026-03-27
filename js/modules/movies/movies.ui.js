@@ -130,8 +130,8 @@ export async function createModalMovie(uuid) {
     const spanSep = document.createElement("span");
     spanSep.classList.add("mr-3");
     spanSep.innerHTML = `&#x2022;`;
-    renderGenres(pGenres, movie.genres);
     pGenres.append(spanTime, spanSep);
+    renderGenres(pGenres, movie.genres);
     divInfos.appendChild(pGenres);
 
     const h3Synopsis = document.createElement("h3");
