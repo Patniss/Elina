@@ -1,4 +1,5 @@
 import { getUserId, getSisterId } from "/Elina/js/services/profiles.service.js";
+import { majMoviesSeen, majTimeMoviesSeen, majMoviesTosee } from "/Elina/js/services/profilesData.service.js";
 import { supabase } from "/Elina/js/core/supabase.js";
 
 export async function addUserMovie(movieId) {
@@ -17,6 +18,8 @@ export async function addUserMovie(movieId) {
         console.log(error);
         return;
     }
+
+    await majMoviesTosee();
 }
 
 export async function deleteUserMovie(movieId) {
@@ -33,6 +36,8 @@ export async function deleteUserMovie(movieId) {
         console.error(error);
         return;
     }
+
+    await majMoviesTosee(-1);
 }
 
 export async function getDateSeen(movieId) {
@@ -426,5 +431,13 @@ export async function updateSeenUserMovie(movieId, seenState) {
     if (error) {
         console.log(error);
         return;
+    }
+
+    if (seenState === true) {
+        await majMoviesSeen(1);
+        await majTimeMoviesSeen(movieId);
+    } else {
+        await majMoviesSeen(-1)
+        await majTimeMoviesSeen(movieId);
     }
 }
