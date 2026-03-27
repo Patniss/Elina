@@ -8,7 +8,7 @@ export async function getRandomMovie(selectedGenres, selectedPlatforms) {
     allToseeMovies = await getToseeMovies();
 }
 
-export async function displayRandomeMovie() {
+export async function displayRandomMovie() {
     const selectGenres = document.getElementById("movie-random-genres");
     const selectPlatforms = document.getElementById("movie-random-platforms");
     initGenres(selectGenres, genres);
