@@ -71,8 +71,6 @@ export async function createShowCard(s) {
     const cancelButton = buttons.cancel;
     const retryButton = buttons.retry;
 
-    console.log(show);
-
     updateShowUI(show.userState, buttons, divTags);
 
     cardContent.append(figureLogo, pSubtitle, divTags);
@@ -117,7 +115,7 @@ export async function createShowCard(s) {
             console.error(error);
         };
         setTimeout(() => {
-            updateShowUI("seeEp", buttons, divTags);
+            changeModeButton(seeEpButton, "seeEp", "S01E01");
             handleButtonState(startButton, "stop-loading");
         }, 100);
     });
