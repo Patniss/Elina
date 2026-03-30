@@ -115,7 +115,7 @@ export async function createShowCard(s) {
             console.error(error);
         };
         setTimeout(() => {
-            changeModeButton(seeEpButton, "seeEp", "S01E01");
+            changeModeButton(seeEpButton, "seeEp", "S01 E01");
             handleButtonState(startButton, "stop-loading");
         }, 100);
     });
