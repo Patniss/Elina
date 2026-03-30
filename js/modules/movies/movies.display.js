@@ -1,9 +1,9 @@
+import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
 import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { renderIndexFavSisterMovies, renderIndexToseeSharedMovies, renderIndexLastSeenSisterMovies, renderIndexOurFavMovies, renderIndexOnlyToseeSisterMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { getSisterPseudo } from "/Elina/js/services/profiles.service.js";
 import { getProfileData, getSisterData } from "/Elina/js/services/profilesData.service.js";
-import { getSeenTimeMovie, getTotalSeenMovies, getTotalToseeMovies, getToseeMovies, getFavMovies, getLastSeenMovies, getOnlyToseeSisterMovies } from "/Elina/js/services/usersMovies.service.js";
-import { getSeenTimeMovieSister, getTotalSeenMoviesSister, getTotalToseeMoviesSister } from "/Elina/js/services/usersMovies.service.js";
+import { getToseeMovies, getFavMovies, getLastSeenMovies, getOnlyToseeSisterMovies } from "/Elina/js/services/usersMovies.service.js";
 import { getToseeSharedMovies, getFavSisterMovies, getLastSeenSisterMovies, getFavSharedSisterMovies } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime, formatPlusDisplay } from "/Elina/js/utils/format.js";
 
@@ -18,8 +18,9 @@ export async function displayIndexMovies() {
     moviesTosee.textContent = profileData.movies_tosee;
 
     displayToseeMovies();
-    const lastSeen = await getLastSeenMovies();
-    await renderIndexLastMovies(lastSeen);
+    const lastSeenMovies = await getLastSeenMovies();
+    const normalizeLastSeenMovies = normalizeMovie(lastSeenMovies);
+    await renderIndexLastMovies(normalizeLastSeenMovies);
     displayFavMovies();
 }
 
@@ -88,10 +89,12 @@ export async function displayIndexMoviesSister() {
 
 export async function displayFavMovies() {
     const favMovies = await getFavMovies();
-    await renderIndexFavMovies(favMovies);
+    const normalizeFavMovies = normalizeMovie(favMovies);
+    await renderIndexFavMovies(normalizeFavMovies);
 }
 
 export async function displayToseeMovies() {
     const toseeMovies = await getToseeMovies();
-    await renderIndexToseeMovies(toseeMovies);
+    const normalizeToseeMovies = normalizeMovie(toseeMovies);
+    await renderIndexToseeMovies(normalizeToseeMovies);
 }
