@@ -1,7 +1,6 @@
 import { showsStore } from "/Elina/js/data/shows.store.js";
-import { loadAllShows, loadCurrentShows, loadPausedShows, loadTostartShows, loadFinishedShows, loadCanceledShows } from "/Elina/js/modules/shows/shows.load.js";
-import { renderAllShows, renderCurrentShows, renderPausedShows, renderTostartShows, renderFinishedShows, renderCanceledShows } from "/Elina/js/modules/shows/shows.render.js";
-import { initToggleSection } from "/Elina/js/ui/toggles.js";
+import { loadAllShows, loadCurrentShows } from "/Elina/js/modules/shows/shows.load.js";
+import { renderAllShows, renderCurrentShows } from "/Elina/js/modules/shows/shows.render.js";
 
 export async function changePage(page) {
     showsStore.setCurrentPage("all", page);
