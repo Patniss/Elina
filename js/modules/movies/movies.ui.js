@@ -12,9 +12,7 @@ const BUTTONS_BY_STATUS = {
 };
 
 export async function createCarouselCard(m, index, list) {
-    console.log(m);
     const movie = normalizeMovie(m);
-    console.log(movie);
 
     const div = document.createElement("div");
     div.classList.add("card-carousel", `card-carousel-${list}`);
@@ -95,36 +93,6 @@ export async function createModalMovie(uuid) {
     const seen = await getStatusMovie(uuid);
     updateMovieUI(seen, buttons, divButtons);
     divInfos.appendChild(divButtons);
-
-    if (seen === true) {
-        const divSeen = document.createElement("div");
-        divSeen.classList.add("mb-4, is-flex");
-
-        const dateSeen = await getDateSeen(uuid);
-        if (dateSeen) {
-            const tagDateSeen = document.createElement("span");
-            tagDateSeen.classList.add("tag", "is-medium");
-            tagDateSeen.textContent = formatCompleteDate(dateSeen);
-            divSeen.appendChild(tagDateSeen);
-        }
-
-        const favUnlike = await getFavUnklikeMovie(uuid);
-        if (favUnlike && favUnlike === "fav") {
-            const tagFavMovie = document.createElement("span");
-            tagFavMovie.classList.add("tag", "is-large", "has-primary-text");
-            tagFavMovie.style.backgroundColor = "transparent";
-            tagFavMovie.innerHTML = `<i class="fa-solid fa-heart"></i>`;
-            divSeen.appendChild(tagFavMovie);
-        }
-        if (favUnlike && favUnlike === "unlike") {
-            const tagFavMovie = document.createElement("span");
-            tagFavMovie.classList.add("tag", "is-large", "has-primary-text");
-            tagFavMovie.style.backgroundColor = "transparent";
-            tagFavMovie.innerHTML = `<i class="fa-solid fa-heart-crack"></i>`;
-            divSeen.appendChild(tagFavMovie);
-        }
-        divInfos.appendChild(divSeen);
-    }
 
     const pGenres = document.createElement("p");
     const spanTime = document.createElement("span");
