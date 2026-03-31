@@ -1,5 +1,4 @@
-import { getCurrentShows } from "/Elina/js/services/usersShows.service.js";
-import { countEpisodesSeen, getTotalTimeSeenEpisodes, getTotalToseeEpisodes } from "/Elina/js/services/usersSeasons.service.js";
+import { getProfileData } from "/Elina/js/services/profilesData.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
 
 export async function displayIndexShows() {
@@ -8,15 +7,10 @@ export async function displayIndexShows() {
     const totalTimeSeen = document.getElementById("total-time-seen");
     const currentShowsTosee = document.getElementById("tosee-current");
 
-    const allCurrentShows = await getCurrentShows();
-    showsCurrent.textContent = allCurrentShows.length;
+    const profileData = await getProfileData();
 
-    const sumEpisodesSeen = await countEpisodesSeen();
-    episodesSeen.textContent = sumEpisodesSeen;
-
-    const totalMinutesSeen = await getTotalTimeSeenEpisodes();
-    totalTimeSeen.textContent = formatTotalTime(totalMinutesSeen);
-
-    const totalToseeEpisodes = await getTotalToseeEpisodes();
-    currentShowsTosee.textContent = totalToseeEpisodes;
+    showsCurrent.textContent = profileData.current_shows;
+    episodesSeen.textContent = profileData.episodes_seen;
+    totalTimeSeen.textContent = formatTotalTime(profileData.time_shows_seen);
+    currentShowsTosee.textContent = profileData.epsiodes_tosee;
 }
