@@ -37,7 +37,7 @@ export async function getSisterData() {
     return data;
 }
 
-export async function majCurrentShows(nb) {
+export async function updateCurrentShows(nb) {
     if (!nb) nb = 1;
     const userId = await getUserId();
     const dataProfile = await getProfileData();
@@ -56,7 +56,7 @@ export async function majCurrentShows(nb) {
     }
 }
 
-export async function majEpisodesSeen(nb) {
+export async function updateEpisodesSeen(nb) {
     if (!nb) nb = 1;
     const userId = await getUserId();
     const dataProfile = await getProfileData();
@@ -75,7 +75,7 @@ export async function majEpisodesSeen(nb) {
     }
 }
 
-export async function majEpisodesTosee(nb) {
+export async function updateEpisodesTosee(nb) {
     if (!nb) nb = 1;
     const userId = await getUserId();
     const dataProfile = await getProfileData();
@@ -94,7 +94,7 @@ export async function majEpisodesTosee(nb) {
     }
 }
 
-export async function majFinishedShows(nb) {
+export async function updateFinishedShows(nb) {
     if (!nb) nb = 1;
     const userId = await getUserId();
     const dataProfile = await getProfileData();
@@ -113,7 +113,7 @@ export async function majFinishedShows(nb) {
     }
 }
 
-export async function majMoviesSeen(nb) {
+export async function updateMoviesSeen(nb) {
     if (!nb) nb = 1;
     const userId = await getUserId();
     const dataProfile = await getProfileData();
@@ -132,7 +132,7 @@ export async function majMoviesSeen(nb) {
     }
 }
 
-export async function majMoviesTosee(nb) {
+export async function updateMoviesTosee(nb) {
     if (!nb) nb = 1;
     const userId = await getUserId();
     const dataProfile = await getProfileData();
@@ -153,7 +153,7 @@ export async function majMoviesTosee(nb) {
     }
 }
 
-export async function majTimeMoviesSeen(movieId) {
+export async function updateTimeMoviesSeen(movieId) {
     const userId = await getUserId();
 
     const dataProfile = await getProfileData();
@@ -176,7 +176,7 @@ export async function majTimeMoviesSeen(movieId) {
     }
 }
 
-export async function majTimeShowsSeen(showId, nbEp, add) {
+export async function updateTimeShowsSeen(showId, nbEp, add) {
     if (!nbEp) nbEp = 1;
     if (!add) add = true;
     const userId = await getUserId();

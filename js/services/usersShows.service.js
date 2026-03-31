@@ -1,6 +1,6 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
-import { majCurrentShows, majFinishedShows } from "/Elina/js/services/profilesData.service.js";
+import { updateCurrentShows, updateFinishedShows } from "/Elina/js/services/profilesData.service.js";
 
 export async function addUserShow(showId) {
     const userId = await getUserId();
@@ -34,7 +34,7 @@ export async function cancelUserShow(showId) {
         return;
     }
 
-    await majCurrentShows(-1);
+    await updateCurrentShows(-1);
 }
 
 export async function deleteUserShow(showId) {
@@ -68,8 +68,8 @@ export async function finishUserShow(showId) {
         return;
     }
 
-    await majCurrentShows(-1);
-    await majFinishedShows();
+    await updateCurrentShows(-1);
+    await updateFinishedShows();
 }
 
 export async function getCurrentShows() {
@@ -122,7 +122,7 @@ export async function pauseUserShow(showId) {
         return;
     }
     
-    await majCurrentShows(-1);
+    await updateCurrentShows(-1);
 }
 
 export async function startUserShow(showId) {
@@ -140,5 +140,5 @@ export async function startUserShow(showId) {
         return;
     }
 
-    await majCurrentShows();
+    await updateCurrentShows();
 }

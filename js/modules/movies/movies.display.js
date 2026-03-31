@@ -19,7 +19,6 @@ export async function displayIndexMovies() {
 
     displayToseeMovies();
     const lastSeenMovies = await getLastSeenMovies();
-    console.log("Derniers films vus:", lastSeenMovies);
     await renderIndexLastMovies(lastSeenMovies);
     displayFavMovies();
 }
@@ -89,12 +88,10 @@ export async function displayIndexMoviesSister() {
 
 export async function displayFavMovies() {
     const favMovies = await getFavMovies();
-    console.log("Films favoris:", favMovies);
     await renderIndexFavMovies(favMovies);
 }
 
 export async function displayToseeMovies() {
     const toseeMovies = await getToseeMovies();
-    console.log("Films à voir:", toseeMovies);
     await renderIndexToseeMovies(toseeMovies);
 }

@@ -12,7 +12,9 @@ const BUTTONS_BY_STATUS = {
 };
 
 export async function createCarouselCard(m, index, list) {
+    console.log(m);
     const movie = normalizeMovie(m);
+    console.log(movie);
 
     const div = document.createElement("div");
     div.classList.add("card-carousel", `card-carousel-${list}`);

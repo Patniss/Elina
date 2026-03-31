@@ -1,11 +1,11 @@
 import { getUserId, getSisterId } from "/Elina/js/services/profiles.service.js";
-import { majMoviesSeen, majTimeMoviesSeen, majMoviesTosee } from "/Elina/js/services/profilesData.service.js";
+import { updateMoviesSeen, updateTimeMoviesSeen, updateMoviesTosee } from "/Elina/js/services/profilesData.service.js";
 import { supabase } from "/Elina/js/core/supabase.js";
 
 export async function addUserMovie(movieId) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_movies")
         .insert([{
             user_id: userId,
@@ -19,13 +19,13 @@ export async function addUserMovie(movieId) {
         return;
     }
 
-    await majMoviesTosee();
+    await updateMoviesTosee();
 }
 
 export async function deleteUserMovie(movieId) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_movies")
         .delete()
         .eq("user_id", userId)
@@ -37,7 +37,7 @@ export async function deleteUserMovie(movieId) {
         return;
     }
 
-    await majMoviesTosee(-1);
+    await updateMoviesTosee(-1);
 }
 
 export async function getDateSeen(movieId) {
@@ -382,7 +382,7 @@ export async function getUserMovie(movieId) {
 export async function updateDateSeenMovie(uuid, date_seen) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_movies")
         .update({date_seen: date_seen})
         .eq("user_id", userId)
@@ -395,7 +395,7 @@ export async function updateDateSeenMovie(uuid, date_seen) {
 export async function updateFavMovie(uuid, fav) {
     const userId = await getUserId();
     
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_movies")
         .update({fav: fav})
         .eq("user_id", userId)
@@ -408,7 +408,7 @@ export async function updateFavMovie(uuid, fav) {
 export async function updateOwnPoster(uuid, link) {
     const userId = await getUserId();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("users_movies")
         .update({own_poster: link})
         .eq("user_id", userId)
@@ -434,12 +434,12 @@ export async function updateSeenUserMovie(movieId, seenState) {
     }
 
     if (seenState === true) {
-        await majMoviesSeen(1);
-        await majTimeMoviesSeen(movieId);
-        await majMoviesTosee(-1);
+        await updateMoviesSeen(1);
+        await updateTimeMoviesSeen(movieId);
+        await updateMoviesTosee(-1);
     } else {
-        await majMoviesSeen(-1)
-        await majTimeMoviesSeen(movieId);
-        await majMoviesTosee(1);
+        await updateMoviesSeen(-1)
+        await updateTimeMoviesSeen(movieId);
+        await updateMoviesTosee(1);
     }
 }
