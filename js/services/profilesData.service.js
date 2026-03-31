@@ -26,7 +26,7 @@ export async function getSisterData() {
     const { data, error } = await supabase
         .from("profiles_data")
         .select("*")
-        .es("user_id", sisterId)
+        .eq("user_id", sisterId)
         .single();
 
     if (error) {
