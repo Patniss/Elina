@@ -25,7 +25,7 @@ function createMonth(table, nbYear, nbMonth) {
     }
 }
 
-export function displayCalendar(yearCalendar) {
+export function displayCalendar() {
     const yearDisplay = document.getElementById("year");
     const januaryDisplay = document.getElementById("january");
     const februaryDisplay = document.getElementById("february");
@@ -41,52 +41,53 @@ export function displayCalendar(yearCalendar) {
     const decemberDisplay = document.getElementById("december");
 
     const nowDate = new Date();
-    const nowYear = yearCalendar ?? new Date().getFullYear();
+    const nowYear = new Date().getFullYear();
+    let usingYear = nowYear;
 
     const linkPrev = document.getElementById("link-year-calendar-prev");
     const linkNext = document.getElementById("link-year-calendar-next");
-    linkPrev.href = `/Elina/daily/calendar/index.html?id=${(parseInt(nowYear) - 1)}`;
-    linkNext.href = `/Elina/daily/calendar/index.html?id=${(parseInt(nowYear) + 1)}`;
+    linkPrev.href = `/Elina/daily/calendar/index.html?id=${(parseInt(usingYear) - 1)}`;
+    linkNext.href = `/Elina/daily/calendar/index.html?id=${(parseInt(usingYear) + 1)}`;
 
     const linkJanuary = document.getElementById("link-january");
-    linkJanuary.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=01`;
+    linkJanuary.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=01`;
     const linkFebruary = document.getElementById("link-february");
-    linkFebruary.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=02`;
+    linkFebruary.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=02`;
     const linkMarch = document.getElementById("link-march");
-    linkMarch.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=03`;
+    linkMarch.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=03`;
     const linkApril = document.getElementById("link-april");
-    linkApril.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=04`;
+    linkApril.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=04`;
     const linkMay = document.getElementById("link-may");
-    linkMay.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=05`;
+    linkMay.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=05`;
     const linkJune = document.getElementById("link-june");
-    linkJune.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=06`;
+    linkJune.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=06`;
     const linkJuly = document.getElementById("link-july");
-    linkJuly.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=07`;
+    linkJuly.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=07`;
     const linkAugust = document.getElementById("link-august");
-    linkAugust.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=08`;
+    linkAugust.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=08`;
     const linkSeptember = document.getElementById("link-september");
-    linkSeptember.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=09`;
+    linkSeptember.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=09`;
     const linkOctober = document.getElementById("link-october");
-    linkOctober.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=10`;
+    linkOctober.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=10`;
     const linkNovember = document.getElementById("link-november");
-    linkNovember.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=11`;
+    linkNovember.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=11`;
     const linkDecember = document.getElementById("link-december");
-    linkDecember.href = `/Elina/daily/calendar/month.html?year=${nowYear}&month=12`;
+    linkDecember.href = `/Elina/daily/calendar/month.html?year=${usingYear}&month=12`;
 
-    createMonth(januaryDisplay, nowYear, 0);
-    createMonth(februaryDisplay, nowYear, 1);
-    createMonth(marchDisplay, nowYear, 2);
-    createMonth(aprilDisplay, nowYear, 3);
-    createMonth(mayDisplay, nowYear, 4);
-    createMonth(juneDisplay, nowYear, 5);
-    createMonth(julyDisplay, nowYear, 6);
-    createMonth(augustDisplay, nowYear, 7);
-    createMonth(septemberDisplay, nowYear, 8);
-    createMonth(octoberDisplay, nowYear, 9);
-    createMonth(novemberDisplay, nowYear, 10);
-    createMonth(decemberDisplay, nowYear, 11);
+    createMonth(januaryDisplay, usingYear, 0);
+    createMonth(februaryDisplay, usingYear, 1);
+    createMonth(marchDisplay, usingYear, 2);
+    createMonth(aprilDisplay, usingYear, 3);
+    createMonth(mayDisplay, usingYear, 4);
+    createMonth(juneDisplay, usingYear, 5);
+    createMonth(julyDisplay, usingYear, 6);
+    createMonth(augustDisplay, usingYear, 7);
+    createMonth(septemberDisplay, usingYear, 8);
+    createMonth(octoberDisplay, usingYear, 9);
+    createMonth(novemberDisplay, usingYear, 10);
+    createMonth(decemberDisplay, usingYear, 11);
 
-    yearDisplay.textContent = nowYear;
+    yearDisplay.textContent = usingYear;
 }
 
 export function displayMonthCalendar(year, month) {
