@@ -91,6 +91,7 @@ export async function createModalMovie(uuid) {
     const seenButton = buttons.seen;
 
     const seen = await getStatusMovie(uuid);
+    console.log(seen);
     updateMovieUI(seen, buttons, divButtons);
     divInfos.appendChild(divButtons);
 
