@@ -90,7 +90,7 @@ export function changeModeButton(button, mode, nextEpisode) {
 }
 
 export function createButton(type, link, id, nextEpisode) {
-    const button = document.createElement("a");
+    const button = document.createElement("button");
     button.classList.add("tag", "button", "is-hoverable", "mr-2");
     
     if (type === "details") {
