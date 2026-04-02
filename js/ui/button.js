@@ -83,8 +83,8 @@ export function changeModeButton(button, mode, nextEpisode) {
 
         case "finish":
             button.classList.add("is-success");
-            button.disabled = true;
             button.innerHTML = `<span class="icon"><i class="fa-solid fa-check"></i></span><span>Terminée</span>`;
+            button.disabled = true;
             break;
     }
 }
