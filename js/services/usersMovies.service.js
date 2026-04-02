@@ -142,6 +142,48 @@ export async function getFavUnklikeMovie(movieId) {
     return data?.fav || null;
 }
 
+export async function getGenresToseeMovie(genres) {
+    const userId = await getUserId();
+    let list = [];
+
+    if (genres.length > 0) {
+        genres.forEach(async(genre) => {
+            const { data, error } = await supabase
+                .from("users_movies")
+                .select("*, movies(*)")
+                .eq("user_id", userId)
+                .eq("seen", false)
+                .ilike("movies.genres", `%${genre}%`);
+
+            if (error) {
+                console.error(error);
+                return [];
+            }
+
+            data.forEach(movie => {
+                if (!list.includes(movie.id)) {
+                    list.push(movie.id);
+                }
+            });
+        });
+    } else {
+        const { data, error } = await supabase
+            .from("users_movies")
+            .select("movie_id")
+            .eq("user_id", userId)
+            .eq("seen", false);
+        
+        if (error) {
+            console.error(error);
+            return [];
+        }
+
+        list = data.id;
+    }
+
+    return list;
+}
+
 export async function getLastSeenMovies() {
     const userId = await getUserId();
 

@@ -1,11 +1,19 @@
 import { genres } from "/Elina/js/data/genres.js";
-import { getToseeMovies } from "/Elina/js/services/usersMovies.service.js";
+import { getGenresToseeMovie } from "/Elina/js/services/usersMovies.service.js";
 import { initGenres, initPlaforms } from "/Elina/js/ui/select.js";
 
 const platforms = ["Netflix", "Disney+", "Amazon Prime"];
 
 export async function getRandomMovie(selectedGenres, selectedPlatforms) {
-    const allToseeMovies = await getToseeMovies();
+    const list = await getGenresToseeMovie(selectedGenres);
+    if (list.length === 0) {
+        console.log("Aucun film");
+        // Aucun film
+        return;
+    }
+
+    const randomValue = list[Math.floor(Math.random() * list.length)];
+    console.log(randomValue);
 }
 
 export async function displayRandomMovie() {
