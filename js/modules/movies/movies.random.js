@@ -5,7 +5,10 @@ import { initGenres, initPlaforms } from "/Elina/js/ui/select.js";
 const platforms = ["Netflix", "Disney+", "Amazon Prime"];
 
 export async function getRandomMovie(selectedGenres, selectedPlatforms) {
+    console.log(selectedGenres);
     const list = await getGenresToseeMovie(selectedGenres);
+    console.log(list);
+
     if (list.length === 0) {
         console.log("Aucun film");
         // Aucun film
