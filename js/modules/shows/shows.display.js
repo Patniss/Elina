@@ -14,10 +14,10 @@ export async function displayIndexShows() {
     showsCurrent.textContent = profileData.current_shows;
     episodesSeen.textContent = profileData.episodes_seen;
     totalTimeSeen.textContent = formatTotalTime(profileData.time_shows_seen);
-    currentToseeEpisodes.textContent = profileData.epsiodes_tosee;
+    currentToseeEpisodes.textContent = profileData.episodes_tosee;
 
     const currentShowsDisplay = document.getElementById("current-shows");
 
-    const currentShows = await getCurrentShows;
+    const currentShows = await getCurrentShows();
     console.log(currentShows);
 }
