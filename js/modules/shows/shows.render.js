@@ -1,6 +1,6 @@
-import { showsStore } from "/Elina/js/data/shows.store.js";
-import { createShowCard } from "/Elina/js/modules/shows/shows.ui.js";
-import { render } from "/Elina/js/ui/render.js";
+import { showsStore, postersStore } from "/Elina/js/data/shows.store.js";
+import { createShowCard, createCarouselCard } from "/Elina/js/modules/shows/shows.ui.js";
+import { render, initCarousel } from "/Elina/js/ui/render.js";
 
 export async function renderAllShows(shows) {
     const container = document.getElementById("list-all-shows");
@@ -71,6 +71,24 @@ export async function renderPausedShows(shows) {
     render(container, showsStore, "paused", "shows", createShowCard, showsToRender);
 
     // renderPaginationPaused();
+}
+
+export async function renderPostersShow(seasons) {
+    const container = document.getElementById("posters-show");
+
+    const leftBtn = document.getElementById("posters-prev-btn");
+    const rightBtn = document.getElementById("posters-next-btn");
+
+    postersStore.seasons = seasons;
+
+    let index = 1;
+
+    for (const season of seasons) {
+        container.appendChild(await createCarouselCard(season, index, "poster"));
+        index++;
+    }
+
+    initCarousel("poster", leftBtn, rightBtn);
 }
 
 export async function renderTostartShows(shows) {

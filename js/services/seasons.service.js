@@ -1,7 +1,7 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 
 export async function addSeason(nbSeason, showId, nbEpisodes) {
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("seasons")
         .insert([{
             season: nbSeason,

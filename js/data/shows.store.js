@@ -51,3 +51,8 @@ export let showsStore = {
         this.notify();
     }
 }
+
+export let postersStore = {
+    seasons: [],
+    pageSize: 1
+}

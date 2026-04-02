@@ -12,14 +12,22 @@ const BUTTONS_BY_STATUS = {
     "finished": [ "finish", "details"]
 };
 
-export function updateShowUI(status, buttons, container) {
-    container.innerHTML = "";
-    const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
+export async function createCarouselCard(season, index, list) {
+    const div = document.createElement("div");
+    div.classList.add("card-carousel", `card-carousel-${list}`);
+    div.dataset.index = index;
 
-    types.forEach(type => {
-        const btn = buttons[type];
-        container.appendChild(btn);
-    });
+    const figure = document.createElement("figure");
+    figure.classList.add("image", "is-2by3", "poster-wrapper");
+
+    const img = document.createElement("img");
+    img.src = season.poster;
+    img.style.maxWidth = "100%";
+
+    figure.appendChild(img);
+    div.appendChild(figure);
+
+    return div;
 }
 
 export async function createShowCard(s) {
@@ -197,4 +205,14 @@ export async function createShowCard(s) {
     })
     
     return column;
+}
+
+export function updateShowUI(status, buttons, container) {
+    container.innerHTML = "";
+    const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
+
+    types.forEach(type => {
+        const btn = buttons[type];
+        container.appendChild(btn);
+    });
 }

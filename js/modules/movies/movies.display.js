@@ -1,4 +1,3 @@
-import { normalizeMovie } from "/Elina/js/modules/movies/movies.model.js";
 import { renderIndexToseeMovies, renderIndexFavMovies, renderIndexLastMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { renderIndexFavSisterMovies, renderIndexToseeSharedMovies, renderIndexLastSeenSisterMovies, renderIndexOurFavMovies, renderIndexOnlyToseeSisterMovies } from "/Elina/js/modules/movies/movies.render.js";
 import { getSisterPseudo } from "/Elina/js/services/profiles.service.js";
