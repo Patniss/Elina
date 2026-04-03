@@ -156,9 +156,9 @@ export async function movieContent(uuid) {
         if (modal) modal.classList.remove('is-active');
     });
     
-    const directors = getDirectorsMovie(uuid);
-    const scriptwriters = getScriptwritersMovie(uuid);
-    const actors = getActorsMovies(uuid);
+    const directors = await getDirectorsMovie(uuid);
+    const scriptwriters = await getScriptwritersMovie(uuid);
+    const actors = await getActorsMovies(uuid);
 
     console.log(directors);
     console.log(scriptwriters);
