@@ -215,12 +215,27 @@ export async function createShowStateEpisodes(s) {
         return document.createElement("div");
     }
 
-    const div = document.createElement("div");
-    const title = document.createElement("h1");
-    title.textContent = show.title;
-    div.appendChild(title);
+    const card = document.createElement("div");
+    card.classList.add("card");
 
-    return div;
+    const content = document.createElement("div");
+    content.classList.add("card-content", "columns")
+
+    const figureLogo = document.createElement("figure");
+    figureLogo.classList.add("column", "is-one-fifth", "image", "logo-wrapper", "py-2", "px-2");
+    const imgLogo = document.createElement("img");
+    imgLogo.src = show.logo;
+    imgLogo.alt = show.title;
+    figureLogo.appendChild(imgLogo);
+
+    const seasons = document.createElement("div");
+    seasons.classList.add("column");
+    seasons.textContent = "Les saisons s'affichent ici.";
+
+    content.append(figureLogo, seasons);
+    card.appendChild(content);
+
+    return card;
 }
 
 export function updateShowUI(status, buttons, container) {
