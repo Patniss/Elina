@@ -160,7 +160,9 @@ export async function getGenresToseeMovie(genres) {
                 return [];
             }
 
-            list = data.map(item => item.movie_id);
+            console.log(data);
+
+            list = data;
         });
     } else {
         const { data, error } = await supabase
