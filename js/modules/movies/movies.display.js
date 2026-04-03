@@ -24,7 +24,7 @@ export async function displayIndexMovies() {
 
 export async function displayIndexMoviesSister() {
     const sisterData = await getSisterData();
-    const userData = await getProfileData();
+    const profileData = await getProfileData();
     const pseudoSister = await getSisterPseudo();
     const sisterPseudo = document.querySelectorAll(".sister-pseudo");
     sisterPseudo.forEach(element => {
@@ -55,7 +55,7 @@ export async function displayIndexMoviesSister() {
     
     moviesToseeSister.textContent = sisterData.movies_tosee;
     moviesToseeCompare.textContent = formatPlusDisplay(compareTosee);
-    const compareTosee = parseInt(userData.movies_tosee) - parseInt(sisterData.movies_tosee);
+    const compareTosee = parseInt(profileData.movies_tosee) - parseInt(sisterData.movies_tosee);
     const classMoviesToseeCompare = compareTosee > 0 ? "has-text-danger" : "has-text-success";
     moviesToseeCompare.classList.add(classMoviesToseeCompare);
 
