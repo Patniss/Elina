@@ -170,11 +170,12 @@ export async function getGenresToseeMovie(genres) {
                 return data;
             })
         );
-
+        
+        console.log(results);
         results.forEach(moviesArray => {
-            console.log(results);
+            console.log(moviesArray);
             moviesArray.forEach(movie => {
-                console.log(moviesArray);
+                console.log(movie);
                 if (!list.find(m => m.movie_id === movie.movie_id)) {
                     list.push(movie);
                 }
