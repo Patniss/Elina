@@ -32,7 +32,7 @@ export async function initMovies() {
     sortFilterMovies(loadAllMovies, "all");
     onlyNoListDisplay();
 
-    await refreshMovies();
+    await refreshMovies(loadAllMovies, "all");
 }
 
 export async function initSeenMovies() {
@@ -68,9 +68,7 @@ export async function initToseeMovies() {
 }
 
 export async function refreshMovies(load, list) {
-    let movies;
-
-    movies = await load(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+    const movies = await load(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
     
     moviesStore.setMoviesAndPage(list, movies, 1);
 }
