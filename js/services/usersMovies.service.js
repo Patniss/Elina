@@ -147,10 +147,10 @@ export async function getGenresToseeMovie(genres) {
     let list = [];
 
     if (genres.length > 0) {
-        genres.forEach(genre => {
-            const { data, error } = supabase
+        for (const genre of genres) {
+            const { data, error } = await supabase
                 .from("users_movies")
-                .select("*, movies(*)")
+                .select("movie_id, movies(id)")
                 .eq("user_id", userId)
                 .eq("seen", false)
                 .ilike("movies.genres", `%${genre}%`);
@@ -162,8 +162,8 @@ export async function getGenresToseeMovie(genres) {
 
             console.log(data);
 
-            list = data;
-        });
+            list = data.map(item => item.movie_id);
+        };
     } else {
         const { data, error } = await supabase
             .from("users_movies")
