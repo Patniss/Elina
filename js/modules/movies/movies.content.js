@@ -164,8 +164,11 @@ export async function movieContent(uuid) {
         const btnAddDirector = document.createElement("button");
         btnAddDirector.classList.add("button", "tag", "is-link");
         btnAddDirector.textContent = "Ajouter un réalisateur";
-        btnAddDirector.dataset.target = "add-director";
         movieDirectors.appendChild(btnAddDirector);
+
+        btnAddDirector.addEventListener("click", () => {
+            document.getElementById("add-actor").classList.add("is-active");
+        });
     } else {
         directors.forEach(d, index => {
             const isLast = index === directors.length - 1;
@@ -194,8 +197,11 @@ export async function movieContent(uuid) {
         const btnAddScriptwriter = document.createElement("button");
         btnAddScriptwriter.classList.add("button", "tag", "is-link");
         btnAddScriptwriter.textContent = "Ajouter un scénariste";
-        btnAddScriptwriter.dataset.target = "add-scripwriter";
         movieScriptwriters.appendChild(btnAddScriptwriter);
+
+        btnAddScriptwriter.addEventListener("click", () => {
+            document.getElementById("add-scriptwriter").classList.add("is-active");
+        });
     } else {
         scriptwriters.forEach(s, index => {
             const isLast = index === directors.length - 1;
