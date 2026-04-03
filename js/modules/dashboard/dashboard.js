@@ -1,10 +1,11 @@
 import { supabase } from "/Elina/js/core/supabase.js";
-import { loadProfile } from "/Elina/js/services/profiles.service.js";
+import { loadProfile, getProfileData } from "/Elina/js/services/profiles.service.js";
 import { getSeenTimeMovie } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
 
 export async function customDashboard() {
   const session = await loadProfile();
+  const profileData = await getProfileData();
   const welcome = document.getElementById("welcome");
 
   if (welcome) {
@@ -16,7 +17,11 @@ export async function customDashboard() {
   let totalSeen = 0;
 
   if (session.movies) {
-    totalSeen += await getSeenTimeMovie();
+    totalSeen += profileData.time_movies_seen;
+  }
+
+  if (session.shows) {
+    totalSeen+= profileData.time_shows_seen;
   }
 
   timeEntertainment.textContent = formatTotalTime(totalSeen);
@@ -24,6 +29,7 @@ export async function customDashboard() {
 
 export async function customDashboardEntertainement() {
   const session = await loadProfile();
+  const profileData = await getProfileData();
 
   const homeMovies = document.getElementById("homeMovies");
   const homeShows = document.getElementById("homeShows");
@@ -32,12 +38,14 @@ export async function customDashboardEntertainement() {
 
   if (session.movies === false) homeMovies.style.display = "none"; else {
     const timeMovies = document.getElementById("time-movies");
-    const totalMinutesSeen = await getSeenTimeMovie();
-    
-    timeMovies.textContent = formatTotalTime(totalMinutesSeen);
+    timeMovies.textContent = formatTotalTime(profileData.time_movies_seen);
   }
 
-  if (session.shows === false) homeShows.style.display = "none";
+  if (session.shows === false) homeShows.style.display = "none"; else {
+    const timeShows = document.getElementById("time-shows");
+    timeShows.textContent = formatTotalTime(profileData.time_shows_seen);
+  }
+
   if (session.dramas === false) homeDramas.style.display = "none";
   if (session.books === false) homeBooks.style.display = "none";
 }
