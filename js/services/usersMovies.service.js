@@ -147,21 +147,33 @@ export async function getGenresToseeMovie(genres) {
     let list = [];
 
     if (genres.length > 0) {
-        genres.forEach(async(genre) => {
-            const { data, error } = await supabase
-                .from("users_movies")
-                .select("*, movies(*)")
-                .eq("user_id", userId)
-                .eq("seen", false)
-                .ilike("movies.genres", `%${genre}%`);
+        const results = await Promise.all(
+            genres.map(async (genre) => {
+                const { data, error } = await supabase
+                    .from("users_movies")
+                    .select("*, movies(*)")
+                    .eq("user_id", userId)
+                    .eq("seen", false)
+                    .ilike("movies.genres", `%${genre}%`);
 
-            if (error) {
-                console.error(error);
-                return [];
-            }
+                if (error) {
+                    console.error(error);
+                    return [];
+                }
 
-            data.forEach(movie => {
-                if (!list.includes(movie.id)) {
+                data.forEach(movie => {
+                    if (!list.includes(movie.id)) {
+                        list.push(movie.id);
+                    }
+                });
+
+                return data;
+            })
+        );
+
+        results.forEach(moviesArray => {
+            moviesArray.forEach(movie => {
+                if (!list.find(m => m.movie_id === movie.movie_id)) {
                     list.push(movie.id);
                 }
             });
@@ -178,7 +190,7 @@ export async function getGenresToseeMovie(genres) {
             return [];
         }
 
-        list = data.id;
+        list = data.map(item => item.movie_id);
     }
 
     return list;
