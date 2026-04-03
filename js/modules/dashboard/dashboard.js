@@ -1,6 +1,5 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { loadProfile, getProfileData } from "/Elina/js/services/profiles.service.js";
-import { getSeenTimeMovie } from "/Elina/js/services/usersMovies.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
 
 export async function customDashboard() {
