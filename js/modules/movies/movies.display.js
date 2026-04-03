@@ -54,8 +54,8 @@ export async function displayIndexMoviesSister() {
     moviesMinutesSeenCompare.classList.add(classMoviesMinutesSeenCompare);
     
     moviesToseeSister.textContent = sisterData.movies_tosee;
-    moviesToseeCompare.textContent = formatPlusDisplay(compareTosee);
     const compareTosee = parseInt(profileData.movies_tosee) - parseInt(sisterData.movies_tosee);
+    moviesToseeCompare.textContent = formatPlusDisplay(compareTosee);
     const classMoviesToseeCompare = compareTosee > 0 ? "has-text-danger" : "has-text-success";
     moviesToseeCompare.classList.add(classMoviesToseeCompare);
 
