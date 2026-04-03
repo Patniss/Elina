@@ -1,6 +1,7 @@
 import { filters } from "/Elina/js/data/genres.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { refreshMovies } from "/Elina/js/modules/movies/movies.controller.js";
+import { loadAllMovies, loadToseeMovies, loadSeenMovies, loadNoListMovies } from "/Elina/js/modules/movies/movies.load.js";
 import { renderPaginationAll } from "/Elina/js/modules/movies/movies.pagination.js";
 import { toggleDropdown } from "/Elina/js/ui/toggles.js";
 
@@ -29,12 +30,12 @@ export function onlyNoListDisplay() {
             moviesStore.catFilter = "";
         }
 
-        refreshMovies();
+        refreshMovies(loadAllMovies, "all");
         renderPaginationAll();
     })
 }
 
-export function sortFilterMovies() {
+export function sortFilterMovies(load, list) {
     const btnSort = document.getElementById("button-content-sort");
     const contentSort = document.getElementById("dropdown-content-sort");
     const btnFilter = document.getElementById("button-content-filter");
@@ -55,7 +56,7 @@ export function sortFilterMovies() {
             moviesStore.genreFilter = genre;
             displayFilter.textContent = label;
             contentFilter.classList.add("is-hidden");
-            refreshMovies();
+            refreshMovies(load, list);
         })
     });
 
@@ -69,7 +70,7 @@ export function sortFilterMovies() {
             });
             moviesStore.sortField = field;
             moviesStore.sortAsc = asc;
-            refreshMovies();
+            refreshMovies(load, list);
             renderPaginationAll();
         })
     });

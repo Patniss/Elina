@@ -9,30 +9,12 @@ export async function changePage(page) {
     moviesStore.setCurrentPage("all", page);
 }
 
-export async function refreshMovies() {
-    let movies;
-    if (moviesStore.catFilter === "nolist") {
-        movies = await loadNoListMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-    } else movies = await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-    
-    moviesStore.setMoviesAndPage("all", movies, 1);
-}
-
 export async function refreshSeenMovies() {
     try {
         const movies = await loadSeenMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
         moviesStore.setMoviesAndPage("seen", movies, 1);
     } catch (error) {
         console.error("Erreur refreshSeenMovies:", error);
-    }
-}
-
-export async function refreshToseeMovies() {
-    try {
-        const movies = await loadToseeMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-        moviesStore.setMoviesAndPage("tosee", movies, 1);
-    } catch (error) {
-        console.error("Erreur refreshToseeMovies:", error);
     }
 }
 
@@ -47,7 +29,7 @@ export async function initMovies() {
     });
 
     initResearchAllMovie();
-    sortFilterMovies();
+    sortFilterMovies(loadAllMovies, "all");
     onlyNoListDisplay();
 
     await refreshMovies();
@@ -64,7 +46,7 @@ export async function initSeenMovies() {
     });
 
     initResearchSeenMovies();
-    sortFilterMovies();
+    sortFilterMovies(loadSeenMovies, "seen");
 
     await refreshSeenMovies();
 }
@@ -80,7 +62,24 @@ export async function initToseeMovies() {
     });
 
     initResearchToseeMovies();
-    sortFilterMovies();
+    sortFilterMovies(loadToseeMovies, "tosee");
 
     await refreshToseeMovies();
+}
+
+export async function refreshMovies(load, list) {
+    let movies;
+
+    movies = await load(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+    
+    moviesStore.setMoviesAndPage(list, movies, 1);
+}
+
+export async function refreshToseeMovies() {
+    try {
+        const movies = await loadToseeMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+        moviesStore.setMoviesAndPage("tosee", movies, 1);
+    } catch (error) {
+        console.error("Erreur refreshToseeMovies:", error);
+    }
 }
