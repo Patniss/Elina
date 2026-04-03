@@ -147,39 +147,20 @@ export async function getGenresToseeMovie(genres) {
     let list = [];
 
     if (genres.length > 0) {
-        const results = await Promise.all(
-            genres.map(async (genre) => {
-                const { data, error } = await supabase
-                    .from("users_movies")
-                    .select("*, movies(*)")
-                    .eq("user_id", userId)
-                    .eq("seen", false)
-                    .ilike("movies.genres", `%${genre}%`);
+        genres.forEach(genre => {
+            const { data, error } = supabase
+                .from("users_movies")
+                .select("movie_id, movies(genres)")
+                .eq("user_id", userId)
+                .eq("seen", false)
+                .ilike("movies.genres", `%${genre}%`);
 
-                if (error) {
-                    console.error(error);
-                    return [];
-                }
+            if (error) {
+                console.error(error);
+                return [];
+            }
 
-                data.forEach(movie => {
-                    if (!list.includes(movie.id)) {
-                        list.push(movie.id);
-                    }
-                });
-
-                return data;
-            })
-        );
-        
-        console.log(results);
-        results.forEach(moviesArray => {
-            console.log(moviesArray);
-            moviesArray.forEach(movie => {
-                console.log(movie);
-                if (!list.find(m => m.movie_id === movie.movie_id)) {
-                    list.push(movie);
-                }
-            });
+            list = data.map(item => item.movie_id);
         });
     } else {
         const { data, error } = await supabase
