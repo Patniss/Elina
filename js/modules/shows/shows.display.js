@@ -9,7 +9,6 @@ export async function displayIndexShows() {
     const currentToseeEpisodes = document.getElementById("tosee-current");
 
     const profileData = await getProfileData();
-    console.log(profileData);
 
     showsCurrent.textContent = profileData.current_shows;
     episodesSeen.textContent = profileData.episodes_seen;

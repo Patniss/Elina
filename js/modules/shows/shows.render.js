@@ -1,5 +1,5 @@
 import { showsStore, postersStore } from "/Elina/js/data/shows.store.js";
-import { createShowCard, createCarouselCard } from "/Elina/js/modules/shows/shows.ui.js";
+import { createShowCard, createCarouselCard, createShowStateEpisodes } from "/Elina/js/modules/shows/shows.ui.js";
 import { render, initCarousel } from "/Elina/js/ui/render.js";
 
 export async function renderAllShows(shows) {
@@ -54,6 +54,14 @@ export async function renderFinishedShows(shows) {
     render(container, showsStore, "finished", "shows", createShowCard, showsToRender);
 
     // renderPaginationFinished();
+}
+
+export async function renderIndexCurrentShows(shows) {
+    const container = document.getElementById("current-shows");
+
+    const showsToRender = shows || showsStore.shows.current;
+
+    render(container, showsStore, "current", 'shows', createShowStateEpisodes, showsToRender);
 }
 
 export async function renderPausedShows(shows) {

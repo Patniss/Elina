@@ -77,7 +77,7 @@ export async function getCurrentShows() {
 
     const { data, error } = await supabase
         .from("users_shows")
-        .select("*")
+        .select("*, shows(*)")
         .eq("user_id", userId)
         .eq("user_state", "started");
 

@@ -207,6 +207,22 @@ export async function createShowCard(s) {
     return column;
 }
 
+export async function createShowStateEpisodes(s) {
+    const show = normalizeShow(s);
+
+    if (!show) {
+        console.error("Invalid normalized show:", s);
+        return document.createElement("div");
+    }
+
+    const div = document.createElement("div");
+    const title = document.createElement("h1");
+    title.textContent = show.title;
+    div.appendChild(title);
+
+    return div;
+}
+
 export function updateShowUI(status, buttons, container) {
     container.innerHTML = "";
     const types = BUTTONS_BY_STATUS[status] ?? BUTTONS_BY_STATUS.null;
