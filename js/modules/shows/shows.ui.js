@@ -1,5 +1,5 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
-import { addUserSeason, getNextEpisode, seeNextEpisode } from "/Elina/js/services/usersSeasons.service.js";
+import { addUserSeason, getNextEpisode, seeNextEpisode, getCurrentSeason, getSeenEpSeason } from "/Elina/js/services/usersSeasons.service.js";
 import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
 import { createButtons, handleButtonState, changeModeButton } from "/Elina/js/ui/button.js";
 
@@ -228,11 +228,30 @@ export async function createShowStateEpisodes(s) {
     imgLogo.alt = show.title;
     figureLogo.appendChild(imgLogo);
 
-    const seasons = document.createElement("div");
-    seasons.classList.add("column");
-    seasons.textContent = "Les saisons s'affichent ici.";
+    const divSeasons = document.createElement("div");
+    divSeasons.classList.add("column");
 
-    content.append(figureLogo, seasons);
+    const divCurrentSeason = document.createElement("div");
+    divCurrentSeason.classList.add("tags");
+
+    const currentSeason = await getCurrentSeason(show.id);
+    const spanSeason = document.createElement("span");
+    spanSeason.classList.add("tag", "is-primary");
+    spanSeason.textContent = `Season ${currentSeason.season}`;
+    divCurrentSeason.appendChild(spanSeason);
+
+    const seenEpisodesCurrentSeason = await getSeenEpSeason(currentSeason.id);
+    for (let ep = 1; ep <= currentSeason.nb_episodes.length; ep++) {
+        const span = document.createElement("span");
+        span.classList.add("tag");
+        span.textContent = ep;
+        span.classList.add("is-success", seenEpisodesCurrentSeason > ep ?? "is-light");
+        divCurrentSeason.appendChild(span);
+    }
+
+    divSeasons.appendChild(divCurrentSeason);
+
+    content.append(figureLogo, divSeasons);
     card.appendChild(content);
 
     return card;
