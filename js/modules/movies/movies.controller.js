@@ -68,7 +68,9 @@ export async function initToseeMovies() {
 }
 
 export async function refreshMovies(load, list) {
-    const movies = await load(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+    const movies = moviesStore.catFilter === "nolist"
+        ? await loadNoListMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter)
+        : await load(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
     
     moviesStore.setMoviesAndPage(list, movies, 1);
 }
