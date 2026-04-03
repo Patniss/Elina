@@ -167,7 +167,7 @@ export async function movieContent(uuid) {
         movieDirectors.appendChild(btnAddDirector);
 
         btnAddDirector.addEventListener("click", () => {
-            document.getElementById("add-actor").classList.add("is-active");
+            document.getElementById("add-director").classList.add("is-active");
         });
     } else {
         directors.forEach(d, index => {

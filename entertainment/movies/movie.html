@@ -107,9 +107,10 @@
             <div class="modal-background"></div>
             <div class="modal-content box">
                 <form id="add-director-form">
+                    <h1 class="title">Ajouter un réalisateur à <i class="movie-title"></i></h1>
                     <div class="field">
                         <div>
-                            <label class="label">Réalisateur</label>
+                            <label class="label">Choisir un.e réalisateur.rice</label>
                             <div class="select">
                                 <select size="8" id="select-director" style="width: 100%;" required></select>
                             </div>
@@ -124,9 +125,10 @@
             <div class="modal-background"></div>
             <div class="modal-content box">
                 <form id="add-scriptwriter-form">
+                    <h1 class="title">Ajouter un.e scénariste à <i class="movie-title"></i></h1>
                     <div class="field">
                         <div>
-                            <label class="label">Scénariste</label>
+                            <label class="label">Choisir un scénariste</label>
                             <div class="select">
                                 <select size="8" id="select-scripwriter" style="width: 100%;" required></select>
                             </div>
@@ -141,9 +143,10 @@
             <div class="modal-background"></div>
             <div class="modal-content box">
                 <form id="add-actor-form">
+                    <h1 class="title">Ajouter un rôle à <i class="movie-title"></i></h1>
                     <div class="field">
                         <div>
-                            <label class="label">Casting</label>
+                            <label class="label">Choisir un acteur</label>
                             <div class="select">
                                 <select size="8" id="select-actor" style="width: 100%;" required></select>
                             </div>
@@ -167,6 +170,9 @@
     const movieId = params.get("id");
     
     movieContent(movieId);
+
+    import { completeMovie } from "/Elina/js/modules/movies/movies.complete.js";
+    completeMovie();
 </script>
 
 <script type="module">
