@@ -1,3 +1,4 @@
+import { renderIndexCurrentShows } from "/Elina/js/modules/shows/shows.render.js";
 import { getProfileData } from "/Elina/js/services/profilesData.service.js";
 import { getCurrentShows } from "/Elina/js/services/usersShows.service.js";
 import { formatTotalTime } from "/Elina/js/utils/format.js";
@@ -15,8 +16,6 @@ export async function displayIndexShows() {
     totalTimeSeen.textContent = formatTotalTime(profileData.time_shows_seen);
     currentToseeEpisodes.textContent = profileData.episodes_tosee;
 
-    const currentShowsDisplay = document.getElementById("current-shows");
-
     const currentShows = await getCurrentShows();
-    console.log(currentShows);
+    renderIndexCurrentShows(currentShows);
 }
