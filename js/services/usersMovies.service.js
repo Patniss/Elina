@@ -174,7 +174,7 @@ export async function getGenresToseeMovie(genres) {
         results.forEach(moviesArray => {
             moviesArray.forEach(movie => {
                 if (!list.find(m => m.movie_id === movie.movie_id)) {
-                    list.push(movie);
+                    list.push(movie.movie_id);
                 }
             });
         });
