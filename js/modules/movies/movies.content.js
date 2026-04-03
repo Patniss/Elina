@@ -160,14 +160,11 @@ export async function movieContent(uuid) {
     const scriptwriters = await getScriptwritersMovie(uuid);
     const actors = await getActorsMovies(uuid);
 
-    console.log(directors);
-    console.log(scriptwriters);
-    console.log(actors);
-
     if (directors.length === 0) {
         const btnAddDirector = document.createElement("button");
         btnAddDirector.classList.add("button", "tag", "is-link");
         btnAddDirector.textContent = "Ajouter un réalisateur";
+        movieDirectors.appendChild(btnAddDirector);
     } else {
         directors.forEach(d, index => {
             const isLast = index === directors.length - 1;
@@ -196,6 +193,7 @@ export async function movieContent(uuid) {
         const btnAddScriptwriter = document.createElement("button");
         btnAddScriptwriter.classList.add("button", "tag", "is-link");
         btnAddScriptwriter.textContent = "Ajouter un scénariste";
+        movieScriptwriters.appendChild(btnAddScriptwriter);
     } else {
         scriptwriters.forEach(s, index => {
             const isLast = index === directors.length - 1;
