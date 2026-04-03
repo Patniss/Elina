@@ -164,6 +164,7 @@ export async function movieContent(uuid) {
         const btnAddDirector = document.createElement("button");
         btnAddDirector.classList.add("button", "tag", "is-link");
         btnAddDirector.textContent = "Ajouter un réalisateur";
+        btnAddDirector.dataset.target = "add-director";
         movieDirectors.appendChild(btnAddDirector);
     } else {
         directors.forEach(d, index => {
@@ -193,6 +194,7 @@ export async function movieContent(uuid) {
         const btnAddScriptwriter = document.createElement("button");
         btnAddScriptwriter.classList.add("button", "tag", "is-link");
         btnAddScriptwriter.textContent = "Ajouter un scénariste";
+        btnAddScriptwriter.dataset.target = "add-scripwriter";
         movieScriptwriters.appendChild(btnAddScriptwriter);
     } else {
         scriptwriters.forEach(s, index => {

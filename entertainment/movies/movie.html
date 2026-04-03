@@ -79,7 +79,7 @@
 
         <div id="change-own-poster" class="modal">
             <div class="modal-background"></div>
-            <div class="modal-content">
+            <div class="modal-content box">
                 <h5 class="title">Personnaliser votre poster</h5>
                 <div class="is-flex">
                     <input class="input mr-4" type="text" id="input-change-own-poster" />
@@ -92,13 +92,64 @@
 
         <div id="change-date-seen" class="modal">
             <div class="modal-background"></div>
-            <div class="modal-content">
+            <div class="modal-content box">
                 <h5 class="title">Changer la date de visionnage</h5>
                 <div class="is-flex">
                     <input class="input mr-4" type="date" id="input-change-date-seen" />
                     <button class="button" id="button-change-date-seen">Modifier</button>
                 </div>
                 <button class="tag mt-2" id="button-null-date-seen">Supprimer la date</button>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+
+        <div id="add-director" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content box">
+                <form id="add-director-form">
+                    <div class="field">
+                        <div>
+                            <label class="label">Réalisateur</label>
+                            <div class="select">
+                                <select size="8" id="select-director" style="width: 100%;" required></select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+
+        <div id="add-scriptwriter" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content box">
+                <form id="add-scriptwriter-form">
+                    <div class="field">
+                        <div>
+                            <label class="label">Scénariste</label>
+                            <div class="select">
+                                <select size="8" id="select-scripwriter" style="width: 100%;" required></select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+
+        <div id="add-actor" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content box">
+                <form id="add-actor-form">
+                    <div class="field">
+                        <div>
+                            <label class="label">Casting</label>
+                            <div class="select">
+                                <select size="8" id="select-actor" style="width: 100%;" required></select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <button class="modal-close is-large" aria-label="close"></button>
         </div>
