@@ -150,7 +150,7 @@ export async function getGenresToseeMovie(genres) {
         genres.forEach(genre => {
             const { data, error } = supabase
                 .from("users_movies")
-                .select("movie_id, movies(genres)")
+                .select("movie_id, movies(*)")
                 .eq("user_id", userId)
                 .eq("seen", false)
                 .ilike("movies.genres", `%${genre}%`);
