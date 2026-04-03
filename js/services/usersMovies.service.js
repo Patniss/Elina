@@ -172,9 +172,11 @@ export async function getGenresToseeMovie(genres) {
         );
 
         results.forEach(moviesArray => {
+            console.log(results);
             moviesArray.forEach(movie => {
+                console.log(moviesArray);
                 if (!list.find(m => m.movie_id === movie.movie_id)) {
-                    list.push(movie.movie_id);
+                    list.push(movie);
                 }
             });
         });
