@@ -28,8 +28,10 @@ export function onlyNoListDisplay() {
     buttonDisplay.addEventListener("click", () => {
         if (moviesStore.catFilter !== "nolist") {
             moviesStore.catFilter = "nolist";
+            buttonDisplay.textContent = "Tous les films";
         } else {
             moviesStore.catFilter = "";
+            buttonDisplay.textContent = "Films non ajoutés";
         }
 
         refreshMovies(loadAllMovies, "all");
