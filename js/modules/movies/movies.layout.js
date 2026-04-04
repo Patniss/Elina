@@ -12,9 +12,10 @@ const sortButtons = [
     { id: "sort-91", field: "year", asc: false },
 ];
 
-export function filterMovies(query, genre) {
+export function filterMovies(query, genre, fromUsersMovies = false) {
     if (genre) {
-        query = query.ilike("genres", `%${genre}%`);
+        const table = fromUsersMovies ? "movies.genres" : "genres";
+        query = query.ilike(table, `%${genre}%`);
     }
 
     return query;

@@ -45,7 +45,7 @@ export async function loadSeenMovies(field, asc, filter) {
         .eq("seen", true);
     
     query = sortUsersMovies(query, field, asc);
-    query = filterMovies(query, filter);
+    query = filterMovies(query, filter, true);
 
     const movies = await querySupabase(query);
 
@@ -61,7 +61,7 @@ export async function loadToseeMovies(field, asc, filter) {
         .eq("seen", false);
     
     query = sortUsersMovies(query, field, asc);
-    query = filterMovies(query, filter);
+    query = filterMovies(query, filter, true);
 
     const movies = await querySupabase(query);
 
