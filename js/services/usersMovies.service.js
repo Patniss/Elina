@@ -145,9 +145,11 @@ export async function getFavUnklikeMovie(movieId) {
 export async function getGenresToseeMovie(genres) {
     const userId = await getUserId();
     let list = [];
+    console.log(genres);
 
     if (genres.length > 0) {
         for (const genre of genres) {
+            console.log(genre);
             const { data, error } = await supabase
                 .from("users_movies")
                 .select("movie_id, movies(id)")
