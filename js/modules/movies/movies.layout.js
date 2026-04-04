@@ -59,22 +59,16 @@ export function sortFilterMovies(load, list, refresh, renderPagination) {
             moviesStore.genreFilter = genre;
             displayFilter.textContent = label;
             contentFilter.classList.add("is-hidden");
-            refreshMovies(load, list);
+            refresh(load, list);
         })
     });
 
     sortButtons.forEach(({id, field, asc}) => {
         const btn = document.getElementById(id);
         btn.addEventListener("click", () => {
-            sortButtons.forEach(({ id: otherId }) => {
-                const el = document.getElementById(otherId);
-                if (otherId !== id) el.classList.remove("is-hidden");
-                else el.classList.add("is-hidden");
-            });
             moviesStore.sortField = field;
             moviesStore.sortAsc = asc;
             refresh(load, list);
-            renderPagination();
         })
     });
 }
