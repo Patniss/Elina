@@ -162,11 +162,15 @@ export async function getGenresToseeMovie(genres) {
                 return [];
             }
 
-            if (data.movies !== null) {
-                console.log(data.movies);
-            }
+            let listGenres = [];
 
-            list = data.map(item => item.movie_id);
+            data.forEach(item => {
+                if (item.movies !== null) {
+                    listGenres.push(item);
+                }
+            });
+
+            list = listGenres.map(item => item.movie_id);
         };
     } else {
         const { data, error } = await supabase
