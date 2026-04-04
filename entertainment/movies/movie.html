@@ -107,15 +107,52 @@
             <div class="modal-background"></div>
             <div class="modal-content box">
                 <form id="add-director-form">
+
                     <h1 class="title">Ajouter un réalisateur à <i class="movie-title"></i></h1>
+
                     <div class="field">
                         <div>
-                            <label class="label">Choisir un.e réalisateur.rice</label>
+                            <label class="label" for="select-director">Choisir un.e réalisateur.rice</label>
                             <div class="select is-multiple">
-                                <select id="select-director" style="width: 100%;" required class="input" multiple></select>
+                                <select name="select-director" id="select-director" style="max-width: 100%; min-width: 200px;" class="input" multiple required></select>
                             </div>
                         </div>
                     </div>
+
+                    <div class="field">
+                        <label class="label" for="firstname-director">Prénom du réalisateur</label>
+                        <div class="control">
+                            <input class="input" type="text" id="firstname-director" name="firstname-director" />
+                        </div>
+                        <label class="label" for="lastname-director">Nom du réalisteur</label>
+                        <div class="control">
+                            <input class="input" type="text" name="lastname-director" id="lastname-director" />
+                        </div>
+                        <label class="label" for="birthdate-director">Date de naissance du réalisateur</label>
+                        <div class="control">
+                            <input class="input" type="date" name="birthdate-director" id="birthdate-director" />
+                        </div>
+                        <label class="label" for="is-dead-director">
+                            <input class="checkbox" type="checkbox" name="is-dead-director" id="is-dead-director" /> Mort
+                        </label>
+                        <div class="is-hidden" id="div-deathdate-director">
+                            <label class="label" for="deathdate-director">Date de mort du réalisateur</label>
+                            <div class="control">
+                                <input class="input" type="date" name="deathdate-director" id="deathdate-director" />
+                            </div>
+                        </div>
+                        <label class="label" for="nationalities-director">Nationalité(s) du réalisateur</label>
+                        <div class="select is-multiple">
+                            <select name="nationalities-director" id="nationalities-director" style="max-width: 100%; min-width: 200px;" multiple></select>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <button class="button is-primary" type="submit" id="btn-add-director">
+                            <span class="icon"><i class="fas fa-plus"></i></span><span>Ajouter le réalisateur</span>
+                        </button>
+                    </div>
+
                 </form>
             </div>
             <button class="modal-close is-large" aria-label="close"></button>
@@ -129,8 +166,8 @@
                     <div class="field">
                         <div>
                             <label class="label">Choisir un scénariste</label>
-                            <div class="select">
-                                <select size="8" id="select-scriptwriter" style="width: 100%;" required></select>
+                            <div class="select is-multiple">
+                                <select size="8" id="select-scriptwriter" style="width: 100%;" multiple required></select>
                             </div>
                         </div>
                     </div>
