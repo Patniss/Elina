@@ -162,7 +162,7 @@ export async function getGenresToseeMovie(genres) {
                 return [];
             }
 
-            console.log("Movie:", data.movies);
+            console.log("Films filtrés genre:", data);
 
             list = data.map(item => item.movie_id);
         };
