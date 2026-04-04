@@ -14,6 +14,7 @@ const sortButtons = [
 
 export function filterMovies(query, genre, fromUsersMovies = false) {
     if (genre) {
+        console.log(query);
         const table = fromUsersMovies ? "movies" : "genres";
         query = query.ilike(table, `%${genre}%`);
     }
