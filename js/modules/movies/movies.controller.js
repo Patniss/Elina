@@ -20,10 +20,10 @@ export async function initMovies() {
     });
 
     initResearchAllMovie();
-    sortFilterMovies(loadAllMovies, "all", refreshMovies, renderPaginationAll);
+    sortFilterMovies(loadAllMovies, "all", refreshMovies);
     onlyNoListDisplay();
 
-    await refreshMovies(loadAllMovies, "all");
+    await refreshMovies();
 }
 
 export async function initSeenMovies() {
@@ -37,7 +37,7 @@ export async function initSeenMovies() {
     });
 
     initResearchSeenMovies();
-    sortFilterMovies(loadSeenMovies, "seen", refreshSeenMovies, renderPaginationSeen);
+    sortFilterMovies(loadSeenMovies, "seen", refreshSeenMovies);
 
     await refreshSeenMovies();
 }
@@ -53,17 +53,17 @@ export async function initToseeMovies() {
     });
 
     initResearchToseeMovies();
-    sortFilterMovies(loadToseeMovies, "tosee", refreshToseeMovies, renderPaginationTosee);
+    sortFilterMovies(loadToseeMovies, "tosee", refreshToseeMovies);
 
     await refreshToseeMovies();
 }
 
-export async function refreshMovies(load, list) {
+export async function refreshMovies() {
     const movies = moviesStore.catFilter === "nolist"
         ? await loadNoListMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter)
-        : await load(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+        : await loadAllMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
     
-    moviesStore.setMoviesAndPage(list, movies, 1);
+    moviesStore.setMoviesAndPage("all", movies, 1);
 }
 
 export async function refreshSeenMovies() {

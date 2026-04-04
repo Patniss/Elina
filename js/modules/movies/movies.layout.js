@@ -33,12 +33,12 @@ export function onlyNoListDisplay() {
             buttonDisplay.textContent = "Films non ajoutés";
         }
 
-        refreshMovies(loadAllMovies, "all");
+        refreshMovies();
         renderPaginationAll();
     })
 }
 
-export function sortFilterMovies(load, list, refresh, renderPagination) {
+export function sortFilterMovies(load, list, refresh) {
     const btnSort = document.getElementById("button-content-sort");
     const contentSort = document.getElementById("dropdown-content-sort");
     const btnFilter = document.getElementById("button-content-filter");
