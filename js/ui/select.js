@@ -11,29 +11,6 @@ export function addPeopleToAllSelects(selects, id, name) {
     });
 }
 
-export function bindPeopleModalNewTag(selectElement) {
-    if (!selectElement) return;
-
-    const modal = document.getElementById("add-new-people-modal");
-    const inputFirstname = document.getElementById("firstname");
-    const inputLastname = document.getElementById("lastname");
-
-    $(selectElement).on("select2:select", function (e) {
-        const data = e.params.data;
-        
-        if (data.newTag) {
-            activePeopleSelect = selectElement;
-            pendingTagText = data.text;
-
-            const { firstName, lastName } = parseFullName(data.text);
-            
-            modal.classList.add("is-active");
-            inputFirstname.value = firstName;
-            inputLastname.value = lastName;
-        }
-    });
-}
-
 export function clearPeopleSelectState() {
     activePeopleSelect = null;
     pendingTagText = null;

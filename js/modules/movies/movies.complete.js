@@ -8,10 +8,9 @@ export async function completeMovie() {
     const people = await getAllPeople();
 
     initPeopleSelect(selectPeople, people);
-
     initPeopleSelect2NewTag(selectPeople, "Saisir un nom…");
 
-    selectPeople.on("select2:select", function (e) {
+    $(selectPeople).on("select2:select", function (e) {
         const data = e.params.data;
 
         if (data.newTag) {
@@ -57,5 +56,5 @@ export async function completeMovie() {
                 deathdatePeople.required = false;
             });
         }
-    })
+    });
 }
