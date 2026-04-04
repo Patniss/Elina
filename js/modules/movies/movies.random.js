@@ -1,4 +1,5 @@
 import { genres } from "/Elina/js/data/genres.js";
+import { getMovie } from "/Elina/js/services/movies.service.js";
 import { getGenresToseeMovie } from "/Elina/js/services/usersMovies.service.js";
 import { initGenres, initPlaforms } from "/Elina/js/ui/select.js";
 
@@ -15,7 +16,11 @@ export async function getRandomMovie(selectedGenres, selectedPlatforms) {
     }
 
     const randomValue = list[Math.floor(Math.random() * list.length)];
-    console.log(randomValue);
+    const movie = await getMovie(randomValue);
+    document.getElementById("random-movie").classList.remove("is-hidden");
+    const posterMovie = document.getElementById("img-random-movie");
+    posterMovie.src = movie.poster;
+    posterMovie.alt = movie.title;
 }
 
 export async function displayRandomMovie() {

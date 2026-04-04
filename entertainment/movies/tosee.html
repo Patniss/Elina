@@ -112,7 +112,7 @@
                     <span class="icon"><i class="fa-solid fa-arrow-down-9-1"></i>
                     </span>Trier par sortie (plus récent au moins récent)</span>
                   </a>
-                  <a href="#" class="dropdown-item" style="display: none;" id="sort-19">
+                  <a href="#" class="dropdown-item" id="sort-19">
                     <span class="icon"><i class="fa-solid fa-arrow-down-1-9"></i>
                     </span>Trier par sortie (moins récent au plus récent)</span>
                   </a>
@@ -135,37 +135,47 @@
 
     <div class="modal" id="modal-random-movie">
       <div class="modal-background"></div>
-      <div class="modal-content box">
-        <form>
+      <div class="modal-content box columns">
 
-          <h3 class="title is-4">Générer un film aléatoire</h3>
+        <div class="column">
+          <form>
 
-          <div class="field">
-            <div>
-              <label class="label">Filter par genres :</label>
-              <div class="select is-multiple">
-                <select multiple="multiple" size="8" id="movie-random-genres" style="width: 100%;"></select>
+            <h3 class="title is-4">Générer un film aléatoire</h3>
+
+            <div class="field">
+              <div>
+                <label class="label">Filter par genres :</label>
+                <div class="select is-multiple">
+                  <select multiple="multiple" size="8" id="movie-random-genres" style="width: 100%;"></select>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="field">
-            <div>
-              <label class="label">Filter par plateforme :</label>
-              <div class="select is-multiple">
-                <select multiple="multiple" size="8" id="movie-random-platforms" style="width: 100%;" disabled></select>
-                <p><i>Cette fonctionnalité sera bientôt disponible…</i></p>
+            <div class="field">
+              <div>
+                <label class="label">Filter par plateforme :</label>
+                <div class="select is-multiple">
+                  <select multiple="multiple" size="8" id="movie-random-platforms" style="width: 100%;" disabled></select>
+                  <p><i>Cette fonctionnalité sera bientôt disponible…</i></p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="control">
-            <button class="button is-primary" type="button" id="movie-random-button">
-              <span class="icon"><i class="fas fa-dice"></i></span><span>Lancer le dé</span>
-            </button>
-          </div>
+            <div class="control">
+              <button class="button is-primary" type="button" id="movie-random-button">
+                <span class="icon"><i class="fas fa-dice"></i></span><span>Lancer le dé</span>
+              </button>
+            </div>
 
-        </form>
+          </form>
+        </div>
+
+        <div id="random-movie" class="is-hidden">
+          <figure class="image is-2by3">
+            <img id="img-random-movie" src="" alt="" style="max-width: 100%;" />
+          </figure>
+        </div>
+
       </div>
       <button class="modal-close" aria-label="close"></button>
     </div>
