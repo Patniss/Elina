@@ -1,14 +1,18 @@
-import { getAllPeople } from "/Elina/js/services/people.service.js";
-import { initPeopleSelect, initPeopleSelect2NewTag } from "/Elina/js/ui/select.js";
+import { nationalities } from "/Elina/js/data/nationalities.js";
+import { getAllPeople, addPeople } from "/Elina/js/services/people.service.js";
+import { initPeopleSelect, initPeopleSelect2NewTag, initNationalities } from "/Elina/js/ui/select.js";
 import { parseFullName } from "/Elina/js/utils/format.js";
 
 export async function completeMovie() {
     const selectPeople = document.getElementById("select-people");
+    const nationalitiesPeople = document.getElementById("nationalities-people");
+    let peopleId;
 
     const people = await getAllPeople();
 
     initPeopleSelect(selectPeople, people);
     initPeopleSelect2NewTag(selectPeople, "Saisir un nom…");
+    initNationalities(nationalitiesPeople, nationalities);
 
     $(selectPeople).on("select2:select", function (e) {
         const data = e.params.data;
@@ -22,7 +26,6 @@ export async function completeMovie() {
             const birthdatePeople = document.getElementById("birthdate-people");
             const isDeadPeople = document.getElementById("is-dead-people");
             const deathdatePeople = document.getElementById("deathdate-people");
-            const nationalitiesPeople = document.getElementById("nationalities-people");
             const cancelAdd = document.getElementById("btn-cancel-add-people");
             const btnAddPeople = document.getElementById("btn-add-people");
 
@@ -55,6 +58,6 @@ export async function completeMovie() {
                 nationalitiesPeople.required = false;
                 deathdatePeople.required = false;
             });
-        }
+        };
     });
 }

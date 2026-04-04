@@ -1,6 +1,6 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 
-export async function addPeople(firstname, lastname, birthdate, nationalities, jobs, deathdate) {
+export async function addPeople(firstname, lastname, birthdate, nationalities, deathdate) {
     const { data, error } = await supabase
         .from("people")
         .insert([{
@@ -8,7 +8,6 @@ export async function addPeople(firstname, lastname, birthdate, nationalities, j
             lastname: lastname,
             birthdate: birthdate,
             nationalities: nationalities,
-            jobs: jobs,
             complete: false,
             deathdate: deathdate
         }]).select("id").single();

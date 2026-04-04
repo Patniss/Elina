@@ -1,5 +1,3 @@
-import { parseFullName } from "/Elina/js/utils/format.js";
-
 export let activePeopleSelect = null;
 export let pendingTagText = null;
 
