@@ -170,7 +170,8 @@ export async function getGenresToseeMovie(genres) {
                 }
             });
 
-            list = listGenres.map(item => item.movie_id);
+            const uniqueList = [...new Set(listGenres)];
+            list = uniqueList.map(item => item.movie_id);
         };
     } else {
         const { data, error } = await supabase
