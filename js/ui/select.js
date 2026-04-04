@@ -11,6 +11,16 @@ export function addPeopleToAllSelects(selects, id, name) {
     });
 }
 
+export function applyBulmaStylesToSelect2(selectElement) {
+    if (!selectElement) return;
+
+    const select2Container = $(selectElement).next('.select2-container');
+    if (select2Container.length) {
+        select2Container.addClass('is-fullwidth');
+        select2Container.find('.select2-selection').addClass('select');
+    }
+}
+
 export function bindPeopleModalNewTag(selectElement) {
     if (!selectElement) return;
 
@@ -32,6 +42,8 @@ export function bindPeopleModalNewTag(selectElement) {
             inputLastname.value = lastName;
         }
     });
+
+    applyBulmaStylesToSelect2(selectElement);
 }
 
 export function clearPeopleSelectState() {
@@ -50,6 +62,8 @@ export function initGenres(selectElement, genres) {
         placeholder: "Choisir un genre…",
         allowClear: true
     });
+
+    applyBulmaStylesToSelect2(selectElement);
 }
 
 export function initNationalities(selectElement, nationalities) {
@@ -63,6 +77,8 @@ export function initNationalities(selectElement, nationalities) {
         placeholder: "Nationalités…",
         allowClear: true
     });
+
+    applyBulmaStylesToSelect2(selectElement);
 }
 
 export function initPeopleSelect(selectElement, people) {
@@ -74,7 +90,7 @@ export function initPeopleSelect(selectElement, people) {
         const completeName = p.firstname ? p.firstname + " " + p.lastname : p.lastname;
         const option = new Option(completeName, p.id, false, false);
         selectElement.append(option);
-    })
+    });
 }
 
 export function initPeopleSelect2NewTag(selectElement, placeholder) {
@@ -95,6 +111,8 @@ export function initPeopleSelect2NewTag(selectElement, placeholder) {
             };
         }
     });
+
+    applyBulmaStylesToSelect2(selectElement);
 }
 
 export function initPlaforms(selectElement, platforms) {
@@ -108,6 +126,8 @@ export function initPlaforms(selectElement, platforms) {
         placeholder: "Choisir une plateforme…",
         allowClear: true
     });
+
+    applyBulmaStylesToSelect2(selectElement);
 }
 
 export function initTags(selectElement, tags) {
@@ -132,5 +152,7 @@ export function initTags(selectElement, tags) {
                 newTag: true
             }
         }
-    })
+    });
+
+    applyBulmaStylesToSelect2(selectElement);
 }
