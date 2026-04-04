@@ -167,7 +167,10 @@ export async function movieContent(uuid) {
         movieDirectors.appendChild(btnAddDirector);
 
         btnAddDirector.addEventListener("click", () => {
-            document.getElementById("add-director").classList.add("is-active");
+            document.getElementById("add-cast").classList.add("is-active");
+            document.getElementById("title-add-cast").textContent = `Ajouter un.e réalisateur.rice au film ${movie.title}`;
+            document.getElementById("label-choose-people").textContent = "Choisir un.e réalisateur.rice";
+            document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle réalisateur.rice à la base de données";
         });
     } else {
         directors.forEach(d, index => {
@@ -200,7 +203,10 @@ export async function movieContent(uuid) {
         movieScriptwriters.appendChild(btnAddScriptwriter);
 
         btnAddScriptwriter.addEventListener("click", () => {
-            document.getElementById("add-scriptwriter").classList.add("is-active");
+            document.getElementById("add-cast").classList.add("is-active");
+            document.getElementById("title-add-cast").textContent = `Ajouter un.e scénariste au film ${movie.title}`;
+            document.getElementById("label-choose-people").textContent = "Choisir un.e scénariste";
+            document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle scénariste à la base de données";
         });
     } else {
         scriptwriters.forEach(s, index => {

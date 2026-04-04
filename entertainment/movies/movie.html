@@ -103,93 +103,57 @@
             <button class="modal-close is-large" aria-label="close"></button>
         </div>
 
-        <div id="add-director" class="modal">
+        <div id="add-cast" class="modal">
             <div class="modal-background"></div>
             <div class="modal-content box">
-                <form id="add-director-form">
+                <form id="add-cast-form">
 
-                    <h1 class="title">Ajouter un réalisateur à <i class="movie-title"></i></h1>
+                    <h1 class="title" id="title-add-cast"></h1>
 
-                    <div class="field">
+                    <div class="field" id="div-choose-people">
                         <div>
-                            <label class="label" for="select-director">Choisir un.e réalisateur.rice</label>
+                            <label class="label" for="select-director" id="label-choose-people"></label>
                             <div class="select is-multiple">
-                                <select name="select-director" id="select-director" style="max-width: 100%; min-width: 200px;" class="input" multiple required></select>
+                                <select name="select-people" id="select-people" style="max-width: 100%; min-width: 200px;" class="input" multiple required></select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="box" id="div-add-director">
-                        <h3 class="subtitle">Ajouter un nouveau réalisateur à la base de données</h3>
-                        <label class="label" for="firstname-director">Prénom du réalisateur</label>
+                    <div id="div-add-people" class="is-hidden">
+                        <h3 class="subtitle" id="subtitle-add-people"></h3>
+                        <label class="label" for="firstname-people">Prénom</label>
                         <div class="control">
-                            <input class="input" type="text" id="firstname-director" name="firstname-director" />
+                            <input class="input" type="text" id="firstname-people" name="firstname-people" />
                         </div>
-                        <label class="label" for="lastname-director">Nom du réalisteur</label>
+                        <label class="label" for="lastname-people">Nom</label>
                         <div class="control">
-                            <input class="input" type="text" name="lastname-director" id="lastname-director" />
+                            <input class="input" type="text" name="lastname-director" id="lastname-people" />
                         </div>
-                        <label class="label" for="birthdate-director">Date de naissance du réalisateur</label>
+                        <label class="label" for="birthdate-people">Date de naissance</label>
                         <div class="control">
-                            <input class="input" type="date" name="birthdate-director" id="birthdate-director" />
+                            <input class="input" type="date" name="birthdate-director" id="birthdate-people" />
                         </div>
-                        <label class="label" for="is-dead-director">
-                            <input class="checkbox" type="checkbox" name="is-dead-director" id="is-dead-director" /> Mort
+                        <label class="label" for="is-dead-people">
+                            <input class="checkbox" type="checkbox" name="is-dead-director" id="is-dead-people" /> Mort
                         </label>
-                        <div class="is-hidden" id="div-deathdate-director">
-                            <label class="label" for="deathdate-director">Date de mort du réalisateur</label>
+                        <div class="is-hidden" id="div-deathdate-people">
+                            <label class="label" for="deathdate-people">Date de mort</label>
                             <div class="control">
-                                <input class="input" type="date" name="deathdate-director" id="deathdate-director" />
+                                <input class="input" type="date" name="deathdate-people" id="deathdate-people" />
                             </div>
                         </div>
-                        <label class="label" for="nationalities-director">Nationalité(s) du réalisateur</label>
+                        <label class="label" for="nationalities-people">Nationalité(s)</label>
                         <div class="select is-multiple">
-                            <select name="nationalities-director" id="nationalities-director" style="max-width: 100%; min-width: 200px;" multiple></select>
+                            <select name="nationalities-people" id="nationalities-people" style="max-width: 100%; min-width: 200px;" multiple></select>
                         </div>
                     </div>
 
                     <div class="control">
-                        <button class="button is-primary" type="submit" id="btn-add-director">
-                            <span class="icon"><i class="fas fa-plus"></i></span><span>Ajouter le réalisateur</span>
+                        <button class="button is-primary" type="submit" id="btn-add-people">
+                            <span class="icon"><i class="fas fa-plus"></i></span><span></span>
                         </button>
                     </div>
 
-                </form>
-            </div>
-            <button class="modal-close is-large" aria-label="close"></button>
-        </div>
-
-        <div id="add-scriptwriter" class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-content box">
-                <form id="add-scriptwriter-form">
-                    <h1 class="title">Ajouter un.e scénariste à <i class="movie-title"></i></h1>
-                    <div class="field">
-                        <div>
-                            <label class="label">Choisir un scénariste</label>
-                            <div class="select is-multiple">
-                                <select size="8" id="select-scriptwriter" style="width: 100%;" multiple required></select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <button class="modal-close is-large" aria-label="close"></button>
-        </div>
-
-        <div id="add-actor" class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-content box">
-                <form id="add-actor-form">
-                    <h1 class="title">Ajouter un rôle à <i class="movie-title"></i></h1>
-                    <div class="field">
-                        <div>
-                            <label class="label">Choisir un acteur</label>
-                            <div class="select">
-                                <select size="8" id="select-actor" style="width: 100%;" required></select>
-                            </div>
-                        </div>
-                    </div>
                 </form>
             </div>
             <button class="modal-close is-large" aria-label="close"></button>
