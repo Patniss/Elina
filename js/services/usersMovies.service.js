@@ -152,7 +152,7 @@ export async function getGenresToseeMovie(genres) {
             console.log(genre);
             const { data, error } = await supabase
                 .from("users_movies")
-                .select("movie_id, movies(id)")
+                .select("movie_id, movies(*)")
                 .eq("user_id", userId)
                 .eq("seen", false)
                 .ilike("movies.genres", `%${genre}%`);
