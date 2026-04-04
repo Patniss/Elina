@@ -38,7 +38,7 @@ export function onlyNoListDisplay() {
     })
 }
 
-export function sortFilterMovies(load, list, renderPagination) {
+export function sortFilterMovies(load, list, refresh, renderPagination) {
     const btnSort = document.getElementById("button-content-sort");
     const contentSort = document.getElementById("dropdown-content-sort");
     const btnFilter = document.getElementById("button-content-filter");
@@ -73,7 +73,7 @@ export function sortFilterMovies(load, list, renderPagination) {
             });
             moviesStore.sortField = field;
             moviesStore.sortAsc = asc;
-            refreshMovies(load, list);
+            refresh(load, list);
             renderPagination();
         })
     });

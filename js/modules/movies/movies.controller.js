@@ -2,21 +2,11 @@ import { initResearchAllMovie, initResearchToseeMovies, initResearchSeenMovies }
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { sortFilterMovies, onlyNoListDisplay } from "/Elina/js/modules/movies/movies.layout.js";
 import { loadAllMovies, loadToseeMovies, loadSeenMovies, loadNoListMovies } from "/Elina/js/modules/movies/movies.load.js";
-import { renderPaginationAll } from "/Elina/js/modules/movies/movies.pagination.js";
+import { renderPaginationAll, renderPaginationSeen, renderPaginationTosee } from "/Elina/js/modules/movies/movies.pagination.js";
 import { renderAllMovies, renderSeenMovies, renderToseeMovies } from "/Elina/js/modules/movies/movies.render.js";
-import { initToggleSection } from "/Elina/js/ui/toggles.js";
 
 export async function changePage(page) {
     moviesStore.setCurrentPage("all", page);
-}
-
-export async function refreshSeenMovies() {
-    try {
-        const movies = await loadSeenMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
-        moviesStore.setMoviesAndPage("seen", movies, 1);
-    } catch (error) {
-        console.error("Erreur refreshSeenMovies:", error);
-    }
 }
 
 export async function initMovies() {
@@ -30,7 +20,7 @@ export async function initMovies() {
     });
 
     initResearchAllMovie();
-    sortFilterMovies(loadAllMovies, "all", renderPaginationAll);
+    sortFilterMovies(loadAllMovies, "all", refreshMovies, renderPaginationAll);
     onlyNoListDisplay();
 
     await refreshMovies(loadAllMovies, "all");
@@ -47,7 +37,7 @@ export async function initSeenMovies() {
     });
 
     initResearchSeenMovies();
-    sortFilterMovies(loadSeenMovies, "seen");
+    sortFilterMovies(loadSeenMovies, "seen", refreshSeenMovies, renderPaginationSeen);
 
     await refreshSeenMovies();
 }
@@ -63,7 +53,7 @@ export async function initToseeMovies() {
     });
 
     initResearchToseeMovies();
-    sortFilterMovies(loadToseeMovies, "tosee");
+    sortFilterMovies(loadToseeMovies, "tosee", refreshToseeMovies, renderPaginationTosee);
 
     await refreshToseeMovies();
 }
@@ -74,6 +64,15 @@ export async function refreshMovies(load, list) {
         : await load(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
     
     moviesStore.setMoviesAndPage(list, movies, 1);
+}
+
+export async function refreshSeenMovies() {
+    try {
+        const movies = await loadSeenMovies(moviesStore.sortField, moviesStore.sortAsc, moviesStore.genreFilter);
+        moviesStore.setMoviesAndPage("seen", movies, 1);
+    } catch (error) {
+        console.error("Erreur refreshSeenMovies:", error);
+    }
 }
 
 export async function refreshToseeMovies() {
