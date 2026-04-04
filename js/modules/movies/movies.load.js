@@ -65,5 +65,7 @@ export async function loadToseeMovies(field, asc, filter) {
 
     const movies = await querySupabase(query);
 
+    console.log(movies);
+
     return movies;
 }
