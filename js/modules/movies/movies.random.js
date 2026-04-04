@@ -7,7 +7,6 @@ const platforms = ["Netflix", "Disney+", "Amazon Prime"];
 
 export async function getRandomMovie(selectedGenres, selectedPlatforms) {
     const list = await getGenresToseeMovie(selectedGenres);
-    console.log(list);
 
     if (list.length === 0) {
         console.log("Aucun film");
