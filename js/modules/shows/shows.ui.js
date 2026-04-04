@@ -235,15 +235,13 @@ export async function createShowStateEpisodes(s) {
     divCurrentSeason.classList.add("tags");
 
     const currentSeason = await getCurrentSeason(show.id);
-    console.log(currentSeason);
-    console.log(currentSeason.season.id);
     const spanSeason = document.createElement("span");
     spanSeason.classList.add("tag", "is-primary");
     spanSeason.textContent = `Season ${currentSeason.season.id}`;
     divCurrentSeason.appendChild(spanSeason);
 
-    const seenEpisodesCurrentSeason = await getSeenEpSeason(currentSeason.id);
-    for (let ep = 1; ep <= currentSeason.nb_episodes; ep++) {
+    const seenEpisodesCurrentSeason = await getSeenEpSeason(currentSeason.season.id);
+    for (let ep = 1; ep <= currentSeason.season.nb_episodes; ep++) {
         const span = document.createElement("a");
         span.classList.add("tag");
         span.textContent = ep;
