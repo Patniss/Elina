@@ -84,6 +84,7 @@ export function initPeopleSelect2NewTag(selectElement, placeholder) {
         placeholder,
         allowClear: true,
         tags: true,
+        maximumSelectionLength: 1,
         createTag: function(params) {
             const term = $.trim(params.term);
             if (term === "") return null;

@@ -485,11 +485,3 @@ body {
 .table-calendar-month {
   background-color: transparent;
 }
-
-select.select2-hidden-accessible {
-    display: none !important;
-}
-
-.select2-container--default {
-    width: 100% !important;
-}
