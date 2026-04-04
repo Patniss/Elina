@@ -14,7 +14,6 @@ const sortButtons = [
 
 export function filterMovies(query, genre, fromUsersMovies = false) {
     if (genre) {
-        console.log(query);
         const table = fromUsersMovies ? "movies" : "genres";
         query = query.ilike(table, `%${genre}%`);
     }
@@ -39,7 +38,7 @@ export function onlyNoListDisplay() {
     })
 }
 
-export function sortFilterMovies(load, list) {
+export function sortFilterMovies(load, list, renderPagination) {
     const btnSort = document.getElementById("button-content-sort");
     const contentSort = document.getElementById("dropdown-content-sort");
     const btnFilter = document.getElementById("button-content-filter");
@@ -75,7 +74,7 @@ export function sortFilterMovies(load, list) {
             moviesStore.sortField = field;
             moviesStore.sortAsc = asc;
             refreshMovies(load, list);
-            renderPaginationAll();
+            renderPagination();
         })
     });
 }
