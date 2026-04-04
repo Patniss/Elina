@@ -63,7 +63,7 @@ export function changeModeButton(button, mode, nextEpisode) {
         
         case "pause":
             button.classList.add("is-warning", "is-light");
-            button.innerHTML = `<span class="icon"><i class="fa-solid fa-pause"></i></span><span>Mettre en pause</span>`;
+            button.innerHTML = `<span class="icon"><i class="fa-solid fa-pause"></i></span><span>Pause</span>`;
             break;
 
         case "takeAgain":
