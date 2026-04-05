@@ -1,11 +1,14 @@
+import { btnCastMovie } from "/Elina/js/data/movies.store.js";
 import { nationalities } from "/Elina/js/data/nationalities.js";
+import { addMovieCasting } from "/Elina/js/services/castings.service.js";
 import { getAllPeople, addPeople } from "/Elina/js/services/people.service.js";
 import { initPeopleSelect, initPeopleSelect2NewTag, initNationalities } from "/Elina/js/ui/select.js";
 import { parseFullName } from "/Elina/js/utils/format.js";
 
-export async function completeMovie() {
+export async function completeMovie(movieId) {
     const selectPeople = document.getElementById("select-people");
     const nationalitiesPeople = document.getElementById("nationalities-people");
+    const btnAddCast = document.getElementById("btn-add-cast");
     let peopleId;
 
     const people = await getAllPeople();
@@ -58,6 +61,48 @@ export async function completeMovie() {
                 nationalitiesPeople.required = false;
                 deathdatePeople.required = false;
             });
+
+            btnAddPeople.addEventListener("click", async () => {
+                const firstnameValue = firstnamePeople.value;
+                const lastnameValue = lastnamePeople.value;
+                const birthdateValue = birthdatePeople.value;
+                const deathdateValue = isDeadPeople.checked ? deathdateValue.value : null;
+
+                let selectedNationalities = $(nationalitiesPeople).val() || null;
+                const nationalitiesPeople = selectedNationalities.join(" ");
+
+                if (!firstnameValue || !lastnameValue || !birthdateValue || !selectedNationalities || (isDeadPeople.checked && !deathdateValue)) {
+                    alert("Veuillez remplir tous les champs nécessaires.");
+                    return;
+                };
+
+                try {
+                    peopleId = await addPeople(firstnameValue, lastnameValue, birthdateValue, nationalitiesPeople, deathdateValue);
+                    await addMovieCasting(movieId, peopleId, btnCastMovie);
+                } catch (error) {
+                    console.error(error);
+                    return;
+                }
+                
+                document.getElementById("div-add-people").classList.add("is-hidden");
+                document.getElementById("div-choose-people").classList.remove("is-hidden");
+                $(selectPeople).val(null).trigger('change');
+            });
         };
+    });
+
+    btnAddCast.addEventListener("click", async () => {
+        peopleId = $(selectPeople).val();
+        if (!peopleId) {
+            alert("Veuillez sélectionner un people.");
+            return;
+        }
+
+        try {
+            await addMovieCasting(movieId, peopleId, btnCastMovie);
+        } catch (error) {
+            console.error(error);
+            return;
+        }
     });
 }

@@ -22,6 +22,38 @@ export function updatePageSize() {
     });
 }
 
+export let indexMoviesStore = {
+    movies: {
+        tosee: [],
+        fav: [],
+        last: []
+    },
+    currentIndex: {
+        tosee: 3,
+        fav: 0,
+        last: 0
+    },
+    pageSize: 7
+}
+
+export let indexSisterMoviesStore = {
+    movies: {
+        favSister: [],
+        toseeShared: [],
+        lastSeenSister: [],
+        ourFavMovies: [],
+        toseeSister: []
+    },
+    currentIndex: {
+        favSister: [],
+        toseeShared: [],
+        lastSeenSister: [],
+        ourFavMovies: [],
+        toseeSister: []
+    },
+    pageSize: 7
+}
+
 export let moviesStore = {
     movies: {
         all: [],
@@ -68,36 +100,6 @@ export let moviesStore = {
         this.currentPage[list] = page;
         this.notify(list);
     }
-};
-
-export let indexMoviesStore = {
-    movies: {
-        tosee: [],
-        fav: [],
-        last: []
-    },
-    currentIndex: {
-        tosee: 3,
-        fav: 0,
-        last: 0
-    },
-    pageSize: 7
 }
 
-export let indexSisterMoviesStore = {
-    movies: {
-        favSister: [],
-        toseeShared: [],
-        lastSeenSister: [],
-        ourFavMovies: [],
-        toseeSister: []
-    },
-    currentIndex: {
-        favSister: [],
-        toseeShared: [],
-        lastSeenSister: [],
-        ourFavMovies: [],
-        toseeSister: []
-    },
-    pageSize: 7
-}
+export let btnCastMovie = "";

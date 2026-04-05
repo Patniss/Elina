@@ -1,3 +1,4 @@
+import { btnCastMovie } from "/Elina/js/data/movies.store.js";
 import { clickAddMovieUser, clickDeleteMovieUser, clickToseeMovieUser, clickSeenMovieUser } from "/Elina/js/modules/usersMovies/usersMovies.actions.js";
 import { getDirectorsMovie, getScriptwritersMovie, getActorsMovies } from "/Elina/js/services/castings.service.js";
 import { getMovie } from "/Elina/js/services/movies.service.js";
@@ -171,6 +172,8 @@ export async function movieContent(uuid) {
             document.getElementById("title-add-cast").textContent = `Ajouter un.e réalisateur.rice au film ${movie.title}`;
             document.getElementById("label-choose-people").textContent = "Choisir un.e réalisateur.rice";
             document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle réalisateur.rice à la base de données";
+            document.getElementById("span-add-cast").textContent = "Ajouter le réalisateur";
+            btnCastMovie = "director";
         });
     } else {
         directors.forEach(d, index => {
@@ -207,6 +210,8 @@ export async function movieContent(uuid) {
             document.getElementById("title-add-cast").textContent = `Ajouter un.e scénariste au film ${movie.title}`;
             document.getElementById("label-choose-people").textContent = "Choisir un.e scénariste";
             document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle scénariste à la base de données";
+            document.getElementById("span-add-cast").textContent = "Ajouter le scénariste";
+            btnCastMovie = "scriptwriter";
         });
     } else {
         scriptwriters.forEach(s, index => {
