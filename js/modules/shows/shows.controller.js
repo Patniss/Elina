@@ -1,6 +1,6 @@
 import { showsStore } from "/Elina/js/data/shows.store.js";
 import { loadAllShows, loadCurrentShows } from "/Elina/js/modules/shows/shows.load.js";
-import { renderAllShows, renderCurrentShows } from "/Elina/js/modules/shows/shows.render.js";
+import { renderAllShows, renderCurrentShows, renderPausedShows } from "/Elina/js/modules/shows/shows.render.js";
 
 export async function changePage(page) {
     showsStore.setCurrentPage("all", page);
@@ -19,6 +19,19 @@ export async function initCurrentShows() {
     });
 
     await refreshCurrentShows();
+}
+
+export async function initPausedShows() {
+    showsStore.genreFilter = "";
+    showsStore.sortField = "title";
+    showsStore.sortAsc = true;
+
+    showsStore.subscribe(() => {
+        renderPausedShows();
+
+        // initResearchShow();
+        // sortFilterShows();
+    });
 }
 
 export async function initShows() {
