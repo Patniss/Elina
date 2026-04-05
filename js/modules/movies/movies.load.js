@@ -48,8 +48,15 @@ export async function loadSeenMovies(field, asc, filter) {
     query = filterMovies(query, filter, true);
 
     const movies = await querySupabase(query);
+    
+    let displayMovies = [];
+    movies.forEach(movie => {
+        if (movie.movies !== null) {
+            displayMovies.push(movie);
+        }
+    });
 
-    return movies;
+    return displayMovies;
 }
 
 export async function loadToseeMovies(field, asc, filter) {

@@ -6,7 +6,5 @@ export async function querySupabase(query) {
         return null;
     }
 
-    console.log(data);
-
     return data;
 }

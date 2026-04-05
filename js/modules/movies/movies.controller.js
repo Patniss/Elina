@@ -73,6 +73,10 @@ export async function refreshSeenMovies() {
     } catch (error) {
         console.error("Erreur refreshSeenMovies:", error);
     }
+    document.getElementById("list-seen-movies").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 export async function refreshToseeMovies() {
@@ -82,4 +86,8 @@ export async function refreshToseeMovies() {
     } catch (error) {
         console.error("Erreur refreshToseeMovies:", error);
     }
+    document.getElementById("list-tosee-movies").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }

@@ -18,8 +18,6 @@ export function filterMovies(query, genre, fromUsersMovies = false) {
         query = query.ilike(table, `%${genre}%`);
     }
 
-    console.log(query);
-
     return query;
 }
 
