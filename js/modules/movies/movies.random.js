@@ -21,7 +21,7 @@ export async function getRandomMovie(selectedGenres, selectedPlatforms) {
     posterMovie.src = movie.poster;
     posterMovie.alt = movie.title;
     const linkMovie = document.getElementById("link-random-movie");
-    linkMovie.href = `/Elina/entertainment/movies/movies?id=${movie.id}`;
+    linkMovie.href = `/Elina/entertainment/movies/movie?id=${movie.id}`;
 }
 
 export async function displayRandomMovie() {
