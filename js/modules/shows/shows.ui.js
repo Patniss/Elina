@@ -1,4 +1,5 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
+import { getSeasonsOfShow, getNbSeason } from "/Elina/js/services/seasons.service.js";
 import { addUserSeason, getNextEpisode, seeNextEpisode, getCurrentSeason, getSeenEpSeason } from "/Elina/js/services/usersSeasons.service.js";
 import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
 import { createButtons, handleButtonState, changeModeButton } from "/Elina/js/ui/button.js";
@@ -235,22 +236,39 @@ export async function createShowStateEpisodes(s) {
     divCurrentSeason.classList.add("tags");
 
     const currentSeason = await getCurrentSeason(show.id);
-    const spanSeason = document.createElement("span");
-    spanSeason.classList.add("tag", "is-primary");
-    spanSeason.textContent = `Season ${currentSeason.season.season}`;
-    divCurrentSeason.appendChild(spanSeason);
+    const nbCurrentSeason = await currentSeason.season.season;
 
-    const seenEpisodesCurrentSeason = await getSeenEpSeason(currentSeason.season.id);
-    for (let ep = 1; ep <= currentSeason.season.nb_episodes; ep++) {
-        const span = document.createElement("a");
-        span.classList.add("tag");
-        span.textContent = ep;
-        if (seenEpisodesCurrentSeason <= ep) {
-            span.classList.add("is-success", "is-light");
-        } else {
-            span.classList.add("is-success");
-        };
-        divCurrentSeason.appendChild(span);
+    const allSeasons = await getSeasonsOfShow(show.id);
+    for (const season of allSeasons) {
+        const spanSeason = document.createElement("button");
+        spanSeason.classList.add("tag", "is-primary");
+        const nbSeason = getNbSeason(season);
+        spanSeason.textContent = nbSeason === nbCurrentSeason ? `Season ${nbSeason}` : nbSeason;
+        divCurrentSeason.appendChild(spanSeason);
+
+        spanSeason.addEventListener("click", () => {
+            console.log("clic sur saison:", nbSeason);
+        });
+
+        if (nbSeason === nbCurrentSeason) {
+            const seenEpisodesCurrentSeason = await getSeenEpSeason(currentSeason.season.id);
+            for (let ep = 1; ep <= currentSeason.season.nb_episodes; ep++) {
+                const span = document.createElement("button");
+                span.classList.add("tag");
+                span.textContent = ep;
+                if (seenEpisodesCurrentSeason < ep) {
+                    span.classList.add("is-success", "is-light");
+                } else {
+                    span.classList.add("is-success");
+                };
+                span.addEventListener("click", () => {
+                    console.log("clic sur épisode:", ep);
+                });
+                divCurrentSeason.appendChild(span);
+            }
+        } else if (nbSeason > nbCurrentSeason) {
+            spanSeason.classList.add("is-light");
+        }
     }
 
     divSeasons.appendChild(divCurrentSeason);
