@@ -101,5 +101,3 @@ export let moviesStore = {
         this.notify(list);
     }
 }
-
-export let btnCastMovie = "";
