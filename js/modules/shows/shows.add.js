@@ -41,7 +41,19 @@ export async function addShow() {
         inputSeason.id = `season-${index}`;
         inputSeason.style.width = "200px";
         inputSeason.required = true;
-        liSeason.append(spanSeason, inputSeason);
+        const inputPoster = document.createElement("input");
+        inputPoster.placeholder = `Poster de la saison ${index}`;
+        inputPoster.classList.add("input");
+        inputPoster.type = "text";
+        inputPoster.id = `poster-${poster}`;
+        inputPoster.style.width = "500px";
+        inputPoster.required = true;
+        const textSynopsis = document.createElement("textarea");
+        textSynopsis.placeholder = `Synopsis de la saison ${index}`;
+        textSynopsis.classList.add("textarea");
+        textSynopsis.id = `synopsis-${index}`;
+        textSynopsis.required = true;
+        liSeason.append(spanSeason, inputSeason, inputPoster, textSynopsis);
         showSeasons.appendChild(liSeason);
       }
     }
