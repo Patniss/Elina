@@ -29,7 +29,6 @@ export async function createCarouselCard(m, index, list) {
 
     img.addEventListener("click", async () => {
         const divModal = await createModalMovie(movie.id);
-        console.log(movie);
         const section = document.getElementById("section");
         section.appendChild(divModal);
     })
