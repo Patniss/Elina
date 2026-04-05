@@ -1,6 +1,7 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { updateCurrentShows, updateFinishedShows } from "/Elina/js/services/profilesData.service.js";
+import { getSeasonData, getNbEpisode } from "/Elina/js/services/season.service.js";
 
 export async function addUserShow(showId) {
     const userId = await getUserId();
@@ -94,28 +95,24 @@ export async function getNextEpisode(showId) {
     if (!userShow) return null;
     
     const nbTotalSeasons = userShow.shows.nb_seasons;
+
+    const currentSeason = await getSeasonData(showId, userShow.current_season);
     const lastEpCurrentSeason = userShow.last_ep ?? 0;
     
-
     let season;
     let episode;
     let result = null;
 
-
-
-    if (parseInt(nbEpisodes) === parseInt(seenEpisode)) {
-        if (parseInt(seasonNumber) === parseInt(nbTotalSeasons)) {
-            if (show.state === "finish") {
-                return "Terminée";
-            } else {
-                return "À jour";
-            }
-        };
-        season = String(seasonNumber + 1).padStart(2,'0');
-        result = `S${season} E01`;
+    if (currentSeason.nb_episodes === lastEpCurrentSeason) {
+        if (nbTotalSeasons === userShow.currentSeason) {
+            result = "À jour";
+        } else {
+            season = String(userShow.current_season + 1).padStart(2, '0');
+            result = `${season} E01`;
+        }
     } else {
-        season = String(seasonNumber).padStart(2,'0');
-        episode = String(seenEpisode + 1).padStart(2,'0');
+        season = String(userShow.current_season).padStart(2, '0');
+        episode = String(userShow.last_ep + 1).padStart(2, '0');
         result = `S${season} E${episode}`;
     }
 

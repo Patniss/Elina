@@ -1,7 +1,7 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
 import { getSeasonsOfShow, getNbSeason } from "/Elina/js/services/seasons.service.js";
-import { addUserSeason, getNextEpisode, seeNextEpisode, getCurrentSeason, getSeenEpSeason } from "/Elina/js/services/usersSeasons.service.js";
-import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow } from "/Elina/js/services/usersShows.service.js";
+import { addUserSeason, seeNextEpisode, getCurrentSeason, getSeenEpSeason } from "/Elina/js/services/usersSeasons.service.js";
+import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow, getNextEpisode } from "/Elina/js/services/usersShows.service.js";
 import { createButtons, handleButtonState, changeModeButton } from "/Elina/js/ui/button.js";
 
 const BUTTONS_BY_STATUS = {
