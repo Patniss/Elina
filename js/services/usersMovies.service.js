@@ -247,9 +247,7 @@ export async function getStatusMovie(movieId) {
         return null;
     }
 
-    console.log(data);
-
-    return data?.seen || null;
+    return data ? data.seen : null;
 }
 
 export async function getOnlyToseeSisterMovies() {
