@@ -1,7 +1,7 @@
 import { normalizeShow } from "/Elina/js/modules/shows/shows.model.js";
-import { getSeasonsOfShow, getNbSeason } from "/Elina/js/services/seasons.service.js";
+import { getSeasonsOfShow, getNbSeason, getSeasonData } from "/Elina/js/services/seasons.service.js";
 import { addUserSeason, seeNextEpisode, getCurrentSeason, getSeenEpSeason } from "/Elina/js/services/usersSeasons.service.js";
-import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow, getNextEpisode } from "/Elina/js/services/usersShows.service.js";
+import { addUserShow, pauseUserShow, deleteUserShow, startUserShow, cancelUserShow, getNextEpisode, getUserShow } from "/Elina/js/services/usersShows.service.js";
 import { createButtons, handleButtonState, changeModeButton } from "/Elina/js/ui/button.js";
 
 const BUTTONS_BY_STATUS = {
@@ -217,6 +217,8 @@ export async function createShowStateEpisodes(s) {
         return document.createElement("div");
     }
 
+    const userShow = await getUserShow(show.id);
+
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -236,28 +238,26 @@ export async function createShowStateEpisodes(s) {
     const divCurrentSeason = document.createElement("div");
     divCurrentSeason.classList.add("tags");
 
-    const currentSeason = await getCurrentSeason(show.id);
-    const nbCurrentSeason = await currentSeason.season.season;
-    
-    for (const season of show.nb_seasons) {
-        console.log(season);
+    const currentSeason = userShow.current_season;
+    const nbEpisodesSeenCurrentSeason = userShow.last_ep;
+    const seasonData = await getSeasonData(show.id, currentSeason);
+
+    for (let season = 1; season <= show.nb_seasons; season++) {
         const spanSeason = document.createElement("button");
         spanSeason.classList.add("tag", "is-primary");
-        const nbSeason = await getNbSeason(season);
-        spanSeason.textContent = nbSeason === nbCurrentSeason ? `Season ${nbSeason}` : nbSeason;
+        spanSeason.textContent = season === currentSeason ? `Season ${season}` : season;
         divCurrentSeason.appendChild(spanSeason);
 
         spanSeason.addEventListener("click", () => {
-            console.log("clic sur saison:", nbSeason);
+            console.log("clic sur saison:", season);
         });
 
-        if (nbSeason === nbCurrentSeason) {
-            const seenEpisodesCurrentSeason = await getSeenEpSeason(currentSeason.season.id);
-            for (let ep = 1; ep <= currentSeason.season.nb_episodes; ep++) {
+        if (season === currentSeason) {
+            for (let ep = 1; ep <= seasonData.nb_episodes; ep++) {
                 const span = document.createElement("button");
                 span.classList.add("tag");
                 span.textContent = ep;
-                if (seenEpisodesCurrentSeason < ep) {
+                if (nbEpisodesSeenCurrentSeason < ep) {
                     span.classList.add("is-success", "is-light");
                 } else {
                     span.classList.add("is-success");
@@ -267,7 +267,7 @@ export async function createShowStateEpisodes(s) {
                 });
                 divCurrentSeason.appendChild(span);
             }
-        } else if (nbSeason > nbCurrentSeason) {
+        } else if (season > currentSeason) {
             spanSeason.classList.add("is-light");
         }
     }
