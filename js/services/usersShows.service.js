@@ -1,7 +1,7 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { updateCurrentShows, updateFinishedShows } from "/Elina/js/services/profilesData.service.js";
-import { getSeasonData, getNbEpisode } from "/Elina/js/services/season.service.js";
+import { getSeasonData, getNbEpisode } from "/Elina/js/services/seasons.service.js";
 
 export async function addUserShow(showId) {
     const userId = await getUserId();
