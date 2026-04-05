@@ -2,12 +2,14 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>엘리나 | ELINA - Dramas</title>
+  <title>엘리나 Elina - Films</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="/Elina/logos/daisy.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="/Elina/logos/daisy.png">
   <link rel="stylesheet" href="/Elina/css/bulma.min.css">
   <link rel="stylesheet" href="/Elina/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -18,15 +20,115 @@
 
     <div class="container">
       <div id="nav-container"></div>
-      
-      <div class="box">
 
-        <h1 class="title">🎬 Dramathèque</h1>
-        
-        <h2 class="subtitle">Mes dramas en cours</h2>
-        
-        <div class="columns is-multiline" id="list-current-dramas">
+      <div class="container box">
 
+        <h1 class="title is-1 has-text-centered"><span class="icon"><i class="fa-solid fa-couch"></i></span>  Dramathèque</h1>
+
+        <nav class="level is-primary">
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Dramas terminés</p>
+                    <p class="title is-2 has-text-primary" id="dramas-finished"></p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Épisodes vus</p>
+                    <p class="title is-2 has-text-primary" id="episodes-seen"></p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Temps total</p>
+                    <p class="title is-2 has-text-primary" id="total-time-seen"></p>
+                </div>
+            </div>
+
+        </nav>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="title is-3 has-text-centered">Dramas en cours et derniers vus</h3>
+          <div id="current-dramas"></div>
+        </div>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="title is-3 has-text-centered">Dramas à voir</h3>
+          <div id="tostart-dramas"></div>
+        </div>
+
+        <hr class="hr" />
+
+        <div>
+          <h3 class="title is-3 has-text-centered">Mes dramas favoris</h3>
+          <div class="fixed-grid has-7-cols is-column-gap-2">
+            <div class="grid" id="fav-dramas"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="columns is-multiline">
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5"><span class="icon"><i class="fa-solid fa-couch"></i></span> Tous les dramas</p>
+              <a href="/Elina/entertainment/dramas/all.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5"><span class="icon"><i class="fa-solid fa-list-check"></i></span> Mes dramas en cours et terminés</p>
+              <a href="/Elina/entertainment/dramas/current.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5"><span class="icon"><i class="fa-solid fa-list"></i></span> Mes dramas à commencer</p>
+              <a href="/Elina/entertainment/dramas/tostart.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5"><span class="icon"><i class="fa-solid fa-stop"></i></span> Mes dramas abandonnés</p>
+              <a href="/Elina/entertainment/dramas/canceled.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5"><span class="icon"><i class="fa-solid fa-heart"></i></span> Sister's dramas</p>
+              <a href="/Elina/entertainment/dramas/sister.html" class="button">Accéder</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-5"><span class="icon"><i class="fa-solid fa-plus"></i></span> Ajouter un drama</p>
+              <a href="/Elina/entertainment/dramas/add.html" class="button">Ajouter</a>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -37,14 +139,14 @@
 
 </main>
 
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script type="module">
   import { loadNav } from "/Elina/js/core/nav.js";
   loadNav();
-</script>
-
-<script type="module">
-  import { loadCurrentDramas } from "/Elina/js/list.js";
-  loadCurrentDramas();
 </script>
 
 <script type="module" src="/Elina/js/core/guard.js"></script>
