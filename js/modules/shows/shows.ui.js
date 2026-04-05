@@ -243,7 +243,7 @@ export async function createShowStateEpisodes(s) {
     for (const season of allSeasons) {
         const spanSeason = document.createElement("button");
         spanSeason.classList.add("tag", "is-primary");
-        const nbSeason = getNbSeason(season);
+        const nbSeason = await getNbSeason(season);
         spanSeason.textContent = nbSeason === nbCurrentSeason ? `Season ${nbSeason}` : nbSeason;
         divCurrentSeason.appendChild(spanSeason);
 
