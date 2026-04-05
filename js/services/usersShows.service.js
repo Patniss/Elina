@@ -130,7 +130,11 @@ export async function startUserShow(showId) {
 
     const { error } = await supabase
         .from("users_shows")
-        .update({user_state: "started"})
+        .update({
+            user_state: "started",
+            current_season: 1,
+            last_ep: 1
+        })
         .eq("user_id", userId)
         .eq("show_id", showId)
         .single();
@@ -141,4 +145,23 @@ export async function startUserShow(showId) {
     }
 
     await updateCurrentShows();
+}
+
+export async function updateCurrentSeasonsEp(showId, season, ep) {
+    const userId = await getUserId();
+
+    const { error } = await supabase
+        .from("users_shows")
+        .update({
+            current_season: season,
+            last_ep: ep
+        })
+        .eq("user_id", userId)
+        .eq("show_id", showId)
+        .single();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
 }

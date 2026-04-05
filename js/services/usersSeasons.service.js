@@ -3,7 +3,7 @@ import { getUserId } from "/Elina/js/services/profiles.service.js";
 import { updateEpisodesSeen, updateTimeShowsSeen } from "/Elina/js/services/profilesData.service.js";
 import { getSeasonId, getNbEpisode, getNbSeason, getTotalSeasons, getSeasonsOfShow } from "/Elina/js/services/seasons.service.js";
 import { getShow, getShowId } from "/Elina/js/services/shows.service.js";
-import { getCurrentShows, finishUserShow } from "/Elina/js/services/usersShows.service.js";
+import { getCurrentShows, finishUserShow, updateCurrentSeasonsEp } from "/Elina/js/services/usersShows.service.js";
 
 export async function addUserSeason(showId, nbSeason) {
     const userId = await getUserId();
@@ -227,6 +227,7 @@ export async function seeNextEpisode(showId) {
         console.log(lastSeasonId);
         const lastEpisode = getNbEpisode(lastSeasonId);
         console.log(lastEpisode);
+        await updateCurrentSeasonsEp(showId, seasonNumber, nextEpisode);
         if ((nbTotalSeasons === seasonNumber) && (nextEpisode === lastEpisode)) {
             await finishUserShow(showId);
         }
