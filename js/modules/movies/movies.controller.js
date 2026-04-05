@@ -75,7 +75,7 @@ export async function refreshSeenMovies() {
     }
     document.getElementById("list-seen-movies").scrollIntoView({
         behavior: "smooth",
-        block: "end"
+        inline: "start"
     });
 }
 
@@ -88,6 +88,6 @@ export async function refreshToseeMovies() {
     }
     document.getElementById("list-tosee-movies").scrollIntoView({
         behavior: "smooth",
-        block: "end"
+        inline: "start"
     });
 }
