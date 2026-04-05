@@ -74,8 +74,8 @@ export async function completeMovie(movieId) {
                 const birthdateValue = birthdatePeople.value;
                 const deathdateValue = isDeadPeople.checked ? deathdateValue.value : null;
 
-                let selectedNationalities = $(nationalitiesPeople).val() || null;
-                const nationalitiesPeople = selectedNationalities.join(" ");
+                let selectedNationalities = $(nationalitiesPeople).val();
+                const nationalitiesValue = selectedNationalities.join(" ");
 
                 if (!firstnameValue || !lastnameValue || !birthdateValue || !selectedNationalities || (isDeadPeople.checked && !deathdateValue)) {
                     alert("Veuillez remplir tous les champs nécessaires.");
@@ -83,7 +83,7 @@ export async function completeMovie(movieId) {
                 };
 
                 try {
-                    peopleId = await addPeople(firstnameValue, lastnameValue, birthdateValue, nationalitiesPeople, deathdateValue);
+                    peopleId = await addPeople(firstnameValue, lastnameValue, birthdateValue, nationalitiesValue, deathdateValue);
                     await addMovieCasting(movieId, peopleId, btnCastMovie);
                 } catch (error) {
                     console.error(error);
