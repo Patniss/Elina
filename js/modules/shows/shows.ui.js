@@ -238,9 +238,9 @@ export async function createShowStateEpisodes(s) {
 
     const currentSeason = await getCurrentSeason(show.id);
     const nbCurrentSeason = await currentSeason.season.season;
-
-    const allSeasons = await getSeasonsOfShow(show.id);
-    for (const season of allSeasons) {
+    
+    for (const season of show.nb_seasons) {
+        console.log(season);
         const spanSeason = document.createElement("button");
         spanSeason.classList.add("tag", "is-primary");
         const nbSeason = await getNbSeason(season);
