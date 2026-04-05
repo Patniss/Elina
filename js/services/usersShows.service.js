@@ -89,6 +89,58 @@ export async function getCurrentShows() {
     return data;
 }
 
+export async function getNextEpisode(showId) {
+    const userShow = await getUserShow(showId);
+    if (!userShow) return null;
+    
+    const nbTotalSeasons = userShow.shows.nb_seasons;
+    const lastEpCurrentSeason = userShow.last_ep ?? 0;
+    
+
+    let season;
+    let episode;
+    let result = null;
+
+
+
+    if (parseInt(nbEpisodes) === parseInt(seenEpisode)) {
+        if (parseInt(seasonNumber) === parseInt(nbTotalSeasons)) {
+            if (show.state === "finish") {
+                return "Terminée";
+            } else {
+                return "À jour";
+            }
+        };
+        season = String(seasonNumber + 1).padStart(2,'0');
+        result = `S${season} E01`;
+    } else {
+        season = String(seasonNumber).padStart(2,'0');
+        episode = String(seenEpisode + 1).padStart(2,'0');
+        result = `S${season} E${episode}`;
+    }
+
+    return result;
+}
+
+export async function getUserShow(showId) {
+    const userId = await getUserId();
+
+    const { data, error } = await supabase
+        .from("users_shows, shows(*)")
+        .select("user_state")
+        .eq("user_id", userId)
+        .eq("show_id", showId)
+        .maybeSingle();
+
+    if (error) {
+        console.error(error);
+        return null;
+    }
+
+    return data;
+}
+
+
 export async function getUserShowStatus(showId) {
     const userId = await getUserId();
 
