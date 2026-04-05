@@ -66,6 +66,7 @@ export function sortFilterMovies(load, list, refresh) {
     sortButtons.forEach(({id, field, asc}) => {
         const btn = document.getElementById(id);
         btn.addEventListener("click", () => {
+            contentSort.classList.add("is-hidden");
             moviesStore.sortField = field;
             moviesStore.sortAsc = asc;
             refresh(load, list);
