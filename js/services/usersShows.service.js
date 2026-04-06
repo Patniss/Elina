@@ -123,7 +123,7 @@ export async function getUserShow(showId) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
-        .from("users_shows, shows(*)")
+        .from("users_shows(*), shows(*)")
         .select("user_state")
         .eq("user_id", userId)
         .eq("show_id", showId)
