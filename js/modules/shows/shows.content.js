@@ -21,4 +21,5 @@ export async function showContent(showId) {
     toggleBtnStateStatut(statut, btnAdd, btnNext, btnCancel, btnPause, btnRetake, btnFinish, btnRetry);
 
     const seasons = await getSeasonsOfShow(showId);
+    console.log(seasons);
 }
