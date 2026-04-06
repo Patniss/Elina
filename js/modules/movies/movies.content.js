@@ -116,6 +116,7 @@ export async function completeMovie(movieId) {
 }
 
 export async function majCast(castings, container) {
+    console.log(castings);
     castings.forEach(async (c, index) => {
         const isLast = index === castings.length - 1;
 
