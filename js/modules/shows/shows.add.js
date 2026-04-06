@@ -45,7 +45,7 @@ export async function addShow() {
         inputPoster.placeholder = `Poster de la saison ${index}`;
         inputPoster.classList.add("input");
         inputPoster.type = "text";
-        inputPoster.id = `poster-${poster}`;
+        inputPoster.id = `poster-${index}`;
         inputPoster.style.width = "500px";
         inputPoster.required = true;
         const textSynopsis = document.createElement("textarea");
