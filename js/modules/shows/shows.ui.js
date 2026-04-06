@@ -242,6 +242,7 @@ export async function createShowStateEpisodes(s) {
     const nbEpisodesSeenCurrentSeason = userShow.last_ep;
     const seasonData = await getSeasonData(show.id, currentSeason);
 
+    console.log(show);
     console.log(show.title, ": nombre de saisons", show.nb_seasons)
 
     for (let season = 1; season <= show.nb_seasons; season++) {
