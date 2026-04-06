@@ -110,6 +110,32 @@ export async function completeMovie(movieId) {
             console.error(error);
             return;
         }
+
+        document.getElementById("add-cast").classList.remove("is-active");
+    });
+}
+
+export async function majCast(castings, container) {
+    castings.forEach(async (c, index) => {
+        const isLast = index === castings.length - 1;
+
+        const cast = await getPeople(c.id_people);
+        const nameCast = `${cast.firstname} ${cast.lastname}`;
+
+        const liCast = document.createElement("li");
+        liCast.classList.add("mr-3");
+        const linkCast = document.createElement("a");
+        linkCast.href = `/Elina/entertainment/people/people.html?id=${c.id_people}`;
+        linkCast.textContent = nameCast;
+        liCast.appendChild(linkCast);
+        container.appendChild(liCast);
+
+        if (!isLast) {
+            const liSep = document.createElement("li");
+            liSep.classList.add("mr-3");
+            liSep.innerHTML = "&#x2022;";
+            container.appendChild(liSep);
+        }
     });
 }
 
@@ -281,28 +307,7 @@ export async function movieContent(uuid) {
             btnCastMovie = "director";
         });
     } else {
-        console.log(directors);
-        directors.forEach(async (d, index) => {
-            const isLast = index === directors.length - 1;
-
-            const director = await getPeople(d.people_id);
-            const nameDirector = `${director.firstname} ${director.lastname}`;
-
-            const liDirector = document.createElement("li");
-            liDirector.classList.add("mr-3");
-            const linkDirector = document.createElement("a");
-            linkDirector.href = `/Elina/entertainment/people/people.html?id=${uuid}`;
-            linkDirector.textContent = nameDirector;
-            liDirector.appendChild(linkDirector);
-            movieDirectors.appendChild(liDirector);
-
-            if (!isLast) {
-                const liSep = document.createElement("li");
-                liSep.classList.add("mr-3");
-                liSep.innerHTML = "&#x2022;";
-                movieDirectors.appendChild(liSep);
-            }
-        });
+        await majCast(directors, movieDirectors);
     }
 
     if (scriptwriters.length === 0) {
@@ -320,26 +325,6 @@ export async function movieContent(uuid) {
             btnCastMovie = "scriptwriter";
         });
     } else {
-        scriptwriters.forEach(s, index => {
-            const isLast = index === directors.length - 1;
-
-            const scriptwriter = getPeople(s.id);
-            const nameScriptwriter = `${scriptwriter.firstname} ${scriptwriter.lastname}`;
-
-            const liScriptwriter = document.createElement("li");
-            liScriptwriter.classList.add("mr-3");
-            const linkScriptwriter = document.createElement("a");
-            linkScriptwriter.href = `/Elina/entertainment/people/people.html?id=${uuid}`;
-            linkScriptwriter.textContent = nameScriptwriter;
-            liScriptwriter.appendChild(linkScriptwriter);
-            movieScriptwriters.appendChild(liScriptwriter);
-
-            if (!isLast) {
-                const liSep = document.createElement("li");
-                liSep.classList.add("mr-3");
-                liSep.innerHTML = "&#x2022;";
-                movieScriptwriters.appendChild(liSep);
-            }
-        });
+        await majCast(scriptwriters, movieScriptwriters);
     }
 }
