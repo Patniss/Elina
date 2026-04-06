@@ -90,11 +90,9 @@ export function sortMovies(query, field, asc, fromUsersMovies = false) {
             break;
 
         default:
-            query = query.order("title", { ascending: asc })
+            query = query.order("title", { ascending: asc, foreignTable: fromUsersMovies ? "movies" : undefined })
             break;
     }
-
-    console.log(fromUsersMovies ? "foreignTable" : "base undefined");
 
     return query;
 }
