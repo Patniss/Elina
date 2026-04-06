@@ -78,16 +78,16 @@ export function sortMovies(query, field, asc, fromUsersMovies = false) {
     switch (field) {
         case "year":
             query = query
-                .order(fromUsersMovies ? "movies.year" : "year", { ascending: asc })
-                .order(fromUsersMovies ? "movies.title" : "title", { ascending: true });
+                .order("year", { ascending: asc, foreignTable: fromUsersMovies ? "movies" : undefined })
+                .order("title", { ascending: true, foreignTable: fromUsersMovies ? "movies" : undefined });
             break;
 
         case "title":
-            query = query.order(fromUsersMovies ? "movies.title" : "title", { ascending: asc })
+            query = query.order("title", { ascending: asc, foreignTable: fromUsersMovies ? "movies" : undefined })
             break;
 
         case "seen":
-            query = query.order(fromUsersMovies ? "date_seen" : "users_movies.date_seen", { ascending: asc })
+            query = query.order("date_seen", { ascending: asc })
             break;
 
         default:
