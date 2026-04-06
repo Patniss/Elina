@@ -235,19 +235,22 @@ export async function createShowStateEpisodes(s) {
     const divSeasons = document.createElement("div");
     divSeasons.classList.add("column");
 
-    const divCurrentSeason = document.createElement("div");
-    divCurrentSeason.classList.add("tags");
+    const divAllSeason = document.createElement("div");
+    divAllSeason.classList.add("tags");
 
     const currentSeason = userShow.current_season;
     const nbEpisodesSeenCurrentSeason = userShow.last_ep;
     const seasonData = await getSeasonData(show.id, currentSeason);
-    console.log(seasonData);
 
     for (let season = 1; season <= show.seasons; season++) {
+        const divSeason = document.createElement("div");
+        divSeason.classList.add("tags");
+
         const spanSeason = document.createElement("button");
         spanSeason.classList.add("tag", "is-primary");
-        spanSeason.textContent = season === currentSeason ? `Season ${season}` : season;
-        divCurrentSeason.appendChild(spanSeason);
+        const displaySpanSeason = currentSeason ? `Season ${season}` : season < 10 ? `S0${season}` : `S${season}`;
+        spanSeason.textContent = displaySpanSeason;
+        divSeason.appendChild(spanSeason);
 
         spanSeason.addEventListener("click", () => {
             console.log("clic sur saison:", season);
@@ -266,14 +269,16 @@ export async function createShowStateEpisodes(s) {
                 span.addEventListener("click", () => {
                     console.log("clic sur épisode:", ep);
                 });
-                divCurrentSeason.appendChild(span);
+                divSeason.appendChild(span);
             }
         } else if (season > currentSeason) {
             spanSeason.classList.add("is-light");
         }
+
+        divAllSeason.appendChild(divSeason);
     }
 
-    divSeasons.appendChild(divCurrentSeason);
+    divSeasons.appendChild(divAllSeason);
 
     content.append(figureLogo, divSeasons);
     card.appendChild(content);
