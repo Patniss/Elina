@@ -242,11 +242,14 @@ export async function createShowStateEpisodes(s) {
     const nbEpisodesSeenCurrentSeason = userShow.last_ep;
     const seasonData = await getSeasonData(show.id, currentSeason);
 
+    console.log(show.title, ": nombre de saisons", show.nb_seasons)
+
     for (let season = 1; season <= show.nb_seasons; season++) {
         const spanSeason = document.createElement("button");
         spanSeason.classList.add("tag", "is-primary");
         spanSeason.textContent = season === currentSeason ? `Season ${season}` : season;
         divCurrentSeason.appendChild(spanSeason);
+        console.log(show.title, "ajout de la saison ", season);
 
         spanSeason.addEventListener("click", () => {
             console.log("clic sur saison:", season);
