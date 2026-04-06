@@ -282,10 +282,10 @@ export async function movieContent(uuid) {
         });
     } else {
         console.log(directors);
-        directors.forEach(d, index => {
+        directors.forEach(async (d, index) => {
             const isLast = index === directors.length - 1;
 
-            const director = getPeople(d.id);
+            const director = await getPeople(d.people_id);
             const nameDirector = `${director.firstname} ${director.lastname}`;
 
             const liDirector = document.createElement("li");
