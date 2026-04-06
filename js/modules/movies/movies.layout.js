@@ -94,7 +94,7 @@ export function sortMovies(query, field, asc, fromUsersMovies = false) {
             break;
     }
 
-    console.log(query);
+    console.log(field, asc, fromUsersMovies);
 
     return query;
 }
