@@ -281,6 +281,7 @@ export async function movieContent(uuid) {
             btnCastMovie = "director";
         });
     } else {
+        console.log(directors);
         directors.forEach(d, index => {
             const isLast = index === directors.length - 1;
 
