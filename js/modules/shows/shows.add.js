@@ -94,9 +94,11 @@ export async function addShow() {
     for (let index = 1; index <= nbSeasonsShow; index++) {
       const nbSeason = index;
       const nbEpisodes = document.getElementById(`season-${index}`).value;
+      const poster = document.getElementById(`poster-${index}`).value;
+      const synopsis = document.getElementById(`synopsis-${index}`).value;
 
       try {
-        await addSeason(nbSeason, idShow.id, nbEpisodes)
+        await addSeason(nbSeason, idShow.id, nbEpisodes, poster, synopsis)
       } catch (error) {
         setTimeout(() => {
           handleButtonState(showSubmit, "error");
