@@ -1,4 +1,4 @@
-import { getSeasonsOfShow } from "/Elina/js/services/seasons.service.js";
+import { getDataSeasonsOfShow } from "/Elina/js/services/seasons.service.js";
 import { getShow } from "/Elina/js/services/shows.service.js";
 import { getUserShowStatus } from "/Elina/js/services/usersShows.service.js";
 import { toggleBtnStateStatut } from "/Elina/js/ui/dom.js";
@@ -20,6 +20,6 @@ export async function showContent(showId) {
 
     toggleBtnStateStatut(statut, btnAdd, btnNext, btnCancel, btnPause, btnRetake, btnFinish, btnRetry);
 
-    const seasons = await getSeasonsOfShow(showId);
+    const seasons = await getDataSeasonsOfShow(showId);
     console.log(seasons);
 }

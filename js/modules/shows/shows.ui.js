@@ -243,8 +243,6 @@ export async function createShowStateEpisodes(s) {
     const seasonData = await getSeasonData(show.id, currentSeason);
     console.log(seasonData);
 
-    console.log(show.title, ": nombre de saisons", show.seasons);
-
     for (let season = 1; season <= show.seasons; season++) {
         const spanSeason = document.createElement("button");
         spanSeason.classList.add("tag", "is-primary");

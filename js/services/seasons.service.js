@@ -17,6 +17,21 @@ export async function addSeason(nbSeason, showId, nbEpisodes, poster, synopsis) 
     }
 }
 
+export async function getDataSeasonsOfShow(showId) {
+    const { data, error } = await supabase
+        .from("seasons")
+        .select("*")
+        .eq("show_id", showId)
+        .order("season", { ascending: true });
+    
+    if (error) {
+        console.error(error);
+        return [];
+    }
+
+    return data || [];
+}
+
 export async function getNbEpisode(seasonId) {
     const { data, error } = await supabase
         .from("seasons")
