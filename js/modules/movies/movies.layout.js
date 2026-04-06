@@ -52,6 +52,10 @@ export function sortFilterMovies(refresh) {
         toggleDropdown(contentFilter, contentSort);
     });
 
+    for (const filter of filters) {
+        console.log(filter);
+    }
+
     filters.forEach(({id, genre, label}) => {
         const btn = document.getElementById(id);
         btn.addEventListener("click", () => {
