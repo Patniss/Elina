@@ -120,7 +120,7 @@ export async function majCast(castings, container) {
         const isLast = index === castings.length - 1;
 
         const cast = await getPeople(c.id_people);
-        console.log(cast);
+        console.log(c);
         const nameCast = `${cast.firstname} ${cast.lastname}`;
 
         const liCast = document.createElement("li");
