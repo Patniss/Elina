@@ -94,7 +94,7 @@ export function sortMovies(query, field, asc, fromUsersMovies = false) {
             break;
     }
 
-    console.log(field, asc, fromUsersMovies);
+    console.log(fromUsersMovies ? "foreignTable" : "base undefined");
 
     return query;
 }
