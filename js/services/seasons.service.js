@@ -65,7 +65,7 @@ export async function getNbSeason(seasonId) {
 export async function getSeasonData(showId, nbSeason) {
     const { data, error } = await supabase
         .from("seasons")
-        .select("id")
+        .select("*")
         .eq("show_id", showId)
         .eq("season", nbSeason)
         .single();
