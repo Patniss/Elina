@@ -30,7 +30,10 @@ export async function addShow() {
 
       for (let index = 1; index <= showNbSeasons.value; index++) {
         const liSeason = document.createElement("li");
-        liSeason.classList.add("is-flex");
+
+        const divSeason = document.createElement("div");
+        divSeason.classList.add("is-flex");
+
         const spanSeason = document.createElement("span");
         spanSeason.classList.add("mr-3");
         spanSeason.textContent = `Saison ${index} :`;
@@ -48,12 +51,15 @@ export async function addShow() {
         inputPoster.id = `poster-${index}`;
         inputPoster.style.width = "500px";
         inputPoster.required = true;
+        divSeason.append(spanSeason, inputSeason, inputPoster);
+
         const textSynopsis = document.createElement("textarea");
         textSynopsis.placeholder = `Synopsis de la saison ${index}`;
         textSynopsis.classList.add("textarea");
         textSynopsis.id = `synopsis-${index}`;
         textSynopsis.required = true;
-        liSeason.append(spanSeason, inputSeason, inputPoster, textSynopsis);
+
+        liSeason.append(divSeason, textSynopsis);
         showSeasons.appendChild(liSeason);
       }
     }
