@@ -1,7 +1,6 @@
 import { filters } from "/Elina/js/data/genres.js";
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { refreshMovies } from "/Elina/js/modules/movies/movies.controller.js";
-import { loadAllMovies, loadToseeMovies, loadSeenMovies, loadNoListMovies } from "/Elina/js/modules/movies/movies.load.js";
 import { renderPaginationAll } from "/Elina/js/modules/movies/movies.pagination.js";
 import { toggleDropdown } from "/Elina/js/ui/toggles.js";
 
@@ -94,6 +93,8 @@ export function sortMovies(query, field, asc, fromUsersMovies = false) {
             query = query.order("title", { ascending: asc })
             break;
     }
+
+    console.log(query);
 
     return query;
 }

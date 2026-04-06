@@ -2,7 +2,6 @@ import { initResearchAllMovie, initResearchToseeMovies, initResearchSeenMovies }
 import { moviesStore } from "/Elina/js/data/movies.store.js";
 import { sortFilterMovies, onlyNoListDisplay } from "/Elina/js/modules/movies/movies.layout.js";
 import { loadAllMovies, loadToseeMovies, loadSeenMovies, loadNoListMovies } from "/Elina/js/modules/movies/movies.load.js";
-import { renderPaginationAll, renderPaginationSeen, renderPaginationTosee } from "/Elina/js/modules/movies/movies.pagination.js";
 import { renderAllMovies, renderSeenMovies, renderToseeMovies } from "/Elina/js/modules/movies/movies.render.js";
 
 export async function changePage(page) {
