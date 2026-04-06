@@ -72,7 +72,7 @@ export async function completeMovie(movieId) {
                 const firstnameValue = firstnamePeople.value;
                 const lastnameValue = lastnamePeople.value;
                 const birthdateValue = birthdatePeople.value;
-                const deathdateValue = isDeadPeople.checked ? deathdateValue.value : null;
+                const deathdateValue = isDeadPeople.checked ? deathdatePeople.value : null;
 
                 let selectedNationalities = $(nationalitiesPeople).val();
                 const nationalitiesValue = selectedNationalities.join(" ");
