@@ -20,7 +20,7 @@ export async function initMovies() {
     });
 
     initResearchAllMovie();
-    sortFilterMovies(loadAllMovies, "all", refreshMovies);
+    sortFilterMovies(refreshMovies);
     onlyNoListDisplay();
 
     await refreshMovies();
@@ -37,7 +37,7 @@ export async function initSeenMovies() {
     });
 
     initResearchSeenMovies();
-    sortFilterMovies(loadSeenMovies, "seen", refreshSeenMovies);
+    sortFilterMovies(refreshSeenMovies);
 
     await refreshSeenMovies();
 }
@@ -53,7 +53,7 @@ export async function initToseeMovies() {
     });
 
     initResearchToseeMovies();
-    sortFilterMovies(loadToseeMovies, "tosee", refreshToseeMovies);
+    sortFilterMovies(refreshToseeMovies);
 
     await refreshToseeMovies();
 }

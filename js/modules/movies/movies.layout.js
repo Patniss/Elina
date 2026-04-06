@@ -38,7 +38,7 @@ export function onlyNoListDisplay() {
     })
 }
 
-export function sortFilterMovies(load, list, refresh) {
+export function sortFilterMovies(refresh) {
     const btnSort = document.getElementById("button-content-sort");
     const contentSort = document.getElementById("dropdown-content-sort");
     const btnFilter = document.getElementById("button-content-filter");
@@ -74,20 +74,20 @@ export function sortFilterMovies(load, list, refresh) {
     });
 }
 
-export function sortMovies(query, field, asc) {
+export function sortMovies(query, field, asc, fromUsersMovies = false) {
     switch (field) {
         case "year":
             query = query
-                .order("year", { ascending: asc })
-                .order("title", { ascending: true });
+                .order(fromUsersMovies ? "movies.year" : "year", { ascending: asc })
+                .order(fromUsersMovies ? "movies.title" : "title", { ascending: true });
             break;
 
         case "title":
-            query = query.order("title", { ascending: asc })
+            query = query.order(fromUsersMovies ? "movies.title" : "title", { ascending: asc })
             break;
 
-        case "date":
-            query = query.order("title", { ascending: asc })
+        case "seen":
+            query = query.order(fromUsersMovies ? "date_seen" : "users_movies.date_seen", { ascending: asc })
             break;
 
         default:
