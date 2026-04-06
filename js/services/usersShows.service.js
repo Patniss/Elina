@@ -123,8 +123,8 @@ export async function getUserShow(showId) {
     const userId = await getUserId();
 
     const { data, error } = await supabase
-        .from("users_shows(*), shows(*)")
-        .select("user_state")
+        .from("users_shows")
+        .select("*, shows(*)")
         .eq("user_id", userId)
         .eq("show_id", showId)
         .maybeSingle();
