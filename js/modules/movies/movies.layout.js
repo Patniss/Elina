@@ -59,7 +59,7 @@ export function sortFilterMovies(load, list, refresh) {
             moviesStore.genreFilter = genre;
             displayFilter.textContent = label;
             contentFilter.classList.add("is-hidden");
-            refresh(load, list);
+            refresh();
         })
     });
 
@@ -69,7 +69,7 @@ export function sortFilterMovies(load, list, refresh) {
             contentSort.classList.add("is-hidden");
             moviesStore.sortField = field;
             moviesStore.sortAsc = asc;
-            refresh(load, list);
+            refresh();
         })
     });
 }
