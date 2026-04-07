@@ -341,6 +341,13 @@ export async function movieContent(uuid) {
         btnAddActor.textContent = "Ajouter un acteur";
         movieActorsDiv.appendChild(btnAddActor);
 
-        btnAddActor.addEventListener("click", )
+        btnAddActor.addEventListener("click", () => {
+            document.getElementById("add-cast").classList.add("is-active");
+            document.getElementById("title-add-cast").textContent = `Ajouter un.e acteur.rice au film ${movie.title}`;
+            document.getElementById("label-chosse-people").textContent = "Choisir un.e acteur.rice";
+            document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle acteur.rice à la base de données";
+            document.getElementById("span-add-cast").textContent = "Ajouter l'acteur.rice";
+            btnCastMovie = "actor";
+        });
     }
 }
