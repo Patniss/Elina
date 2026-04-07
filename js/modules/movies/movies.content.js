@@ -140,49 +140,43 @@ export async function majCast(castings, container) {
 }
 
 export async function movieContent(uuid) {
-    const movieTitle = document.getElementById("movie-title");
-    const movieYear = document.getElementById("movie-year");
-    const moviePoster = document.getElementById("movie-poster");
-    const movieTime = document.getElementById("movie-time");
-    const movieSynopsis = document.getElementById("movie-synopsis");
-    const movieGenres = document.getElementById("movie-genres");
-    const modalPoster = document.getElementById("modal-poster");
-    const btnAddMovie = document.getElementById("button-add-movie");
-    const btnToseeMovie = document.getElementById("button-tosee-movie");
-    const btnDeleteMovie = document.getElementById("button-supp-movie");
-    const btnSeenMovie = document.getElementById("button-seen-movie");
-
-    const addOwnPoster = document.getElementById("add-own-poster");
-    const btnChangeOwnPoster = document.getElementById("button-change-own-poster");
-    const btnNullOwnPoster = document.getElementById("button-null-own-poster");
-
-    const divSeenMovie = document.getElementById("div-seen");
-    const dateSeenMovie = document.getElementById("movie-date-seen");
-    const inputChangeDate = document.getElementById("input-change-date-seen");
-    const btnChangeDate = document.getElementById("button-change-date-seen");
-    const btnNullDate = document.getElementById("button-null-date-seen");
-    const movieFav = document.getElementById("movie-fav");
-    const movieUnlike = document.getElementById("movie-unlike");
-
-    const movieDirectors = document.getElementById("directors");
-    const movieScriptwriters = document.getElementById("scriptwriters");
-
     const movie = await getMovie(uuid);
     const userMovie = await getUserMovie(uuid);
     const poster = userMovie?.own_poster ?? movie.poster;
     const statut = userMovie ? userMovie.seen : null;
     const dateSeen = userMovie?.date_seen === "1900-01-01" ? null : userMovie?.date_seen ?? null;
     let fav = userMovie?.fav ?? null;
-
+    
+    const movieTitle = document.getElementById("movie-title");
     movieTitle.textContent = movie.title;
+
+    const movieYear = document.getElementById("movie-year");
     movieYear.textContent = movie.year;
+
+    const moviePoster = document.getElementById("movie-poster");
     moviePoster.src = poster;
     modalPoster.src = poster;
-    movieTime.textContent = formatMovieDuration(movie.time);
-    movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
-    renderGenres(movieGenres, movie.genres);
     
+    const movieTime = document.getElementById("movie-time");
+    movieTime.textContent = formatMovieDuration(movie.time);
+
+    const movieSynopsis = document.getElementById("movie-synopsis");
+    movieSynopsis.textContent = formatFrenchTypography(movie.synopsis);
+
+    const movieGenres = document.getElementById("movie-genres");
+    renderGenres(movieGenres, movie.genres);
+
+    const modalPoster = document.getElementById("modal-poster");
+
+    const btnAddMovie = document.getElementById("button-add-movie");
+    const btnToseeMovie = document.getElementById("button-tosee-movie");
+    const btnDeleteMovie = document.getElementById("button-supp-movie");
+    const btnSeenMovie = document.getElementById("button-seen-movie");
+
     toggleBtnSeenStatut(statut, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
+
+    const divSeenMovie = document.getElementById("div-seen");
+    const dateSeenMovie = document.getElementById("movie-date-seen");
 
     clickAddMovieUser(btnAddMovie, uuid);
     btnAddMovie.addEventListener("click", async () => {
@@ -199,7 +193,7 @@ export async function movieContent(uuid) {
     clickDeleteMovieUser(btnDeleteMovie, uuid);
     btnDeleteMovie.addEventListener("click", async () => {
         toggleBtnSeenStatut(null, btnAddMovie, btnToseeMovie, btnDeleteMovie, btnSeenMovie);
-    })
+    });
 
     clickSeenMovieUser(btnSeenMovie, uuid);
     btnSeenMovie.addEventListener("click", async () => {
@@ -207,6 +201,7 @@ export async function movieContent(uuid) {
         divSeenMovie.classList.add("is-hidden");
     });
 
+    const movieFav = document.getElementById("movie-fav");
     movieFav.addEventListener("click", async () => {
         if (fav !== "fav") {
             updateFavMovie(uuid, "fav");
@@ -219,8 +214,9 @@ export async function movieContent(uuid) {
             movieUnlike.classList.remove("is-hidden");
             fav = null;
         }
-    })
+    });
 
+    const movieUnlike = document.getElementById("movie-unlike");
     movieUnlike.addEventListener("click", async () => {
         if (fav !== "unlike") {
             updateFavMovie(uuid, "unlike");
@@ -233,7 +229,7 @@ export async function movieContent(uuid) {
             movieFav.classList.remove("is-hidden");
             fav = null;
         }
-    })
+    });
 
     if (statut === true) {
         divSeenMovie.classList.remove("is-hidden");
@@ -245,8 +241,10 @@ export async function movieContent(uuid) {
             movieFav.classList.add("is-hidden");
             movieUnlike.classList.add("has-text-primary");
         }
-    }
+    };
 
+    const btnChangeDate = document.getElementById("button-change-date-seen");
+    const inputChangeDate = document.getElementById("input-change-date-seen");
     btnChangeDate.addEventListener("click", async() => {
         if (!inputChangeDate.value) return;
         updateDateSeenMovie(uuid, inputChangeDate.value);
@@ -255,6 +253,7 @@ export async function movieContent(uuid) {
         if (modal) modal.classList.remove('is-active');
     });
 
+    const btnNullDate = document.getElementById("button-null-date-seen");
     btnNullDate.addEventListener("click", () => {
         updateDateSeenMovie(uuid, null);
         dateSeenMovie.textContent = "Ajouter une date";
@@ -262,6 +261,7 @@ export async function movieContent(uuid) {
         if (modal) modal.classList.remove('is-active');
     });
 
+    const addOwnPoster = document.getElementById("add-own-poster");
     addOwnPoster.addEventListener("click", () => {
         const modal = document.querySelector('.modal.is-active');
         if (modal) modal.classList.remove('is-active');
@@ -269,6 +269,7 @@ export async function movieContent(uuid) {
         changeOwnPoster.classList.add("is-active");
     });
 
+    const btnChangeOwnPoster = document.getElementById("button-change-own-poster");
     btnChangeOwnPoster.addEventListener("click", () => {
         const inputChangeOwnPoster = document.getElementById("input-change-own-poster");
         if (inputChangeOwnPoster) {
@@ -280,6 +281,7 @@ export async function movieContent(uuid) {
         }
     });
 
+    const btnNullOwnPoster = document.getElementById("button-null-own-poster");
     btnNullOwnPoster.addEventListener("click", () => {
         updateOwnPoster(uuid, null);
         moviePoster.src = movie.poster;
@@ -289,9 +291,7 @@ export async function movieContent(uuid) {
     });
     
     const directors = await getDirectorsMovie(uuid);
-    const scriptwriters = await getScriptwritersMovie(uuid);
-    const actors = await getActorsMovies(uuid);
-
+    const movieDirectors = document.getElementById("directors");
     if (directors.length === 0) {
         const btnAddDirector = document.createElement("button");
         btnAddDirector.classList.add("button", "tag", "is-link");
@@ -308,8 +308,10 @@ export async function movieContent(uuid) {
         });
     } else {
         await majCast(directors, movieDirectors);
-    }
+    };
 
+    const scriptwriters = await getScriptwritersMovie(uuid);
+    const movieScriptwriters = document.getElementById("scriptwriters");
     if (scriptwriters.length === 0) {
         const btnAddScriptwriter = document.createElement("button");
         btnAddScriptwriter.classList.add("button", "tag", "is-link");
@@ -326,5 +328,19 @@ export async function movieContent(uuid) {
         });
     } else {
         await majCast(scriptwriters, movieScriptwriters);
+    };
+
+    const actors = await getActorsMovies(uuid);
+    const movieActorsDiv = document.getElementById("div-actors");
+    if (actors.length > 0) {
+        // majCastActors
+    }
+    if (!movie.complete) {
+        const btnAddActor = document.createElement("button");
+        btnAddActor.classList.add("button", "tag", "is-link");
+        btnAddActor.textContent = "Ajouter un acteur";
+        movieActorsDiv.appendChild(btnAddActor);
+
+        btnAddActor.addEventListener("click", )
     }
 }
