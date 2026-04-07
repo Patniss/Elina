@@ -347,6 +347,8 @@ export async function movieContent(uuid) {
             document.getElementById("label-chosse-people").textContent = "Choisir un.e acteur.rice";
             document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle acteur.rice à la base de données";
             document.getElementById("span-add-cast").textContent = "Ajouter l'acteur.rice";
+            document.getElementById("div-role-cast").classList.remove("is-hidden");
+            document.getElementById("role-cast").required = true;
             btnCastMovie = "actor";
         });
     }
