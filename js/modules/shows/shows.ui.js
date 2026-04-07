@@ -33,6 +33,7 @@ export async function createCarouselCard(season, index, list) {
 
 export async function createShowCard(s) {
     const show = normalizeShow(s);
+    console.log(show);
 
     if (!show) {
         console.error("Invalid normalized show:", s);
@@ -81,7 +82,6 @@ export async function createShowCard(s) {
     const retryButton = buttons.retry;
 
     updateShowUI(show.userState, buttons, divTags);
-    console.log("state of", show.title, ":", show.userState);
 
     cardContent.append(figureLogo, pSubtitle, divTags);
     card.appendChild(cardContent);
@@ -240,6 +240,7 @@ export async function createShowStateEpisodes(s) {
 
     const currentSeason = userShow.current_season;
     const nbEpisodesSeenCurrentSeason = userShow.last_ep;
+    console.log(currentSeason);
     const seasonData = await getSeasonData(show.id, currentSeason);
 
     for (let season = 1; season <= show.seasons; season++) {
