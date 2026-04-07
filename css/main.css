@@ -485,3 +485,14 @@ body {
 .table-calendar-month {
   background-color: transparent;
 }
+
+#img-random-movie {
+  opacity: 0;
+  transform: scale(0,95);
+  transition: opacity 0.5s, transform 0.5s ease;
+}
+
+#img-random-movie.loaded {
+  opacity: 1;
+  transform: scale(1);
+}

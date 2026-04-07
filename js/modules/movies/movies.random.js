@@ -9,8 +9,7 @@ export async function getRandomMovie(selectedGenres, selectedPlatforms) {
     const list = await getGenresToseeMovie(selectedGenres);
 
     if (list.length === 0) {
-        console.log("Aucun film");
-        // Aucun film
+        alert("Aucun film trouvé avec les filtres donnés.");
         return;
     }
 
@@ -18,6 +17,10 @@ export async function getRandomMovie(selectedGenres, selectedPlatforms) {
     const movie = await getMovie(randomValue);
     document.getElementById("random-movie").classList.remove("is-hidden");
     const posterMovie = document.getElementById("img-random-movie");
+    posterMovie.classList.remove("loaded");
+    posterMovie.onload = () => {
+        posterMovie.classList.add("loaded");
+    };
     posterMovie.src = movie.poster;
     posterMovie.alt = movie.title;
     const linkMovie = document.getElementById("link-random-movie");
