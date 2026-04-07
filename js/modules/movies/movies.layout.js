@@ -79,18 +79,22 @@ export function sortMovies(query, field, asc, fromUsersMovies = false) {
             query = query
                 .order("year", { ascending: asc, foreignTable: fromUsersMovies ? "movies" : undefined })
                 .order("title", { ascending: true, foreignTable: fromUsersMovies ? "movies" : undefined });
+                console.log("bouton cliqué year")
             break;
 
         case "title":
             query = query.order("title", { ascending: asc, foreignTable: fromUsersMovies ? "movies" : undefined })
+            console.log("bouton cliqué title")
             break;
 
         case "seen":
             query = query.order("date_seen", { ascending: asc })
+            console.log("bouton cliqué seen")
             break;
 
         default:
             query = query.order("title", { ascending: asc, foreignTable: fromUsersMovies ? "movies" : undefined })
+            console.log("bouton cliqué default")
             break;
     }
 
