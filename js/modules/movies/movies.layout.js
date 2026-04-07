@@ -53,28 +53,24 @@ export function sortFilterMovies(refresh) {
     });
 
     for (const filter of filters) {
-        console.log(filter);
+        const btn = document.getElementById(filter.id);
+        btn.addEventListener("click", async () => {
+            moviesStore.genreFilter = filter.genre;
+            displayFilter.textContent = filter.label;
+            contentFilter.classList.add("is-hidden");
+            await refresh()
+        });
     }
 
-    filters.forEach(({id, genre, label}) => {
-        const btn = document.getElementById(id);
-        btn.addEventListener("click", () => {
-            moviesStore.genreFilter = genre;
-            displayFilter.textContent = label;
-            contentFilter.classList.add("is-hidden");
-            refresh();
-        })
-    });
-
-    sortButtons.forEach(({id, field, asc}) => {
-        const btn = document.getElementById(id);
-        btn.addEventListener("click", () => {
+    for (const sort of sortButtons) {
+        const btn = document.getElementById(sort.id);
+        btn.addEventListener("click", async () => {
+            moviesStore.sortField = sort.field;
+            moviesStore.sortAsc = sort.asc;
             contentSort.classList.add("is-hidden");
-            moviesStore.sortField = field;
-            moviesStore.sortAsc = asc;
-            refresh();
-        })
-    });
+            await refresh();
+        });
+    }
 }
 
 export function sortMovies(query, field, asc, fromUsersMovies = false) {
