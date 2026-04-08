@@ -91,12 +91,14 @@ export async function getCurrentShows() {
 }
 
 export async function getNextEpisode(showId) {
-    console.log(showId);
     const userShow = await getUserShow(showId);
     if (!userShow) return null;
-    console.log(userShow);
     
     const nbTotalSeasons = userShow.shows.nb_seasons;
+
+    if (!userShow.current_season) {
+        return null;
+    }
 
     const currentSeason = await getSeasonData(showId, userShow.current_season);
     const lastEpCurrentSeason = userShow.last_ep ?? 0;
