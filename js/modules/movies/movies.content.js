@@ -94,13 +94,14 @@ export async function completeMovie(movieId) {
                 document.getElementById("div-choose-people").classList.remove("is-hidden");
                 $(selectPeople).val(null).trigger('change');
             });
-        } else {
-            peopleId = $(selectPeople).val();
         }
     });
 
     btnAddCast.addEventListener("click", async () => {
         peopleId = $(selectPeople).val();
+        console.log(peopleId);
+        console.log(movieId);
+        console.log(btnCastMovie);
         if (!peopleId) {
             alert("Veuillez sélectionner un people.");
             return;
