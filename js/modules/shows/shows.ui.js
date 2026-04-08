@@ -247,7 +247,10 @@ export async function createShowStateEpisodes(s) {
     for (let season = 1; season <= show.seasons; season++) {
         const spanSeason = document.createElement("button");
         spanSeason.classList.add("tag", "is-primary");
-        const displaySpanSeason = currentSeason ? `Season ${season}` : season < 10 ? `S0${season}` : `S${season}`;
+        if (season > currentSeason) {
+            spanSeason.classList.add("is-light");
+        }
+        const displaySpanSeason = currentSeason === season ? `Season ${season}` : season < 10 ? `S0${season}` : `S${season}`;
         spanSeason.textContent = displaySpanSeason;
         divAllSeason.appendChild(spanSeason);
 
@@ -257,7 +260,7 @@ export async function createShowStateEpisodes(s) {
 
         if (season === currentSeason) {
             const divEpisodes = document.createElement("div");
-            divEpisodes.classList.add("tags");
+            divEpisodes.classList.add("tags", "mb-0");
             for (let ep = 1; ep <= seasonData.nb_episodes; ep++) {
                 const span = document.createElement("button");
                 span.classList.add("tag");
@@ -267,6 +270,12 @@ export async function createShowStateEpisodes(s) {
                 } else {
                     span.classList.add("is-success");
                 };
+                span.addEventListener("mouseenter", () => {
+                    span.classList.remove("is-light");
+                });
+                span.addEventListener("mouseleave", () => {
+                    span.classList.add("is-light");
+                })
                 span.addEventListener("click", () => {
                     console.log("clic sur épisode:", ep);
                 });
