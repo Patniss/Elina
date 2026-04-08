@@ -75,7 +75,7 @@ export async function renderPostersShow(seasons) {
         index++;
     }
 
-    initCarousel("poster", leftBtn, rightBtn);
+    initCarousel("poster", leftBtn, rightBtn, 1);
 }
 
 export async function renderTostartShows(shows) {
