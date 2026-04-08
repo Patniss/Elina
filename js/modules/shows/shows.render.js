@@ -14,15 +14,8 @@ export async function renderAllShows(shows) {
 
 export async function renderCanceledShows(shows) {
     const container = document.getElementById("list-canceled-shows");
-    const box = document.getElementById("box-canceled-shows");
 
     const showsToRender = shows || showsStore.shows.canceled;
-
-    if (showsToRender.length === 0) {
-        box.classList.add("is-hidden");
-    } else {
-        box.classList.remove("is-hidden");
-    }
 
     render(container, showsStore, "canceled", "shows", createShowCard, showsToRender);
 
@@ -41,15 +34,8 @@ export async function renderCurrentShows(shows) {
 
 export async function renderFinishedShows(shows) {
     const container = document.getElementById("list-finished-shows");
-    const box = document.getElementById("box-finished-shows");
 
     const showsToRender = shows || showsStore.shows.finished;
-
-    if (showsToRender.length === 0) {
-        box.classList.add("is-hidden");
-    } else {
-        box.classList.remove("is-hidden");
-    }
 
     render(container, showsStore, "finished", "shows", createShowCard, showsToRender);
 
@@ -94,15 +80,8 @@ export async function renderPostersShow(seasons) {
 
 export async function renderTostartShows(shows) {
     const container = document.getElementById("list-tostart-shows");
-    const box = document.getElementById("box-tostart-shows");
 
     const showsToRender = shows || showsStore.shows.tostart;
-
-    if (showsToRender.length === 0) {
-        box.classList.add("is-hidden");
-    } else {
-        box.classList.remove("is-hidden");
-    }
 
     render(container, showsStore, "tostart", "shows", createShowCard, showsToRender);
 
