@@ -29,7 +29,7 @@ export let indexMoviesStore = {
         last: []
     },
     currentIndex: {
-        tosee: 3,
+        tosee: 0,
         fav: 0,
         last: 0
     },

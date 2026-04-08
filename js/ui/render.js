@@ -1,4 +1,16 @@
-export function initCarousel(list, leftArrow, rightArrow) {
+export function initCarousel(list, leftArrow, rightArrow, visibleCount = 5) {
+    if (visibleCount % 2 === 0) {
+        visibleCount += 1;
+    }
+    if (visibleCount > 7) {
+        visibleCount = 7;
+    }
+    if (visibleCount < 0) {
+        visibleCount = 1
+    }
+
+    const half = Math.floor(visibleCount / 2);
+
     const cards = document.querySelectorAll(`.card-carousel-${list}`);
 
     let currentIndex = 0;
@@ -12,26 +24,25 @@ export function initCarousel(list, leftArrow, rightArrow) {
         
         cards.forEach((card, i) => {
             const offset = (i - currentIndex + cards.length) % cards.length;
-            
+
             card.classList.remove(
                 "center",
                 "left-1",
                 "left-2",
+                "left-3",
                 "right-1",
                 "right-2",
+                "right-3",
                 "hidden"
             );
-            
+
             if (offset === 0) {
                 card.classList.add("center");
-            } else if (offset === 1) {
-                card.classList.add("right-1");
-            } else if (offset === 2) {
-                card.classList.add("right-2");
-            } else if (offset === cards.length - 1) {
-                card.classList.add("left-1");
-            } else if (offset === cards.length - 2) {
-                card.classList.add("left-2");
+            } else if (offset <= half) {
+                card.classList.add(`right-${offset}`);
+            } else if (offset >= cards.length - half) {
+                const pos = cards.length - offset;
+                card.classList.add(`left-${pos}`);
             } else {
                 card.classList.add("hidden");
             }
