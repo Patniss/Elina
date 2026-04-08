@@ -24,15 +24,101 @@
       
       <div class="box">
         
-        <h1 class="title"><span class="icon"><i class="fa-solid fa-couch"></i></span> Séries en pause</h1>
+        <h1 class="title"> <span class="icon"><i class="fa-solid fa-couch"></i></span>  Séries en cours</h1>
+
+        <div class="fixed-grid has-4-cols">
+          <div class="grid">
+            <div class="cell is-col-from-end-2 buttons is-right">
+              <a href="/Elina/entertainment/shows/index.html" class="button is-small">Accueil</a>
+              <a href="/Elina/entertainment/shows/all.html" class="button is-small">Toutes</a>
+              <a href="/Elina/entertainment/shows/current.html" class="button is-small">En cours</a>
+              <a href="/Elina/entertainment/shows/add.html" class="button is-small">Ajouter</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input type="text" id="movie-search" placeholder="Chercher un film…" class="input mb-4"/>
+            <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+          </p>
+          <div class="buttons are-small">
+
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-filter" id="button-content-filter">
+                  <span class="icon"><i class="fa-solid fa-filter"></i></span><span class="content">Filtrer par genre</span>
+                </button>
+              </div>
+
+              <div class="dropdown-menu" id="dropdown-menu-filter" role="menu">
+                <div class="dropdown-content is-hidden" id="dropdown-content-filter">
+                  <a href="#" class="dropdown-item" id="filter-reint">Réinitialiser</a>
+                  <a href="#" class="dropdown-item" id="filter-action">Action</a>
+                  <a href="#" class="dropdown-item" id="filter-animation">Animation</a>
+                  <a href="#" class="dropdown-item" id="filter-artsmartiaux">Arts martiaux</a>
+                  <a href="#" class="dropdown-item" id="filter-aventure">Aventure</a>
+                  <a href="#" class="dropdown-item" id="filter-biopic">Biopic</a>
+                  <a href="#" class="dropdown-item" id="filter-comedie">Comédie</a>
+                  <a href="#" class="dropdown-item" id="filter-commusicale">Comédie musicale</a>
+                  <a href="#" class="dropdown-item" id="filter-crime">Crime</a>
+                  <a href="#" class="dropdown-item" id="filter-drame">Drame</a>
+                  <a href="#" class="dropdown-item" id="filter-espionnage">Espionnage</a>
+                  <a href="#" class="dropdown-item" id="filter-fantastique">Fantastique</a>
+                  <a href="#" class="dropdown-item" id="filter-famille">Famille</a>
+                  <a href="#" class="dropdown-item" id="filter-guerre">Guerre</a>
+                  <a href="#" class="dropdown-item" id="filter-historique">Historique</a>
+                  <a href="#" class="dropdown-item" id="filter-horreur">Horreur</a>
+                  <a href="#" class="dropdown-item" id="filter-musique">Musique</a>
+                  <a href="#" class="dropdown-item" id="filter-mystere">Mystère</a>
+                  <a href="#" class="dropdown-item" id="filter-policier">Policier</a>
+                  <a href="#" class="dropdown-item" id="filter-romance">Romance</a>
+                  <a href="#" class="dropdown-item" id="filter-sf">Science-fiction</a>
+                  <a href="#" class="dropdown-item" id="filter-suspense">Suspense</a>
+                  <a href="#" class="dropdown-item" id="filter-thriller">Thriller</a>
+                  <a href="#" class="dropdown-item" id="filter-western">Western</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-sort" id="button-content-sort">
+                  <span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span><span class="content">Trier</span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu-sort" role="menu">
+                <div class="dropdown-content is-hidden" id="dropdown-content-sort">
+                  <a href="#" class="dropdown-item" id="sort-az">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-a-z"></i></span>
+                    <span>Trier par titre A-Z</span>
+                  </a>
+                  <a href="#" class="dropdown-item" id="sort-za">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-z-a"></i></span>
+                    <span>Trier par titre Z-A</span>
+                  </a>
+                  <a href="#" class="dropdown-item" id="sort-91">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-9-1"></i>
+                    </span>Trier par sortie (plus récent au moins récent)</span>
+                  </a>
+                  <a href="#" class="dropdown-item" style="display: none;" id="sort-19">
+                    <span class="icon"><i class="fa-solid fa-arrow-down-1-9"></i>
+                    </span>Trier par sortie (moins récent au plus récent)</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <p id="filter-display" class="is-italic"></p>
+
+          </div>
+        </div>
         
         <div class="columns is-multiline" id="list-paused-shows"></div>
+
+        <nav class="pagination is-left" role="navigation" aria-label="pagination" id="pagination-list"></nav>
         
       </div>
-
-      <nav class="pagination" role="navigation" aria-label="navigation" id="pagination">
-        <div class="pagination-list" id="pagination_nb"></div>
-      </nav>
 
     </div>
 
