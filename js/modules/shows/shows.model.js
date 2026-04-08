@@ -1,4 +1,5 @@
 export function normalizeShow(show) {
+    console.log(show);
     const source = show.shows ?? show;
 
     return {
