@@ -31,11 +31,18 @@ export async function showContent(showId) {
     renderGenres(showGenres, show.genres);
 
     const showSynopsis = document.getElementById("show-synopsis");
+    const showSeasons = document.getElementById("show-seasons");
     
     seasons.forEach(season => {
-        console.log(season);
         if (season.season === 1) {
             showSynopsis.textContent = season.synopsis;
         }
+
+        const divSeason = document.createElement("div");
+        divSeason.classList.add("tags");
+
+        const spanSeason = document.createElement("button");
+        spanSeason.classList.add("button", "tag", "is-primary");
+        spanSeason.textContent = `Saison ${season.season}`;
     });
 }
