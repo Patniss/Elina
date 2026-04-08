@@ -94,7 +94,9 @@ export async function completeMovie(movieId) {
                 document.getElementById("div-choose-people").classList.remove("is-hidden");
                 $(selectPeople).val(null).trigger('change');
             });
-        };
+        } else {
+            peopleId = $(selectPeople).val();
+        }
     });
 
     btnAddCast.addEventListener("click", async () => {

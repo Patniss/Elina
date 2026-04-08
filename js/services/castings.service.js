@@ -47,8 +47,8 @@ export async function addMovieCasting(movieId, peopleId, cast) {
         }]).select().single();
 
     if (error) {
-        console.log("Erreur sur l'ajout du casting: " + error);
-        return;
+        console.error(error);
+        return null;
     }
 
     return data;
