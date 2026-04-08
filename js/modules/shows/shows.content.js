@@ -34,6 +34,7 @@ export async function showContent(showId) {
     const showSeasons = document.getElementById("show-seasons");
     
     seasons.forEach(season => {
+        console.log(season);
         if (season.season === 1) {
             showSynopsis.textContent = season.synopsis;
         }
@@ -44,5 +45,8 @@ export async function showContent(showId) {
         const spanSeason = document.createElement("button");
         spanSeason.classList.add("button", "tag", "is-primary");
         spanSeason.textContent = `Saison ${season.season}`;
+
+        divSeason.appendChild(spanSeason);
+        showSeasons.appendChild(divSeason);
     });
 }
