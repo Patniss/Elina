@@ -264,6 +264,7 @@ export async function createShowStateEpisodes(s) {
             for (let ep = 1; ep <= seasonData.nb_episodes; ep++) {
                 const span = document.createElement("button");
                 span.classList.add("tag");
+                span.id = `ep-${ep}`;
                 span.textContent = ep;
                 if (nbEpisodesSeenCurrentSeason < ep) {
                     span.classList.add("is-success", "is-light");
@@ -272,9 +273,17 @@ export async function createShowStateEpisodes(s) {
                 };
                 span.addEventListener("mouseenter", () => {
                     span.classList.remove("is-light");
+                    for (let i = 1; i <= ep; i++) {
+                        document.getElementById(`ep-${i}`).classList.remove("is-light");
+                    }
                 });
                 span.addEventListener("mouseleave", () => {
-                    span.classList.add("is-light");
+                    for (let i = 1; i <= ep; i++) {
+                        if (i > nbEpisodesSeenCurrentSeason) {
+                            document.getElementById(`ep-${i}`).classList.add("is-light");
+                        }
+                        document.getElementById(`ep-${i}`).classList.remove("is-light");
+                    }
                 })
                 span.addEventListener("click", () => {
                     console.log("clic sur épisode:", ep);
