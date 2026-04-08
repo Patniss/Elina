@@ -98,10 +98,8 @@ export async function completeMovie(movieId) {
     });
 
     btnAddCast.addEventListener("click", async () => {
-        peopleId = $(selectPeople).val();
-        console.log(peopleId);
-        console.log(movieId);
-        console.log(btnCastMovie);
+        const values = $(selectPeople).val();
+        peopleId = values ? values[0] : null;
         if (!peopleId) {
             alert("Veuillez sélectionner un people.");
             return;
