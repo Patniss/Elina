@@ -281,8 +281,9 @@ export async function createShowStateEpisodes(s) {
                     for (let i = 1; i <= ep; i++) {
                         if (i > nbEpisodesSeenCurrentSeason) {
                             document.getElementById(`ep-${i}`).classList.add("is-light");
+                        } else {
+                            document.getElementById(`ep-${i}`).classList.remove("is-light");
                         }
-                        document.getElementById(`ep-${i}`).classList.remove("is-light");
                     }
                 })
                 span.addEventListener("click", () => {
