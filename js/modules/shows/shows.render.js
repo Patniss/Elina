@@ -66,15 +66,8 @@ export async function renderIndexCurrentShows(shows) {
 
 export async function renderPausedShows(shows) {
     const container = document.getElementById("list-paused-shows");
-    const box = document.getElementById("box-paused-shows");
     
     const showsToRender = shows || showsStore.shows.paused;
-
-    if (showsToRender.length === 0) {
-        box.classList.add("is-hidden");
-    } else {
-        box.classList.remove("is-hidden");
-    }
 
     render(container, showsStore, "paused", "shows", createShowCard, showsToRender);
 
