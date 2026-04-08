@@ -30,6 +30,7 @@ export async function showContent(showId) {
     const showSynopsis = document.getElementById("show-synopsis");
     
     seasons.forEach(season => {
+        console.log(season);
         if (season.season === 1) {
             showSynopsis.textContent = seasons.synopsis;
         }
