@@ -28,9 +28,9 @@ export async function showContent(showId) {
     renderGenres(showGenres, show.genres);
 
     const showSynopsis = document.getElementById("show-synopsis");
-
+    
     seasons.forEach(season => {
-        if (seasons.season === 1) {
+        if (season.season === 1) {
             showSynopsis.textContent = seasons.synopsis;
         }
     });

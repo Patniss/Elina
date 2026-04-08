@@ -155,6 +155,8 @@ export async function movieContent(uuid) {
 
     const moviePoster = document.getElementById("movie-poster");
     moviePoster.src = poster;
+
+    const modalPoster = document.getElementById("modal-poster");
     modalPoster.src = poster;
     
     const movieTime = document.getElementById("movie-time");
@@ -165,8 +167,6 @@ export async function movieContent(uuid) {
 
     const movieGenres = document.getElementById("movie-genres");
     renderGenres(movieGenres, movie.genres);
-
-    const modalPoster = document.getElementById("modal-poster");
 
     const btnAddMovie = document.getElementById("button-add-movie");
     const btnToseeMovie = document.getElementById("button-tosee-movie");
