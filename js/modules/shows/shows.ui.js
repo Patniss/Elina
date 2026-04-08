@@ -83,7 +83,7 @@ export async function createShowCard(s) {
     const retryButton = buttons.retry;
 
     console.log(show);
-    updateShowUI(show.userState, buttons, divTags);
+    updateShowUI(show.user_state, buttons, divTags);
 
     cardContent.append(figureLogo, pSubtitle, divTags);
     card.appendChild(cardContent);
