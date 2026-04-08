@@ -289,6 +289,8 @@ export async function movieContent(uuid) {
         const modal = document.querySelector('.modal.is-active');
         if (modal) modal.classList.remove('is-active');
     });
+
+    const divRole = document.getElementById("div-role-cast");
     
     const directors = await getDirectorsMovie(uuid);
     const movieDirectors = document.getElementById("directors");
@@ -300,10 +302,12 @@ export async function movieContent(uuid) {
 
         btnAddDirector.addEventListener("click", () => {
             document.getElementById("add-cast").classList.add("is-active");
-            document.getElementById("title-add-cast").textContent = `Ajouter un.e réalisateur.rice au film ${movie.title}`;
+            document.getElementById("title-add-cast").innerHTML = `Ajouter un.e réalisateur.rice au film <i class="has-text-primary">${movie.title}</i>`;
             document.getElementById("label-choose-people").textContent = "Choisir un.e réalisateur.rice";
             document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle réalisateur.rice à la base de données";
             document.getElementById("span-add-cast").textContent = "Ajouter le réalisateur";
+            divRole.classList.add("is-hidden");
+            document.getElementById("role-cast").required = false;
             btnCastMovie = "director";
         });
     } else {
@@ -320,10 +324,12 @@ export async function movieContent(uuid) {
 
         btnAddScriptwriter.addEventListener("click", () => {
             document.getElementById("add-cast").classList.add("is-active");
-            document.getElementById("title-add-cast").textContent = `Ajouter un.e scénariste au film ${movie.title}`;
+            document.getElementById("title-add-cast").innerHTML = `Ajouter un.e scénariste au film <i class="has-text-primary">${movie.title}</i>`;
             document.getElementById("label-choose-people").textContent = "Choisir un.e scénariste";
             document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle scénariste à la base de données";
             document.getElementById("span-add-cast").textContent = "Ajouter le scénariste";
+            divRole.classList.add("is-hidden");
+            document.getElementById("role-cast").required = false;
             btnCastMovie = "scriptwriter";
         });
     } else {
@@ -332,7 +338,6 @@ export async function movieContent(uuid) {
 
     const actors = await getActorsMovies(uuid);
     const movieActorsDiv = document.getElementById("div-actors");
-    const divRole = document.getElementById("div-role-cast");
     if (actors.length > 0) {
         // majCastActors
     }
@@ -344,7 +349,7 @@ export async function movieContent(uuid) {
 
         btnAddActor.addEventListener("click", () => {
             document.getElementById("add-cast").classList.add("is-active");
-            document.getElementById("title-add-cast").textContent = `Ajouter un.e acteur.rice au film ${movie.title}`;
+            document.getElementById("title-add-cast").innerHTML = `Ajouter un.e acteur.rice au film <i class="has-text-primary">${movie.title}</i>`;
             document.getElementById("label-choose-people").textContent = "Choisir un.e acteur.rice";
             document.getElementById("subtitle-add-people").textContent = "Ajouter un.e nouveau.elle acteur.rice à la base de données";
             document.getElementById("span-add-cast").textContent = "Ajouter l'acteur.rice";
