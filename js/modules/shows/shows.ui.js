@@ -240,7 +240,6 @@ export async function createShowStateEpisodes(s) {
 
     const currentSeason = userShow.current_season;
     const nbEpisodesSeenCurrentSeason = userShow.last_ep;
-    console.log(currentSeason);
     const seasonData = await getSeasonData(show.id, currentSeason);
 
     for (let season = 1; season <= show.seasons; season++) {
@@ -271,11 +270,10 @@ export async function createShowStateEpisodes(s) {
                 });
                 divEpisodes.appendChild(span);
             }
+            divAllSeason.appendChild(divEpisodes);
         } else if (season > currentSeason) {
             spanSeason.classList.add("is-light");
         }
-
-        divAllSeason.appendChild(divEpisodes);
     }
 
     divSeasons.appendChild(divAllSeason);
