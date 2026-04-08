@@ -91,8 +91,10 @@ export async function getCurrentShows() {
 }
 
 export async function getNextEpisode(showId) {
+    console.log(showId);
     const userShow = await getUserShow(showId);
     if (!userShow) return null;
+    console.log(userShow);
     
     const nbTotalSeasons = userShow.shows.nb_seasons;
 
@@ -115,6 +117,8 @@ export async function getNextEpisode(showId) {
         episode = String(userShow.last_ep + 1).padStart(2, '0');
         result = `S${season} E${episode}`;
     }
+
+    console.log("fin get next ep exécuté")
 
     return result;
 }

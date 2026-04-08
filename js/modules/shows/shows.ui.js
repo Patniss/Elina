@@ -33,7 +33,6 @@ export async function createCarouselCard(season, index, list) {
 
 export async function createShowCard(s) {
     const show = normalizeShow(s);
-    console.log(show);
 
     if (!show) {
         console.error("Invalid normalized show:", s);
@@ -41,6 +40,7 @@ export async function createShowCard(s) {
     }
 
     const nextEpisode = await getNextEpisode(show.id);
+    console.log(nextEpisode);
 
     const column = document.createElement("div");
     column.classList.add("column", "is-one-quarter");
@@ -53,9 +53,11 @@ export async function createShowCard(s) {
     
     const figureLogo = document.createElement("figure");
     figureLogo.classList.add("image", "logo-wrapper", "py-2", "px-2");
+
     const imgLogo = document.createElement("img");
     imgLogo.src = show.logo;
     imgLogo.alt = show.title;
+    
     figureLogo.appendChild(imgLogo);
     
     const pTitle = document.createElement("p");
