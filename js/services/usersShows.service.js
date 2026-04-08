@@ -120,8 +120,6 @@ export async function getNextEpisode(showId) {
         result = `S${season} E${episode}`;
     }
 
-    console.log("fin get next ep exécuté")
-
     return result;
 }
 

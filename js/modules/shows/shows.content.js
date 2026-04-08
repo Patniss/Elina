@@ -1,3 +1,4 @@
+import { renderPostersShow } from "/Elina/js/modules/shows/shows.render.js";
 import { getDataSeasonsOfShow } from "/Elina/js/services/seasons.service.js";
 import { getShow } from "/Elina/js/services/shows.service.js";
 import { getUserShowStatus } from "/Elina/js/services/usersShows.service.js";
@@ -8,6 +9,8 @@ export async function showContent(showId) {
     const show = await getShow(showId);
     const statut = await getUserShowStatus(showId);
     const seasons = await getDataSeasonsOfShow(showId);
+
+    await renderPostersShow(seasons);
 
     const showTitle = document.getElementById("show-title");
     showTitle.textContent = show.title;
@@ -32,7 +35,7 @@ export async function showContent(showId) {
     seasons.forEach(season => {
         console.log(season);
         if (season.season === 1) {
-            showSynopsis.textContent = seasons.synopsis;
+            showSynopsis.textContent = season.synopsis;
         }
     });
 }
