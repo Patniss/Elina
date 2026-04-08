@@ -40,7 +40,6 @@ export async function createShowCard(s) {
     }
 
     const nextEpisode = await getNextEpisode(show.id);
-    console.log(nextEpisode);
 
     const column = document.createElement("div");
     column.classList.add("column", "is-one-quarter");
@@ -83,6 +82,7 @@ export async function createShowCard(s) {
     const cancelButton = buttons.cancel;
     const retryButton = buttons.retry;
 
+    console.log(show);
     updateShowUI(show.userState, buttons, divTags);
 
     cardContent.append(figureLogo, pSubtitle, divTags);
