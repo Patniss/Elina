@@ -264,7 +264,7 @@ export async function createShowStateEpisodes(s) {
             for (let ep = 1; ep <= seasonData.nb_episodes; ep++) {
                 const span = document.createElement("button");
                 span.classList.add("tag");
-                span.id = `ep-${ep}`;
+                span.id = `${show.id}-s-${season}-ep-${ep}`;
                 span.textContent = ep;
                 if (nbEpisodesSeenCurrentSeason < ep) {
                     span.classList.add("is-success", "is-light");
@@ -280,9 +280,9 @@ export async function createShowStateEpisodes(s) {
                 span.addEventListener("mouseleave", () => {
                     for (let i = 1; i <= ep; i++) {
                         if (i > nbEpisodesSeenCurrentSeason) {
-                            document.getElementById(`ep-${i}`).classList.add("is-light");
+                            document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.add("is-light");
                         } else {
-                            document.getElementById(`ep-${i}`).classList.remove("is-light");
+                            document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.remove("is-light");
                         }
                     }
                 })
