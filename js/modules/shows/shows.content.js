@@ -1,14 +1,18 @@
 import { renderPostersShow } from "/Elina/js/modules/shows/shows.render.js";
 import { getDataSeasonsOfShow } from "/Elina/js/services/seasons.service.js";
 import { getShow } from "/Elina/js/services/shows.service.js";
-import { getUserShowStatus } from "/Elina/js/services/usersShows.service.js";
+import { getUserShow } from "/Elina/js/services/usersShows.service.js";
 import { toggleBtnStateStatut } from "/Elina/js/ui/dom.js";
 import { renderGenres } from "/Elina/js/ui/render.js";
 
 export async function showContent(showId) {
     const show = await getShow(showId);
-    const statut = await getUserShowStatus(showId);
     const seasons = await getDataSeasonsOfShow(showId);
+    const userShow = await getUserShow(showId);
+
+    const state = userShow ? userShow.user_state : null;
+    const current_season = userShow ? userShow.current_season : null;
+    const last_ep = userShow ? userShow.last_ep : null;
 
     await renderPostersShow(seasons);
 
@@ -25,7 +29,7 @@ export async function showContent(showId) {
     const btnCancel = document.getElementById("button-cancel-show");
     const btnRetry = document.getElementById("button-retry-show");
     const btnFinish = document.getElementById("button-finished-show");
-    toggleBtnStateStatut(statut, btnAdd, btnNext, btnCancel, btnPause, btnRetake, btnFinish, btnRetry);
+    toggleBtnStateStatut(state, btnAdd, btnNext, btnCancel, btnPause, btnRetake, btnFinish, btnRetry);
 
     const showGenres = document.getElementById("show-genres");
     renderGenres(showGenres, show.genres);
@@ -34,7 +38,6 @@ export async function showContent(showId) {
     const showSeasons = document.getElementById("show-seasons");
     
     seasons.forEach(season => {
-        console.log(season);
         if (season.season === 1) {
             showSynopsis.textContent = season.synopsis;
         }
@@ -46,7 +49,23 @@ export async function showContent(showId) {
         spanSeason.classList.add("button", "tag", "is-primary");
         spanSeason.textContent = `Saison ${season.season}`;
 
+        if (season < current_season) {
+            spanSeason.classList.add("is-light");
+        }
+
         divSeason.appendChild(spanSeason);
+
+        for (let ep = 0; ep < season.nb_episodes; ep++) {
+            const spanEpisode = document.createElement("button");
+            spanEpisode.id = `s${season}-ep${ep}`;
+            spanEpisode.classList.add("button", "tag", "is-success");
+            if (season < current_season || (season === current_season && ep > last_ep)) {
+                spanEpisode.classList.add("is-light")
+            }
+            spanEpisode.textContent = ep;
+            divSeason.appendChild(spanEpisode);
+        }
+
         showSeasons.appendChild(divSeason);
     });
 }
