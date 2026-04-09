@@ -231,7 +231,7 @@ export async function createShowStateEpisodes(s) {
     figureLogo.classList.add("column", "is-one-fifth", "image", "logo-wrapper", "py-2", "px-2");
 
     const linkLogo = document.createElement("a");
-    linkLogo.href = `/Elina/entertainment/movies/movie.html?id=${show.id}`;
+    linkLogo.href = `/Elina/entertainment/shows/show.html?id=${show.id}`;
 
     const imgLogo = document.createElement("img");
     imgLogo.src = show.logo;
@@ -280,7 +280,7 @@ export async function createShowStateEpisodes(s) {
                 span.addEventListener("mouseenter", () => {
                     span.classList.remove("is-light");
                     for (let i = 1; i <= ep; i++) {
-                        document.getElementById(`${show.id}-s-${season}-ep-${ep}`).classList.remove("is-light");
+                        document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.remove("is-light");
                     }
                 });
                 span.addEventListener("mouseleave", () => {
