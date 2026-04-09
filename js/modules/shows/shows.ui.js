@@ -249,6 +249,7 @@ export async function createShowStateEpisodes(s) {
     const currentSeason = userShow.current_season;
     const nbEpisodesSeenCurrentSeason = userShow.last_ep;
     const seasonData = await getSeasonData(show.id, currentSeason);
+    console.log(show.title, currentSeason);
 
     for (let season = 1; season <= show.seasons; season++) {
         const spanSeason = document.createElement("button");
@@ -272,26 +273,24 @@ export async function createShowStateEpisodes(s) {
                 span.classList.add("tag");
                 span.id = `${show.id}-s-${season}-ep-${ep}`;
                 span.textContent = ep;
-                if (nbEpisodesSeenCurrentSeason < ep) {
-                    span.classList.add("is-success", "is-light");
-                } else {
+                if (nbEpisodesSeenCurrentSeason >= ep) {
                     span.classList.add("is-success");
                 };
                 span.addEventListener("mouseenter", () => {
-                    span.classList.remove("is-light");
+                    span.classList.add("is-success", "is-light");
                     for (let i = 1; i <= ep; i++) {
-                        document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.remove("is-light");
+                        document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.remove("is-success", "is-light");
                     }
                 });
                 span.addEventListener("mouseleave", () => {
                     for (let i = 1; i <= ep; i++) {
                         if (i > nbEpisodesSeenCurrentSeason) {
-                            document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.add("is-light");
+                            document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.add("is-success", "is-light");
                         } else {
-                            document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.remove("is-light");
+                            document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.remove("is-success", "is-light");
                         }
                     }
-                })
+                });
                 span.addEventListener("click", () => {
                     console.log("clic sur épisode:", ep);
                 });
