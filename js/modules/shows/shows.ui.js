@@ -229,10 +229,16 @@ export async function createShowStateEpisodes(s) {
 
     const figureLogo = document.createElement("figure");
     figureLogo.classList.add("column", "is-one-fifth", "image", "logo-wrapper", "py-2", "px-2");
+
+    const linkLogo = document.createElement("a");
+    linkLogo.href = `/Elina/entertainment/movies/movie.html?id=${show.id}`;
+
     const imgLogo = document.createElement("img");
     imgLogo.src = show.logo;
     imgLogo.alt = show.title;
-    figureLogo.appendChild(imgLogo);
+
+    linkLogo.appendChild(imgLogo);
+    figureLogo.appendChild(linkLogo);
 
     const divSeasons = document.createElement("div");
     divSeasons.classList.add("column");
