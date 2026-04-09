@@ -55,7 +55,7 @@ export async function showContent(showId) {
 
         divSeason.appendChild(spanSeason);
 
-        for (let ep = 0; ep < season.nb_episodes; ep++) {
+        for (let ep = 1; ep <= season.nb_episodes; ep++) {
             const spanEpisode = document.createElement("button");
             spanEpisode.id = `s${season}-ep${ep}`;
             spanEpisode.classList.add("button", "tag", "is-success");
