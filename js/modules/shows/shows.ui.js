@@ -274,7 +274,7 @@ export async function createShowStateEpisodes(s) {
                 span.addEventListener("mouseenter", () => {
                     span.classList.remove("is-light");
                     for (let i = 1; i <= ep; i++) {
-                        document.getElementById(`ep-${i}`).classList.remove("is-light");
+                        document.getElementById(`${show.id}-s-${season}-ep-${ep}`).classList.remove("is-light");
                     }
                 });
                 span.addEventListener("mouseleave", () => {
