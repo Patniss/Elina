@@ -127,7 +127,8 @@ export async function render(containerStore, store, list, element, createFunctio
 export function renderGenres(container, genresString) {
     container.innerHTML = '';
     const genres = genresString.trim().split(" ; ");
-    genres.forEach(genre => {
+    genres.forEach(g => {
+        const genre = g.replace(["é", "è"], ["e", "e"]);
         const spanGenre = document.createElement("span");
         spanGenre.classList.add("tag", "is-medium", genre.trim().toLowerCase(), "mr-2");
         spanGenre.textContent = genre;

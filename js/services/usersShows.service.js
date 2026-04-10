@@ -141,7 +141,6 @@ export async function getUserShow(showId) {
     return data;
 }
 
-
 export async function getUserShowStatus(showId) {
     const userId = await getUserId();
 

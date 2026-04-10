@@ -1,5 +1,4 @@
 export function normalizeShow(show) {
-    console.log(show);
     const source = show.shows ?? show;
 
     return {
@@ -12,6 +11,6 @@ export function normalizeShow(show) {
         seasons: source.nb_seasons,
         logo: source.logo,
         logo_large: source.logo_large,
-        user_state: source.user_state
+        user_state: show.user_state ?? source.user_state
     }
 }

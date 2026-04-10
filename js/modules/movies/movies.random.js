@@ -18,10 +18,15 @@ export async function getRandomMovie(selectedGenres, selectedPlatforms) {
     document.getElementById("random-movie").classList.remove("is-hidden");
     const posterMovie = document.getElementById("img-random-movie");
     posterMovie.classList.remove("loaded");
-    posterMovie.onload = () => {
-        posterMovie.classList.add("loaded");
-    };
+    void posterMovie.offsetWidth;
     posterMovie.src = movie.poster;
+    if (posterMovie.complete) {
+        posterMovie.classList.add("loaded");
+    } else {
+        posterMovie.onload = () => {
+            posterMovie.classList.add("loaded");
+        };
+    }
     posterMovie.alt = movie.title;
     const linkMovie = document.getElementById("link-random-movie");
     linkMovie.href = `/Elina/entertainment/movies/movie?id=${movie.id}`;
