@@ -279,15 +279,15 @@ export async function createShowStateEpisodes(s) {
                 span.addEventListener("mouseenter", () => {
                     span.classList.add("is-success", "is-light");
                     for (let i = 1; i <= ep; i++) {
-                        document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.remove("is-success", "is-light");
+                        document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.add("is-success", "is-light");
                     }
                 });
                 span.addEventListener("mouseleave", () => {
                     for (let i = 1; i <= ep; i++) {
                         if (i > nbEpisodesSeenCurrentSeason) {
-                            document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.add("is-success", "is-light");
-                        } else {
                             document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.remove("is-success", "is-light");
+                        } else {
+                            document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.add("is-success", "is-light");
                         }
                     }
                 });
