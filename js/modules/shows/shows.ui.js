@@ -278,7 +278,7 @@ export async function createShowStateEpisodes(s) {
                 };
                 span.addEventListener("mouseenter", () => {
                     span.classList.add("is-success", "is-light");
-                    for (let i = 1; (i <= ep && i > nbEpisodesSeenCurrentSeason); i++) {
+                    for (let i = 1; (i <= ep); i++) {
                         document.getElementById(`${show.id}-s-${season}-ep-${i}`).classList.add("is-success", "is-light");
                     }
                 });
