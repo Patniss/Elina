@@ -113,6 +113,17 @@ export async function completeMovie(movieId) {
         }
 
         document.getElementById("add-cast").classList.remove("is-active");
+
+        if (btnCastMovie === "director") {
+            const directors = await getDirectorsMovie(movieId);
+            const movieDirectors = document.getElementById("directors");
+            await majCast(directors, movieDirectors);
+        }
+        if (btnCastMovie === "scriptwriter") {
+            const scriptwriters = await getScriptwritersMovie(movieId);
+            const movieScriptwriters = document.getElementById("scriptwriters");
+            await majCast(scriptwriters, movieScriptwriters);
+        }
     });
 }
 
