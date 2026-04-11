@@ -58,9 +58,9 @@ export async function showContent(showId) {
         for (let ep = 1; ep <= season.nb_episodes; ep++) {
             const spanEpisode = document.createElement("button");
             spanEpisode.id = `s${season}-ep${ep}`;
-            spanEpisode.classList.add("button", "tag", "is-success");
+            spanEpisode.classList.add("button", "tag");
             if (season < current_season) {
-                spanEpisode.classList.remove("is-success")
+                spanEpisode.classList.add("is-success")
             }
             spanEpisode.textContent = ep;
             divSeason.appendChild(spanEpisode);
