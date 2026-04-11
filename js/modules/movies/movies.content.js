@@ -1,6 +1,6 @@
 import { nationalities } from "/Elina/js/data/nationalities.js";
 import { clickAddMovieUser, clickDeleteMovieUser, clickToseeMovieUser, clickSeenMovieUser } from "/Elina/js/modules/usersMovies/usersMovies.actions.js";
-import { getDirectorsMovie, getScriptwritersMovie, getActorsMovies, addMovieCasting } from "/Elina/js/services/castings.service.js";
+import { getDirectorsMovie, getScriptwritersMovie, getActorsMovies, addMovieCasting, addActorMovieCasting } from "/Elina/js/services/castings.service.js";
 import { getMovie } from "/Elina/js/services/movies.service.js";
 import { getPeople, getAllPeople, addPeople } from "/Elina/js/services/people.service.js";
 import { getUserMovie, updateDateSeenMovie, updateFavMovie, updateOwnPoster} from "/Elina/js/services/usersMovies.service.js";
@@ -84,7 +84,13 @@ export async function completeMovie(movieId) {
 
                 try {
                     peopleId = await addPeople(firstnameValue, lastnameValue, birthdateValue, nationalitiesValue, deathdateValue);
-                    await addMovieCasting(movieId, peopleId, btnCastMovie);
+                    const actors = await getActorsMovies(movieId);
+                    const credit = actors.length + 1;
+                    if (btnCastMovie === "actor") {
+                        await addActorMovieCasting(movieId, peopleId, credit);
+                    } else {
+                        await addMovieCasting(movieId, peopleId, btnCastMovie);
+                    }
                 } catch (error) {
                     console.error(error);
                     return;
@@ -128,6 +134,7 @@ export async function completeMovie(movieId) {
 }
 
 export async function majCast(castings, container) {
+    container.textContent = "";
     castings.forEach(async (c, index) => {
         const isLast = index === castings.length - 1;
 

@@ -1,13 +1,12 @@
 import { supabase } from "/Elina/js/core/supabase.js";
 
-export async function addActorMovieCasting(movieId, peopleId, role, typeRole, credit) {
+export async function addActorMovieCasting(movieId, peopleId, role, credit) {
     const { data, error } = await supabase
         .from("movies_casting")
         .insert([{
             movie_id: movieId,
             people_id: peopleId,
             role: role,
-            type_role: typeRole,
             credit: credit,
             job: "director"
         }]).select().single();
