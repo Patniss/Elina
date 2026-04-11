@@ -128,7 +128,9 @@ export function renderGenres(container, genresString) {
     container.innerHTML = '';
     const genres = genresString.trim().split(" ; ");
     genres.forEach(g => {
+        console.log(g);
         const genre = g.replace(["é", "è"], ["e", "e"]);
+        console.log(genre);
         const spanGenre = document.createElement("span");
         spanGenre.classList.add("tag", "is-medium", genre.trim().toLowerCase(), "mr-2");
         spanGenre.textContent = genre;
