@@ -87,7 +87,9 @@ export async function completeMovie(movieId) {
                     const actors = await getActorsMovies(movieId);
                     const credit = actors.length + 1;
                     if (btnCastMovie === "actor") {
-                        await addActorMovieCasting(movieId, peopleId, credit);
+                        const selectRole = document.getElementById("role-cast");
+                        const role = selectRole.value;
+                        await addActorMovieCasting(movieId, peopleId, role, credit);
                     } else {
                         await addMovieCasting(movieId, peopleId, btnCastMovie);
                     }

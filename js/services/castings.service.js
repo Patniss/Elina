@@ -8,7 +8,7 @@ export async function addActorMovieCasting(movieId, peopleId, role, credit) {
             people_id: peopleId,
             role: role,
             credit: credit,
-            job: "director"
+            job: "actor"
         }]).select().single();
 
     if (error) {
